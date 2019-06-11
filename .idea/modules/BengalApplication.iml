@@ -9,6 +9,9 @@
       </configuration>
     </facet>
   </component>
+  <component name="ModuleRunConfigurationManager">
+    <shared />
+  </component>
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$/../../BengalApplication">
       <sourceFolder url="file://$MODULE_DIR$/../../BengalApplication/test" isTestSource="true" />
@@ -37,6 +40,7 @@
     <orderEntry type="library" scope="PROVIDED" name="archive-zip (v0.12.0, ruby-2.4.6-p354) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="arel (v9.0.0, ruby-2.4.6-p354) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="backports (v3.15.0, ruby-2.4.6-p354) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="bcrypt (v3.1.13, ruby-2.4.6-p354) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="bindex (v0.7.0, ruby-2.4.6-p354) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="bootsnap (v1.4.4, ruby-2.4.6-p354) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="builder (v3.2.3, ruby-2.4.6-p354) [gem]" level="application" />
