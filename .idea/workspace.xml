@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5365f6c9-52e7-47cd-903e-ca8b61c98bd7" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/BengalApplication/app/controllers/teachers_controller.rb" beforeDir="false" afterPath="$PROJECT_DIR$/BengalApplication/app/controllers/teachers_controller.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BengalApplication/config/routes.rb" beforeDir="false" afterPath="$PROJECT_DIR$/BengalApplication/config/routes.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BengalApplication/db/schema.rb" beforeDir="false" afterPath="$PROJECT_DIR$/BengalApplication/db/schema.rb" afterDir="false" />
-    </list>
+    <list default="true" id="5365f6c9-52e7-47cd-903e-ca8b61c98bd7" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -14,7 +10,7 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/BengalApplication/config/routes.rb">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="116">
@@ -23,7 +19,16 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/BengalApplication/app/models/student.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="24">
+              <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/BengalApplication/app/controllers/homeroutes_controller.rb">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="216">
@@ -37,15 +42,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="72">
               <caret line="3" selection-start-line="3" selection-end-line="3" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/BengalApplication/Gemfile">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1512">
-              <caret line="63" selection-start-line="63" selection-end-line="63" />
             </state>
           </provider>
         </entry>
@@ -131,6 +127,7 @@
         <option value="$PROJECT_DIR$/BengalApplication/config/routes.rb" />
         <option value="$PROJECT_DIR$/BengalApplication/app/controllers/homeroutes_controller.rb" />
         <option value="$PROJECT_DIR$/BengalApplication/app/controllers/teachers_controller.rb" />
+        <option value="$PROJECT_DIR$/BengalApplication/app/models/student.rb" />
       </list>
     </option>
   </component>
@@ -182,7 +179,8 @@
               <item name="BengalEvents" type="b2602c69:ProjectViewProjectNode" />
               <item name="BengalEvents" type="462c0819:PsiDirectoryNode" />
               <item name="BengalApplication" type="462c0819:PsiDirectoryNode" />
-              <item name="config" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="models" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -306,12 +304,12 @@
       <workItem from="1560267015598" duration="1681000" />
       <workItem from="1560270032162" duration="18000" />
       <workItem from="1560279959324" duration="765000" />
-      <workItem from="1561393529334" duration="3116000" />
+      <workItem from="1561393529334" duration="3687000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="11993000" />
+    <option name="totallyTimeSpent" value="12564000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-6" y="-6" width="1292" height="702" extended-state="6" />
@@ -322,7 +320,7 @@
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" sideWeight="0.49919093" weight="0.32846716" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32846716" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32846716" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -330,7 +328,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="8" />
       <window_info anchor="bottom" id="Version Control" order="9" weight="0.32846716" />
-      <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.49838188" weight="0.37043795" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="10" sideWeight="0.49838188" visible="true" weight="0.37043795" />
       <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.50161815" side_tool="true" weight="0.38686132" />
       <window_info anchor="bottom" id="Messages" order="12" sideWeight="0.49919093" weight="0.32846716" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -443,13 +441,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/BengalApplication/config/routes.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="116">
-          <caret line="5" column="24" selection-start-line="5" selection-start-column="24" selection-end-line="5" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/BengalApplication/app/models/user.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
@@ -468,6 +459,20 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="216">
           <caret line="9" column="11" selection-start-line="9" selection-start-column="11" selection-end-line="9" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BengalApplication/app/models/student.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="24">
+          <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BengalApplication/config/routes.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="116">
+          <caret line="5" column="24" selection-start-line="5" selection-start-column="24" selection-end-line="5" selection-end-column="24" />
         </state>
       </provider>
     </entry>
