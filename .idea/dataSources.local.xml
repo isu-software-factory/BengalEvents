@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="dataSourceStorageLocal">
+    <data-source name="Rails BengalApplication: default" uuid="ea3bfbb0-826f-468d-9120-5b44ddec13bd">
+      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" dbms="MYSQL" exact-version="0" />
+      <user-name>root</user-name>
+    </data-source>
+    <data-source name="Rails BengalApplication: production" uuid="1713721b-2bf5-4771-85c8-6f61b725c6fd">
+      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" dbms="MYSQL" exact-version="0" />
+      <user-name>root</user-name>
+    </data-source>
+    <data-source name="Rails BengalApplication: test" uuid="45b94366-53ca-44d5-bb26-e3b0357dfb4e">
+      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" dbms="MYSQL" exact-version="0" />
+      <user-name>root</user-name>
+    </data-source>
+    <data-source name="Rails BengalApplication: development" uuid="66996fea-c6f9-42ca-bf29-50287e63fdfc">
+      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" dbms="MYSQL" exact-version="0" />
+      <user-name>root</user-name>
+    </data-source>
+  </component>
+</project>
