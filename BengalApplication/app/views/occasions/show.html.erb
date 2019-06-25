@@ -1,0 +1,19 @@
+<h1>Listing in the <%=@occasion.name %> Occasion</h1>
+
+<table>
+  <thead>
+  <tr>
+    <td>Name</td>
+    <td>Start Date</td>
+    <td>End Date</td>
+  </tr>
+  </thead>
+<tbody>
+<tr>
+  <td><%=@occasion.name %> </td>
+  <td><%=@occasion.start_date %></td>
+  <td><%=@occasion.end_date %></td>
+</tr>
+</tbody>
+</table>
+<a href="/occasions">Home Page</a>

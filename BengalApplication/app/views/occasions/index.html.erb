@@ -1,0 +1,25 @@
+<h1>Occasions</h1>
+
+<table>
+  <thead>
+  <tr>
+    <td>Name</td>
+    <td>Start Date</td>
+    <td>End Date</td>
+    <td>Actions</td>
+  </tr>
+  </thead>
+  <tbody>
+  <% @occasions.each do |occasion| %>
+    <tr>
+      <td><%= occasion.name %></td>
+      <td><%= occasion.start_date %></td>
+      <td><%= occasion.end_date %></td>
+      <td><a href="occasions/<%=occasion.id %>">Show</a></td>
+      <td><a href="occasions/<%=occasion.id%>/edit">Edit</a></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+<%#link_to "Add new Occasion", occasion_path(@profile) %>
+<a href="/occasions/new">Create new occasions</a>

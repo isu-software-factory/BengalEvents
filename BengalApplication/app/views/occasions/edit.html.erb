@@ -1,0 +1,22 @@
+<h1>Edit <%= @occasion.name %></h1>
+
+<form action="/occasions/<%= @occasion.id%>" method="post">
+  <input type="hidden" name="_method" value="patch">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+  <p>
+    <label>Occasion Name: </label>
+    <input type="text" name="occasion[name]" value = "<%=@occasion.name %>">
+  </p>
+  <p>
+    <label>Start Date: </label>
+    <input type="text" name="occasion[start_date]" value="<%=@occasion.start_date %>">
+
+  </p>
+  <p>
+    <label>End Date: </label>
+    <input type="text" name="occasion[end_date]" value="<%=@occasion.end_date %>">
+  </p>
+  <input type="submit" value="Update">
+</form>
+
+<a href="/occasions">Return to Home Page</a>

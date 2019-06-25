@@ -1,0 +1,23 @@
+<h1>Create a new Occasion</h1>
+<% if flash[:errors] %>
+  <% flash[:errors].each do |e| %>
+    <p><%= e %></p>
+  <% end %>
+<% end %>
+
+<form action="/occasions" method="post">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+  <p>
+    <label>Occasion Name: </label>
+    <input type="text" name="occasion[name]">
+  </p>
+  <p>
+    <label>Start Date: </label>
+    <input type="text" name="occasion[start_date]">
+  </p>
+  <p>
+    <label>End Date: </label>
+    <input type="text" name="occasion[end_date]">
+  </p>
+  <input type="submit" value="Create">
+</form>
