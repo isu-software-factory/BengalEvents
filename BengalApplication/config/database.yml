@@ -16,7 +16,7 @@ default: &default
 
 development:
   <<: *default
-  database: bengalevents
+  database: bengalevent
 
 
 # Warning: The database defined as "test" will be erased and
@@ -24,10 +24,10 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: bengalevent
+  database: bengalevent_test
 
 
 production:
   <<: *default
-  database: bengalevents
+  database: bengalevent
 
