@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_25_080943) do
+ActiveRecord::Schema.define(version: 2019_06_25_082106) do
 
   create_table "coordinators", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -34,6 +34,16 @@ ActiveRecord::Schema.define(version: 2019_06_25_080943) do
     t.datetime "end_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "periods", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+    t.datetime "start_time"
+    t.datetime "end_time"
+    t.integer "capacity"
+    t.bigint "event_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["event_id"], name: "index_periods_on_event_id"
   end
 
   create_table "sponsors", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
@@ -66,4 +76,5 @@ ActiveRecord::Schema.define(version: 2019_06_25_080943) do
   end
 
   add_foreign_key "events", "occasions"
+  add_foreign_key "periods", "events"
 end
