@@ -2,7 +2,7 @@ class HomeroutesController < ApplicationController
 
   def routes
     if user_signed_in?
-      if current_user.teacher?
+      if current_user[:role] == "teachers"
         if current_user.teacher == nil
           redirect_to new_teacher_path
         else
@@ -11,4 +11,6 @@ class HomeroutesController < ApplicationController
       end
     end
   end
+
+
 end
