@@ -18,7 +18,7 @@ class TeachersController < ApplicationController
   end
 
   def teacher_params
-    params.require(:teachers).permit(:name, :password_digest, :school, :email)
+    params.require(:teacher).permit(:school, :chaperone_count, :student_count)
   end
 
   def user_params
