@@ -1,5 +1,5 @@
 class TeachersController < ApplicationController
-  before_action :authenticate_user!
+  #before_action :authenticate_user!
 
   def index
   end
@@ -18,7 +18,7 @@ class TeachersController < ApplicationController
   end
 
   def teacher_params
-    params.require(:teacher).permit(:name, :password_digest, :school, :email)
+    params.require(:teacher).permit(:school, :chaperone_count, :student_count)
   end
 
   def user_params
