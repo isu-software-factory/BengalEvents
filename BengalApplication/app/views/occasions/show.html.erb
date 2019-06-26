@@ -1,3 +1,4 @@
+<%content_for(:title,"#{@occasion.name}")  %>
 <h1>Listing in the <%=@occasion.name %> Occasion</h1>
 
 <table>
@@ -16,4 +17,4 @@
 </tr>
 </tbody>
 </table>
-<a href="/occasions">Home Page</a>
+<%=link_to "Home Page", occasions_path %>

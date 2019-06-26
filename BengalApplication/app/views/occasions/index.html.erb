@@ -1,3 +1,4 @@
+<% content_for :title, "Occasions" %>
 <h1>Occasions</h1>
 
 <table>
@@ -15,11 +16,13 @@
       <td><%= occasion.name %></td>
       <td><%= occasion.start_date %></td>
       <td><%= occasion.end_date %></td>
-      <td><a href="occasions/<%=occasion.id %>">Show</a></td>
-      <td><a href="occasions/<%=occasion.id%>/edit">Edit</a></td>
+      <td><%= link_to "Show", occasion_path(occasion.id) %></td>
+      <td><%= link_to "Edit", edit_occasion_path(occasion.id) %></td>
+      <td><%= link_to "Delete", occasion_path(occasion.id), data: {method: :delete, confirm: "Are you sure?"} %>
+      </td>
     </tr>
   <% end %>
   </tbody>
 </table>
 <%#link_to "Add new Occasion", occasion_path(@profile) %>
-<a href="/occasions/new">Create new occasions</a>
+<%= link_to "Create New Occasion", new_occasion_path %>
