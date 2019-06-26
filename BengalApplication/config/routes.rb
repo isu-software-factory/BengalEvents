@@ -3,7 +3,9 @@ Rails.application.routes.draw do
   resources :teachers do
     resources :students
   end
-  resources :occasions
+  resources :occasions do
+    resources :events
+  end
   root 'homeroutes#route'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 

@@ -17,4 +17,9 @@
 </tr>
 </tbody>
 </table>
+<br>
+
+<%= render @occasion.events %>
+<h2>Create an Event under this Occasion</h2>
+<%=render  partial: "events/form" %>
 <%=link_to "Home Page", occasions_path %>

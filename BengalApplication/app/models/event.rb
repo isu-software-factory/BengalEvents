@@ -1,6 +1,6 @@
 class Event < ApplicationRecord
   belongs_to :occasion
-  has_many :sessions
+  has_many :sessions, dependent: :destroy
   validates :name, presence: true
   validates :location, presence: true
   validates :description, presence: true
