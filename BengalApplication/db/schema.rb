@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_25_091208) do
+ActiveRecord::Schema.define(version: 2019_06_26_032055) do
 
   create_table "coordinators", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -62,6 +62,9 @@ ActiveRecord::Schema.define(version: 2019_06_25_091208) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id"
+    t.string "school"
+    t.integer "chaperone_count"
+    t.integer "student_count"
     t.index ["user_id"], name: "index_teachers_on_user_id"
   end
 
