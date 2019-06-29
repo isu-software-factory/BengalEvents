@@ -1,0 +1,28 @@
+<% content_for :title, "Occasions" %>
+<h1>Occasions</h1>
+
+<table>
+  <thead>
+  <tr>
+    <td>Name</td>
+    <td>Start Date</td>
+    <td>End Date</td>
+    <td>Actions</td>
+  </tr>
+  </thead>
+  <tbody>
+  <% @occasions.each do |occasion| %>
+    <tr>
+      <td><%= occasion.name %></td>
+      <td><%= occasion.start_date %></td>
+      <td><%= occasion.end_date %></td>
+      <td><%= link_to "Show", occasion_path(occasion.id) %></td>
+      <td><%= link_to "Edit", edit_occasion_path(occasion.id) %></td>
+      <td><%= link_to "Delete", occasion_path(occasion.id), data: {method: :delete, confirm: "Are you sure?"} %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+<%#link_to "Add new Occasion", occasion_path(@profile) %>
+<%= link_to "Create New Occasion", new_occasion_path %>

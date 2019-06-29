@@ -1,5 +1,5 @@
 class TeachersController < ApplicationController
-  #before_action :authenticate_user!
+  before_action :authenticate_user!
 
   def index
   end
@@ -10,7 +10,7 @@ class TeachersController < ApplicationController
 
   def create
     @teacher = Teacher.new(teacher_params)
-    @teacher.user_id = current_user.id
+    authorize @teacher
     if @teacher.save
       redirect_to @teacher
     else
