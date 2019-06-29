@@ -1,5 +1,6 @@
 class StudentsController < ApplicationController
   def index
+    @students = Student.where("teacher_id = ?", params[:teacher_id])
   end
 
   def new

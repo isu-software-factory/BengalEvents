@@ -1,14 +1,14 @@
 <h1>Teacher main view</h1>
 <p>Still need to build table to display students in database</p>
 
-<%= form_tag("../students", method: "post") do %>
+<%= form_for(@teacher) do |f| %>
   <div class="field">
-    <%=label_tag(:name, "Student Name") %>
-    <%=text_field_tag(:name) %>
+    <%=f.label(:name, "Student Name") %>
+    <%=f.text_field(:name) %>
   </div>
   <div class="field">
-    <%=label_tag(:email, "Student email") %>
-    <%=text_field_tag(:email) %>
+    <%=f.label(:email, "Student email") %>
+    <%=f.text_field(:email) %>
   </div>
   <div class="actions"><%=submit_tag "Submit Student" %></div>
 <% end %>
