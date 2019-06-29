@@ -10,6 +10,7 @@ class TeachersController < ApplicationController
 
   def create
     @teacher = Teacher.new(teacher_params)
+    authorize @teacher
     if @teacher.save
       redirect_to @teacher
     else
