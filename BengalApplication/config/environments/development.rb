@@ -67,7 +67,7 @@ Rails.application.configure do
       port:                 587,
       domain:               'example.com',
       user_name:            'bengalevents@isu.edu',
-      password:             '<password>',
+      password:             'bengalevents',
       authentication:       'plain',
       enable_starttls_auto: true  }
   # Raises error for missing translations
