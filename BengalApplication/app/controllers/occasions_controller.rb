@@ -1,8 +1,8 @@
 class OccasionsController < ApplicationController
-
-
   def index
-    @occasions = Occasion.all
+
+      @occasions = Occasion.all
+
   end
 
   def new

@@ -9,8 +9,11 @@ class HomeroutesController < ApplicationController
           redirect_to teacher_path
         end
       end
+      if current_user[:role] == "sponsor"
+        redirect_to occasions_path
+      end
+    else
+      redirect_to new_user_session_path
     end
   end
-
-
 end
