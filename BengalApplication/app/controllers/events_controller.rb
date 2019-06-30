@@ -16,6 +16,10 @@ class EventsController < ApplicationController
   def edit
   end
 
+  def show
+
+  end
+
   def update
     @event.update(event_params)
       redirect_to occasion_path(@occasion)

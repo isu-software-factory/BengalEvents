@@ -1,20 +1,16 @@
 <h1>Please provide your information below</h1>
 <%=form_for @teacher do |f| %>
   <div class="field">
-    <%=f.label :name, "First and Last Name" %>
-    <%=f.text_field(:name) %>
-  </div>
-  <div class="field">
-    <%=f.label :password_digest, "Password" %>
-    <%=f.password_field(:password_digest) %>
-  </div>
-  <div class="field">
     <%=f.label :school, "School Name" %>
     <%=f.text_field(:school )%>
   </div>
   <div class="field">
-    <%=f.label :email, "School Email Address" %>
-    <%=f.text_field(:email) %>
+    <%=f.label :chaperone_count, "Expected number of Chaperones" %>
+    <%=f.text_field(:chaperone_count )%>
+  </div>
+  <div class="field">
+    <%=f.label :student_count, "Expected number of Students" %>
+    <%=f.text_field(:student_count )%>
   </div>
   <div class="actions"><%=submit_tag "Confirm" %></div>
 <%end %>

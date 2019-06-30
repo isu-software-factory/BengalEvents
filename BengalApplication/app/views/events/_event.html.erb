@@ -16,6 +16,7 @@
     <td><%= event.isMakeAhead %></td>
     <td><%= link_to "Delete ", occasion_event_path(@occasion, event), method: :delete, data: {confirm: "Are you sure?"} %></td>
     <td><%= link_to "Edit", edit_occasion_event_path(@occasion,event) %></td>
+    <td><%=link_to "Details", occasion_event_path(@occasion, event) %></td>
   </tr>
   </tbody>
 </table>
