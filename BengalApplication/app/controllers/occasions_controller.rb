@@ -1,4 +1,6 @@
 class OccasionsController < ApplicationController
+
+
   def index
     @occasions = Occasion.all
   end

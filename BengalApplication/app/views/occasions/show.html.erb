@@ -1,5 +1,5 @@
-<%content_for(:title,"#{@occasion.name}")  %>
-<h1>Listing in the <%=@occasion.name %> Occasion</h1>
+<% content_for(:title, "#{@occasion.name}") %>
+<h1>Listing in the <%= @occasion.name %> Occasion</h1>
 
 <table>
   <thead>
@@ -9,17 +9,16 @@
     <td>End Date</td>
   </tr>
   </thead>
-<tbody>
-<tr>
-  <td><%=@occasion.name %> </td>
-  <td><%=@occasion.start_date %></td>
-  <td><%=@occasion.end_date %></td>
-</tr>
-</tbody>
+  <tbody>
+  <tr>
+    <td><%= @occasion.name %> </td>
+    <td><%= @occasion.start_date %></td>
+    <td><%= @occasion.end_date %></td>
+  </tr>
+  </tbody>
 </table>
 <br>
-<h3><%= @occasion.events.count %> Events </h3>
+<h2>These are the lists of events under this occasion.</h2>
 <%= render @occasion.events %>
-<h2>Create an Event under this Occasion</h2>
-<%=render  partial: "events/form" %>
-<%=link_to "Home Page", occasions_path %>
+<p><%= link_to "Create an event", new_occasion_event_path(@occasion,@event) %></p>
+<p><%= link_to "Home Page", occasions_path %></p>

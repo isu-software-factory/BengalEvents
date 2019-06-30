@@ -1,4 +1,22 @@
-<%= event.name %>
-<%= event.location %>
-<%= event.description %>
-<p> <%= link_to "Delete Event", [event.occasion,event], method: :delete, data: {confirm: "Are you sure?"} %></p>
+<table>
+  <thead>
+  <tr>
+    <td>Name</td>
+    <td>Location</td>
+    <td>Description</td>
+    <td>Make ahead</td>
+    <td>Actions</td>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+    <td><%= event.name %></td>
+    <td><%= event.location %></td>
+    <td><%= event.description %></td>
+    <td><%= event.isMakeAhead %></td>
+    <td><%= link_to "Delete ", occasion_event_path(@occasion, event), method: :delete, data: {confirm: "Are you sure?"} %></td>
+    <td><%= link_to "Edit", edit_occasion_event_path(@occasion,event) %></td>
+  </tr>
+  </tbody>
+</table>
+
