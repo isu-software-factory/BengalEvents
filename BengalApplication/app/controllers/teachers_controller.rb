@@ -12,7 +12,7 @@ class TeachersController < ApplicationController
   def create
     current_user.teacher = Teacher.create(teacher_params)
     @teacher = Teacher.find(current_user.teacher.id)
-    authorize @teacher
+
     if @teacher.save
       redirect_to @teacher
     else
