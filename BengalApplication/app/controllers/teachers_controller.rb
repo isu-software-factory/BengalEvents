@@ -2,6 +2,7 @@ class TeachersController < ApplicationController
   before_action :authenticate_user!
 
   def index
+    @teachers = Teacher.all
   end
 
   def new
@@ -9,7 +10,8 @@ class TeachersController < ApplicationController
   end
 
   def create
-    @teacher = Teacher.new(teacher_params)
+    current_user.teacher = Teacher.create(teacher_params)
+    @teacher = Teacher.find(current_user.teacher.id)
     authorize @teacher
     if @teacher.save
       redirect_to @teacher
@@ -18,15 +20,8 @@ class TeachersController < ApplicationController
     end
   end
 
-  def teacher_params
-    params.require(:teacher).permit(:school, :chaperone_count, :student_count)
-  end
-
-  def user_params
-    params.require(:user).permit(:name, :password_digest, :email)
-  end
-
   def show
+    @teacher = Teacher.find(params[:id])
   end
 
   def edit
@@ -36,5 +31,11 @@ class TeachersController < ApplicationController
   end
 
   def destroy
+  end
+
+  private
+
+  def teacher_params
+    params.require(:teacher).permit(:school, :chaperone_count, :student_count)
   end
 end
