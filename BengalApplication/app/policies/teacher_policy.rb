@@ -12,6 +12,7 @@ class TeacherPolicy < ApplicationPolicy
   end
 
   def create?
+    user.present? && user.role == 'teacher' || user.role == 'admin'
   end
 
   def edit?
