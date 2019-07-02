@@ -9,7 +9,7 @@ class HomeroutesController < ApplicationController
           redirect_to teacher_path(current_user.teacher.id)
         end
       end
-      if current_user[:role] == "sponsor"
+      if current_user[:role] == "coordinator" || current_user[:role] == "sponsor"
         redirect_to occasions_path
       end
     else
