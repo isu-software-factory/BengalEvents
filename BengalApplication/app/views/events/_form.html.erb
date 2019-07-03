@@ -1,7 +1,7 @@
 <%#= form_for([@occasion, @occasion.events.build]) do |f| %>
-  <%= form_for [@occasion, @event] do |f| %>
+<%= form_for [@occasion, @event] do |f| %>
 
-    <p>
+  <p>
     <%= f.label :name %>
     <%= f.text_field :name %>
   </p>
@@ -16,8 +16,8 @@
   <p>
     <%= f.label :isMakeAhead %>
     <%= f.check_box :isMakeAhead %>
-  </p>
-  <p>
-    <%= f.submit %>
-  </p>
+    </p>
+    <p>
+      <%= f.submit %>
+    </p>
 <% end %>

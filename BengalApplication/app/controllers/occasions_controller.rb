@@ -1,4 +1,6 @@
 class OccasionsController < ApplicationController
+  before_action :authenticate_user!, except: [:index]
+  after_action :verify_authorized, except: [:index, :show, :edit]
 
   def index
     @occasions = Occasion.all
@@ -11,7 +13,7 @@ class OccasionsController < ApplicationController
 
   def create
     occasion = Occasion.new(occasion_params)
-    authorize @occasion
+    authorize occasion
     if occasion.save
       redirect_to occasions_path
     else
@@ -32,7 +34,7 @@ class OccasionsController < ApplicationController
 
   def update
     occasion = Occasion.find(params[:id])
-    authorize @occasion
+    authorize occasion
     if occasion.update(occasion_params)
       redirect_to occasions_path
     else

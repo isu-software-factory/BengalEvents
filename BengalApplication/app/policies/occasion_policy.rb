@@ -1,5 +1,9 @@
 class OccasionPolicy < ApplicationPolicy
 
+  def index?
+    @user.role == "coordinator" || @user.role == "admin"
+  end
+
   def edit?
     @user.role == "coordinator" || @user.role == "admin"
   end
@@ -16,11 +20,7 @@ class OccasionPolicy < ApplicationPolicy
     @user.role == "coordinator" || @user.role == "admin"
   end
 
-  def index?
-    @user.role == "coordinator" || @user.role == "admin"
-  end
-
   def destroy?
-    @user.coordinator? || @user.role == "admin"
+    @user.role == "coordinator" || @user.role == "admin"
   end
 end
