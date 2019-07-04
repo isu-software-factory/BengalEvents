@@ -1,2 +1,0 @@
-class Coordinator < ApplicationRecord
-end

@@ -1,8 +1,8 @@
 class EventsController < ApplicationController
-  before_action :authenticate_user!
+  # before_action :authenticate_user!
   before_action :set_occasion, expect: [:index, :show]
   before_action :set_event, except: [:new, :create]
-  after_action :verify_authorized
+  # after_action :verify_authorized
 
   def new
     @event = Event.new
