@@ -1,0 +1,12 @@
+<h1>Add students here</h1>
+<%= form_for teacher_students_path do |f| %>
+  <div class="field">
+    <%=f.label :name, "Student Name" %>
+    <%=f.text_field(:name )%>
+  </div>
+  <div class="field">
+    <%=f.label :email, "Student Email" %>
+    <%=f.text_field(:email )%>
+  </div>
+  <div class="actions"><%=submit_tag "Add Student" %></div>
+<% end %>
