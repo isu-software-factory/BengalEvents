@@ -10,11 +10,10 @@ class TeachersController < ApplicationController
   end
 
   def create
-
-    @teacher = Teacher.create(teacher_params)
-    @teacher.user = current_user
-
-    if @teacher.save
+    @user = User.new(params[:user])
+    @teacher = Teacher.new(teacher_params)
+    @user.identifiable = @teacher
+    if @user.save
       redirect_to @teacher
     else
       render :new
