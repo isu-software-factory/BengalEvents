@@ -12,8 +12,9 @@ class TeachersController < ApplicationController
   def create
     @user = User.new(params[:user])
     @teacher = Teacher.new(teacher_params)
-    @user.identifiable = @teacher
-    if @user.save
+    @user.Identifiable = @teacher
+    if @teacher.save
+      @user.save
       redirect_to @teacher
     else
       render :new
