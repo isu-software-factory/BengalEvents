@@ -10,8 +10,9 @@ class TeachersController < ApplicationController
   end
 
   def create
-    current_user.teacher = Teacher.create(teacher_params)
-    @teacher = Teacher.find(current_user.teacher.id)
+
+    @teacher = Teacher.create(teacher_params)
+    @teacher.user = current_user
 
     if @teacher.save
       redirect_to @teacher
