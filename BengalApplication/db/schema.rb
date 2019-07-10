@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_10_052440) do
+ActiveRecord::Schema.define(version: 2019_07_10_060608) do
 
   create_table "admins", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -53,6 +53,15 @@ ActiveRecord::Schema.define(version: 2019_07_10_052440) do
     t.index ["coordinator_id"], name: "index_occasions_on_coordinator_id"
   end
 
+  create_table "registrations", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+    t.bigint "student_id"
+    t.bigint "event_detail_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["event_detail_id"], name: "index_registrations_on_event_detail_id"
+    t.index ["student_id"], name: "index_registrations_on_student_id"
+  end
+
   create_table "sponsors", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -81,4 +90,6 @@ ActiveRecord::Schema.define(version: 2019_07_10_052440) do
   add_foreign_key "event_details", "events"
   add_foreign_key "events", "occasions"
   add_foreign_key "occasions", "coordinators"
+  add_foreign_key "registrations", "event_details"
+  add_foreign_key "registrations", "students"
 end
