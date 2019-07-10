@@ -13,6 +13,14 @@
     <%=f.text_field(:student_count )%>
   </div>
   <div class="actions"><%=submit_tag "Confirm" %></div>
+  <%=fields_for :users do |user| %>
+    <%=user.label :email %>
+    <%=user.email_field :email %>
+    <%=user.label :password %>
+    <%=user.password_field :password %>
+    <%=user.label :password_confirmation %>
+    <%=user.password_field :password_confirmation %>
+  <%end %>
 <%end %>
 
 <% if @teacher.errors.any? %>
