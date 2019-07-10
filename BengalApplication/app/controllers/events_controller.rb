@@ -6,33 +6,33 @@ class EventsController < ApplicationController
 
   def new
     @event = Event.new
-    authorize @event
+    # authorize @event
   end
 
   def create
     @event = Event.new(event_params)
     @event.occasion = @occasion
-    authorize @event
+    # authorize @event
     @event.save
     redirect_to occasion_path(@occasion)
   end
 
   def edit
-  authorize @event
+  # authorize @event
   end
 
   def show
-    authorize @event
+    # authorize @event
   end
 
   def update
-    authorize @event
+    # authorize @event
     @event.update(event_params)
     redirect_to occasion_path(@occasion)
   end
 
   def destroy
-    authorize @event
+    # authorize @event
     @event.destroy
     redirect_to occasion_path(@occasion)
   end

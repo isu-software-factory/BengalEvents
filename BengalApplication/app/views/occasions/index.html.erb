@@ -18,13 +18,13 @@
       <td><%= occasion.start_date %></td>
       <td><%= occasion.end_date %></td>
       <td><%= link_to "Show", occasion_path(occasion.id) %></td>
-      <% if policy(occasion).edit? %>
+      <%# if policy(occasion).edit? %>
       <td><%= link_to "Edit", edit_occasion_path(occasion.id) %></td>
-        <%end %>
-      <% if policy(occasion).destroy? %>
+        <%#end %>
+      <%# if policy(occasion).destroy? %>
         <td><%= link_to "Delete", occasion_path(occasion.id), data: {method: :delete, confirm: "Are you sure?"} %>
         </td>
-      <% end %>
+      <%# end %>
     </tr>
   <% end %>
   </tbody>
