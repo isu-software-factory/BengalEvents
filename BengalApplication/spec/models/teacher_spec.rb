@@ -29,7 +29,8 @@ RSpec.describe Teacher, type: :model do
     end
 
     it "should have a user" do
-      pending
+      teacher = Teacher.create(chaperone_count: 3, student_count: 23, school: "Valley", user_attributes: {email: "dan@gmail.com", password: "password"})
+      expect(teacher.user.id).not_to eq(nil)
     end
   end
 end

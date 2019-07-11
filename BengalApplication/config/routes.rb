@@ -1,8 +1,10 @@
 Rails.application.routes.draw do
   devise_for :users, skip: :devise_registration
-  resources :teachers do
-    resources :students
-  end
+ # devise_for :users, skip: :devise_registration
+  resources :teachers
+  resources :students
+  resources :sponsors
+
   resources :occasions do
     resources :events do
       resources :event_details

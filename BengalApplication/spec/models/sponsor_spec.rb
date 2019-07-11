@@ -16,7 +16,8 @@ RSpec.describe Sponsor, type: :model do
     end
 
     it "should have a user" do
-      pending
+      sponsor = Sponsor.create(user_attributes: {email: "hi@gmail.com", password: "password"})
+      expect(sponsor.user.id).not_to eq(nil)
     end
   end
 end

@@ -14,7 +14,8 @@ RSpec.describe Student, type: :model do
       end
 
       it "should have a user" do
-        pending
+        student = Student.create(user_attributes: {email: "rich@gmail.com", password: "password"})
+        expect(student.user.id).not_to eq(nil)
       end
 
       it "can have an event_detail" do

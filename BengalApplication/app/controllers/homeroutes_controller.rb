@@ -2,7 +2,12 @@ class HomeroutesController < ApplicationController
 
   def routes
     if user_signed_in?
-      redirect_to occasion_event_path
+      if current_user.meta_type == "Teacher"
+        redirect_to teacher_path(current_user.meta.id)
+      elsif curent_user.meta_type == "Student"
+        redirect_to student_path(curent_user.meta.id)
+      end
+
     end
   end
 end
