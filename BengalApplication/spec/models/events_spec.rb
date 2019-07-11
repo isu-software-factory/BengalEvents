@@ -1,9 +1,9 @@
 require 'rails_helper'
 
-RSpec.describe Events, type: :model do
+RSpec.describe Event, type: :model do
   context "association tests" do
     it "should have an occasion" do
-      occasion = Occasion.create!(start_date: 2/23/2018, end_date: 2/19/2019)
+      occasion = Occasion.create(name: "BenagelEvent", start_date: 2/23/2019, end_date: 3/23/2019)
       event = Event.new(name: "robotics", location: "SUB", description: "For people interesting in Robotics.", isMakeAhead: true)
       event.save
       event.occasion = occasion

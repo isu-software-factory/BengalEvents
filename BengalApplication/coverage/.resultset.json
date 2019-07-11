@@ -5,20 +5,19 @@
         1,
         null,
         1,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        null,
-        0,
-        null,
-        null,
-        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
         null,
         null,
-        0,
+        1,
+        null,
+        null,
+        1,
         null,
         null,
         null
@@ -650,8 +649,34 @@
       "C:/BengalEvents/BengalApplication/app/helpers/teachers_helper.rb": [
         1,
         null
+      ],
+      "C:/BengalEvents/BengalApplication/app/models/event.rb": [
+        1,
+        1,
+        1,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "C:/BengalEvents/BengalApplication/app/models/occasion.rb": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        null
+      ],
+      "C:/BengalEvents/BengalApplication/app/models/coordinator.rb": [
+        1,
+        1,
+        1,
+        null
       ]
     },
-    "timestamp": 1562877932
+    "timestamp": 1562878718
   }
 }
