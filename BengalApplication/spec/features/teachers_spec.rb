@@ -13,6 +13,8 @@ RSpec.feature "Teachers", type: :feature do
     scenario "should be successful" do
       within('form') do
         fill_in 'teacher[student_count]', with: 202
+        fill_in 'users[email]', with: "da2@gmail.com"
+        fill_in 'users[password]', with: "password"
       end
       click_button 'Confirm'
       expect(page).to have_content("Teacher main view")
