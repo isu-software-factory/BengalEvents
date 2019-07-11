@@ -1,18 +1,14 @@
 require 'rails_helper'
 
 RSpec.describe Student, type: :model do
-  context "validation tests" do
-    it "ensures school name" do
-      student = Student.new(school: "Valley").save
-      expect(student).to eq(false)
-    end
 
     context "association tests" do
       it "should have a teacher" do
         teacher = Teacher.new(student_count: 23, school: "Valley", chaperone_count: 2)
         teacher.save
-
-        teacher.student = Student.create(school: "Valley")
+        student = Student.new
+        student.save
+        teacher.student = student
 
         expect(Student.first.teacher.chaperone_count).to eq(2)
       end
@@ -30,13 +26,13 @@ RSpec.describe Student, type: :model do
 
         student = Student.new
         student.save
-        student.event_detail = event_detail
+        student.event_details << event_detail
+        expect(student.event_details.first).to eq(event_detail)
       end
 
       it "can have a team" do
         pending
       end
 
-    end
   end
 end

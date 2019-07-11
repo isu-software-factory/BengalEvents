@@ -21,8 +21,11 @@ RSpec.describe Teacher, type: :model do
       teacher = Teacher.new(chaperone_count: 3, student_count: 23, school: "Valley")
       teacher.save
 
-      teacher.student = Student.create(school: "Valley")
-      expect(teacher.student.school).to eq("Valley")
+      student = Student.new
+      student.save
+
+      teacher.student = student
+      expect(teacher.student).not_to eq(nil)
     end
 
     it "should have a user" do
