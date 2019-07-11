@@ -1,9 +1,8 @@
 class EventDetailsController < ApplicationController
   # before_action :authenticate_user!
   before_action :set_event
-  # before_action :set_occasion
-  before_action :set_event_detail
-  # after_action :verify_authorized
+  before_action :set_event_detail, except: [:new, :create]
+  before_action :set_occasion
 
   def new
     @event_detail = EventDetail.new
@@ -14,9 +13,14 @@ class EventDetailsController < ApplicationController
     @event_detail.event = @event
 
     @event_detail.save
+    redirect_to occasion_event_path(@occasion, @event)
   end
 
   def edit
+
+  end
+
+  def show
 
   end
 
@@ -26,15 +30,15 @@ class EventDetailsController < ApplicationController
 
   def destroy
     @event_detail.destroy
-    redirect_to occasion_events_path
+    redirect_to occasion_event_path(@occasion, @event)
   end
 
 
   private
 
-  # def set_occasion
-  #   @occasion = Occasion.find(params[:occasion_id])
-  # end
+  def set_occasion
+    @occasion = Occasion.find(params[:occasion_id])
+  end
 
   def set_event
     @event = Event.find(params[:event_id])

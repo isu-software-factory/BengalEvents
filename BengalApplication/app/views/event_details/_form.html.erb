@@ -1,5 +1,5 @@
 <%#= form_for([@occasion, @occasion.events.build]) do |f| %>
-<%= form_for [@event, @event_detail] do |f| %>
+<%= form_for([@occasion, @event, @event_detail]) do |f| %>
 
   <p>
     <%= f.label :capacity %>
