@@ -7,7 +7,6 @@ RSpec.describe Events, type: :model do
       event = Event.new(name: "robotics", location: "SUB", description: "For people interesting in Robotics.", isMakeAhead: true)
       event.save
       event.occasion = occasion
-
       expect(event.occasion).not_to eq(nil)
     end
 
