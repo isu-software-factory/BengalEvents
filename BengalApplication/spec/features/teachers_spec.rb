@@ -48,7 +48,7 @@ RSpec.feature "Teachers", type: :feature do
   context "destroy teacher" do
     scenario "should be successful" do
       teacher = Teacher.create(school: "valley", chaperone_count: 23, student_count: 232)
-      visit teacher_path
+      visit teacher_path(teacher)
       click_link "Delete"
       expect(page).to have_content "Teacher was successfully deleted"
     end
