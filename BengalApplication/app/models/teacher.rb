@@ -1,5 +1,6 @@
 class Teacher < ApplicationRecord
-  has_one :user, as: :Identifiable
+  has_one :user, as: :Identifiable, dependent: :destroy
+  accepts_nested_attributes_for :user
 
   validates :school, presence: true
   validates :chaperone_count, presence: true

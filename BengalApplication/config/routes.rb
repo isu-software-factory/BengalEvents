@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  devise_for :users, skip: :devise_registration
+  devise_for :users
+ # devise_for :users, skip: :devise_registration
   resources :teachers do
     resources :students
   end
