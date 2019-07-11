@@ -17,15 +17,12 @@ class EventDetailsController < ApplicationController
   end
 
   def edit
-
   end
 
-  def show
-
-  end
 
   def update
     @event_detail.update(event_detail_params)
+    redirect_to occasion_event_path(@occasion, @event)
   end
 
   def destroy
