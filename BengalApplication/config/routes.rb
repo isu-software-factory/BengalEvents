@@ -7,6 +7,10 @@ Rails.application.routes.draw do
     resources :events
   end
 
+  resources :events do
+    resources :event_details
+  end
+
   root 'homeroutes#routes'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 

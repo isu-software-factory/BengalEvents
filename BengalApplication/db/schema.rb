@@ -12,67 +12,67 @@
 
 ActiveRecord::Schema.define(version: 2019_07_10_060608) do
 
-  create_table "admins", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+  create_table "admins", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "coordinators", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+  create_table "coordinators", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "event_details", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+  create_table "event_details", force: :cascade do |t|
     t.integer "capacity"
     t.datetime "start_time"
     t.datetime "end_time"
-    t.bigint "event_id"
+    t.integer "event_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["event_id"], name: "index_event_details_on_event_id"
   end
 
-  create_table "events", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+  create_table "events", force: :cascade do |t|
     t.string "name"
     t.string "location"
     t.text "description"
     t.boolean "isMakeAhead"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "occasion_id"
+    t.integer "occasion_id"
     t.index ["occasion_id"], name: "index_events_on_occasion_id"
   end
 
-  create_table "occasions", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+  create_table "occasions", force: :cascade do |t|
     t.string "name"
     t.datetime "start_date"
     t.datetime "end_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "coordinator_id"
+    t.integer "coordinator_id"
     t.index ["coordinator_id"], name: "index_occasions_on_coordinator_id"
   end
 
-  create_table "registrations", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
-    t.bigint "student_id"
-    t.bigint "event_detail_id"
+  create_table "registrations", force: :cascade do |t|
+    t.integer "student_id"
+    t.integer "event_detail_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["event_detail_id"], name: "index_registrations_on_event_detail_id"
     t.index ["student_id"], name: "index_registrations_on_student_id"
   end
 
-  create_table "sponsors", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+  create_table "sponsors", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "students", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+  create_table "students", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+  create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.integer "Identifiable_id"
@@ -87,9 +87,4 @@ ActiveRecord::Schema.define(version: 2019_07_10_060608) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "event_details", "events"
-  add_foreign_key "events", "occasions"
-  add_foreign_key "occasions", "coordinators"
-  add_foreign_key "registrations", "event_details"
-  add_foreign_key "registrations", "students"
 end
