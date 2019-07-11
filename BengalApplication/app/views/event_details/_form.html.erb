@@ -1,0 +1,19 @@
+<%#= form_for([@occasion, @occasion.events.build]) do |f| %>
+<%= form_for([@occasion, @event, @event_detail]) do |f| %>
+
+  <p>
+    <%= f.label :capacity %>
+    <%= f.text_field :capacity %>
+  </p>
+  <p>
+    <%= f.label :start_time %>
+    <%= f.text_field :start_time %>
+  </p>
+  <p>
+    <%= f.label :end_time %>
+    <%= f.text_field :end_time %>
+  </p>
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>
