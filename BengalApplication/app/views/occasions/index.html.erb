@@ -9,6 +9,7 @@
     <td>Start Date</td>
     <td>End Date</td>
     <td>Actions</td>
+    <td>Created By</td>
   </tr>
   </thead>
   <tbody>
@@ -17,13 +18,15 @@
       <td><%= occasion.name %></td>
       <td><%= occasion.start_date %></td>
       <td><%= occasion.end_date %></td>
-      <td><%= link_to "Show", occasion_path(occasion.id) %></td>
-      <%# if policy(occasion).edit? %>
-      <td><%= link_to "Edit", edit_occasion_path(occasion.id) %></td>
+      <td>
+        <%= link_to "Show", occasion_path(occasion.id) %>
+        <%# if policy(occasion).edit? %>
+        <%= link_to "Edit", edit_occasion_path(occasion.id) %>
         <%#end %>
-      <%# if policy(occasion).destroy? %>
-        <td><%= link_to "Delete", occasion_path(occasion.id), data: {method: :delete, confirm: "Are you sure?"} %>
-        </td>
+        <%# if policy(occasion).destroy? %>
+        <%= link_to "Delete", occasion_path(occasion.id), data: {method: :delete, confirm: "Are you sure?"} %>
+      </td>
+      <td><%= occasion.coordinator.user.email %></td>
       <%# end %>
     </tr>
   <% end %>
