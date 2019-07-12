@@ -1,5 +1,7 @@
 class StudentsController < ApplicationController
   before_action :prepare_teacher
+  before_action :authenticate_user!, except: :new
+
   def index
     @students = Student.where("teacher_id = ?", params[:teacher_id])
   end
