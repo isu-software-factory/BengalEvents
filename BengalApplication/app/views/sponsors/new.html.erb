@@ -1,21 +1,25 @@
 <h1>Additional information needed</h1>
-<%=form_for @sponsor do |f| %>
-  <div class="actions"><%=f.submit "Confirm" %></div>
-  <%=fields_for :users do |user| %>
+<%= form_for @sponsor do |f| %>
+  <div class="field">
+    <%= f.label :name, "Name" %>
+    <%= f.text_field(:name) %>
+  </div>
+  <div class="actions"><%= submit_tag "Confirm" %></div>
+  <%= fields_for :users do |user| %>
     <div class="field">
-      <%=user.label :name %>
-      <%=user.text_field :name %>
+      <%= user.label :email %>
+      <%= user.email_field :email %>
     </div>
     <div class="field">
-      <%=user.label :email %>
-      <%=user.email_field :email %>
+      <%= user.label :password %>
+      <%= user.password_field :password %>
     </div>
     <div class="field">
-      <%=user.label :password %>
-      <%=user.password_field :password %>
+      <%= user.label :password_confirmation %>
+      <%= user.password_field :password_confirmation %>
     </div>
-  <%end %>
-<%end %>
+  <% end %>
+<% end %>
 
 <% if @sponsor.errors.any? %>
   <div id="error_explanation">
