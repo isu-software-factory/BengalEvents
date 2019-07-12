@@ -24,12 +24,21 @@ class TeachersController < ApplicationController
   end
 
   def edit
+    @teacher = Teacher.find(params[:id])
   end
 
   def update
+    if @teacher.update_attributes(user_params)
+      redirect_to @teacher
+    else
+      render 'edit'
+    end
+
   end
 
   def destroy
+    Teacher.find(params[:id]).destroy
+    redirect_to teachers_path
   end
 
   private
