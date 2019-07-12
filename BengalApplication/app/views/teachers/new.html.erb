@@ -15,20 +15,12 @@
   <div class="actions"><%=submit_tag "Confirm" %></div>
   <%=fields_for :users do |user| %>
     <div class="field">
-    <%=user.label :name %>
-    <%=user.text_field :name %>
-    </div>
-    <div class="field">
     <%=user.label :email %>
     <%=user.email_field :email %>
     </div>
     <div class="field">
     <%=user.label :password %>
     <%=user.password_field :password %>
-    </div>
-    <div class="field">
-    <%=user.label :password_confirmation %>
-    <%=user.password_field :password_confirmation %>
     </div>
   <%end %>
 <%end %>

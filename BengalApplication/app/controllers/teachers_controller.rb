@@ -10,8 +10,8 @@ class TeachersController < ApplicationController
   end
 
   def create
-    @teacher = Teacher.new(teacher_params)
-    if @teacher.save
+    @teacher = Teacher.create(teacher_params)
+    if @teacher
       redirect_to @teacher
     else
       render :new
@@ -34,6 +34,6 @@ class TeachersController < ApplicationController
   private
 
   def teacher_params
-    params.require(:teacher).permit(:school, :chaperone_count, :student_count, user_attributes: [:id, :email, :name, :password])
+    params.require(:teacher).permit(:school, :chaperone_count, :student_count, user_attributes: [:id, :email, :password])
   end
 end

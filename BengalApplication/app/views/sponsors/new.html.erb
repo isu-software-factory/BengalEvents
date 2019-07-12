@@ -1,6 +1,6 @@
 <h1>Additional information needed</h1>
 <%=form_for @sponsor do |f| %>
-  <div class="actions"><%=submit_tag "Confirm" %></div>
+  <div class="actions"><%=f.submit "Confirm" %></div>
   <%=fields_for :users do |user| %>
     <div class="field">
       <%=user.label :name %>
@@ -13,10 +13,6 @@
     <div class="field">
       <%=user.label :password %>
       <%=user.password_field :password %>
-    </div>
-    <div class="field">
-      <%=user.label :password_confirmation %>
-      <%=user.password_field :password_confirmation %>
     </div>
   <%end %>
 <%end %>
