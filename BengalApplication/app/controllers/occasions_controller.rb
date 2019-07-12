@@ -1,5 +1,5 @@
 class OccasionsController < ApplicationController
-  # before_action :authenticate_user!, except: [:index]
+  before_action :authenticate_user!
   # after_action :verify_authorized, except: [:index, :show, :edit]
 
   def index
@@ -7,13 +7,13 @@ class OccasionsController < ApplicationController
   end
 
   def new
-    @occasion = Occasion.new
-    # authorize @occasion
+    @occasion = current_user.meta.occasions.build
+    authorize @occasion
   end
 
   def create
-    occasion = Occasion.new(occasion_params)
-    # authorize occasion
+    occasion = current_user.meta.occasions.build(occasion_params)
+    authorize occasion
     if occasion.save
       redirect_to occasions_path
     else
@@ -29,12 +29,12 @@ class OccasionsController < ApplicationController
 
   def edit
     @occasion = Occasion.find(params[:id])
-    # authorize @occasion
+    authorize @occasion
   end
 
   def update
     occasion = Occasion.find(params[:id])
-    # authorize occasion
+    authorize occasion
     if occasion.update(occasion_params)
       redirect_to occasions_path
     else
@@ -45,7 +45,7 @@ class OccasionsController < ApplicationController
 
   def destroy
     occasion = Occasion.find(params[:id])
-    # authorize occasion
+    authorize occasion
     occasion.destroy
     redirect_to occasions_path
   end

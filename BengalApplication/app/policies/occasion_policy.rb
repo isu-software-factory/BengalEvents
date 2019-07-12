@@ -1,26 +1,26 @@
 class OccasionPolicy < ApplicationPolicy
 
-  def index?
-    @user.role == "coordinator" || @user.role == "admin"
+  def new
+    user.meta_type == "Coordinator" || user.meta_type == "Admin"
   end
 
   def edit?
-    @user.role == "coordinator" || @user.role == "admin"
+    user.meta_type == "Coordinator" || user.meta_type == "Admin"
   end
 
   def update?
-    user.role == "coordinator" || user.role == "admin"
+    user.meta_type == "Coordinator" || user.meta_type == "Admin"
   end
 
   def create?
-    @user.role == "coordinator" || @user.role == "admin"
+    user.meta_type == "Coordinator" || user.meta_type == "Admin"
   end
 
   def show?
-    @user.role == "coordinator" || @user.role == "admin"
+    user.meta_type == "Coordinator" || user.meta_type == "Admin" || user.meta_type == "Sponsor"
   end
 
   def destroy?
-    @user.role == "coordinator" || @user.role == "admin"
+    user.meta_type == "Coordinator" || user.meta_type == "Admin"
   end
 end
