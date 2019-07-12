@@ -11,11 +11,12 @@ class StudentsController < ApplicationController
   end
 
   def create
+    @student = Student.new
+    @student.teacher_id = @teacher.id
     random_password = ('0'..'z').to_a.shuffle.first(8).join
     @user = User.new(user_params)
     @user.password = random_password
     @user.password_confirmation = random_password
-    @student = Student.new
     @user.Identifiable = @student
     if @student.save
       @user.save
@@ -26,10 +27,10 @@ class StudentsController < ApplicationController
   private
 
   def prepare_teacher
-    @teacher = Teacher.find(params[:teacher_id])
+    @teacher = Teacher.find(params[:format])
   end
 
-  def user_params
-    params.require(:user).permit(:name, :email)
+  def student_params
+    params.require(:student).permit(user_attributes: [:password, :email])
   end
 end
