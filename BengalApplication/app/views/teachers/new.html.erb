@@ -1,5 +1,23 @@
-<h1>Additional information needed</h1>
+<h1>Please Enter your Info</h1>
 <%=form_for @teacher do |f| %>
+  <%=fields_for :users do |user| %>
+    <div class="field">
+      <%=user.label :name %>
+      <%=user.text_field :name %>
+    </div>
+    <div class="field">
+      <%=user.label :email %>
+      <%=user.email_field :email %>
+    </div>
+    <div class="field">
+      <%=user.label :password %>
+      <%=user.password_field :password %>
+    </div>
+    <div class="field">
+      <%=user.label :password_confirmation %>
+      <%=user.password_field :password_confirmation %>
+    </div>
+  <%end %>
   <div class="field">
     <%=f.label :school, "School Name" %>
     <%=f.text_field(:school )%>
@@ -13,24 +31,6 @@
     <%=f.text_field(:student_count )%>
   </div>
   <div class="actions"><%=submit_tag "Confirm" %></div>
-  <%=fields_for :users do |user| %>
-    <div class="field">
-    <%=user.label :name %>
-    <%=user.text_field :name %>
-    </div>
-    <div class="field">
-    <%=user.label :email %>
-    <%=user.email_field :email %>
-    </div>
-    <div class="field">
-    <%=user.label :password %>
-    <%=user.password_field :password %>
-    </div>
-    <div class="field">
-    <%=user.label :password_confirmation %>
-    <%=user.password_field :password_confirmation %>
-    </div>
-  <%end %>
 <%end %>
 
 <% if @teacher.errors.any? %>
