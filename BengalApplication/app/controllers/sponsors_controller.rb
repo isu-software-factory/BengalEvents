@@ -1,16 +1,38 @@
 class SponsorsController < ApplicationController
-  def index
+    def index
+      @sponsor = Sponsor.all
+    end
 
+    def new
+      @sponsor = Sponsor.new
+    end
+
+    def create
+      @sponsor = Sponsor.new(sponsor_params)
+      if @sponsor.save
+        redirect_to @sponsor
+      else
+        render :new
+      end
+    end
+
+    def show
+      @sponsor = Sponsor.find(params[:id])
+    end
+
+    def edit
+    end
+
+    def update
+    end
+
+    def destroy
+    end
+
+    private
+
+    def sponsor_params
+      params.require(:sponsor).permit(user_attributes: [:id, :email, :name, :password])
+    end
   end
 
-  def show
-
-  end
-
-  def new
-
-  end
-  def create
-
-  end
-end

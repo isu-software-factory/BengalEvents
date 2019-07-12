@@ -11,7 +11,7 @@ class HomeroutesController < ApplicationController
       elsif current_user.meta_type == "Sponsor"
         redirect_to occasion_path(current_user.meta.id)
       else
-        redirect_to
+        redirect_to teacher_path(current_user.meta.id)
       end
 
     end

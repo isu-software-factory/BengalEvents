@@ -1,0 +1,34 @@
+<h1>Additional information needed</h1>
+<%=form_for @sponsor do |f| %>
+  <div class="actions"><%=submit_tag "Confirm" %></div>
+  <%=fields_for :users do |user| %>
+    <div class="field">
+      <%=user.label :name %>
+      <%=user.text_field :name %>
+    </div>
+    <div class="field">
+      <%=user.label :email %>
+      <%=user.email_field :email %>
+    </div>
+    <div class="field">
+      <%=user.label :password %>
+      <%=user.password_field :password %>
+    </div>
+    <div class="field">
+      <%=user.label :password_confirmation %>
+      <%=user.password_field :password_confirmation %>
+    </div>
+  <%end %>
+<%end %>
+
+<% if @sponsor.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@sponsor.errors.count, "error") %> prohibited this post from being saved:</h2>
+
+    <ul>
+      <% @sponsor.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>

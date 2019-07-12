@@ -1,27 +1,26 @@
 class EventPolicy < ApplicationPolicy
 
-  def create?
-    @user.role == "coordinator" || @user.role == "admin" || @user.role == "sponsor"
-  end
-
-  def new?
-    @user.role == "coordinator" || @user.role == "sponsor" || @user.role == "admin"
-  end
-
-  def show?
-    @user.role == "coordinator" || @user.role == "sponsor" || @user.role == "admin"
+  def new
+    user.meta_type == "Coordinator" || user.meta_type == "Admin"|| user.meta_type == "Sponsor"
   end
 
   def edit?
-    @user.role == "coordinator" || @user.role == "admin" || @user.role == "sponsor"
+    user.meta_type == "Coordinator" || user.meta_type == "Admin" || user.meta_type == "Sponsor"
   end
 
   def update?
-    @user.role == "coordinator" || @user.role == "admin" || @user.role == "sponsor"
+    user.meta_type == "Coordinator" || user.meta_type == "Admin"|| user.meta_type == "Sponsor"
+  end
+
+  def create?
+    user.meta_type == "Coordinator" || user.meta_type == "Admin" || user.meta_type == "Sponsor"
+  end
+
+  def show?
+    user.meta_type == "Coordinator" || user.meta_type == "Admin" || user.meta_type == "Sponsor"
   end
 
   def destroy?
-    @user.role == "coordinator" || @user.role == "admin"
+    user.meta_type == "Coordinator" || user.meta_type == "Admin"
   end
-
 end
