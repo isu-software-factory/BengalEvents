@@ -12,3 +12,19 @@
   <%end %>
   <div class="actions"><%=submit_tag "Add Student" %></div>
 <% end %>
+<%= link_to "Return Home", @teacher %>
+
+<table>
+  <thead>
+  <tr>
+    <th>Name</th>
+    <th>Email</th>
+  </tr>
+  </thead>
+  <% @teacher.students.each do |s| %>
+    <tr>
+      <td><%=s.name %></td>
+      <td><%=s.user.email %></td>
+    </tr>
+  <% end %>
+</table>

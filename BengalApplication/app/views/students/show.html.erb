@@ -1,0 +1,6 @@
+<h1>Welcome, <%= @student.name %>!</h1>
+<h2>Registration Details</h2>
+<% if @student.event_details == nil %>
+      <p>You don't seem to be registered for anything yet!</p>
+
+<% end %>

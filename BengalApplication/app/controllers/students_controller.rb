@@ -1,5 +1,5 @@
 class StudentsController < ApplicationController
-  before_action :prepare_teacher
+  before_action :prepare_teacher, only: [:new, :create]
   before_action :authenticate_user!, except: :new
 
   def index
@@ -25,9 +25,10 @@ class StudentsController < ApplicationController
     @student.user.password_confirmation = random_password
 
     if @student.save
-      redirect_to root_path
+      #UserMailer.login_email(@student.user, "localhost:3000/", random_password)
+      render 'new'
     else
-      render new
+      redirect_to root_path
     end
   end
 
@@ -36,11 +37,6 @@ class StudentsController < ApplicationController
   end
 
   def update
-    if @student.update_attributes(user_params)
-      redirect_to @student
-    else
-      render 'edit'
-    end
   end
 
   def destroy
