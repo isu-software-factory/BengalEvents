@@ -11,7 +11,7 @@ Rails.application.routes.draw do
     end
   end
 
-
+  get "homeroutes/routes" => 'homeroutes#routes'
   root 'homeroutes#routes'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 

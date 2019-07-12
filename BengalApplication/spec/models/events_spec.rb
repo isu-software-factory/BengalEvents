@@ -11,9 +11,9 @@ RSpec.describe Event, type: :model do
     end
 
     it "should have an event detail" do
-      #event = Event.create(name: "robotics", location: "SUB", description: "For people interesting in Robotics.", isMakeAhead: true)
-      #event_detail = EventDetail.create(capacity: 23, start_time: 2/23/2019, end_time: 2/23/2019)
-      pending
+      event = Event.create(name: "robotics", location: "SUB", description: "For people interesting in Robotics.", isMakeAhead: true)
+      event_detail = EventDetail.create(capacity: 23, start_time: 2/23/2019, end_time: 2/23/2019)
+      event.event_details << event_detail
     end
   end
 end

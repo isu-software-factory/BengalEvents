@@ -4,7 +4,7 @@ RSpec.describe Coordinator, type: :model do
   context "association tests" do
     it "should have a user" do
       coordinator = Coordinator.create(user_attributes: {email: "pasl@gmail.com", password: "password"})
-      expect(coordinator.user).to_no eq(nil)
+      expect(coordinator.user).not_to eq(nil)
     end
 
     it "should have an occasion" do
