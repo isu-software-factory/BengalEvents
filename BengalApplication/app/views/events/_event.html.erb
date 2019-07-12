@@ -18,7 +18,9 @@
       <% if policy(event).destroy? %>
         <%= link_to "Delete ", occasion_event_path(@occasion, event), method: :delete, data: {confirm: "Are you sure?"} %>
       <% end %>
-      <%= link_to "Edit", edit_occasion_event_path(@occasion, event) %>
+      <% if policy(event).edit? %>
+        <%= link_to "Edit", edit_occasion_event_path(@occasion, event) %>
+      <% end %>
       <%= link_to "Details", occasion_event_path(@occasion, event) %>
     </td>
   </tr>

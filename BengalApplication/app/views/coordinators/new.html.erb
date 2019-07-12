@@ -1,0 +1,34 @@
+<h1>Additional information needed</h1>
+<%= form_for @coordinator do |f| %>
+  <div class="field">
+    <%= f.label :name, "Name" %>
+    <%= f.text_field(:name) %>
+  </div>
+  <div class="actions"><%= submit_tag "Confirm" %></div>
+  <%= f.fields_for :user do |u| %>
+    <div class="field">
+      <%= u.label :email %>
+      <%= u.email_field :email %>
+    </div>
+    <div class="field">
+      <%= u.label :password %>
+      <%= u.password_field :password %>
+    </div>
+    <div class="field">
+      <%= u.label :password_confirmation %>
+      <%= u.password_field :password_confirmation %>
+    </div>
+  <% end %>
+<% end %>
+
+<% if @coordinator.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@coordinator.errors.count, "error") %> prohibited this post from being saved:</h2>
+
+    <ul>
+      <% @coordinator.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
