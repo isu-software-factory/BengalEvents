@@ -1,33 +1,36 @@
 require 'rails_helper'
 
-RSpec.feature "Students", type: :feature do
-  context "create new student" do
+RSpec.feature "Sponsors", type: :feature do
+  context "create new sponsor" do
     scenario "should be successful" do
-      visit new_student_path
+      visit new_sponsor_path
       within('form') do
         fill_in "Name", with: 'Daniel'
-        fill_in 'student[email]', with: "hi@gmail.com"
-    end
+        fill_in 'sponsor[email]', with: "hi@gmail.com"
+        fill_in 'sponsor[password]', with: "password"
+      end
       click_button 'Confirm'
-      expect(page).to have_content("Student main view")
+      expect(page).to have_content("Sponsor main view")
     end
 
     scenario "should fail" do
-      visit new_student_path
+      visit new_sponsor_path
       within('form') do
         fill_in "Name", with: 'Daniel'
-      click_button "Confirm"
-      expect(page).to have_content("Name can't be blank")
+        fill_in "sponsor[password]", with: "password"
+        click_button "Confirm"
+        expect(page).to have_content("Name can't be blank")
+      end
     end
-    end
-    end
-  context "update student" do
-    let!(:student) {Student.create}
+  end
+  context "update sponsor" do
+    let!(:sponsor) {Student.create}
     scenario "should be successful" do
-      visit edit_student_path(student)
+      visit edit_sponsor_path(sponsor)
       within("form")do
         fill_in "Name", with: "Wendell"
-        fill_in "student[email]", with: "sup@gmail.com"
+        fill_in "sponsor[email]", with: "sup@gmail.com"
+        fill_in "sponsor[password]", with: "password23"
 
       end
       click_button 'Update'
@@ -43,10 +46,10 @@ RSpec.feature "Students", type: :feature do
     end
   end
 
-  context "destroy student" do
+  context "destroy sponsor" do
     scenario "should be successful" do
-      student = Student.create
-      visit student_path(student)
+      sponsor = Student.create
+      visit sponsor_path(sponsor)
       click_link "Delete"
       expect(page).to have_content "Student was successfully deleted"
     end

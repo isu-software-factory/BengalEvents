@@ -3,5 +3,5 @@ class Student < ApplicationRecord
   accepts_nested_attributes_for :user
   has_many :registrations
   has_many :event_details, through: :registrations
-
+  has_one :teacher
 end

@@ -1,5 +1,5 @@
 class TeachersController < ApplicationController
-  #before_action :authenticate_user!
+  before_action :authenticate_user!, except: :new
 
   def index
     @teachers = Teacher.all

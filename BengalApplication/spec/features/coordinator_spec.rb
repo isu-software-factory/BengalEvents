@@ -1,33 +1,37 @@
 require 'rails_helper'
 
-RSpec.feature "Students", type: :feature do
-  context "create new student" do
+RSpec.feature "Coordinators", type: :feature do
+  context "create new coordinator" do
+
+
     scenario "should be successful" do
-      visit new_student_path
+      visit new_coordinator_path
       within('form') do
         fill_in "Name", with: 'Daniel'
-        fill_in 'student[email]', with: "hi@gmail.com"
-    end
+        fill_in 'coordinator[email]', with: "hi@gmail.com"
+        fill_in 'coordinator[password', with: "password"
+      end
       click_button 'Confirm'
-      expect(page).to have_content("Student main view")
+      expect(page).to have_content("Coordinator main view")
     end
 
     scenario "should fail" do
-      visit new_student_path
+      visit new_coordinator_path
       within('form') do
         fill_in "Name", with: 'Daniel'
+        fill_in "coordinator[password]", with: "password"
+      end
       click_button "Confirm"
       expect(page).to have_content("Name can't be blank")
     end
-    end
-    end
-  context "update student" do
-    let!(:student) {Student.create}
+  end
+  context "update coordinator" do
+    let!(:coordinator) {Coordinator.create}
     scenario "should be successful" do
-      visit edit_student_path(student)
+      visit edit_coordinator_path(coordinator)
       within("form")do
         fill_in "Name", with: "Wendell"
-        fill_in "student[email]", with: "sup@gmail.com"
+        fill_in "coordinator[email]", with: "sup@gmail.com"
 
       end
       click_button 'Update'
@@ -43,12 +47,12 @@ RSpec.feature "Students", type: :feature do
     end
   end
 
-  context "destroy student" do
+  context "destroy coordinator" do
     scenario "should be successful" do
-      student = Student.create
-      visit student_path(student)
+      coordinator = Coordinator.create
+      visit coordinator_path(coordinator)
       click_link "Delete"
-      expect(page).to have_content "Student was successfully deleted"
+      expect(page).to have_content "Coordinator was successfully deleted"
     end
   end
 end
