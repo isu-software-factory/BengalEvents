@@ -39,6 +39,6 @@ class TeachersController < ApplicationController
   end
 
   def authenticate_teacher
-    redirect_to(new_user_session_path) unless current_user.meat_type == "Teacher"
+    redirect_to(new_user_session_path) unless current_user.meata_type == "Teacher"
   end
 end
