@@ -7,6 +7,7 @@ class TeachersController < ApplicationController
 
   def new
     @teacher = Teacher.new
+    @teacher.build_user
   end
 
   def create
@@ -34,6 +35,6 @@ class TeachersController < ApplicationController
   private
 
   def teacher_params
-    params.require(:teacher).permit(:school, :student_count, :chaperone_count, user_attributes: [:id, :password, :email])
+    params.require(:teacher).permit(:school, :student_count, :chaperone_count, user_attributes: [:id, :email, :password, :password_confirmation])
   end
 end

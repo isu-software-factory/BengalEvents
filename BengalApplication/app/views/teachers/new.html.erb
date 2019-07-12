@@ -12,14 +12,19 @@
     <%=f.label :student_count, "Expected number of Students" %>
     <%=f.text_field(:student_count )%>
   </div>
-  <%=fields_for :users do |user| %>
+  <%=f.fields_for :user do |u| %>
+
     <div class="field">
-    <%=user.label :email %>
-    <%=user.email_field :email %>
+    <%=u.label :email %>
+    <%=u.email_field :email %>
     </div>
     <div class="field">
-    <%=user.label :password %>
-    <%=user.password_field :password %>
+    <%=u.label :password %>
+    <%=u.password_field :password %>
+    </div>
+    <div class="field">
+    <%=u.label :password_confirmation %>
+    <%=u.password_field :password_confirmation %>
     </div>
   <%end %>
   <div class="actions"><%=submit_tag "Confirm" %></div>
