@@ -10,9 +10,9 @@ RSpec.describe Sponsor, type: :model do
 
       sponsor = Sponsor.new
       sponsor.save
-      sponsor.event = event
+      sponsor.events << event
 
-      expect(sponsor.event.name).to eq("robotics")
+      expect(sponsor.events).not_to eq(nil)
     end
 
     it "should have a user" do

@@ -24,8 +24,8 @@ RSpec.describe Teacher, type: :model do
       student = Student.new
       student.save
 
-      teacher.student = student
-      expect(teacher.student).not_to eq(nil)
+      teacher.students << student
+      expect(teacher.students).not_to eq(nil)
     end
 
     it "should have a user" do

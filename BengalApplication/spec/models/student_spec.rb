@@ -8,9 +8,9 @@ RSpec.describe Student, type: :model do
         teacher.save
         student = Student.new
         student.save
-        teacher.student = student
+        teacher.students << student
 
-        expect(Student.first.teacher.chaperone_count).to eq(2)
+        expect(student.teacher).not_to eq(nil)
       end
 
       it "should have a user" do

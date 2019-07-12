@@ -1,10 +1,10 @@
 require 'rails_helper'
 
-RSpec.describe SponsorsController, type: :controller do
+RSpec.describe CoordinatorsController, type: :controller do
   context 'GET #show' do
     it 'returns a success response' do
-      sponsor = Sponsor.create!(chaperone_count: 3, student_count: 23, school: "Valley")
-      get :show, params: {id: sponsor.to_param}
+      coordinator = Coordinator.create!(chaperone_count: 3, student_count: 23, school: "Valley")
+      get :show, params: {id: coordinator.to_param}
       expect(response).to be_success
     end
   end

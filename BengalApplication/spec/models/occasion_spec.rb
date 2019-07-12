@@ -24,12 +24,14 @@ RSpec.describe Occasion, type: :model do
       event = Event.new(name: "robotics", location: "SUB", description: "For people interesting in Robotics.", isMakeAhead: true)
       event.save
       event.occasion = occasion
+      expect(event.occasion).not_to eq(nil)
     end
 
     it "should have a coordinator" do
       coordinator = Coordinator.new
       coordinator.save
       occasion.coordinator = coordinator
+      expect(occasion.coordinator).not_to eq(nil)
     end
   end
 end
