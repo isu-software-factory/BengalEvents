@@ -1,5 +1,5 @@
 class TeachersController < ApplicationController
-  before_action :authenticate_user!, except: :new
+  before_action :authenticate_user!, except: [:new, :create]
 
   def index
     @teachers = Teacher.all
@@ -10,9 +10,9 @@ class TeachersController < ApplicationController
   end
 
   def create
-    @teacher = Teacher.create(teacher_params)
-    if @teacher
-      redirect_to @teacher
+    @teacher = Teacher.new(teacher_params)
+    if @teacher.save
+      redirect_to root_path
     else
       render :new
     end
@@ -34,6 +34,6 @@ class TeachersController < ApplicationController
   private
 
   def teacher_params
-    params.require(:teacher).permit(:school, :chaperone_count, :student_count, user_attributes: [:id, :email, :password])
+    params.require(:teacher).permit(:school, :student_count, :chaperone_count, user_attributes: [:id, :password, :email])
   end
 end
