@@ -1,5 +1,7 @@
 class SponsorsController < ApplicationController
-    def index
+  before_action :authenticate_user!, except: :new
+
+  def index
       @sponsor = Sponsor.all
     end
 
