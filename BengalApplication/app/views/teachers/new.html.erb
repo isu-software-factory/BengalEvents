@@ -1,6 +1,10 @@
 <h1>Additional information needed</h1>
 <%=form_for @teacher do |f| %>
   <div class="field">
+    <%=f.label :name, "Teacher Name" %>
+    <%=f.text_field(:name )%>
+  </div>
+  <div class="field">
     <%=f.label :school, "School Name" %>
     <%=f.text_field(:school )%>
   </div>

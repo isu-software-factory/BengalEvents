@@ -17,10 +17,13 @@ class StudentsController < ApplicationController
 
   def create
     @student = Student.new(student_params)
-    @student.teacher_id = @teacher.id
+    @teacher.students << @student
+
     random_password = ('0'..'z').to_a.shuffle.first(8).join
+
     @student.user.password = random_password
     @student.user.password_confirmation = random_password
+
     if @student.save
       redirect_to root_path
     else
@@ -49,10 +52,10 @@ class StudentsController < ApplicationController
   private
 
   def prepare_teacher
-    @teacher = Teacher.find(params[:format])
+    @teacher = Teacher.find(current_user.meta.id)
   end
 
   def student_params
-    params.require(:student).permit(user_attributes: [:password, :email])
+    params.require(:student).permit(:name, user_attributes: [:email])
   end
 end
