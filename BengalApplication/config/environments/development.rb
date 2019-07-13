@@ -59,15 +59,15 @@ Rails.application.configure do
   # }
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = true
-  config.action_mailer.default_options = {from: 'bengalevents@isu.edu'}
-
+  config.action_mailer.default_options = {from: 'isuevent@isu.edu'}
+  config.action_mailer.default_url_options = {:host => "localhost:3000"}
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
       address:              'smtp.gmail.com',
       port:                 587,
       domain:               'example.com',
-      user_name:            'bengalevents@isu.edu',
-      password:             'bengalevents',
+      user_name:            'isuevent@isu.edu',
+      password:             'b166t173',
       authentication:       'plain',
       enable_starttls_auto: true  }
   # Raises error for missing translations

@@ -1,4 +1,4 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: 'bengalevents@isu.edu'
+  default from: 'isuevent@isu.edu'
  layout 'mailer'
 end

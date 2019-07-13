@@ -9,7 +9,7 @@ class EventPolicy < ApplicationPolicy
   end
 
   def update?
-    user.meta_type == "Coordinator" || user.meta_type == "Admin"|| user.meta_type == "Sponsor"
+    (user.meta_type == "Coordinator" || user.meta_type == "Admin"|| user.meta_type == "Sponsor") && (user.meta.id == record.sponsor.id)
   end
 
   def create?
