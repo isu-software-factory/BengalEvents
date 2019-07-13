@@ -5,11 +5,12 @@ class OccasionPolicy < ApplicationPolicy
   end
 
   def edit?
-    user.meta_type == "Coordinator" || user.meta_type == "Admin"
+    (user.meta_type == "Coordinator" || user.meta_type == "Admin") && (user.meta.id == record.coordinator.id)
   end
 
   def update?
-    user.meta_type == "Coordinator" || user.meta_type == "Admin"
+    (user.meta_type == "Coordinator" || user.meta_type == "Admin") && (user.meta.id == record.coordinator.id)
+
   end
 
   def create?

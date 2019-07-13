@@ -1,9 +1,10 @@
 class UserMailer < ApplicationMailer
-  # UserMailer.welcome_email(@user).deliver_now
+  # UserMailer.login_email(@user).deliver_now
 
-  def login_email(user, link)
+  def login_email(account, user, password)
+    @account = account
     @user = user
-    @link = link
+    @password = password
     mail(to: @user.email, subject: "Welcome to BengalEvents")
   end
 

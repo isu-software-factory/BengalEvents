@@ -1,12 +1,14 @@
 <h1>Add students here</h1>
-<%= form_for [@teacher, @student] do |f| %>
+<%= form_for [@student] do |f| %>
   <div class="field">
     <%=f.label :name, "Student Name" %>
     <%=f.text_field(:name )%>
   </div>
-  <div class="field">
-    <%=f.label :email, "Student Email" %>
-    <%=f.text_field(:email )%>
-  </div>
+  <%=f.fields_for :user do |u| %>
+    <div class="field">
+      <%=u.label :email %>
+      <%=u.email_field :email %>
+    </div>
+  <%end %>
   <div class="actions"><%=submit_tag "Add Student" %></div>
 <% end %>
