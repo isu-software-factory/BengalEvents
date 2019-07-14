@@ -1,6 +1,27 @@
 <h1>Welcome, <%= @student.name %>!</h1>
-<h2>Registration Details</h2>
-<% if @student.event_details == nil %>
-      <p>You don't seem to be registered for anything yet!</p>
+<p>Teacher: <%= @student.teacher.name %></p>
+<p>School: <%= @student.teacher.school %></p>
+<%= link_to "Register for Events", new_registration_path %>
+<%= link_to "Log Out", destroy_user_session_path %>
 
-<% end %>
+<h2>Registration Details</h2>
+<table>
+  <thead>
+  <tr>
+    <th>Name</th>
+    <th>Description</th>
+    <th>Location</th>
+    <th>Start Time</th>
+    <th>End Time</th>
+  </tr>
+  </thead>
+  <% @student.event_details.each do |s| %>
+    <tr>
+      <td><%=s Event.find(s.event_id).name %></td>
+      <td><%=Event.find(s.event_id).description %></td>
+      <td><%=Event.find(s.event_id).location %></td>
+      <td><%=s s.start_time %></td>
+      <td><%=s s.end_time %></td>
+    </tr>
+  <% end %>
+</table>
