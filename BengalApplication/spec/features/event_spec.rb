@@ -1,10 +1,13 @@
 require 'rails_helper'
-
+include Warden::Test::Helpers
 RSpec.feature "Events", type: :feature do
   context "create new event" do
     before(:each) do
-      occasion = Occasion.create(start_date: 2/23/2018, end_date: 2/19/2019)
-      visit new_occasion_event_url(:occasion_id => 1)
+      Warden.test_reset!
+      occasion = Occasion.create(name: "yes", start_date: 2/23/2018, end_date: 2/19/2019)
+      sponsor = Sponsor.create(name: "Sponsor", user_attributes: {email: "sponsor@gmail.com", password: "password"})
+      login_as(sponsor.user, :scope => :user)
+      visit new_occasion_event_path(occasion)
       within('form') do
         fill_in "event[name]", with: "Robtics"
         fill_in "event[location]", with: "Gym"

@@ -19,8 +19,8 @@ class StudentsController < ApplicationController
     @student = Student.new(student_params)
     @teacher.students << @student
 
-    random_password = ('0'..'z').to_a.shuffle.first(8).join
-
+    #random_password = ('0'..'z').to_a.shuffle.first(8).join
+    random_password = "password"
     @student.user.password = random_password
     @student.user.password_confirmation = random_password
 

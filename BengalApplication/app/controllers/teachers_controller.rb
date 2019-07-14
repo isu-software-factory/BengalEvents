@@ -13,7 +13,8 @@ class TeachersController < ApplicationController
   def create
     @teacher = Teacher.new(teacher_params)
     if @teacher.save
-      redirect_to root_path
+      sign_in @teacher.user
+      redirect_to @teacher
     else
       render :new
     end

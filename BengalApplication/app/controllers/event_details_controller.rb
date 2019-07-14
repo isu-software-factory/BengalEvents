@@ -1,18 +1,20 @@
 class EventDetailsController < ApplicationController
-  # before_action :authenticate_user!
+   before_action :authenticate_user!
   before_action :set_event
   before_action :set_event_detail, except: [:new, :create]
   before_action :set_occasion
 
   def new
+   # sponsor = Sponsor.find(current_user.meta.id)
     @event_detail = EventDetail.new
   end
 
   def create
-    @event_detail = EventDetail.new(event_detail_params)
+    #sponsor = Sponsor.find(current_user.meta.id)
+    @event_detail = EventDetail.create(event_detail_params)
+
     @event_detail.event = @event
 
-    @event_detail.save
     redirect_to occasion_event_path(@occasion, @event)
   end
 
