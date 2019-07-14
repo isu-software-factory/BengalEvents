@@ -1,6 +1,20 @@
 require 'rails_helper'
 
 RSpec.describe Event, type: :model do
+  context "validation tests" do
+    it "ensures name" do
+      event = Event.new(location: "gym", description: "in the gym").save
+      expect(event).to eq(false)
+    end
+    it "ensures location" do
+      event = Event.new(name: "robotics", description: "in the gym").save
+      expect(event).to eq(false)
+    end
+    it "ensures description" do
+      event = Event.new(location: "gym", name: "robotics").save
+      expect(event).to eq(false)
+    end
+  end
   context "association tests" do
     it "should have an occasion" do
       occasion = Occasion.create(name: "BenagelEvent", start_date: 2/23/2019, end_date: 3/23/2019)

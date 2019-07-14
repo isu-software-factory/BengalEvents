@@ -3,13 +3,12 @@ require 'rails_helper'
 RSpec.feature "Coordinators", type: :feature do
   context "create new coordinator" do
 
-
     scenario "should be successful" do
       visit new_coordinator_path
       within('form') do
         fill_in "Name", with: 'Daniel'
         fill_in 'coordinator[email]', with: "hi@gmail.com"
-        fill_in 'coordinator[password', with: "password"
+        fill_in 'coordinator[password]', with: "password"
       end
       click_button 'Confirm'
       expect(page).to have_content("Coordinator main view")
