@@ -1,0 +1,24 @@
+<table>
+  <thead>
+  <tr>
+    <td>Name</td>
+    <td>Start Date</td>
+    <td>End Date</td>
+  </tr>
+  </thead>
+  <tbody>
+  <% if current_user.meta.occasions.any? %>
+    <h3>Occasion (<%= current_user.meta.occasions.count %>)</h3>
+    <tr>
+      <% current_user.meta.occasions.each do |o| %>
+        <td><%= o.name %></td>
+        <td><%= o.start_date %></td>
+        <td><%= o.end_date %></td>
+      <% end %>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+
+
+<%= link_to "Occasion Home Page", occasions_path %>

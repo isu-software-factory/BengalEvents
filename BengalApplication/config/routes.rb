@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resources :students
   resources :sponsors
   resources :coordinators
+  resources :registrations
   resources :occasions do
     resources :events do
       resources :event_details
