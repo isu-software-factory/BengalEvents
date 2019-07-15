@@ -6,6 +6,7 @@
     <td>Description</td>
     <td>Make ahead</td>
     <td>Actions</td>
+    <td>Created By</td>
   </tr>
   </thead>
   <tbody>
@@ -16,13 +17,14 @@
     <td><%= event.isMakeAhead %></td>
     <td>
       <% if policy(event).destroy? %>
-        <%= link_to "Delete ", occasion_event_path(@occasion, event), method: :delete, data: {confirm: "Are you sure?"} %>
+        <%= link_to "Delete", occasion_event_path(@occasion, event), method: :delete, data: {confirm: "Are you sure?"} %>
       <% end %>
       <% if policy(event).edit? %>
         <%= link_to "Edit", edit_occasion_event_path(@occasion, event) %>
       <% end %>
       <%= link_to "Details", occasion_event_path(@occasion, event) %>
     </td>
+    <td><%= event.sponsor.user.email %></td>
   </tr>
   </tbody>
 </table>
