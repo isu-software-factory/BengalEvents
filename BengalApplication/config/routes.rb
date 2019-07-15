@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resources :students
   resources :sponsors
   get "registrations/register/:id" => "registrations#register"
+  get "registrations/events/:id" => "registrations#events"
   resources :coordinators
   resources :registrations
   resources :occasions do

@@ -11,9 +11,7 @@ class EventDetailsController < ApplicationController
 
   def create
     #sponsor = Sponsor.find(current_user.meta.id)
-    @event_detail = EventDetail.create(event_detail_params)
-
-    @event_detail.event = @event
+    @event.event_details.create(event_detail_params)
 
     redirect_to occasion_event_path(@occasion, @event)
   end

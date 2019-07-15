@@ -6,21 +6,14 @@ class RegistrationsController < ApplicationController
     event.students << @student
     redirect_to @student
   end
+
+  def events
+    occasion = Occasion.find(params[:id])
+    @events = occasion.events
+  end
+
   def index
     @occasions = Occasion.all
   end
 
-  def new
-    # get student teacher
-    @student = Student.find(current_user.meta.id)
-    @occasions = Occasion.all
-
-  end
-  
-
-
-  private
-    def registration_params
-      params.require(:registrations).permit!
-    end
 end

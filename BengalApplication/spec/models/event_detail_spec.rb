@@ -22,6 +22,7 @@ RSpec.describe EventDetail, type: :model do
       event = Event.new(name: "robotics", location: "SUB", description: "For people interesting in Robotics.", isMakeAhead: true)
       event.save
       event_detail.event = event
+      expect(event_detail.event).not_to eq(event)
     end
     it "can have a student" do
       student = Student.new

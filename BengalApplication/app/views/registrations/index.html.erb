@@ -13,12 +13,9 @@
   <tbody>
   <% @occasions.each do |o| %>
     <tr>
-      <%=form_tag(action: "new", method: "post") do %>
-        <td><%=text_field_tag :name, o.name %><%=submit_tag "Enter" %></td>
-
-        <%end %>
-      <td>o.start_date</td>
-      <td>o.start_date</td>
+      <td><%= link_to o.name, "registrations/events/#{o.id}" %></td>
+      <td><%=o.start_date %></td>
+      <td><%=o.start_date %></td>
     </tr>
   <% end %>
   </tbody>

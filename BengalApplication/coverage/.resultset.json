@@ -1,34 +1,40 @@
 {
   "RSpec": {
     "coverage": {
-      "C:/BengalEvents/BengalApplication/spec/features/event_spec.rb": [
+      "C:/BengalEvents/BengalApplication/spec/models/event_detail_spec.rb": [
+        1,
+        null,
         1,
         1,
         1,
         1,
         1,
-        2,
-        2,
-        2,
-        2,
-        2,
-        0,
-        0,
-        0,
+        null,
+        1,
+        1,
+        1,
+        null,
+        1,
+        1,
+        1,
         null,
         null,
         null,
         1,
-        0,
-        0,
-        null,
-        0,
-        0,
-        null,
+        3,
+        1,
+        1,
+        1,
+        1,
+        1,
         null,
         1,
-        0,
-        0,
+        1,
+        1,
+        null,
+        1,
+        null,
+        null,
         null,
         null,
         null
@@ -606,6 +612,8 @@
         1,
         1,
         1,
+        1,
+        1,
         null,
         null,
         null,
@@ -669,9 +677,7 @@
         1,
         null
       ],
-      "C:/BengalEvents/BengalApplication/app/models/occasion.rb": [
-        1,
-        1,
+      "C:/BengalEvents/BengalApplication/app/models/event_detail.rb": [
         1,
         1,
         1,
@@ -679,7 +685,35 @@
         1,
         null
       ],
-      "C:/BengalEvents/BengalApplication/app/models/coordinator.rb": [
+      "C:/BengalEvents/BengalApplication/app/models/event.rb": [
+        1,
+        1,
+        1,
+        1,
+        null,
+        1,
+        1,
+        1,
+        null,
+        null
+      ],
+      "C:/BengalEvents/BengalApplication/app/models/teacher.rb": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        null,
+        1,
+        1,
+        1,
+        null,
+        null
+      ],
+      "C:/BengalEvents/BengalApplication/app/models/occasion.rb": [
+        1,
+        1,
+        1,
         1,
         1,
         1,
@@ -692,8 +726,25 @@
         1,
         1,
         null
+      ],
+      "C:/BengalEvents/BengalApplication/app/models/student.rb": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        null
+      ],
+      "C:/BengalEvents/BengalApplication/app/models/registration.rb": [
+        1,
+        1,
+        1,
+        null
       ]
     },
-    "timestamp": 1563065692
+    "timestamp": 1563148031
   }
 }

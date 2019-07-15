@@ -1,0 +1,37 @@
+<h1>Event Time Slots</h1>
+
+
+  <%@events.each do |e| %>
+    <table>
+      <thead>
+      <tr>
+        <td>Name</td>
+        <td>Location</td>
+        <td>Description</td>
+      </tr>
+      </thead>
+      <tr>
+        <td><%=e.name %></td>
+        <td><%=e.location %></td>
+        <td><%=e.description %></td>
+      </tr>
+      <thead>
+      <tr>
+        <td>Capacity</td>
+        <td>Start Time</td>
+        <td>End Time</td>
+        <td>Register</td>
+      </tr>
+      </thead>
+      <tbody>
+      <%e.event_details.each do |ed| %>
+        <tr>
+          <td><%=ed.capacity %></td>
+          <td><%= ed.start_time %></td>
+          <td><%= ed.end_time %></td>
+          <td><%=link_to "Register", controller: "registrations", action: "register", id:ed.id  %></td>
+        </tr>
+      <%end %>
+      </tbody>
+    </table>
+  <%end %>
