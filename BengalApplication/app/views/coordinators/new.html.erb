@@ -4,7 +4,7 @@
     <%= f.label :name, "Name" %>
     <%= f.text_field(:name) %>
   </div>
-  <div class="actions"><%= submit_tag "Confirm" %></div>
+  <div class="actions"><%= submit_tag "Confirm", class: "button" %></div>
   <%= f.fields_for :user do |u| %>
     <div class="field">
       <%= u.label :email %>
