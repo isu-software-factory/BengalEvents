@@ -13,7 +13,12 @@
  *= require_self
  */
 p, h1, h2, a {
-    color:orange;
+    color:rgb(244,121,32); /*ISU Orange */
+}
+
+a:hover {
+    color:white;
+    text-decoration: none !important;
 }
 
 body {

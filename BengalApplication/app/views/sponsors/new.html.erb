@@ -18,7 +18,7 @@
       <%= u.password_field :password_confirmation %>
     </div>
   <% end %>
-  <div class="actions"><%= submit_tag "Confirm" %></div>
+  <div class="actions"><%= submit_tag "Confirm", class: "button" %></div>
 <% end %>
 
 <% if @sponsor.errors.any? %>
