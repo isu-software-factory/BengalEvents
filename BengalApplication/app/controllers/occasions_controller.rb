@@ -5,6 +5,7 @@ class OccasionsController < ApplicationController
 
   def index
     @occasions = Occasion.all
+    @sponsor = Sponsor.find(current_user.meta.id)
     authorize @occasions
   end
 
