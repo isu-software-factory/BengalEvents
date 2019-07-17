@@ -8,13 +8,15 @@
     </tr>
   </thead>
   <tbody>
-  <%@events.each do |e| %>
-    <tr>
-      <td><%=e.name %></td>
-      <td><%=e.location %></td>
-      <td><%=e.description %></td>
-    </tr>
-  <% end %>
+  <% unless @events == nil %>
+    <%@events.each do |e| %>
+      <tr>
+        <td><%=e.name %></td>
+        <td><%=e.location %></td>
+        <td><%=e.description %></td>
+      </tr>
+    <% end %>
+  <%end %>
   </tbody>
 </table>
 

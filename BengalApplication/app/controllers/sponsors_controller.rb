@@ -21,6 +21,7 @@ class SponsorsController < ApplicationController
 
     def show
       @sponsor = Sponsor.find(params[:id])
+      @occasions = Occasion.all
     end
 
     def edit

@@ -14,7 +14,10 @@ class HomeroutesController < ApplicationController
         redirect_to teacher_path(current_user.meta.id)
       end
     end
-    @occasion = Occasion.first
-    @events = @occasion.events
+    unless Occasion.first == nil
+      @occasion = Occasion.first
+      @events = @occasion.events
+    end
+
   end
 end
