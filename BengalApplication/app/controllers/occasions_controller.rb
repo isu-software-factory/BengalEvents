@@ -1,10 +1,11 @@
 class OccasionsController < ApplicationController
   before_action :authenticate_user!
-  # after_action :verify_authorized, except: [:index, :show, :edit]
+  after_action :verify_authorized, except: [:index, :show, :edit]
 
 
   def index
     @occasions = Occasion.all
+    authorize @occasions
   end
 
   def new
@@ -25,7 +26,7 @@ class OccasionsController < ApplicationController
 
   def show
     @occasion = Occasion.find(params[:id])
-    # authorize @occasion
+     authorize @occasion
   end
 
   def edit

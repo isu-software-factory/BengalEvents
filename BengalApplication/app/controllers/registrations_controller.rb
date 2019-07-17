@@ -1,5 +1,5 @@
 class RegistrationsController < ApplicationController
-
+  before_action :authenticate_user!
   def register
     event = EventDetail.find(params[:id])
     @student = Student.find(current_user.meta.id)
