@@ -13,3 +13,63 @@
  *= require_tree .
  *= require_self
  */
+p, h1, h2, a {
+    color:orange;
+}
+
+body {
+    margin:0;
+
+}
+.header {
+    padding: 10px 16px;
+    background: rgba(5,5,5, .7);
+    color: #f1f1f1;
+    text-align: right;
+    height: 100px;
+    position:relative;
+}
+.sticky {
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+
+.content{
+    padding: 10px 10% 10px 10%;
+
+}
+.sticky + .content {
+    padding-top: 110px;
+}
+
+
+/* Hide alert and notice if empty */
+.notice:empty, .alert:empty {
+    display:none;
+}
+
+.button {
+    background-color: rgb(109,110,113); /* ISU medium gray */
+    border: 2px solid rgb(109,110,113);
+    color: white;
+    padding: 8px 20px;
+    border-radius: 2px;
+    text-align: center;
+    text-decoration: none !important;
+    display: inline-block;
+    font-size: 14px;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+}
+
+.button:hover {
+    background-color: white;
+    color: black;
+}
+
+.sign-in-links {
+    position: absolute;
+    bottom: 0;
+    right: 16px;
+}

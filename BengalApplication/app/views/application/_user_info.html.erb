@@ -2,7 +2,9 @@
   <p><%= current_user.email %></p>
   <p><%= link_to "Log out", destroy_user_session_path, method: :delete %></p>
 <% else %>
+  <p class="sign-in-links">
 <%= link_to "Sign Up As Teacher", new_teacher_path %>
   <%= link_to "Sign Up As Sponsor", new_sponsor_path %>
  <%= link_to "Sign In", user_session_path %>
+  </p>
 <% end %>
