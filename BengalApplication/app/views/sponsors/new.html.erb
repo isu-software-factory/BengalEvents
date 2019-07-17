@@ -4,7 +4,6 @@
     <%= f.label :name, "Name" %>
     <%= f.text_field(:name) %>
   </div>
-  <div class="actions"><%= submit_tag "Confirm" %></div>
   <%= f.fields_for :user do |u| %>
     <div class="field">
       <%= u.label :email %>
@@ -19,6 +18,7 @@
       <%= u.password_field :password_confirmation %>
     </div>
   <% end %>
+  <div class="actions"><%= submit_tag "Confirm", class: "button" %></div>
 <% end %>
 
 <% if @sponsor.errors.any? %>
