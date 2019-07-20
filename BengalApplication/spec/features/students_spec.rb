@@ -1,7 +1,18 @@
 require 'rails_helper'
 
 RSpec.feature "Students", type: :feature do
-  pending "On Hold" do
+  context "create student" do
+    scenario "should be successful" do
+      teacher = Teacher.create(chaperone_count: 3, student_count: 23, school: "valley", name: "teacher", user_attributes: {email: "te@gmail.com", password: "password"})
+      login_as(teacher.user, :scope => :user)
+      visit new_student_path
+      within("form") do
+        fill_in "student[name]", with: "student"
+        fill_in "student[user_attributes][email]", with: "s@gmail.com"
+      end
+        click_button "Add Student"
+        expect(page).to have_content("Add students here")
+    end
 
   end
 end

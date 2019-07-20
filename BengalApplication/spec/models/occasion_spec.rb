@@ -2,36 +2,46 @@ require 'rails_helper'
 
 RSpec.describe Occasion, type: :model do
   context "validation tests" do
+    before do
+      @coordinator = Coordinator.create(name: "coord", user_attributes: {email: "coord@gmail.com", password: "password"})
+    end
     it "ensures name" do
-      occasion = Occasion.new(start_date: 2/23/2018, end_date: 2/19/2019).save
+      occasion = @coordinator.occasions.build(start_date: Time.now, end_date: Time.now).save
       expect(occasion).to eq(false)
     end
 
     it "ensures start date" do
-      occasion = Occasion.new(name: "BengalEvent", end_date: 2/2/2019).save
+      occasion = @coordinator.occasions.build(name: "BengalEvent", end_date: Time.now).save
       expect(occasion).to eq(false)
     end
 
     it "ensures end date" do
-      occasion = Occasion.new(name: "BengalEvent", end_date: 2/2/2019).save
+      occasion = @coordinator.occasions.build(name: "BengalEvent", end_date: Time.now).save
       expect(occasion).to eq(false)
+    end
+
+    it "should be created successfully" do
+      occasion = @coordinator.occasions.build(name: "BengalEvent", end_date: Time.now, start_date: Time.now).save
+      expect(occasion).not_to eq(false)
     end
   end
 
   context "association tests" do
-    let (:occasion) {Occasion.create(name: "BenagelEvent", start_date: 2/23/2019, end_date: 3/23/2019)}
+    before do
+      @coordinator = Coordinator.create(name: "coord", user_attributes: {email: "coord@gmail.com", password: "password"})
+      @occasion = @coordinator.occasions.build(name: "BengalEvent", end_date: Time.now, start_date: Time.now)
+      @occasion.save
+      @sponsor = Sponsor.create(name: "Sponsor", user_attributes: {email: "spon@gmail.com", password: "password"})
+      @event = @sponsor.events.build(name: "robotics", location: "SUB", description: "For people interesting in Robotics.")
+      @event.occasion = @occasion
+      @event.save
+    end
     it "should have an event" do
-      event = Event.new(name: "robotics", location: "SUB", description: "For people interesting in Robotics.", isMakeAhead: true)
-      event.save
-      event.occasion = occasion
-      expect(event.occasion).not_to eq(nil)
+      expect(@event.occasion.id).to eq(@occasion.id)
     end
 
     it "should have a coordinator" do
-      coordinator = Coordinator.new
-      coordinator.save
-      occasion.coordinator = coordinator
-      expect(occasion.coordinator).not_to eq(nil)
+      expect(@occasion.coordinator.id).to eq(@coordinator.id)
     end
   end
 end
