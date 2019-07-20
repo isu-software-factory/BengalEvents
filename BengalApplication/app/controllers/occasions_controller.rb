@@ -5,9 +5,6 @@ class OccasionsController < ApplicationController
 
   def index
     @occasions = Occasion.all
-    # Bug - many users use the index page not just sponsor
-    #@sponsor = Sponsor.find(current_user.meta.id)
-    #authorize @occasions
   end
 
   def new
