@@ -2,7 +2,7 @@
 <%= form_for [@student] do |f| %>
   <div class="field">
     <%=f.label :name, "Student Name" %>
-    <%=f.text_field(:name )%>
+    <%#=f.text_field(:name )%>
   </div>
   <%=f.fields_for :user do |u| %>
     <div class="field">
