@@ -2,9 +2,9 @@ class StudentsController < ApplicationController
   before_action :prepare_teacher, only: [:new, :create]
   before_action :authenticate_user!, except: :new
 
-  def index
-    @students = Student.where("teacher_id = ?", params[:teacher_id])
-  end
+  # def index
+  #   @students = Student.where("teacher_id = ?", params[:teacher_id])
+  # end
 
   def show
     @student = Student.find(params[:id])

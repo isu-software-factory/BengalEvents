@@ -6,4 +6,5 @@ class Student < ApplicationRecord
   belongs_to :teacher
   has_many :groupings
   has_many :team, through: :groupings
+  validates :name, presence: true
 end

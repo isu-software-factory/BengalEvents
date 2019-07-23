@@ -13,8 +13,12 @@ class EventsController < ApplicationController
     @event = current_user.meta.events.build(event_params)
     @event.occasion = @occasion
     authorize @event
-    @event.save
-    redirect_to occasion_path(@occasion)
+   if @event.save
+     redirect_to occasion_path(@occasion)
+   else
+     flash[:errors] = @event.errors.full_messages
+     redirect_back(fallback_location: new_occasion_event_path)
+   end
   end
 
   def edit
@@ -27,8 +31,13 @@ class EventsController < ApplicationController
 
   def update
     authorize @event
-    @event.update(event_params)
-    redirect_to occasion_path(@occasion)
+
+   if @event.update(event_params)
+     redirect_to occasion_path(@occasion)
+   else
+     flash[:errors] = @event.errors.full_messages
+     redirect_back(fallback_location: edit_occasion_event_path)
+   end
   end
 
   def destroy
