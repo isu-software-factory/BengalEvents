@@ -1,4 +1,9 @@
 <%#= form_for([@occasion, @occasion.events.build]) do |f| %>
+<% if flash[:errors] %>
+  <% flash[:errors].each do |e| %>
+    <p><%= e %></p>
+  <% end %>
+<% end %>
 <%= form_for [@occasion, @event] do |f| %>
 
   <p>

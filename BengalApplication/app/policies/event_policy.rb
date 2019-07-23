@@ -23,6 +23,6 @@ class EventPolicy < ApplicationPolicy
   end
 
   def destroy?
-    user.meta_type == "Coordinator" || user.meta_type == "Admin"
+    user.meta_type == "Coordinator" || user.meta_type == "Admin"|| user.meta_type == "Sponsor"
   end
 end

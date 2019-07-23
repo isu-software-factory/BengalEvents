@@ -8,6 +8,10 @@ Rails.application.routes.draw do
   get "registrations/events/:id" => "registrations#events"
   resources :coordinators
   resources :registrations
+  post 'teams/register_members' => "teams#register_members"
+  get "teams/register" => "teams#register"
+  resources :teams
+
   resources :occasions do
     resources :events do
       resources :event_details

@@ -12,7 +12,7 @@ RSpec.describe OccasionsController, type: :controller do
   end
 
   context "GET #show" do
-    it "returns a success resposne" do
+    it "returns a success response" do
       coordinator = Coordinator.create(name: "coordinator", user_attributes: {email: "c@gmail.com", password: "password"})
       occasion = coordinator.occasions.build(name: "BengalEvent", end_date: Time.now, start_date: Time.now)
       occasion.save

@@ -1,0 +1,28 @@
+<h1>Team <%=@team.lead %></h1>
+
+<table>
+  <thead>
+    <tr>
+      <td>Members</td>
+    </tr>
+  </thead>
+  <tbody>
+    <%unless @team.students.count == 0%>
+      <%@team.students.each do |s| %>
+      <tr>
+        <td><%=s.name %></td>
+      </tr>
+      <%end %>
+    <%else %>
+       <tr>
+         <td>No Members in Team</td>
+       </tr>
+    <%end %>
+
+
+  </tbody>
+</table>
+
+<div>
+  <%=link_to "Invite Members", controller: "teams", action: "register" %>
+</div>
