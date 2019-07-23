@@ -31,8 +31,7 @@
     <%=u.password_field :password_confirmation %>
     </div>
   <%end %>
-  <div class="actions"><%=submit_tag "Confirm" %></div>
-  <p>You will need to sign in once you are finished creating your account</p>
+  <div class="actions"><%=submit_tag "Confirm", class: "button" %></div>
 <%end %>
 
 <% if @teacher.errors.any? %>

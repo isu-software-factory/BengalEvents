@@ -38,3 +38,6 @@
   <%= link_to "Create New Occasion", new_occasion_path %>
 <% end %>
 
+<% if current_user.meta.is_a? Sponsor %>
+  <%= link_to "Home Page", sponsor_path(@sponsor) %>
+<% end %>

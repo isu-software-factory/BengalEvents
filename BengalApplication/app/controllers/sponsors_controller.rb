@@ -13,7 +13,8 @@ class SponsorsController < ApplicationController
     def create
       @sponsor = Sponsor.new(sponsor_params)
       if @sponsor.save
-        redirect_to root_path
+        sign_in @sponsor.user
+        redirect_to @sponsor
       else
         render :new
       end
@@ -21,6 +22,7 @@ class SponsorsController < ApplicationController
 
     def show
       @sponsor = Sponsor.find(params[:id])
+      @occasions = Occasion.all
     end
 
     def edit

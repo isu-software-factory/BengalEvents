@@ -7,5 +7,5 @@ class Teacher < ApplicationRecord
   validates :school, presence: true
   validates :chaperone_count, presence: true
   validates :student_count, presence: true
-
+  validates :name, presence: true
 end

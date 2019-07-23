@@ -1,4 +1,24 @@
-<h1>Events Upcoming</h1>
+<h1>Upcoming Events</h1>
+<table>
+  <thead>
+    <tr>
+      <td>Name</td>
+      <td>Location</td>
+      <td>Description</td>
+    </tr>
+  </thead>
+  <tbody>
+  <% unless @events == nil %>
+    <%@events.each do |e| %>
+      <tr>
+        <td><%=e.name %></td>
+        <td><%=e.location %></td>
+        <td><%=e.description %></td>
+      </tr>
+    <% end %>
+  <%end %>
+  </tbody>
+</table>
 
-<%= link_to "sign in", new_user_session_path %>
+
 
