@@ -67,4 +67,5 @@ gem 'pundit'
 gem 'hirb'
 gem 'simplecov', require: false, group: :test
 gem 'rails-controller-testing'
-# gem ''
+gem 'wicked_pdf'
+gem 'wkhtmltopdf-binary'
