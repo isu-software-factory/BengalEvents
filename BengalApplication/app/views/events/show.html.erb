@@ -23,7 +23,7 @@
 
 <%= render @event.event_details %>
 <p><%= link_to "Create Time slots", new_occasion_event_event_detail_path(@occasion,@event,@event_detail) %></p>
-<p><%=link_to "Go Back", occasions_path %></p>
+<p><%=link_to "Go Back", occasion_path(@occasion) %></p>
 
 
 
