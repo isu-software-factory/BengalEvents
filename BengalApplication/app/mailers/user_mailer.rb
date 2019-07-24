@@ -8,4 +8,10 @@ class UserMailer < ApplicationMailer
     mail(to: @user.email, subject: "Welcome to BengalEvents")
   end
 
+  def invite(account, student, team)
+    @account = account
+    @team = team
+    @student = student
+    mail(to: @student.user.email, subject: "Team Invite" )
+  end
 end
