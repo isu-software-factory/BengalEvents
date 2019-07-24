@@ -14,4 +14,30 @@
     </tr>
   <% end %>
 </table>
+
+<h2>Registration Details</h2>
+<table>
+  <thead>
+  <tr>
+    <th>Name</th>
+    <th>Description</th>
+    <th>Location</th>
+    <th>Start Time</th>
+    <th>End Time</th>
+  </tr>
+
+  </thead>
+  <% @teacher.participant.event_details.each do |s| %>
+    <tr>
+      <td><%=Event.find(s.event_id).name %></td>
+      <td><%=Event.find(s.event_id).description %></td>
+      <td><%=Event.find(s.event_id).location %></td>
+      <td><%=s.start_time %></td>
+      <td><%=s.end_time %></td>
+    </tr>
+  <% end %>
+</table>
 <%= link_to "Add Students", new_student_path %>
+<div>
+<%=link_to "Register for events", controller: "registrations", action: "index", part_id: @teacher.participant.id %>
+</div>

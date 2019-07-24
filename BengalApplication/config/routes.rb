@@ -4,10 +4,14 @@ Rails.application.routes.draw do
   resources :teachers
   resources :students
   resources :sponsors
-  get "registrations/register/:id" => "registrations#register"
-  get "registrations/events/:id" => "registrations#events"
+  get 'registrations/index/:part_id' => "registrations#index"
+  get "registrations/register/:part_id/:id" => "registrations#register"
+  get "registrations/events/:part_id/:id" => "registrations#events"
   resources :coordinators
-  resources :registrations
+  post 'teams/register_members' => "teams#register_members"
+  get "teams/register" => "teams#register"
+  resources :teams
+
   resources :occasions do
     resources :events do
       resources :event_details

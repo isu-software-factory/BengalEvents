@@ -24,12 +24,20 @@
   <p>
     <%= f.fields_for :locations do |location| %>
       <%= location.label "Location" %>
-      <%= location.text_field :name %>
+      <%= location.text_field :name, rows: 3 %>
+    <p>
       <%= location.fields_for :time_slots do |slots| %>
+      <p>
         <%= slots.label :"Start Time" %>
         <%= slots.date_field :start_time %>
-      <% end %>
+      </p>
+      <p>
+        <%= slots.label :"End Time" %>
+        <%= slots.date_field :end_time %>
+      </p>
     <% end %>
+    </p>
+  <% end %>
   </p>
   <p>
 

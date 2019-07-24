@@ -17,7 +17,7 @@
     <td><%= @occasion.start_date %></td>
     <td><%= @occasion.end_date %></td>
     <% @occasion.locations.each do |location| %>
-      <td><%=link_to  location.name, new_time_slot_path %></td>
+      <td><%= location.name %></td>
     <% end %>
   </tr>
   </tbody>
@@ -27,5 +27,5 @@
 <br>
 <h2>These are the lists of events under this occasion.</h2>
 <%= render @occasion.events %>
-<p><%= link_to "Create an event", new_occasion_event_path(@occasion,@event) %></p>
+<p><%= link_to "Create an event", new_occasion_event_path(@occasion, @event) %></p>
 <p><%= link_to "Home Page", occasions_path %></p>

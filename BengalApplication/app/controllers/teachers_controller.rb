@@ -12,6 +12,7 @@ class TeachersController < ApplicationController
 
   def create
     @teacher = Teacher.new(teacher_params)
+    Participant.create(member: @teacher)
     if @teacher.save
       sign_in @teacher.user
       redirect_to @teacher

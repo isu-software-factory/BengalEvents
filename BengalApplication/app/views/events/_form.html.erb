@@ -1,4 +1,9 @@
 <%#= form_for([@occasion, @occasion.events.build]) do |f| %>
+<% if flash[:errors] %>
+  <% flash[:errors].each do |e| %>
+    <p><%= e %></p>
+  <% end %>
+<% end %>
 <%= form_for [@occasion, @event] do |f| %>
 
   <p>
@@ -7,7 +12,9 @@
   </p>
   <p>
     <%= f.label :location %>
-    <%= f.text_field :location %>
+    <% @occasion.locations.each do |location| %>
+    <%= f.select :location, options_for_select([["Select One",""], location.name ])  %>
+      <%end %>
   </p>
   <p>
     <%= f.label :description %>

@@ -1,0 +1,55 @@
+<h1>Team <%=@team.lead %></h1>
+
+<table>
+  <thead>
+    <tr>
+      <td>Members</td>
+    </tr>
+  </thead>
+  <tbody>
+    <%unless @team.students.count == 0%>
+      <%@team.students.each do |s| %>
+      <tr>
+        <td><%=s.name %></td>
+      </tr>
+      <%end %>
+    <%else %>
+       <tr>
+         <td>No Members in Team</td>
+       </tr>
+    <%end %>
+
+
+  </tbody>
+</table>
+<div>
+
+  <h2>Registration Details</h2>
+  <table>
+    <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Location</th>
+      <th>Start Time</th>
+      <th>End Time</th>
+    </tr>
+
+    </thead>
+    <% @team.participant.event_details.each do |s| %>
+      <tr>
+        <td><%=Event.find(s.event_id).name %></td>
+        <td><%=Event.find(s.event_id).description %></td>
+        <td><%=Event.find(s.event_id).location %></td>
+        <td><%=s.start_time %></td>
+        <td><%=s.end_time %></td>
+      </tr>
+    <% end %>
+  </table>
+</div>
+<div>
+  <%=link_to "Invite Members", controller: "teams", action: "register" %>
+</div>
+<div>
+  <%=link_to "Register for events as a team", controller: "registrations", action: "index", part_id: @team.participant.id %>
+</div>
