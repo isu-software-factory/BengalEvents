@@ -23,10 +23,11 @@ class TeamsController < ApplicationController
   def create
     @team = Team.new(team_params)
     @student = Student.find(current_user.meta.id)
+    @team.lead = @student.id
+    Participant.create(member: @team)
     if @team.save
       # add team lead
       @team.students << @student
-      @team.lead = @student.id
       redirect_to @team
     else
       redirect_to @student
@@ -35,7 +36,7 @@ class TeamsController < ApplicationController
 
   private
   def team_params
-    params.require(:team).permit(:lead)
+    params.require(:team).permit(:name)
   end
 
   def get_team

@@ -18,11 +18,10 @@ class StudentsController < ApplicationController
   def create
     @student = Student.new(student_params)
     @teacher.students << @student
-
     random_password = ('0'..'z').to_a.shuffle.first(8).join
     @student.user.password = random_password
     @student.user.password_confirmation = random_password
-
+    Participant.create(member: @student)
     if @student.save
       UserMailer.login_email(@student, @student.user, random_password).deliver_now
       render 'new'
