@@ -73,12 +73,12 @@ ActiveRecord::Schema.define(version: 2019_07_23_224142) do
   end
 
   create_table "registrations", force: :cascade do |t|
-    t.integer "participants_id"
+    t.integer "participant_id"
     t.integer "event_detail_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["event_detail_id"], name: "index_registrations_on_event_detail_id"
-    t.index ["participants_id"], name: "index_registrations_on_participants_id"
+    t.index ["participant_id"], name: "index_registrations_on_participant_id"
   end
 
   create_table "sponsors", force: :cascade do |t|
