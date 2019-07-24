@@ -17,7 +17,7 @@ p, h1, h2, a {
 }
 
 a:hover {
-    color:blue;
+    color:rgb(247, 148, 30);
     text-decoration: none !important;
 }
 
@@ -79,5 +79,26 @@ body {
 }
 
 table, th, td, tr{
-    border: 1px solid darkorange;
+    border: 2px solid rgb(246, 132, 40);
+}
+
+td{
+    padding: 5px
+
+}
+
+th{
+    text-align: center;
+}
+
+a.loginlink{
+    color: white;
+}
+a:hover.loginlink {
+    color: rgb(247, 148, 30);
+}
+
+.column{
+    float: left;
+    width: 25%;
 }
