@@ -8,6 +8,7 @@
     <td>Name</td>
     <td>Start Date</td>
     <td>End Date</td>
+    <td>Location</td>
   </tr>
   </thead>
   <tbody>
@@ -15,9 +16,14 @@
     <td><%= @occasion.name %> </td>
     <td><%= @occasion.start_date %></td>
     <td><%= @occasion.end_date %></td>
+    <% @occasion.locations.each do |location| %>
+      <td><%=link_to  location.name, new_time_slot_path %></td>
+    <% end %>
   </tr>
   </tbody>
 </table>
+<%#= render partial: "locations/location"%>
+
 <br>
 <h2>These are the lists of events under this occasion.</h2>
 <%= render @occasion.events %>

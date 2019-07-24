@@ -1,103 +1,7 @@
 {
   "RSpec": {
     "coverage": {
-      "C:/BengalEvents/BengalApplication/spec/features/event_spec.rb": [
-        1,
-        1,
-        1,
-        1,
-        1,
-        2,
-        2,
-        2,
-        2,
-        2,
-        2,
-        2,
-        2,
-        2,
-        null,
-        null,
-        null,
-        1,
-        1,
-        1,
-        null,
-        1,
-        1,
-        null,
-        null,
-        null,
-        1,
-        1,
-        1,
-        null,
-        null,
-        null
-      ],
-      "C:/BengalEvents/BengalApplication/spec/rails_helper.rb": [
-        null,
-        1,
-        1,
-        1,
-        null,
-        1,
-        1,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        1,
-        1,
-        null,
-        0,
-        0,
-        null,
-        1,
-        null,
-        1,
-        null,
-        null,
-        null,
-        1,
-        1,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        1,
-        1,
-        null,
-        1,
-        null,
-        null,
-        null
-      ],
-      "C:/BengalEvents/BengalApplication/config/environment.rb": [
+      "C:/Users/Adhar/Desktop/BengalEvents/BengalApplication/config/environment.rb": [
         null,
         1,
         null,
@@ -105,7 +9,7 @@
         1,
         null
       ],
-      "C:/BengalEvents/BengalApplication/config/application.rb": [
+      "C:/Users/Adhar/Desktop/BengalEvents/BengalApplication/config/application.rb": [
         1,
         null,
         1,
@@ -128,13 +32,13 @@
         null,
         null
       ],
-      "C:/BengalEvents/BengalApplication/config/boot.rb": [
+      "C:/Users/Adhar/Desktop/BengalEvents/BengalApplication/config/boot.rb": [
         1,
         null,
         1,
         1
       ],
-      "C:/BengalEvents/BengalApplication/config/environments/test.rb": [
+      "C:/Users/Adhar/Desktop/BengalEvents/BengalApplication/config/environments/test.rb": [
         1,
         null,
         null,
@@ -195,7 +99,7 @@
         null,
         null
       ],
-      "C:/BengalEvents/BengalApplication/config/initializers/application_controller_renderer.rb": [
+      "C:/Users/Adhar/Desktop/BengalEvents/BengalApplication/config/initializers/application_controller_renderer.rb": [
         null,
         null,
         null,
@@ -205,7 +109,7 @@
         null,
         null
       ],
-      "C:/BengalEvents/BengalApplication/config/initializers/assets.rb": [
+      "C:/Users/Adhar/Desktop/BengalEvents/BengalApplication/config/initializers/assets.rb": [
         null,
         null,
         null,
@@ -221,7 +125,7 @@
         null,
         null
       ],
-      "C:/BengalEvents/BengalApplication/config/initializers/backtrace_silencers.rb": [
+      "C:/Users/Adhar/Desktop/BengalEvents/BengalApplication/config/initializers/backtrace_silencers.rb": [
         null,
         null,
         null,
@@ -230,7 +134,7 @@
         null,
         null
       ],
-      "C:/BengalEvents/BengalApplication/config/initializers/content_security_policy.rb": [
+      "C:/Users/Adhar/Desktop/BengalEvents/BengalApplication/config/initializers/content_security_policy.rb": [
         null,
         null,
         null,
@@ -257,20 +161,20 @@
         null,
         null
       ],
-      "C:/BengalEvents/BengalApplication/config/initializers/cookies_serializer.rb": [
+      "C:/Users/Adhar/Desktop/BengalEvents/BengalApplication/config/initializers/cookies_serializer.rb": [
         null,
         null,
         null,
         null,
         1
       ],
-      "C:/BengalEvents/BengalApplication/config/initializers/customize_error.rb": [
+      "C:/Users/Adhar/Desktop/BengalEvents/BengalApplication/config/initializers/customize_error.rb": [
         null,
         1,
         0,
         null
       ],
-      "C:/BengalEvents/BengalApplication/config/initializers/devise.rb": [
+      "C:/Users/Adhar/Desktop/BengalEvents/BengalApplication/config/initializers/devise.rb": [
         null,
         null,
         null,
@@ -571,13 +475,13 @@
         null,
         null
       ],
-      "C:/BengalEvents/BengalApplication/config/initializers/filter_parameter_logging.rb": [
+      "C:/Users/Adhar/Desktop/BengalEvents/BengalApplication/config/initializers/filter_parameter_logging.rb": [
         null,
         null,
         null,
         1
       ],
-      "C:/BengalEvents/BengalApplication/config/initializers/inflections.rb": [
+      "C:/Users/Adhar/Desktop/BengalEvents/BengalApplication/config/initializers/inflections.rb": [
         null,
         null,
         null,
@@ -595,13 +499,13 @@
         null,
         null
       ],
-      "C:/BengalEvents/BengalApplication/config/initializers/mime_types.rb": [
+      "C:/Users/Adhar/Desktop/BengalEvents/BengalApplication/config/initializers/mime_types.rb": [
         null,
         null,
         null,
         null
       ],
-      "C:/BengalEvents/BengalApplication/config/initializers/wrap_parameters.rb": [
+      "C:/Users/Adhar/Desktop/BengalEvents/BengalApplication/config/initializers/wrap_parameters.rb": [
         null,
         null,
         null,
@@ -617,7 +521,7 @@
         null,
         null
       ],
-      "C:/BengalEvents/BengalApplication/config/routes.rb": [
+      "C:/Users/Adhar/Desktop/BengalEvents/BengalApplication/config/routes.rb": [
         1,
         1,
         null,
@@ -640,7 +544,23 @@
         null,
         null
       ],
-      "C:/BengalEvents/BengalApplication/app/models/user.rb": [
+      "C:/Users/Adhar/Desktop/BengalEvents/BengalApplication/app/models/user.rb": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
         1,
         null,
         null,
@@ -649,176 +569,56 @@
         1,
         null
       ],
-      "C:/BengalEvents/BengalApplication/app/models/application_record.rb": [
+      "C:/Users/Adhar/Desktop/BengalEvents/BengalApplication/app/models/application_record.rb": [
         1,
         1,
         null
       ],
-      "C:/BengalEvents/BengalApplication/app/helpers/application_helper.rb": [
+      "C:/Users/Adhar/Desktop/BengalEvents/BengalApplication/app/helpers/application_helper.rb": [
         1,
         null
       ],
-      "C:/BengalEvents/BengalApplication/app/helpers/coordinators_helper.rb": [
+      "C:/Users/Adhar/Desktop/BengalEvents/BengalApplication/app/helpers/coordinators_helper.rb": [
         1,
         null
       ],
-      "C:/BengalEvents/BengalApplication/app/helpers/event_details_helper.rb": [
+      "C:/Users/Adhar/Desktop/BengalEvents/BengalApplication/app/helpers/event_details_helper.rb": [
         1,
         null
       ],
-      "C:/BengalEvents/BengalApplication/app/helpers/events_helper.rb": [
+      "C:/Users/Adhar/Desktop/BengalEvents/BengalApplication/app/helpers/events_helper.rb": [
         1,
         null
       ],
-      "C:/BengalEvents/BengalApplication/app/helpers/homeroutes_helper.rb": [
+      "C:/Users/Adhar/Desktop/BengalEvents/BengalApplication/app/helpers/homeroutes_helper.rb": [
         1,
         null
       ],
-      "C:/BengalEvents/BengalApplication/app/helpers/occasions_helper.rb": [
+      "C:/Users/Adhar/Desktop/BengalEvents/BengalApplication/app/helpers/locations_helper.rb": [
         1,
         null
       ],
-      "C:/BengalEvents/BengalApplication/app/helpers/registrations_helper.rb": [
+      "C:/Users/Adhar/Desktop/BengalEvents/BengalApplication/app/helpers/occasions_helper.rb": [
         1,
         null
       ],
-      "C:/BengalEvents/BengalApplication/app/helpers/sponsors_helper.rb": [
+      "C:/Users/Adhar/Desktop/BengalEvents/BengalApplication/app/helpers/registrations_helper.rb": [
         1,
         null
       ],
-      "C:/BengalEvents/BengalApplication/app/helpers/students_helper.rb": [
+      "C:/Users/Adhar/Desktop/BengalEvents/BengalApplication/app/helpers/sponsors_helper.rb": [
         1,
         null
       ],
-      "C:/BengalEvents/BengalApplication/app/helpers/teachers_helper.rb": [
+      "C:/Users/Adhar/Desktop/BengalEvents/BengalApplication/app/helpers/students_helper.rb": [
         1,
         null
       ],
-      "C:/BengalEvents/BengalApplication/app/models/coordinator.rb": [
-        1,
-        1,
-        1,
-        1,
-        null,
+      "C:/Users/Adhar/Desktop/BengalEvents/BengalApplication/app/helpers/teachers_helper.rb": [
         1,
         null
       ],
-      "C:/BengalEvents/BengalApplication/app/models/occasion.rb": [
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        null
-      ],
-      "C:/BengalEvents/BengalApplication/app/models/sponsor.rb": [
-        1,
-        1,
-        1,
-        1,
-        null,
-        1,
-        null
-      ],
-      "C:/BengalEvents/BengalApplication/app/controllers/events_controller.rb": [
-        1,
-        1,
-        1,
-        1,
-        1,
-        null,
-        1,
-        2,
-        2,
-        null,
-        null,
-        1,
-        2,
-        2,
-        2,
-        2,
-        2,
-        null,
-        null,
-        1,
-        0,
-        null,
-        null,
-        1,
-        0,
-        null,
-        null,
-        1,
-        0,
-        0,
-        0,
-        null,
-        null,
-        1,
-        0,
-        0,
-        0,
-        null,
-        null,
-        1,
-        null,
-        1,
-        0,
-        null,
-        null,
-        1,
-        4,
-        null,
-        null,
-        1,
-        2,
-        null,
-        null
-      ],
-      "C:/BengalEvents/BengalApplication/app/controllers/application_controller.rb": [
-        1,
-        1,
-        1,
-        1,
-        1,
-        null,
-        1,
-        null,
-        1,
-        0,
-        0,
-        null,
-        null,
-        null,
-        1,
-        0,
-        0,
-        null,
-        null,
-        null,
-        null
-      ],
-      "C:/BengalEvents/BengalApplication/app/models/event.rb": [
-        1,
-        1,
-        1,
-        1,
-        null,
-        1,
-        1,
-        1,
-        null,
-        null
-      ],
-      "C:/BengalEvents/BengalApplication/app/policies/event_policy.rb": [
-        1,
-        null,
-        1,
-        0,
-        null,
-        null,
+      "C:/Users/Adhar/Desktop/BengalEvents/BengalApplication/app/controllers/occasions_controller.rb": [
         1,
         1,
         1,
@@ -826,83 +626,6 @@
         null,
         1,
         0,
-        0,
-        null,
-        null,
-        1,
-        4,
-        null,
-        null,
-        1,
-        0,
-        null,
-        null,
-        1,
-        1,
-        null,
-        null
-      ],
-      "C:/BengalEvents/BengalApplication/app/policies/application_policy.rb": [
-        1,
-        1,
-        null,
-        1,
-        7,
-        7,
-        null,
-        null,
-        1,
-        0,
-        null,
-        null,
-        1,
-        0,
-        null,
-        null,
-        1,
-        0,
-        null,
-        null,
-        1,
-        2,
-        null,
-        null,
-        1,
-        0,
-        null,
-        null,
-        1,
-        0,
-        null,
-        null,
-        1,
-        0,
-        null,
-        null,
-        1,
-        1,
-        null,
-        1,
-        0,
-        0,
-        null,
-        null,
-        1,
-        0,
-        null,
-        null,
-        null
-      ],
-      "C:/BengalEvents/BengalApplication/app/controllers/occasions_controller.rb": [
-        1,
-        1,
-        1,
-        null,
-        null,
-        1,
-        0,
-        null,
-        null,
         null,
         null,
         null,
@@ -916,6 +639,7 @@
         0,
         0,
         0,
+        0,
         null,
         0,
         0,
@@ -923,8 +647,8 @@
         null,
         null,
         1,
-        2,
-        2,
+        0,
+        0,
         null,
         null,
         1,
@@ -958,36 +682,30 @@
         null,
         null
       ],
-      "C:/BengalEvents/BengalApplication/app/policies/occasion_policy.rb": [
+      "C:/Users/Adhar/Desktop/BengalEvents/BengalApplication/app/controllers/application_controller.rb": [
+        1,
+        1,
+        1,
+        1,
         1,
         null,
         1,
-        0,
-        null,
-        null,
-        1,
-        0,
-        null,
         null,
         1,
         0,
-        null,
-        null,
-        null,
-        1,
         0,
         null,
-        null,
-        1,
-        2,
         null,
         null,
         1,
         0,
+        0,
+        null,
+        null,
         null,
         null
       ]
     },
-    "timestamp": 1563563153
+    "timestamp": 1563851010
   }
 }

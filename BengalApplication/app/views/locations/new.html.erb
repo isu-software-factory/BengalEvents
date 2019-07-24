@@ -1,0 +1,17 @@
+<% if flash[:errors] %>
+  <% flash[:errors].each do |e| %>
+    <p><%= e %></p>
+  <% end %>
+<% end %>
+
+<%= form_for [@occasion,@location] do |f| %>
+  <p>
+    <%= f.label :start_time %>
+    <%= f.text_field :start_time %>
+  </p>
+  <p>
+    <%= f.label :end_time %>
+    <%= f.text_field :end_time %>
+  </p>
+  <%= f.submit "Create" %>
+<% end %>

@@ -17,7 +17,7 @@ p, h1, h2, a {
 }
 
 a:hover {
-    color:white;
+    color:blue;
     text-decoration: none !important;
 }
 
