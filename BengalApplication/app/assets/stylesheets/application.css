@@ -102,3 +102,8 @@ a:hover.loginlink {
     float: left;
     width: 25%;
 }
+
+.column p{
+    padding-left: 15px;
+    color: black;
+}
