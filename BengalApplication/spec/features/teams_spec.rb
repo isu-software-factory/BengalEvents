@@ -42,7 +42,7 @@ RSpec.feature "Teams", type: :feature do
       login_as(@student.user)
       visit "teams/register"
       within("form") do
-        fill_in "team[email1]", with: @student2.user.email
+        fill_in "email1", with: @student2.user.email
       end
       click_button "Invite"
       expect(page).to have_content("Welcome, #{@student.name}")
@@ -51,7 +51,7 @@ RSpec.feature "Teams", type: :feature do
       login_as(@student.user)
       visit "teams/register"
       within("form") do
-        fill_in "team[email1]", with: "random@gmail.com"
+        fill_in "email1", with: "random@gmail.com"
       end
       click_button "Invite"
       expect(page).to have_content("no such student exits, random@gmail.com")

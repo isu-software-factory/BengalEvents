@@ -32,5 +32,9 @@ RSpec.feature "Homeroutes", type: :feature do
       visit "homeroutes/routes"
       expect(page).to have_content("Registration Details")
     end
+
+    it "routes to homeroutes routes page"
+      visit "homeroutes/routes"
+      expect(page).to have_content("Upcoming Events")
   end
 end
