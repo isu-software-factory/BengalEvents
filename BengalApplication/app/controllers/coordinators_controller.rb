@@ -1,9 +1,6 @@
 class CoordinatorsController < ApplicationController
   before_action :authenticate_user!, except: [:new, :create]
 
-  def index
-    @coordinator = Coordinator.all
-  end
 
   def new
     @coordinator = Coordinator.new

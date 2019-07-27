@@ -36,15 +36,17 @@
     </tr>
 
     </thead>
-    <% @team.participant.event_details.each do |s| %>
-      <tr>
-        <td><%=Event.find(s.event_id).name %></td>
-        <td><%=Event.find(s.event_id).description %></td>
-        <td><%=Event.find(s.event_id).location %></td>
-        <td><%=s.start_time %></td>
-        <td><%=s.end_time %></td>
-      </tr>
-    <% end %>
+    <tbody>
+      <% @team.participant.event_details.each do |s| %>
+        <tr>
+          <td><%=Event.find(s.event_id).name %></td>
+          <td><%=Event.find(s.event_id).description %></td>
+          <td><%=Event.find(s.event_id).location %></td>
+          <td><%=s.start_time %></td>
+          <td><%=s.end_time %></td>
+        </tr>
+      <% end %>
+    </tbody>
   </table>
 </div>
 <div>

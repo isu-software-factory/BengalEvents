@@ -16,7 +16,7 @@ class TeamsController < ApplicationController
           UserMailer.invite(@student, invited_student, @student.participant).deliver_now
         else
           @pass = false
-          flash[:notice] = "no such such student exits, #{email}"
+          flash[:notice] = "no such student exits, #{email}"
           render "register"
         end
       end
