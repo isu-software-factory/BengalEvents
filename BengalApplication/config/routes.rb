@@ -1,9 +1,11 @@
 Rails.application.routes.draw do
+  get 'groupings/add'
   devise_for :users, skip: :devise_registration
  # devise_for :users, skip: :devise_registration
   resources :teachers
   resources :students
   resources :sponsors
+  get "groupings/add/:id/:team_id" => "groupings#add"
   get 'registrations/index/:part_id' => "registrations#index"
   get "registrations/register/:part_id/:id" => "registrations#register"
   get "registrations/events/:part_id/:id" => "registrations#events"

@@ -4,5 +4,6 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   belongs_to :meta, polymorphic: true
+  validates :encrypted_password, presence:true
   validates :email, presence: true
 end

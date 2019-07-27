@@ -1,0 +1,5 @@
+<h1><%=@account.name %> has invited you to join their team.</h1>
+
+<p>Would you like to join their team. <%=link_to "Join", controller: "groupings", action: "add", id: @student.id, team_id: @team.id %></p>
+
+<p>Don't reply to this email.</p>

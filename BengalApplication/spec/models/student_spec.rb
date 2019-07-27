@@ -15,6 +15,10 @@ RSpec.describe Student, type: :model do
         @teacher = Teacher.create(name: "Kelly", user_attributes: {email: "tech@gmail.com", password: "password"})
         @student = @teacher.students.build(name: "Bill", user_attributes: {email: "student@gmail.com", password: "password"})
         @student.save
+        Participant.create(member: @student)
+      end
+      it "should have a participant" do
+        expect(@student.participant).not_to eq(nil)
       end
       it "should have a teacher" do
         expect(@student.teacher.id).to eq(@teacher.id)
@@ -25,12 +29,15 @@ RSpec.describe Student, type: :model do
       end
 
       it "can have an event_detail" do
-        @event_detail.students << @student
-        expect(@student.event_details.count).to eq(1)
+        @event_detail.participants << @student.participant
+        expect(@student.participant.event_details.count).to eq(1)
       end
 
       it "can have a team" do
-        pending
+        team = Team.create(name: "Kings")
+        team.lead = @student.id
+        team.students << @student
+        expect(@student.teams.count).to eq(1)
       end
 
   end
