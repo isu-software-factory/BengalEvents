@@ -1,9 +1,10 @@
 <h1>Welcome, <%= @student.name %>!</h1>
 <p>Teacher: <%= @student.teacher.name %></p>
 <p>School: <%= @student.teacher.school %></p>
-<%= link_to "Register for Events", controller: "registrations", action: "index", part_id: @student.participant.id do %>
 
-<% end %> %>
+<div>
+<%= link_to "Register for Events", controller: "registrations", action: "index", part_id: @student.participant.id %>
+</div>
 <%= link_to "Create Team", new_team_path%>
 
 <h2>Registration Details</h2>
@@ -18,7 +19,7 @@
   </tr>
 
   </thead>
-  <% @student.event_details.each do |s| %>
+  <% @student.participant.event_details.each do |s| %>
     <tr>
       <td><%=Event.find(s.event_id).name %></td>
       <td><%=Event.find(s.event_id).description %></td>
@@ -27,4 +28,22 @@
       <td><%=s.end_time %></td>
     </tr>
   <% end %>
+</table>
+
+<h2>My Teams</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Team Name</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%unless @student.teams.count == 0 %>
+      <%@student.teams.each do |t| %>
+        <tr>
+          <td><%=link_to t.name, controller: "teams", action: "show", id: t.id %></td>
+        </tr>
+      <%end %>
+    <%end %>
+  </tbody>
 </table>

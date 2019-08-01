@@ -10,8 +10,6 @@ class HomeroutesController < ApplicationController
         redirect_to coordinator_path(current_user.meta.id)
       elsif current_user.meta_type == "Sponsor"
         redirect_to sponsor_path(current_user.meta.id)
-        else
-        redirect_to teacher_path(current_user.meta.id)
       end
     end
     unless Occasion.first == nil

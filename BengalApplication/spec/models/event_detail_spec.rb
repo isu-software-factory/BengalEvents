@@ -38,19 +38,31 @@ RSpec.describe EventDetail, type: :model do
       @event.save
       @event_detail = @event.event_details.build(start_time: Time.now, end_time: Time.now, capacity: 23)
       @event_detail.save
+      @teacher = Teacher.create(name: "Kelly", school: "Valley", student_count: 23, chaperone_count: 2, user_attributes: {email: "tech@gmail.com", password: "password"})
+      Participant.create(member: @teacher)
     end
     it "should have an event" do
       expect(@event_detail.event.id).to eq(@event.id)
     end
-    it "can have a student" do
-      teacher = Teacher.create(name: "Kelly", user_attributes: {email: "tech@gmail.com", password: "password"})
-      student = teacher.students.build(name: "Bill", user_attributes: {email: "student@gmail.com", password: "password"})
+    it "can have a student participant" do
+      student = @teacher.students.build(name: "Bill", user_attributes: {email: "student@gmail.com", password: "password"})
       student.save
-      @event_detail.students << student
-      s_event = student.event_details.count
-      expect(s_event).to eq(1)
+      Participant.create(member: student)
+      @event_detail.participants << student.participant
+      expect(student.participant.event_details.count).to eq(1)
     end
-
+    it "can have a teacher participant" do
+      @event_detail.participants << @teacher.participant
+      expect(@teacher.participant.event_details.count).to eq(1)
+    end
+    it "can have a team participant" do
+      student = @teacher.students.build(name: "Bill", user_attributes: {email: "student@gmail.com", password: "password"}, participant_attributes:{})
+      student.save
+      team = student.teams.build(name: "Tigers", lead: student.id)
+      Participant.create(member: team)
+      @event_detail.participants << team.participant
+      expect(team.participant.event_details.count).to eq(1)
+    end
   end
 
 end

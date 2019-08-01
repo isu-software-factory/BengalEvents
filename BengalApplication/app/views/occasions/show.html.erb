@@ -5,10 +5,9 @@
 <table>
   <thead>
   <tr>
-    <td>Name</td>
-    <td>Start Date</td>
-    <td>End Date</td>
-    <td>Location</td>
+    <th>Name</th>
+    <th>Start Date</th>
+    <th>End Date</th>
   </tr>
   </thead>
   <tbody>
@@ -16,16 +15,11 @@
     <td><%= @occasion.name %> </td>
     <td><%= @occasion.start_date %></td>
     <td><%= @occasion.end_date %></td>
-    <% @occasion.locations.each do |location| %>
-      <td><%= location.name %></td>
-    <% end %>
   </tr>
   </tbody>
 </table>
-<%#= render partial: "locations/location"%>
-
 <br>
 <h2>These are the lists of events under this occasion.</h2>
 <%= render @occasion.events %>
-<p><%= link_to "Create an Event", new_occasion_event_path(@occasion, @event) %></p>
+<p><%= link_to "Create an Event", new_occasion_event_path(@occasion,@event) %></p>
 <p><%= link_to "Home Page", occasions_path %></p>

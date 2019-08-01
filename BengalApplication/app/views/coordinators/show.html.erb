@@ -1,15 +1,15 @@
+<h1>Coordinator @coordinator.name</h1>
 <table>
   <thead>
   <tr>
-    <td>Name</td>
-    <td>Start Date</td>
-    <td>End Date</td>
-    <td>Location</td>
+    <th>Name</th>
+    <th>Start Date</th>
+    <th>End Date</th>
   </tr>
   </thead>
   <tbody>
   <% if current_user.meta.occasions.any? %>
-    <h3>Occasion (<%= current_user.meta.occasions.count %>)</h3>
+    <h1>Occasion (<%= current_user.meta.occasions.count %>)</h1>
     <tr>
       <% current_user.meta.occasions.each do |o| %>
         <td><%= o.name %></td>
