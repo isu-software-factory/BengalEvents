@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   get 'groupings/add'
   devise_for :users, skip: :devise_registration
- # devise_for :users, skip: :devise_registration
+  # devise_for :users, skip: :devise_registration
   resources :teachers
   resources :students
   resources :sponsors
@@ -19,6 +19,7 @@ Rails.application.routes.draw do
       resources :event_details
     end
   end
+  resources :time_slots
 
   get "homeroutes/routes" => 'homeroutes#routes'
   root 'homeroutes#routes'

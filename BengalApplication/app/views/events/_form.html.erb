@@ -12,7 +12,9 @@
   </p>
   <p>
     <%= f.label :location %>
-    <%= f.text_field :location %>
+    <% @occasion.locations.each do |location| %>
+    <%= f.select :location, options_for_select([["Select One",""], location.name ])  %>
+      <%end %>
   </p>
   <p>
     <%= f.label :description %>

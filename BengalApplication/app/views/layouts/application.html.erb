@@ -12,7 +12,15 @@
 </head>
 
 <body>
-<div class="header" id="header">
+<div class="header" id="logo">
+  <%= link_to homeroutes_routes_path do %>
+    <%= image_tag('random.png') %>
+  <% end %>
+</div>
+
+
+
+<div class="header" id="header">>
   <%= render 'user_info' %>
 </div>
 <div class="content">

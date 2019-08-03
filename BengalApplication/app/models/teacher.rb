@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: teachers
+#
+#  id              :integer          not null, primary key
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#  school          :string
+#  chaperone_count :integer
+#  student_count   :integer
+#  name            :string
+#
+
 class Teacher < ApplicationRecord
   has_one :user, as: :meta, dependent: :destroy
   has_one :participant, as: :member, dependent: :destroy

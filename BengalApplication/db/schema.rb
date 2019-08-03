@@ -55,6 +55,16 @@ ActiveRecord::Schema.define(version: 2019_07_23_224142) do
     t.index ["team_id"], name: "index_groupings_on_team_id"
   end
 
+  create_table "locations", force: :cascade do |t|
+    t.datetime "start_time"
+    t.datetime "end_time"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "occasion_id"
+    t.string "name"
+    t.index ["occasion_id"], name: "index_locations_on_occasion_id"
+  end
+
   create_table "occasions", force: :cascade do |t|
     t.string "name"
     t.datetime "start_date"
@@ -62,6 +72,7 @@ ActiveRecord::Schema.define(version: 2019_07_23_224142) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "coordinator_id"
+    t.string "description"
     t.index ["coordinator_id"], name: "index_occasions_on_coordinator_id"
   end
 
@@ -109,6 +120,17 @@ ActiveRecord::Schema.define(version: 2019_07_23_224142) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "name"
+  end
+
+  create_table "time_slots", force: :cascade do |t|
+    t.datetime "start_time"
+    t.datetime "end_time"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "event_id"
+    t.integer "location_id"
+    t.index ["event_id"], name: "index_time_slots_on_event_id"
+    t.index ["location_id"], name: "index_time_slots_on_location_id"
   end
 
   create_table "users", force: :cascade do |t|

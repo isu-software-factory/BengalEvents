@@ -9,10 +9,15 @@ class OccasionsController < ApplicationController
 
   def new
     @occasion = current_user.meta.occasions.build
+    3.times do
+      location = @occasion.locations.build
+    end
     authorize @occasion
   end
 
+
   def create
+    # binding.pry
     occasion = current_user.meta.occasions.build(occasion_params)
     authorize occasion
     if occasion.save
@@ -25,7 +30,7 @@ class OccasionsController < ApplicationController
 
   def show
     @occasion = Occasion.find(params[:id])
-     authorize @occasion
+    authorize @occasion
   end
 
   def edit
@@ -54,7 +59,7 @@ class OccasionsController < ApplicationController
   private
 
   def occasion_params
-    params.require(:occasion).permit(:name, :end_date, :start_date)
+    params.require(:occasion).permit(:start_date, :end_date, :description, :name, locations_attributes: [:id, :name], time_slots_attributes: [:start_time, :end_time])
   end
 end
 
