@@ -24,13 +24,13 @@ class TeachersController < ApplicationController
       format.html
       format.pdf do
         render pdf: "Test PDF",
-        page_size: 'A4',
+        #page_size: 'A4',
         template: "teachers/show.html.erb",
-        layout: "pdf.html",
-        orientation: "Landscape",
-        lowquality: true,
-        zoom: 1,
-        dpi: 75
+        layout: "pdf.html"
+        #orientation: "Landscape",
+        #lowquality: true,
+        #zoom: 1,
+        #dpi: 75
       end
     end
   end
