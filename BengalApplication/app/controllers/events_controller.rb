@@ -1,8 +1,8 @@
 class EventsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_occasion, expect: [:index, :show]
-  before_action :set_event, except: [:new, :create]
-   after_action :verify_authorized
+  before_action :set_occasion, only: [:new, :create, :delete, :update, :edit, :show]
+  before_action :set_event, only: [:delete, :update, :edit, :show]
+  # after_action :verify_authorized
 
   def new
     @event = current_user.meta.events.build
@@ -12,17 +12,18 @@ class EventsController < ApplicationController
   def create
     @event = current_user.meta.events.build(event_params)
     @event.occasion = @occasion
+    # binding.pry
     authorize @event
-   if @event.save
-     redirect_to occasion_path(@occasion)
-   else
-     flash[:errors] = @event.errors.full_messages
-     redirect_back(fallback_location: new_occasion_event_path)
-   end
+    if @event.save
+      redirect_to occasion_path(@occasion)
+    else
+      flash[:errors] = @event.errors.full_messages
+      redirect_back(fallback_location: new_occasion_event_path)
+    end
   end
 
   def edit
-  authorize @event
+    authorize @event
   end
 
   def show
@@ -32,18 +33,25 @@ class EventsController < ApplicationController
   def update
     authorize @event
 
-   if @event.update(event_params)
-     redirect_to occasion_path(@occasion)
-   else
-     flash[:errors] = @event.errors.full_messages
-     redirect_back(fallback_location: edit_occasion_event_path)
-   end
+    if @event.update(event_params)
+      redirect_to occasion_path(@occasion)
+    else
+      flash[:errors] = @event.errors.full_messages
+      redirect_back(fallback_location: edit_occasion_event_path)
+    end
   end
 
   def destroy
     authorize @event
     @event.destroy
     redirect_to occasion_path(@occasion)
+  end
+
+  def location_timeslots
+    # binding.pry
+    location = Location.find_by(name: params[:name])
+    time_slots = location.time_slots
+    render json: time_slots.to_json
   end
 
   private
@@ -57,6 +65,8 @@ class EventsController < ApplicationController
   end
 
   def event_params
-    params.require(:event).permit(:name, :location, :description, :isMakeAhead)
+    params.require(:event).permit(:name, :description, :isMakeAhead)
   end
+
+
 end

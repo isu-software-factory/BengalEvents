@@ -15,7 +15,7 @@
 class Occasion < ApplicationRecord
   has_many :events, dependent: :destroy
   belongs_to :coordinator
-  has_many :locations
+  has_many :locations, dependent: :destroy
   validates :name, :start_date, :end_date, presence: true
   accepts_nested_attributes_for :locations
   # has one location

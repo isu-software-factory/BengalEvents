@@ -10,13 +10,20 @@ Rails.application.routes.draw do
   resources :coordinators
   post 'teams/register_members' => "teams#register_members"
   get "teams/register" => "teams#register"
+
+  get "slots/:name" => "events#location_timeslots"
   resources :teams
 
   resources :occasions do
+    resources :locations do
+      resources :time_slots
+    end
     resources :events do
       resources :event_details
     end
   end
+
+
   resources :time_slots
 
   get "homeroutes/routes" => 'homeroutes#routes'

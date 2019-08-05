@@ -12,5 +12,7 @@
 
 class Location < ApplicationRecord
   belongs_to :occasion
-  has_many :timeslots
+  has_many :time_slots, dependent: :destroy
+  accepts_nested_attributes_for :time_slots
 end
+

@@ -17,11 +17,11 @@
     <% current_user.meta.events.each do |e| %>
       <tr>
         <td><%= e.name %></td>
-        <td><%= e.location %></td>
         <td> <%= e.description %></td>
         <td> <%= e.isMakeAhead %></td>
         <% e.event_details.each do |d| %>
           <td> <%= d.capacity %></td>
+          <td><%= d.location %></td>
           <td> <%= d.start_time %></td>
           <td><%= d.end_time %></td>
           </tr>

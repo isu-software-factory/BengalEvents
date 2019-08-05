@@ -10,32 +10,32 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_23_224142) do
+ActiveRecord::Schema.define(version: 2019_08_04_233200) do
 
-  create_table "admins", force: :cascade do |t|
+  create_table "admins", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "coordinators", force: :cascade do |t|
+  create_table "coordinators", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "name"
   end
 
-  create_table "event_details", force: :cascade do |t|
+  create_table "event_details", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "capacity"
     t.datetime "start_time"
     t.datetime "end_time"
     t.integer "event_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "location"
     t.index ["event_id"], name: "index_event_details_on_event_id"
   end
 
-  create_table "events", force: :cascade do |t|
+  create_table "events", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
-    t.string "location"
     t.text "description"
     t.boolean "isMakeAhead"
     t.datetime "created_at", null: false
@@ -46,7 +46,7 @@ ActiveRecord::Schema.define(version: 2019_07_23_224142) do
     t.index ["sponsor_id"], name: "index_events_on_sponsor_id"
   end
 
-  create_table "groupings", force: :cascade do |t|
+  create_table "groupings", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "team_id"
     t.integer "student_id"
     t.datetime "created_at", null: false
@@ -55,7 +55,7 @@ ActiveRecord::Schema.define(version: 2019_07_23_224142) do
     t.index ["team_id"], name: "index_groupings_on_team_id"
   end
 
-  create_table "locations", force: :cascade do |t|
+  create_table "locations", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.datetime "start_time"
     t.datetime "end_time"
     t.datetime "created_at", null: false
@@ -65,7 +65,7 @@ ActiveRecord::Schema.define(version: 2019_07_23_224142) do
     t.index ["occasion_id"], name: "index_locations_on_occasion_id"
   end
 
-  create_table "occasions", force: :cascade do |t|
+  create_table "occasions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
     t.datetime "start_date"
     t.datetime "end_date"
@@ -76,14 +76,14 @@ ActiveRecord::Schema.define(version: 2019_07_23_224142) do
     t.index ["coordinator_id"], name: "index_occasions_on_coordinator_id"
   end
 
-  create_table "participants", force: :cascade do |t|
+  create_table "participants", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "member_id"
     t.string "member_type"
   end
 
-  create_table "registrations", force: :cascade do |t|
+  create_table "registrations", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "student_id"
     t.integer "event_detail_id"
     t.datetime "created_at", null: false
@@ -92,13 +92,13 @@ ActiveRecord::Schema.define(version: 2019_07_23_224142) do
     t.index ["student_id"], name: "index_registrations_on_student_id"
   end
 
-  create_table "sponsors", force: :cascade do |t|
+  create_table "sponsors", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "name"
   end
 
-  create_table "students", force: :cascade do |t|
+  create_table "students", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "teacher_id"
@@ -106,7 +106,7 @@ ActiveRecord::Schema.define(version: 2019_07_23_224142) do
     t.index ["teacher_id"], name: "index_students_on_teacher_id"
   end
 
-  create_table "teachers", force: :cascade do |t|
+  create_table "teachers", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "school"
@@ -115,25 +115,24 @@ ActiveRecord::Schema.define(version: 2019_07_23_224142) do
     t.string "name"
   end
 
-  create_table "teams", force: :cascade do |t|
+  create_table "teams", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "lead"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "name"
   end
 
-  create_table "time_slots", force: :cascade do |t|
+  create_table "time_slots", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.datetime "start_time"
     t.datetime "end_time"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "event_id"
     t.integer "location_id"
-    t.index ["event_id"], name: "index_time_slots_on_event_id"
+    t.integer "interval"
     t.index ["location_id"], name: "index_time_slots_on_location_id"
   end
 
-  create_table "users", force: :cascade do |t|
+  create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"

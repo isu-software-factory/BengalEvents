@@ -1,25 +1,25 @@
-<table>
-  <thead>
-  <tr>
-    <td>Name</td>
-    <td>Start Date</td>
-    <td>End Date</td>
-    <td>Location</td>
-  </tr>
-  </thead>
-  <tbody>
-  <% if current_user.meta.occasions.any? %>
-    <h3>Occasion (<%= current_user.meta.occasions.count %>)</h3>
-    <tr>
-      <% current_user.meta.occasions.each do |o| %>
+<% if current_user.meta.occasions.any? %>
+  <h3>Occasion (<%= current_user.meta.occasions.count %>)</h3>
+  <% current_user.meta.occasions.each do |o| %>
+    <br>
+    <table>
+      <thead>
+      <tr>
+        <td>Occasion Name</td>
+        <td>Start Date</td>
+        <td>End Date</td>
+      </tr>
+      </thead>
+      <tbody>
+
+      <tr>
         <td><%= o.name %></td>
         <td><%= o.start_date %></td>
         <td><%= o.end_date %></td>
-      <% end %>
-    </tr>
+      </tr>
+      </tbody>
+    </table>
   <% end %>
-  </tbody>
-</table>
-
+<% end %>
 
 <%= link_to "Occasion Home Page", occasions_path %>

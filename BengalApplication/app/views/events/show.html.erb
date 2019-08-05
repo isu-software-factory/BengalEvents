@@ -5,22 +5,19 @@
   <thead>
   <tr>
     <td>Name</td>
-    <td>Location</td>
     <td>Description</td>
     <td>Make ahead</td>
-    <td>Capacity</td>
   </tr>
   </thead>
   <tbody>
   <tr>
     <td><%= @event.name %></td>
-    <td><%= @event.location %></td>
     <td><%= @event.description %></td>
     <td><%= @event.isMakeAhead %></td>
   </tr>
   </tbody>
 </table>
-
+<br>
 <%= render @event.event_details %>
 <p><%= link_to "Create Time slots", new_occasion_event_event_detail_path(@occasion,@event,@event_detail) %></p>
 <p><%=link_to "Go Back", occasion_path(@occasion) %></p>

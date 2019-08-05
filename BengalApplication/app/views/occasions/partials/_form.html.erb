@@ -11,7 +11,7 @@
   </p>
   <p>
     <%= f.label :description %>
-    <%= f.text_field :description %>
+    <%= f.text_area :description %>
   </p>
   <p>
     <%= f.label :start_date %>
@@ -21,27 +21,5 @@
     <%= f.label :end_date %>
     <%= f.date_field :end_date %>
   </p>
-  <p>
-    <%= f.fields_for :locations do |location| %>
-      <%= location.label "Location" %>
-      <%= location.text_field :name, rows: 3 %>
-    <p>
-      <%= location.fields_for :time_slots do |slots| %>
-      <p>
-        <%= slots.label :"Start Time" %>
-        <%= slots.date_field :start_time %>
-      </p>
-      <p>
-        <%= slots.label :"End Time" %>
-        <%= slots.date_field :end_time %>
-      </p>
-    <% end %>
-    </p>
-  <% end %>
-  </p>
-  <p>
-
-  </p>
-
   <%= f.submit "Create", class: "button" %>
 <% end %>

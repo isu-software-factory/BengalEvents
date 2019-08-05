@@ -2,6 +2,7 @@
   <thead>
   <tr>
     <td>Capacity</td>
+    <td>Location</td>
     <td>Start time</td>
     <td>End Time</td>
     <td>Actions</td>
@@ -10,10 +11,13 @@
   <tbody>
   <tr>
     <td><%= event_detail.capacity %></td>
+    <td><%= event_detail.location %></td>
     <td><%= event_detail.start_time %></td>
     <td><%= event_detail.end_time %></td>
-    <td><%= link_to "Delete ", occasion_event_event_detail_path(@occasion, @event, event_detail), method: :delete, data: {confirm: "Are you sure?"} %></td>
-    <td><%= link_to "Edit ", edit_occasion_event_event_detail_path(@occasion,@event, event_detail) %></td>
+    <td>
+      <%= link_to "Edit ", edit_occasion_event_event_detail_path(@occasion, @event, event_detail) %>
+      <%= link_to "Delete ", occasion_event_event_detail_path(@occasion, @event, event_detail), method: :delete, data: {confirm: "Are you sure?"} %>
+    </td>
   </tr>
   </tbody>
 </table>

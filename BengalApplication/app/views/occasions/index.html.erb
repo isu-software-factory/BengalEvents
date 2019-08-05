@@ -8,7 +8,6 @@
     <td>Name</td>
     <td>Start Date</td>
     <td>End Date</td>
-    <td>Location</td>
     <td>Actions</td>
     <td>Created By</td>
   </tr>
@@ -19,9 +18,6 @@
       <td><%= occasion.name %></td>
       <td><%= occasion.start_date %></td>
       <td><%= occasion.end_date %></td>
-      <% occasion.locations.each do |location| %>
-        <td><%= location.name %></td>
-      <% end %>
       <td>
         <%= link_to "Show", occasion_path(occasion.id) %>
         <% if policy(occasion).edit? %>
