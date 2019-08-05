@@ -19,7 +19,7 @@ RSpec.feature "Teachers", type: :feature do
         fill_in 'teacher[user_attributes][password_confirmation]', with: "password"
       end
       click_button 'Confirm'
-      expect(page).to have_content("Teachers main page")
+      expect(page).to have_content("Teachers Main Page")
     end
 
     scenario "should fail" do

@@ -26,8 +26,6 @@
         <% if policy(occasion).destroy? %>
           <%= link_to "Delete", occasion_path(occasion.id), data: {method: :delete, confirm: "Are you sure?"} %>
         <% end %>
-        <%#= link_to "Add Location", new_occasion_location_path(occasion) %>
-
       </td>
       <td><%= occasion.coordinator.user.email %></td>
       <%# end %>

@@ -1,5 +1,5 @@
 <h1>Team <%=@team.name %></h1>
-
+<div>
 <table>
   <thead>
     <tr>
@@ -18,12 +18,11 @@
          <td>No Members in Team</td>
        </tr>
     <%end %>
-
-
   </tbody>
 </table>
-<div>
+</div>
 
+<div>
   <h2>Registration Details</h2>
   <table>
     <thead>
@@ -34,7 +33,6 @@
       <th>Start Time</th>
       <th>End Time</th>
     </tr>
-
     </thead>
     <tbody>
       <% @team.participant.event_details.each do |s| %>
@@ -49,9 +47,11 @@
     </tbody>
   </table>
 </div>
+
 <div>
-  <%=link_to "Invite Members", controller: "teams", action: "register" %>
+  <%=link_to "Invite Members", controller: "teams", action: "invite", id: @team.id %>
 </div>
+
 <div>
   <%=link_to "Register for events as a team", controller: "registrations", action: "index", part_id: @team.participant.id %>
 </div>

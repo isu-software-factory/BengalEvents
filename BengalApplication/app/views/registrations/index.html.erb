@@ -15,7 +15,7 @@
   <tbody>
   <% @occasions.each do |o| %>
     <tr>
-      <td><%= link_to o.name, controller: "registrations", action: "events", part_id: @participant, id:o.id %></td>
+      <td><%= link_to o.name, controller: "registrations", action: "events", part_id: @participant_id, id:o.id %></td>
       <td><%=o.start_date %></td>
       <td><%=o.start_date %></td>
     </tr>

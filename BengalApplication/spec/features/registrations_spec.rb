@@ -18,7 +18,7 @@ RSpec.feature "Registrations", type: :feature do
       login_as(@teacher.user)
       visit "registrations/events/#{@teacher.participant.id}/#{@occasion.id}"
       click_link "Register"
-      expect(page).to have_content("Teachers main page")
+      expect(page).to have_content("Teachers Main Page")
       expect(@teacher.participant.event_details.count).to eq(1)
     end
   end
