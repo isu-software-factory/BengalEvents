@@ -6,4 +6,9 @@
 
 
     Scenario: Student register for an event
-      Given 
+      Given Student is logged in and is at student page
+      When Student clicks Register for Events
+      And clicks an occasion
+      And clicks Register for an event detail
+      Then Student will be registered for that event
+      And will be redirected to student page

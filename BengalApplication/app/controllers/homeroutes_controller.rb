@@ -1,6 +1,7 @@
 class HomeroutesController < ApplicationController
 
   def routes
+    # user signed in then redirect them to their page
     if user_signed_in?
       if current_user.meta_type == "Teacher"
         redirect_to teacher_path(current_user.meta.id)
@@ -12,6 +13,7 @@ class HomeroutesController < ApplicationController
         redirect_to sponsor_path(current_user.meta.id)
       end
     end
+    # if user isn't signed in then show events for current occasion
     unless Occasion.first == nil
       @occasion = Occasion.first
       @events = @occasion.events
