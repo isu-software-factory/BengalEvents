@@ -10,7 +10,8 @@ class CoordinatorsController < ApplicationController
   def create
     @coordinator = Coordinator.new(coordinator_params)
     if @coordinator.save
-      redirect_to root_path
+      sign_in @sponsor.user
+      redirect_to @coordinator
     else
       render :new
     end
@@ -18,6 +19,7 @@ class CoordinatorsController < ApplicationController
 
   def show
     @coordinator = Coordinator.find(params[:id])
+    @occasions = Occasion.all
   end
 
   def edit
