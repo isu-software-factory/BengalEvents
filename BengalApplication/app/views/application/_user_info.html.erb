@@ -1,10 +1,12 @@
 <% if signed_in? %>
-  <p><%= current_user.email %></p>
-  <p><%= link_to "Log out", destroy_user_session_path, method: :delete %></p>
+  <p class="sign-in-links">
+    <%= current_user.email %> <span style="color:rgb(167, 169, 172)">|</span>
+    <%= link_to "Log Out", destroy_user_session_path, method: :delete %>
+  </p>
 <% else %>
   <p class="sign-in-links">
-<%= link_to "Sign Up As Teacher", new_teacher_path %>
-  <%= link_to "Sign Up As Sponsor", new_sponsor_path %>
- <%= link_to "Sign In", user_session_path %>
+    <%= link_to "Sign Up as Teacher", new_teacher_path %> <span style="color:rgb(167, 169, 172)">|</span>
+  <%= link_to "Sign Up as Sponsor", new_sponsor_path %> <span style="color:rgb(167, 169, 172)">|</span>
+ <%= link_to "Log In", user_session_path, class: "loginlink"%>
   </p>
 <% end %>

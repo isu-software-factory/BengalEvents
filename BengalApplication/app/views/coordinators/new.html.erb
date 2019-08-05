@@ -1,24 +1,35 @@
-<h1>Additional information needed</h1>
+<h1>Additional Information Needed</h1>
 <%= form_for @coordinator do |f| %>
-  <div class="field">
-    <%= f.label :name, "Name" %>
-    <%= f.text_field(:name) %>
+  <div class="row">
+    <div class="column"> <%= f.label :name, "Name" %>
+    </div>
+    <div class="column"> <%= f.text_field(:name) %>
+    </div>
   </div>
-  <div class="actions"><%= submit_tag "Confirm", class: "button" %></div>
+
   <%= f.fields_for :user do |u| %>
-    <div class="field">
-      <%= u.label :email %>
-      <%= u.email_field :email %>
+    <div class="row">
+      <div class="column"><%= u.label :email %>
+      </div>
+      <div class="column"> <%= u.email_field :email %>
+      </div>
     </div>
-    <div class="field">
-      <%= u.label :password %>
-      <%= u.password_field :password %>
+
+    <div class="row">
+      <div class="column"> <%= u.label :password %>
+      </div>
+      <div class="column"> <%= u.password_field :password %>
+      </div>
     </div>
-    <div class="field">
-      <%= u.label :password_confirmation %>
-      <%= u.password_field :password_confirmation %>
+
+    <div class="row">
+      <div class="column"> <%= u.label :password_confirmation %>
+      </div>
+      <div class="column"><%= u.password_field :password_confirmation %>
+      </div>
     </div>
   <% end %>
+  <div class="actions"> <%= submit_tag "Confirm", class: "button" %></div>
 <% end %>
 
 <% if @coordinator.errors.any? %>

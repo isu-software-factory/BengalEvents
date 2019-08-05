@@ -5,13 +5,13 @@ class LocationsController < ApplicationController
   end
 
   def new
-    @occasion = Occasion.find_by(params[:occasion_id])
+    @occasion = Occasion.find(params[:occasion_id])
     @location = @occasion.locations.build
     @location.time_slots.build
   end
 
   def create
-    @occasion = Occasion.find_by(params[:id])
+    @occasion = Occasion.find(params[:occasion_id])
     @location = @occasion.locations.build(location_params)
     if @location.save
       redirect_to occasion_path(@occasion)
@@ -22,7 +22,7 @@ class LocationsController < ApplicationController
   end
 
   def show
-    @occasion = Occasion.find_by(params[:id])
+    @occasion = Occasion.find_by(params[:occasion_id])
     @location = Location.find_by(params[:id])
   end
 

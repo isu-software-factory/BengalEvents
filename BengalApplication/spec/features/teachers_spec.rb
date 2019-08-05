@@ -28,35 +28,40 @@ RSpec.feature "Teachers", type: :feature do
     end
   end
 
-  #context "update teacher" do
-   # let!(:teacher) {Teacher.create(school: "valley", chaperone_count: 23, student_count: 232)}
-    #scenario "should be successful" do
-     # visit edit_teacher_path(teacher)
-      #within("form")do
-      #  fill_in "teacher[name]", with: "valley"
-       # fill_in "teacher[school]", with: 'Daniel'
-        #fill_in 'teacher[chaperone_count]', with: 23
-      #end
-      #click_button 'Update'
-      #expect(page).to have_content("Successfully updated")
-    #end
+  context "update teacher" do
+    before do
+      @teacher = Teacher.create(school: "Valley", chaperone_count: 23, student_count: 232, name: "Sally", user_attributes: {email: "t@gmail.com", password: "password"})
+      login_as(@teacher.user, :scope => :user)
+    end
+    scenario "should be successful" do
+     visit edit_teacher_path(@teacher)
+      within("form")do
+       fill_in "teacher[name]", with: "valley"
+       fill_in "teacher[school]", with: 'Daniel'
+        fill_in 'teacher[chaperone_count]', with: 23
+      end
+      click_button 'Update'
+      expect(page).to have_content("Successfully updated")
+    end
 
-    #scenario "should fail" do
-     # within('form') do
-      #  fill_in "School", with: ""
-      #end
-      #click_button "Update"
-      #expect(page).to have_content "School can't be blank"
-    #end
-  #end
+    scenario "should fail" do
+      visit edit_teacher_path(@teacher)
+     within('form') do
+       fill_in "School", with: ""
+      end
+      click_button "Update"
+      expect(page).to have_content "School can't be blank"
+    end
+  end
 
-  #context "destroy teacher" do
-   # scenario "should be successful" do
-    #  teacher = Teacher.create(school: "valley", chaperone_count: 23, student_count: 232)
-     # visit teacher_path(teacher)
-      #click_link "Delete"
-      #expect(page).to have_content "Teacher was successfully deleted"
-    #end
-  #end
+  context "destroy teacher" do
+   scenario "should be successful" do
+     @teacher = Teacher.create(school: "Valley", chaperone_count: 23, student_count: 232, name: "Sally", user_attributes: {email: "t@gmail.com", password: "password"})
+     login_as(@teacher.user, :scope => :user)
+     visit teacher_path(@teacher)
+      click_link "Delete"
+      expect(page).to have_content "Teacher was successfully deleted"
+    end
+  end
 
 end
