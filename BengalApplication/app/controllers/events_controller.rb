@@ -48,25 +48,35 @@ class EventsController < ApplicationController
   end
 
   def location_timeslots
-    # binding.pry
     location = Location.find_by(name: params[:name])
     time_slots = location.time_slots
-    render json: time_slots.to_json
+    results = time_slots.each do |time|
+      # binding.pry
+      start_time = time.start_time
+      end_time = time.end_time
+      times = [start_time.strftime('%H:%M')]
+      begin
+        start_time += time.interval.minutes
+        times << start_time.strftime('%H:%M')
+      end while start_time < end_time
+      render json: times.to_json
+    end
   end
-
-  private
-
-  def set_event
-    @event = Event.find(params[:id])
-  end
-
-  def set_occasion
-    @occasion = Occasion.find(params[:occasion_id])
-  end
-
-  def event_params
-    params.require(:event).permit(:name, :description, :isMakeAhead)
-  end
-
-
 end
+
+
+private
+
+def set_event
+  @event = Event.find(params[:id])
+end
+
+def set_occasion
+  @occasion = Occasion.find(params[:occasion_id])
+end
+
+def event_params
+  params.require(:event).permit(:name, :description, :isMakeAhead)
+end
+
+

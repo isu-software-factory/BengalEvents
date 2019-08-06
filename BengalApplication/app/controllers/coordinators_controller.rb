@@ -10,7 +10,7 @@ class CoordinatorsController < ApplicationController
   def create
     @coordinator = Coordinator.new(coordinator_params)
     if @coordinator.save
-      sign_in @sponsor.user
+      sign_in @coordinator.user
       redirect_to @coordinator
     else
       render :new

@@ -6,9 +6,10 @@ $(document).ready(function () {
             type: 'GET',
             dataType: 'json',
             success: (function (res) {
+                $('#selectTimeSlots').empty();
                 $.each(res, function (key, entry) {
                     console.log(entry);
-                    $('#selectTimeSlots').append($('<option></option>').attr('value', entry.start_time).text(entry.start_time));
+                    $('#selectTimeSlots').append($('<option></option>').attr('value', entry).text(entry));
                     $('#selectEndTime').append($('<option></option>').attr('value', entry.end_time).text(entry.end_time));
                 });
             })
