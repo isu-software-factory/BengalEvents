@@ -12,8 +12,5 @@
 class Registration < ApplicationRecord
   belongs_to :event_detail
   belongs_to :participant
-  # validates :student, uniqueness: true
-  # validates :event_detail, uniqueness: true
-
-  #validates_uniqueness_of :event_detail, scope: :student
+  validates  :event_detail_id, :uniqueness => {:scope => :participant_id, :message => "You have already registered on this event."}
 end

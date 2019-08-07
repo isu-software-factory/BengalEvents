@@ -1,5 +1,6 @@
 class RegistrationsController < ApplicationController
   before_action :authenticate_user!
+
   def register
     # get participant and event detail
     @participant = Participant.find(params[:part_id])
@@ -8,8 +9,9 @@ class RegistrationsController < ApplicationController
     authorize @participant, policy_class: RegistrationPolicy
 
     # add participant to event
-    event.participants << @participant
-    redirect_to @participant.member
+    if event.participants << @participant
+      redirect_to @participant.member
+    end
   end
 
   def events

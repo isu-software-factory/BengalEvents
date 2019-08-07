@@ -1,7 +1,7 @@
 class EventsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_occasion, only: [:new, :create, :delete, :update, :edit, :show]
-  before_action :set_event, only: [:delete, :update, :edit, :show]
+  before_action :set_occasion, only: [:new, :create, :destroy, :update, :edit, :show]
+  before_action :set_event, only: [:destroy, :update, :edit, :show]
   # after_action :verify_authorized
 
   def new
