@@ -34,6 +34,6 @@ class CoordinatorsController < ApplicationController
   private
 
   def coordinator_params
-    params.require(:coordinator).permit(:name, user_attributes: [:id, :email, :password])
+    params.require(:coordinator).permit(:name, user_attributes: [:id, :email, :password, :password_confirmation])
   end
 end
