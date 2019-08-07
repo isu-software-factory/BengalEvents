@@ -1,15 +1,25 @@
 class RegistrationsController < ApplicationController
   before_action :authenticate_user!
   def register
+
     # get participant and event detail
     @participant = Participant.find(params[:part_id])
-    event = EventDetail.find(params[:id])
+    event_detail = EventDetail.find(params[:id])
     # authorize participant as a registration policy
     authorize @participant, policy_class: RegistrationPolicy
 
     # add participant to event
-    event.participants << @participant
-    redirect_to @participant.member
+    success = event_detail.register_participant(@participant)
+    
+    if success
+      redirect_to @participant.member
+    else
+      # already registered for event
+      event = Event.find(event_detail.event.id)
+      occasion = Occasion.find(event.id)
+      flash[:notice] = "You are already registered for this event"
+      redirect_to controller: "registrations", action: "events", part_id: @participant.id, id: occasion.id
+    end
   end
 
   def events
