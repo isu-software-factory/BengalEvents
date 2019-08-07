@@ -10,15 +10,21 @@ class RegistrationsController < ApplicationController
 
     # add participant to event
     success = event_detail.register_participant(@participant)
-    
+
     if success
       redirect_to @participant.member
     else
-      # already registered for event
       event = Event.find(event_detail.event.id)
       occasion = Occasion.find(event.id)
-      flash[:notice] = "You are already registered for this event"
-      redirect_to controller: "registrations", action: "events", part_id: @participant.id, id: occasion.id
+      # capacity is full
+      if event_detail.capacity_remaining == 0
+        flash[:notice] = "Event capacity is full. Register for another."
+        redirect_to controller: "registrations", action: "events", part_id: @participant.id, id: occasion.id
+      else
+        # already registered for event
+        flash[:notice] = "You are already registered for this event"
+        redirect_to controller: "registrations", action: "events", part_id: @participant.id, id: occasion.id
+      end
     end
   end
 

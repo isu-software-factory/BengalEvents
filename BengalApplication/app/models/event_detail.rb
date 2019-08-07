@@ -23,11 +23,16 @@ class EventDetail < ApplicationRecord
 # Makes sure that participant isn't already registered
   def register_participant(participant)
     unless self.participants.include?(participant)
-      self.participants << participant
-      true
-    else
-      false
+      unless capacity_remaining == 0
+        self.participants << participant
+        true
+      end
     end
   end
+
+  def capacity_remaining
+    self.capacity - self.participants.count
+  end
+
 
 end
