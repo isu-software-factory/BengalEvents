@@ -19,4 +19,5 @@ class EventDetail < ApplicationRecord
   validates_uniqueness_of :start_time, :end_time, :scope => [:location]
   validates :capacity, :location, presence: true
 
+
 end

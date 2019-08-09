@@ -13,7 +13,11 @@
   </p>
   <p>
     <%= f.label :location %>
-    <%= f.collection_select :location, Location.order(:name), :name, :name, {:prompt   => "Select a Location"}, class: "location-select" %>
+    <%= f.collection_select :location, Location.order(:name), :name, :name, {:prompt => "Select a Location"}, class: "location-select" %>
+  </p>
+  <p>
+    <%= f.label :date_started %>
+    <%= f.select(:date_started, [['Select One', ""],], {}, id: 'selectDate') %>
   </p>
   <p>
     <%= f.label :start_time %>

@@ -52,6 +52,7 @@ class EventsController < ApplicationController
     time_slots = location.time_slots
     results = time_slots.each do |time|
       # binding.pry
+      dates = ((location.occasion.start_date.to_date)...(location.occasion.end_date.to_date)).to_a
       start_time = time.start_time
       end_time = time.end_time
       times = [start_time.strftime('%H:%M')]
@@ -59,7 +60,7 @@ class EventsController < ApplicationController
         start_time += time.interval.minutes
         times << start_time.strftime('%H:%M')
       end while start_time < end_time
-      render json: times.to_json
+      render json: {results: {dates: dates, times: times }}
     end
   end
 end

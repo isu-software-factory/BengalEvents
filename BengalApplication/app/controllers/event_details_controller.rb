@@ -9,7 +9,9 @@ class EventDetailsController < ApplicationController
   end
 
   def create
-    @event_details = @event.event_details.build(event_detail_params)
+    @event_details = @event.event_details.new(event_detail_params)
+    @event_details.start_time = @event_details.date_started.to_date
+    @event_details.end_time = @event_details.date_started.to_date
     if @event_details.save
       redirect_to occasion_event_path(@occasion, @event)
     else
@@ -49,7 +51,7 @@ class EventDetailsController < ApplicationController
   end
 
   def event_detail_params
-    params.require(:event_detail).permit(:capacity, :location, :start_time, :end_time)
+    params.require(:event_detail).permit(:capacity, :location, :date_started, :start_time, :end_time)
   end
 
 
