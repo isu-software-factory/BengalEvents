@@ -6,6 +6,7 @@
   <thead>
   <tr>
     <th>Name</th>
+    <th>Description</th>
     <th>Start Date</th>
     <th>End Date</th>
     <th>Actions</th>
@@ -16,8 +17,9 @@
   <% @occasions.each do |occasion| %>
     <tr>
       <td><%= occasion.name %></td>
-      <td><%= occasion.start_date %></td>
-      <td><%= occasion.end_date %></td>
+      <td><%= occasion.description %></td>
+      <td><%= occasion.start_date.strftime("%Y-%m-%d") %></td>
+      <td><%= occasion.end_date.strftime("%Y-%m-%d") %></td>
       <td>
         <%= link_to "Show", occasion_path(occasion.id) %>
         <% if policy(occasion).edit? %>

@@ -13,17 +13,21 @@
   <tbody>
   <tr>
     <td><%= @occasion.name %> </td>
-    <td><%= @occasion.start_date %></td>
-    <td><%= @occasion.end_date %></td>
+    <td><%= @occasion.start_date.strftime("%Y-%m-%d") %></td>
+    <td><%= @occasion.end_date.strftime("%Y-%m-%d") %></td>
   </tr>
   </tbody>
 </table>
 
 <%= render @occasion.locations %>
-<p><%= link_to "Add Location", new_occasion_location_path(@occasion, @location) %></p>
 
+<% if policy(@occasion).new? %>
+  <p><%= link_to "Add Location", new_occasion_location_path(@occasion, @location) %></p>
+<% end %>
 <br>
 <h2>These are the lists of events under this occasion.</h2>
+
 <%= render @occasion.events %>
 <p><%= link_to "Create an event", new_occasion_event_path(@occasion, @event) %></p>
 <p><%= link_to "Home Page", occasions_path %></p>
+

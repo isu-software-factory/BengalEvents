@@ -1,3 +1,8 @@
+<% if flash[:errors] %>
+  <% flash[:errors].each do |e| %>
+    <p><%= e %></p>
+  <% end %>
+<% end %>
 <div>
   <% if flash[:errors] %>
     <% flash[:errors].each do |e| %>
@@ -21,7 +26,6 @@
       </thead>
       <tr>
         <td><%=e.name %></td>
-        <td><%=e.event_details.first.location %></td>
         <td><%=e.description %></td>
       </tr>
       <thead>

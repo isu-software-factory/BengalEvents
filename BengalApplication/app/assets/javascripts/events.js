@@ -1,15 +1,23 @@
 $(document).ready(function () {
-    $("select").on("change", function () {
+    // turbolink ma hanley
+    $(".location-select").on("change", function () {
+        $('#selectTimeSlots').empty();
+        $('#selectDate').empty();
         const value = $("option:selected", this).text();
         Rails.ajax({
             url: `/slots/${value}`,
             type: 'GET',
             dataType: 'json',
             success: (function (res) {
-                $.each(res, function (key, entry) {
-                    console.log(entry);
-                    $('#selectTimeSlots').append($('<option></option>').attr('value', entry.start_time).text(entry.start_time));
-                    $('#selectEndTime').append($('<option></option>').attr('value', entry.end_time).text(entry.end_time));
+                $('#selectTimeSlots').empty();
+                $('#selectDate').empty();
+                console.log(res);
+                $.each(res.results.dates, function (key, entry) {
+                    $('#selectDate').append($('<option></option>').attr('value', entry).text(entry));
+                });
+                $.each(res.results.times, function (key, entry) {
+                    $('#selectTimeSlots').append($('<option></option>').attr('value', entry).text(entry));
+                    $('#selectEndTime').append($('<option></option>').attr('value', entry).text(entry));
                 });
             })
         });

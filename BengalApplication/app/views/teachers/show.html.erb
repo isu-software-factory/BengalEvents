@@ -1,3 +1,8 @@
+<% if flash[:errors] %>
+  <% flash[:errors].each do |e| %>
+    <p><%= e %></p>
+  <% end %>
+<% end %>
 <h1>Teachers Main Page</h1>
 <h2>Students</h2>
 <table>
@@ -21,7 +26,6 @@
   <tr>
     <th>Name</th>
     <th>Description</th>
-    <th>Location</th>
     <th>Start Time</th>
     <th>End Time</th>
   </tr>
@@ -31,7 +35,6 @@
     <tr>
       <td><%=Event.find(s.event_id).name %></td>
       <td><%=Event.find(s.event_id).description %></td>
-      <td><%= s.location %></td>
       <td><%=s.start_time %></td>
       <td><%=s.end_time %></td>
     </tr>

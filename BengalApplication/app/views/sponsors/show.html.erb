@@ -1,14 +1,14 @@
-<h1>Welcome, <%=@sponsor.name %></h1>
+<h1>Welcome, <%= @sponsor.name %></h1>
 <%= link_to "Go to Events", occasions_path %>
 <h3>Occasion (<%= current_user.meta.events.count %>)</h3>
 <table>
   <thead>
   <tr>
     <th>Name</th>
-    <th>Location</th>
     <th>Description</th>
     <th>Make Ahead</th>
     <th>Capacity</th>
+    <th>Location</th>
     <th>Start Time</th>
     <th>End Time</th>
   </tr>

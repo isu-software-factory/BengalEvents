@@ -9,21 +9,21 @@
     <%= location.label "Location" %>
     <%= location.text_field :name %>
   </p>
-  <%= location.fields_for :time_slots do |slots| %>
-    <!--      cocoon gem-->
-    <p>
-      <%= slots.label :"Interval" %>
-      <%= slots.text_field :interval, id: "setInterval" %>
-    </p>
-    <p>
-      <%= slots.label :"Start Time" %>
-      <%= slots.time_select :start_time, {minute_step: 15} %>
-    </p>
-    <p>
-      <%= slots.label :"End Time" %>
-      <%= slots.time_select :end_time %>
-    </p>
-  <% end %>
+  <%#= location.fields_for :time_slots do |slots| %>
+  <!--         cocoon gem-->
+  <!--    <p>-->
+  <%#= slots.label :"Interval" %>
+  <%#= slots.text_field :interval, id: "setInterval" %>
+  <!--    </p>-->
+  <!--    <p>-->
+  <%#= slots.label :"Start Time" %>
+  <%#= slots.time_select :start_time, {minute_step: 15} %>
+  <!--    </p>-->
+  <!--    <p>-->
+  <%#= slots.label :"End Time" %>
+  <%#= slots.time_select :end_time %>
+  <!--    </p>-->
+  <%# end %>
   <%= location.submit "Create", class: "button" %>
 <% end %>
 
