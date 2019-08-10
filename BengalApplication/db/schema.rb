@@ -31,7 +31,7 @@ ActiveRecord::Schema.define(version: 2019_08_09_180621) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "location"
-    t.datetime "date_started"
+    t.date "date_started"
     t.index ["event_id"], name: "index_event_details_on_event_id"
   end
 
