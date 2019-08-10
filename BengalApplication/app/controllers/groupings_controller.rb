@@ -16,4 +16,14 @@ class GroupingsController < ApplicationController
       redirect_to student
     end
   end
+
+  def drop
+    # drop members from team
+    student = Student.find(params[:part_id])
+    team = Team.find(params[:id])
+
+    authorize team
+    team.students.delete(student)
+    redirect_to team
+  end
 end

@@ -1,26 +1,36 @@
+
 <h1>Team <%=@team.name %></h1>
-<div>
+<h2>Team Members</h2>
 <table>
   <thead>
-    <tr>
-      <td>Members</td>
-    </tr>
+  <tr>
+    <th>Member</th>
+    <th>Position</th>
+    <%if policy(@team).change? %>
+      <th>Drop Member</th>
+    <%end %>
+  </tr>
   </thead>
   <tbody>
-    <%unless @team.students.count == 0%>
-      <%@team.students.each do |s| %>
-      <tr>
-        <td><%=s.name %></td>
-      </tr>
+  <%@team.students.each do |m| %>
+    <tr>
+      <td><%=m.name %></td>
+      <%if m == @team.get_lead %>
+        <td>Team Lead</td>
+      <%else %>
+        <td>Member</td>
       <%end %>
-    <%else %>
-       <tr>
-         <td>No Members in Team</td>
-       </tr>
-    <%end %>
+      <%if policy(@team).change? %>
+        <%if m == @team.get_lead %>
+          <td>Can't Drop Team Lead</td>
+        <%else %>
+          <td><%=button_to "Drop",  method: :post, controller: "groupings", action: :drop, part_id: m.id, id: @team.id%></td>
+        <%end %>
+      <%end %>
+    </tr>
+  <% end %>
   </tbody>
 </table>
-</div>
 
 <div>
   <h2>Registration Details</h2>
@@ -32,6 +42,9 @@
       <th>Location</th>
       <th>Start Time</th>
       <th>End Time</th>
+      <%if policy(@team).change? %>
+        <th>Modify</th>
+      <%end %>
     </tr>
     </thead>
     <tbody>
@@ -39,9 +52,14 @@
         <tr>
           <td><%=Event.find(s.event_id).name %></td>
           <td><%=Event.find(s.event_id).description %></td>
-          <td><%=Event.find(s.event_id).location %></td>
+          <td><%=s.location %></td>
           <td><%=s.start_time %></td>
           <td><%=s.end_time %></td>
+          <%if policy(@team).change? %>
+            <td>
+              <%=button_to "Drop Event", controller: "registrations", action: :drop, part_id: @team.participant.id, id: s.id %>
+            </td>
+          <%end %>
         </tr>
       <% end %>
     </tbody>
@@ -55,3 +73,4 @@
 <div>
   <%=link_to "Register for events as a team", controller: "registrations", action: "index", part_id: @team.participant.id %>
 </div>
+

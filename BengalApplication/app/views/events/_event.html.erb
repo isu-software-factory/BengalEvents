@@ -16,13 +16,16 @@
     <td><%= event.isMakeAhead %></td>
     <td><%= event.location.name %></td>
     <td>
-      <% if policy(event).destroy? %>
-        <%= link_to "Delete", occasion_event_path(@occasion, event), method: :delete, data: {confirm: "Are you sure?"} %>
-      <% end %>
+      <%if policy(event).show? %>
+      <%= link_to "Details", occasion_event_path(@occasion, event) %>
+      <%end %>
       <% if policy(event).edit? %>
         <%= link_to "Edit", edit_occasion_event_path(@occasion, event) %>
       <% end %>
-      <%= link_to "Details", occasion_event_path(@occasion, event) %>
+      <% if policy(event).destroy? %>
+        <%= link_to "Delete", occasion_event_path(@occasion, event), method: :delete, data: {confirm: "Are you sure?"} %>
+      <% end %>
+
     </td>
     <td><%= event.sponsor.user.email %></td>
   </tr>

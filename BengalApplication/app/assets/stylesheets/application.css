@@ -12,8 +12,18 @@
  *= require_tree .
  *= require_self
  */
-p, h1, h2, a {
+body {
+    font-family: tahoma, geneva, sans-serif;
+    margin:0;
+
+}
+
+h1, h2, a {
     color:rgb(244,121,32); /*ISU Orange */
+}
+
+p{
+color:black;
 }
 
 a:hover {
@@ -21,13 +31,9 @@ a:hover {
     text-decoration: none !important;
 }
 
-body {
-    margin:0;
-
-}
 .header {
     padding: 10px 16px;
-    background: rgba(5,5,5, .7);
+    background: rgba(5,5,5,.7);
     color: #f1f1f1;
     text-align: right;
     height: 100px;
@@ -70,12 +76,14 @@ body {
 .button:hover {
     background-color: white;
     color: black;
+    margin: 5px 0px 0px 0xp
 }
 
 .sign-in-links {
     position: absolute;
     bottom: 0;
     right: 16px;
+    color: rgb(244,121,32);
 }
 
 table, th, td, tr{
@@ -100,10 +108,16 @@ a:hover.loginlink {
 
 .column{
     float: left;
-    width: 25%;
+    width: 30%;
 }
 
-.column p{
-    padding-left: 15px;
+.column label{
+    padding: 0px 0px 0px 15px;
+    margin: 0px;
     color: black;
+
+}
+
+.column input{
+    margin-bottom: 2px;
 }

@@ -14,7 +14,7 @@
 <div>
   <%=link_to "Home", controller: "homeroutes", action: "routes" %>
 </div>
-<h1>Event Time Slots</h1>
+<h1>Events</h1>
   <%@events.each do |e| %>
     <table>
       <thead>
@@ -42,9 +42,11 @@
           <td><%=ed.capacity %></td>
           <td><%= ed.start_time %></td>
           <td><%= ed.end_time %></td>
-          <td><%=link_to "Register", controller: "registrations", action: "register", part_id: @participant_id, id:ed.id  %></td>
+          <td><%=link_to "Register", controller: "registrations", action: "register", part_id: @participant_id, id:ed.id, id: "register" %></td>
         </tr>
       <%end %>
       </tbody>
     </table>
   <%end %>
+
+<%=link_to "Go Back", @participant.member %>

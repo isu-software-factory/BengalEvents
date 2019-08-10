@@ -20,4 +20,8 @@ class TeamPolicy < ApplicationPolicy
     @user.meta_type == "Student"
   end
 
+  def change?
+    # only team lead can change team details
+    @user.meta_type == "Student" && record.get_lead == @user.meta
+  end
 end

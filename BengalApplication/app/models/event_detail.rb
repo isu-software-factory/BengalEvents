@@ -30,8 +30,20 @@ class EventDetail < ApplicationRecord
     end
   end
 
+  # Capacity remaining for event detail
   def capacity_remaining
-    self.capacity - self.participants.count
+    # Go through participants to decrease capacity
+    @remaining = self.capacity
+    self.participants.each do |p|
+      if p.member_type == "Team"
+        # team members
+        members = p.member.students.count
+        @remaining -= members
+      else
+        @remaining -= 1
+      end
+    end
+    @remaining
   end
 
 

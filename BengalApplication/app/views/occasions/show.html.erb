@@ -25,7 +25,8 @@
   <p><%= link_to "Add Location", new_occasion_location_path(@occasion, @location) %></p>
 <% end %>
 <br>
-<h2>These are the lists of events under this occasion.</h2>
+
+<h2>List of Events</h2>
 
 <%= render @occasion.events %>
 <p><%= link_to "Create an event", new_occasion_event_path(@occasion, @event) %></p>
