@@ -8,15 +8,18 @@ class StudentsController < ApplicationController
 
   def show
     @student = Student.find(params[:id])
+    authorize @student
   end
 
   def new
     @student = Student.new
     @student.build_user
+    authorize @student
   end
 
   def create
     @student = Student.new(student_params)
+    authorize @student
     @teacher.students << @student
     random_password = ('0'..'z').to_a.shuffle.first(8).join
     @student.user.password = random_password
@@ -32,14 +35,17 @@ class StudentsController < ApplicationController
 
   def edit
     @student = Student.find(params[:id])
+    authorize @student
   end
 
   def update
   end
 
   def destroy
-    Student.find(params[:id]).destroy
-    redirect_to students_path
+    @student = Student.find(params[:id])
+    authorize @student
+    @student.destroy
+    redirect_to current_user.meta
   end
 
 

@@ -10,7 +10,8 @@ class EventDetailsController < ApplicationController
 
   def create
     @event_details = @event.event_details.new(event_detail_params)
-    @event_details.start_time = @event_details.date_started.to_date
+    @start_time = @event_details.date_started.to_s + " " + @event_details.start_time.strftime("%H:%M")
+    @event_details.start_time = DateTime.parse(@start_time)
     @event_details.end_time = @event_details.date_started.to_date
     if @event_details.save
       redirect_to occasion_event_path(@occasion, @event)

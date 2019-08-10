@@ -45,4 +45,14 @@ class RegistrationsController < ApplicationController
     authorize @participant, policy_class: RegistrationPolicy
   end
 
+  def drop
+    # drop participants from events
+    participant = Participant.find(params[:part_id])
+    event_detail = EventDetail.find(params[:id])
+
+    authorize participant, policy_class: RegistrationPolicy
+    event_detail.participants.delete(participant)
+    redirect_to participant.member
+  end
+
 end

@@ -27,6 +27,7 @@ class TeamsController < ApplicationController
     redirect_to @student if @pass
   end
 
+
   def invite
     @team = Team.find(params[:id])
     authorize @team
@@ -64,5 +65,9 @@ class TeamsController < ApplicationController
   private
   def team_params
     params.require(:team).permit(:name)
+  end
+
+  def all_team_params
+    params.require(:team).permit!
   end
 end
