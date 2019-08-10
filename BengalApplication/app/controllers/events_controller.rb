@@ -12,7 +12,6 @@ class EventsController < ApplicationController
   def create
     @event = current_user.meta.events.build(event_params)
     @event.occasion = @occasion
-    # binding.pry
     authorize @event
     if @event.save
       redirect_to occasion_path(@occasion)
@@ -50,8 +49,8 @@ class EventsController < ApplicationController
   def location_timeslots
     location = Location.find_by(name: params[:name])
     time_slots = location.time_slots
+    return render json: {results: {dates: [], times: []}} if time_slots.empty?
     results = time_slots.each do |time|
-      # binding.pry
       dates = ((location.occasion.start_date.to_date)...(location.occasion.end_date.to_date)).to_a
       start_time = time.start_time
       end_time = time.end_time
@@ -60,7 +59,7 @@ class EventsController < ApplicationController
         start_time += time.interval.minutes
         times << start_time.strftime('%H:%M')
       end while start_time < end_time
-      render json: {results: {dates: dates, times: times }}
+      render json: {results: {dates: dates, times: times}}
     end
   end
 end
@@ -77,7 +76,7 @@ def set_occasion
 end
 
 def event_params
-  params.require(:event).permit(:name, :description, :isMakeAhead)
+  params.require(:event).permit(:name, :location_id, :description, :isMakeAhead)
 end
 
 

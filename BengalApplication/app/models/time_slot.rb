@@ -12,8 +12,8 @@
 #
 
 class TimeSlot < ApplicationRecord
-
   belongs_to :location
+
   validate :no_reservation_overlap
 
   def no_reservation_overlap

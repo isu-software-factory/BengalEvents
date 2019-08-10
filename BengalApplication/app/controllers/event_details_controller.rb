@@ -25,7 +25,6 @@ class EventDetailsController < ApplicationController
   def edit
   end
 
-
   def update
     @event_detail.update(event_detail_params)
     redirect_to occasion_event_path(@occasion, @event)
@@ -52,7 +51,7 @@ class EventDetailsController < ApplicationController
   end
 
   def event_detail_params
-    params.require(:event_detail).permit(:capacity, :location, :date_started, :start_time, :end_time)
+    params.require(:event_detail).permit(:capacity, :date_started, :start_time, :end_time)
   end
 
 

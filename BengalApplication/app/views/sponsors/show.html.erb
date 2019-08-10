@@ -2,29 +2,29 @@
 <%= link_to "Go to Events", occasions_path %>
 <h3>Occasion (<%= current_user.meta.events.count %>)</h3>
 <table>
-    <tr>
+  <tr>
     <th>Name</th>
     <th>Description</th>
     <th>Make Ahead</th>
-    <th>Capacity</th>
     <th>Location</th>
+    <th>Capacity</th>
     <th>Start Time</th>
     <th>End Time</th>
   </tr>
-  <tr>
   <% if current_user.meta.events.any? %>
-    <% current_user.meta.events.each do |e| %>
-      <tr>
-        <td><%= e.name %></td>
-        <td> <%= e.description %></td>
-        <td> <%= e.isMakeAhead %></td>
+    <tr>
+      <% current_user.meta.events.each do |e| %>
         <% e.event_details.each do |d| %>
-          <td  span="2"> <%= d.capacity %></td>
-          <td ><%= d.location %></td>
+        <tr>
+          <td><%= e.name %></td>
+          <td> <%= e.description %></td>
+          <td> <%= e.isMakeAhead %></td>
+          <td><%= e.location.name %></td>
+          <td> <%= d.capacity %></td>
           <td> <%= d.start_time %></td>
           <td><%= d.end_time %></td>
-        <% end %>
+        </tr>
+      <% end %>
     <% end %>
   <% end %>
-  </tr>
 </table>
