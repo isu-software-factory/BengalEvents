@@ -18,6 +18,11 @@
   </p>
 
   <p>
+    <%= f.label :location_id %>
+    <%= f.collection_select :location_id, Location.order(:name), :id, :name, {:prompt => "Select a Location"}, class: "location-select" %>
+  </p>
+
+  <p>
     <%= f.label "Make Ahead Item" %>
     <%= f.check_box :isMakeAhead %>
   </p>

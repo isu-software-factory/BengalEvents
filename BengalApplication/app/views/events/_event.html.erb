@@ -4,6 +4,7 @@
     <td>Name</td>
     <td>Description</td>
     <td>Make ahead</td>
+    <td>Location</td>
     <td>Actions</td>
     <td>Created By</td>
   </tr>
@@ -13,6 +14,7 @@
     <td><%= event.name %></td>
     <td><%= event.description %></td>
     <td><%= event.isMakeAhead %></td>
+    <td><%= event.location.name %></td>
     <td>
       <% if policy(event).destroy? %>
         <%= link_to "Delete", occasion_event_path(@occasion, event), method: :delete, data: {confirm: "Are you sure?"} %>

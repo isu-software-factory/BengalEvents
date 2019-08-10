@@ -1,6 +1,6 @@
 class TimeSlotsController < ApplicationController
-  before_action :find_occasion, only: [:new, :create, :destroy, :update, :edit, :show]
-  before_action :find_location, only: [:new, :create, :destroy, :update, :edit, :show]
+  before_action :find_occasion
+  before_action :find_location
   before_action :find_time_slots, except: [:new, :create]
 
   def index
@@ -9,11 +9,11 @@ class TimeSlotsController < ApplicationController
 
   def new
     @time_slot = TimeSlot.new
-    # @location.time_slots.build
   end
 
   def create
-    @time_slot = @location.time_slots.build(time_slots_params)
+    @time_slot = TimeSlot.new(time_slots_params)
+    @time_slot.location = @location
     if @time_slot.save
       redirect_to occasion_location_path(@occasion, @location)
     else

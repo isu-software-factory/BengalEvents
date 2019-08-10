@@ -22,6 +22,22 @@ class LocationsController < ApplicationController
     end
   end
 
+  def edit
+    @occasion = Occasion.find(params[:occasion_id])
+    @location = Location.find(params[:id])
+  end
+
+  def update
+    @occasion = Occasion.find(params[:occasion_id])
+    @location = Location.find(params[:id])
+    if @location.update(location_params)
+      redirect_to occasion_path(@occasion)
+    else
+      flash[:errors] = @event.errors.full_messages
+      redirect_back(fallback_location: edit_occasion_event_path)
+    end
+  end
+
   def show
     @occasion = Occasion.find_by(params[:occasion_id])
     @location = Location.find_by(params[:id])
@@ -40,6 +56,5 @@ class LocationsController < ApplicationController
 
   def location_params
     params.require(:location).permit(:name)
-      # params.require(:location).permit(:name, time_slots_attributes: [:id, :interval, :start_time, :end_time])
   end
 end

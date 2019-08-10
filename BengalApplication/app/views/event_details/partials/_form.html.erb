@@ -12,8 +12,7 @@
     <%= f.text_field :capacity %>
   </p>
   <p>
-    <%= f.label :location %>
-    <%= f.collection_select :location, Location.order(:name), :name, :name, {:prompt => "Select a Location"}, class: "location-select" %>
+    <%= hidden_field_tag 'location_name', @event.location.name %>
   </p>
   <p>
     <%= f.label :date_started %>
