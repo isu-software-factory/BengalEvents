@@ -4,11 +4,17 @@
   <% end %>
 <% end %>
 <div>
+  <% if flash[:errors] %>
+    <% flash[:errors].each do |e| %>
+      <p><%= e %></p>
+    <% end %>
+  <% end %>
+</div>
+
+<div>
   <%=link_to "Home", controller: "homeroutes", action: "routes" %>
 </div>
 <h1>Event Time Slots</h1>
-
-
   <%@events.each do |e| %>
     <table>
       <thead>

@@ -12,8 +12,8 @@
   <tr>
     <td><%= event_detail.capacity %></td>
     <td><%= event_detail.location %></td>
-    <td><%= event_detail.start_time %></td>
-    <td><%= event_detail.end_time %></td>
+    <td><%= event_detail.start_time.strftime("%F %H:%M %p") %></td>
+    <td><%= event_detail.end_time.strftime("%F %H:%M %p") %></td>
     <td>
       <%= link_to "Edit ", edit_occasion_event_event_detail_path(@occasion, @event, event_detail) %>
       <%= link_to "Delete ", occasion_event_event_detail_path(@occasion, @event, event_detail), method: :delete, data: {confirm: "Are you sure?"} %>
