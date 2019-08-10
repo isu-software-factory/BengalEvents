@@ -14,7 +14,7 @@ class EventDetailsController < ApplicationController
     @event_details.end_time = @event_details.date_started.to_s + " " + @event_details.end_time.strftime("%H:%M")
     if @event_details.save
       # binding.pry
-      redirect_to occasion_event_path(@occasion, @event)
+      redirect_to occasion_event_path(@occasion, @event), :notice => "Successfully created Event Session."
     else
       flash[:errors] = @event_details.errors.full_messages
       redirect_back(fallback_location: new_occasion_event_event_detail_path(@occasion, @event))
@@ -23,11 +23,20 @@ class EventDetailsController < ApplicationController
   end
 
   def edit
+
+  end
+
+  def update_time
+
   end
 
   def update
-    @event_detail.update(event_detail_params)
-    redirect_to occasion_event_path(@occasion, @event)
+    @event_detail.update_attributes(event_detail_params)
+    @event_detail.start_time = @event_detail.date_started.to_s + " " + @event_detail.start_time.strftime("%H:%M")
+    @event_detail.end_time = @event_detail.date_started.to_s + " " + @event_detail.end_time.strftime("%H:%M")
+    if @event_detail.save
+      redirect_to occasion_event_path(@occasion, @event), :notice => "Successfully updated."
+    end
   end
 
   def destroy
