@@ -1,10 +1,6 @@
 class SponsorsController < ApplicationController
   before_action :authenticate_user!, except: [:new, :create]
 
-  def index
-      @sponsor = Sponsor.all
-    end
-
     def new
       @sponsor = Sponsor.new
       @sponsor.build_user

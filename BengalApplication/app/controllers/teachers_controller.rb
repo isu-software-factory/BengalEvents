@@ -37,9 +37,12 @@ class TeachersController < ApplicationController
 
   def edit
     @teacher = Teacher.find(params[:id])
+    authorize @teacher
   end
 
   def update
+    @teacher = Teacher.find(params[:id])
+    authorize @teacher
     if @teacher.update_attributes(user_params)
       redirect_to @teacher
     else
@@ -49,7 +52,9 @@ class TeachersController < ApplicationController
   end
 
   def destroy
-    Teacher.find(params[:id]).destroy
+    @teacher = Teacher.find(params[:id])
+    authorize @teacher
+    @teacher.destroy
     redirect_to teachers_path
   end
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_23_224142) do
+ActiveRecord::Schema.define(version: 2019_08_10_180520) do
 
   create_table "admins", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -30,18 +30,20 @@ ActiveRecord::Schema.define(version: 2019_07_23_224142) do
     t.integer "event_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.date "date_started"
     t.index ["event_id"], name: "index_event_details_on_event_id"
   end
 
   create_table "events", force: :cascade do |t|
     t.string "name"
-    t.string "location"
     t.text "description"
     t.boolean "isMakeAhead"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "occasion_id"
     t.integer "sponsor_id"
+    t.integer "location_id"
+    t.index ["location_id"], name: "index_events_on_location_id"
     t.index ["occasion_id"], name: "index_events_on_occasion_id"
     t.index ["sponsor_id"], name: "index_events_on_sponsor_id"
   end
@@ -127,9 +129,8 @@ ActiveRecord::Schema.define(version: 2019_07_23_224142) do
     t.datetime "end_time"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "event_id"
     t.integer "location_id"
-    t.index ["event_id"], name: "index_time_slots_on_event_id"
+    t.integer "interval"
     t.index ["location_id"], name: "index_time_slots_on_location_id"
   end
 

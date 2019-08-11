@@ -6,6 +6,10 @@ RSpec.describe Coordinator, type: :model do
       coordinator = Coordinator.create(user_attributes: {email: "coor@gmail.com", password: "password"})
       expect(coordinator.id).to eq(nil)
     end
+    it "should create coordinator successfully" do
+      coordinator = Coordinator.new(name: "Sally", user_attributes: {email: "c@gmail.com", password:"password"}).save
+      expect(coordinator).to eq(true)
+    end
   end
   context "association tests" do
     before do
@@ -18,7 +22,6 @@ RSpec.describe Coordinator, type: :model do
     it "should have an occasion" do
       occasion = @coordinator.occasions.build(name: "BenagelEvent", start_date: Time.now, end_date: Time.now)
       expect(occasion.coordinator.id).to eq(@coordinator.id)
-
     end
   end
 end

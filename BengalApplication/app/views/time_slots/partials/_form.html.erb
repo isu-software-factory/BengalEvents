@@ -1,0 +1,20 @@
+<% if flash[:errors] %>
+  <% flash[:errors].each do |e| %>
+    <p><%= e %></p>
+  <% end %>
+<% end %>
+<%= form_for([@occasion, @location, @time_slot]) do |slots| %>
+  <p>
+    <%= slots.label :"Interval" %>
+    <%= slots.text_field :interval, id: "setInterval" %>
+  </p>
+  <p>
+    <%= slots.label :"Start Time" %>
+    <%= slots.time_select :start_time, {minute_step: 15} %>
+  </p>
+  <p>
+    <%= slots.label :"End Time" %>
+    <%= slots.time_select :end_time, {minute_step: 15} %>
+  </p>
+  <%= slots.submit "Create", class: "button" %>
+<% end %>

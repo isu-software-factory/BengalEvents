@@ -7,15 +7,13 @@
     </div>
   </div>
 
-    <div class="actions"> <%= submit_tag "Confirm", class: "button" %></div>
   <%= f.fields_for :user do |u| %>
-
-   <div class="row">
-     <div class="column" ><%= u.label :email %>
-     </div>
-     <div class="column"> <%= u.email_field :email %>
-     </div>
-   </div>
+    <div class="row">
+      <div class="column"><%= u.label :email %>
+      </div>
+      <div class="column"> <%= u.email_field :email %>
+      </div>
+    </div>
 
     <div class="row">
       <div class="column"> <%= u.label :password %>
@@ -24,13 +22,14 @@
       </div>
     </div>
 
-    <div class="field">
+    <div class="row">
       <div class="column"> <%= u.label :password_confirmation %>
       </div>
       <div class="column"><%= u.password_field :password_confirmation %>
       </div>
     </div>
   <% end %>
+  <div class="actions"> <%= submit_tag "Confirm", class: "button" %></div>
 <% end %>
 
 <% if @coordinator.errors.any? %>

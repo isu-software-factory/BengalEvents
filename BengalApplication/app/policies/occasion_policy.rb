@@ -1,6 +1,6 @@
 class OccasionPolicy < ApplicationPolicy
 
-  def new
+  def new?
     user.meta_type == "Coordinator" || user.meta_type == "Admin"
   end
 

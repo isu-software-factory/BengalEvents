@@ -1,0 +1,35 @@
+<div>
+  <% if flash[:errors] %>
+    <% flash[:errors].each do |e| %>
+      <p><%= e %></p>
+    <% end %>
+  <% end %>
+</div>
+
+<h1>Invite Members</h1>
+
+<%=form_tag(controller: "teams", action: "register_members", id: @team.id) do %>
+  <div>
+    <%=label_tag "member email" %>
+    <%=text_field_tag :email1 %>
+  </div>
+  <div>
+    <%=label_tag "member email" %>
+    <%=text_field_tag :email2 %>
+  </div>
+  <div>
+    <%=label_tag "member email" %>
+    <%=text_field_tag :email3 %>
+  </div>
+  <div>
+    <%=label_tag "member email" %>
+    <%=text_field_tag :email4 %>
+  </div>
+  <div>
+    <%=submit_tag "Invite" %>
+  </div>
+<%end %>
+
+<div>
+<%=link_to "Go Back", @team %>
+</div>

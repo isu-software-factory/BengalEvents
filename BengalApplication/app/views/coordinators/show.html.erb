@@ -1,25 +1,28 @@
-<h1>Coordinator @coordinator.name</h1>
-<table>
-  <thead>
-  <tr>
-    <th>Name</th>
-    <th>Start Date</th>
-    <th>End Date</th>
-  </tr>
-  </thead>
-  <tbody>
-  <% if current_user.meta.occasions.any? %>
-    <h1>Occasion (<%= current_user.meta.occasions.count %>)</h1>
-    <tr>
-      <% current_user.meta.occasions.each do |o| %>
+<% unless current_user.meta.occasions.present? %>
+  <p> There are no Occasions under you. Go to Home Page to create an Occasion.</p>
+<% end %>
+<% if current_user.meta.occasions.any? %>
+  <h3>Occasion (<%= current_user.meta.occasions.count %>)</h3>
+  <% current_user.meta.occasions.each do |o| %>
+    <br>
+    <table>
+      <thead>
+      <tr>
+        <td>Occasion Name</td>
+        <td>Start Date</td>
+        <td>End Date</td>
+      </tr>
+      </thead>
+      <tbody>
+
+      <tr>
         <td><%= o.name %></td>
         <td><%= o.start_date %></td>
         <td><%= o.end_date %></td>
-      <% end %>
-    </tr>
+      </tr>
+      </tbody>
+    </table>
   <% end %>
-  </tbody>
-</table>
-
+<% end %>
 
 <%= link_to "Occasion Home Page", occasions_path %>

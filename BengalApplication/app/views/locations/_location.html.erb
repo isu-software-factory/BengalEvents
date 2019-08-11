@@ -1,0 +1,32 @@
+<% if current_user.meta.is_a? Coordinator %>
+
+  <% if flash[:errors] %>
+    <% flash[:errors].each do |e| %>
+      <p><%= e %></p>
+    <% end %>
+  <% end %>
+  <br>
+  <table>
+    <thead>
+    <tr>
+      <td>Location Name</td>
+      <td>Actions</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td><%= location.name %></td>
+      <td>
+        <% if policy(location).show? %>
+          <%= link_to "Show", occasion_location_path(@occasion, location) %>
+        <% end %>
+        <%= link_to "Edit", edit_occasion_location_path(@occasion, location) %>
+        <% if policy(location).destroy? %>
+          <%= link_to "Delete", occasion_location_path(@occasion, location), method: :delete, data: {confirm: "Are you sure?"} %>
+        <% end %>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+<% end %>

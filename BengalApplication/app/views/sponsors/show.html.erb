@@ -1,32 +1,30 @@
+<h1>Welcome, <%= @sponsor.name %></h1>
 <%= link_to "Go to Events", occasions_path %>
 <h3>Occasion (<%= current_user.meta.events.count %>)</h3>
 <table>
-  <thead>
   <tr>
     <th>Name</th>
-    <th>Location</th>
     <th>Description</th>
     <th>Make Ahead</th>
+    <th>Location</th>
     <th>Capacity</th>
     <th>Start Time</th>
     <th>End Time</th>
   </tr>
-  </thead>
-  <tbody>
   <% if current_user.meta.events.any? %>
-    <% current_user.meta.events.each do |e| %>
-      <tr>
-        <td><%= e.name %></td>
-        <td><%= e.location %></td>
-        <td> <%= e.description %></td>
-        <td> <%= e.isMakeAhead %></td>
+    <tr>
+      <% current_user.meta.events.each do |e| %>
         <% e.event_details.each do |d| %>
+        <tr>
+          <td><%= e.name %></td>
+          <td> <%= e.description %></td>
+          <td> <%= e.isMakeAhead %></td>
+          <td><%= e.location.name %></td>
           <td> <%= d.capacity %></td>
           <td> <%= d.start_time %></td>
           <td><%= d.end_time %></td>
-          </tr>
-        <% end %>
+        </tr>
+      <% end %>
     <% end %>
   <% end %>
-  </tbody>
 </table>

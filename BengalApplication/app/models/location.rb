@@ -12,5 +12,9 @@
 
 class Location < ApplicationRecord
   belongs_to :occasion
-  has_many :timeslots
+  has_many :time_slots, dependent: :destroy
+  has_many :events
+
+  validates :name, presence: true
 end
+

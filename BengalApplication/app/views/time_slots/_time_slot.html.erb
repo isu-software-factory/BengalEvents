@@ -1,0 +1,27 @@
+<% if flash[:errors] %>
+  <% flash[:errors].each do |e| %>
+    <p><%= e %></p>
+  <% end %>
+<% end %>
+<br>
+<table>
+  <thead>
+  <tr>
+    <td>Interval</td>
+    <td>Start Time</td>
+    <td>End Time</td>
+    <td>Actions</td>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+    <td><%= time_slot.interval %></td>
+    <td><%= time_slot.start_time.strftime("%H:%M %p") %></td>
+    <td><%= time_slot.end_time.strftime("%H:%M %p") %></td>
+    <td>
+      <%= link_to "Delete", occasion_location_time_slot_path(@occasion, @location, time_slot), method: :delete, data: {confirm: "Are you sure?"} %>
+    </td>
+  </tr>
+  </tbody>
+</table>
+
