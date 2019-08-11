@@ -10,6 +10,7 @@ Guide for Installation and initial operation
 3: Confirm download versions
     - run commands in terminal "ruby -v", "gem -v", and "rails -v"
     - if no errors then install was successful
+    - if the ruby-v does not match with the application go to this website to download the version. https://rubyinstaller.org/downloads/
 4: Clone/download code from github "https://github.com/isu-software-factory/BengalEvents.git"
 5: Navigate to installed directory
 6: using terminal, run "bundle install"
