@@ -17,4 +17,5 @@ class Occasion < ApplicationRecord
   belongs_to :coordinator
   has_many :locations, dependent: :destroy
   validates :name, :start_date, :end_date, presence: true
+  validates :description, presence: true
 end

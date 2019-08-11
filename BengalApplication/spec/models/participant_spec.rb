@@ -24,13 +24,19 @@ RSpec.describe Participant, type: :model do
       @sponsor = Sponsor.create(name: "sponsor", user_attributes: {email: "sponsor@gmail.com", password: "password"})
       @coordinator = Coordinator.create(name:"coord", user_attributes: {email: "coordinaotr@gmail.com", password: "password"})
       @occasion = @coordinator.occasions.build(name: "BengalEvents", start_date: Time.now, end_date: Time.now)
-      @event = @sponsor.events.build(location: "Gym", name: "Robotics", description: "great")
+      @occasion.save
+      @location = @occasion.locations.build(name: "Gym", start_time: Time.now, end_time: Time.now)
+      @location.save
+      @time_slot = @location.time_slots.build(start_time: Time.now, end_time: Time.now, interval: 60)
+      @time_slot.save
+      @event = @sponsor.events.build(name: "Robotics", description: "great")
+      @event.location = @location
       @event.occasion = @occasion
       @event.save
-      @event_detail = @event.event_details.build(start_time: Time.now, end_time: Time.now, capacity: 23)
+      @event_detail = @event.event_details.build(start_time: @time_slot.start_time, end_time: @time_slot.end_time, date_started: @occasion.start_date, capacity: 23)
       @event_detail.save
       Participant.create(member: @student)
-      @event_detail.participants << @student.participant
+      @event_detail.register_participant(@student.participant)
       participant = Participant.find(@student.participant.id)
       expect(participant.event_details.count).to eq(1)
     end

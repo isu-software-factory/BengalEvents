@@ -39,8 +39,8 @@ class LocationsController < ApplicationController
   end
 
   def show
-    @occasion = Occasion.find_by(params[:occasion_id])
-    @location = Location.find_by(params[:id])
+    @occasion = Occasion.find(params[:occasion_id])
+    @location = Location.find(params[:id])
     authorize @location
   end
 

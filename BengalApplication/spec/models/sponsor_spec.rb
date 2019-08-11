@@ -16,12 +16,18 @@ RSpec.describe Sponsor, type: :model do
   context "association tests" do
     before do
       @coordinator = Coordinator.create(name: "coord", user_attributes: {email: "coord@gmail.com", password: "password"})
-      @occasion = @coordinator.occasions.build(name: "BengalEvent", end_date: Time.now, start_date: Time.now)
+      @occasion = @coordinator.occasions.build(name: "BengalEvent", end_date: Time.now, start_date: Time.now, description: "Event")
       @occasion.save
+      @location = @occasion.locations.build(name: "Gym", start_time: Time.now, end_time: Time.now)
+      @location.save
+      @time_slot = @location.time_slots.build(start_time: Time.now, end_time: Time.now, interval: 60)
+      @time_slot.save
       @sponsor = Sponsor.create(name: "sponsor", user_attributes: {email: "sponsor@gmail.com", password: "password"})
     end
-    it "should create an event in an occasion" do
-      @event = @sponsor.events.build(location: "Gym", name: "Robotics", description: "great")
+    it "can have an event" do
+      @event = @sponsor.events.build(name: "Robotics", description: "great")
+      @event.location = @location
+      @event.save
       expect(@event.sponsor.id).to eq(@sponsor.id)
     end
 
