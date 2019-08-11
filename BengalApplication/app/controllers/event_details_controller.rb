@@ -1,5 +1,4 @@
 class EventDetailsController < ApplicationController
-  before_action :authenticate_user!
   before_action :set_event
   before_action :set_event_detail, except: [:new, :create]
   before_action :set_occasion
