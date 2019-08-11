@@ -61,6 +61,8 @@ ActiveRecord::Schema.define(version: 2019_08_10_180520) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "occasion_id"
+    t.index ["occasion_id"], name: "index_locations_on_occasion_id"
   end
 
   create_table "occasions", force: :cascade do |t|
