@@ -1,11 +1,9 @@
 class CoordinatorsController < ApplicationController
   before_action :authenticate_user!, except: [:new, :create]
 
-
   def new
     @coordinator = Coordinator.new
     @coordinator.build_user
-    authorize @coordinator
   end
 
   def create
@@ -21,17 +19,9 @@ class CoordinatorsController < ApplicationController
   def show
     @coordinator = Coordinator.find(params[:id])
     @occasions = Occasion.all
-
+    authorize @coordinator
   end
 
-  def edit
-  end
-
-  def update
-  end
-
-  def destroy
-  end
 
   private
 

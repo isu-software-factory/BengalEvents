@@ -22,7 +22,7 @@ class EventDetailsController < ApplicationController
   end
 
   def edit
-
+  
   end
 
   def update_time

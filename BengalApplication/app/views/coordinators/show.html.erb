@@ -1,6 +1,7 @@
 <% unless current_user.meta.occasions.present? %>
   <p> There are no Occasions under you. Go to Home Page to create an Occasion.</p>
 <% end %>
+
 <% if current_user.meta.occasions.any? %>
   <h3>Occasion (<%= current_user.meta.occasions.count %>)</h3>
   <% current_user.meta.occasions.each do |o| %>

@@ -20,7 +20,9 @@
         <% if policy(location).show? %>
           <%= link_to "Show", occasion_location_path(@occasion, location) %>
         <% end %>
-        <%= link_to "Edit", edit_occasion_location_path(@occasion, location) %>
+        <% if policy(location).edit? %>
+          <%= link_to "Edit", edit_occasion_location_path(@occasion, location) %>
+        <% end %>
         <% if policy(location).destroy? %>
           <%= link_to "Delete", occasion_location_path(@occasion, location), method: :delete, data: {confirm: "Are you sure?"} %>
         <% end %>
@@ -28,5 +30,4 @@
     </tr>
     </tbody>
   </table>
-
 <% end %>

@@ -1,7 +1,6 @@
 <% content_for(:title, "#{@occasion.name}") %>
+
 <h1> <%= @occasion.name %> </h1>
-
-
 <table>
   <thead>
   <tr>
@@ -22,15 +21,18 @@
 </table>
 
 <%= render @occasion.locations %>
-
-<% if policy(@occasion).new? %>
-  <p><%= link_to "Add Location", new_occasion_location_path(@occasion, @location) %></p>
-<% end %>
+<p>
+  <%= link_to "Add Location", new_occasion_location_path(@occasion, @location) %>
+</p>
 <br>
 
 <h2>List of Events</h2>
 
 <%= render @occasion.events %>
-<p><%= link_to "Create an event", new_occasion_event_path(@occasion, @event) %></p>
-<p><%= link_to "Home Page", occasions_path %></p>
+<p>
+  <%= link_to "Create an event", new_occasion_event_path(@occasion, @event) %>
+</p>
+<p>
+  <%= link_to "Home Page", occasions_path %>
+</p>
 
