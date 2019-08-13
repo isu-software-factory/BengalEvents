@@ -15,7 +15,7 @@ RSpec.feature "Teams", type: :feature do
       end
       click_button "Create"
       expect(@student.teams.count).to eq(1)
-      expect(page).to have_content("Team")
+      expect(page).to have_content("Team Tigers")
     end
     it "fails to create a team" do
       login_as(@student.user)
@@ -35,12 +35,12 @@ RSpec.feature "Teams", type: :feature do
       @student.save
       @student2 = @teacher.students.build(name: "Billy", user_attributes:{email: "andecord@gmail.com", password: "password"}, participant_attributes: {})
       @student2.save
-      @team = Team.create(name: "Tigers", participant_attributes: {})
-      @team.students << @student
+      @team = Team.create(name: "Tigers", lead: @student.id, participant_attributes: {})
+      @team.register_member(@student)
     end
     it "successfully invites students" do
       login_as(@student.user)
-      visit "teams/register"
+      visit "teams/#{@team.id}/invite"
       within("form") do
         fill_in "email1", with: @student2.user.email
       end
@@ -49,7 +49,7 @@ RSpec.feature "Teams", type: :feature do
     end
     it "fail to invite students" do
       login_as(@student.user)
-      visit "teams/register"
+      visit "teams/#{@team.id}/invite"
       within("form") do
         fill_in "email1", with: "random@gmail.com"
       end

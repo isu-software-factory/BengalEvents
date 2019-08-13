@@ -18,7 +18,7 @@ class RegistrationsController < ApplicationController
       occasion = Occasion.find(event.id)
       # capacity is full
       if event_detail.capacity_remaining == 0
-        flash[:notice] = "Event capacity is full. Register for another."
+        flash[:notice] = "Event capacity is full. Register for a different event."
         redirect_to controller: "registrations", action: "events", part_id: @participant.id, id: occasion.id
       else
         # already registered for event
