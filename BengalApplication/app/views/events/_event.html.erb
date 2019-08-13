@@ -1,28 +1,42 @@
+<div>
+  <% if flash[:errors] %>
+    <% flash[:errors].each do |e| %>
+      <p><%= e %></p>
+    <% end %>
+  <% end %>
+</div>
+
+<br>
 <table>
   <thead>
   <tr>
-    <td>Name</td>
-    <td>Description</td>
-    <td>Make ahead</td>
-    <td>Location</td>
-    <td>Actions</td>
-    <td>Created By</td>
+    <th>S.N</th>
+    <th>Name</th>
+    <th>Description</th>
+    <th>Make ahead</th>
+    <th>Location</th>
+    <th>Actions</th>
+    <th>Created By</th>
   </tr>
   </thead>
   <tbody>
   <tr>
+    <td><%= event.id %></td>
     <td><%= event.name %></td>
     <td><%= event.description %></td>
     <td><%= event.isMakeAhead %></td>
     <td><%= event.location.name %></td>
     <td>
-      <% if policy(event).destroy? %>
-        <%= link_to "Delete", occasion_event_path(@occasion, event), method: :delete, data: {confirm: "Are you sure?"} %>
-      <% end %>
+      <%if policy(event).show? %>
+      <%= link_to "Details", occasion_event_path(@occasion, event) %>
+      <%end %>
       <% if policy(event).edit? %>
         <%= link_to "Edit", edit_occasion_event_path(@occasion, event) %>
       <% end %>
-      <%= link_to "Details", occasion_event_path(@occasion, event) %>
+      <% if policy(event).destroy? %>
+        <%= link_to "Delete", occasion_event_path(@occasion, event), method: :delete, data: {confirm: "Are you sure?"} %>
+      <% end %>
+
     </td>
     <td><%= event.sponsor.user.email %></td>
   </tr>

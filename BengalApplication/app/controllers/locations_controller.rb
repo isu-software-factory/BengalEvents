@@ -15,7 +15,7 @@ class LocationsController < ApplicationController
     @location = @occasion.locations.build(location_params)
     authorize @location
     if @location.save
-      redirect_to occasion_path(@occasion)
+      redirect_to occasion_path(@occasion), :notice => "Successfully created Location."
     else
       flash[:errors] = @location.errors.full_messages
       redirect_back(fallback_location: new_occasion_location_path)
@@ -31,7 +31,7 @@ class LocationsController < ApplicationController
     @occasion = Occasion.find(params[:occasion_id])
     @location = Location.find(params[:id])
     if @location.update(location_params)
-      redirect_to occasion_path(@occasion)
+      redirect_to occasion_path(@occasion), :notice => "Successfully updated Occasion."
     else
       flash[:errors] = @event.errors.full_messages
       redirect_back(fallback_location: edit_occasion_event_path)

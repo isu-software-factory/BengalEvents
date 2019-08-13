@@ -5,6 +5,7 @@ class CoordinatorsController < ApplicationController
   def new
     @coordinator = Coordinator.new
     @coordinator.build_user
+    #authorize @coordinator
   end
 
   def create
@@ -20,6 +21,7 @@ class CoordinatorsController < ApplicationController
   def show
     @coordinator = Coordinator.find(params[:id])
     @occasions = Occasion.all
+
   end
 
   def edit

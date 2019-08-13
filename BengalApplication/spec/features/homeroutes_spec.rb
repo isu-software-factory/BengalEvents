@@ -10,29 +10,37 @@ RSpec.feature "Homeroutes", type: :feature do
       @coordinator = Coordinator.create(name: "coordinator", user_attributes: {email: "c@gmail.com", password: "password"})
       @occasion = @coordinator.occasions.build(name: "BengalEvents", start_date: Time.now, end_date: Time.now)
       @occasion.save
-      @event = @sponsor.events.build(location: "Gym", name: "Robotics", description: "great")
+      @location = @occasion.locations.build(name: "Gym")
+      @location.save
+      @event = @sponsor.events.build(name: "Robotics", description: "great")
+      @event.location = @location
+      @event.occasion = @occasion
       @event.save
     end
     it "routes sponsor" do
       login_as(@sponsor.user)
+
       visit "homeroutes/routes"
       expect(page).to have_content("Occasion")
     end
 
     it "routes teacher" do
       login_as(@teacher.user)
+
       visit "homeroutes/routes"
       expect(page).to have_content("Teachers Main Page")
     end
 
     it "routes coordinator" do
       login_as(@coordinator.user)
+
       visit "homeroutes/routes"
-      expect(page).to have_content("Coordinator")
+      expect(page).to have_content("c@gmail.com")
     end
 
     it "routes student" do
       login_as(@student.user)
+
       visit "homeroutes/routes"
       expect(page).to have_content("Registration Details")
     end

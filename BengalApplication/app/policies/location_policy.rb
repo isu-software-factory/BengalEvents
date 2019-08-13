@@ -1,27 +1,33 @@
 class LocationPolicy < ApplicationPolicy
 
   def new?
+    # Only Coordinator can create the Location
     user.meta_type == "Coordinator" || user.meta_type == "Admin"
   end
 
   def edit?
-    (user.meta_type == "Coordinator" || user.meta_type == "Admin") && (user.meta.id == record.coordinator.id)
+    # Only Coordinator can edit the Location
+    user.meta_type == "Coordinator" || user.meta_type == "Admin"
   end
 
   def update?
-    (user.meta_type == "Coordinator" || user.meta_type == "Admin") && (user.meta.id == record.coordinator.id)
+    # Only Coordinator can update the Location
+    user.meta_type == "Coordinator" || user.meta_type == "Admin"
 
   end
 
   def create?
+    # Only Coordinator can create the Location
     user.meta_type == "Coordinator" || user.meta_type == "Admin"
   end
 
   def show?
-    user.meta_type == "Coordinator" || user.meta_type == "Admin" || user.meta_type == "Sponsor"
+    # Only Coordinator can see the Location
+    user.meta_type == "Coordinator" || user.meta_type == "Admin"
   end
 
   def destroy?
+    # Only Coordinator can delete the Location
     user.meta_type == "Coordinator"
   end
 end

@@ -1,4 +1,6 @@
-<% if flash[:errors] %>
+
+<div class="page">
+  <% if flash[:errors] %>
   <% flash[:errors].each do |e| %>
     <p><%= e %></p>
   <% end %>
@@ -20,7 +22,7 @@
   </p>
   <p>
     <%= f.label :start_time %>
-    <%= f.select(:start_time, [['Select One', ""],], {}, id: 'selectTimeSlots') %>
+    <%= f.select(:start_time, [['Select One', ""],], {}, id: 'selectStartTime') %>
   </p>
   <p>
     <%= f.label :end_time %>
@@ -32,3 +34,4 @@
 <% end %>
 
 <%= link_to "Go Back", occasion_event_path(@occasion, @event) %>
+</div>

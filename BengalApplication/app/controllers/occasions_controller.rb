@@ -18,7 +18,7 @@ class OccasionsController < ApplicationController
     occasion = current_user.meta.occasions.build(occasion_params)
     authorize occasion
     if occasion.save
-      redirect_to occasions_path
+      redirect_to occasions_path, :notice => "Successfully created Occasion."
     else
       flash[:errors] = occasion.errors.full_messages
       redirect_back(fallback_location: new_occasion_path)
@@ -39,7 +39,7 @@ class OccasionsController < ApplicationController
     occasion = Occasion.find(params[:id])
     authorize occasion
     if occasion.update(occasion_params)
-      redirect_to occasions_path
+      redirect_to occasions_path, :notice => "Successfully updated Occasion."
     else
       flash[:errors] = occasion.errors.full_messages
       redirect_back(fallback_location: edit_occasion_path(occasion.id))

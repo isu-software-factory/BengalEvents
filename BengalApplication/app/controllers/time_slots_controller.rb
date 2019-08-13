@@ -12,8 +12,8 @@ class TimeSlotsController < ApplicationController
   end
 
   def create
-    @time_slot = TimeSlot.new(time_slots_params)
-    @time_slot.location = @location
+    @time_slot = @location.time_slots.new(time_slots_params)
+    # @time_slot.location = @location
     if @time_slot.save
       redirect_to occasion_location_path(@occasion, @location)
     else
@@ -31,12 +31,12 @@ end
 
 private
 
-def find_location
-  @location = Location.find(params[:location_id])
-end
-
 def find_occasion
   @occasion = Occasion.find(params[:occasion_id])
+end
+
+def find_location
+  @location = Location.find(params[:location_id])
 end
 
 def find_time_slots

@@ -18,7 +18,7 @@ RSpec.describe Sponsor, type: :model do
       @coordinator = Coordinator.create(name: "coord", user_attributes: {email: "coord@gmail.com", password: "password"})
       @occasion = @coordinator.occasions.build(name: "BengalEvent", end_date: Time.now, start_date: Time.now, description: "Event")
       @occasion.save
-      @location = @occasion.locations.build(name: "Gym", start_time: Time.now, end_time: Time.now)
+      @location = @occasion.locations.build(name: "Gym")
       @location.save
       @time_slot = @location.time_slots.build(start_time: Time.now, end_time: Time.now, interval: 60)
       @time_slot.save

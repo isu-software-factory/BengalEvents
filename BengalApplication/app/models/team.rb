@@ -23,6 +23,8 @@ class Team < ApplicationRecord
       unless self.students.include?(student)
         self.students << student
         true
+      else
+        false
       end
     else
       false
