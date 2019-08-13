@@ -1,4 +1,6 @@
-<% if flash[:errors] %>
+
+<div class="page">
+  <% if flash[:errors] %>
   <% flash[:errors].each do |e| %>
     <p><%= e %></p>
   <% end %>
@@ -32,3 +34,4 @@
 <% end %>
 
 <%= link_to "Go Back", occasion_event_path(@occasion, @event) %>
+</div>

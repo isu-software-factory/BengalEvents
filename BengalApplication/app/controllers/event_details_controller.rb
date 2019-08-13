@@ -44,6 +44,7 @@ class EventDetailsController < ApplicationController
   end
 
 
+
   private
 
   def set_occasion

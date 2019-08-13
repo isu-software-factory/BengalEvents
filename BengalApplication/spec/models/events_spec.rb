@@ -7,7 +7,7 @@ RSpec.describe Event, type: :model do
       @coordinator = Coordinator.create(name:"coord", user_attributes: {email: "coordinaotr@gmail.com", password: "password"})
       @occasion = @coordinator.occasions.build(name: "BengalEvents", start_date: Time.now, end_date: Time.now)
       @occasion.save
-      @location = @occasion.locations.build(name: "Gym", start_time: Time.now, end_time: Time.now)
+      @location = @occasion.locations.build(name: "Gym")
       @location.save
     end
     it "ensures name" do
@@ -36,9 +36,9 @@ RSpec.describe Event, type: :model do
     before do
       @sponsor = Sponsor.create(name: "sponsor", user_attributes: {email: "sponsor@gmail.com", password: "password"})
       @coordinator = Coordinator.create(name:"coord", user_attributes: {email: "coordinaotr@gmail.com", password: "password"})
-      @occasion = @coordinator.occasions.build(name: "BengalEvents", start_date: Time.now, end_date: Time.now)
+      @occasion = @coordinator.occasions.build(name: "BengalEvents", start_date: Time.now, end_date: Time.now, description: "Event")
       @occasion.save
-      @location = @occasion.locations.build(name: "Gym", start_time: Time.now, end_time: Time.now)
+      @location = @occasion.locations.build(name: "Gym")
       @location.save
       @time_slot = @location.time_slots.build(start_time: Time.now, end_time: Time.now, interval: 60)
       @time_slot.save
@@ -64,6 +64,7 @@ RSpec.describe Event, type: :model do
       event.occasion = @occasion
       event.location = @location
       event.save
+      expect(event.location).not_to eq(nil)
     end
   end
 end

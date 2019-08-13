@@ -49,7 +49,7 @@ RSpec.describe Occasion, type: :model do
     end
 
     it "can have a location" do
-      location = @occasion.locations.build(name: "Gym", start_time: Time.now, end_time: Time.now)
+      location = @occasion.locations.build(name: "Gym")
       location.save
       expect(@occasion.locations.first).to eq(location)
     end

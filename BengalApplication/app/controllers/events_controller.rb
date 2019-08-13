@@ -43,6 +43,7 @@ class EventsController < ApplicationController
   def destroy
     authorize @event
     @event.destroy
+    flash[:message] = "Event was successfully deleted"
     redirect_to occasion_path(@occasion)
   end
 
