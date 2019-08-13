@@ -49,8 +49,11 @@ class OccasionsController < ApplicationController
   def destroy
     occasion = Occasion.find(params[:id])
     authorize occasion
-    occasion.destroy
-    redirect_to occasions_path
+    if occasion.destroy
+      redirect_to occasions_path, :notice => "Successfully Deleted Occasion."
+    else
+      flash[:error] = "We were unable to destroy the Occasion"
+    end
   end
 
   private

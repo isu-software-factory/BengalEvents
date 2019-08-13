@@ -14,7 +14,7 @@ class EventsController < ApplicationController
     @event.occasion = @occasion
     authorize @event
     if @event.save
-      redirect_to occasion_path(@occasion),:notice => "Successfully created Event."
+      redirect_to occasion_path(@occasion), :notice => "Successfully created Event."
     else
       flash[:errors] = @event.errors.full_messages
       redirect_back(fallback_location: new_occasion_event_path)
@@ -42,9 +42,11 @@ class EventsController < ApplicationController
 
   def destroy
     authorize @event
-    @event.destroy
-    flash[:message] = "Event was successfully deleted"
-    redirect_to occasion_path(@occasion)
+    if @event.destroy
+      redirect_to occasion_path(@occasion), :notice => "Successfully Deleted Event."
+    else
+      flash[:error] = "We were unable to destroy the Item"
+    end
   end
 
   def location_timeslots
