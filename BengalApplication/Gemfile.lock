@@ -156,6 +156,7 @@ GEM
     nokogiri (1.10.3-x64-mingw32)
       mini_portile2 (~> 2.4.0)
     orm_adapter (0.5.0)
+    pdfkit (0.8.4.1)
     public_suffix (3.1.0)
     puma (3.12.1)
     pundit (2.0.1)
@@ -196,6 +197,8 @@ GEM
     rb-inotify (0.10.0)
       ffi (~> 1.0)
     regexp_parser (1.5.1)
+    render_anywhere (0.0.12)
+      rails (>= 3.0.7)
     responders (3.0.0)
       actionpack (>= 5.0)
       railties (>= 5.0)
@@ -292,10 +295,12 @@ DEPENDENCIES
   jbuilder (~> 2.5)
   jquery-rails
   letter_opener
+  pdfkit
   puma (~> 3.11)
   pundit
   rails (~> 5.2.3)
   rails-controller-testing
+  render_anywhere
   rspec-rails
   sass-rails (~> 5.0)
   selenium-webdriver
