@@ -5,13 +5,18 @@ RSpec.feature "Events", type: :feature do
     before(:each) do
       Warden.test_reset!
       @coordinator = Coordinator.create(name: "coordinator", user_attributes: {email: "sup@gmail.com", password: "password" })
-      @coordinator.occasions.create(name: "BengalEvents", start_date: Time.now, end_date: Time.now)
+      @occasion = @coordinator.occasions.build(name: "BengalEvents", start_date: Time.now, end_date: Time.now, description: "Events")
+      @occasion.save
+      @location = @occasion.locations.build(name: "Gym")
+      @location.save
+      @time_slot = @location.time_slots.build(start_time: Time.now, end_time: Time.now, interval: 60)
+      @time_slot.save
       sponsor = Sponsor.create(name: "Sponsor", user_attributes: {email: "sponsor@gmail.com", password: "password"})
       login_as(sponsor.user, :scope => :user)
-      visit new_occasion_event_path(1)
+      visit new_occasion_event_path(@occasion.id)
       within('form') do
-       fill_in "event[name]", with: "Robtics"
-       fill_in "event[location]", with: "Gym"
+       fill_in "event[name]", with: "Robotics"
+       select("Gym", from: 'event[location_id]')
       end
     end
 
@@ -20,7 +25,7 @@ RSpec.feature "Events", type: :feature do
        fill_in "event[description]", with: "Robots in the gym"
       end
       click_button 'Confirm'
-      expect(page).to have_content("These are the lists of events under this occasion.")
+      expect(page).to have_content("List of Events")
 
     end
 
@@ -33,32 +38,42 @@ RSpec.feature "Events", type: :feature do
   context "update an event" do
     before(:each) do
       # create event
-      @coordinator = Coordinator.create(name:"coord", user_attributes: {email: "coordinaotr@gmail.com", password: "password"})
-      @occasion = @coordinator.occasions.build(name: "BengalEvents", start_date: Time.now, end_date: Time.now)
-      @sponsor = Sponsor.create(name: "sponsor", user_attributes: {email: "sponsor@gmail.com", password: "password"})
-      @event = @sponsor.events.build(location: "Gym", name: "Robotics", description: "great")
+      @coordinator = Coordinator.create(name: "coordinator", user_attributes: {email: "sup@gmail.com", password: "password" })
+      @occasion = @coordinator.occasions.build(name: "BengalEvents", start_date: Time.now, end_date: Time.now, description: "Events")
+      @occasion.save
+      @location = @occasion.locations.build(name: "Gym")
+      @location.save
+      @location2 = @occasion.locations.build(name: "Stadium")
+      @location2.save
+      @time_slot = @location.time_slots.build(start_time: Time.now, end_time: Time.now, interval: 60)
+      @time_slot.save
+      @sponsor = Sponsor.create(name: "Sponsor", user_attributes: {email: "sponsor@gmail.com", password: "password"})
+      @event = @sponsor.events.build(name: "Robots", description: "Electronics")
+      @event.location = @location
       @event.occasion = @occasion
       @event.save
     end
     scenario "should be successful" do
       login_as(@sponsor.user, :scope => :user)
-
       visit edit_occasion_event_path(occasion_id: @occasion.id, id: @event.id)
+      # fill form
       within('form') do
         fill_in "event[name]", with: "Biology"
-        fill_in "event[location]", with: "SUB"
+        select("Stadium", from: 'event[location_id]')
         fill_in "event[description]", with: "Science"
       end
         click_button "Confirm"
         expect(page).to have_content("Biology")
+        expect(page).to have_content("Stadium")
+        expect(page).to have_content("Science")
     end
     scenario "should fail" do
       login_as(@sponsor.user, :scope => :user)
-
       visit edit_occasion_event_path(occasion_id: @occasion.id, id: @event.id)
+      # fill form
       within('form') do
         fill_in "event[name]", with: ""
-        fill_in "event[location]", with: "SUB"
+        select("Stadium", from: 'event[location_id]')
         fill_in "event[description]", with: "Science"
       end
       click_button "Confirm"
@@ -69,19 +84,30 @@ RSpec.feature "Events", type: :feature do
   context "destroy event" do
     before(:each) do
       # create event
-      @coordinator = Coordinator.create(name:"coord", user_attributes: {email: "coordinaotr@gmail.com", password: "password"})
-      @occasion = @coordinator.occasions.build(name: "BengalEvents", start_date: Time.now, end_date: Time.now)
-      @sponsor = Sponsor.create(name: "sponsor", user_attributes: {email: "sponsor@gmail.com", password: "password"})
-      @event = @sponsor.events.build(location: "Gym", name: "Robotics", description: "great")
+      @coordinator = Coordinator.create(name: "coordinator", user_attributes: {email: "sup@gmail.com", password: "password" })
+      @occasion = @coordinator.occasions.build(name: "BengalEvents", start_date: Time.now, end_date: Time.now, description: "Events")
+      @occasion.save
+      @location = @occasion.locations.build(name: "Gym")
+      @location.save
+      @sponsor = Sponsor.create(name: "Sponsor", user_attributes: {email: "sponsor@gmail.com", password: "password"})
+      @event = @sponsor.events.build(name: "Robots", description: "Electronics")
+      @event.location = @location
       @event.occasion = @occasion
       @event.save
     end
 
     scenario "should be successful" do
+      Capybara.current_driver = :selenium_chrome
+      Capybara.default_max_wait_time = 10
       login_as(@sponsor.user, :scope => :user)
       visit occasion_path(@occasion.id)
       #click destroy
-      expect{click_link 'Destroy'}.to change(Event, :count).by(-1)
+      click_link("Delete")
+      page.driver.browser.switch_to.alert.accept
+      # accept_confirm do
+      #   click_link("Delete")
+      #   #expect{click_link 'Destroy'}.to change(Event, :count).by(-1)
+      # end
       expect(page).to have_content "Event was successfully deleted"
     end
   end

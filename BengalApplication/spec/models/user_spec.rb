@@ -39,6 +39,5 @@ RSpec.describe User, type: :model do
       user = User.find(@coordinator.user.id)
       expect(user.id).to eq(@coordinator.user.id)
     end
-
   end
 end

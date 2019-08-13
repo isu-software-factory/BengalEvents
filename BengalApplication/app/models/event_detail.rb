@@ -21,13 +21,17 @@ class EventDetail < ApplicationRecord
   validates :date_started, presence: true
 
 # register participant to event detail
-# Makes sure that participant isn't already registered
+# Makes sure that participant isn't already registered and that the capacity is zero
   def register_participant(participant)
     unless self.participants.include?(participant)
       unless self.capacity_remaining == 0
         self.participants << participant
         true
+      else
+        false
       end
+    else
+      false
     end
   end
 

@@ -5,7 +5,7 @@ class CoordinatorsController < ApplicationController
   def new
     @coordinator = Coordinator.new
     @coordinator.build_user
-    authorize @coordinator
+    #authorize @coordinator
   end
 
   def create

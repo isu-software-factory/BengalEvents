@@ -7,7 +7,7 @@ RSpec.describe EventDetail, type: :model do
       @coordinator = Coordinator.create(name:"coord", user_attributes: {email: "coordinaotr@gmail.com", password: "password"})
       @occasion = @coordinator.occasions.build(name: "BengalEvents", start_date: Time.now, end_date: Time.now)
       @occasion.save
-      @location = @occasion.locations.build(name: "Gym", start_time: Time.now, end_time: Time.now)
+      @location = @occasion.locations.build(name: "Gym")
       @location.save
       @time_slot = @location.time_slots.build(start_time: Time.now, end_time: Time.now, interval: 60)
       @time_slot.save
@@ -44,7 +44,7 @@ RSpec.describe EventDetail, type: :model do
       @coordinator = Coordinator.create(name:"coord", user_attributes: {email: "coordinaotr@gmail.com", password: "password"})
       @occasion = @coordinator.occasions.build(name: "BengalEvents", start_date: Time.now, end_date: Time.now)
       @occasion.save
-      @location = @occasion.locations.build(name: "Gym", start_time: Time.now, end_time: Time.now)
+      @location = @occasion.locations.build(name: "Gym")
       @location.save
       @time_slot = @location.time_slots.build(start_time: Time.now, end_time: Time.now, interval: 60)
       @time_slot.save
@@ -76,6 +76,120 @@ RSpec.describe EventDetail, type: :model do
       team.save
       @event_detail.register_participant(team.participant)
       expect(team.participant.event_details.count).to eq(1)
+    end
+  end
+  context 'method tests' do
+    context 'register_participant test' do
+      before do
+        @sponsor = Sponsor.create(name: "sponsor", user_attributes: {email: "sponsor@gmail.com", password: "password"})
+        @coordinator = Coordinator.create(name:"coord", user_attributes: {email: "coordinaotr@gmail.com", password: "password"})
+        @occasion = @coordinator.occasions.build(name: "BengalEvents", start_date: Time.now, end_date: Time.now)
+        @occasion.save
+        @location = @occasion.locations.build(name: "Gym")
+        @location.save
+        @time_slot = @location.time_slots.build(start_time: Time.now, end_time: Time.now, interval: 60)
+        @time_slot.save
+        @event = @sponsor.events.build(name: "Robotics", description: "great")
+        @event.location = @location
+        @event.occasion = @occasion
+        @event.save
+        @event_detail = @event.event_details.build(start_time: @time_slot.start_time, end_time: @time_slot.end_time, date_started: @occasion.start_date, capacity: 2)
+        @event_detail.save
+        @teacher = Teacher.create(name: "Kelly", school: "Valley", student_count: 23, chaperone_count: 2, user_attributes: {email: "tech@gmail.com", password: "password"}, participant_attributes: {})
+        @student = @teacher.students.build(name: "Bill", user_attributes: {email: "student@gmail.com", password: "password"}, participant_attributes:{})
+        @student.save
+        @team = Team.create(name: "Tigers", lead: @student.id, participant_attributes: {})
+        @team.register_member(@student)
+      end
+      it 'should add student' do
+        @event_detail.register_participant(@student.participant)
+        expect(@student.participant.event_details.first).to eq(@event_detail)
+      end
+      it 'should add teacher' do
+        @event_detail.register_participant(@teacher.participant)
+        expect(@teacher.participant.event_details.first).to eq(@event_detail)
+      end
+      it 'should add team' do
+        @event_detail.register_participant(@team.participant)
+        expect(@team.participant.event_details.first).to eq(@event_detail)
+      end
+      it "should not register student if they are already registered for event" do
+        register = @event_detail.register_participant(@student.participant)
+        expect(register).to eq(true)
+        re_register = @event_detail.register_participant(@student.participant)
+        expect(re_register).to eq(false)
+      end
+      it "should not register teacher if they are already registered for event" do
+        register = @event_detail.register_participant(@teacher.participant)
+        expect(register).to eq(true)
+        re_register = @event_detail.register_participant(@teacher.participant)
+        expect(re_register).to eq(false)
+      end
+      it "should not register team if they are already registered for event" do
+        register = @event_detail.register_participant(@team.participant)
+        expect(register).to eq(true)
+        re_register = @event_detail.register_participant(@team.participant)
+        expect(re_register).to eq(false)
+      end
+      it "should not register student if capacity is full" do
+        expect(@event_detail.capacity_remaining).to eq(2)
+        @event_detail.register_participant(@teacher.participant)
+        expect(@event_detail.capacity_remaining).to eq(1)
+        @event_detail.register_participant(@team.participant)
+        expect(@event_detail.participants.count).to eq(2)
+        register = @event_detail.register_participant(@student.participant)
+        expect(register).to eq(false)
+      end
+      it "should not register teacher if capacity is full" do
+        @event_detail.register_participant(@student.participant)
+        @event_detail.register_participant(@team.participant)
+        register = @event_detail.register_participant(@teacher.participant)
+        expect(register).to eq(false)
+      end
+      it "should not register team if capacity is full" do
+        @event_detail.register_participant(@teacher.participant)
+        @event_detail.register_participant(@student.participant)
+        register = @event_detail.register_participant(@team.participant)
+        expect(register).to eq(false)
+      end
+    end
+    context "capacity_remaining" do
+      before do
+        @sponsor = Sponsor.create(name: "sponsor", user_attributes: {email: "sponsor@gmail.com", password: "password"})
+        @coordinator = Coordinator.create(name:"coord", user_attributes: {email: "coordinaotr@gmail.com", password: "password"})
+        @occasion = @coordinator.occasions.build(name: "BengalEvents", start_date: Time.now, end_date: Time.now)
+        @occasion.save
+        @location = @occasion.locations.build(name: "Gym")
+        @location.save
+        @time_slot = @location.time_slots.build(start_time: Time.now, end_time: Time.now, interval: 60)
+        @time_slot.save
+        @event = @sponsor.events.build(name: "Robotics", description: "great")
+        @event.location = @location
+        @event.occasion = @occasion
+        @event.save
+        @event_detail = @event.event_details.build(start_time: @time_slot.start_time, end_time: @time_slot.end_time, date_started: @occasion.start_date, capacity: 10)
+        @event_detail.save
+        @teacher = Teacher.create(name: "Kelly", school: "Valley", student_count: 23, chaperone_count: 2, user_attributes: {email: "tech@gmail.com", password: "password"}, participant_attributes: {})
+        @student = @teacher.students.build(name: "Bill", user_attributes: {email: "student@gmail.com", password: "password"}, participant_attributes:{})
+        @student.save
+        @student2 = @teacher.students.build(name: "Billy", user_attributes: {email: "stu@gmail.com", password: "password"}, participant_attributes:{})
+        @student2.save
+        @team = Team.create(name: "Tigers", lead: @student.id, participant_attributes: {})
+        @team.register_member(@student2)
+        @team.register_member(@student)
+      end
+      it "should return capacity remaining after one student registers" do
+        @event_detail.register_participant(@student.participant)
+        expect(@event_detail.capacity_remaining).to eq(9)
+      end
+      it "should return capacity remaining after one teacher registers" do
+        @event_detail.register_participant(@teacher.participant)
+        expect(@event_detail.capacity_remaining).to eq(9)
+      end
+      it "should return capacity remaining after a team of 2, registers" do
+        @event_detail.register_participant(@team.participant)
+        expect(@event_detail.capacity_remaining).to eq(8)
+      end
     end
   end
 
