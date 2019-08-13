@@ -18,4 +18,11 @@ class Occasion < ApplicationRecord
   has_many :locations, dependent: :destroy
   validates :name, :start_date, :end_date, presence: true
   validates :description, presence: true
+  validate :end_must_be_after_start
+
+  def end_must_be_after_start
+    if self.start_date >= self.end_date
+      errors.add(:end_time, "must be after start time")
+    end
+  end
 end

@@ -11,6 +11,8 @@ class TimeSlotsController < ApplicationController
     @time_slot = TimeSlot.new
   end
 
+
+
   def create
     @time_slot = @location.time_slots.new(time_slots_params)
     authorize @time_slot

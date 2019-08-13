@@ -4,6 +4,7 @@ class SponsorsController < ApplicationController
   def new
     @sponsor = Sponsor.new
     @sponsor.build_user
+    authorize @sponsor
   end
 
   def create
@@ -19,7 +20,6 @@ class SponsorsController < ApplicationController
   def show
     @sponsor = Sponsor.find(params[:id])
     @occasions = Occasion.all
-    authorize @sponsor
   end
 
   private

@@ -21,9 +21,9 @@
           <td> <%= e.description %></td>
           <td> <%= e.isMakeAhead %></td>
           <td><%= e.location.name %></td>
-          <td> <%= d.capacity %></td>
+          <td> <%= d.capacity_remaining %></td>
           <td> <%= d.start_time.strftime("%F %H:%M %p") %></td>
-          <td><%= d.end_time.strftime("%F %H:%M %p")   %></td>
+          <td><%= d.end_time.strftime("%F %H:%M %p") %></td>
           <td><%= e.sponsor.user.email %></td>
         </tr>
       <% end %>

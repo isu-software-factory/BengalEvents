@@ -22,12 +22,14 @@ class EventDetailsController < ApplicationController
   end
 
   def edit
-  
-  end
-
-  def update_time
 
   end
+
+  # def update_time
+  #
+  # end
+
+
 
   def update
     @event_detail.update_attributes(event_detail_params)
@@ -42,7 +44,6 @@ class EventDetailsController < ApplicationController
     @event_detail.destroy
     redirect_to occasion_event_path(@occasion, @event)
   end
-
 
 
   private
