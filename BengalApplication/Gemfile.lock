@@ -293,6 +293,7 @@ DEPENDENCIES
   hirb
   jbuilder (~> 2.5)
   jquery-rails
+  prawn
   puma (~> 3.11)
   pundit
   rails (~> 5.2.3)

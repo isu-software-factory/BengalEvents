@@ -32,7 +32,7 @@ RSpec.feature "Teachers", type: :feature do
 
   context "update teacher" do
     before do
-      @teacher = Teacher.create(school: "Valley", chaperone_count: 23, student_count: 232, name: "Sally", user_attributes: {email: "t@gmail.com", password: "password"})
+      @teacher = Teacher.create(school: "Valley", chaperone_count: 23, student_count: 232, name: "Sally", user_attributes: {email: "t@gmail.com", password: "password"}, participant_attributes: {})
       login_as(@teacher.user, :scope => :user)
     end
     scenario "should be successful" do
@@ -42,7 +42,7 @@ RSpec.feature "Teachers", type: :feature do
        fill_in "teacher[school]", with: 'Daniel'
         fill_in 'teacher[chaperone_count]', with: 23
       end
-      click_button 'Update'
+      click_button 'Confirm'
       expect(page).to have_content("Successfully updated")
     end
 
@@ -51,7 +51,7 @@ RSpec.feature "Teachers", type: :feature do
      within('form') do
        fill_in "School", with: ""
       end
-      click_button "Update"
+      click_button "Confirm"
       expect(page).to have_content "School can't be blank"
     end
   end

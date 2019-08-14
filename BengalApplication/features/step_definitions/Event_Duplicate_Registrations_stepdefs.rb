@@ -26,7 +26,7 @@ Given("Student is at registration page and has register for {string}") do |strin
 
   # login and go to registration page
   login_as(@student.user, :scope => :user)
-  visit "registrations/events/#{@student.participant.id}/#{@event.id}"
+  visit "registrations/events/#{@student.participant.id}/#{@occasion.id}"
 end
 
 When("Student clicks register for Robotics") do

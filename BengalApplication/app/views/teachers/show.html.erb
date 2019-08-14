@@ -42,7 +42,7 @@
       <td><%=Event.find(s.event_id).description %></td>
       <td><%=s.start_time %></td>
       <td><%=s.end_time %></td>
-      <td><%=button_to "Drop",  method: :post, controller: "registrations", action: :drop, part_id: m.id, id: @team.id%></td>
+      <td><%=button_to "Drop",  method: :post, controller: "registrations", action: :drop, part_id: @teacher.participant.id, id:s.id%></td>
     </tr>
   <% end %>
 </table>

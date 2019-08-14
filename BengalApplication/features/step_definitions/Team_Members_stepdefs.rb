@@ -13,6 +13,7 @@ Given("Team lead is at invite team page") do
   @student4.save
   @team = Team.create(name: "Tigers", lead: @student.id, participant_attributes: {})
   @team.lead = @student.id
+  @team.register_member(@student)
 
   # login and go to team invite page
   login_as(@student.user)
@@ -26,22 +27,16 @@ When("Team lead fills out emails and sends invites") do
     fill_in "email3", with: @student4.user.email
   end
   click_button "Invite"
-
-  open_email(@student2.user.email)
-  expect(current_email.subject).to eq("Invite")
 end
 
 When("Members click join link") do
-
-  #open_email(@student2.user.email)
-  #expect(current_email.subject).to eq("Invite")
-  # emails = [@student2.user.email, @student3.user.email, @student4.user.email]
-  # emails.each do |e|
-  #   open_email(e)
-  #   current_email.click_link 'Join'
-  #   #clear_emails
-  # end
-
+  # open_email(@student2.user.email)
+  # current_email.click_link "Join"
+  emails = [@student2.user.email, @student3.user.email, @student4.user.email]
+  emails.each do |e|
+    open_email(e)
+    current_email.click_link 'Join'
+  end
 end
 
 Then("Team will have {int} members") do |max|

@@ -39,6 +39,9 @@ end
 
 When("Team lead clicks register for event detail") do
   # click register link
+  expect(@event_detail).to_not eq(nil)
+  expect(@event).to_not eq(nil)
+  expect(page).to have_content("10")
   click_link "Register"
 end
 

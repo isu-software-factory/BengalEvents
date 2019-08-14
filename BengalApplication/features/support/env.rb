@@ -8,6 +8,13 @@
 require 'cucumber/rails'
 require 'capybara/email'
 World(Capybara::Email::DSL)
+Mail.defaults do
+  delivery_method :test
+end
+ActionDispatch::IntegrationTest
+  Capybara.server_port = 301
+  Capybara.app_host = "http://localhost:3001"
+
 # Capybara defaults to CSS3 selectors rather than XPath.
 # If you'd prefer to use XPath, just uncomment this line and adjust any
 # selectors in your step definitions to use the XPath syntax.
