@@ -42,7 +42,7 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'cucumber-rails', require: false
   gem 'capybara-email'
-  gem 'letter_opener'
+  #gem 'letter_opener'
 end
 
 group :development do

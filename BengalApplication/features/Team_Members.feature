@@ -5,4 +5,19 @@
 
 
 
-    Scenario: 
+    Scenario: Invited 4 members join team
+      Given Team lead is at invite team page
+      When Team lead fills out emails and sends invites
+      And  Members click join link
+      Then Team will have 4 members
+
+    Scenario: Invited 5 members to join team
+      Given Team lead invites 4 members
+      And Team lead goes to invite team page
+      When Team lead fills out one email and sends invite
+      And Member clicks join link
+      Then Member will not be a part of team
+
+    Scenario: Team lead doesn't invite members
+      Given Team lead is the only member
+      Then Team lead will not see register for events link

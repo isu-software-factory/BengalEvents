@@ -6,6 +6,7 @@
 require 'simplecov'
 require 'capybara'
 require 'webdrivers'
+require 'capybara/email/rspec'
 SimpleCov.start
 # Given that it is always loaded, you are encouraged to keep this file as
 # light-weight as possible. Requiring heavyweight dependencies from this file

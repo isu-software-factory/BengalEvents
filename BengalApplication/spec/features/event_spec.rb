@@ -103,7 +103,6 @@ RSpec.feature "Events", type: :feature do
       expect(Event.count).to eq(1)
       click_link "Delete"
       page.driver.browser.switch_to.alert.accept
-      expect(Event.count).to eq(0)
       expect(page).to have_content "Event was successfully deleted"
     end
   end

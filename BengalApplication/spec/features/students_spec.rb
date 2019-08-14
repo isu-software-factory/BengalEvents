@@ -28,44 +28,46 @@ RSpec.feature "Students", type: :feature do
     end
   end
 
-  context "update student" do
-    before(:each) do
-      teacher = Teacher.create(chaperone_count: 3, student_count: 23, school: "valley", name: "teacher", user_attributes: {email: "te@gmail.com", password: "password"})
-      @student = teacher.students.build(name: "Bill", user_attributes: {email: "student@gmail.com", password: "password"})
-      @student.save
-      login_as(@student.user, :scope => :user)
-      visit edit_student_path(@student.id)
-    end
-    scenario "should be successful" do
-      within("form") do
-        fill_in  "user[password]", with: "newpassword"
-      end
-      click_button "update"
-      expect(@student.user.password).to eq("newpassword")
-      expect(page).to have_content("Student main page")
-    end
-    scenario "should fail" do
-      within("form") do
-        fill_in "user[password]", with: ""
-        expect(@student.user.password).to eq("password")
-        expect(page).to have_content("Password can't be blank")
-      end
-    end
-  end
+  # Will not be implemented
+  # context "update student" do
+  #   before(:each) do
+  #     teacher = Teacher.create(chaperone_count: 3, student_count: 23, school: "valley", name: "teacher", user_attributes: {email: "te@gmail.com", password: "password"})
+  #     @student = teacher.students.build(name: "Bill", user_attributes: {email: "student@gmail.com", password: "password"})
+  #     @student.save
+  #     login_as(@student.user, :scope => :user)
+  #     visit edit_student_path(@student.id)
+  #   end
+  #   scenario "should be successful" do
+  #     within("form") do
+  #       fill_in  "user[password]", with: "newpassword"
+  #     end
+  #     click_button "update"
+  #     expect(@student.user.password).to eq("newpassword")
+  #     expect(page).to have_content("Student main page")
+  #   end
+  #   scenario "should fail" do
+  #     within("form") do
+  #       fill_in "user[password]", with: ""
+  #       expect(@student.user.password).to eq("password")
+  #       expect(page).to have_content("Password can't be blank")
+  #     end
+  #   end
+  # end
 
-  context "destroy student" do
-    scenario "should be successful" do
-      teacher = Teacher.create(chaperone_count: 3, student_count: 23, school: "valley", name: "teacher", user_attributes: {email: "te@gmail.com", password: "password"})
-      student = teacher.students.build(name: "Bill", user_attributes: {email: "student@gmail.com", password: "password"})
-      student.save
-      coordinator = Coordinator.create(name: "coordinator", user_attributes: {email: "pasl@gmail.com", password: "password"})
-      login_as(coordinator.user, :scope => :user)
-      visit student_path
-      #click_link "delete"
-      expect{click_link 'Delete'}.to change(Student, :count).by(-1)
-      expect(page).to have_content("Student was successfully deleted")
-    end
-  end
+  # Not yet implemented
+  # context "destroy student" do
+  #   scenario "should be successful" do
+  #     teacher = Teacher.create(chaperone_count: 3, student_count: 23, school: "valley", name: "teacher", user_attributes: {email: "te@gmail.com", password: "password"})
+  #     student = teacher.students.build(name: "Bill", user_attributes: {email: "student@gmail.com", password: "password"})
+  #     student.save
+  #     coordinator = Coordinator.create(name: "coordinator", user_attributes: {email: "pasl@gmail.com", password: "password"})
+  #     login_as(coordinator.user, :scope => :user)
+  #     visit student_path
+  #     #click_link "delete"
+  #     expect{click_link 'Delete'}.to change(Student, :count).by(-1)
+  #     expect(page).to have_content("Student was successfully deleted")
+  #   end
+  # end
 
 end
 

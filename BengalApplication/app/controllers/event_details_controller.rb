@@ -25,10 +25,6 @@ class EventDetailsController < ApplicationController
 
   end
 
-  def update_time
-
-  end
-
   def update
     @event_detail.update_attributes(event_detail_params)
     @event_detail.start_time = @event_detail.date_started.to_s + " " + @event_detail.start_time.strftime("%H:%M")
@@ -40,7 +36,7 @@ class EventDetailsController < ApplicationController
 
   def destroy
     @event_detail.destroy
-    redirect_to occasion_event_path(@occasion, @event)
+    redirect_to occasion_event_path(@occasion, @event), :notice => "Successfully deleted time slot"
   end
 
 

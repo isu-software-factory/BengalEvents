@@ -130,10 +130,6 @@ GEM
       railties (>= 4.2.0)
       thor (>= 0.14, < 2.0)
     json (2.2.0)
-    launchy (2.4.3)
-      addressable (~> 2.3)
-    letter_opener (1.7.0)
-      launchy (~> 2.2)
     loofah (2.2.3)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
@@ -295,7 +291,6 @@ DEPENDENCIES
   hirb
   jbuilder (~> 2.5)
   jquery-rails
-  letter_opener
   puma (~> 3.11)
   pundit
   rails (~> 5.2.3)

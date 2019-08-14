@@ -14,7 +14,6 @@ RSpec.describe EventsController, type: :controller do
       event.save
       # go to event show page
       get :show, params: {occasion_id: @occasion.id, id: event.id}
-
       expect(response).to render_template("show")
 
     end

@@ -56,15 +56,16 @@ RSpec.feature "Teachers", type: :feature do
     end
   end
 
-  context "destroy teacher" do
-   scenario "should be successful" do
-     @teacher = Teacher.create(school: "Valley", chaperone_count: 23, student_count: 232, name: "Sally", user_attributes: {email: "t@gmail.com", password: "password"})
-     @coordinator = Coordinator.create(name: "Sally", user_attributes: {email: "coordinator@gmail.com", password: "password"})
-     login_as(@coordinator.user, :scope => :user)
-     visit coordinator_path(@coordinator)
-      click_link "Delete"
-      expect(page).to have_content "Teacher was successfully deleted"
-    end
-  end
+  # Will not be implemented yet
+  # context "destroy teacher" do
+  #  scenario "should be successful" do
+  #    @teacher = Teacher.create(school: "Valley", chaperone_count: 23, student_count: 232, name: "Sally", user_attributes: {email: "t@gmail.com", password: "password"})
+  #    @coordinator = Coordinator.create(name: "Sally", user_attributes: {email: "coordinator@gmail.com", password: "password"})
+  #    login_as(@coordinator.user, :scope => :user)
+  #    visit coordinator_path(@coordinator)
+  #     click_link "Delete"
+  #     expect(page).to have_content "Teacher was successfully deleted"
+  #   end
+  # end
 
 end

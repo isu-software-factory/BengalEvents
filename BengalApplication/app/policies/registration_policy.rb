@@ -30,7 +30,7 @@ class RegistrationPolicy < ApplicationPolicy
   def drop?
     # only teachers, students, and team leads can drop event details
     if user.meta_type == "Student"
-      record.member_type == "Student" || record.member_type == "Team" && user.meta == record.get_lead
+      record.member_type == "Student" || record.member_type == "Team" && user.meta == record.member.get_lead
     else
       record.member_type == "Teacher"
     end

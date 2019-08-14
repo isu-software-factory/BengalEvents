@@ -31,9 +31,9 @@ class LocationsController < ApplicationController
     @occasion = Occasion.find(params[:occasion_id])
     @location = Location.find(params[:id])
     if @location.update(location_params)
-      redirect_to occasion_path(@occasion), :notice => "Successfully updated Occasion."
+      redirect_to occasion_path(@occasion), :notice => "Successfully updated Location."
     else
-      flash[:errors] = @event.errors.full_messages
+      flash[:errors] = @location.errors.full_messages
       redirect_back(fallback_location: edit_occasion_event_path)
     end
   end
@@ -49,7 +49,7 @@ class LocationsController < ApplicationController
     location = Location.find(params[:id])
     authorize location
     location.destroy
-    redirect_to occasion_path(@occasion)
+    redirect_to occasion_path(@occasion), :notice => "Successfully deleted Location."
   end
 
   private

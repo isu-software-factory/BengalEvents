@@ -24,8 +24,12 @@ end
 Given("Sponsor has account and is signed in") do
   # create an occasion
   @coordinator = Coordinator.create(name:"coord", user_attributes: {email: "coordinaotr@gmail.com", password: "password"})
-  @occasion = @coordinator.occasions.build(name: "BengalEvents", start_date: Time.now, end_date: Time.now)
+  @occasion = @coordinator.occasions.build(name: "BengalEvents", start_date: Time.now, end_date: Time.now, description: "Stem Day")
   @occasion.save
+  @location = @occasion.locations.build(name: "Gym")
+  @location.save
+  @time_slot = @location.time_slots.build(start_time: Time.now, end_time: Time.now, interval: 60)
+
 
   # create sponsor
   @sponsor = Sponsor.create(name: "Jacob", user_attributes: {email: "sponsor@gmail.com", password: "password"})
@@ -44,14 +48,14 @@ When("Sponsor clicks Show on an occasion") do
 end
 
 When("Sponsor clicks Create an event") do
-  click_link "Create an Event"
+  click_link "Create an event"
 end
 
 When("Sponsor fills out Event information and clicks confirm") do
   # fill form
   within("form") do
     fill_in "event[name]", with: "Robotics"
-    fill_in "event[location]", with: "Gym"
+    select("Gym", from: "event_location_id")
     fill_in "event[description]", with: "Robots are cool"
   end
   click_button "Confirm"
@@ -67,11 +71,16 @@ Given("Sponsor has account and event created and is at sponsor page") do
   # create sponsor, occasion, and event
   @sponsor = Sponsor.create(name: "sponsor", user_attributes: {email: "sponsor@gmail.com", password: "password"})
   @coordinator = Coordinator.create(name:"coord", user_attributes: {email: "coordinaotr@gmail.com", password: "password"})
-  @occasion = @coordinator.occasions.build(name: "BengalEvents", start_date: Time.now, end_date: Time.now)
+  @occasion = @coordinator.occasions.build(name: "BengalEvents", start_date: Time.now, end_date: Time.now, description: "Stem Day")
   @occasion.save
+  @location = @occasion.locations.build(name: "Gym")
+  @location.save
+  @time_slot = @location.time_slots.build(start_time: Time.now, end_time: Time.now, interval: 60)
+
   # create an event
-  @event = @sponsor.events.build(location: "Gym", name: "Robotics", description: "great")
+  @event = @sponsor.events.build(name: "Robotics", description: "great")
   @event.occasion = @occasion
+  @event.location = @location
   @event.save
 
   # login and go to sponsor page

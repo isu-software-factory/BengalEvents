@@ -33,22 +33,6 @@ class StudentsController < ApplicationController
     end
   end
 
-  def edit
-    @student = Student.find(params[:id])
-    authorize @student
-  end
-
-  def update
-  end
-
-  def destroy
-    @student = Student.find(params[:id])
-    authorize @student
-    @student.destroy
-    redirect_to current_user.meta
-  end
-
-
   private
 
   def prepare_teacher

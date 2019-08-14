@@ -52,7 +52,7 @@
         <tr>
           <td><%=Event.find(s.event_id).name %></td>
           <td><%=Event.find(s.event_id).description %></td>
-          <td><%=s.location %></td>
+          <td><%=Event.find(s.event_id).location.name %></td>
           <td><%=s.start_time %></td>
           <td><%=s.end_time %></td>
           <%if policy(@team).change? %>
@@ -66,11 +66,16 @@
   </table>
 </div>
 
-<div>
-  <%=link_to "Invite Members", controller: "teams", action: "invite", id: @team.id %>
-</div>
-
-<div>
-  <%=link_to "Register for events as a team", controller: "registrations", action: "index", part_id: @team.participant.id %>
-</div>
+<%if policy(@team).change? %>
+  <div>
+    <%=link_to "Invite Members", controller: "teams", action: "invite", id: @team.id %>
+  </div>
+  <%if @team.students.count > 1 %>
+    <div>
+      <%=link_to("Register for events as a team", controller: "registrations", action: "index", part_id: @team.participant.id)%>
+    </div>
+  <%else %>
+    <p>You have to have at least two members to register for an event as a team.</p>
+  <%end %>
+<%end %>
 

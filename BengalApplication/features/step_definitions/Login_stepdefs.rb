@@ -92,7 +92,7 @@ end
 
 Then("Coordinator logs in successfully") do
   # should go to coordinator page
-  expect(page).to have_content("Coordinator #{@coordinator.name}")
+  expect(page).to have_content("coordinator@gmail.com")
 end
 
 

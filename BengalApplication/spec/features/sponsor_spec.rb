@@ -25,40 +25,42 @@ RSpec.feature "Sponsors", type: :feature do
     end
   end
 
-  context "update sponsor" do
-   before do
-     @sponsor = Sponsor.create(name: "Daniel", user_attributes: {email: "s@gmail.com", password: "password"})
-   end
-    scenario "should be successful" do
-      login_as(@sponsor.user)
-     visit edit_sponsor_path(@sponsor)
-      within("form")do
-       fill_in "Name", with: "Jane"
-       fill_in "sponsor[email]", with: "sup@gmail.com"
-       fill_in "sponsor[password]", with: "password23"
-      end
-      click_button 'Update'
-      expect(page).to have_content("Successfully updated")
-    end
+  # Will not be implemented
+  # context "update sponsor" do
+  #  before do
+  #    @sponsor = Sponsor.create(name: "Daniel", user_attributes: {email: "s@gmail.com", password: "password"})
+  #  end
+  #   scenario "should be successful" do
+  #     login_as(@sponsor.user)
+  #    visit edit_sponsor_path(@sponsor)
+  #     within("form")do
+  #      fill_in "Name", with: "Jane"
+  #      fill_in "sponsor[email]", with: "sup@gmail.com"
+  #      fill_in "sponsor[password]", with: "password23"
+  #     end
+  #     click_button 'Update'
+  #     expect(page).to have_content("Successfully updated")
+  #   end
+  #
+  #   scenario "should fail" do
+  #     login_as(@sponsor.user)
+  #     visit edit_sponsor_path(@sponsor)
+  #    within("form") do
+  #      fill_in "Name", with: ""
+  #     end
+  #     click_button "Update"
+  #     expect(page).to have_content "Name can't be blank"
+  #   end
+  # end
 
-    scenario "should fail" do
-      login_as(@sponsor.user)
-      visit edit_sponsor_path(@sponsor)
-     within("form") do
-       fill_in "Name", with: ""
-      end
-      click_button "Update"
-      expect(page).to have_content "Name can't be blank"
-    end
-  end
-
-  context "destroy sponsor" do
-   scenario "should be successful" do
-     @sponsor = Sponsor.create(name: "Dan", user_attributes: {email: "e@gmail.com", password: "password"})
-     @coordinator = Coordinator.create(name: "Coordinator", user_attributes: {emaiL: "c@gamil.com", password: "password"})
-     visit coordinator_path(@coordinator)
-      click_link "Delete"
-      expect(page).to have_content "Sponsor was successfully deleted"
-    end
-  end
+  # Not yet implemented
+  # context "destroy sponsor" do
+  #  scenario "should be successful" do
+  #    @sponsor = Sponsor.create(name: "Dan", user_attributes: {email: "e@gmail.com", password: "password"})
+  #    @coordinator = Coordinator.create(name: "Coordinator", user_attributes: {emaiL: "c@gamil.com", password: "password"})
+  #    visit coordinator_path(@coordinator)
+  #     click_link "Delete"
+  #     expect(page).to have_content "Sponsor was successfully deleted"
+  #   end
+  # end
 end

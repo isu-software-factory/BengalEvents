@@ -13,17 +13,20 @@ Given("Team member is at team page") do
   @student2.save
   @sponsor = Sponsor.create(name: "sponsor", user_attributes: {email: "sponsor@gmail.com", password: "password"})
   @coordinator = Coordinator.create(name:"coord", user_attributes: {email: "coordinaotr@gmail.com", password: "password"})
-  @occasion = @coordinator.occasions.build(name: "BengalEvents", start_date: Time.now, end_date: Time.now)
+  @occasion = @coordinator.occasions.build(name: "BengalEvents", start_date: Time.now, end_date: Time.now, description: "Stem Day")
   @occasion.save
-  @event = @sponsor.events.build(location: "Gym", name: "Robotics", description: "great")
+  @location = @occasion.locations.build(name: "Gym")
+  @location.save
+  @event = @sponsor.events.build(name: "Robotics", description: "great")
   @event.occasion = @occasion
+  @event.location = @location
   @event.save
-  @event_detail = @event.event_details.build(start_time: @time1, end_time: @time2, capacity: 23)
+  @event_detail = @event.event_details.build(start_time: @time1, end_time: @time2, capacity: 23, date_started: @occasion.start_date)
   @event_detail.save
-  @team = Team.create(name: "Tigers", participant_attributes: {})
+  @team = Team.create(name: "Tigers", lead: @student.id, participant_attributes: {})
   @team.lead = @student.id
-  @team.students << @student
-  @team.students << @student2
+  @team.register_member(@student)
+  @team.register_member(@student2)
 
   # Register team for event
   @team.participant.event_details << @event_detail
@@ -42,7 +45,7 @@ Then("Team member can see team's registered schedule for events") do
   # end time
   expect(page).to have_content(@time2)
   # location
-  expect(page).to have_content(@event.location)
+  expect(page).to have_content(@event.location.name)
   # description
   expect(page).to have_content(@event.description)
 end

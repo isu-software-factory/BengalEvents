@@ -17,9 +17,11 @@ end
 
 
 Given("Sponsor is already signed in and goes to occasions page") do
-  @coordinator = Coordinator.create(name: "Sam", user_attributes: {email: "c@gmail.com", password: "password"})
-  @occasion = @coordinator.occasions.build(name: "BengalEvents", start_date: Time.now, end_date: Time.now)
+  @coordinator = Coordinator.create(name:"coord", user_attributes: {email: "coordinaotr@gmail.com", password: "password"})
+  @occasion = @coordinator.occasions.build(name: "BengalEvents", start_date: Time.now, end_date: Time.now, description: "Stem Day")
   @occasion.save
+  @location = @occasion.locations.build(name: "Gym")
+  @location.save
   # create sponsor
   @sponsor = Sponsor.create(name: "Ben", user_attributes: {email: "s@gmail.com", password: "password"})
   # sign in and go to sponsor page
@@ -31,7 +33,7 @@ When("Sponsor clicks to create an event") do
   # click link to go to events
   click_link("Go to Events")
   click_link("Show")
-  click_link("Create an Event")
+  click_link("Create an event")
 end
 
 Then("Sponsor is redirected to create an event without having to login") do
@@ -39,11 +41,15 @@ Then("Sponsor is redirected to create an event without having to login") do
 end
 
 Given("Teacher is already signed in") do
-  @coordinator = Coordinator.create(name: "Sam", user_attributes: {email: "c@gmail.com", password: "password"})
-  @occasion = @coordinator.occasions.build(name: "BengalEvents", start_date: Time.now, end_date: Time.now)
+  @sponsor = Sponsor.create(name: "sponsor", user_attributes: {email: "sponsor@gmail.com", password: "password"})
+  @coordinator = Coordinator.create(name:"coord", user_attributes: {email: "coordinaotr@gmail.com", password: "password"})
+  @occasion = @coordinator.occasions.build(name: "BengalEvents", start_date: Time.now, end_date: Time.now, description: "Stem Day")
   @occasion.save
-  @sponsor = Sponsor.create(name: "Ben", user_attributes: {email: "s@gmail.com", password: "password"})
-  @event = @sponsor.events.build(location: "Gym", name: "Robotics", description: "great")
+  @location = @occasion.locations.build(name: "Gym")
+  @location.save
+  @event = @sponsor.events.build(name: "Robotics", description: "great")
+  @event.occasion = @occasion
+  @event.location = @location
   @event.save
   @event_detail = @event.event_details.build(start_time: Time.now, end_time: Time.now, capacity: 23)
   @event_detail.save
@@ -61,18 +67,21 @@ When("Teacher clicks registration link") do
 end
 
 Then("Teacher is redirected to register without having to login") do
-  expect(page).to have_content("Event Time Slots")
+  expect(page).to have_content("Events")
 end
 
 Given("Student is already signed in") do
-  @coordinator = Coordinator.create(name: "Sam", user_attributes: {email: "c@gmail.com", password: "password"})
-  @occasion = @coordinator.occasions.build(name: "BengalEvents", start_date: Time.now, end_date: Time.now)
+  @sponsor = Sponsor.create(name: "sponsor", user_attributes: {email: "sponsor@gmail.com", password: "password"})
+  @coordinator = Coordinator.create(name:"coord", user_attributes: {email: "coordinaotr@gmail.com", password: "password"})
+  @occasion = @coordinator.occasions.build(name: "BengalEvents", start_date: Time.now, end_date: Time.now, description: "Stem Day")
   @occasion.save
-  @sponsor = Sponsor.create(name: "Ben", user_attributes: {email: "s@gmail.com", password: "password"})
-  @event = @sponsor.events.build(location: "Gym", name: "Robotics", description: "great")
+  @location = @occasion.locations.build(name: "Gym")
+  @location.save
+  @time_slot = @location.time_slots.build(start_time: Time.now, end_time: Time.now, interval: 60)
+  @event = @sponsor.events.build(name: "Robotics", description: "great")
+  @event.occasion = @occasion
+  @event.location = @location
   @event.save
-  @event_detail = @event.event_details.build(start_time: Time.now, end_time: Time.now, capacity: 23)
-  @event_detail.save
   # create teacher
   @teacher = Teacher.create(chaperone_count: 3, student_count: 23, school: "valley", name: "teacher", user_attributes: {email: "t@gmail.com", password: "password"}, participant_attributes: {})
   # create student
@@ -90,5 +99,5 @@ When("Student clicks registration link") do
 end
 
 Then("Student is redirected to register without having to login") do
-  expect(page).to have_content("Event Time Slots")
+  expect(page).to have_content("Events")
 end
