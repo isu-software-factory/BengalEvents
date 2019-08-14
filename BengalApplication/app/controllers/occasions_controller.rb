@@ -26,6 +26,7 @@ class OccasionsController < ApplicationController
   end
 
   def show
+    @location = Location.all
     @occasion = Occasion.find(params[:id])
     authorize @occasion
   end

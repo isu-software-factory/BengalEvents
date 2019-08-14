@@ -21,9 +21,11 @@
 </table>
 
 <%= render @occasion.locations %>
-<p>
-  <%= link_to "Add Location", new_occasion_location_path(@occasion, @location) %>
-</p>
+<% if policy(@location).new? %>
+  <p>
+    <%= link_to "Add Location", new_occasion_location_path(@occasion, @location) %>
+  </p>
+<% end %>
 <br>
 
 <h2>List of Events</h2>
