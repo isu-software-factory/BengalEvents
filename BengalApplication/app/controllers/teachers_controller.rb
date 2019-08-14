@@ -19,6 +19,14 @@ class TeachersController < ApplicationController
 
   def show
     @teacher = Teacher.find(params[:id])
+    respond_to do |format|
+      format.html
+      format.pdf do
+        doc = Prawn::Document.generate("test.pdf") do
+          text "Hello World"
+        end
+      end
+    end
   end
 
   def edit
@@ -29,7 +37,7 @@ class TeachersController < ApplicationController
   def update
     @teacher = Teacher.find(params[:id])
     authorize @teacher
-    if @teacher.update_attributes(user_params)
+    if @teacher.update_attributes(teacher_params)
       redirect_to @teacher
     else
       render 'edit'
@@ -49,6 +57,5 @@ class TeachersController < ApplicationController
   def teacher_params
     params.require(:teacher).permit(:school, :name, :student_count, :chaperone_count, user_attributes: [:id, :email, :password, :password_confirmation])
   end
-
 
 end
