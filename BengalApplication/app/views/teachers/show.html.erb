@@ -10,17 +10,21 @@
   <tr>
     <th>Name</th>
     <th>Email</th>
+    <th>Registered</th>
   </tr>
   </thead>
 <% @teacher.students.each do |s| %>
     <tr>
-      <td><%=s.name %></td>
+      <td><%= link_to s.name, s %></td>
       <td><%=s.user.email %></td>
+      <td><%= Registration.exists?(s.participant.id) %></td>
     </tr>
   <% end %>
 </table>
+<div><%= link_to "Add Students", new_student_path %></div>
 
 <h2>Registration Details</h2>
+<% if Registration.exists?(@teacher.participant.id) %>
 <table>
   <thead>
   <tr>
@@ -28,6 +32,7 @@
     <th>Description</th>
     <th>Start Time</th>
     <th>End Time</th>
+    <th>Remove</th>
   </tr>
 
   </thead>
@@ -37,10 +42,14 @@
       <td><%=Event.find(s.event_id).description %></td>
       <td><%=s.start_time %></td>
       <td><%=s.end_time %></td>
+      <td><%=button_to "Drop",  method: :post, controller: "registrations", action: :drop, part_id: m.id, id: @team.id%></td>
     </tr>
   <% end %>
 </table>
-<%= link_to "Add Students", new_student_path %>
+  <% else %>
+  <p>You haven't registered for anything yet!</p>
+  <% end %>
 <div>
 <%=link_to "Register for events", controller: "registrations", action: "index", part_id: @teacher.participant.id %>
 </div>
+<div><%= link_to "Edit Account Details", controller: "teachers", action: "edit" %></div>

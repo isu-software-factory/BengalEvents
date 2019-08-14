@@ -14,6 +14,18 @@
 <% end %>
 <%= link_to "Return Home", @teacher %>
 
+<% if @student.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@student.errors.count, "error") %> prohibited this post from being saved:</h2>
+
+    <ul>
+      <% @student.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
 <table>
   <thead>
   <tr>
