@@ -21,7 +21,7 @@ class Occasion < ApplicationRecord
   validate :end_must_be_after_start
 
   def end_must_be_after_start
-    if self.start_date >= self.end_date
+    if self.start_date > self.end_date
       errors.add(:end_time, "must be after start time")
     end
   end
