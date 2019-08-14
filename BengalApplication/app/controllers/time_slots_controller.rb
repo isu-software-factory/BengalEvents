@@ -11,9 +11,11 @@ class TimeSlotsController < ApplicationController
     @time_slot = TimeSlot.new
   end
 
+
+
   def create
     @time_slot = @location.time_slots.new(time_slots_params)
-    # @time_slot.location = @location
+    authorize @time_slot
     if @time_slot.save
       redirect_to occasion_location_path(@occasion, @location)
     else
@@ -24,6 +26,7 @@ class TimeSlotsController < ApplicationController
 
   def destroy
     @time_slot.destroy
+    authorize @time_slot
     redirect_to occasion_location_path(@occasion, @location)
   end
 

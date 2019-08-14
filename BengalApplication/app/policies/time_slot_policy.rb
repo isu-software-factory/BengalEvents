@@ -10,6 +10,12 @@ class TimeSlotPolicy < ApplicationPolicy
     user.meta_type == "Coordinator" || user.meta_type == "Admin"
   end
 
+  def update?
+    # Only Coordinator can create the TimeSlot
+    user.meta_type == "Coordinator" || user.meta_type == "Admin"
+  end
+
+
   def destroy?
     # Only Coordinator can destroy the TimeSlot
     user.meta_type == "Coordinator"

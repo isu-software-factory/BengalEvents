@@ -19,7 +19,13 @@ class EventDetail < ApplicationRecord
   validates_uniqueness_of :start_time, :end_time
   validates :capacity, presence: true
   validates :date_started, presence: true
+  validate :end_must_be_after_start
 
+  def end_must_be_after_start
+    if self.start_time >= self.end_time
+      errors.add(:end_time, "must be after start time")
+    end
+  end
 # register participant to event detail
 # Makes sure that participant isn't already registered and that the capacity is zero
   def register_participant(participant)
