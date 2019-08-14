@@ -15,6 +15,13 @@ class TeamPolicy < ApplicationPolicy
     @user.meta_type == "Student" && record.students.include?(user.meta)
   end
 
+  def drop?
+    # only a team lead can delete a member
+    if @user.meta_type == "Student"
+      @user.meta == record.get_lead
+    end
+  end
+
   def create?
     # only a student can create a team
     @user.meta_type == "Student"

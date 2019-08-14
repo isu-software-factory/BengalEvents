@@ -11,7 +11,7 @@ RSpec.feature "Sponsors", type: :feature do
         fill_in 'sponsor[user_attributes][password_confirmation]', with: "password"
       end
       click_button 'Confirm'
-      expect(page).to have_content("Go to Events")
+      expect(page).to have_content("Welcome, Daniel")
     end
 
     scenario "should fail" do
@@ -19,41 +19,46 @@ RSpec.feature "Sponsors", type: :feature do
       within('form') do
         fill_in "sponsor[name]", with: 'Daniel'
         fill_in "sponsor[user_attributes][password]", with: "password"
-        click_button "Confirm"
-        expect(page).to have_content("Name")
       end
+        click_button "Confirm"
+        expect(page).to have_content("User email can't be blank")
     end
   end
 
-  #context "update sponsor" do
-   # let!(:sponsor) {Student.create}
-    #scenario "should be successful" do
-     # visit edit_sponsor_path(sponsor)
-      #within("form")do
-       # fill_in "Name", with: "Wendell"
-        #fill_in "sponsor[email]", with: "sup@gmail.com"
-        #fill_in "sponsor[password]", with: "password23"
+  context "update sponsor" do
+   before do
+     @sponsor = Sponsor.create(name: "Daniel", user_attributes: {email: "s@gmail.com", password: "password"})
+   end
+    scenario "should be successful" do
+      login_as(@sponsor.user)
+     visit edit_sponsor_path(@sponsor)
+      within("form")do
+       fill_in "Name", with: "Jane"
+       fill_in "sponsor[email]", with: "sup@gmail.com"
+       fill_in "sponsor[password]", with: "password23"
+      end
+      click_button 'Update'
+      expect(page).to have_content("Successfully updated")
+    end
 
-      #end
-      #click_button 'Update'
-      #expect(page).to have_content("Successfully updated")
-    #end
+    scenario "should fail" do
+      login_as(@sponsor.user)
+      visit edit_sponsor_path(@sponsor)
+     within("form") do
+       fill_in "Name", with: ""
+      end
+      click_button "Update"
+      expect(page).to have_content "Name can't be blank"
+    end
+  end
 
-    #scenario "should fail" do
-     # within('form') do
-       # fill_in "Name", with: ""
-      #end
-      #click_button "Update"
-      #expect(page).to have_content "Name can't be blank"
-    #end
-  #end
-
-  #context "destroy sponsor" do
-   # scenario "should be successful" do
-    #  sponsor = Student.create
-     # visit sponsor_path(sponsor)
-      #click_link "Delete"
-      #expect(page).to have_content "Student was successfully deleted"
-    #end
-  #end
+  context "destroy sponsor" do
+   scenario "should be successful" do
+     @sponsor = Sponsor.create(name: "Dan", user_attributes: {email: "e@gmail.com", password: "password"})
+     @coordinator = Coordinator.create(name: "Coordinator", user_attributes: {emaiL: "c@gamil.com", password: "password"})
+     visit coordinator_path(@coordinator)
+      click_link "Delete"
+      expect(page).to have_content "Sponsor was successfully deleted"
+    end
+  end
 end

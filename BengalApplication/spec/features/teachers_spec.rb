@@ -25,6 +25,8 @@ RSpec.feature "Teachers", type: :feature do
     scenario "should fail" do
       click_button "Confirm"
       expect(page).to have_content("Student count can't be blank")
+      expect(page).to have_content("User email can't be blank")
+      expect(page).to have_content("User password can't be blank")
     end
   end
 
@@ -57,8 +59,9 @@ RSpec.feature "Teachers", type: :feature do
   context "destroy teacher" do
    scenario "should be successful" do
      @teacher = Teacher.create(school: "Valley", chaperone_count: 23, student_count: 232, name: "Sally", user_attributes: {email: "t@gmail.com", password: "password"})
-     login_as(@teacher.user, :scope => :user)
-     visit teacher_path(@teacher)
+     @coordinator = Coordinator.create(name: "Sally", user_attributes: {email: "coordinator@gmail.com", password: "password"})
+     login_as(@coordinator.user, :scope => :user)
+     visit coordinator_path(@coordinator)
       click_link "Delete"
       expect(page).to have_content "Teacher was successfully deleted"
     end

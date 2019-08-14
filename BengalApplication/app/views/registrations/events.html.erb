@@ -26,6 +26,7 @@
       </thead>
       <tr>
         <td><%=e.name %></td>
+        <td><%=e.location.name %></td>
         <td><%=e.description %></td>
       </tr>
       <thead>
@@ -42,7 +43,7 @@
           <td><%=ed.capacity %></td>
           <td><%= ed.start_time %></td>
           <td><%= ed.end_time %></td>
-          <td><%=link_to "Register", controller: "registrations", action: "register", part_id: @participant_id, id:ed.id, id: "register" %></td>
+          <td><%=link_to "Register", controller: "registrations", action: "register", part_id: @participant_id, id:ed.id %></td>
         </tr>
       <%end %>
       </tbody>

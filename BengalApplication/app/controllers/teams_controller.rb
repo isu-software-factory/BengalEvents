@@ -57,8 +57,8 @@ class TeamsController < ApplicationController
       @team.students << @student
       redirect_to @team
     else
-      redirect_to @student
-      flash[:notice] = "Couldn't create a team."
+      flash[:notice] = @team.errors.full_messages
+      render :new
     end
   end
 

@@ -15,23 +15,10 @@ SimpleCov.start
 # the additional setup, and require it from the spec files that actually need
 # it.
 Selenium::WebDriver::Chrome.driver_path = "C:\\Ruby25-x64\\bin\\chromedriver.exe"
-# Capybara.register_driver :selenium do |app|
-#   Capybara::Selenium::Driver.new(app, browser: :chrome)
-# end
-
-# # Capybara.register_driver :headless_chrome do |app|
-# #   capabilities = Selenium::WebDriver::Remote::Capabilities.chrome(chromeOptions:{
-# #       args: %w[headless enable-features=NetworkService,NetworkServiceInProcess]
-# #   })
-# #   Capybara::Selenium::Driver.new app,
-# #     browser: :chrome,
-# #     desired_cappabilities: capabilities
-# # end
-# #
-# Capybara.default_driver = :chrome
-#  Capybara.javascript_driver = :chrome
+Capybara.default_driver = :selenium_chrome
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|
+
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest
   # assertions if you prefer.

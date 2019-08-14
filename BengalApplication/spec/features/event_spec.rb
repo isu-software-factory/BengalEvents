@@ -97,17 +97,13 @@ RSpec.feature "Events", type: :feature do
     end
 
     scenario "should be successful" do
-      Capybara.current_driver = :selenium_chrome
-      Capybara.default_max_wait_time = 10
       login_as(@sponsor.user, :scope => :user)
       visit occasion_path(@occasion.id)
       #click destroy
-      click_link("Delete")
+      expect(Event.count).to eq(1)
+      click_link "Delete"
       page.driver.browser.switch_to.alert.accept
-      # accept_confirm do
-      #   click_link("Delete")
-      #   #expect{click_link 'Destroy'}.to change(Event, :count).by(-1)
-      # end
+      expect(Event.count).to eq(0)
       expect(page).to have_content "Event was successfully deleted"
     end
   end
