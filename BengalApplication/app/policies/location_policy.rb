@@ -13,7 +13,6 @@ class LocationPolicy < ApplicationPolicy
   def update?
     # Only Coordinator can update the Location
     user.meta_type == "Coordinator" || user.meta_type == "Admin"
-
   end
 
   def create?

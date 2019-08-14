@@ -15,6 +15,6 @@ class Location < ApplicationRecord
   has_many :time_slots, dependent: :destroy
   has_many :events
 
-  validates :name, presence: true
+  validates :name, uniqueness: true, presence: true
 end
 

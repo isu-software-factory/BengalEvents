@@ -13,7 +13,7 @@ class TimeSlotsController < ApplicationController
 
   def create
     @time_slot = @location.time_slots.new(time_slots_params)
-    # @time_slot.location = @location
+    authorize @time_slot
     if @time_slot.save
       redirect_to occasion_location_path(@occasion, @location)
     else

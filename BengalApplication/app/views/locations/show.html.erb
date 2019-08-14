@@ -1,5 +1,3 @@
 <%= render @location.time_slots %>
-<% if policy(@location).create? %>
-  <p><%= link_to "Create Time Slots", new_occasion_location_time_slot_path(@occasion, @location) %></p>
-<% end %>
+<p><%= link_to "Create Time Slots", new_occasion_location_time_slot_path(@occasion, @location) %></p>
 <p><%= link_to "Go Back", occasion_path(@occasion) %></p>

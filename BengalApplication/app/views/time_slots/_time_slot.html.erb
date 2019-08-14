@@ -18,9 +18,11 @@
     <td><%= time_slot.interval %></td>
     <td><%= time_slot.start_time.strftime("%H:%M %p") %></td>
     <td><%= time_slot.end_time.strftime("%H:%M %p") %></td>
-    <td>
-      <%= link_to "Delete", occasion_location_time_slot_path(@occasion, @location, time_slot), method: :delete, data: {confirm: "Are you sure?"} %>
-    </td>
+    <% if policy(time_slot).destroy? %>
+      <td>
+        <%= link_to "Delete", occasion_location_time_slot_path(@occasion, @location, time_slot), method: :delete, data: {confirm: "Are you sure?"} %>
+      </td>
+    <% end %>
   </tr>
   </tbody>
 </table>
