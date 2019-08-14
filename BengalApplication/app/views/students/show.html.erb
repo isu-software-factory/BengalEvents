@@ -8,6 +8,7 @@
 <%= link_to "Create Team", new_team_path%>
 
 <h2>Registration Details</h2>
+<% if Registration.exists?(@student.participant.id)%>
 <table>
   <thead>
   <tr>
@@ -25,11 +26,14 @@
       <td><%=Event.find(s.event_id).description %></td>
       <td><%=s.location %></td>
       <td><%=s.start_time %></td>
-      <td><%=s.end_time %></td>
     </tr>
   <% end %>
 </table>
+  <% else %>
+  <p>You haven't registered for anything yet!</p>
+  <% end %>
 
+<% if Grouping.exists?(@student.participant.id) %>
 <h2>My Teams</h2>
 <table>
   <thead>
@@ -47,3 +51,4 @@
     <%end %>
   </tbody>
 </table>
+<% end %>

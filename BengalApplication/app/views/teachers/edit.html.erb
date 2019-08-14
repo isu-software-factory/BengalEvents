@@ -1,0 +1,53 @@
+<h1>Edit Account</h1>
+<%=form_for @teacher do |f| %>
+
+  <div class="row">
+    <div class="column">  <%=f.label :name, "Teacher Name" %>
+    </div>
+    <div class="column"> <%=f.text_field(:name )%>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column"> <%=f.label :school, "School Name" %>
+    </div>
+    <div class="column"> <%=f.text_field(:school )%>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column"> <%=f.label :chaperone_count, "Expected Number of Chaperones" %>
+    </div>
+    <div class="column"> <%=f.text_field(:chaperone_count )%>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column"><%=f.label :student_count, "Expected Number of Students" %>
+    </div>
+    <div class="column"><%=f.text_field(:student_count )%>
+    </div>
+  </div>
+  <%=f.fields_for :user do |u| %>
+
+    <div class="row">
+      <div class="column"> <%=u.label :email %>
+      </div>
+      <div class="column"> <%=u.email_field :email %>
+      </div>
+    </div>
+  <%end %>
+  <div class="actions"><%=submit_tag "Confirm", class: "button" %></div>
+<%end %>
+
+<% if @teacher.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@teacher.errors.count, "error") %> prohibited this post from being saved:</h2>
+
+    <ul>
+      <% @teacher.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>

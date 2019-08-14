@@ -2,9 +2,9 @@ class StudentsController < ApplicationController
   before_action :prepare_teacher, only: [:new, :create]
   before_action :authenticate_user!, except: :new
 
-  # def index
-  #   @students = Student.where("teacher_id = ?", params[:teacher_id])
-  # end
+   def index
+     @students = Student.where("teacher_id = ?", params[:teacher_id])
+   end
 
   def show
     @student = Student.find(params[:id])
@@ -27,10 +27,8 @@ class StudentsController < ApplicationController
     Participant.create(member: @student)
     if @student.save
       UserMailer.login_email(@student, @student.user, random_password).deliver_now
-      render 'new'
-    else
-      redirect_to root_path
     end
+    render 'new'
   end
 
   def edit
