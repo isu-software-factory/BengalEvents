@@ -1,28 +1,69 @@
-<% unless current_user.meta.occasions.present? %>
-  <p> There are no Occasions under you. Go to Home Page to create an Occasion.</p>
-<% end %>
+<%# unless current_user.meta.occasions.present? %>
+<!--  <p> There are no Occasions under you. Go to Home Page to create an Occasion.</p>-->
+<%# end %>
 
-<% if current_user.meta.occasions.any? %>
-  <h3>Occasion (<%= current_user.meta.occasions.count %>)</h3>
-  <br>
-  <table>
-    <thead>
+<%# if current_user.meta.occasions.any? %>
+<!--  <h3>Occasion (<%#= current_user.meta.occasions.count %>)</h3>-->
+<!--  <br>-->
+<!--  <table>-->
+<!--    <thead>-->
+<!--    <tr>-->
+<!--      <th>Occasion Name</th>-->
+<!--      <th>Start Date</th>-->
+<!--      <th>End Date</th>-->
+<!--    </tr>-->
+<!--    </thead>-->
+<!--    <tbody>-->
+    <%# current_user.meta.occasions.each do |o| %>
+<!--      <tr>-->
+<!--        <td><%#= o.name %></td>-->
+<!--        <td><%#= o.start_date.to_date %></td>-->
+<!--        <td><%#= o.end_date.to_date %></td>-->
+<!--      </tr>-->
+    <%# end %>
+<!--    </tbody>-->
+<!--  </table>-->
+<%# end %>
+
+<%#= link_to "Occasion Home Page", occasions_path %>
+<% content_for :title, "Occasions" %>
+<%# if signed_in? %>
+<h1>Occasions</h1>
+
+<table>
+  <thead>
+  <tr>
+    <th>Name</th>
+    <th>Description</th>
+    <th>Start Date</th>
+    <th>End Date</th>
+    <th>Actions</th>
+    <th>Created By</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @occasions.each do |occasion| %>
     <tr>
-      <th>Occasion Name</th>
-      <th>Start Date</th>
-      <th>End Date</th>
+      <td><%= occasion.name %></td>
+      <td><%= occasion.description %></td>
+      <td><%= occasion.start_date.strftime("%Y-%m-%d") %></td>
+      <td><%= occasion.end_date.strftime("%Y-%m-%d") %></td>
+      <td>
+        <%= link_to "Show", occasion_path(occasion.id) %>
+        <% if policy(occasion).edit? %>
+          <%= link_to "Edit", edit_occasion_path(occasion.id) %>
+        <% end %>
+        <% if policy(occasion).destroy? %>
+          <%= link_to "Delete", occasion_path(occasion.id), data: {method: :delete, confirm: "Are you sure?"} %>
+        <% end %>
+      </td>
+      <td><%= occasion.coordinator.user.email %></td>
+      <%# end %>
     </tr>
-    </thead>
-    <tbody>
-    <% current_user.meta.occasions.each do |o| %>
-      <tr>
-        <td><%= o.name %></td>
-        <td><%= o.start_date.to_date %></td>
-        <td><%= o.end_date.to_date %></td>
-      </tr>
-    <% end %>
-    </tbody>
-  </table>
+  <% end %>
+  </tbody>
+</table>
+<!--Event creation leading to another page-->
+<% if policy(@occasions).create? %>
+  <%= link_to "Create New Occasion", new_occasion_path %>
 <% end %>
-
-<%= link_to "Occasion Home Page", occasions_path %>
