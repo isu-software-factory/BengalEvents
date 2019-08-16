@@ -115,9 +115,11 @@ RSpec.feature "Registrations", type: :feature do
     it "should successfully remove participant from event" do
       login_as(@teacher.user)
       visit "teachers/#{@teacher.id}"
+      expect(page).to have_content("Robotics")
+
       click_button "Drop"
       page.driver.browser.switch_to.alert.accept
-      expect(@teacher.participant.event_details.count).to eq(0)
+      expect(page).not_to have_content("Robotics")
     end
   end
 end

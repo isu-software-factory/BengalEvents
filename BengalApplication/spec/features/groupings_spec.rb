@@ -44,10 +44,12 @@ RSpec.feature "Groupings", type: :feature do
     end
     it "should successfully drop a student" do
       login_as(@student.user)
-      expect(@team.students.count).to eq(2)
       visit "teams/#{@team.id}"
+      expect(page).to have_content("Bill")
+
       click_button "Drop"
-      expect(@team.students.count).to eq(1)
+      page.driver.browser.switch_to.alert.accept
+      expect(page).not_to have_content("Bill")
       expect(page).to have_content("Team #{@team.name}")
     end
   end

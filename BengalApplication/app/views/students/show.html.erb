@@ -26,6 +26,7 @@
       <td><%=Event.find(s.event_id).description %></td>
       <td><%=Event.find(s.event_id).location.name %></td>
       <td><%=s.start_time %></td>
+      <td><%=button_to("Drop",  {method: :post, controller: "registrations", action: :drop, part_id: @student.participant.id, id:s.id}, data: {confirm: "Are you sure?"})%></td>
     </tr>
   <% end %>
 </table>

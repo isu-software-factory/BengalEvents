@@ -4,7 +4,6 @@ class SponsorsController < ApplicationController
   def new
     @sponsor = Sponsor.new
     @sponsor.build_user
-    authorize @sponsor
   end
 
   def create

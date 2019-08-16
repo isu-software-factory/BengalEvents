@@ -12,7 +12,7 @@
       Then Team will have 4 members
 
     Scenario: Invited 5 members to join team
-      Given Team lead invites 4 members
+      Given Team lead invites four members
       And Team lead goes to invite team page
       When Team lead fills out one email and sends invite
       And Member clicks join link

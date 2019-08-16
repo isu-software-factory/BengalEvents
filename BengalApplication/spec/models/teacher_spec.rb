@@ -44,7 +44,7 @@ RSpec.describe Teacher, type: :model do
       Participant.create(member: @teacher)
       @sponsor = Sponsor.create(name: "sponsor", user_attributes: {email: "sponsor@gmail.com", password: "password"})
       @coordinator = Coordinator.create(name:"coord", user_attributes: {email: "coordinaotr@gmail.com", password: "password"})
-      @occasion = @coordinator.occasions.build(name: "BengalEvents", start_date: Time.now, end_date: Time.now)
+      @occasion = @coordinator.occasions.build(name: "BengalEvents", start_date: Time.now, end_date: Time.now, description: "Events")
       @occasion.save
       @location = @occasion.locations.build(name: "Gym")
       @location.save

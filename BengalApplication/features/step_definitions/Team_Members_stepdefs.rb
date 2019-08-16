@@ -45,30 +45,64 @@ end
 
 
 
-Given("Team lead invites {int} members") do |int|
-  pending # Write code here that turns the phrase above into concrete actions
+Given("Team lead invites four members") do
+  # create student, teacher, team,
+  @teacher = Teacher.create(chaperone_count: 3, student_count: 23, school: "valley", name: "teacher", user_attributes: {email: "t@gmail.com", password: "password"}, participant_attributes: {})
+  @student = @teacher.students.build(name: "Ben", user_attributes: {email: "ben@gmail.com", password: "password"}, participant_attributes: {})
+  @student.save
+  @student2 = @teacher.students.build(name: "Bill", user_attributes: {email: "bill@gmail.com", password: "password"}, participant_attributes: {})
+  @student2.save
+  @student3 = @teacher.students.build(name: "Bob", user_attributes: {email: "bob@gmail.com", password: "password"}, participant_attributes: {})
+  @student3.save
+  @student4 = @teacher.students.build(name: "sam", user_attributes: {email: "sam@gmail.com", password: "password"}, participant_attributes: {})
+  @student4.save
+  @student5 = @teacher.students.build(name: "Tim", user_attributes: {email: "Tim@gmail.com", password: "password"}, participant_attributes: {})
+  @student5.save
+  @team = Team.create(name: "Tigers", lead: @student.id, participant_attributes: {})
+  @team.lead = @student.id
+  @team.register_member(@student)
+  @team.register_member(@student2)
+  @team.register_member(@student3)
+  @team.register_member(@student4)
 end
 
 Given("Team lead goes to invite team page") do
-  pending # Write code here that turns the phrase above into concrete actions
+  # login and go to team invite page
+  login_as(@student.user)
+  visit "teams/#{@team.id}/invite"
 end
 
 When("Team lead fills out one email and sends invite") do
-  pending # Write code here that turns the phrase above into concrete actions
+  within("form") do
+    fill_in "email1", with: @student5.user.email
+  end
+  click_button "Invite"
 end
 
 When("Member clicks join link") do
-  pending # Write code here that turns the phrase above into concrete actions
+  open_email(@student5.user.email)
+  current_email.click_link "Join"
 end
 
 Then("Member will not be a part of team") do
-  pending # Write code here that turns the phrase above into concrete actions
+  expect(@student5.teams.count).to eq(0)
 end
 
+
 Given("Team lead is the only member") do
-  pending # Write code here that turns the phrase above into concrete actions
+  # create student, teacher, team,
+  @teacher = Teacher.create(chaperone_count: 3, student_count: 23, school: "valley", name: "teacher", user_attributes: {email: "t@gmail.com", password: "password"}, participant_attributes: {})
+  @student = @teacher.students.build(name: "Ben", user_attributes: {email: "ben@gmail.com", password: "password"}, participant_attributes: {})
+  @student.save
+  @team = Team.create(name: "Tigers", lead: @student.id, participant_attributes: {})
+  @team.lead = @student.id
+  @team.register_member(@student)
+
+  # login and go to team page
+  login_as(@student.user)
+  visit "teams/#{@team.id}"
 end
 
 Then("Team lead will not see register for events link") do
-  pending # Write code here that turns the phrase above into concrete actions
+  expect(page).not_to have_content("Register for events as a team")
 end

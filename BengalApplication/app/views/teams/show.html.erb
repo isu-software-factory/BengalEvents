@@ -24,7 +24,7 @@
         <%if m == @team.get_lead %>
           <td>Can't Drop Team Lead</td>
         <%else %>
-          <td><%=button_to "Drop",  method: :post, controller: "groupings", action: :drop, part_id: m.id, id: @team.id%></td>
+          <td><%=button_to("Drop",  {method: :post, controller: "groupings", action: :drop, part_id: m.id, id: @team.id}, data: {confirm: "Are you sure?"})%></td>
         <%end %>
       <%end %>
     </tr>
@@ -57,7 +57,7 @@
           <td><%=s.end_time %></td>
           <%if policy(@team).change? %>
             <td>
-              <%=button_to "Drop Event", controller: "registrations", action: :drop, part_id: @team.participant.id, id: s.id %>
+              <%=button_to("Drop Event", {controller: "registrations", part_id: @team.participant.id, id: s.id, action: :drop}, data: {confirm: "Are you sure?"}) %>
             </td>
           <%end %>
         </tr>

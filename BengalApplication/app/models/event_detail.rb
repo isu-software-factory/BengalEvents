@@ -22,8 +22,10 @@ class EventDetail < ApplicationRecord
   validate :end_must_be_after_start
 
   def end_must_be_after_start
-    if self.start_time >= self.end_time
-      errors.add(:end_time, "must be after start time")
+    if self.start_time != nil && self.end_time != nil
+      if self.start_time >= self.end_time
+        errors.add(:end_time, "must be after start time")
+      end
     end
   end
 # register participant to event detail

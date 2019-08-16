@@ -38,7 +38,7 @@ class TeachersController < ApplicationController
     @teacher = Teacher.find(params[:id])
     authorize @teacher
     if @teacher.update_attributes(teacher_params)
-      redirect_to @teacher
+      redirect_to @teacher, :notice => "Successfully updated"
     else
       render 'edit'
     end

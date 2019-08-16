@@ -25,7 +25,7 @@ RSpec.describe Occasion, type: :model do
       expect(occasion).to eq(false)
     end
     it "should be created successfully" do
-      occasion = @coordinator.occasions.build(name: "BengalEvent", end_date: Time.now, start_date: Time.now, description: "Events").save
+      occasion = @coordinator.occasions.build(name: "BengalEvent", start_date: Time.now, end_date: Time.now, description: "Events").save
       expect(occasion).to eq(true)
     end
   end
@@ -33,7 +33,7 @@ RSpec.describe Occasion, type: :model do
   context "association tests" do
     before do
       @coordinator = Coordinator.create(name: "coord", user_attributes: {email: "coord@gmail.com", password: "password"})
-      @occasion = @coordinator.occasions.build(name: "BengalEvent", end_date: Time.now, start_date: Time.now)
+      @occasion = @coordinator.occasions.build(name: "BengalEvent", start_date: Time.now, end_date: Time.now, description: "Events")
       @occasion.save
       @sponsor = Sponsor.create(name: "Sponsor", user_attributes: {email: "spon@gmail.com", password: "password"})
       @event = @sponsor.events.build(name: "robotics", description: "For people interesting in Robotics.")
@@ -52,6 +52,21 @@ RSpec.describe Occasion, type: :model do
       location = @occasion.locations.build(name: "Gym")
       location.save
       expect(@occasion.locations.first).to eq(location)
+    end
+  end
+  context "method tests" do
+    context "start_date_before_end_date method" do
+      before do
+        @coordinator = Coordinator.create(name: "coord", user_attributes: {email: "coord@gmail.com", password: "password"})
+      end
+      it "should fail to create occasion wrong date position" do
+        @occasion = @coordinator.occasions.build(name: "BengalEvents", end_date: Time.now, start_date: Time.now, description: "Events").save
+        expect(@occasion).to eq(false)
+      end
+      it "should successfully create occasion with right date position" do
+        @occasion = @coordinator.occasions.build(name: "BengalEvents", start_date: Time.now, end_date: Time.now, description: "Events").save
+        expect(@occasion).to eq(true)
+      end
     end
   end
 end

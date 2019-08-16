@@ -21,7 +21,7 @@ RSpec.feature "Homeroutes", type: :feature do
       login_as(@sponsor.user)
 
       visit "homeroutes/routes"
-      expect(page).to have_content("Occasion")
+      expect(page).to have_content("Welcome, #{@sponsor.name}")
     end
 
     it "routes teacher" do
