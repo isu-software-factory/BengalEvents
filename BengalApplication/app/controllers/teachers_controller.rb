@@ -11,7 +11,7 @@ class TeachersController < ApplicationController
     Participant.create(member: @teacher)
     if @teacher.save
       sign_in @teacher.user
-      redirect_to @teacher
+      redirect_to "/students/new"
     else
       render :new
     end

@@ -1,5 +1,5 @@
 class StudentsController < ApplicationController
-  before_action :prepare_teacher, only: [:new, :create]
+  before_action :prepare_teacher, only: [:new, :create, :student_emails, :student_names]
   before_action :authenticate_user!, except: :new
 
    def index
@@ -18,17 +18,15 @@ class StudentsController < ApplicationController
   end
 
   def create
-    @student = Student.new(student_params)
-    authorize @student
-    @teacher.students << @student
-    random_password = ('0'..'z').to_a.shuffle.first(8).join
-    @student.user.password = random_password
-    @student.user.password_confirmation = random_password
-    Participant.create(member: @student)
-    if @student.save
-      UserMailer.login_email(@student, @student.user, random_password).deliver_now
+    names = student_names
+    emails = student_emails
+    authorize Student
+
+    for each in 1..names.count do
+      # if an error occurs
+      success = create_students(names[each], emails[each])
     end
-    render 'new'
+    redirect_to teacher_path(@teacher.id)
   end
 
   private
@@ -37,8 +35,36 @@ class StudentsController < ApplicationController
     @teacher = Teacher.find(current_user.meta.id)
   end
 
-  def student_params
-    params.require(:student).permit(:name, user_attributes: [:email])
+  def student_names
+    names = []
+    for num in 1..@teacher.student_count do
+      names << params["name" + num.to_s]
+    end
+    names
   end
 
+  def student_emails
+    emails = []
+    for num in 1..@teacher.student_count do
+      emails << params["email" + num.to_s]
+    end
+    emails
+  end
+
+  def create_students(name, email)
+    @student = Student.new(name: name, user_attributes: {email: email}, participant_attributes: {})
+    @teacher.students << @student
+    # create password
+    random_password = ('0'..'z').to_a.shuffle.first(8).join
+    @student.user.password = random_password
+    @student.user.password_confirmation = random_password
+
+    if @student.save
+      UserMailer.login_email(@student, @student.user, random_password).deliver_now
+      true
+    else
+      false
+    end
+
+  end
 end
