@@ -2,7 +2,6 @@ class OccasionsController < ApplicationController
   before_action :authenticate_user!
   after_action :verify_authorized, except: [:index, :show, :edit]
 
-
   def index
     @occasions = Occasion.all
   end
