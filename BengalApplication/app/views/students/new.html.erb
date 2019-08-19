@@ -1,23 +1,30 @@
-<h1>Add students here</h1>
-<%= form_for [@student] do |f| %>
-  <div class="field">
-    <%=f.label :name, "Student Name" %>
-    <%=f.text_field(:name )%>
-  </div>
-  <%=f.fields_for :user do |u| %>
-    <div class="field">
-      <%=u.label :email %>
-      <%=u.email_field :email %>
-    </div>
-  <%end %>
-  <div class="actions"><%=submit_tag "Add Student", class: "button" %></div>
-<% end %>
-<%= link_to "Return Home", @teacher %>
+<h1>Enter student emails to register students</h1>
+
+
+<div id="student_emails">
+  <%= form_tag controller: "students", action: "create" do %>
+    <%for student in 1..@teacher.student_count do %>
+      <div class="field">
+      <%=label_tag "Student Name" %>
+      <%=text_field_tag "name" +student.to_s  %>
+      </div>
+      <div class="field">
+        <%=label_tag "Email" %>
+        <%=text_field_tag "email" + student.to_s  %>
+      </div>
+
+    <%end %>
+    <div class="actions"><%=submit_tag "Add Student", class: "button" %></div>
+  <% end %>
+</div>
+
+
+
+
 
 <% if @student.errors.any? %>
   <div id="error_explanation">
     <h2><%= pluralize(@student.errors.count, "error") %> prohibited this post from being saved:</h2>
-
     <ul>
       <% @student.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
@@ -25,18 +32,3 @@
     </ul>
   </div>
 <% end %>
-
-<table>
-  <thead>
-  <tr>
-    <th>Name</th>
-    <th>Email</th>
-  </tr>
-  </thead>
-  <% @teacher.students.each do |s| %>
-    <tr>
-      <td><%=s.name %></td>
-      <td><%=s.user.email %></td>
-    </tr>
-  <% end %>
-</table>

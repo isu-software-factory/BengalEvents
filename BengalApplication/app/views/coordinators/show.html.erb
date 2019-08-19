@@ -1,31 +1,4 @@
-<%# unless current_user.meta.occasions.present? %>
-<!--  <p> There are no Occasions under you. Go to Home Page to create an Occasion.</p>-->
-<%# end %>
 
-<%# if current_user.meta.occasions.any? %>
-<!--  <h3>Occasion (<%#= current_user.meta.occasions.count %>)</h3>-->
-<!--  <br>-->
-<!--  <table>-->
-<!--    <thead>-->
-<!--    <tr>-->
-<!--      <th>Occasion Name</th>-->
-<!--      <th>Start Date</th>-->
-<!--      <th>End Date</th>-->
-<!--    </tr>-->
-<!--    </thead>-->
-<!--    <tbody>-->
-    <%# current_user.meta.occasions.each do |o| %>
-<!--      <tr>-->
-<!--        <td><%#= o.name %></td>-->
-<!--        <td><%#= o.start_date.to_date %></td>-->
-<!--        <td><%#= o.end_date.to_date %></td>-->
-<!--      </tr>-->
-    <%# end %>
-<!--    </tbody>-->
-<!--  </table>-->
-<%# end %>
-
-<%#= link_to "Occasion Home Page", occasions_path %>
 <% content_for :title, "Occasions" %>
 <%# if signed_in? %>
 <h1>Occasions</h1>
