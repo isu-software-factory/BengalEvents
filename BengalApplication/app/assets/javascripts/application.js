@@ -15,7 +15,7 @@
 //= require rails-ujs
 //= require activestorage
 //= require turbolinks
-
+//= require_nested_form_fields
 
 
 

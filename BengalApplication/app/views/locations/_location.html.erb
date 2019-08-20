@@ -9,16 +9,29 @@
     <thead>
     <tr>
       <th>Location Name</th>
+      <th>Start Time</th>
+      <th>End Time</th>
+      <th>Intervals</th>
       <th>Actions</th>
     </tr>
     </thead>
     <tbody>
     <tr>
       <td><%= location.name %></td>
+      <% location.time_slots.each do |t| %>
+        <td>
+          <%= t.start_time.strftime("%H:%M %p") %></td>
+        <td>
+          <%= t.end_time.strftime("%H:%M %p") %>
+        </td>
+        <td>
+          <%= t.interval %>
+        </td>
+      <% end %>
       <td>
-        <% if policy(location).show? %>
-          <%= link_to "Show", occasion_location_path(@occasion, location) %>
-        <% end %>
+        <%# if policy(location).show? %>
+          <%#= link_to "Show", occasion_location_path(@occasion, location) %>
+        <%# end %>
         <% if policy(location).edit? %>
           <%= link_to "Edit", edit_occasion_location_path(@occasion, location) %>
         <% end %>

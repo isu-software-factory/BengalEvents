@@ -9,6 +9,23 @@
     <%= location.label "Location" %>
     <%= location.text_field :name %>
   </p>
+
+  <%= location.fields_for :time_slots do |ff| %>
+    <p>
+      <%= ff.label :interval, "Interval" %>
+      <%= ff.text_field :interval %>
+    </p>
+    <p>
+      <%= ff.label :start_time, "Start Time" %>
+      <%= ff.time_select :start_time, {minute_step: 15} %>
+    </p>
+    <p>
+      <%= ff.label :end_time, "End Time" %>
+      <%= ff.time_select :end_time, {minute_step: 15} %>
+    </p>
+  <% end %>
+
+
   <%#= location.fields_for :time_slots do |slots| %>
   <!--         cocoon gem-->
   <!--    <p>-->
