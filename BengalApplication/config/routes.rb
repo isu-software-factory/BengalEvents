@@ -15,8 +15,8 @@ Rails.application.routes.draw do
   post "groupings/drop/:part_id/:id" => "groupings#drop"
   post "registrations/drop/:part_id/:id" => "registrations#drop"
   get "slots/:name" => "events#location_timeslots"
-  resources :teams
 
+  resources :teams
   resources :occasions do
     resources :locations
     resources :events do

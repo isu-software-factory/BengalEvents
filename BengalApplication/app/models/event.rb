@@ -16,6 +16,7 @@
 class Event < ApplicationRecord
   belongs_to :occasion
   belongs_to :sponsor
+  belongs_to :coordinator
   has_many :event_details, dependent: :destroy
   belongs_to :location
   validates :name, presence: true

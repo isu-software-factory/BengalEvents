@@ -2,6 +2,7 @@ class StudentsController < ApplicationController
   before_action :prepare_teacher, only: [:new, :create, :student_emails, :student_names]
   before_action :authenticate_user!, except: :new
 
+
    def index
      @students = Student.where("teacher_id = ?", params[:teacher_id])
    end
@@ -9,6 +10,7 @@ class StudentsController < ApplicationController
   def show
     @student = Student.find(params[:id])
     authorize @student
+    add_breadcrumb "Home", @student
   end
 
   def new
@@ -22,9 +24,11 @@ class StudentsController < ApplicationController
     emails = student_emails
     authorize Student
 
-    for each in 1..names.count do
+    for each in 0..(names.count - 1) do
       # if an error occurs
+
       success = create_students(names[each], emails[each])
+
     end
     redirect_to teacher_path(@teacher.id)
   end
@@ -51,8 +55,8 @@ class StudentsController < ApplicationController
     emails
   end
 
-  def create_students(name, email)
-    @student = Student.new(name: name, user_attributes: {email: email}, participant_attributes: {})
+  def create_students(name1, email1)
+    @student = Student.new(name: name1, user_attributes: {email: email1}, participant_attributes: {})
     @teacher.students << @student
     # create password
     random_password = ('0'..'z').to_a.shuffle.first(8).join
@@ -63,6 +67,7 @@ class StudentsController < ApplicationController
       UserMailer.login_email(@student, @student.user, random_password).deliver_now
       true
     else
+      asasda
       false
     end
 

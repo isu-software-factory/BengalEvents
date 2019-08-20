@@ -72,4 +72,4 @@ gem 'simplecov', require: false, group: :test
 gem 'rails-controller-testing'
 gem 'jquery-rails'
 gem 'prawn'
-gem 'nested_form_fields'
+gem 'breadcrumbs_on_rails'

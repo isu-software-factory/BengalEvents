@@ -27,11 +27,13 @@ class TeachersController < ApplicationController
         end
       end
     end
+    add_breadcrumb "Home", @teacher
   end
 
   def edit
     @teacher = Teacher.find(params[:id])
     authorize @teacher
+    add_breadcrumb "Account Settings", edit_teacher_path(@teacher)
   end
 
   def update
@@ -42,7 +44,6 @@ class TeachersController < ApplicationController
     else
       render 'edit'
     end
-
   end
 
   private

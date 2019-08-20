@@ -19,6 +19,7 @@ class SponsorsController < ApplicationController
   def show
     @sponsor = Sponsor.find(params[:id])
     @occasions = Occasion.all
+    add_breadcrumb "Home", @sponsor
   end
 
   private

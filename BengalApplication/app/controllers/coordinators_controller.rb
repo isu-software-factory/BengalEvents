@@ -20,6 +20,7 @@ class CoordinatorsController < ApplicationController
     @coordinator = Coordinator.find(params[:id])
     @occasions = Occasion.all
     authorize @coordinator
+    add_breadcrumb "Home", @coordinator
   end
 
 
