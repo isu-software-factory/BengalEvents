@@ -17,14 +17,13 @@
 </head>
 
 <body>
-
 <div class="header" id="header">
   <%= render 'user_info' %>
 </div>
 <div class="content">
 <p class="notice"><%= notice %></p>
 <p class="alert"><%= alert %></p>
-
+  <%= render_breadcrumbs %>
   <%= yield %>
 </div>
 <script>
