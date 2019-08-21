@@ -10,8 +10,12 @@
 
 class Sponsor < ApplicationRecord
   has_one :user, as: :meta, dependent: :destroy
+  has_one :supervisor, as: director, dependent: :destroy
   accepts_nested_attributes_for :user
+  accepts_nested_attributes_for :supervisor
   has_many :events
+
+
 
   validates :name, presence: true
 end

@@ -9,5 +9,6 @@
 
 class Admin < ApplicationRecord
   has_one :user, as: :meta, dependent: :destroy
+  has_one :supervisor, as: :director, dependent: :destroy
   accepts_nested_attributes_for :user
 end

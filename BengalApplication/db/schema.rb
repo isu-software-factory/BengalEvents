@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_10_180520) do
+ActiveRecord::Schema.define(version: 2019_08_21_014125) do
 
   create_table "admins", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -41,11 +41,11 @@ ActiveRecord::Schema.define(version: 2019_08_10_180520) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "occasion_id"
-    t.integer "sponsor_id"
     t.integer "location_id"
+    t.integer "supervisor_id"
     t.index ["location_id"], name: "index_events_on_location_id"
     t.index ["occasion_id"], name: "index_events_on_occasion_id"
-    t.index ["sponsor_id"], name: "index_events_on_sponsor_id"
+    t.index ["supervisor_id"], name: "index_events_on_supervisor_id"
   end
 
   create_table "groupings", force: :cascade do |t|
@@ -104,6 +104,13 @@ ActiveRecord::Schema.define(version: 2019_08_10_180520) do
     t.integer "teacher_id"
     t.string "name"
     t.index ["teacher_id"], name: "index_students_on_teacher_id"
+  end
+
+  create_table "supervisors", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "director_id"
+    t.string "director_type"
   end
 
   create_table "teachers", force: :cascade do |t|

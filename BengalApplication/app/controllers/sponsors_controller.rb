@@ -8,6 +8,7 @@ class SponsorsController < ApplicationController
 
   def create
     @sponsor = Sponsor.new(sponsor_params)
+    Supervisor.create(director: @sponsor)
     if @sponsor.save
       sign_in @sponsor.user
       redirect_to @sponsor
