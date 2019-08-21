@@ -5,12 +5,12 @@ class EventsController < ApplicationController
   # after_action :verify_authorized
 
   def new
-    @event = current_user.meta.events.build
+    @event = current_user.meta.supervisor.events.build
     authorize @event
   end
 
   def create
-    @event = current_user.meta.events.build(event_params)
+    @event = current_user.meta.supervisor.events.build(event_params)
     @event.occasion = @occasion
     authorize @event
     if @event.save
