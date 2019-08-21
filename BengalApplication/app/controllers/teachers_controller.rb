@@ -1,6 +1,7 @@
 class TeachersController < ApplicationController
   before_action :authenticate_user!, except: [:new, :create]
 
+
   def new
     @teacher = Teacher.new
     @teacher.build_user
