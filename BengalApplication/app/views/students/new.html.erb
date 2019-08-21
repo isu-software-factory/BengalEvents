@@ -1,6 +1,5 @@
 <h1>Enter student emails to register students</h1>
 
-
 <div id="student_emails">
   <%= form_tag controller: "students", action: "create" do %>
     <%for student in 1..@teacher.student_count do %>
@@ -17,9 +16,6 @@
     <div class="actions"><%=submit_tag "Add Student", class: "button" %></div>
   <% end %>
 </div>
-
-
-
 
 
 <% if @student.errors.any? %>

@@ -15,12 +15,10 @@ Rails.application.routes.draw do
   post "groupings/drop/:part_id/:id" => "groupings#drop"
   post "registrations/drop/:part_id/:id" => "registrations#drop"
   get "slots/:name" => "events#location_timeslots"
-  resources :teams
 
+  resources :teams
   resources :occasions do
-    resources :locations do
-      resources :time_slots
-    end
+    resources :locations
     resources :events do
       resources :event_details
     end
@@ -28,6 +26,6 @@ Rails.application.routes.draw do
 
   get "homeroutes/routes" => 'homeroutes#routes'
   root 'homeroutes#routes'
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+# For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
 end

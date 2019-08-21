@@ -2,7 +2,6 @@ class OccasionsController < ApplicationController
   before_action :authenticate_user!
   after_action :verify_authorized, except: [:index, :show, :edit]
 
-
   def index
     @occasions = Occasion.all
   end
@@ -18,7 +17,7 @@ class OccasionsController < ApplicationController
     occasion = current_user.meta.occasions.build(occasion_params)
     authorize occasion
     if occasion.save
-      redirect_to occasions_path, :notice => "Successfully created Occasion."
+      redirect_to  new_occasion_location_path(occasion_id: occasion.id)
     else
       flash[:errors] = occasion.errors.full_messages
       redirect_back(fallback_location: new_occasion_path)

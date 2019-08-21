@@ -7,12 +7,14 @@ class LocationsController < ApplicationController
   def new
     @occasion = Occasion.find(params[:occasion_id])
     @location = @occasion.locations.build
+    @time_slot = @location.time_slots.build
     authorize @location
   end
 
   def create
     @occasion = Occasion.find(params[:occasion_id])
     @location = @occasion.locations.build(location_params)
+    # pry
     authorize @location
     if @location.save
       redirect_to occasion_path(@occasion), :notice => "Successfully created Location."
@@ -55,6 +57,6 @@ class LocationsController < ApplicationController
   private
 
   def location_params
-    params.require(:location).permit(:name)
+    params.require(:location).permit(:name, time_slots_attributes: [:id, :interval, :start_time, :end_time])
   end
 end
