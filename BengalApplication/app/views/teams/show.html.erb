@@ -1,36 +1,39 @@
-
-<h1>Team <%=@team.name %></h1>
-<h2>Team Members</h2>
-<table>
-  <thead>
-  <tr>
-    <th>Member</th>
-    <th>Position</th>
-    <%if policy(@team).change? %>
-      <th>Drop Member</th>
-    <%end %>
-  </tr>
-  </thead>
-  <tbody>
-  <%@team.students.each do |m| %>
-    <tr>
-      <td><%=m.name %></td>
-      <%if m == @team.get_lead %>
-        <td>Team Lead</td>
-      <%else %>
-        <td>Member</td>
-      <%end %>
-      <%if policy(@team).change? %>
-        <%if m == @team.get_lead %>
-          <td>Can't Drop Team Lead</td>
-        <%else %>
-          <td><%=button_to("Drop",  {method: :post, controller: "groupings", action: :drop, part_id: m.id, id: @team.id}, data: {confirm: "Are you sure?"})%></td>
+<div class="card w-100 text-white bg-secondary mb-3" style="max-width: 30rem;">
+  <div class="card-header">Team Members</div>
+  <div class="card-body">
+    <table class="table">
+      <thead class="thead-dark">
+      <tr>
+        <th scope="col">Member</th>
+        <th scope="col">Position</th>
+        <%if policy(@team).change? %>
+          <th scope="col">Drop Member</th>
         <%end %>
-      <%end %>
-    </tr>
-  <% end %>
-  </tbody>
-</table>
+      </tr>
+      </thead>
+      <tbody>
+      <%@team.students.each do |m| %>
+        <tr>
+          <td><%=m.name %></td>
+          <%if m == @team.get_lead %>
+            <td>Team Lead</td>
+          <%else %>
+            <td>Member</td>
+          <%end %>
+          <%if policy(@team).change? %>
+            <%if m == @team.get_lead %>
+              <td>Can't Drop Team Lead</td>
+            <%else %>
+              <td><%=button_to("Drop",  {method: :post, controller: "groupings", action: :drop, part_id: m.id, id: @team.id}, data: {confirm: "Are you sure?"})%></td>
+            <%end %>
+          <%end %>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+<h1>Team <%=@team.name %></h1>
 
 <div>
   <h2>Registration Details</h2>

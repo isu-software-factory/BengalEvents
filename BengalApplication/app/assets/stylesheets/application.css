@@ -123,3 +123,7 @@ a:hover.loginlink {
 .column input {
     margin-bottom: 2px;
 }
+
+.card {
+    float: right;
+}
