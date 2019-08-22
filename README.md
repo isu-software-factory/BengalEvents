@@ -21,5 +21,5 @@
 - Run `rails db:migrate` in the terminal to migrate the database.
    -  The database used for development is sqlite3. Make sure sqlite3 gets installed along with the packages. 
    -  To check the version of any gem installed, type bundle show [gemname] in the terminal. In the sqlite3 case,`bundle show sqlite3`
-- In terminal, run "rails server"
+- In terminal, run 'rails server'
 - Go to "localhost:3000" in browser to see homepage.
