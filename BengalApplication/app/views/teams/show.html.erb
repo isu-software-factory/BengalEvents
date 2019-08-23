@@ -85,10 +85,12 @@
             <p><%=link_to "Invite Members", controller: "teams", action: "invite", id: @team.id %></p>
             <%if @team.students.count > 1 %>
               <p>You can register for events as a team. Every member will participate in the event.</p>
-              <p><%=link_to("Register for events as a team", controller: "registrations", action: "index", part_id: @team.participant.id)%></p>
+              <p><%=link_to("Register For Events", controller: "registrations", action: "index", part_id: @team.participant.id)%></p>
             <%else %>
               <p>You have to have at least two members to register for an event as a team.</p>
             <%end %>
+            <%else %>
+              <p>Your team lead will register the team for events. Talk to them to agree on what events you want to take.</p>
           <%end %>
         </div>
       </div>

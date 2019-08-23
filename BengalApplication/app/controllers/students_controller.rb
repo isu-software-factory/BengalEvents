@@ -11,6 +11,7 @@ class StudentsController < ApplicationController
     @student = Student.find(params[:id])
     authorize @student
     add_breadcrumb "Home", @student
+
   end
 
   def new
