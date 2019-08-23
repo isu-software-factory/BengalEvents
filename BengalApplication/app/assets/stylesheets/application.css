@@ -87,12 +87,22 @@ a:hover {
     color: black;
     margin: 5px 0px 0px 0px;
 }
-
+.menu-container{
+    background-color: rgb(109, 110, 113);
+    color: orange;
+}
 .sign-in-links {
     position: absolute;
     bottom: 0;
     right: 16px;
     color: rgb(244, 121, 32);
+}
+.sign-in-links:hover{
+    color: white;
+    cursor: pointer;
+}
+.menu{
+    margin-top: 110px;
 }
 
 .team_registrations .table{
@@ -131,7 +141,7 @@ a:hover.loginlink {
     margin-bottom: 2px;
 }
 .container{
-    padding-left: 0px;
+    padding-left: 0;
     margin-top: 20px;
 }
 
@@ -151,6 +161,8 @@ a:hover.loginlink {
     width: 500px;
     text-align: center;
 }
+
+
 
 .field{
     width: 250px;
