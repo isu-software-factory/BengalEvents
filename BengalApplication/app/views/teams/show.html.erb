@@ -66,7 +66,7 @@
                   <%if m == @team.get_lead %>
                     <td>Can't Drop Team Lead</td>
                   <%else %>
-                    <td><%=button_to("Drop",  {method: :post, controller: "groupings", action: :drop, part_id: m.id, id: @team.id}, data: {confirm: "Are you sure?"})%></td>
+                    <td><%=button_to("Drop",  {method: :post, controller: "groupings", action: :drop, part_id: m.id, id: @team.id}, class: "button", data: {confirm: "Are you sure?"})%></td>
                   <%end %>
                 <%end %>
               </tr>
@@ -81,8 +81,10 @@
         <div class="card-header">Actions</div>
         <div class="card-body">
           <%if policy(@team).change? %>
+            <p>Invite members to join your team.</p>
             <p><%=link_to "Invite Members", controller: "teams", action: "invite", id: @team.id %></p>
             <%if @team.students.count > 1 %>
+              <p>You can register for events as a team. Every member will participate in the event.</p>
               <p><%=link_to("Register for events as a team", controller: "registrations", action: "index", part_id: @team.participant.id)%></p>
             <%else %>
               <p>You have to have at least two members to register for an event as a team.</p>
