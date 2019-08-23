@@ -47,19 +47,45 @@ a:hover {
     width: 100%;
 }
 
-.content {
-    padding: 10px 10% 10px 10%;
-
-}
-
 .sticky + .content {
     padding-top: 110px;
 }
 
+.new-profile{
+    width: 800px;
+    height: 500px;
+    margin-left: 400px;
 
+    border-style: solid;
+    border-width: 5px;
+    border-color: #1c2324;
+}
+
+.team-section{
+    margin-left: 40px;
+}
+
+.team-name{
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    width: 280px;
+    border-bottom-style: solid;
+    border-width: 2px;
+}
+.profile-field{
+    margin-bottom: 10px;
+}
 /* Hide alert and notice if empty */
 .notice:empty, .alert:empty {
     display: none;
+}
+
+.top-bar{
+    background-color: #363636;
+    height: 90px;
+    width: 100%;
+    margin-bottom: 20px;
+    text-align: center;
 }
 
 .button {
@@ -85,7 +111,7 @@ a:hover {
 .button:hover {
     background-color: white;
     color: black;
-    margin: 5px 0px 0px 0px;
+    margin: 5px 0 0 0;
 }
 .menu-container{
     background-color: rgb(109, 110, 113);
@@ -102,7 +128,9 @@ a:hover {
     cursor: pointer;
 }
 .menu{
-    margin-top: 110px;
+    position: absolute;;
+    bottom: 0;
+    right: 16px;
 }
 
 .team_registrations .table{
@@ -167,6 +195,7 @@ a:hover.loginlink {
 .field{
     width: 250px;
 }
+
 .field_container{
     padding-left: 125px;
 }

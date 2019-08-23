@@ -1,19 +1,18 @@
 <% if signed_in? %>
   <%= render_breadcrumbs %>
   <%if controller.controller_name == "teams" %>
-    <div class="team_name"><h1>Team <%=Team.find(params[:id]).name %></h1></div>
+    <%unless params[:id] == nil%>
+      <div class="team_name"><h1>Team <%=Team.find(params[:id]).name %></h1></div>
+      <%end %>
   <%end %>
 
   <div class="dropdown menu">
-    <p class="dropdown-toggle sign-in-links" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"  id="dropdownMenuLink"><%=current_user.meta.name %></p>
-    <div class="dropdown-menu menu-container">
+    <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><%=current_user.meta.name %></a>
+
+    <div class="dropdown-menu menu-container dropdown-menu-right">
       <%=link_to "Account Settings", edit_user_registration_path, class: "dropdown-item" %>
       <%=link_to "Log Out", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
     </div>
   </div>
 
-<!--  <p class="sign-in-links">-->
-<!--    <%#= link_to current_user.email, edit_user_registration_path %> <span style="color:rgb(167, 169, 172)">|</span>-->
-    <%#= link_to "Log Out", destroy_user_session_path, method: :delete %>
-<!--  </p>-->
 <% end %>
