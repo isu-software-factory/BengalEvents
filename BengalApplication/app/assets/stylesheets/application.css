@@ -20,6 +20,7 @@ body {
 
 h1, h2, a {
     color: rgb(244, 121, 32); /*ISU Orange */
+    margin-bottom: 10px;
 }
 
 p {
@@ -142,3 +143,37 @@ a:hover.loginlink {
     margin-top: 10px;
 }
 
+.login_block{
+    /*border-left-width: 5px;*/
+    border-left-color: #1c2324;
+    border-width: medium;
+    height: 500px;
+    width: 500px;
+    text-align: center;
+}
+
+.field{
+    width: 250px;
+}
+.field_container{
+    padding-left: 125px;
+}
+
+.checkbox_container{
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.full_button{
+    width: 250px;
+}
+
+.button_container{
+    padding-left: 10px;
+    margin-top: 5px;
+}
+
+.sign_up{
+    margin-top: 50px;
+    text-decoration-color: #ffffff;
+}
