@@ -4,8 +4,16 @@
     <div class="team_name"><h1>Team <%=Team.find(params[:id]).name %></h1></div>
   <%end %>
 
-  <p class="sign-in-links">
-    <%= link_to current_user.email, edit_user_registration_path %> <span style="color:rgb(167, 169, 172)">|</span>
-    <%= link_to "Log Out", destroy_user_session_path, method: :delete %>
-  </p>
+  <div class="dropdown menu">
+    <p class="dropdown-toggle sign-in-links" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"  id="dropdownMenuLink"><%=current_user.meta.name %></p>
+    <div class="dropdown-menu menu-container">
+      <%=link_to "Account Settings", edit_user_registration_path, class: "dropdown-item" %>
+      <%=link_to "Log Out", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
+    </div>
+  </div>
+
+<!--  <p class="sign-in-links">-->
+<!--    <%#= link_to current_user.email, edit_user_registration_path %> <span style="color:rgb(167, 169, 172)">|</span>-->
+    <%#= link_to "Log Out", destroy_user_session_path, method: :delete %>
+<!--  </p>-->
 <% end %>
