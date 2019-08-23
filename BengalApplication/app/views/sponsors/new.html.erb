@@ -1,36 +1,37 @@
-<h1>Additional Information Needed</h1>
+<h1>Sign Up</h1>
+<h4>It's simple!</h4>
 <%= form_for @sponsor do |f| %>
   <div class="row">
-    <div class="column"><%= f.label :name, "Name" %>
+    <div class="column"><%= f.label :name, "Your Name" %>
     </div>
-    <div class="column"><%= f.text_field(:name) %>
+    <div class="field-container"><%= f.text_field :name, placeholder: "Full Name", class: "field form-control" %>
     </div>
   </div>
-    <%= f.fields_for :user do |u| %>
+  <%= f.fields_for :user do |u| %>
 
-  <div class="row">
-    <div class="column"><%= u.label :email %>
+    <div class="row">
+      <div class="column"><%= u.label :email %>
+      </div>
+      <div class="field-container"> <%= u.email_field :email, placeholder: "Email", class: "field form-control" %>
+      </div>
     </div>
-    <div class="column"> <%= u.email_field :email %>
-    </div>
-  </div>
 
-  <div class="row">
-    <div class="column">  <%= u.label :password %>
+    <div class="row">
+      <div class="column">  <%= u.label :password %>
+      </div>
+      <div class="field-container">  <%= u.password_field :password, placeholder: "Password", class: "field form-control" %>
+      </div>
     </div>
-    <div class="column">  <%= u.password_field :password %>
-    </div>
-  </div>
 
-  <div class="row">
-    <div class="column"><%= u.label :password_confirmation %>
+    <div class="row">
+      <div class="column"><%= u.label :password_confirmation, "Re-enter Password" %>
+      </div>
+      <div class="field-container"><%= u.password_field :password_confirmation , placeholder: "Password", class: "field form-control" %>
+      </div>
     </div>
-    <div class="column"><%= u.password_field :password_confirmation %>
-    </div>
-  </div>
 
   <% end %>
-  <div class="actions"><%= submit_tag "Confirm", class: "button" %></div>
+  <div class="actions"><%= submit_tag "Create Account", class: "button" %></div>
 <% end %>
 
 <% if @sponsor.errors.any? %>

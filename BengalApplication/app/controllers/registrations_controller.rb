@@ -73,7 +73,7 @@ class RegistrationsController < ApplicationController
     @participant = Participant.find(params[:part_id])
     @event_detail = EventDetail.find(params[:id])
 
-    authorize participant, policy_class: RegistrationPolicy
+    authorize @participant, policy_class: RegistrationPolicy
     @event_detail.participants.delete(@participant)
     redirect_to @participant.member
   end

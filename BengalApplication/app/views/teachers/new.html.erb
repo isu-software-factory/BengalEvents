@@ -1,59 +1,61 @@
-<h1>Additional Information Needed</h1>
-<%=form_for @teacher do |f| %>
+<h1>Create your account</h1>
+</br>
+
+<%= form_for @teacher do |f| %>
 
   <div class="row">
-    <div class="column">  <%=f.label :name, "Teacher Name" %>
+    <div class="column">  <%= f.label :name, "Full Name" %>
     </div>
-    <div class="column"> <%=f.text_field(:name )%>
+    <div class="column"> <%= f.text_field :name, placeholder: "Full Name" %>
     </div>
   </div>
 
   <div class="row">
-    <div class="column"> <%=f.label :school, "School Name" %>
+    <div class="column"> <%= f.label :school, "School Name" %>
     </div>
-    <div class="column"> <%=f.text_field(:school )%>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="column"> <%=f.label :chaperone_count, "Expected Number of Chaperones" %>
-    </div>
-    <div class="column"> <%=f.text_field(:chaperone_count )%>
+    <div class="column"> <%= f.text_field :school, placeholder: "School Name" %>
     </div>
   </div>
 
   <div class="row">
-    <div class="column"><%=f.label :student_count, "Expected Number of Students" %>
+    <div class="column"> <%= f.label :chaperone_count, "Expected Number of Chaperones" %>
     </div>
-    <div class="column"><%=f.text_field(:student_count )%>
+    <div class="column"> <%= f.text_field :chaperone_count, placeholder: "Number of Chaperones" %>
     </div>
   </div>
-  <%=f.fields_for :user do |u| %>
 
-   <div class="row">
-     <div class="column"> <%=u.label :email %>
-     </div>
-     <div class="column"> <%=u.email_field :email %>
-     </div>
-   </div>
+  <div class="row">
+    <div class="column"><%= f.label :student_count, "Expected Number of Students" %>
+    </div>
+    <div class="column"><%= f.text_field :student_count, placeholder: "Student Count" %>
+    </div>
+  </div>
+  <%= f.fields_for :user do |u| %>
 
     <div class="row">
-      <div class="column"><%=u.label :password %>
+      <div class="column"> <%= u.label :email %>
       </div>
-      <div class="column"><%=u.password_field :password %>
+      <div class="column"> <%= u.email_field :email, placeholder: "Email" %>
       </div>
     </div>
 
     <div class="row">
-      <div class="column"><%=u.label :password_confirmation %>
+      <div class="column"><%= u.label :password %>
       </div>
-      <div class="column"><%=u.password_field :password_confirmation %>
+      <div class="column"><%= u.password_field :password, placeholder: "Password" %>
       </div>
     </div>
 
-  <%end %>
-  <div class="actions"><%=submit_tag "Confirm", class: "button" %></div>
-<%end %>
+    <div class="row">
+      <div class="column"><%= u.label :password_confirmation %>
+      </div>
+      <div class="column"><%= u.password_field :password_confirmation, placeholder: "Retype Password" %>
+      </div>
+    </div>
+
+  <% end %>
+  <div class="actions"><%= submit_tag "Create Account", class: "button" %></div>
+<% end %>
 
 <% if @teacher.errors.any? %>
   <div id="error_explanation">
