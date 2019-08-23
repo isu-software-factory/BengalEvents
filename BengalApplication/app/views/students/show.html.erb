@@ -1,55 +1,74 @@
 <h1>Welcome, <%= @student.name %>!</h1>
-<p>Teacher: <%= @student.teacher.name %></p>
-<p>School: <%= @student.teacher.school %></p>
+<div class="container">
+  <div class="row">
+    <div class="col-sm">
+      <h3>Registration Details</h3>
+      <% if @student.participant.event_details.count > 0 %>
+        <table class="table">
+          <thead class="thead-dark">
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Description</th>
+            <th scope="col">Location</th>
+            <th scope="col">Start Time</th>
+            <th scope="col">End Time</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <% @student.participant.event_details.each do |s| %>
+            <tr>
+              <th scope="row"><%= Event.find(s.event_id).name %></th>
+              <td><%= Event.find(s.event_id).description %></td>
+              <td><%= Event.find(s.event_id).location.name %></td>
+              <td><%= s.start_time.strftime("%F %H:%M %p") %></td>
+              <td><%= s.end_time.strftime("%F %H:%M %p") %></td>
+              <td>
+                <button type="button" class="btn btn-danger">
+                  <%= button_to("Drop", {method: :post, controller: "registrations",
+                                         action: :drop, part_id: @student.participant.id, id: s.id},
+                                data: {confirm: "Are you sure?"}) %>
+                </button>
+              </td>
+            </tr>
+          <% end %>
+          </tbody>
+        </table>
+      <% end %>
+      <a href="#" class="card-link"><%= link_to "Register for Events", controller: "registrations", action: "index", part_id: @student.participant.id %></a>
 
-<div>
-<%= link_to "Register for Events", controller: "registrations", action: "index", part_id: @student.participant.id %>
-</div>
-<%= link_to "Create Team", new_team_path%>
+      <h2>My Teams</h2>
 
-<h2>Registration Details</h2>
-<% if @student.participant.event_details.count > 0%>
-<table>
-  <thead>
-  <tr>
-    <th>Name</th>
-    <th>Description</th>
-    <th>Location</th>
-    <th>Start Time</th>
-    <th>End Time</th>
-  </tr>
+      <p><a href="#" class="card-link"><%= link_to "Create Team", new_team_path %></a></p>
 
-  </thead>
-  <% @student.participant.event_details.each do |s| %>
-    <tr>
-      <td><%=Event.find(s.event_id).name %></td>
-      <td><%=Event.find(s.event_id).description %></td>
-      <td><%=Event.find(s.event_id).location.name %></td>
-      <td><%=s.start_time %></td>
-      <td><%=s.end_time %></td>
-      <td><%=button_to("Drop",  {method: :post, controller: "registrations", action: :drop, part_id: @student.participant.id, id:s.id}, data: {confirm: "Are you sure?"})%></td>
-    </tr>
-  <% end %>
-</table>
-  <% else %>
-  <p>You haven't registered for anything yet!</p>
-  <% end %>
-
-
-<h2>My Teams</h2>
-<table>
-  <thead>
-    <tr>
-      <th>Team Name</th>
-    </tr>
-  </thead>
-  <tbody>
-    <%unless @student.teams.count == 0 %>
-      <%@student.teams.each do |t| %>
+      <table>
+        <thead>
         <tr>
-          <td><%=link_to t.name, controller: "teams", action: "show", id: t.id %></td>
+          <th>Team Name</th>
         </tr>
-      <%end %>
-    <%end %>
-  </tbody>
-</table>
+        </thead>
+        <tbody>
+        <% unless @student.teams.count == 0 %>
+          <% @student.teams.each do |t| %>
+            <tr>
+              <td><%= link_to t.name, controller: "teams", action: "show", id: t.id %></td>
+            </tr>
+          <% end %>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="col-sm-3">
+      <div class="card border-dark mb-3" style="max-width: 18rem;">
+        <div class="card-header">Your Teacher's Information</div>
+        <div class="card-body text-dark">
+          <p class="card-text">Teacher: <%= @student.teacher.name %></p>
+          <p class="card-text">School Name: <%= @student.teacher.school %></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+

@@ -5,13 +5,11 @@ class EventPolicy < ApplicationPolicy
   end
 
   def edit?
-    (user.meta_type == "Coordinator" || user.meta_type == "Admin" || user.meta_type == "Sponsor") &&
-        (user.meta.id == record.supervisor.id)
+    (user.meta_type == "Coordinator" || user.meta_type == "Admin" || user.meta_type == "Sponsor")
   end
 
   def update?
-    (user.meta_type == "Coordinator" || user.meta_type == "Admin" || user.meta_type == "Sponsor") &&
-        (user.meta.id == record.supervisor.id)
+    (user.meta_type == "Coordinator" || user.meta_type == "Admin" || user.meta_type == "Sponsor")
   end
 
   def create?

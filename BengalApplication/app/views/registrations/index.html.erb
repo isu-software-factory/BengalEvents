@@ -1,23 +1,23 @@
 <%# @registration.each do |r| %>
 <!-- <p> Student <%#=r.student.name %> is registered for  <%#= r.event_details.event.name %></p>-->
 <%# end %>
-
-<table>
+<table class="table table-dark">
   <thead>
-    <tr>
-      <th>Occasion Name</th>
-      <th>Start Date</th>
-      <th>End Date</th>
-    </tr>
+  <tr>
+    <th scope="col">Occasion Name</th>
+    <th scope="col">Start Time</th>
+    <th scope="col">End Time</th>
+  </tr>
   </thead>
   <tbody>
-  <% @occasions.each do |o| %>
+  <tr>
+    <% @occasions.each do |o| %>
     <tr>
-      <td><%= link_to o.name, controller: "registrations", action: "events", part_id: @participant_id, id:o.id %></td>
-      <td><%=o.start_date %></td>
-      <td><%=o.start_date %></td>
+      <td scope="row"><%= link_to o.name, controller: "registrations", action: "events", part_id: @participant_id, id: o.id %></td>
+      <td><%= o.start_date.strftime("%F") %></td>
+      <td><%= o.end_date.strftime("%F") %></td>
     </tr>
   <% end %>
   </tbody>
-
 </table>
+
