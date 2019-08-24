@@ -1,4 +1,4 @@
-<h1>Welcome, <%= @student.name %>!</h1>
+
 <div class="container">
   <div class="row">
     <div class="col-sm">
@@ -12,6 +12,7 @@
             <th scope="col">Location</th>
             <th scope="col">Start Time</th>
             <th scope="col">End Time</th>
+            <th scope="col">Modify</th>
           </tr>
           </thead>
           <tbody>
@@ -24,51 +25,96 @@
               <td><%= s.start_time.strftime("%F %H:%M %p") %></td>
               <td><%= s.end_time.strftime("%F %H:%M %p") %></td>
               <td>
-                <button type="button" class="btn btn-danger">
                   <%= button_to("Drop", {method: :post, controller: "registrations",
-                                         action: :drop, part_id: @student.participant.id, id: s.id},
+                                         action: :drop, part_id: @student.participant.id, id: s.id}, class: "button",
                                 data: {confirm: "Are you sure?"}) %>
-                </button>
               </td>
             </tr>
           <% end %>
           </tbody>
         </table>
       <% end %>
-      <a href="#" class="card-link"><%= link_to "Register for Events", controller: "registrations", action: "index", part_id: @student.participant.id %></a>
-
-      <h2>My Teams</h2>
-
-      <p><a href="#" class="card-link"><%= link_to "Create Team", new_team_path %></a></p>
-
-      <table>
-        <thead>
-        <tr>
-          <th>Team Name</th>
-        </tr>
-        </thead>
-        <tbody>
-        <% unless @student.teams.count == 0 %>
-          <% @student.teams.each do |t| %>
-            <tr>
-              <td><%= link_to t.name, controller: "teams", action: "show", id: t.id %></td>
-            </tr>
-          <% end %>
-        <% end %>
-        </tbody>
-      </table>
     </div>
 
     <div class="col-sm-3">
+      <div>
+        <div class="card border-dark mb-3" style="max-width: 18rem;">
+          <div class="card-header">Your Teacher's Information</div>
+          <div class="card-body text-dark">
+            <p class="card-text">Teacher: <%= @student.teacher.name %></p>
+            <p class="card-text">School Name: <%= @student.teacher.school %></p>
+          </div>
+        </div>
+      </div>
+
+
       <div class="card border-dark mb-3" style="max-width: 18rem;">
-        <div class="card-header">Your Teacher's Information</div>
+        <div class="card-header">Actions</div>
         <div class="card-body text-dark">
-          <p class="card-text">Teacher: <%= @student.teacher.name %></p>
-          <p class="card-text">School Name: <%= @student.teacher.school %></p>
+          <p>Register for events to be able to participate in them.</p>
+          <p class="card-text"><%=link_to "Tegister For Events", controller: "registrations", action: "index", part_id: @student.participant.id %></p>
+          <p>Create a team so that you and your team members can register for events and participate as a group.</p>
+          <p class="card-text"><%= link_to "Create Team", new_team_path %></p>
         </div>
       </div>
     </div>
   </div>
+
+  <div class="team-bar"><h2>My Teams</h2></div>
+    <div class="row"></div>
+    <% unless @student.teams.count == 0 %>
+      <%for t in 1..@teams %>
+        <div class="row">
+          <%for i in 0..2 %>
+            <%if @student.teams[@count] != nil %>
+              <div class="col-sm-4">
+                <div class="card-w-100 text-white bg-secondary mb-3 link-card"  >
+                  <div class="card-header">Team <%=@student.teams[@count].name %></div>
+                  <div class="card-body">
+                    <p>This team has registered for <%=@student.teams[@count].participant.event_details.count %></p>
+                  </div>
+                </div>
+              </div>
+              <%@count += 1 %>
+            <%else %>
+              <%break %>
+            <%end %>
+         <%end %>
+        </div>
+      <%end %>
+    <%end %>
+      <%#@team_num = 0 %>
+      <%# @student.teams.each do |t| %>
+        <%#unless @team_num == 3 %>
+<!--          <div class="col-sm-4">-->
+<!--            <div class="col-sm-4">-->
+<!--              <div class="card w-100 text-white bg-secondary mb-3" >-->
+<!--                <div class="card-header">Team <%#=t.name %></div>-->
+<!--                <div class="card-body">-->
+<!--                  <p>This team has registered for <%#=t.participant.event_details.count %>.</p>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+        <%#else %>
+<!--          <div class="row">-->
+<!--            <div class="col-sm-4">-->
+<!--              <div class="card w-100 text-white bg-secondary mb-3" >-->
+<!--                <div class="card-header">Team <%#=t.name %></div>-->
+<!--                <div class="card-body">-->
+<!--                  <p>This team has registered for <%#=t.participant.event_details.count %>.</p>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+        <%#end %>
+      <%#end %>
+    <%#end %>
+
+
+<!--            <td><%#= link_to t.name, controller: "teams", action: "show", id: t.id %></td>-->
+
+
 </div>
 
 

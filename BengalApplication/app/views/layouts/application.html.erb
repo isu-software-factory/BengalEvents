@@ -21,6 +21,9 @@
   <%#= image_tag("UniversityMark.gif", :alt => "University Logo") %>
   <%= render 'user_info' %>
 </div>
+<div class="navigation">
+  <%= render_breadcrumbs :separator => ' / ' %>
+</div>
 <div class="content">
 <p class="alert alert-success"><%= notice %></p>
 <p class="alert alert-danger"><%= alert %></p>

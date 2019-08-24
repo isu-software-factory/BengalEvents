@@ -35,8 +35,23 @@
 .team_name{
     text-align: left;
     padding-left: 150px;
-
+}
+.bengal-card{
+    background: rgba(244,121,32, 0.85);
+    color: rgb(0,0,0);
 }
 .profile-field{
   margin-bottom: 10px;
+}
+
+.info{
+    padding-left: 13em;
+}
+.thead-bengal{
+    background: rgb(130,130,130);
+    color: rgb(0,0,0);
+}
+
+.bengal-table{
+    color: rgb(0,0,0);
 }
