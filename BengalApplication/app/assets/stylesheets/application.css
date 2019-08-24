@@ -14,15 +14,13 @@
  */
 body {
     font-family: tahoma, geneva, sans-serif;
-    margin: 0
+    margin: 0;
 }
 
 h1, h2, a {
     color: rgb(244, 121, 32); /*ISU Orange */
     margin-bottom: 10px;
 }
-
-
 
 a:hover {
     color: rgb(247, 148, 30);
@@ -34,57 +32,14 @@ a:hover {
     background: rgba(5, 5, 5, .7);
     color: #f1f1f1;
     text-align: right;
-    height: 140px;
+    height: 120px;
     position: relative;
 }
 
-.sticky {
-    position: fixed;
-    top: 0;
-    width: 100%;
-}
-
-.sticky + .content {
-    padding-top: 110px;
-}
-
-.new-profile{
-    width: 800px;
-    height: 500px;
-    margin-left: 400px;
-
-    border-style: solid;
-    border-width: 5px;
-    border-color: #1c2324;
-}
-
-.team-section{
-    margin-left: 40px;
-}
-
-.team-name{
-    margin-bottom: 10px;
-    padding-bottom: 10px;
-    width: 280px;
-    border-bottom-style: solid;
-    border-width: 2px;
-}
-.profile-field{
-    margin-bottom: 10px;
-}
 /* Hide alert and notice if empty */
 .notice:empty, .alert:empty {
     display: none;
 }
-
-.top-bar{
-    background-color: #363636;
-    height: 90px;
-    width: 100%;
-    margin-bottom: 20px;
-    text-align: center;
-}
-
 .button {
     background-color: rgb(109, 110, 113); /* ISU medium gray */
     border: 2px solid rgb(109, 110, 113);
@@ -98,76 +53,32 @@ a:hover {
     -webkit-transition-duration: 0.4s;
     transition-duration: 0.4s;
 }
-
-.team_name{
-    text-align: left;
-    padding-left: 150px;
-
-}
-
 .button:hover {
     background-color: white;
     color: black;
     margin: 5px 0 0 0;
 }
-.menu-container{
-    background-color: rgb(109, 110, 113);
-    color: orange;
-}
+
 .sign-in-links {
     position: absolute;
     bottom: 0;
     right: 16px;
     color: rgb(244, 121, 32);
 }
+
 .sign-in-links:hover{
     color: white;
     cursor: pointer;
 }
+
 .menu{
     position: absolute;;
     bottom: 0;
     right: 16px;
 }
 
-.team_registrations .table{
-    width: 900px;
-}
-
-a.loginlink {
-    color: white;
-}
-
-a:hover.loginlink {
-    color: rgb(247, 148, 30);
-}
-
-.column {
-    float: left;
-    width: 30%;
-}
-
-.column label {
-    padding: 0px 0px 0px 15px;
-    margin: 0px;
-    color: black;
-
-}
-
-.column input {
-    margin-bottom: 2px;
-}
-.container{
-    padding-left: 0;
-    margin-top: 20px;
-}
-
 .content{
-    padding-left: 150px;
-    padding-top: 60px;
-}
-.display_content{
-    margin-top: 10px;
+    padding: 25px 10px;
 }
 
 .login_block{
@@ -178,8 +89,6 @@ a:hover.loginlink {
     width: 500px;
     text-align: center;
 }
-
-
 
 .field{
     width: 250px;
@@ -203,7 +112,7 @@ a:hover.loginlink {
     margin-top: 5px;
 }
 
-.sign_up{
-    margin-top: 50px;
-    text-decoration-color: #ffffff;
-}
+/*.sign_up{*/
+/*    margin-top: 50px;*/
+/*    text-decoration-color: #ffffff;*/
+/*}*/

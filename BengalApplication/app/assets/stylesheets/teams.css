@@ -1,0 +1,42 @@
+
+.new-profile{
+  width: 800px;
+  height: 500px;
+  border-style: solid;
+  border-width: 5px;
+  border-color: #1c2324;
+  position: absolute;
+  right: 25%;
+}
+
+.team-section{
+  margin-left: 40px;
+}
+
+.menu-container{
+    background-color: rgb(109, 110, 113);
+    color: orange;
+}
+
+.top-bar{
+    background-color: #363636;
+    height: 90px;
+    width: 100%;
+    margin-bottom: 20px;
+    text-align: center;
+}
+.team-name{
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  width: 280px;
+  border-bottom-style: solid;
+  border-width: 2px;
+}
+.team_name{
+    text-align: left;
+    padding-left: 150px;
+
+}
+.profile-field{
+  margin-bottom: 10px;
+}

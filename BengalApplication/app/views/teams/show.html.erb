@@ -1,5 +1,5 @@
 <h2>Registration Details</h2>
-<div class="container col-xl">
+<div class="container">
   <div class="row">
     <div class="col-sm-8">
       <div class="team_registrations">
@@ -39,8 +39,7 @@
 
 
     <div class="col-sm-4">
-      <div>
-      <div class="card w-100 text-white bg-secondary mb-3" style="max-width: 30rem;">
+      <div class="card w-100 text-white bg-secondary mb-3" >
         <div class="card-header">Team Members</div>
         <div class="card-body">
           <table class="table">
@@ -75,9 +74,9 @@
           </table>
         </div>
       </div>
-    </div>
 
-      <div class="card w-100 text-white bg-secondary mb-3" style="max-width: 30rem;">
+
+      <div class="card w-100 text-white bg-secondary mb-3" >
         <div class="card-header">Actions</div>
         <div class="card-body">
           <%if policy(@team).change? %>
@@ -87,14 +86,14 @@
               <p>You can register for events as a team. Every member will participate in the event.</p>
               <p><%=link_to("Register For Events", controller: "registrations", action: "index", part_id: @team.participant.id)%></p>
             <%else %>
-              </div>
-              </div>
 
               <p>You have to have at least two members to register for an event as a team.</p>
             <%end %>
             <%else %>
               <p>Your team lead will register the team for events. Talk to them to agree on what events you want to take.</p>
           <%end %>
+        </div>
+          </div>
     </div>
   </div>
 </div>
