@@ -11,7 +11,16 @@ class StudentsController < ApplicationController
     @student = Student.find(params[:id])
     authorize @student
     add_breadcrumb "Home", @student
-
+    @teams = 1
+    @count = 0
+    @increase = 1
+    for i in 1..@student.teams.count
+      if @increase == 4
+        @teams += 1
+        @increase = 0
+      end
+      @increase += 1
+    end
   end
 
   def new

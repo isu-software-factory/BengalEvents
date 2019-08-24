@@ -29,7 +29,7 @@ class TeamsController < ApplicationController
           invited_student = Student.find(@user.meta.id)
           UserMailer.invite(@student, invited_student, team).deliver_now
         else
-          flash[:notice] = "no such student exits, #{email}"
+          flash[:alert] = "no such student exits, #{email}"
           # error occurs
           @pass = false
         end
@@ -80,7 +80,7 @@ class TeamsController < ApplicationController
         render "invite"
       end
     else
-      flash[:notice] = @team.errors.full_messages
+      flash[:alert] = @team.errors.full_messages
       render :new
     end
   end
