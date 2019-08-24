@@ -1,4 +1,4 @@
-<h2>Registration Details</h2>
+<h2 class="info">Registration Details</h2>
 <div class="container">
   <div class="row">
     <div class="col-sm-8">
@@ -18,8 +18,10 @@
         </tr>
         </thead>
         <tbody>
+          <%@number = 1 %>
           <% @team.participant.event_details.each do |s| %>
             <tr>
+              <td><%=@number %></td>
               <td><%=Event.find(s.event_id).name %></td>
               <td><%=Event.find(s.event_id).description %></td>
               <td><%=Event.find(s.event_id).location.name %></td>
@@ -27,7 +29,7 @@
               <td><%=s.end_time %></td>
               <%if policy(@team).change? %>
                 <td>
-                  <%=button_to("Drop Event", {controller: "registrations", part_id: @team.participant.id, id: s.id, action: :drop}, data: {confirm: "Are you sure?"}) %>
+                  <%=button_to("Drop Event", {controller: "registrations", part_id: @team.participant.id, id: s.id, action: :drop}, class: "button", data: {confirm: "Are you sure?"}) %>
                 </td>
               <%end %>
             </tr>
@@ -39,11 +41,11 @@
 
 
     <div class="col-sm-4">
-      <div class="card w-100 text-white bg-secondary mb-3" >
+      <div class="card w-100 bengal-card mb-3" >
         <div class="card-header">Team Members</div>
         <div class="card-body">
-          <table class="table">
-            <thead class="thead-dark">
+          <table class="table bengal-table">
+            <thead class="thead-bengal">
             <tr>
               <th scope="col">Member</th>
               <th scope="col">Position</th>

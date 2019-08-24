@@ -114,6 +114,25 @@ a:hover {
     margin-top: 5px;
 }
 
+.navigation{
+    background-color: rgba(244,121,32, 0.8);
+    padding-left: 150px;
+}
+
+.navigation a{
+    color: #ffffff;
+}
+
+.navigation a:hover{
+    color: rgb(130,130,130);
+}
+
+/*Growling Gray 130,130, 130
+  Growling Gray Medium 167, 167, 167
+  Rorange 244,121,32
+  Rorange Light 246,146,64
+  Growling Gray Light 230,231,232
+  */
 /*.sign_up{*/
 /*    margin-top: 50px;*/
 /*    text-decoration-color: #ffffff;*/
