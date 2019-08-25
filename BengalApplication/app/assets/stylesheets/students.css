@@ -1,14 +1,13 @@
 
 
+
+
+.link-card:hover{
+  margin: 5px 0 0 0;
+}
+
 .team-bar{
     border-bottom-style: solid;
     border-width: 2px;
-    width: 100%;
+    margin-bottom: 8px;
 }
-
-.link-card:hover{
-    background: white;
-    margin: 10px 0 0 0;
-    cursor: pointer;
-}
-
