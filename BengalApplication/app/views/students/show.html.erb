@@ -68,7 +68,7 @@
           <%for i in 0..2 %>
             <%if @student.teams[@count] != nil %>
               <div class="col-sm-4">
-                <a class="link-card" href=<%=team_path(@student.teams[@count]) %> >
+                <a href=<%=team_path(@student.teams[@count]) %> >
                   <div class="card-w-100 text-white bg-secondary mb-3 link-card"  >
                    <div class="card-header">Team <%=@student.teams[@count].name %></div>
                    <div class="card-body">
