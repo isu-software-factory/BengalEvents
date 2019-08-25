@@ -1,40 +1,35 @@
 <% content_for(:title, "#{@occasion.name}") %>
+<div class="container">
+  <div class="row">
+    <div class="col-sm">
+      <h1> <%= @occasion.name %> </h1>
+      <%= render @occasion.locations %>
+      <% if policy(@location).new? %>
+        <p>
+          <%= link_to "Add Location", new_occasion_location_path(@occasion, @location) %>
+        </p>
+      <% end %>
+      <br>
 
-<h1> <%= @occasion.name %> </h1>
-<table>
-  <thead>
-  <tr>
-    <th>Name</th>
-    <th>Description</th>
-    <th>Start Date</th>
-    <th>End Date</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr>
-    <td><%= @occasion.name %> </td>
-    <td><%= @occasion.description %> </td>
-    <td><%= @occasion.start_date.strftime("%Y-%m-%d") %></td>
-    <td><%= @occasion.end_date.strftime("%Y-%m-%d") %></td>
-  </tr>
-  </tbody>
-</table>
+      <h2>List of Events</h2>
 
-<%= render @occasion.locations %>
-<% if policy(@location).new? %>
-  <p>
-    <%= link_to "Add Location", new_occasion_location_path(@occasion, @location) %>
-  </p>
-<% end %>
-<br>
-
-<h2>List of Events</h2>
-
-<%= render @occasion.events %>
-<p>
-  <%= link_to "Create an event", new_occasion_event_path(@occasion, @event) %>
-</p>
-<p>
-  <%= link_to "Home Page", occasions_path %>
-</p>
-
+      <%= render @occasion.events %>
+      <p>
+        <%= link_to "Create an event", new_occasion_event_path(@occasion, @event) %>
+      </p>
+      <p>
+        <%= link_to "Home Page", occasions_path %>
+      </p>
+    </div>
+    <div class="col-sm-3">
+      <div class="card border-dark mb-3" style="max-width: 18rem;">
+        <div class="card-header">Occasion's Information</div>
+        <div class="card-body text-dark">
+          <p class="card-text">Occasion Name: <%= @occasion.name %></p>
+          <p class="card-text">Start Time: <%= @occasion.start_date.strftime("%Y-%m-%d") %></p>
+          <p class="card-text">End Time: <%= @occasion.end_date.strftime("%Y-%m-%d") %></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

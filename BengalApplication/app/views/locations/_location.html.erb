@@ -4,42 +4,32 @@
       <p><%= e %></p>
     <% end %>
   <% end %>
-  <br>
-  <table>
-    <thead>
-    <tr>
-      <th>Location Name</th>
-      <th>Start Time</th>
-      <th>End Time</th>
-      <th>Intervals</th>
-      <th>Actions</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-      <td><%= location.name %></td>
-      <% location.time_slots.each do |t| %>
-        <td>
-          <%= t.start_time.strftime("%H:%M %p") %></td>
-        <td>
-          <%= t.end_time.strftime("%H:%M %p") %>
-        </td>
-        <td>
-          <%= t.interval %>
-        </td>
-      <% end %>
-      <td>
-        <%# if policy(location).show? %>
-          <%#= link_to "Show", occasion_location_path(@occasion, location) %>
-        <%# end %>
-        <% if policy(location).edit? %>
-          <%= link_to "Edit", edit_occasion_location_path(@occasion, location) %>
-        <% end %>
-        <% if policy(location).destroy? %>
-          <%= link_to "Delete", occasion_location_path(@occasion, location), method: :delete, data: {confirm: "Are you sure?"} %>
-        <% end %>
-      </td>
-    </tr>
-    </tbody>
-  </table>
+  <% location.time_slots.each do |t| %>
+    <div class="accordion" id="accordionExample">
+      <div class="card">
+        <div class="card-header" id="headingOne">
+          <h5 class="mb-0">
+            <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#<%= t.id %>" aria-expanded="true" aria-controls="collapseOne">
+               <%= t.location.name %>
+            </button>
+          </h5>
+        </div>
+        <div id="<%= t.id %>" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+          <div class="card-body">
+            <p>Start Time: <%= t.start_time.strftime("%H:%M %p") %> </p>
+            <p> End Time: <%= t.end_time.strftime("%H:%M %p") %> </p>
+            <p> Interval: <%= t.interval %> minutes </p>
+            <% if policy(location).edit? %>
+              <%= link_to "Edit", edit_occasion_location_path(@occasion, location) %>
+            <% end %>
+            <% if policy(location).destroy? %>
+              <%= link_to "Delete", occasion_location_path(@occasion, location), method: :delete, data: {confirm: "Are you sure?"} %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
 <% end %>
+
+
