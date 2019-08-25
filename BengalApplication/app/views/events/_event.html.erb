@@ -1,16 +1,6 @@
-<div>
-  <% if flash[:errors] %>
-    <% flash[:errors].each do |e| %>
-      <p><%= e %></p>
-    <% end %>
-  <% end %>
-</div>
-
-<br>
 <table>
   <thead>
   <tr>
-    <th>S.N</th>
     <th>Name</th>
     <th>Description</th>
     <th>Make ahead</th>
@@ -21,7 +11,6 @@
   </thead>
   <tbody>
   <tr>
-    <td><%= event.id %></td>
     <td><%= event.name %></td>
     <td><%= event.description %></td>
     <td><%= event.isMakeAhead %></td>
@@ -37,7 +26,7 @@
         <%= link_to "Delete", occasion_event_path(@occasion, event), method: :delete, data: {confirm: "Are you sure?"} %>
       <% end %>
     </td>
-<!--    <td><%#= event.supervisor.director.user.email %></td>-->
+    <td><%= event.supervisor.director.user.email %></td>
   </tr>
   </tbody>
 </table>

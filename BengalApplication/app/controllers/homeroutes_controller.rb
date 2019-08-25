@@ -18,6 +18,5 @@ class HomeroutesController < ApplicationController
       @occasion = Occasion.first
       @events = @occasion.events
     end
-
   end
 end

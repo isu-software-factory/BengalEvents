@@ -9,10 +9,13 @@
           <%= link_to "Add Location", new_occasion_location_path(@occasion, @location) %>
         </p>
       <% end %>
-      <br>
-
-      <h2>List of Events</h2>
-
+      <hr>
+      <h2>Events</h2>
+      <div class="alert alert-success" role="alert">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close"> &#88; </a>
+        <h4 class="alert-heading">What is this?</h4>
+        <p> These are the list of events created under this occasion.</p>
+      </div>
       <%= render @occasion.events %>
       <p>
         <%= link_to "Create an event", new_occasion_event_path(@occasion, @event) %>
@@ -21,6 +24,7 @@
         <%= link_to "Home Page", occasions_path %>
       </p>
     </div>
+
     <div class="col-sm-3">
       <div class="card border-dark mb-3" style="max-width: 18rem;">
         <div class="card-header">Occasion's Information</div>
@@ -33,3 +37,4 @@
     </div>
   </div>
 </div>
+
