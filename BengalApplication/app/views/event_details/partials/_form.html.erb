@@ -1,37 +1,49 @@
-
 <div class="page">
   <% if flash[:errors] %>
-  <% flash[:errors].each do |e| %>
-    <p><%= e %></p>
+    <% flash[:errors].each do |e| %>
+      <p><%= e %></p>
+    <% end %>
   <% end %>
-<% end %>
-<h2>Input Capacity, Start-time, and End-time for each sessions</h2>
+  <h2>Input Capacity, Start-time, and End-time for each sessions</h2>
 
-<%= form_for([@occasion, @event, @event_detail]) do |f| %>
+  <%= form_for([@occasion, @event, @event_detail], :html => {:class => "form-horizontal center"}) do |f| %>
+    <div class="form-group">
+      <%= f.label :capacity, " Maximum Capacity:", class: "col-md-4 control-label" %>
+      <div class="col-xs-2">
+        <%= f.text_field :capacity, placeholder: "Capacity", class: "form-control" %>
+      </div>
+    </div>
+    <p>
+      <%= hidden_field_tag 'location_name', @event.location.name %>
+    </p>
+    <div class="form-group">
+      <%= f.label :date_started, "Starting Date:", class: "col-md-4 control-label" %>
+      <div class="col-xs-2">
+        <%= f.select(:date_started, [['Select One', ""],], {}, id: 'selectDate', placeholder: "Capacity", class: "form-control") %>
+      </div>
+    </div>
+    <div class="form-group">
+      <%= f.label :start_time, "Start Time:", class: "col-md-4 control-label" %>
+      <div class="col-xs-2">
+        <%= f.select(:start_time, [['Select One', ""],], {}, id: 'selectStartTime', placeholder: "Capacity", class: "form-control") %>
+      </div>
+    </div>
+    <div class="form-group">
+      <%= f.label :end_time, "End Time:", class: "col-md-4 control-label" %>
+      <div class="col-xs-2">
+        <%= f.select(:end_time, [['Select One', ""],], {}, id: 'selectEndTime', placeholder: "Capacity", class: "form-control") %>
+      </div>
+    </div>
+    <!--    <p>-->
+    <%#= f.label :end_time %>
+    <%#= f.select(:end_time, [['Select One', ""],], {}, id: 'selectEndTime') %>
+    <!--    </p>-->
+    <div class="form-group">
+      <div class="col-md-4 control-label">
+        <%= f.submit "Create", class: "btn btn-default btn-primary" %>
+      </div>
+    </div>
+  <% end %>
 
-  <p>
-    <%= f.label :capacity %>
-    <%= f.text_field :capacity %>
-  </p>
-  <p>
-    <%= hidden_field_tag 'location_name', @event.location.name %>
-  </p>
-  <p>
-    <%= f.label :date_started %>
-    <%= f.select(:date_started, [['Select One', ""],], {}, id: 'selectDate') %>
-  </p>
-  <p>
-    <%= f.label :start_time %>
-    <%= f.select(:start_time, [['Select One', ""],], {}, id: 'selectStartTime') %>
-  </p>
-  <p>
-    <%= f.label :end_time %>
-    <%= f.select(:end_time, [['Select One', ""],], {}, id: 'selectEndTime') %>
-  </p>
-  <p>
-    <%= f.submit %>
-  </p>
-<% end %>
-
-<%= link_to "Go Back", occasion_event_path(@occasion, @event) %>
+  <%= link_to "Go Back", occasion_event_path(@occasion, @event) %>
 </div>

@@ -1,19 +1,9 @@
-<table>
-  <thead>
-  <tr>
-    <th>Name</th>
-    <th>Description</th>
-    <th>Make ahead</th>
-    <th>Location</th>
-    <th>Actions</th>
-    <th>Created By</th>
-  </tr>
-  </thead>
+
   <tbody>
   <tr>
     <td><%= event.name %></td>
     <td><%= event.description %></td>
-    <td><%= event.isMakeAhead %></td>
+    <td><%= event.isMakeAhead  %></td>
     <td><%= event.location.name %></td>
     <td>
       <% if policy(event).show? %>
@@ -29,5 +19,4 @@
     <td><%= event.supervisor.director.user.email %></td>
   </tr>
   </tbody>
-</table>
 

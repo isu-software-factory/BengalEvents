@@ -16,7 +16,24 @@
         <h4 class="alert-heading">What is this?</h4>
         <p> These are the list of events created under this occasion.</p>
       </div>
-      <%= render @occasion.events %>
+
+      <!-- Start of event Partial-->
+      <% if @occasion.events.present? %>
+        <table class="table">
+          <thead class="thead-dark">
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Description</th>
+            <th scope="col">Make Ahead</th>
+            <th scope="col">Location</th>
+            <th scope="col">Actions</th>
+            <th scope="col">Created By</th>
+          </tr>
+          </thead>
+          <%= render @occasion.events %>
+        </table>
+      <% end %>
+      <!--      End of event Partial-->
       <p>
         <%= link_to "Create an event", new_occasion_event_path(@occasion, @event) %>
       </p>
