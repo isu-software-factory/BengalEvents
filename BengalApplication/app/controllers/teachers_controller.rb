@@ -20,14 +20,15 @@ class TeachersController < ApplicationController
 
   def show
     @teacher = Teacher.find(params[:id])
-    respond_to do |format|
-      format.html
-      format.pdf do
-        doc = Prawn::Document.generate("test.pdf") do
-          text "Hello World"
-        end
-      end
-    end
+    # respond_to do |format|
+    #   format.html
+    #   format.pdf do
+    #     doc = Prawn::Document.generate("test.pdf") do
+    #       text "Hello World"
+    #     end
+    #   end
+    # end
+    @students = organize_students(@teacher.students)
     add_breadcrumb "Home", @teacher
   end
 
@@ -53,4 +54,7 @@ class TeachersController < ApplicationController
     params.require(:teacher).permit(:school, :name, :student_count, :chaperone_count, user_attributes: [:id, :email, :password, :password_confirmation])
   end
 
+  def organize_students(students_list)
+    students_list.sort_by{|s| s.name}
+  end
 end
