@@ -13,7 +13,7 @@
     <th>Registered</th>
   </tr>
   </thead>
-<% @teacher.students.each do |s| %>
+<% @students.each do |s| %>
     <tr>
       <td><%= link_to s.name, s %></td>
       <td><%=s.user.email %></td>

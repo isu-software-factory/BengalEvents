@@ -6,7 +6,11 @@ class EventsController < ApplicationController
 
   def new
     @event = current_user.meta.supervisor.events.build
+    @occasion = Occasion.find(params[:occasion_id])
     authorize @event
+    add_breadcrumb "Home", current_user.meta
+    add_breadcrumb @occasion.name, @occasion
+    add_breadcrumb "Create Event", new_occasion_event_path(@occasion)
   end
 
   def create
