@@ -1,8 +1,8 @@
-<h2>Fill in the information to create an account.</h2>
+<h1>To Create an account fill in the information.</h1>
 
 <% if @sponsor.errors.any? %>
   <div id="error_explanation">
-    <h2><%= pluralize(@sponsor.errors.count, "error") %> prohibited this post from being saved:</h2>
+    <h2>The form has <%= pluralize(@sponsor.errors.count, "error") %></h2>
     <ul>
       <% @sponsor.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
