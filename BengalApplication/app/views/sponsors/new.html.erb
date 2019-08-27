@@ -1,43 +1,8 @@
-<h1>Sign Up</h1>
-<h4>It's simple!</h4>
-<%= form_for @sponsor do |f| %>
-  <div class="row">
-    <div class="column"><%= f.label :name, "Your Name:  " %>
-    </div>
-    <div class="field-container"><%= f.text_field :name, placeholder: "Full Name", class: "field form-control" %>
-    </div>
-  </div>
-  <%= f.fields_for :user do |u| %>
-
-    <div class="row">
-      <div class="column"><%= u.label :email %>
-      </div>
-      <div class="field-container"> <%= u.email_field :email, placeholder: "Email", class: "field form-control" %>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="column">  <%= u.label :password %>
-      </div>
-      <div class="field-container">  <%= u.password_field :password, placeholder: "Password", class: "field form-control" %>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="column"><%= u.label :password_confirmation, "Re-enter Password" %>
-      </div>
-      <div class="field-container"><%= u.password_field :password_confirmation , placeholder: "Password", class: "field form-control" %>
-      </div>
-    </div>
-
-  <% end %>
-  <div class="actions"><%= submit_tag "Create Account", class: "button" %></div>
-<% end %>
+<h2>Fill in the information to create an account.</h2>
 
 <% if @sponsor.errors.any? %>
   <div id="error_explanation">
     <h2><%= pluralize(@sponsor.errors.count, "error") %> prohibited this post from being saved:</h2>
-
     <ul>
       <% @sponsor.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
@@ -45,3 +10,47 @@
     </ul>
   </div>
 <% end %>
+
+<div class="container">
+  <div id="loginbox" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+    <div class="panel panel-info">
+      <div class="panel-heading">
+        <div class="panel-title">Sign Up</div>
+      </div>
+      <div style="padding-top:30px" class="panel-body">
+        <%= form_for @sponsor, class: "form-horizontal" do |f| %>
+
+          <div style="margin-bottom: 25px" class="input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+            <%= f.text_field :name, placeholder: "Full Name", class: "form-control" %>
+          </div>
+
+          <%= f.fields_for :user do |u| %>
+
+            <div style="margin-bottom: 25px" class="input-group">
+              <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+              <%= u.email_field :email, placeholder: "Email", class: "form-control" %>
+            </div>
+
+            <div style="margin-bottom: 25px" class="input-group">
+              <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+              <%= u.password_field :password, placeholder: "Password", class: "form-control" %>
+            </div>
+
+            <div style="margin-bottom: 25px" class="input-group">
+              <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+              <%= u.password_field :password_confirmation, placeholder: "Confirm Password", class: "form-control" %>
+            </div>
+
+          <% end %>
+          <div style="margin-top:10px" class="form-group">
+            <!-- Button -->
+            <div class="col-sm-12 controls">
+              <%= submit_tag "Create Account", class: "btn btn-success" %></div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
