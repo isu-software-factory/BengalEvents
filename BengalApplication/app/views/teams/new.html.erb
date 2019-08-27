@@ -1,29 +1,25 @@
-<div class="new-profile ">
-  <div class="top-bar"><h1>Team Information</h1></div>
-    <div class="row">
-      <div class="col-sm-8 ">
-        <div class="team-section">
-          <div class="team-name">
-            <h2>Enter Team Name</h2>
-              <%=form_for @team do |f| %>
-                <%=f.text_field :name, placeholder: "Name", class: "field" %>
-          </div>
-
-          <h2>Invite Members</h2>
-          <div class="profile-field"><%=text_field_tag :email1, nil, placeholder: "Member Email", class: "field" %></div>
-          <div class="profile-field"><%=text_field_tag :email2, nil, placeholder: "Member Email", class: "field" %></div>
-          <div class="profile-field"><%=text_field_tag :email3, nil, placeholder: "Member Email", class: "field" %></div>
-          <div class="profile-field"><%=text_field_tag :email4, nil, placeholder: "Member Email", class: "field"%></div>
-          <div><%=f.submit "Create", class:"button full_button" %></div>
-            <%end %>
-            </div>
+<div class="container">
+  <div class="row">
+    <div class="col-sm">
+      <div class="card border-dark mb-3">
+        <div class="car-header dark-header">Team Information</div>
+        <div class="card-body text-dark">
+          <h2>Enter Team Name</h2>
+          <%=form_for @team do |f| %>
+            <%=f.text_field :name, placeholder: "Name", class: "field" %>
+            <h2>Invite Members</h2>
+            <div class="profile-field"><%=text_field_tag :email1, nil, placeholder: "Member Email", class: "field" %></div>
+            <div class="profile-field"><%=text_field_tag :email2, nil, placeholder: "Member Email", class: "field" %></div>
+            <div class="profile-field"><%=text_field_tag :email3, nil, placeholder: "Member Email", class: "field" %></div>
+            <div class="profile-field"><%=text_field_tag :email4, nil, placeholder: "Member Email", class: "field"%></div>
+            <div><%=f.submit "Create", class:"button full_button" %></div>
+          <%end %>
+        </div>
       </div>
-          <div class="col-sm-4">
-            <div class="team-info">
-              <p>The name you enter will be the name of your team. It will show up on the event registrations as your team</p>
-            </div>
-          </div>
     </div>
   </div>
 </div>
+
+
+
 

@@ -1,6 +1,6 @@
 <h1>Welcome, <%= @sponsor.name %></h1>
 <%= link_to "Go to Events", occasions_path %>
-<h3>Event (<%= current_user.meta.events.count %>)</h3>
+<h3>Event (<%= current_user.meta.supervisor.events.count %>)</h3>
 <table>
   <tr>
     <th>Name</th>
@@ -11,9 +11,9 @@
     <th>Start Time</th>
     <th>End Time</th>
   </tr>
-  <% if current_user.meta.events.any? %>
+  <% if current_user.meta.supervisor.events.any? %>
     <tr>
-      <% current_user.meta.events.each do |e| %>
+      <% current_user.meta.supervisor.events.each do |e| %>
         <% e.event_details.each do |d| %>
         <tr>
           <td><%= e.name %></td>

@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
   get 'groupings/add'
   devise_for :users, skip: :devise_registration
-  # devise_for :users, skip: :devise_registration
+  devise_for :users, skip: :sessions
+  devise_for :users, only: "homeroutes#routes"
+
+      # devise_for :users, skip: :devise_registration
   resources :teachers
   resources :students
   resources :sponsors
