@@ -36,6 +36,11 @@
     text-align: left;
     padding-left: 150px;
 }
+
+.dark-header{
+    background: #000000;
+    color: orange;
+}
 .bengal-card{
     background: rgba(244,121,32, 0.85);
     color: rgb(0,0,0);

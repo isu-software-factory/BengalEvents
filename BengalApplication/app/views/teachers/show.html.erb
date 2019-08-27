@@ -3,53 +3,74 @@
     <p><%= e %></p>
   <% end %>
 <% end %>
-<h1>Teachers Main Page</h1>
-<h2>Students</h2>
-<table>
-  <thead>
-  <tr>
-    <th>Name</th>
-    <th>Email</th>
-    <th>Registered</th>
-  </tr>
-  </thead>
-<% @students.each do |s| %>
-    <tr>
-      <td><%= link_to s.name, s %></td>
-      <td><%=s.user.email %></td>
-      <td><%= Registration.exists?(s.participant.id) %></td>
-    </tr>
-  <% end %>
-</table>
-<div><%= link_to "Add Students", new_student_path %></div>
 
-<h2>Registration Details</h2>
-<% if Registration.exists?(@teacher.participant.id) %>
-<table>
-  <thead>
-  <tr>
-    <th>Name</th>
-    <th>Description</th>
-    <th>Start Time</th>
-    <th>End Time</th>
-    <th>Remove</th>
-  </tr>
 
-  </thead>
-  <% @teacher.participant.event_details.each do |s| %>
-    <tr>
-      <td><%=Event.find(s.event_id).name %></td>
-      <td><%=Event.find(s.event_id).description %></td>
-      <td><%=s.start_time %></td>
-      <td><%=s.end_time %></td>
-      <td><%=button_to("Drop",  {method: :post, controller: "registrations", action: :drop, part_id: @teacher.participant.id, id:s.id}, data: {confirm: "Are you sure?"})%></td>
-    </tr>
-  <% end %>
-</table>
-  <% else %>
-  <p>You haven't registered for anything yet!</p>
-  <% end %>
-<div>
-<%=link_to "Register for events", controller: "registrations", action: "index", part_id: @teacher.participant.id %>
+<div class="container">
+  <div class="row">
+      <div class="col-sm">
+      <h2>My Students</h2>
+      <table class="table">
+        <thead class="thead-dark">
+        <tr>
+          <th scope="col">Name</th>
+          <th scope="col">Email</th>
+          <th scope="col">Registered For Events</th>
+        </tr>
+        </thead>
+        <tbody>
+          <% @students.each do |s| %>
+            <tr>
+              <th scope="row"><%=s.name %></th>
+              <td><%=s.user.email %></td>
+              <td><%= Registration.exists?(s.participant.id)? "Yes":"No" %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+
+
+    <div class="col-sm-3">
+      <div>
+        <div class="card border-dark mb-3" style="max-width: 18rem;">
+          <div class="card-header">Actions</div>
+          <div class="card-body text-dark">
+            <p class="card-text">If you forgot to add a student, then you can add another student here.</p>
+            <p class="card-text"><%=link_to "Add Student", new_student_path %></p>
+            <p class="card-text">You can register for events yourself. Register for an event to participate in.</p>
+            <p class="card-text"><%=link_to "Register for events", controller: "registrations", action: "index", part_id: @teacher.participant.id %></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm">
+      <% if @teacher.participant.event_details.count > 0 %>
+        <h2>Events Registered For</h2>
+        <table class="table">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">Name</th>
+              <th scope="col">Description</th>
+              <th scope="col">Start Time</th>
+              <th scope="col">End Time</th>
+              <th scope="col">Remove</th>
+            </tr>
+          </thead>
+          <tbody>
+            <%@teacher.participant.event_details.each do |s| %>
+            <th scope="row"><%=Event.find(s.event_id).name %></th>
+            <td><%=Event.find(s.event_id).description %></td>
+            <td><%=s.start_time %></td>
+            <td><%=s.end_time %></td>
+            <td><%=button_to("Drop",  {method: :post, controller: "registrations", action: :drop, part_id: @teacher.participant.id, id:s.id}, class: "button", data: {confirm: "Are you sure?"}) %></td>
+            <%end %>
+          </tbody>
+        </table>
+      <%end %>
+    </div>
+  </div>
 </div>
-<div><%= link_to "Edit Account Details", controller: "teachers", action: "edit" %></div>
+

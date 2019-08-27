@@ -30,7 +30,7 @@ class OccasionsController < ApplicationController
     @location = Location.all
     @occasion = Occasion.find(params[:id])
     authorize @occasion
-    add_breadcrumb "Home", coordinator_path(current_user.meta)
+    add_breadcrumb "Home", current_user.meta
     add_breadcrumb @occasion.name, occasion_path(@occasion)
   end
 
