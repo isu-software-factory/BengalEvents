@@ -14,6 +14,10 @@ class EventDetailsController < ApplicationController
     @event_details.end_time = @event_details.date_started.to_s + " " + @event_details.end_time.strftime("%H:%M")
     authorize @event_details
     if @event_details.save
+      # add a waitlist to event
+      @waitlist = Waitlist.new
+      @waitlist.event_detail = @event_details
+      @waitlist.save
       # binding.pry
       redirect_to occasion_event_path(@occasion, @event), :notice => "Successfully created Event Session."
     else

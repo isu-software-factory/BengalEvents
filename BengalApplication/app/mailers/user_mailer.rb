@@ -14,4 +14,15 @@ class UserMailer < ApplicationMailer
     @student = student
     mail(to: @student.user.email, subject: "Team Invite" )
   end
+
+  def notice(participant, event)
+    @participant = participant
+    @event = event
+    if @participant.member_type == "Team"
+      mail(to: @participant.member.get_lead.user.email, subject: "Registration Notice")
+    else
+      mail(to: @participant.member.user.email, subject: "Registration Notice")
+    end
+
+  end
 end

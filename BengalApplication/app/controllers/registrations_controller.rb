@@ -68,6 +68,14 @@ class RegistrationsController < ApplicationController
 
   end
 
+  def add_to_waitlist
+    # adds the participant to the events waitlist
+    @participant = Participant.find(params[:part_id])
+    @event_detail = EventDetail.find(params[:id])
+
+    @event_detail.waitlist.participants << @participant
+    redirect_to @participant.member, :notice => "You have been added to the waitlist"
+  end
   def drop
     # drop participants from events
     @participant = Participant.find(params[:part_id])
@@ -75,6 +83,9 @@ class RegistrationsController < ApplicationController
 
     authorize @participant, policy_class: RegistrationPolicy
     @event_detail.participants.delete(@participant)
+
+    # when participant is drop check waitlist
+    @event_detail.wait_list_check
     redirect_to @participant.member
   end
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_21_014125) do
+ActiveRecord::Schema.define(version: 2019_08_28_150829) do
 
   create_table "admins", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -81,6 +81,8 @@ ActiveRecord::Schema.define(version: 2019_08_21_014125) do
     t.datetime "updated_at", null: false
     t.integer "member_id"
     t.string "member_type"
+    t.integer "waitlist_id"
+    t.index ["waitlist_id"], name: "index_participants_on_waitlist_id"
   end
 
   create_table "registrations", force: :cascade do |t|
@@ -151,6 +153,13 @@ ActiveRecord::Schema.define(version: 2019_08_21_014125) do
     t.string "meta_type"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  end
+
+  create_table "waitlists", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "event_detail_id"
+    t.index ["event_detail_id"], name: "index_waitlists_on_event_detail_id"
   end
 
 end

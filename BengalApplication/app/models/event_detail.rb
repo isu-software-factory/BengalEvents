@@ -12,6 +12,7 @@
 #
 
 class EventDetail < ApplicationRecord
+  has_one :waitlist
   belongs_to :event
   has_many :registrations
   has_many :participants, through: :registrations
@@ -59,5 +60,23 @@ class EventDetail < ApplicationRecord
     @remaining
   end
 
+  # sends an email to a participant and automatically registers student for event
+  def wait_list_check
+    # checks to see if the even has a spot open and if there is anyone on the wait list
+    if self.capacity_remaining > 0
+      if self.waitlist.participants.count > 0
+        # get first person on wait_list
+        @participant = self.waitlist.participants[0]
+
+        # register participant and send email
+        self.register_participant(@participant)
+        UserMailer.notice(@participant.member.user, self).deliver_now
+
+        # remove participant from waitlist
+        self.waitlist.participants.delete(@participant)
+      end
+    end
+
+  end
 
 end
