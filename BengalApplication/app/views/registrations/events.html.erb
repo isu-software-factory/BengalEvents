@@ -12,38 +12,38 @@
 </div>
 
 <h1>Events</h1>
-  <%@events.each do |e| %>
-    <table>
-      <thead>
+<% @events.each do |e| %>
+  <table>
+    <thead>
+    <tr>
+      <th>Name</th>
+      <th>Location</th>
+      <th>Description</th>
+    </tr>
+    </thead>
+    <tr>
+      <td><%= e.name %></td>
+      <td><%= e.location.name %></td>
+      <td><%= e.description %></td>
+    </tr>
+    <thead>
+    <tr>
+      <th>Capacity</th>
+      <th>Start Time</th>
+      <th>End Time</th>
+      <th>Register</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% e.event_details.each do |ed| %>
       <tr>
-        <th>Name</th>
-        <th>Location</th>
-        <th>Description</th>
+        <td><%= ed.capacity_remaining %></td>
+        <td><%= ed.start_time.strftime("%F %H:%M %p") %></td>
+        <td><%= ed.end_time.strftime("%F %H:%M %p") %></td>
+        <td><%= link_to "Register", controller: "registrations", action: "register", part_id: @participant_id, id: ed.id %></td>
       </tr>
-      </thead>
-      <tr>
-        <td><%=e.name %></td>
-        <td><%=e.location.name %></td>
-        <td><%=e.description %></td>
-      </tr>
-      <thead>
-      <tr>
-        <th>Capacity</th>
-        <th>Start Time</th>
-        <th>End Time</th>
-        <th>Register</th>
-      </tr>
-      </thead>
-      <tbody>
-      <%e.event_details.each do |ed| %>
-        <tr>
-          <td><%=ed.capacity_remaining %></td>
-          <td><%= ed.start_time %></td>
-          <td><%= ed.end_time %></td>
-          <td><%=link_to "Register", controller: "registrations", action: "register", part_id: @participant_id, id:ed.id %></td>
-        </tr>
-      <%end %>
-      </tbody>
-    </table>
-  <%end %>
+    <% end %>
+    </tbody>
+  </table>
+<% end %>
 

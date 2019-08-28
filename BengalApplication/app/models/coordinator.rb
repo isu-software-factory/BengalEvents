@@ -15,6 +15,5 @@ class Coordinator < ApplicationRecord
   accepts_nested_attributes_for :supervisor
   has_many :occasions
   has_many :events
-
   validates :name, presence: true
 end

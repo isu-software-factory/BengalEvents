@@ -2,20 +2,25 @@
 <div class="container">
   <div class="row">
     <div class="col-sm">
-      <h1> <%= @occasion.name %> </h1>
 
-      <div class="alert alert-success" role="alert">
-        <a href="#" class="close" data-dismiss="alert" aria-label="close"> &#88; </a>
-        <h4 class="alert-heading">What is this?</h4>
-        <p>- Click on the Location Name to view more Details.</p>
-      </div>
+      <% if current_user.meta.supervisor == "Coordinator" %>
+        <h1> <%= @occasion.name %> </h1>
 
-      <%= render @occasion.locations %>
-      <br>
-      <% if policy(@location).new? %>
-         <%= link_to "Add Location", new_occasion_location_path(@occasion, @location), class:"btn btn-primary" %>
+        <div class="alert alert-success" role="alert">
+          <a href="#" class="close" data-dismiss="alert" aria-label="close"> &#88; </a>
+          <h4 class="alert-heading">What is this?</h4>
+          <p>- Click on the Location Name to view more Details.</p>
+        </div>
+
+        <%= render @occasion.locations %>
+        <br>
+        <% if policy(@location).new? %>
+          <%= link_to "Add Location", new_occasion_location_path(@occasion, @location), class: "btn btn-primary" %>
+        <% end %>
+        <hr>
       <% end %>
-      <hr>
+
+      <!-- Start of event Partial-->
       <h2>Events</h2>
       <div class="alert alert-success" role="alert">
         <a href="#" class="close" data-dismiss="alert" aria-label="close"> &#88; </a>
@@ -23,7 +28,6 @@
         <p> - These are the list of events created under this occasion.</p>
       </div>
 
-      <!-- Start of event Partial-->
       <% if @occasion.events.present? %>
         <table class="table">
           <thead class="thead-dark">
@@ -41,10 +45,10 @@
       <% end %>
       <!--      End of event Partial-->
       <p>
-        <%= link_to "Create an event", new_occasion_event_path(@occasion, @event),class:"btn btn-primary" %>
+        <%= link_to "Create an event", new_occasion_event_path(@occasion, @event), class: "btn btn-primary" %>
       </p>
       <p>
-        <%= link_to "Home Page", occasions_path, class:"btn btn-outline-success" %>
+        <%= link_to "Home Page", occasions_path, class: "btn btn-outline-success" %>
       </p>
     </div>
 
