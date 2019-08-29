@@ -17,7 +17,7 @@ class RegistrationsController < ApplicationController
       redirect_to @participant.member
     else
       event = Event.find(event_detail.event.id)
-      occasion = Occasion.find(event.id)
+      occasion = Occasion.find(event.occasion.id)
       # capacity is full
       if event_detail.capacity_remaining == 0
         flash[:alert] = "Event capacity is full. Register for a different event."

@@ -35,6 +35,7 @@ class EventDetail < ApplicationRecord
     unless self.participants.include?(participant)
       unless self.capacity_remaining == 0
         self.participants << participant
+        send_make_ahead(participant)
         true
       else
         false
@@ -70,13 +71,25 @@ class EventDetail < ApplicationRecord
 
         # register participant and send email
         self.register_participant(@participant)
-        UserMailer.notice(@participant.member.user, self).deliver_now
+        UserMailer.notice(@participant, self).deliver_now
 
         # remove participant from waitlist
         self.waitlist.participants.delete(@participant)
       end
     end
-
   end
 
+  # make ahead email will be sent to all registered participant
+  def send_make_ahead(participant)
+    if self.event.isMakeAhead
+      # send email one week prior to event
+      @week = self.date_started - 7
+      @day = self.date_started - 1
+      if @week > Date.today
+        UserMailer.event_notice(participant, self.event).deliver_later(wait_until: @week)
+        # send an email 1 day before event
+        UserMailer.event_notice(participant, self.event).deliver_later(wait_until: @day)
+      end
+    end
+  end
 end

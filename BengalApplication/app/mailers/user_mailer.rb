@@ -25,4 +25,15 @@ class UserMailer < ApplicationMailer
     end
 
   end
+
+  def event_notice(participant, event)
+    @participant = participant
+    @event = event
+
+    if @participant.member_type == "Team"
+      mail(to: @participant.member.get_lead.user.email, subject: "Event Notice")
+    else
+      mail(to: @participant.member.user.email, subject: "Event Notice")
+    end
+  end
 end

@@ -21,4 +21,6 @@ class Event < ApplicationRecord
   validates :name, presence: true
   validates :description, presence: true
   # validates :isMakeAhead, presence: true
+  #
+  #
 end
