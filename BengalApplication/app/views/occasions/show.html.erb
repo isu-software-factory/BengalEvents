@@ -3,7 +3,6 @@
   <div class="row">
     <div class="col-sm">
 
-      <% if current_user.meta.supervisor == "Coordinator" %>
         <h1> <%= @occasion.name %> </h1>
 
         <div class="alert alert-success" role="alert">
@@ -18,7 +17,6 @@
           <%= link_to "Add Location", new_occasion_location_path(@occasion, @location), class: "btn btn-primary" %>
         <% end %>
         <hr>
-      <% end %>
 
       <!-- Start of event Partial-->
       <h2>Events</h2>

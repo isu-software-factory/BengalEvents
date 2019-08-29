@@ -12,38 +12,53 @@
 </div>
 
 <h1>Events</h1>
-<% @events.each do |e| %>
-  <table>
-    <thead>
+<table class="table">
+  <thead class="thead-dark">
     <tr>
-      <th>Name</th>
-      <th>Location</th>
-      <th>Description</th>
+      <th scope="col">Name</th>
+      <th scope="col">Location</th>
+      <th scope="col">Description</th>
     </tr>
-    </thead>
-    <tr>
-      <td><%= e.name %></td>
-      <td><%= e.location.name %></td>
-      <td><%= e.description %></td>
-    </tr>
-    <thead>
-    <tr>
-      <th>Capacity</th>
-      <th>Start Time</th>
-      <th>End Time</th>
-      <th>Register</th>
-    </tr>
-    </thead>
-    <tbody>
-    <% e.event_details.each do |ed| %>
-      <tr>
-        <td><%= ed.capacity_remaining %></td>
-        <td><%= ed.start_time.strftime("%F %H:%M %p") %></td>
-        <td><%= ed.end_time.strftime("%F %H:%M %p") %></td>
-        <td><%= link_to "Register", controller: "registrations", action: "register", part_id: @participant_id, id: ed.id %></td>
-      </tr>
-    <% end %>
-    </tbody>
-  </table>
-<% end %>
+  </thead>
+</table>
+
+
+
+<%@events.each do |e| %>
+  <div class="accordion" id="accordionExample">
+    <div class="card border-dark mb-3">
+      <div class="card-header" id="headingOne">
+        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#<%=e.id %>" aria-expanded="false" aria-controls="collapseOne">
+           <%=e.name %>
+        </button>
+      </div>
+
+      <div id="<%=e.id %>" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+        <div class="card-body">
+          <table class="table">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">Capacity Remaining</th>
+                <th scope="col">Start Time</th>
+                <th scope="col">End Time</th>
+                <th scope="col">Register</th>
+              </tr>
+            </thead>
+            <tbody>
+              <%e.event_details.each do |ed| %>
+                <tr>
+                  <td><%=ed.capacity_remaining %></td>
+                  <td><%= ed.start_time %></td>
+                  <td><%= ed.end_time %></td>
+                  <td><%=link_to "Register", controller: "registrations", action: "register", part_id: @participant_id, id:ed.id %></td>
+                </tr>
+              <%end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+<%end %>
+
 
