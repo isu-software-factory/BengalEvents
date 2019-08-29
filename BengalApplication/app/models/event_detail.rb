@@ -85,9 +85,13 @@ class EventDetail < ApplicationRecord
       # send email one week prior to event
       @week = self.date_started - 7
       @day = self.date_started - 1
+
       if @week > Date.today
         UserMailer.event_notice(participant, self.event).deliver_later(wait_until: @week)
-        # send an email 1 day before event
+      end
+
+      # send an email 1 day before event
+      if @day > Date.today
         UserMailer.event_notice(participant, self.event).deliver_later(wait_until: @day)
       end
     end
