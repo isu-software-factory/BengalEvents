@@ -12,6 +12,7 @@
 #
 
 class EventDetail < ApplicationRecord
+  has_one :waitlist
   belongs_to :event
   has_many :registrations
   has_many :participants, through: :registrations
@@ -34,6 +35,7 @@ class EventDetail < ApplicationRecord
     unless self.participants.include?(participant)
       unless self.capacity_remaining == 0
         self.participants << participant
+        send_make_ahead(participant)
         true
       else
         false
@@ -59,5 +61,39 @@ class EventDetail < ApplicationRecord
     @remaining
   end
 
+  # sends an email to a participant and automatically registers student for event
+  def wait_list_check
+    # checks to see if the even has a spot open and if there is anyone on the wait list
+    if self.capacity_remaining > 0
+      if self.waitlist.participants.count > 0
+        # get first person on wait_list
+        @participant = self.waitlist.participants[0]
 
+        # register participant and send email
+        self.register_participant(@participant)
+        UserMailer.notice(@participant, self).deliver_now
+
+        # remove participant from waitlist
+        self.waitlist.participants.delete(@participant)
+      end
+    end
+  end
+
+  # make ahead email will be sent to all registered participant
+  def send_make_ahead(participant)
+    if self.event.isMakeAhead
+      # send email one week prior to event
+      @week = self.date_started - 7
+      @day = self.date_started - 1
+
+      if @week > Date.today
+        UserMailer.event_notice(participant, self.event).deliver_later(wait_until: @week)
+      end
+
+      # send an email 1 day before event
+      if @day > Date.today
+        UserMailer.event_notice(participant, self.event).deliver_later(wait_until: @day)
+      end
+    end
+  end
 end

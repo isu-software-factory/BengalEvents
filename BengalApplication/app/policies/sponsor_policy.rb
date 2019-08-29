@@ -1,7 +1,7 @@
 class SponsorPolicy < ApplicationPolicy
 
   def show?
-    @user.meta_type == "Sponsor"
+    @user.meta_type == "Sponsor" && @user.meta.id == @record.id
   end
 
 

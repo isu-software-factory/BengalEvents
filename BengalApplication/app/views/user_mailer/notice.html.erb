@@ -1,0 +1,15 @@
+<%if @participant.member_type == "Team" %>
+  <h1>You're team has been automatically registered for <%=@event.event.name %></h1>
+
+  <p>You're team was on the wait list for the event <%=@event.event.name %> and a spot was just opened.</p>
+  <p>The team has been registered automatically, but if you changed your mind and don't want to be registered
+  for this event then you can go back and drop the event.</p>
+  <p>click here to login <%=root_url %></p>
+  <%else %>
+  <h1>You have been automatically registered for <%=@event.event.name %></h1>
+
+  <p>You were on the wait list for the event <%=@event.event.name %> and a spot was just opened.</p>
+  <p>You have been registered automatically, but if you changed your mind and don't want to be registered
+    for this event then you can go back and drop the event.</p>
+  <p>click here to login <%=root_url %></p>
+<%end %>

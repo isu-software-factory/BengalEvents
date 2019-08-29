@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   get "teams/:id/invite" => "teams#invite"
   post "groupings/drop/:part_id/:id" => "groupings#drop"
   post "registrations/drop/:part_id/:id" => "registrations#drop"
+  get "registrations/add_to_waitlist/:part_id/:id" => "registrations#add_to_waitlist"
   get "slots/:name" => "events#location_timeslots"
 
   resources :teams
