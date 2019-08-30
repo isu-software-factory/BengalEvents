@@ -32,6 +32,15 @@ class TeachersController < ApplicationController
     add_breadcrumb "Home", @teacher
   end
 
+  def class_registrations
+    # display every student registrations
+    @teacher = Teacher.find(params[:id])
+    @students = @teacher.students
+    add_breadcrumb "Home", current_user.meta
+    add_breadcrumb "Class Registrations", controller: "teachers", action: "class_registrations", id: @teacher.id
+  end
+
+
   def edit
     @teacher = Teacher.find(params[:id])
     authorize @teacher

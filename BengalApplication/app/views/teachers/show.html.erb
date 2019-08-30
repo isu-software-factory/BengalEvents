@@ -20,7 +20,7 @@
         <tbody>
           <% @students.each do |s| %>
             <tr>
-              <th scope="row"><%=link_to s.name, s %></th>
+              <th scope="row"><%=Registration.exists?(s.participant.id)? (link_to s.name, controller: "students", action: "schedule", id: s.id):s.name %></th>
               <td><%=s.user.email %></td>
               <td><%= Registration.exists?(s.participant.id)? "Yes":"No" %></td>
             </tr>
@@ -39,6 +39,8 @@
             <p class="card-text"><%=link_to "Add Student", new_student_path %></p>
             <p class="card-text">You can register for events yourself. Register for an event to participate in.</p>
             <p class="card-text"><%=link_to "Register for events", controller: "registrations", action: "index", part_id: @teacher.participant.id %></p>
+            <p class="card-text">You can view the registration details of all your class as one class.</p>
+            <p class="card-text"><%=link_to "View Class Registrations", controller: "teachers", action: "class_registrations", id: @teacher.id%></p>
           </div>
         </div>
       </div>
