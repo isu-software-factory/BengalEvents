@@ -14,7 +14,11 @@ class RegistrationsController < ApplicationController
     success = event_detail.register_participant(@participant)
 
     if success
-      redirect_to @participant.member
+      if event_detail.isMakeAhead
+        redirect_to @participant.member, :notice => "You will be sent and email prior to the event."
+      else
+        redirect_to @participant.member, :notice => "Successfully registered for #{event_detail.event.name}"
+      end
     else
       event = Event.find(event_detail.event.id)
       occasion = Occasion.find(event.occasion.id)
