@@ -3,12 +3,13 @@ Rails.application.routes.draw do
   devise_for :users, skip: :devise_registration
   devise_for :users, skip: :sessions
   devise_for :users, only: "homeroutes#routes"
-
       # devise_for :users, skip: :devise_registration
   resources :teachers
   resources :students
   resources :sponsors
   resources :coordinators
+  get "teachers/class_registrations/:id" => "teachers#class_registrations"
+  get "students/schedule/:id" => "students#schedule"
   get "groupings/add/:id/:team_id" => "groupings#add"
   get 'registrations/index/:part_id' => "registrations#index"
   get "registrations/register/:part_id/:id" => "registrations#register"

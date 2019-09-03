@@ -7,6 +7,13 @@ class StudentsController < ApplicationController
      @students = Student.where("teacher_id = ?", params[:teacher_id])
    end
 
+  def schedule
+    # shows the schedule of a student
+    @student = Student.find(params[:id])
+    add_breadcrumb "Home", current_user.meta
+    add_breadcrumb "#{@student.name}'s Schedule", controller: "students", action: "schedule", id: @student.id
+  end
+
   def show
     @student = Student.find(params[:id])
     authorize @student
