@@ -29,6 +29,14 @@ class OccasionsController < ApplicationController
   def show
     @location = Location.all
     @occasion = Occasion.find(params[:id])
+    respond_to do |format|
+      format.html
+      format.pdf do
+        pdf = OccasionPdf.new(@occasion)
+        send_data pdf.render, filename: "occasion.pdf",
+                  type: "application/pdf", disposition: "inline"
+      end
+    end
     authorize @occasion
     add_breadcrumb "Home", current_user.meta
     add_breadcrumb @occasion.name, occasion_path(@occasion)

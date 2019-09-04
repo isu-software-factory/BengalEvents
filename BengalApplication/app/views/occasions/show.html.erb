@@ -3,20 +3,20 @@
   <div class="row">
     <div class="col-sm">
 
-        <h1> <%= @occasion.name %> </h1>
+      <h1> <%= @occasion.name %> </h1>
 
-        <div class="alert alert-success" role="alert">
-          <a href="#" class="close" data-dismiss="alert" aria-label="close"> &#88; </a>
-          <h4 class="alert-heading">What is this?</h4>
-          <p>- Click on the Location Name to view more Details.</p>
-        </div>
+      <div class="alert alert-success" role="alert">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close"> &#88; </a>
+        <h4 class="alert-heading">What is this?</h4>
+        <p>- Click on the Location Name to view more Details.</p>
+      </div>
 
-        <%= render @occasion.locations %>
-        <br>
-        <% if policy(@location).new? %>
-          <%= link_to "Add Location", new_occasion_location_path(@occasion, @location), class: "btn btn-primary" %>
-        <% end %>
-        <hr>
+      <%= render @occasion.locations %>
+      <br>
+      <% if policy(@location).new? %>
+        <%= link_to "Add Location", new_occasion_location_path(@occasion, @location), class: "btn btn-primary" %>
+      <% end %>
+      <hr>
 
       <!-- Start of event Partial-->
       <h2>Events</h2>
@@ -63,3 +63,4 @@
   </div>
 </div>
 
+<p><%= link_to "Print", occasion_path(@occasion, format: "pdf") %></p>
