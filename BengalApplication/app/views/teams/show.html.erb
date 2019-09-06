@@ -94,6 +94,7 @@
             <%end %>
             <%else %>
               <p>Your team lead will register the team for events. Talk to them to agree on what events you want to take.</p>
+              <p><%=button_to("Leave This Team",  {method: :post, controller: "groupings", action: :drop, part_id: current_user.meta.id, id: @team.id}, class: "button", data: {confirm: "Are you sure?"}) %></p>
           <%end %>
         </div>
           </div>
