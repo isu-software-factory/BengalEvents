@@ -24,6 +24,11 @@ class GroupingsController < ApplicationController
 
     authorize team
     team.students.delete(student)
-    redirect_to team
+
+    if student == team.get_lead
+      redirect_to team
+    else
+      redirect_to student
+    end
   end
 end

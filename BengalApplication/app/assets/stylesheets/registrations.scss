@@ -3,6 +3,26 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 
-.event-content{
-  display: none;
+tr.event-collapse:hover td{
+  background-color: rgb(246,146,64);
+  cursor: pointer;
+  color: white;
+}
+.event-collapse td{
+  background-color: rgb(244,121,32);
+  color: black;
+  font-size: 1.5em;
+}
+.events:hover td{
+  background-color: rgb(196, 193, 188);
+}
+.thead-secondary{
+  background-color: rgb(152, 153, 156);
+}
+.hide{
+  visibility: hidden;
+}
+
+.show{
+  visibility: visible;
 }

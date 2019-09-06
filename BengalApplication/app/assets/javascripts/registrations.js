@@ -2,18 +2,23 @@
 
 $(document).ready(function(){
 
-        // get all collapse elements
-        var elements = $(".collapse");
 
-        elements.each(function(){
-            this.onclick(function(){
-                var event_details = this.nextElementSibling;
-                if (event_details.style.display === "block"){
-                    event_details.style.display = "none";
-                }else{
-                    event_details.style.display = "block";
-                }
-            })
-        })
+    // get all collapse elements
+    $(".event-collapse").click(function(event){
+        var target = event.currentTarget;
+        var children = target.nextSibling.nextSibling.childNodes;
+        var collpaseEvent = children[1].childNodes;
+        var collpaseEventElement = collpaseEvent[1];
+
+        if (collpaseEventElement.className == "show"){
+            collpaseEventElement.className = "hide";
+        }
+        else{
+            collpaseEventElement.className = "show";
+        }
+
+    });
+
+
 
 });
