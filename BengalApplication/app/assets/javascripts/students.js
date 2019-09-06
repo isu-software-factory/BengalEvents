@@ -1,7 +1,10 @@
 
 
 $(document).ready(function(){
-   if ($(".student-schedule") != null){
+    var element = document.getElementsByClassName("student-schedule");
+    alert(element.tagName);
+   if (!(element.tagName === 'undefined')){
+       alert(element.tagName);
        print(this);
    }
 });
