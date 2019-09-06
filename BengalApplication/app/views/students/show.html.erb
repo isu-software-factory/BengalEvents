@@ -69,7 +69,7 @@
             <%if @student.teams[@count] != nil %>
               <div class="col-sm-4">
                 <a href=<%=team_path(@student.teams[@count]) %> >
-                  <div class="card-w-100 text-white <%=@random_card[Random.rand(5)] %> mb-3 link-card"  >
+                  <div class="card-w-100 text-white <%=@random_card[Random.rand(4)] %> mb-3 link-card"  >
                    <div class="card-header">Team <%=@student.teams[@count].name %></div>
                    <div class="card-body">
                     <p>This team has registered for <%=@student.teams[@count].participant.event_details.count %></p>

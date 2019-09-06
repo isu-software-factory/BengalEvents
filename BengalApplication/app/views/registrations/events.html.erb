@@ -27,18 +27,21 @@
         <td><%=e.location.name %></td>
         <td><%=e.description %></td>
       </tr>
-      <table class="table event-content">
-        <thead class="thead-dark">
+      <tr>
+        <td>
+          <div class="hide">
+        <table class="table">
+          <thead class="thead-secondary">
           <tr>
             <th scope="col">Capacity Remaining</th>
             <th scope="col">Start Time</th>
             <th scope="col">End Time</th>
             <th scope="col">Register</th>
           </tr>
-        </thead>
-        <tbody>
+          </thead>
+          <tbody>
           <%e.event_details.each do |ed| %>
-            <tr>
+            <tr class="events">
               <td><%=ed.capacity_remaining %></td>
               <td><%= ed.start_time %></td>
               <td><%= ed.end_time %></td>
@@ -48,8 +51,11 @@
                 <%end %>
             </tr>
           <%end %>
-        </tbody>
-      </table>
+          </tbody>
+        </table>
+          </div>
+        </td>
+      </tr>
     <% end %>
   </tbody>
 </table>
