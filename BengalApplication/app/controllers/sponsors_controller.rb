@@ -20,6 +20,14 @@ class SponsorsController < ApplicationController
   def show
     @sponsor = Sponsor.find(params[:id])
     @occasions = Occasion.all
+    respond_to do |format|
+      format.html
+      format.pdf do
+        pdf = SponsorPdf.new(@sponsor)
+        send_data pdf.render, filename: "sponsor.pdf",
+                  type: "application/pdf", disposition: "inline"
+      end
+    end
     add_breadcrumb "Home", @sponsor
   end
 
