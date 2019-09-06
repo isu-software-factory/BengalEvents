@@ -2,18 +2,34 @@
   <div class="row">
     <div class="col-sm">
       <div class="card border-dark mb-3">
-        <div class="car-header dark-header">Team Information</div>
-        <div class="card-body text-dark">
-          <h2>Enter Team Name</h2>
-          <%=form_for @team do |f| %>
-            <%=f.text_field :name, placeholder: "Name", class: "field" %>
-            <h2>Invite Members</h2>
-            <div class="profile-field"><%=text_field_tag :email1, nil, placeholder: "Member Email", class: "field" %></div>
-            <div class="profile-field"><%=text_field_tag :email2, nil, placeholder: "Member Email", class: "field" %></div>
-            <div class="profile-field"><%=text_field_tag :email3, nil, placeholder: "Member Email", class: "field" %></div>
-            <div class="profile-field"><%=text_field_tag :email4, nil, placeholder: "Member Email", class: "field"%></div>
-            <div><%=f.submit "Create", class:"button full_button" %></div>
-          <%end %>
+        <div class="card-header dark-header bengal-card"><h1>Team Information</h1></div>
+        <div class="card-body text-dark bengal-body">
+          <div class="container">
+            <div class="row">
+              <div class="col-sm right-bar">
+                <h2>Enter Team Name And Member Emails</h2>
+                <%=form_for @team do |f| %>
+                  <div class="profile-field"><%=f.text_field :name, placeholder: "Name", class: "field" %></div>
+                  <div class="profile-field"><%=text_field_tag :email1, nil, placeholder: "Member Email", class: "field" %></div>
+                  <div class="profile-field"><%=text_field_tag :email2, nil, placeholder: "Member Email", class: "field" %></div>
+                  <div class="profile-field"><%=text_field_tag :email3, nil, placeholder: "Member Email", class: "field" %></div>
+                  <div class="profile-field"><%=text_field_tag :email4, nil, placeholder: "Member Email", class: "field"%></div>
+                  <div><%=f.submit "Create", class:"button full_button" %></div>
+                <%end %>
+              </div>
+              <div class="col-sm-8">
+                <div class="team-info-section">
+                  <h2>Name</h2>
+                  <p>Enter your team name. The name will be the one that will appear when you register as a team.</p>
+                </div>
+                <div class="team-info-section bar-top">
+                  <h2>Member Email</h2>
+                  <p>Enter the email of the people you want to invite to your team. You can only have four members in total. This includes yourself. If the members don't answer to the invite you can invite others later
+                  or you can invite members later.</p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

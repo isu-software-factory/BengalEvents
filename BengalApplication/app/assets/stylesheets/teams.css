@@ -41,10 +41,12 @@
     background: #000000;
     color: orange;
 }
+
+
 .bengal-card{
-    background: rgba(244,121,32, 0.85);
-    color: rgb(0,0,0);
+    text-align: center;
 }
+
 .profile-field{
   margin-bottom: 10px;
 }
@@ -59,4 +61,22 @@
 
 .bengal-table{
     color: rgb(0,0,0);
+}
+
+.right-bar{
+    border-right-width: 5px;
+    border-color: black;
+    border-right-style: solid;
+}
+
+.team-info-section{
+    height: 110px;
+    width: 600px;
+    padding-top: 10px;
+}
+
+.bar-top{
+    border-top-style: solid;
+    border-color: black;
+    border-top-width: 5px;
 }
