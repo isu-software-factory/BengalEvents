@@ -1,30 +1,40 @@
 <h1>Welcome, <%= @sponsor.name %></h1>
-<%= link_to "Go to Events", occasions_path %>
+
 <h3>Event (<%= current_user.meta.supervisor.events.count %>)</h3>
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Description</th>
-    <th>Make Ahead</th>
-    <th>Location</th>
-    <th>Capacity</th>
-    <th>Start Time</th>
-    <th>End Time</th>
-  </tr>
-  <% if current_user.meta.supervisor.events.any? %>
+
+<% if current_user.meta.supervisor.events.present? %>
+  <table class="table">
+    <thead class="thead-dark">
     <tr>
-      <% current_user.meta.supervisor.events.each do |e| %>
-        <% e.event_details.each do |d| %>
-        <tr>
-          <td><%= e.name %></td>
-          <td> <%= e.description %></td>
-          <td> <%= e.isMakeAhead %></td>
-          <td><%= e.location.name %></td>
-          <td> <%= d.capacity_remaining %></td>
-          <td> <%= d.start_time.strftime("%F %H:%M %p") %></td>
-          <td><%= d.end_time.strftime("%F %H:%M %p") %></td>
-        </tr>
+      <th scope="col">Name</th>
+      <th scope="col">Description</th>
+      <th scope="col">Make Ahead</th>
+      <th scope="col">Capacity</th>
+      <th scope="col">Start Time</th>
+      <th scope="col">End Time</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <% if current_user.meta.supervisor.events.any? %>
+      <tr>
+        <% current_user.meta.supervisor.events.each do |e| %>
+          <% e.event_details.each do |d| %>
+          <tr>
+            <th scope="row"><%= e.name %></th>
+            <td> <%= e.description %></td>
+            <td> <%= e.isMakeAhead %></td>
+            <td><%= e.location.name %></td>
+            <td> <%= d.capacity_remaining %></td>
+            <td> <%= d.start_time.strftime("%F %H:%M %p") %></td>
+            <td><%= d.end_time.strftime("%F %H:%M %p") %></td>
+        <% end %>
       <% end %>
     <% end %>
-  <% end %>
-</table>
+    </tr>
+    </tbody>
+  </table>
+<% else %>
+  <p>There are no events under you. Click on the link to create one.</p>
+<% end %>
+<%= link_to "Create an Event", occasions_path %>

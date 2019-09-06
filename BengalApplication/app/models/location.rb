@@ -17,6 +17,5 @@ class Location < ApplicationRecord
   validates :name, uniqueness: true, presence: true
   accepts_nested_attributes_for :time_slots, allow_destroy: true,
                                 reject_if: ->(attrs) {attrs['interval'].blank? }
-
 end
 

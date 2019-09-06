@@ -73,5 +73,6 @@ gem 'simplecov', require: false, group: :test
 gem 'rails-controller-testing'
 gem 'jquery-rails'
 gem 'prawn'
+gem 'prawn-table'
 gem 'breadcrumbs_on_rails'
 gem 'bootstrap-sass'

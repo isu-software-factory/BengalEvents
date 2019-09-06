@@ -19,7 +19,8 @@ class TimeSlot < ApplicationRecord
   validates :interval, presence: true
 
   def no_reservation_overlap
-    result = TimeSlot.joins(:location => :occasion).where(locations: {name: location.name}).where(start_time: start_time...end_time) or (where(end_time: start_time...end_time)).where(locations: {occasions: {start_date: location.occasion.start_date..location.occasion.end_date}}).or(where(locations: {occasions: {end_date: location.occasion.start_date...location.occasion.end_date}}))
+    result = TimeSlot.joins(:location => :occasion).where(locations: {name: location.name}).where(start_time: start_time...end_time) or
+        (where(end_time: start_time...end_time)).where(locations: {occasions: {start_date: location.occasion.start_date..location.occasion.end_date}}).or(where(locations: {occasions: {end_date: location.occasion.start_date...location.occasion.end_date}}))
     errors.add(:location, 'overlaps another reservation') if result.length > 0
   end
 

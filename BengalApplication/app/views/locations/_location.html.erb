@@ -4,13 +4,17 @@
       <p><%= e %></p>
     <% end %>
   <% end %>
+
   <% location.time_slots.each do |t| %>
     <div class="accordion" id="accordionExample">
       <div class="card">
         <div class="card-header" id="headingOne">
           <h5 class="mb-0">
             <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#<%= t.id %>" aria-expanded="true" aria-controls="collapseOne">
-               <%= t.location.name %>
+              <%= t.location.name %>
+            </button>
+            <button class="btn btn-link float-right" type="button" data-toggle="collapse" data-target="#<%= t.id %>" aria-expanded="true" aria-controls="collapseOne">
+              <span class="glyphicon glyphicon-menu-down pull-right"></span>
             </button>
           </h5>
         </div>

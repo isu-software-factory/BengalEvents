@@ -12,8 +12,4 @@
 class Registration < ApplicationRecord
   belongs_to :event_detail
   belongs_to :participant
-
-
-
-
 end
