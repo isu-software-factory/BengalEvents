@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
 
   protected
 
-  def authenticate_user!
+  def authenticate_user!(opts={})
     if user_signed_in?
       super
     else

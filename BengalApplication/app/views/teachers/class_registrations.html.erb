@@ -1,6 +1,6 @@
-<h3>Class Registration Details</h3>
+<div class="bottom-bar"><h2>Class Registration Details</h2></div>
 <%@students.each do |s| %>
-  <div class="student-bar"><%=s.name %></div>
+  <div class="student-name"><h3><%=s.name %></h3></div>
   <%if s.participant.event_details.count > 0 %>
   <table class="table">
     <thead class="thead-dark">

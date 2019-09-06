@@ -10,6 +10,8 @@
   <%= stylesheet_link_tag 'application',  media: 'all', 'data-turbolinks-track': 'reload' %>
   <%if controller.controller_name == "event_details" %>
     <%= javascript_include_tag 'application', :event_details, 'data-turbolinks-track': 'reload' %>
+  <%elsif controller.controller_name == "registrations" %>
+    <%=javascript_include_tag 'application', :registrations, 'data-trubolinks-track': 'reload'  %>
   <%else %>
     <%=javascript_include_tag 'application', 'data-turbolinks-track': 'reload'  %>
   <%end %>

@@ -4,6 +4,26 @@
 
 
 .student-bar{
-  background: #1c2324;
+  background: red;
   color: white;
+  margin-bottom: 30px;
+  height: 25px;
+}
+h2{
+  text-decoration-color: black;
+}
+.student-name{
+  background: #363636;
+  color: white;
+  padding-left: 10px;
+  border-bottom-width: 5px;
+  border-bottom-color: rgb(244, 121, 32);
+  border-bottom-style: solid;
+}
+
+.bottom-bar{
+  border-bottom-width: 3px;
+  border-bottom-color: black;
+  border-bottom-style: solid;
+  padding-left: 10px;
 }
