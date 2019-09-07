@@ -1,10 +1,8 @@
 
 
 $(document).ready(function(){
-    var element = document.getElementsByClassName("student-schedule");
-    alert(element.tagName);
-   if (!(element.tagName === 'undefined')){
-       alert(element.tagName);
+    var element = document.getElementById("student-schedule");
+   if (element.tagName !== undefined){
        print(this);
    }
 });
