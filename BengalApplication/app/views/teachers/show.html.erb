@@ -63,11 +63,13 @@
           </thead>
           <tbody>
             <%@teacher.participant.event_details.each do |s| %>
+          <tr>
             <th scope="row"><%=Event.find(s.event_id).name %></th>
             <td><%=Event.find(s.event_id).description %></td>
             <td><%=s.start_time %></td>
             <td><%=s.end_time %></td>
             <td><%=button_to("Drop",  {method: :post, controller: "registrations", action: :drop, part_id: @teacher.participant.id, id:s.id}, class: "button", data: {confirm: "Are you sure?"}) %></td>
+          </tr>
             <%end %>
           </tbody>
         </table>

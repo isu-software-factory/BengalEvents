@@ -2,7 +2,8 @@
 <%@students.each do |s| %>
   <div class="student-name"><h3><%=s.name %></h3></div>
   <%if s.participant.event_details.count > 0 %>
-  <table class="table">
+    <div class="increase-bottom-margin">
+  <table class="table increase-bottom-margin">
     <thead class="thead-dark">
     <tr>
       <th scope="col">Name</th>
@@ -25,7 +26,8 @@
     <% end %>
     </tbody>
   </table>
+    </div>
     <%else %>
-    <div class="student-bar">This student has not registered for events yet.</div>
+    <div class="student-bar increase-bottom-margin">This student has not registered for events yet.</div>
   <%end %>
 <%end %>
