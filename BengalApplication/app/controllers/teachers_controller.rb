@@ -1,5 +1,7 @@
 class TeachersController < ApplicationController
   before_action :authenticate_user!, except: [:new, :create]
+  layout 'teams', only: :class_registrations
+
 
   # shows teacher new page
   def new
@@ -39,6 +41,7 @@ class TeachersController < ApplicationController
 
   # shows class registrations page
   def class_registrations
+
     # display every student registrations
     @teacher = Teacher.find(params[:id])
     @students = @teacher.students
