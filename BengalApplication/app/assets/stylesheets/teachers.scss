@@ -20,6 +20,14 @@ h2{
   border-bottom-color: rgb(244, 121, 32);
   border-bottom-style: solid;
 }
+.student-name-black{
+  background: #363636;
+  color: white;
+  padding-left: 10px;
+  border-bottom-width: 5px;
+  border-bottom-color: black;
+  border-bottom-style: solid;
+}
 
 .bottom-bar{
   border-bottom-width: 3px;
@@ -27,3 +35,12 @@ h2{
   border-bottom-style: solid;
   padding-left: 10px;
 }
+
+.increase-bottom-margin{
+  margin-bottom: 100px;
+}
+
+//.far-right{
+//  width: fit-content;
+//  margin-left: fill;
+//}

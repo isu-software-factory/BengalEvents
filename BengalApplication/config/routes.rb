@@ -10,7 +10,9 @@ Rails.application.routes.draw do
   get "sponsors/pdf/:id" => "sponsors#pdfshow"
   get "teams/pdf/:id" => "teams#teamschedulepdf"
   get "teachers/class_registrations/:id" => "teachers#class_registrations"
+  get "teachers/print_class_registrations/:id" => "teachers#print_class_registrations", as: :class_print
   get "students/schedule/:id" => "students#schedule"
+  get "students/print_schedule/:id" => "students#print_schedule", as: :student_print
   get "groupings/add/:id/:team_id" => "groupings#add"
   get 'registrations/index/:part_id' => "registrations#index"
   get "registrations/register/:part_id/:id" => "registrations#register"
