@@ -1,0 +1,44 @@
+<div id="teamSchedule">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-8">
+        <h2>Registration Details</h2>
+        <div class="team_registrations">
+          <table class="table">
+            <thead class="thead-light">
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Name</th>
+              <th scope="col">Description</th>
+              <th scope="col">Location</th>
+              <th scope="col">Start Time</th>
+              <th scope="col">End Time</th>
+              <% if policy(@team).change? %>
+                <th scope="col">Modify</th>
+              <% end %>
+            </tr>
+            </thead>
+            <tbody>
+            <% @number = 1 %>
+            <% @team.participant.event_details.each do |s| %>
+              <tr>
+                <td><%= @number %></td>
+                <td><%= Event.find(s.event_id).name %></td>
+                <td><%= Event.find(s.event_id).description %></td>
+                <td><%= Event.find(s.event_id).location.name %></td>
+                <td><%= s.start_time %></td>
+                <td><%= s.end_time %></td>
+                <% if policy(@team).change? %>
+                  <td>
+                    <%= button_to("Drop Event", {controller: "registrations", part_id: @team.participant.id, id: s.id, action: :drop}, class: "button", data: {confirm: "Are you sure?"}) %>
+                  </td>
+                <% end %>
+              </tr>
+            <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

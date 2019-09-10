@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   resources :sponsors
   resources :coordinators
   get "sponsors/pdf/:id" => "sponsors#pdfshow"
+  get "teams/pdf/:id" => "teams#teamschedulepdf"
   get "teachers/class_registrations/:id" => "teachers#class_registrations"
   get "students/schedule/:id" => "students#schedule"
   get "groupings/add/:id/:team_id" => "groupings#add"
@@ -19,6 +20,7 @@ Rails.application.routes.draw do
   post "registrations/drop/:part_id/:id" => "registrations#drop"
   get "registrations/add_to_waitlist/:part_id/:id" => "registrations#add_to_waitlist"
   get "slots/:name" => "events#location_timeslots"
+
 
   resources :teams
   resources :occasions do

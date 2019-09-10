@@ -2,7 +2,6 @@ class TeamsController < ApplicationController
   before_action :authenticate_user!
 
 
-
   def register_members
     # get student emails
     @student = Student.find(current_user.meta.id)
@@ -53,6 +52,10 @@ class TeamsController < ApplicationController
     add_breadcrumb "Team", team_path(@team)
   end
 
+  def teamschedulepdf
+    @team = Team.find(params[:id])
+  end
+
   def new
     @team = Team.new
     authorize @team
@@ -86,9 +89,11 @@ class TeamsController < ApplicationController
   end
 
   private
+
   def get_user
     current_user.meta
   end
+
   def team_params
     params.require(:team).permit(:name)
   end

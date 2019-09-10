@@ -16,6 +16,8 @@
     <%= javascript_include_tag 'application', :students, 'data-turbolinks-track': 'reload' %>
   <% elsif controller.controller_name == "sponsors" %>
     <%= javascript_include_tag 'application', :sponsors, 'data-turbolinks-track': 'reload' %>
+  <% elsif controller.controller_name == "teams" %>
+    <%= javascript_include_tag 'application', :teams, 'data-turbolinks-track': 'reload' %>
   <% else %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   <% end %>

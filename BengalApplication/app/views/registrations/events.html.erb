@@ -14,49 +14,49 @@
 <h1>Events</h1>
 <table class="table">
   <thead class="thead-dark">
-    <tr >
-      <th scope="col">Name</th>
-      <th scope="col">Location</th>
-      <th scope="col">Description</th>
-    </tr>
+  <tr>
+    <th scope="col">Name</th>
+    <th scope="col">Location</th>
+    <th scope="col">Description</th>
+  </tr>
   </thead>
   <tbody>
-    <%@events.each do |e| %>
-      <tr class="event-collapse">
-        <td><%=e.name %></td>
-        <td><%=e.location.name %></td>
-        <td><%=e.description %></td>
-      </tr>
-      <tr>
-        <td>
-          <div class="hide">
-        <table class="table">
-          <thead class="thead-secondary">
-          <tr>
-            <th scope="col">Capacity Remaining</th>
-            <th scope="col">Start Time</th>
-            <th scope="col">End Time</th>
-            <th scope="col">Register</th>
-          </tr>
-          </thead>
-          <tbody>
-          <%e.event_details.each do |ed| %>
-            <tr class="events">
-              <td><%=ed.capacity_remaining %></td>
-              <td><%= ed.start_time %></td>
-              <td><%= ed.end_time %></td>
-              <td><%=link_to "Register", controller: "registrations", action: "register", part_id: @participant_id, id:ed.id %>
-                <%if ed.capacity_remaining == 0 %> |
-                  <%=link_to "Add to WaitList", controller: "registrations", action: "add_to_waitlist", part_id: @participant_id, id:ed.id %>
-                <%end %>
+  <% @events.each do |e| %>
+    <tr class="event-collapse">
+      <td><%= e.name %></td>
+      <td><%= e.location.name %></td>
+      <td><%= e.description %></td>
+    </tr>
+    <tr>
+      <td>
+        <div class="hide">
+          <table class="table">
+            <thead class="thead-secondary">
+            <tr>
+              <th scope="col">Capacity Remaining</th>
+              <th scope="col">Start Time</th>
+              <th scope="col">End Time</th>
+              <th scope="col">Register</th>
             </tr>
-          <%end %>
-          </tbody>
-        </table>
-          </div>
-        </td>
-      </tr>
-    <% end %>
+            </thead>
+            <tbody>
+            <% e.event_details.each do |ed| %>
+              <tr class="events">
+                <td><%= ed.capacity_remaining %></td>
+                <td><%= ed.start_time %></td>
+                <td><%= ed.end_time %></td>
+                <td><%= link_to "Register", controller: "registrations", action: "register", part_id: @participant_id, id: ed.id %>
+                  <% if ed.capacity_remaining == 0 %> |
+                    <%= link_to "Add to WaitList", controller: "registrations", action: "add_to_waitlist", part_id: @participant_id, id: ed.id %>
+                  <% end %>
+              </tr>
+            <% end %>
+            </tbody>
+          </table>
+        </div>
+      </td>
+    </tr>
+  <% end %>
   </tbody>
 </table>
 
@@ -67,7 +67,7 @@
 <!--    <div class="card border-dark mb-3">-->
 <!--      <div class="card-header" id="headingOne">-->
 <!--        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#<%#=e.id %>" aria-expanded="false" aria-controls="collapseOne">-->
-           <%#=e.name %>
+<%#=e.name %>
 <!--        </button>-->
 <!--      </div>-->
 
@@ -83,18 +83,18 @@
 <!--              </tr>-->
 <!--            </thead>-->
 <!--            <tbody>-->
-              <%#e.event_details.each do |ed| %>
+<%#e.event_details.each do |ed| %>
 <!--                <tr>-->
 <!--                  <td><%#=ed.capacity_remaining %></td>-->
 <!--                  <td><%#= ed.start_time %></td>-->
 <!--                  <td><%#= ed.end_time %></td>-->
 <!--                  <td><%#=link_to "Register", controller: "registrations", action: "register", part_id: @participant_id, id:ed.id %>-->
 <!--                    <%#if ed.capacity_remaining == 0 %> |-->
-                      <%#=link_to "Add to WaitList", controller: "registrations", action: "add_to_waitlist", part_id: @participant_id, id:ed.id %>
-                    <%#end %>
+<%#=link_to "Add to WaitList", controller: "registrations", action: "add_to_waitlist", part_id: @participant_id, id:ed.id %>
+<%#end %>
 <!--                  </td>-->
 <!--                </tr>-->
-              <%#end %>
+<%#end %>
 <!--            </tbody>-->
 <!--          </table>-->
 <!--        </div>-->
