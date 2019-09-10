@@ -4,8 +4,9 @@
       <p><%= e %></p>
     <% end %>
   <% end %>
-  <h2>Input Capacity, Start-time, and End-time for each sessions</h2>
 
+  <h2>Input Capacity, Start-time, and End-time for each sessions</h2>
+<br>
   <%= form_for([@occasion, @event, @event_detail], :html => {:class => "form-horizontal center"}) do |f| %>
     <div class="form-group">
       <%= f.label :capacity, " Maximum Capacity:", class: "col-md-4 control-label" %>
@@ -45,5 +46,5 @@
     </div>
   <% end %>
 
-  <%= link_to "Go Back", occasion_event_path(@occasion, @event) %>
+  <%= link_to "Go Back", occasion_event_path(@occasion, @event),class: "btn btn-primary" %>
 </div>

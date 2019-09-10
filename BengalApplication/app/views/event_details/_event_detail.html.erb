@@ -1,22 +1,13 @@
-<table>
-  <thead>
-  <tr>
-    <th>Capacity</th>
-    <th>Start time</th>
-    <th>End Time</th>
-    <th>Actions</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr>
-    <td><%= event_detail.capacity_remaining %></td>
-    <td><%= event_detail.start_time.strftime("%F %H:%M %p") %></td>
-    <td><%= event_detail.end_time.strftime("%F %H:%M %p") %></td>
-    <td>
-      <%= link_to "Edit ", edit_occasion_event_event_detail_path(@occasion, @event, event_detail) %>
-      <%= link_to "Delete ", occasion_event_event_detail_path(@occasion, @event, event_detail), method: :delete, data: {confirm: "Are you sure?"} %>
-    </td>
-  </tr>
-  </tbody>
-</table>
+<tbody>
+<tr>
+  <th scope="row"><%= event_detail.capacity_remaining %></th>
+  <td><%= event_detail.start_time.strftime("%F %H:%M %p") %></td>
+  <td><%= event_detail.end_time.strftime("%F %H:%M %p") %></td>
+  <td>
+    <%= link_to "Edit ", edit_occasion_event_event_detail_path(@occasion, @event, event_detail) %>
+    <%= link_to "Delete ", occasion_event_event_detail_path(@occasion, @event, event_detail), method: :delete, data: {confirm: "Are you sure?"} %>
+  </td>
+</tr>
+</tbody>
+
 
