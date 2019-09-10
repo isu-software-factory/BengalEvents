@@ -1,18 +1,6 @@
-<div class="container col-sm-12">
-  <div class="row">
-    <div class="col-sm-10">
-      <h3>Registration Details</h3>
-    </div>
-    <div class="col-sm-2">
-      <a class="button" href=<%= student_print_path(@student.id)%>>
-        Print<span class="glyphicon glyphicon-print"></span>
-      </a>
-    </div>
-  </div>
-</div>
-
+<h3>Registration Details</h3>
 <% if @student.participant.event_details.count > 0 %>
-  <table class="table">
+  <table id="student-schedule" class="table">
     <thead class="thead-dark">
     <tr>
       <th scope="col">Name</th>

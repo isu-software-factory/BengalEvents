@@ -1,6 +1,5 @@
 class TeachersController < ApplicationController
   before_action :authenticate_user!, except: [:new, :create]
-  layout 'teams', only: :class_registrations
 
 
   # shows teacher new page
@@ -37,6 +36,13 @@ class TeachersController < ApplicationController
     # end
     @students = organize_students(@teacher.students)
     add_breadcrumb "Home", @teacher
+  end
+
+  # shows the print page for class registration
+  def print_class_registrations
+    @teacher = Teacher.find(params[:id])
+    @students = @teacher.students
+
   end
 
   # shows class registrations page

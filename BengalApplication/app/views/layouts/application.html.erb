@@ -14,6 +14,8 @@
     <%=javascript_include_tag 'application', :registrations, 'data-turbolinks-track': 'reload'  %>
     <%elsif controller.controller_name == "students" %>
       <%=javascript_include_tag 'application', :students, 'data-turbolinks-track': 'reload' %>
+    <%elsif controller.controller_name == "teachers" %>
+      <%=javascript_include_tag 'application', :teachers, 'data-turbolinks-track': 'reload' %>
   <%else %>
     <%=javascript_include_tag 'application', 'data-turbolinks-track': 'reload'  %>
   <%end %>

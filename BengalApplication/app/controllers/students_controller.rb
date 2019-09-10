@@ -7,9 +7,16 @@ class StudentsController < ApplicationController
      @students = Student.where("teacher_id = ?", params[:teacher_id])
    end
 
+  # shows printing page for schedule
+  def print_schedule
+    @student = Student.find(params[:id])
+  end
+
   # shows the schedule of a student
   def schedule
     @student = Student.find(params[:id])
+    # print path
+    @print_path =
 
     # add breadcrumbs
     add_breadcrumb "Home", current_user.meta
