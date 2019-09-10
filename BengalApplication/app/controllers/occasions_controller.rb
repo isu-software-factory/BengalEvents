@@ -19,7 +19,7 @@ class OccasionsController < ApplicationController
     occasion = current_user.meta.occasions.build(occasion_params)
     authorize occasion
     if occasion.save
-      redirect_to  new_occasion_location_path(occasion_id: occasion.id)
+      redirect_to new_occasion_location_path(occasion_id: occasion.id)
     else
       flash[:errors] = occasion.errors.full_messages
       redirect_back(fallback_location: new_occasion_path)
@@ -29,14 +29,6 @@ class OccasionsController < ApplicationController
   def show
     @location = Location.all
     @occasion = Occasion.find(params[:id])
-    # respond_to do |format|
-    #   format.html
-    #   format.pdf do
-    #     pdf = OccasionPdf.new(@occasion)
-    #     send_data pdf.render, filename: "occasion.pdf",
-    #               type: "application/pdf", disposition: "inline"
-    #   end
-    # end
     authorize @occasion
     add_breadcrumb "Home", current_user.meta
     add_breadcrumb @occasion.name, occasion_path(@occasion)
