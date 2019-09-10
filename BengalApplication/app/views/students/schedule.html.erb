@@ -4,9 +4,9 @@
       <h3>Registration Details</h3>
     </div>
     <div class="col-sm-2">
-      <a class="button" href=<%= student_print_path(@student.id)%> target="_blank">
-        Print<span class="glyphicon glyphicon-print"></span>
-      </a>
+      <button class="btn btn-primary">
+        <span class="glyphicon glyphicon-print" aria-hidden="true"> </span><%= link_to "  Print", {controller: "students", action: "print_schedule", id: @student.id}, target: :_blank %>
+      </button>
     </div>
   </div>
 </div>

@@ -1,8 +1,8 @@
 
 <div>
-<a class="button" href=<%= class_print_path(@teacher.id)%>  target="_blank">
-  Print <span class="glyphicon glyphicon-print"></span>
-</a>
+  <button class="btn btn-primary btn-lg">
+    <span class="glyphicon glyphicon-print" aria-hidden="true"> </span><%= link_to "  Print", {controller: "teachers", action: "class_registrations", id: @teacher.id}, target: :_blank %>
+  </button>
 </div>
 <%@students.each do |s| %>
   <div class="student-name"><h3><%=s.name %></h3></div>
