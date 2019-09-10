@@ -1,67 +1,80 @@
 <h1>Create your account</h1>
 <div class="container">
-<%= form_for @teacher do |f| %>
-  <div class="row">
-    <div class="col-sm-3">
-      <%=f.label :name, "Full Name" %>
-    </div>
-    <div class="col-sm">
-      <%=f.text_field :name, placeholder: "Full Name", class: "field" %>
-    </div>
-  </div>
+  <%= form_for @teacher do |f| %>
     <div class="row">
       <div class="col-sm-3">
-        <%=f.label :school, "School Name" %>
+        <%= f.label :name, "Full Name" %>
       </div>
       <div class="col-sm">
-        <%=f.text_field :school, placeholder: "School Name", class: "field" %>
+        <%= f.text_field :name, placeholder: "Full Name", class: "field" %>
       </div>
     </div>
     <div class="row">
       <div class="col-sm-3">
-        <%=f.label :student_count, "Number of Students" %>
+        <%= f.label :school, "School Name" %>
       </div>
       <div class="col-sm">
-        <%=f.text_field :student_count, placeholder: "Number of Students", class: "field" %>
+        <%= f.text_field :school, placeholder: "School Name", class: "field" %>
       </div>
     </div>
     <div class="row">
       <div class="col-sm-3">
-        <%=f.label :chaperone_count, "Number of Chaperones" %>
+        <%= f.label :student_count, "Number of Students" %>
       </div>
       <div class="col-sm">
-        <%=f.text_field :chaperone_count, placeholder: "Number of chaperones" , class: "field"%>
+        <%= f.text_field :student_count, placeholder: "Number of Students", class: "field" %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-3">
+        <%= f.label :chaperone_count, "Number of Chaperones" %>
+      </div>
+      <div class="col-sm">
+        <%= f.text_field :chaperone_count, placeholder: "Number of chaperones", class: "field" %>
       </div>
     </div>
     <%= f.fields_for :user do |u| %>
-      <div class="row">
-        <div class="col-sm-3">
-          <%=u.label :password, "Password" %>
-        </div>
-        <div class="col-sm">
-          <%=u.text_field :password, placeholder: "Password", class: "field" %>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-sm-3">
-          <%=u.label :password_confirmation, "Password Confirmation" %>
-        </div>
-        <div class="col-sm">
-          <%=u.text_field :password_confirmation, placeholder: "Password Confirmation", class: "field" %>
-        </div>
-      </div>
-    <%end %>
-      <div class="actions"><%= submit_tag "Create Account", class: "button" %></div>
-</div>
-<% end %>
 
-<% if @teacher.errors.any? %>
-  <div id="error_explanation">
-    <h2><%= pluralize(@teacher.errors.count, "error") %> prohibited this post from being saved:</h2>
-    <ul>
-      <% @teacher.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-    </ul>
-  </div>
-<% end %>
+      <div class="row">
+        <div class="col-sm-3">
+          <%= u.label :email, "Email" %>
+        </div>
+        <div class="col-sm">
+          <%= u.text_field :email, placeholder: "Email", class: "field" %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-3">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-3">
+          <%= u.label :password, "Password" %>
+        </div>
+        <div class="col-sm">
+          <%= u.text_field :password, placeholder: "Password", class: "field" %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-3">
+          <%= u.label :password_confirmation, "Password Confirmation" %>
+        </div>
+        <div class="col-sm">
+          <%= u.text_field :password_confirmation, placeholder: "Password Confirmation", class: "field" %>
+        </div>
+      </div>
+    <% end %>
+    <div class="actions"><%= submit_tag "Create Account", class: "button" %></div>
+    </div>
+  <% end %>
+
+  <% if @teacher.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@teacher.errors.count, "error") %> prohibited this post from being saved:</h2>
+      <ul>
+        <% @teacher.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
