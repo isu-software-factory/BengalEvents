@@ -1,12 +1,7 @@
-<button class="btn btn-primary btn-lg float-right" >
-  <span class="glyphicon glyphicon-print" aria-hidden="true"> </span><%= link_to "  Print", {controller: "sponsors", action: "pdfshow", part_id: @sponsor.id}, target: :_blank %>
-</button>
+<!--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">-->
 
-<h1>Welcome, <%= @sponsor.name %></h1>
 
-<h3>Event (<%= current_user.meta.supervisor.events.count %>)</h3>
-
-<% if current_user.meta.supervisor.events.present? %>
+<div id="printEventPdf">
   <table class="table">
     <thead class="thead-dark">
     <tr>
@@ -14,9 +9,7 @@
       <th scope="col">Description</th>
       <th scope="col">Make Ahead</th>
       <th scope="col">Location</th>
-      <!--      <th scope="col">Capacity</th>-->
-      <!--      <th scope="col">Start Time</th>-->
-      <!--      <th scope="col">End Time</th>-->
+      <th scope="col">Actions</th>
     </tr>
     </thead>
     <tbody>
@@ -35,11 +28,7 @@
           <!--            <td><%#= d.end_time.strftime("%F %H:%M %p") %></td>-->
       <% end %>
     <% end %>
-    <%# end %>
     </tr>
     </tbody>
   </table>
-<% else %>
-  <p>There are no events under you. Click on the link to create one.</p>
-<% end %>
-<%= link_to "Create an Event", occasions_path %>
+</div>

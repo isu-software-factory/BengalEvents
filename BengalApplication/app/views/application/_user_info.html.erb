@@ -1,18 +1,18 @@
 <% if signed_in? %>
-  <%if controller.controller_name == "teams" %>
-    <%unless params[:id] == nil%>
-      <div class="team_name"><h1>Team <%=Team.find(params[:id]).name %></h1></div>
-      <%end %>
-  <%end %>
-
-  <div class="dropdown menu">
-    <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-      <span class="glyphicon glyphicon-cog"></span>
-      <%=current_user.meta.name %></a>
-    <div class="dropdown-menu menu-container dropdown-menu-right">
-      <%=link_to "Account Settings", edit_user_registration_path, class: "dropdown-item" %>
-      <%=link_to "Log Out", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
+  <% if controller.controller_name == "teams" %>
+    <% unless params[:id] == nil %>
+      <div class="team_name"><h1>Team <%= Team.find(params[:id]).name %></h1></div>
+    <% end %>
+  <% end %>
+  <% if controller.action_name != "pdfshow" %>
+    <div class="dropdown menu">
+      <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <span class="glyphicon glyphicon-cog"></span>
+        <%= current_user.meta.name %></a>
+      <div class="dropdown-menu menu-container dropdown-menu-right">
+        <%= link_to "Account Settings", edit_user_registration_path, class: "dropdown-item" %>
+        <%= link_to "Log Out", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
+      </div>
     </div>
-  </div>
-
+  <% end %>
 <% end %>
