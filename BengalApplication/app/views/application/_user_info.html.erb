@@ -4,7 +4,7 @@
       <div class="team_name"><h1>Team <%= Team.find(params[:id]).name %></h1></div>
     <% end %>
   <% end %>
-  <% if (controller.action_name != "pdfshow") || (controller.action_name != "teamschedulepdf")   %>
+  <% unless (controller.action_name == "pdfshow") || (controller.action_name == "teamschedulepdf" || controller.action_name == "print_schedule") || (controller.action_name == "print_class_registrations")   %>
     <div class="dropdown menu">
       <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         <span class="glyphicon glyphicon-cog"></span>

@@ -1,6 +1,7 @@
 class TeachersController < ApplicationController
   before_action :authenticate_user!, except: [:new, :create]
 
+
   # shows teacher new page
   def new
     @teacher = Teacher.new
@@ -37,8 +38,16 @@ class TeachersController < ApplicationController
     add_breadcrumb "Home", @teacher
   end
 
+  # shows the print page for class registration
+  def print_class_registrations
+    @teacher = Teacher.find(params[:id])
+    @students = @teacher.students
+
+  end
+
   # shows class registrations page
   def class_registrations
+
     # display every student registrations
     @teacher = Teacher.find(params[:id])
     @students = @teacher.students
