@@ -1,12 +1,11 @@
 <h1>Event Info</h1>
-
-<table>
-  <thead>
+<table class="table">
+  <thead class="thead-dark">
   <tr>
-    <th>Name</th>
-    <th>Description</th>
-    <th>Make ahead</th>
-    <th>Location</th>
+    <th scope="col">Name</th>
+    <th scope="col">Description</th>
+    <th scope="col">Make Ahead</th>
+    <th scope="col">Location</th>
   </tr>
   </thead>
   <tbody>
@@ -15,14 +14,27 @@
     <td><%= @event.description %></td>
     <td><%= @event.isMakeAhead %></td>
     <td><%= @event.location.name %></td>
-
   </tr>
   </tbody>
 </table>
+
 <br>
-<%= render @event.event_details %>
-<p><%= link_to "Create Time slots", new_occasion_event_event_detail_path(@occasion, @event, @event_detail) %></p>
-<p><%= link_to "Go Back", occasion_path(@occasion) %></p>
+<table class="table">
+  <thead class="thead-dark">
+  <tr>
+    <th scope="col">Capacity</th>
+    <th scope="col">Start Time</th>
+    <th scope="col">End Time</th>
+    <th scope="col">Actions</th>
+  </tr>
+  </thead>
+  <%= render @event.event_details %>
+</table>
+
+
+
+<p><%= link_to "Create Time slots", new_occasion_event_event_detail_path(@occasion, @event, @event_detail), class: "btn btn-primary" %></p>
+<p><%= link_to "Go Back", occasion_path(@occasion), class: "btn btn-primary" %></p>
 
 
 

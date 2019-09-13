@@ -1,4 +1,4 @@
-<button class="btn btn-primary btn-lg float-right" >
+<button class="btn btn-primary btn-lg float-right">
   <span class="glyphicon glyphicon-print" aria-hidden="true"> </span><%= link_to "  Print", {controller: "sponsors", action: "pdfshow", part_id: @sponsor.id}, target: :_blank %>
 </button>
 
@@ -26,13 +26,10 @@
         <% current_user.meta.supervisor.events.each do |e| %>
           <%# e.event_details.each do |d| %>
         <tr>
-          <th scope="row"><%= e.name %></th>
+          <th scope="row"><%= link_to e.name, controller: "occasions", action: "show" %></th>
           <td> <%= e.description %></td>
           <td> <%= e.isMakeAhead %></td>
           <td><%= e.location.name %></td>
-          <!--            <td> <%#= d.capacity_remaining %></td>-->
-          <!--            <td> <%#= d.start_time.strftime("%F %H:%M %p") %></td>-->
-          <!--            <td><%#= d.end_time.strftime("%F %H:%M %p") %></td>-->
       <% end %>
     <% end %>
     <%# end %>

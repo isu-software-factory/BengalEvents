@@ -1,6 +1,6 @@
 class SponsorsController < ApplicationController
   before_action :authenticate_user!, except: [:new, :create]
-   # layout false, only: :pdfshow
+  # layout false, only: :pdfshow
 
   def new
     @sponsor = Sponsor.new
