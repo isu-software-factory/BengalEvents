@@ -1,70 +1,72 @@
 require 'rails_helper'
 
 RSpec.describe Event, type: :model do
+  fixtures :sponsors, :occasions, :locations, :events, :event_details,
+           :supervisors, :coordinators
+
   context "validation tests" do
     before do
-      @sponsor = Sponsor.create(name: "sponsor", user_attributes: {email: "sponsor@gmail.com", password: "password"})
-      @coordinator = Coordinator.create(name:"coord", user_attributes: {email: "coordinaotr@gmail.com", password: "password"})
-      @occasion = @coordinator.occasions.build(name: "BengalEvents", start_date: Time.now, end_date: Time.now)
-      @occasion.save
-      @location = @occasion.locations.build(name: "Gym")
-      @location.save
+      @sponsor = sponsors(:sponsor_carlos)
+      @occasion = occasions(:one)
+      @location = locations(:one)
     end
+
+
     it "ensures name" do
-      event = @sponsor.events.build(description: "great")
+      event = @sponsor.supervisor.events.build(description: "great")
       event.occasion = @occasion
       event.location = @location
-      event.save
-      expect(event.id).to eq(nil)
+      e = event.save
+      expect(e).to eq(false)
     end
+
     it "ensures description" do
-      event = @sponsor.events.build(name: "Robotics")
+      event = @sponsor.supervisor.events.build(name: "Robotics")
       event.occasion = @occasion
       event.location = @location
-      event.save
-      expect(event.id).to eq(nil)
+      e = event.save
+      expect(e).to eq(false)
     end
+
     it "should successfully create an event" do
-      event = @sponsor.events.build(name: "Robotics", description: "great")
+      event = @sponsor.supervisor.events.build(name: "Robotics", description: "great")
       event.occasion = @occasion
       event.location = @location
-      event.save
-      expect(event.id).not_to eq(nil)
+      e = event.save
+      expect(e).to eq(true)
     end
   end
+
   context "association tests" do
     before do
-      @sponsor = Sponsor.create(name: "sponsor", user_attributes: {email: "sponsor@gmail.com", password: "password"})
-      @coordinator = Coordinator.create(name:"coord", user_attributes: {email: "coordinaotr@gmail.com", password: "password"})
-      @occasion = @coordinator.occasions.build(name: "BengalEvents", start_date: Time.now, end_date: Time.now, description: "Event")
-      @occasion.save
-      @location = @occasion.locations.build(name: "Gym")
-      @location.save
-      @time_slot = @location.time_slots.build(start_time: Time.now, end_time: Time.now, interval: 60)
-      @time_slot.save
+      @sponsor = sponsors(:sponsor_carlos)
+      @coordinator = coordinators(:coordinator_rebeca)
+      @occasion = occasions(:one)
+      @location = locations(:one)
+      @event = events(:one)
+      @event2 = events(:two)
+      @event_detail = event_details(:one)
     end
+
+
     it "should have an occasion" do
-      event = @sponsor.events.build( name: "Robotics", description: "great")
-      event.occasion = @occasion
-      event.save
-      expect(event.occasion.id).not_to eq(nil)
+      expect(@event.occasion).to eq(@occasion)
     end
 
     it "should have an event detail" do
-      event = @sponsor.events.build(name: "Robotics", description: "great")
-      event.occasion = @occasion
-      event.save
-      event_detail = event.event_details.build(start_time: @time_slot.start_time, end_time: @time_slot.end_time, date_started: @occasion.start_date, capacity: 23)
-      event_detail.save
-      expect(event_detail.event.id).to eq(event.id)
+      expect(@event.event_details.first).to eq(@event_detail)
     end
 
     it "should have a location" do
-      event = @sponsor.events.build( name: "Robotics", description: "great")
-      event.occasion = @occasion
-      event.location = @location
-      event.save
-      expect(event.location).not_to eq(nil)
+      expect(@event.location).not_to eq(nil)
+    end
+
+    it "can have a coordinator" do
+      expect(@event.supervisor.director).to eq(@coordinator)
+    end
+
+    it "can have a sponsor" do
+      expect(@event2.supervisor.director).to eq(@sponsor)
     end
   end
 end

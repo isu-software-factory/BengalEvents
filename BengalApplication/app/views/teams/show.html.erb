@@ -94,16 +94,18 @@
             <%end %>
             <%else %>
               <p>Your team lead will register the team for events. Talk to them to agree on what events you want to take.</p>
-              <p><%=button_to("Leave This Team",  {method: :post, controller: "groupings", action: :drop, part_id: current_user.meta.id, id: @team.id}, class: "button", data: {confirm: "Are you sure?"}) %></p>
+              <p><%=button_to("Leave This Team",  {method: :post, controller: "groupings", action: :drop, part_id: current_user.meta.id, id: @team.id}, class: "btn btn-info", data: {confirm: "Are you sure?"}) %></p>
           <%end %>
+          <p>You can print your team schedule here.</p>
+          <button class="btn btn-primary btn-lg">
+            <span class="glyphicon glyphicon-print" aria-hidden="true"> </span><%= link_to "  Print", {controller: "teams", action: "teamschedulepdf", part_id: @team.id}, target: :_blank %>
+          </button>
         </div>
-          </div>
+      </div>
     </div>
   </div>
 </div>
 
 
 
-<button class="btn btn-primary btn-lg float-right" >
-  <span class="glyphicon glyphicon-print" aria-hidden="true"> </span><%= link_to "  Print", {controller: "teams", action: "teamschedulepdf", part_id: @team.id}, target: :_blank %>
-</button>
+

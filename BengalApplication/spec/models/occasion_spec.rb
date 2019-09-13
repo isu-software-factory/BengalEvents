@@ -1,10 +1,15 @@
 require 'rails_helper'
 
 RSpec.describe Occasion, type: :model do
+  fixtures :coordinators
+
   context "validation tests" do
     before do
-      @coordinator = Coordinator.create(name: "coord", user_attributes: {email: "coord@gmail.com", password: "password"})
+      @coordinator = coordinators(:coordinator_rebeca)
+      @start_time = Time.new(2019,01,03, 01,02,23)
+      @end_time = Time.new(2019, 03,04, )
     end
+
     it "ensures name" do
       occasion = @coordinator.occasions.build(start_date: Time.now, end_date: Time.now, description: "Events").save
       expect(occasion).to eq(false)

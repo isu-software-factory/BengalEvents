@@ -1,0 +1,78 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+# This model initially had no columns defined. If you add columns to the
+# model remove the '{}' from the fixture names and add the columns immediately
+# below each fixture, per the syntax in the comments below
+#
+
+# column: value
+#
+
+teacher:
+ id: 1
+ email: "emily@gmail.com"
+ encrypted_password: "password"
+ meta_type: "Teacher"
+ meta_id: 1
+
+
+
+student_1:
+ id: 2
+ email: "robert@gmail.com"
+ encrypted_password: "password"
+ meta_id: 1
+ meta_type: "Student"
+
+student_2:
+ id: 3
+ email: "bigben@gmail.com"
+ encrypted_password: "password"
+ meta_id: 2
+ meta_type: "Student"
+
+student_3:
+ id: 4
+ email: "cartmen@gmail.com"
+ encrypted_password: "password"
+ meta_id: 3
+ meta_type: "Student"
+
+student_4:
+ id: 5
+ email: "sarah@gmail.com"
+ encrypted_password: "password"
+ meta_id: 4
+ meta_type: "Student"
+
+student_5:
+ id: 6
+ email: "sally@gmail.com"
+ encrypted_password: "password"
+ meta_id: 5
+ meta_type: "Student"
+
+student_6:
+ id: 7
+ email: "clark@gmail.com"
+ encrypted_password: "password"
+ meta_id: 6
+ meta_type: "Student"
+
+
+
+coordinator:
+ id: 8
+ email: "rebeca@gmail.com"
+ encrypted_password: "password"
+ meta_id: 1
+ meta_type: "Coordinator"
+
+
+
+sponsor:
+ id: 9
+ email: "carlos@gmail.com"
+ encrypted_password: "password"
+ meta_id: 1
+ meta_type: "Sponsor"

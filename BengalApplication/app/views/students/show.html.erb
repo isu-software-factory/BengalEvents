@@ -55,6 +55,10 @@
           <p class="card-text"><%=link_to "Register For Events", controller: "registrations", action: "index", part_id: @student.participant.id %></p>
           <p>Create a team so that you and your team members can register for events and participate as a group.</p>
           <p class="card-text"><%= link_to "Create Team", new_team_path %></p>
+          <p>You can print your registrations here.</p>
+          <button class="btn btn-primary">
+            <span class="glyphicon glyphicon-print" aria-hidden="true"> </span><%= link_to "  Print", {controller: "students", action: "print_schedule", part_id: @student.id}, target: :_blank %>
+          </button>
         </div>
       </div>
     </div>
@@ -72,7 +76,7 @@
                   <div class="card-w-100 text-white <%=@random_card[Random.rand(4)] %> mb-3 link-card"  >
                    <div class="card-header">Team <%=@student.teams[@count].name %></div>
                    <div class="card-body">
-                    <p>This team has registered for <%=@student.teams[@count].participant.event_details.count %></p>
+                    <p>This team has registered for <%=@student.teams[@count].participant.event_details.count%> <%= @student.teams[@count].participant.event_details.count == 1 ? "event." : "events."%></p>
                     </div>
                   </div>
                 </a>
