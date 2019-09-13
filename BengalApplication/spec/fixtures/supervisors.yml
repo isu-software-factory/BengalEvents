@@ -1,0 +1,10 @@
+
+coordinaotr:
+  id: 1
+  director_id: 1
+  director_type: "Coordinator"
+
+sponsor:
+  id: 2
+  director_id: 1
+  director_type: "Sponsor"

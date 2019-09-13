@@ -1,27 +1,38 @@
 require 'rails_helper'
 
 RSpec.describe Coordinator, type: :model do
+  fixtures :coordinators, :users, :supervisors, :events, :occasions
+
   context "validation tests" do
     it "ensures coordinator has a name" do
-      coordinator = Coordinator.create(user_attributes: {email: "coor@gmail.com", password: "password"})
-      expect(coordinator.id).to eq(nil)
+      coordinator = Coordinator.new(user_attributes: {email: "coor@gmail.com", password: "password"}).save
+      expect(coordinator).to eq(false)
     end
     it "should create coordinator successfully" do
       coordinator = Coordinator.new(name: "Sally", user_attributes: {email: "c@gmail.com", password:"password"}).save
       expect(coordinator).to eq(true)
     end
   end
+  
+  
   context "association tests" do
     before do
-      @coordinator = Coordinator.create(name: "coordinator", user_attributes: {email: "pasl@gmail.com", password: "password"})
+      @coordinator = coordinators(:coordinator_rebeca)
     end
     it "should have a user" do
       expect(@coordinator.user.id).not_to eq(nil)
     end
 
-    it "should have an occasion" do
-      occasion = @coordinator.occasions.build(name: "BenagelEvent", start_date: Time.now, end_date: Time.now)
-      expect(occasion.coordinator.id).to eq(@coordinator.id)
+    it "should have a supervisor" do
+      expect(@coordinator.supervisor).not_to eq(nil)
+    end
+
+    it "can have an event" do
+      expect(@coordinator.supervisor.events.first).not_to eq(nil)
+    end
+
+    it "can have an occasion" do
+      expect(@coordinator.occasions.first).not_to eq(nil)
     end
   end
 end

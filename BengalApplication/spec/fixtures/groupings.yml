@@ -1,0 +1,10 @@
+
+group_1:
+  id: 1
+  team_id: 1
+  student_id: 1
+
+grouping_2:
+  id: 2
+  team_id: 1
+  student_id: 2
