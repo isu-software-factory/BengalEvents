@@ -6,6 +6,15 @@ Rails.application.routes.draw do
   resources :students
   resources :sponsors
   resources :coordinators
+
+  # education discount for travis ci, to run tests, github pages for the project, fortravisci, robocup with tests,
+  # build automated up and tooling fortravisci
+  # document everything
+  # security testing tools for websites
+  # document managing and development
+  # how can stress test the system, Selenium ide
+  # Script up one user.
+
   get "sponsors/pdf/:id" => "sponsors#pdfshow"
   get "teams/pdf/:id" => "teams#teamschedulepdf"
   get "teachers/class_registrations/:id" => "teachers#class_registrations"

@@ -1,14 +1,16 @@
 require 'rails_helper'
 
 RSpec.describe Student, type: :model do
-
+    fixtures :teachers, :users
     context "validation tests" do
       before do
-        @teacher = Teacher.create(name: "Kelly", user_attributes: {email: "tech@gmail.com", password: "password"})
+        @teacher = teachers(:teacher_emily)
       end
       it "ensures a name" do
         @student = @teacher.students.build(user_attributes: {email: "s@gmail.com", password: "password"}, participant_attributes: {}).save
         expect(@student).to eq(false)
+        expect(@t_user.meta.name).to eq("Emily Udy")
+        expect(@teacher.user.email).to eq("emil@gmail.com")
       end
 
       it "should create student successful" do

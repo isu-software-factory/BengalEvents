@@ -1,9 +1,2 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  student: one
-  event_detail: one
-
-two:
-  student: two
-  event_detail: two
