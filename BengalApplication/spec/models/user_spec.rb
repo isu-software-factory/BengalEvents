@@ -1,43 +1,51 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
+  fixtures :teachers, :users, :students, :sponsors, :coordinators
+
   context "validation tests" do
     it "ensures email presence" do
-      @sponsor = Sponsor.new(name: "sponsor", user_attributes: {password: "password"}).save
-      expect(@sponsor).to eq(false)
+      @user = User.new(password: "password", meta_id: 1, meta_type: "Teacher").save
+      expect(@user).to eq(false)
     end
+
     it "ensures password presence" do
-      @sponsor = Sponsor.new(name: "sponsor", user_attributes: {email: "s@gmail.com"}).save
-      expect(@sponsor).to eq(false)
+      @user = User.new(email: "u@gmail.com", meta_id: 1, meta_type: "Teacher").save
+      expect(@user).to eq(false)
     end
+
     it "should be create successfully" do
-      @sponsor = Sponsor.new(name: "sponsor", user_attributes: {email: "s@gmail.com", password: "password"}).save
-      expect(@sponsor).to eq(true)
+      @user = User.new(email: "u@gmail.com", password: "password", meta_id: 1, meta_type: "Teacher").save
+      expect(@user).to eq(true)
     end
   end
+
   context "association tests" do
     before do
-      @teacher = Teacher.create(chaperone_count: 3, student_count: 23, school: "valley", name: "teacher", user_attributes: {email: "t@gmail.com", password: "password"})
-      @student = @teacher.students.build(name: "Carlos", user_attributes: {email: "s@gmail.com", password: "password"})
-      @student.save
-      @sponsor = Sponsor.create(name: "sponsor", user_attributes: {email: "sponsor@gmail.com", password: "password"})
-      @coordinator = Coordinator.create(name: "coordinator", user_attributes: {email: "c@gmail.com", password: "password"})
+      @user = users(:student_1)
+      @user1 = users(:teacher)
+      @user2 = users(:sponsor)
+      @user3 = users(:coordinator)
+      @student = students(:student_1)
+      @sponsor = sponsors(:sponsor_carlos)
+      @teacher = teachers(:teacher_emily)
+      @coordinator = coordinators(:coordinator_rebeca)
     end
+
     it "can have a student" do
-      user = User.find(@student.user.id)
-      expect(user.id).to eq(@student.user.id)
+      expect(@user.meta).to eq(@student)
     end
+
     it "can have a teacher" do
-      user = User.find(@teacher.user.id)
-      expect(user.id).to eq(@teacher.user.id)
+      expect(@user1.meta).to eq(@teacher)
     end
+
     it "can have a sponsor" do
-      user = User.find(@sponsor.user.id)
-      expect(user.id).to eq(@sponsor.user.id)
+      expect(@user2.meta).to eq(@sponsor)
     end
+
     it "can have a coordinator" do
-      user = User.find(@coordinator.user.id)
-      expect(user.id).to eq(@coordinator.user.id)
+      expect(@user3.meta).to eq(@coordinator)
     end
   end
 end

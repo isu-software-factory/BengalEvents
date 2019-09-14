@@ -1,5 +1,5 @@
 
-coordinaotr:
+coordinator:
   id: 1
   director_id: 1
   director_type: "Coordinator"
