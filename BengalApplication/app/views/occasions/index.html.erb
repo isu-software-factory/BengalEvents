@@ -1,40 +1,50 @@
 <% content_for :title, "Occasions" %>
-<%# if signed_in? %>
 <h1>Occasions</h1>
-<table class="table">
-  <thead class="thead-light">
-  <tr>
-    <th scope="col">Name</th>
-    <th scope="col">Description</th>
-    <th scope="col">Start Date</th>
-    <th scope="col">End Date</th>
-    <th scope="col">Events</th>
-    <th scope="col">Created By</th>
-  </tr>
-  </thead>
-  <tbody>
-  <% @occasions.each do |occasion| %>
-    <tr>
-      <td><%= occasion.name %></td>
-      <td><%= occasion.description %></td>
-      <td><%= occasion.start_date.strftime("%Y-%m-%d") %></td>
-      <td><%= occasion.end_date.strftime("%Y-%m-%d") %></td>
-      <td>
-        <%= link_to "Show", occasion_path(occasion.id) %>
-        <% if policy(occasion).edit? %>
-          <%= link_to "Edit", edit_occasion_path(occasion.id) %>
-        <% end %>
-        <% if policy(occasion).destroy? %>
-          <%= link_to "Delete", occasion_path(occasion.id), data: {method: :delete, confirm: "Are you sure?"} %>
-        <% end %>
-      </td>
-      <td><%= occasion.coordinator.user.email %></td>
-      <%# end %>
-    </tr>
-  <% end %>
-  </tbody>
-</table>
-<!--Event creation leading to another page-->
-<% if policy(@occasions).create? %>
-  <%= link_to "Create New Occasion", new_occasion_path %>
-<% end %>
+<div class="container">
+  <div class="row">
+    <% @occasions.each do |occasion| %>
+      <div class="col-sm">
+        <div class="card border-dark mb-3 w-75">
+          <div class="card-header">
+            <h4> <%= occasion.name %>  </h4>
+            <span>Created By: <%= occasion.coordinator.user.email %></span>
+          </div>
+          <div class="card-body text-dark">
+            <p class="card-text">Name: <%= occasion.name %></p>
+            <p class="card-text">Description: <%= occasion.description %></p>
+            <p class="card-text">Start Date: <%= occasion.start_date.strftime("%Y-%m-%d") %></p>
+            <p class="card-text">End Date: <%= occasion.end_date.strftime("%Y-%m-%d") %></p>
+            <p>
+              <% if policy(occasion).edit? %>
+                <%= link_to "Edit", edit_occasion_path(occasion.id), class: "btn btn-secondary" %>
+              <% end %>
+              <% if policy(occasion).destroy? %>
+                <%= link_to "Delete", occasion_path(occasion.id), class: "btn btn-danger", data: {method: :delete, confirm: "Are you sure?"} %>
+              <% end %></p>
+            <hr>
+            <p class="card-text">
+              <%= link_to "Events", occasion_path(occasion.id), class: "btn btn-primary" %>
+
+
+            </p>
+          </div>
+        </div>
+      </div>
+    <% end %>
+
+    <div class="col-sm-3">
+      <div class="card border-dark mb-3" style="max-width: 18rem;">
+        <div class="card-header">Actions</div>
+        <div class="card-body text-dark">
+          <p>To create a new Occasion: </p>
+          <% if policy(@occasions).create? %>
+            <%= link_to "Click Here", new_occasion_path, class: "btn-btn-success" %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+

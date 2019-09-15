@@ -1,22 +1,22 @@
-
-  <tbody>
-  <tr>
-    <td><%= event.name %></td>
-    <td><%= event.description %></td>
-    <td><%= event.isMakeAhead  %></td>
-    <td><%= event.location.name %></td>
-    <td>
-      <% if policy(event).show? %>
-        <%= link_to "Details", occasion_event_path(@occasion, event) %>
-      <% end %>
-      <% if policy(event).edit? %>
-        <%= link_to "Edit", edit_occasion_event_path(@occasion, event) %>
-      <% end %>
-      <% if policy(event).destroy? %>
-        <%= link_to "Delete", occasion_event_path(@occasion, event), method: :delete, data: {confirm: "Are you sure?"} %>
-      <% end %>
-    </td>
-    <td><%= event.supervisor.director.user.email %></td>
-  </tr>
-  </tbody>
+<tbody>
+<tr>
+  <td>
+    <% if policy(event).show? %>
+      <%= link_to event.name, occasion_event_path(@occasion, event) %>
+    <% end %>
+  </td>
+  <td><%= event.description %></td>
+  <td><%= event.isMakeAhead %></td>
+  <td><%= event.location.name %></td>
+  <td>
+    <%# if policy(event).edit? %>
+    <%#= link_to "Edit", edit_occasion_event_path(@occasion, event) %>
+    <%# end %>
+    <% if policy(event).destroy? %>
+      <%= link_to "Delete", occasion_event_path(@occasion, event), method: :delete, data: {confirm: "Are you sure?"} %>
+    <% end %>
+  </td>
+  <td><%= event.supervisor.director.user.email %></td>
+</tr>
+</tbody>
 

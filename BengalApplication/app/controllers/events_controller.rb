@@ -18,7 +18,7 @@ class EventsController < ApplicationController
     @event.occasion = @occasion
     authorize @event
     if @event.save
-      redirect_to occasion_path(@occasion), :notice => "Successfully created Event."
+      redirect_to  new_occasion_event_event_detail_path(@occasion, @event), :notice => "Successfully created Event."
     else
       flash[:errors] = @event.errors.full_messages
       redirect_back(fallback_location: new_occasion_event_path)

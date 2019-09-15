@@ -14,9 +14,6 @@
       <th scope="col">Description</th>
       <th scope="col">Make Ahead</th>
       <th scope="col">Location</th>
-      <!--      <th scope="col">Capacity</th>-->
-      <!--      <th scope="col">Start Time</th>-->
-      <!--      <th scope="col">End Time</th>-->
     </tr>
     </thead>
     <tbody>
@@ -24,7 +21,6 @@
       <% if current_user.meta.supervisor.events.any? %>
       <tr>
         <% current_user.meta.supervisor.events.each do |e| %>
-          <%# e.event_details.each do |d| %>
         <tr>
           <th scope="row"><%= link_to e.name, controller: "occasions", action: "show" %></th>
           <td> <%= e.description %></td>
@@ -32,7 +28,6 @@
           <td><%= e.location.name %></td>
       <% end %>
     <% end %>
-    <%# end %>
     </tr>
     </tbody>
   </table>
