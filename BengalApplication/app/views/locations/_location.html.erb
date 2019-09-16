@@ -1,3 +1,4 @@
+
 <% if current_user.meta.is_a? Coordinator %>
   <% if flash[:errors] %>
     <% flash[:errors].each do |e| %>
@@ -24,10 +25,10 @@
             <p> End Time: <%= t.end_time.strftime("%H:%M %p") %> </p>
             <p> Interval: <%= t.interval %> minutes </p>
             <% if policy(location).edit? %>
-              <%= link_to "Edit", edit_occasion_location_path(@occasion, location) %>
+              <%#= link_to "Edit", edit_occasion_location_path(@occasion, location) %>
             <% end %>
             <% if policy(location).destroy? %>
-              <%= link_to "Delete", occasion_location_path(@occasion, location), method: :delete, data: {confirm: "Are you sure?"} %>
+              <%= link_to "Delete", occasion_location_path(@occasion, location), class: "btn btn-danger", method: :delete, data: {confirm: "Are you sure?"} %>
             <% end %>
           </div>
         </div>
