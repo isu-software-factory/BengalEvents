@@ -6,8 +6,8 @@ RSpec.describe TimeSlot, type: :model do
   context "Validation tests" do
     before do
       @location = locations(:one)
-      @start_time = Time.new(2018,01,03, 02,22,22)
-      @end_time = Time.new(2018,01,03, 04,22,22)
+      @start_time = Time.new(2019,06,25, 02,22,22)
+      @end_time = Time.new(2019,06,26, 04,22,22)
     end
 
     it "ensures start time" do

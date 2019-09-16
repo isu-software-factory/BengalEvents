@@ -1,16 +1,18 @@
 require 'rails_helper'
 
 RSpec.feature "EventDetails", type: :feature do
-  fixtures :sponsors, :users, :occasions, :events
+  fixtures :sponsors, :users, :occasions, :events, :locations
 
   context "create a new event detail" do
     before do
       @occasion = occasions(:one)
+      @location = locations(:one)
       @event = events(:one)
+      @event.location = @location
       @sponsor = sponsors(:sponsor_carlos)
       # log in
       login_as(@sponsor.user)
-      visit @event
+      visit new_occasion_event_event_detail_path(@occasion, @event)
     end
 
     it "should successfully create an event detail" do
