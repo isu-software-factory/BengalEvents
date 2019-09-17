@@ -22,8 +22,8 @@
                 <td><%= e.description %></td>
                 <td><%= e.location.name %></td>
                 <td><%= ev.capacity %></td>
-                <td><%= ev.start_time %></td>
-                <td><%= ev.end_time %></td>
+                <td><%= ev.start_time.strftime("%F %H:%M %p") %></td>
+                <td><%= ev.end_time.strftime("%F %H:%M %p") %></td>
               </tr>
             <% end %>
           <% end %>
