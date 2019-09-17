@@ -13,3 +13,24 @@ team:
   id: 3
   member_id: 1
   member_type: "Team"
+
+student_2:
+  id: 4
+  member_id: 2
+  member_type: "Student"
+
+student_3:
+  id: 5
+  member_id: 3
+  member_type: "Student"
+
+student_4:
+  id: 6
+  member_id: 4
+  member_type: "Student"
+
+student_5:
+  id: 7
+  member_id: 5
+  member_type: "Student"
+

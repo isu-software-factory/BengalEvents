@@ -8,12 +8,11 @@ class GroupingsController < ApplicationController
     if team.register_member(student)
       # sign student in and redirect them to team page
       sign_in student.user
-      redirect_to team
+      redirect_to team, notice => "You have been added to the team!"
     else
       # student can't register for team
-      flash[:notice] = "Member limit of 4 reached. No more room for new member"
       sign_in student.user
-      redirect_to student
+      redirect_to student, notice => "Member limit of 4 reached. No more room for new member"
     end
   end
 
@@ -22,13 +21,13 @@ class GroupingsController < ApplicationController
     student = Student.find(params[:part_id])
     team = Team.find(params[:id])
 
-    authorize team
-    team.students.delete(student)
-
     if student == team.get_lead
-      redirect_to team
+      authorize team
+      team.students.delete(student)
+      redirect_to team, notice => "Dropped #{student.name} from team."
     else
-      redirect_to student
+      team.students.delete(student)
+      redirect_to student, notice => "Left team #{team.name}"
     end
   end
 end

@@ -2,3 +2,8 @@ one:
   id: 1
   name: "Gym"
   occasion_id: 1
+
+two:
+  id: 2
+  name: "SUB"
+  occasion_id: 1
