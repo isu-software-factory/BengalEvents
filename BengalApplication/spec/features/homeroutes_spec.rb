@@ -1,48 +1,56 @@
 require 'rails_helper'
 
 RSpec.feature "Homeroutes", type: :feature do
+
   context "routing users" do
     before do
-      @teacher = Teacher.create(name: "teacher", school: "valley", student_count: 23, chaperone_count: 232, user_attributes: {email: "s@gmail.com", password: "password"}, participant_attributes: {})
-      @student = @teacher.students.build(name: "Bill", user_attributes: {email: "student@gmail.com", password: "password"}, participant_attributes: {})
+      @teacher = Teacher.create(name: "Sally", school: "Valley", student_count: 25, chaperone_count: 3, user_attributes: {email: "teacher@gmail.com", password: "password"}, participant_attributes: {})
+      @student = @teacher.students.build(name: "Tim", user_attributes: {email: "student@gmail.com", password: "password"}, participant_attributes: {})
       @student.save
-      @sponsor = Sponsor.create(name: "sponsor", user_attributes: {email: "g@gmail.com", password: "password"})
-      @coordinator = Coordinator.create(name: "coordinator", user_attributes: {email: "c@gmail.com", password: "password"})
-      @occasion = @coordinator.occasions.build(name: "BengalEvents", start_date: Time.now, end_date: Time.now)
-      @occasion.save
-      @location = @occasion.locations.build(name: "Gym")
-      @location.save
-      @event = @sponsor.events.build(name: "Robotics", description: "great")
-      @event.location = @location
-      @event.occasion = @occasion
-      @event.save
-    end
-    it "routes sponsor" do
-      login_as(@sponsor.user)
+      @sponsor = Sponsor.create(name: "Bill", user_attributes: {email: "sponsor@gmail.com", password: "password"}, supervisor_attributes: {})
+      @coordinator = Coordinator.create(name: "Kelly", user_attributes: {email: "coordinator@gmail.com", password: "password"}, supervisor_attributes: {})
 
       visit "homeroutes/routes"
-      expect(page).to have_content("Welcome, #{@sponsor.name}")
+    end
+
+    it "routes sponsor" do
+      # fill form
+      within("form#sign_in") do
+        fill_in "user[email]", with: "#{@sponsor.user.email}"
+        fill_in "user[password]", with: "password"
+      end
+      click_button "Sign in"
+      expect(page).to have_content(" #{@sponsor.name}")
     end
 
     it "routes teacher" do
-      login_as(@teacher.user)
-
-      visit "homeroutes/routes"
-      expect(page).to have_content("Teachers Main Page")
+      # fill form
+      within("form#sign_in") do
+        fill_in "user[email]", with: "#{@teacher.user.email}"
+        fill_in "user[password]", with: "password"
+      end
+      click_button "Sign in"
+      expect(page).to have_content("#{@teacher.name}")
     end
 
     it "routes coordinator" do
-      login_as(@coordinator.user)
-
-      visit "homeroutes/routes"
-      expect(page).to have_content("c@gmail.com")
+      # fill form
+      within("form#sign_in") do
+        fill_in "user[email]", with: "#{@coordinator.user.email}"
+        fill_in "user[password]", with: "password"
+      end
+      click_button "Sign in"
+      expect(page).to have_content("#{@coordinator.name}")
     end
 
     it "routes student" do
-      login_as(@student.user)
-
-      visit "homeroutes/routes"
-      expect(page).to have_content("Registration Details")
+      # fill form
+      within("form#sign_in") do
+        fill_in "user[email]", with: "#{@student.user.email}"
+        fill_in "user[password]", with: "password"
+      end
+      click_button "Sign in"
+      expect(page).to have_content("#{@student.name}")
     end
 
     it "routes to homeroutes routes page" do

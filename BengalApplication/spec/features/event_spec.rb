@@ -77,6 +77,7 @@ RSpec.feature "Events", type: :feature do
       @event = events(:one)
       @event.location = @location
       @sponsor = sponsors(:sponsor_carlos)
+      @occasion = occasions(:one)
       # log in
       login_as(@sponsor.user)
       visit occasion_path(@occasion.id)
