@@ -7,27 +7,24 @@
 
       <% if current_user.meta.is_a? Coordinator %>
 
-        <div class="alert alert-success" id="success-alert" role="alert">
+        <div class="alert alert-success" id="flash" role="alert">
           <a href="#" class="close" data-dismiss="alert" aria-label="close"> &#88; </a>
           <h4 class="alert-heading">What is this?</h4>
           <p>- List of the Locations that you can choose from to create an event.</p>
         </div>
       <% end %>
       <%= render @occasion.locations %>
-      <% if policy(@location).new? %>
-        <%= link_to "Add Location", new_occasion_location_path(@occasion, @location), class: "btn btn-primary" %>
-      <% end %>
       <hr>
 
       <!-- Start of event Partial-->
       <h2>Events</h2>
-      <div class="alert alert-success" role="alert">
+      <div class="alert alert-success" id="flash1" role="alert">
         <a href="#" class="close" data-dismiss="alert" aria-label="close"> &#88; </a>
         <h4 class="alert-heading">What is this?</h4>
         <p> - These are the list of events created under this occasion.</p>
       </div>
 
-      <% if current_user.meta.supervisor.events %>
+      <% if current_user.meta.supervisor.events.present? %>
         <table class="table">
           <thead class="thead-dark">
           <tr>
@@ -44,9 +41,6 @@
       <% end %>
       <!--      End of event Partial-->
       <p>
-        <%= link_to "Create an event", new_occasion_event_path(@occasion, @event), class: "btn btn-primary" %>
-      </p>
-      <p>
         <%= link_to "Home Page", occasions_path, class: "btn btn-outline-success" %>
       </p>
     </div>
@@ -60,7 +54,21 @@
           <p class="card-text">End Time: <%= @occasion.end_date.strftime("%Y-%m-%d") %></p>
         </div>
       </div>
+      <div class="card border-dark mb-3" style="max-width: 18rem;">
+        <div class="card-header">Actions</div>
+        <div class="card-body text-dark">
+          <% if policy(@location).new? %>
+            <p class="card-text">Create a Location for the sponsor to choose from for their event.</p>
+            <%= link_to "Add Location", new_occasion_location_path(@occasion, @location), class: "btn btn-primary" %>
+            <hr>
+          <% end %>
+          <p class="card-text"> To create an <span class="font-weight-bold">Event</span>
+            <%= link_to "Click Here", new_occasion_event_path(@occasion, @event), class: "btn btn-success" %> </p>
+        </div>
+      </div>
     </div>
   </div>
 </div>
+
+
 

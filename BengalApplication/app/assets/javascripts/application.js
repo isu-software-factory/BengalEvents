@@ -16,7 +16,11 @@
 //= require activestorage
 //= require turbolinks
 
-
+$('document').ready(function() {
+    setTimeout(function() {
+        $('.alert-success').slideUp();
+    }, 3000);
+});
 
 function stickyHeader() {
     var header = document.getElementById("header");
