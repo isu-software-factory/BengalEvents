@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_28_150829) do
+ActiveRecord::Schema.define(version: 2019_09_15_231029) do
 
   create_table "admins", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -37,7 +37,7 @@ ActiveRecord::Schema.define(version: 2019_08_28_150829) do
   create_table "events", force: :cascade do |t|
     t.string "name"
     t.text "description"
-    t.boolean "isMakeAhead"
+    t.boolean "isMakeAhead", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "occasion_id"

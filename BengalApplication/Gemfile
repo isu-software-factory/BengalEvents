@@ -74,3 +74,4 @@ gem 'rails-controller-testing'
 gem 'jquery-rails'
 gem 'breadcrumbs_on_rails'
 gem 'bootstrap-sass'
+gem 'rubocop', require: false
