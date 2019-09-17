@@ -3,19 +3,6 @@ require 'rails_helper'
 RSpec.feature "Locations", type: :feature do
   fixtures :coordinators, :occasions, :locations, :users
 
-  context "GET #show" do
-    before do
-      @coordinator = coordinators(:coordinator_rebeca)
-      @location = locations(:one)
-
-      login_as(@coordinator.user)
-      visit occasion_location_path(occasion_id: @occasion.id, id: @location.id)
-    end
-
-    it "should be successful" do
-      expect(page).to have_content("Create Time Slots")
-    end
-  end
 
   # Will not be implemented
   # context "GET #index" do
