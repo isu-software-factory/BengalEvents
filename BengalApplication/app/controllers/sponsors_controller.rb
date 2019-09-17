@@ -1,6 +1,5 @@
 class SponsorsController < ApplicationController
-  before_action :authenticate_user!, except: [:new, :create]
-  # layout false, only: :pdfshow
+  before_action :authenticate_user!, except: %i[new create]
 
   def new
     @sponsor = Sponsor.new
@@ -21,7 +20,7 @@ class SponsorsController < ApplicationController
   def show
     @sponsor = Sponsor.find(params[:id])
     @occasions = Occasion.all
-    add_breadcrumb "Home", @sponsor
+    add_breadcrumb 'Home', @sponsor
   end
 
   def pdfshow
@@ -32,7 +31,7 @@ class SponsorsController < ApplicationController
   private
 
   def sponsor_params
-    params.require(:sponsor).permit(:name, user_attributes: [:id, :email, :password])
+    params.require(:sponsor).permit(:name, user_attributes: %i[id email password])
   end
 end
 
