@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Occasion, type: :model do
-  fixtures :coordinators
+  fixtures :coordinators, :events, :coordinators, :locations, :occasions
 
   context "validation tests" do
     before do
@@ -37,39 +37,41 @@ RSpec.describe Occasion, type: :model do
 
   context "association tests" do
     before do
-      @coordinator = Coordinator.create(name: "coord", user_attributes: {email: "coord@gmail.com", password: "password"})
-      @occasion = @coordinator.occasions.build(name: "BengalEvent", start_date: Time.now, end_date: Time.now, description: "Events")
-      @occasion.save
-      @sponsor = Sponsor.create(name: "Sponsor", user_attributes: {email: "spon@gmail.com", password: "password"})
-      @event = @sponsor.events.build(name: "robotics", description: "For people interesting in Robotics.")
-      @event.occasion = @occasion
-      @event.save
+      @event = events(:one)
+      @occasion = occasions(:one)
+      @coordinator = coordinators(:coordinator_rebeca)
+      @location = locations(:one)
     end
+
+
     it "should have an event" do
-      expect(@event.occasion.id).to eq(@occasion.id)
+      expect(@occasion.events.first).to eq(@event)
     end
 
     it "should have a coordinator" do
-      expect(@occasion.coordinator.id).to eq(@coordinator.id)
+      expect(@occasion.coordinator).to eq(@coordinator)
     end
 
     it "can have a location" do
-      location = @occasion.locations.build(name: "Gym")
-      location.save
-      expect(@occasion.locations.first).to eq(location)
+      expect(@occasion.locations.first).to eq(@location)
     end
   end
+
   context "method tests" do
     context "start_date_before_end_date method" do
       before do
-        @coordinator = Coordinator.create(name: "coord", user_attributes: {email: "coord@gmail.com", password: "password"})
+        @coordinator = coordinators(:coordinator_rebeca)
+        @start_time = Time.new(2018,01,03, 02,22,22)
+        @end_time = Time.new(2018,01,03, 04,22,22)
       end
+
+
       it "should fail to create occasion wrong date position" do
-        @occasion = @coordinator.occasions.build(name: "BengalEvents", end_date: Time.now, start_date: Time.now, description: "Events").save
+        @occasion = @coordinator.occasions.build(name: "BengalEvents", end_date: @start_time, start_date: @end_time, description: "Events").save
         expect(@occasion).to eq(false)
       end
       it "should successfully create occasion with right date position" do
-        @occasion = @coordinator.occasions.build(name: "BengalEvents", start_date: Time.now, end_date: Time.now, description: "Events").save
+        @occasion = @coordinator.occasions.build(name: "BengalEvents", start_date: @start_time, end_date: @end_time, description: "Events").save
         expect(@occasion).to eq(true)
       end
     end

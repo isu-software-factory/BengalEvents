@@ -37,7 +37,7 @@ class EventDetailsController < ApplicationController
     @event_detail.update_attributes(event_detail_params)
     @event_detail.start_time = @event_detail.date_started.to_s + " " + @event_detail.start_time.strftime("%H:%M")
     @event_detail.end_time = @event_detail.date_started.to_s + " " + @event_detail.end_time.strftime("%H:%M")
-    authorize @event_details
+    authorize @event_detail
     if @event_detail.save
       redirect_to occasion_event_path(@occasion, @event), :notice => "Successfully updated."
     end
@@ -46,7 +46,7 @@ class EventDetailsController < ApplicationController
   def destroy
     authorize @event_detail
     @event_detail.destroy
-    redirect_to occasion_event_path(@occasion, @event), :notice => "Successfully deleted time slot"
+    redirect_to occasion_event_path(@occasion, @event), :notice => "Successfully deleted time slot."
   end
 
 

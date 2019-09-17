@@ -13,7 +13,7 @@
 
 class EventDetail < ApplicationRecord
   has_one :waitlist
-  belongs_to :event
+  belongs_to :event, dependent: :destroy
   has_many :registrations
   has_many :participants, through: :registrations
   validates :start_time, :end_time,  presence: true

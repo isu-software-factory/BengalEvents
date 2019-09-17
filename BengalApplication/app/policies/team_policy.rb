@@ -17,7 +17,7 @@ class TeamPolicy < ApplicationPolicy
 
   def drop?
     # only a team lead can delete a member
-    @user.meta_type == "Student"
+    @user.meta_type == "Student" && record.get_lead == @user.meta
 
   end
 

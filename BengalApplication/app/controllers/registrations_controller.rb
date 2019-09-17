@@ -7,6 +7,7 @@ class RegistrationsController < ApplicationController
     # get participant and event detail
     @participant = Participant.find(params[:part_id])
     event_detail = EventDetail.find(params[:id])
+    @event = event_detail.event
     # authorize participant as a registration policy
     authorize @participant, policy_class: RegistrationPolicy
 
@@ -14,7 +15,7 @@ class RegistrationsController < ApplicationController
     success = event_detail.register_participant(@participant)
 
     if success
-      if event_detail.isMakeAhead
+      if @event.isMakeAhead
         redirect_to @participant.member, :notice => "You will be sent and email prior to the event."
       else
         redirect_to @participant.member, :notice => "Successfully registered for #{event_detail.event.name}"

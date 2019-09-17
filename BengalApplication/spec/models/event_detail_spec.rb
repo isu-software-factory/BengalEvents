@@ -216,5 +216,11 @@ RSpec.describe EventDetail, type: :model do
     context "Mailing Tests" do
       pending
     end
+
+    context "Waitlist tests" do
+      it "checks to waitlist" do
+        pending
+      end
+    end
   end
 end

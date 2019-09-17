@@ -1,16 +1,17 @@
 require 'rails_helper'
 
 RSpec.describe Student, type: :model do
-    fixtures :teachers, :users
+    fixtures :teachers, :users, :participants, :event_details, :teams, :groupings,
+             :students
+
     context "validation tests" do
       before do
         @teacher = teachers(:teacher_emily)
       end
+
       it "ensures a name" do
         @student = @teacher.students.build(user_attributes: {email: "s@gmail.com", password: "password"}, participant_attributes: {}).save
         expect(@student).to eq(false)
-        expect(@t_user.meta.name).to eq("Emily Udy")
-        expect(@teacher.user.email).to eq("emil@gmail.com")
       end
 
       it "should create student successful" do
@@ -19,48 +20,36 @@ RSpec.describe Student, type: :model do
       end
     end
 
+
     context "association tests" do
       before do
-        @sponsor = Sponsor.create(name: "sponsor", user_attributes: {email: "sponsor@gmail.com", password: "password"})
-        @coordinator = Coordinator.create(name:"coord", user_attributes: {email: "coordinaotr@gmail.com", password: "password"})
-        @occasion = @coordinator.occasions.build(name: "BengalEvents", start_date: Time.now, end_date: Time.now)
-        @occasion.save
-        @location = @occasion.locations.build(name: "Gym")
-        @location.save
-        @time_slot = @location.time_slots.build(start_time: Time.now, end_time: Time.now, interval: 60)
-        @time_slot.save
-        @event = @sponsor.events.build(name: "Robotics", description: "great")
-        @event.location = @location
-        @event.occasion = @occasion
-        @event.save
-        @event_detail = @event.event_details.build(start_time: @time_slot.start_time, end_time: @time_slot.end_time, date_started: @occasion.start_date, capacity: 23)
-        @event_detail.save
-        @teacher = Teacher.create(name: "Kelly", user_attributes: {email: "tech@gmail.com", password: "password"})
-        @student = @teacher.students.build(name: "Bill", user_attributes: {email: "student@gmail.com", password: "password"})
-        @student.save
-        Participant.create(member: @student)
+        @participant = participants(:student_1)
+        @student = students(:student_1)
+        @teacher = teachers(:teacher_emily)
+        @user = users(:student_1)
+        @event_detail = event_details(:one)
+        @team = teams(:team_1)
       end
+
       it "should have a participant" do
-        expect(@student.participant).not_to eq(nil)
+        expect(@student.participant).to eq(@participant)
       end
+
       it "should have a teacher" do
-        expect(@student.teacher.id).to eq(@teacher.id)
+        expect(@student.teacher).to eq(@teacher)
       end
 
       it "should have a user" do
-        expect(@student.user.id).not_to eq(nil)
+        expect(@student.user).to eq(@user)
       end
 
       it "can have an event_detail" do
         @event_detail.register_participant(@student.participant)
-        expect(@student.participant.event_details.count).to eq(1)
+        expect(@student.participant.event_details.first).to eq(@event_detail)
       end
 
       it "can have a team" do
-        team = Team.create(name: "Kings", participant_attributes: {})
-        team.lead = @student.id
-        team.students << @student
-        expect(@student.teams.count).to eq(1)
+        expect(@student.teams.first).to eq(@team)
       end
 
   end
