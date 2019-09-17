@@ -1,5 +1,5 @@
 class CoordinatorsController < ApplicationController
-  before_action :authenticate_user!, except: [:new, :create]
+  before_action :authenticate_user!, except: %i[new create]
 
   def new
     @coordinator = Coordinator.new
@@ -21,13 +21,12 @@ class CoordinatorsController < ApplicationController
     @coordinator = Coordinator.find(params[:id])
     @occasions = Occasion.all
     authorize @coordinator
-    add_breadcrumb "Home", @coordinator
+    add_breadcrumb 'Home', @coordinator
   end
-
 
   private
 
   def coordinator_params
-    params.require(:coordinator).permit(:name, user_attributes: [:id, :email, :password, :password_confirmation])
+    params.require(:coordinator).permit(:name, user_attributes: %i[id email password password_confirmation])
   end
 end
