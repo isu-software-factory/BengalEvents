@@ -15,7 +15,7 @@ SimpleCov.start
 # a separate helper file that requires the additional dependencies and performs
 # the additional setup, and require it from the spec files that actually need
 # it.
-Selenium::WebDriver::Chrome.driver_path = "C:\\Ruby25-x64\\bin\\chromedriver.exe"
+Selenium::WebDriver::Chrome.driver_path = "./spec/chrome/chromedriver.exe"
 Capybara.default_driver = :selenium_chrome
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|
