@@ -1,7 +1,7 @@
 class TimeSlotsController < ApplicationController
   before_action :find_occasion
   before_action :find_location
-  before_action :find_time_slots, except: [:new, :create]
+  before_action :find_time_slots, except: %i[new create]
 
   # def index
   #   @time_slot = TimeSlot.all
@@ -24,9 +24,8 @@ class TimeSlotsController < ApplicationController
 
   def destroy
     @time_slot.destroy
-    redirect_to occasion_location_path(@occasion, @location), :notice => "Successfully deleted time slot"
+    redirect_to occasion_location_path(@occasion, @location), notice: "Successfully deleted time slot"
   end
-
 end
 
 private

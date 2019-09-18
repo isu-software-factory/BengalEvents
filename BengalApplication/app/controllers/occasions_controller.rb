@@ -14,7 +14,6 @@ class OccasionsController < ApplicationController
   end
 
   def create
-    # creating occasion
     occasion = current_user.meta.occasions.build(occasion_params)
     authorize occasion
     if occasion.save

@@ -8,11 +8,11 @@ class GroupingsController < ApplicationController
     if team.register_member(student)
       # sign student in and redirect them to team page
       sign_in student.user
-      redirect_to team, notice => "You have been added to the team!"
+      redirect_to team, notice: 'You have been added to the team!'
     else
       # student can't register for team
       sign_in student.user
-      redirect_to student, notice => "Member limit of 4 reached. No more room for new member"
+      redirect_to student, notice: 'Member limit of 4 reached. No more room for new member.'
     end
   end
 

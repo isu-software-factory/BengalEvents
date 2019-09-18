@@ -1,9 +1,7 @@
 class RegistrationsController < ApplicationController
   before_action :authenticate_user!
 
-
   def register
-
     # get participant and event detail
     @participant = Participant.find(params[:part_id])
     event_detail = EventDetail.find(params[:id])
@@ -16,21 +14,21 @@ class RegistrationsController < ApplicationController
 
     if success
       if @event.isMakeAhead
-        redirect_to @participant.member, :notice => "You will be sent and email prior to the event."
+        redirect_to @participant.member, notice: 'You will be sent and email prior to the event.'
       else
-        redirect_to @participant.member, :notice => "Successfully registered for #{event_detail.event.name}"
+        redirect_to @participant.member, notice: "Successfully registered for #{event_detail.event.name}"
       end
     else
       event = Event.find(event_detail.event.id)
       occasion = Occasion.find(event.occasion.id)
       # capacity is full
       if event_detail.capacity_remaining == 0
-        flash[:alert] = "Event capacity is full. Register for a different event."
-        redirect_to controller: "registrations", action: "events", part_id: @participant.id, id: occasion.id
+        flash[:alert] = 'Event capacity is full. Register for a different event.'
+        redirect_to controller: 'registrations', action: 'events', part_id: @participant.id, id: occasion.id
       else
         # already registered for event
-        flash[:alert] = "You are already registered for this event"
-        redirect_to controller: "registrations", action: "events", part_id: @participant.id, id: occasion.id
+        flash[:alert] = 'You are already registered for this event'
+        redirect_to controller: 'registrations', action: 'events', part_id: @participant.id, id: occasion.id
       end
     end
   end
@@ -42,18 +40,16 @@ class RegistrationsController < ApplicationController
     @events = @occasion.events
     # authorize participant as a registration policy
     authorize @participant, policy_class: RegistrationPolicy
-    if @participant.member_type == "Team"
-      add_breadcrumb "Home", current_user.meta
-      add_breadcrumb "Team", @participant.member
-      add_breadcrumb "Occasions", controller: "registrations", action: "index", part_id: @participant_id
-      add_breadcrumb "Registration", ""
+    if @participant.member_type == 'Team'
+      add_breadcrumb 'Home', current_user.meta
+      add_breadcrumb 'Team', @participant.member
+      add_breadcrumb 'Occasions', controller: 'registrations', action: 'index', part_id: @participant_id
+      add_breadcrumb 'Registration', ""
     else
-      add_breadcrumb "Home", current_user.meta
-      add_breadcrumb "Occasions", controller: "registrations", action: "index", part_id: @participant_id
-      add_breadcrumb "Registration", controller: "registrations", action: "events", part_id: @participant_id, id: @occasion.id
+      add_breadcrumb 'Home', current_user.meta
+      add_breadcrumb 'Occasions', controller: 'registrations', action: 'index', part_id: @participant_id
+      add_breadcrumb 'Registration', controller: 'registrations', action: 'events', part_id: @participant_id, id: @occasion.id
     end
-
-
   end
 
   def index
@@ -62,15 +58,14 @@ class RegistrationsController < ApplicationController
     @occasions = Occasion.all
     # authorize participant as a registration policy
     authorize @participant, policy_class: RegistrationPolicy
-    if @participant.member_type == "Team"
-      add_breadcrumb "Home", current_user.meta
-      add_breadcrumb "Team", @participant.member
-      add_breadcrumb "Occasions", controller: "registrations", action: "index", part_id: @participant_id
+    if @participant.member_type == 'Team'
+      add_breadcrumb 'Home', current_user.meta
+      add_breadcrumb 'Team', @participant.member
+      add_breadcrumb 'Occasions', controller: 'registrations', action: 'index', part_id: @participant_id
     else
-      add_breadcrumb "Home", current_user.meta
-      add_breadcrumb "Occasions", controller: "registrations", action: "index", part_id: @participant_id
+      add_breadcrumb 'Home', current_user.meta
+      add_breadcrumb 'Occasions', controller: 'registrations', action: 'index', part_id: @participant_id
     end
-
   end
 
   def add_to_waitlist
@@ -79,8 +74,9 @@ class RegistrationsController < ApplicationController
     @event_detail = EventDetail.find(params[:id])
 
     @event_detail.waitlist.participants << @participant
-    redirect_to @participant.member, :notice => "You have been added to the waitlist"
+    redirect_to @participant.member, notice: 'You have been added to the waitlist'
   end
+
   def drop
     # drop participants from events
     @participant = Participant.find(params[:part_id])
@@ -93,6 +89,4 @@ class RegistrationsController < ApplicationController
     @event_detail.wait_list_check
     redirect_to @participant.member
   end
-
-
 end

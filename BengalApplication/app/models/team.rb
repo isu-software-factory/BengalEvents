@@ -34,5 +34,4 @@ class Team < ApplicationRecord
   def get_lead
     Student.find(self.lead)
   end
-
 end
