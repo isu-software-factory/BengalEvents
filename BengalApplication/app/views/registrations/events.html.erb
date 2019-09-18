@@ -43,7 +43,7 @@
             <% e.event_details.each do |ed| %>
               <tr class="events">
                 <td><%= ed.capacity_remaining %></td>
-                <td><%= ed.start_time.strtftime("%F %H:%M %p") %></td>
+                <td><%= ed.start_time.strftime("%F %H:%M %p") %></td>
                 <td><%= ed.end_time %></td>
                 <td><%= link_to "Register", controller: "registrations", action: "register", part_id: @participant_id, id: ed.id %>
                   <% if ed.capacity_remaining == 0 %> |

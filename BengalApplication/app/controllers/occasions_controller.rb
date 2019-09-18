@@ -39,13 +39,13 @@ class OccasionsController < ApplicationController
   end
 
   def update
-    occasion = Occasion.find(params[:id])
-    authorize occasion
-    if occasion.update(occasion_params)
-      redirect_to occasions_path, notice: 'Successfully updated Occasion.'
+    @occasion = Occasion.find(params[:id])
+    authorize @occasion
+    if @occasion.update(occasion_params)
+      redirect_to occasions_path, :notice => 'Successfully updated Occasion.'
     else
-      flash[:errors] = occasion.errors.full_messages
-      redirect_back(fallback_location: edit_occasion_path(occasion.id))
+      flash[:errors] = @occasion.errors.full_messages
+       redirect_back(fallback_location: edit_occasion_path(@occasion.id))
     end
   end
 

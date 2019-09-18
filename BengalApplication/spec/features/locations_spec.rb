@@ -49,48 +49,50 @@ RSpec.feature "Locations", type: :feature do
     end
   end
 
-  context "update location" do
-    before do
-      @coordinator = coordinators(:coordinator_rebeca)
-      @location = locations(:one)
+  # Will not be implemented yet
+  # context "update location" do
+  #   before do
+  #     @coordinator = coordinators(:coordinator_rebeca)
+  #     @location = locations(:one)
+  #
+  #     login_as(@coordinator.user)
+  #     visit edit_occasion_location_path(occasion_id: @occasion.id, id: @location.id)
+  #   end
+  #
+  #   it "should successfully update location" do
+  #     # fill form
+  #     within("form") do
+  #       fill_in "location[name]", with: "Stadium"
+  #     end
+  #     click_button "Create"
+  #     expect(page).to have_content("Successfully updated Location.")
+  #   end
+  #
+  #   it "should fail to update location" do
+  #     # fill form
+  #     within("form") do
+  #       fill_in "location[name]", with: ""
+  #     end
+  #     click_button "Create"
+  #     expect(page).to have_content("Name can't be blank")
+  #   end
+  # end
 
-      login_as(@coordinator.user)
-      visit edit_occasion_location_path(occasion_id: @occasion.id, id: @location.id)
-    end
-
-    it "should successfully update location" do
-      # fill form
-      within("form") do
-        fill_in "location[name]", with: "Stadium"
-      end
-      click_button "Create"
-      expect(page).to have_content("Successfully updated Location.")
-    end
-
-    it "should fail to update location" do
-      # fill form
-      within("form") do
-        fill_in "location[name]", with: ""
-      end
-      click_button "Create"
-      expect(page).to have_content("Name can't be blank")
-    end
-  end
-
-  context "delete location" do
-    before do
-      @coordinator = coordinators(:coordinator_rebeca)
-      @occasion = occasions(:one)
-
-      login_as(@coordinator.user)
-      visit occasions_path(occasion_id: @occasion.id)
-    end
-
-    it "should successfully delete a location" do
-      click_link "Delete"
-      page.driver.browser.switch_to.alert.accept
-      #expect(Location.count).to eq(0)
-      expect(page).to have_content("Successfully deleted Location.")
-    end
-  end
+  # WIll not be implemented yet
+  # context "delete location" do
+  #   before do
+  #     @coordinator = coordinators(:coordinator_rebeca)
+  #     @occasion = occasions(:one)
+  #
+  #     login_as(@coordinator.user)
+  #     visit occasions_path(occasion_id: @occasion.id)
+  #   end
+  #
+  #   it "should successfully delete a location" do
+  #     click_link "Delete"
+  #     page.driver.browser.switch_to.alert.accept
+  #     #expect(Location.count).to eq(0)
+  #     expect(page).to have_content("Successfully deleted Location.")
+  #   end
+  # end
 end

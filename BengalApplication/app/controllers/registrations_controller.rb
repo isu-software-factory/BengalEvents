@@ -3,34 +3,37 @@ class RegistrationsController < ApplicationController
 
 
   def register
-
     # get participant and event detail
     @participant = Participant.find(params[:part_id])
-    event_detail = EventDetail.find(params[:id])
-    @event = event_detail.event
+    @event_detail = EventDetail.find(params[:id])
+    @event = @event_detail.event
     # authorize participant as a registration policy
     authorize @participant, policy_class: RegistrationPolicy
 
     # add participant to event
-    success = event_detail.register_participant(@participant)
+    success = @event_detail.register_participant(@participant)
 
     if success
+      #sadfasd
       if @event.isMakeAhead
         redirect_to @participant.member, :notice => "You will be sent and email prior to the event."
       else
-        redirect_to @participant.member, :notice => "Successfully registered for #{event_detail.event.name}"
+        redirect_to @participant.member, :notice => "Successfully registered for #{@event_detail.event.name}"
+        #asdfa
       end
     else
-      event = Event.find(event_detail.event.id)
-      occasion = Occasion.find(event.occasion.id)
+      @event = Event.find(@event_detail.event.id)
+      @occasion = Occasion.find(@event.occasion.id)
       # capacity is full
-      if event_detail.capacity_remaining == 0
+      if @event_detail.capacity_remaining == 0
         flash[:alert] = "Event capacity is full. Register for a different event."
-        redirect_to controller: "registrations", action: "events", part_id: @participant.id, id: occasion.id
+        redirect_to controller: "registrations", action: "events", part_id: @participant.id, id: @occasion.id
+        return
       else
         # already registered for event
         flash[:alert] = "You are already registered for this event"
-        redirect_to controller: "registrations", action: "events", part_id: @participant.id, id: occasion.id
+        redirect_to controller: "registrations", action: "events", part_id: @participant.id, id: @occasion.id
+        return
       end
     end
   end
