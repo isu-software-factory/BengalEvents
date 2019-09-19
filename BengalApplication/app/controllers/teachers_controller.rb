@@ -25,14 +25,7 @@ class TeachersController < ApplicationController
   # shows teacher main page
   def show
     @teacher = Teacher.find(params[:id])
-    # respond_to do |format|
-    #   format.html
-    #   format.pdf do
-    #     doc = Prawn::Document.generate("test.pdf") do
-    #       text "Hello World"
-    #     end
-    #   end
-    # end
+    authorize @teacher
     @students = organize_students(@teacher.students)
     add_breadcrumb 'Home', @teacher
   end

@@ -1,25 +1,24 @@
 require 'rails_helper'
 
 RSpec.feature "Teams", type: :feature do
+  fixtures :students, :teachers, :users, :participants, :teams, :groupings
   context "create team" do
     before do
-      @teacher = Teacher.create(chaperone_count: 3, student_count: 23, school: "valley", name: "teacher", user_attributes: {email: "t@gmail.com", password: "password"}, participant_attributes: {})
-      @student = @teacher.students.build(name: "student", user_attributes: {email: "e@gmail.com", password: "password"}, participant_attributes: {})
-      @student.save
-    end
-    it "student successfully creates a team" do
+      @student = students(:student_1)
+
       login_as(@student.user)
       visit new_team_path
+    end
+
+    it "student successfully creates a team" do
       within("form") do
         fill_in "team[name]", with: "Tigers"
       end
       click_button "Create"
-      expect(@student.teams.count).to eq(1)
       expect(page).to have_content("Team Tigers")
     end
+
     it "fails to create a team" do
-      login_as(@student.user)
-      visit new_team_path
       within("form") do
         fill_in "team[name]", with: ""
       end
@@ -30,25 +29,23 @@ RSpec.feature "Teams", type: :feature do
 
   context "invite members" do
     before do
-      @teacher = Teacher.create(chaperone_count: 3, student_count: 23, school: "valley", name: "teacher", user_attributes: {email: "t@gmail.com", password: "password"}, participant_attributes: {})
-      @student = @teacher.students.build(name: "student", user_attributes: {email: "e@gmail.com", password: "password"}, participant_attributes: {})
-      @student.save
-      @student2 = @teacher.students.build(name: "Billy", user_attributes:{email: "andecord@gmail.com", password: "password"}, participant_attributes: {})
-      @student2.save
-      @team = Team.create(name: "Tigers", lead: @student.id, participant_attributes: {})
-      @team.register_member(@student)
-    end
-    it "successfully invites students" do
+      @student = students(:student_1)
+      @team = teams(:team_1)
+      @student2 = students(:student_2)
+
       login_as(@student.user)
+    end
+
+    it "successfully invites students" do
       visit "teams/#{@team.id}/invite"
       within("form") do
         fill_in "email1", with: @student2.user.email
       end
       click_button "Invite"
-      expect(page).to have_content("Welcome, #{@student.name}")
+      expect(page).to have_content("Invited members to team")
     end
+
     it "fail to invite students" do
-      login_as(@student.user)
       visit "teams/#{@team.id}/invite"
       within("form") do
         fill_in "email1", with: "random@gmail.com"

@@ -11,7 +11,7 @@ class TeamsController < ApplicationController
 
     # redirect student to student page if emails are sent
     if @continue
-      redirect_to @student
+      redirect_to @team, :notice => "Invited members to team"
     else
       render 'invite'
     end
