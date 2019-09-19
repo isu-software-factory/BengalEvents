@@ -9,6 +9,10 @@ class LocationsController < ApplicationController
     @location = @occasion.locations.build
     @time_slot = @location.time_slots.build
     authorize @location
+
+    add_breadcrumb "Home", current_user.meta
+    add_breadcrumb "#{@occasion.name}", @occasion
+    add_breadcrumb "New Location", new_occasion_location_path(@occasion)
   end
 
   def create

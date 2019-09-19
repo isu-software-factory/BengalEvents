@@ -31,6 +31,11 @@ class EventsController < ApplicationController
 
   def show
     authorize @event
+
+    add_breadcrumb "Home", current_user.meta
+    add_breadcrumb @occasion.name, @occasion
+    add_breadcrumb @event.name, occasion_events_path(@event)
+
   end
 
   def update

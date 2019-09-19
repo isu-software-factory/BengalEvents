@@ -5,7 +5,14 @@ class EventDetailsController < ApplicationController
 
   def new
     @event_detail = EventDetail.new
+    @occasion = Occasion.find(params[:occasion_id])
+    @event = Event.find(params[:event_id])
     authorize @event_detail
+
+    add_breadcrumb "Home", current_user.meta
+    add_breadcrumb @occasion.name, @occasion
+    add_breadcrumb @event.name, occasion_events_path(@event)
+    add_breadcrumb "New Time Slot", new_occasion_event_event_detail_path(@occasion, @event)
   end
 
   def create
