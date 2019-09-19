@@ -1,11 +1,10 @@
 class StudentsController < ApplicationController
-  before_action :prepare_teacher, only: [:new, :create, :student_emails, :student_names]
+  before_action :prepare_teacher, only: %i[new create student_emails student_names]
   before_action :authenticate_user!, except: :new
 
-
-   def index
-     @students = Student.where("teacher_id = ?", params[:teacher_id])
-   end
+  def index
+    @students = Student.where('teacher_id = ?', params[:teacher_id])
+  end
 
   # shows printing page for schedule
   def print_schedule
@@ -17,20 +16,17 @@ class StudentsController < ApplicationController
     @student = Student.find(params[:id])
     # print path
     @print_path =
-
-    # add breadcrumbs
-    add_breadcrumb "Home", current_user.meta
-    add_breadcrumb "#{@student.name}'s Schedule", controller: "students", action: "schedule", id: @student.id
+        # add breadcrumbs
+        add_breadcrumb 'Home', current_user.meta
+    add_breadcrumb "#{@student.name}'s Schedule", controller: 'students', action: 'schedule', id: @student.id
   end
 
   # shows student main page
   def show
     @student = Student.find(params[:id])
     authorize @student
-
     # add breadcrumbs
-    add_breadcrumb "Home", @student
-
+    add_breadcrumb 'Home', @student
     # get the number of teams per row
     # for the student page
     @teams = 1
@@ -45,7 +41,7 @@ class StudentsController < ApplicationController
     end
 
     # list of card styles
-    @random_card = ["bg-primary", "bg-success", "bg-info", "bg-dark"]
+    @random_card = %w[bg-primary bg-success bg-info bg-dark]
   end
 
   # shows the student new page
@@ -66,10 +62,10 @@ class StudentsController < ApplicationController
       success = create_students(names[each], emails[each])
     end
     redirect_to teacher_path(@teacher.id)
-
   end
 
   private
+
   def prepare_teacher
     @teacher = Teacher.find(current_user.meta.id)
   end
@@ -79,7 +75,7 @@ class StudentsController < ApplicationController
     names = []
     # add each name into names array
     for num in 1..@teacher.student_count do
-      names << params["name" + num.to_s]
+      names << params['name' + num.to_s]
     end
     names
   end
@@ -89,18 +85,18 @@ class StudentsController < ApplicationController
     emails = []
     # adds every email from params to emails array
     for num in 1..@teacher.student_count do
-      emails << params["email" + num.to_s]
+      emails << params['email' + num.to_s]
     end
     emails
   end
 
   # creates a student
   def create_students(name1, email1)
-    @student = Student.new(name: name1, user_attributes: {email: email1}, participant_attributes: {})
+    @student = Student.new(name: name1, user_attributes: { email: email1 }, participant_attributes: {})
     @teacher.students << @student
 
     # create password
-    random_password = ('0'..'z').to_a.shuffle.first(8).join
+    random_password = ('0'..'z').to_a.sample.first(8).join
     @student.user.password = random_password
     @student.user.password_confirmation = random_password
 
@@ -112,5 +108,4 @@ class StudentsController < ApplicationController
       false
     end
   end
-
 end

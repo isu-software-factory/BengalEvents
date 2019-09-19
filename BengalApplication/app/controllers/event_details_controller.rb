@@ -1,6 +1,6 @@
 class EventDetailsController < ApplicationController
   before_action :set_event
-  before_action :set_event_detail, except: [:new, :create]
+  before_action :set_event_detail, except: %i[new create]
   before_action :set_occasion
 
   def new
@@ -10,8 +10,8 @@ class EventDetailsController < ApplicationController
 
   def create
     @event_details = @event.event_details.new(event_detail_params)
-    @event_details.start_time = @event_details.date_started.to_s + " " + @event_details.start_time.strftime("%H:%M")
-    @event_details.end_time = @event_details.date_started.to_s + " " + @event_details.end_time.strftime("%H:%M")
+    @event_details.start_time = @event_details.date_started.to_s + ' ' + @event_details.start_time.strftime('%H:%M')
+    @event_details.end_time = @event_details.date_started.to_s + ' ' + @event_details.end_time.strftime('%H:%M')
     authorize @event_details
 
     if @event_details.save
@@ -20,11 +20,10 @@ class EventDetailsController < ApplicationController
       @waitlist.event_detail = @event_details
       @waitlist.save
       # binding.pry
-      redirect_to occasion_event_path(@occasion, @event), :notice => "Successfully created Event Session."
+      redirect_to occasion_event_path(@occasion, @event), notice: 'Successfully created Event Session.'
     else
       flash[:errors] = @event_details.errors.full_messages
       redirect_back(fallback_location: new_occasion_event_event_detail_path(@occasion, @event))
-
     end
   end
 
@@ -32,24 +31,21 @@ class EventDetailsController < ApplicationController
     authorize @event_detail
   end
 
-
   def update
     @event_detail.update_attributes(event_detail_params)
-    @event_detail.start_time = @event_detail.date_started.to_s + " " + @event_detail.start_time.strftime("%H:%M")
-    @event_detail.end_time = @event_detail.date_started.to_s + " " + @event_detail.end_time.strftime("%H:%M")
+    @event_detail.start_time = @event_detail.date_started.to_s + ' ' + @event_detail.start_time.strftime('%H:%M')
+    @event_detail.end_time = @event_detail.date_started.to_s + ' ' + @event_detail.end_time.strftime('%H:%M')
     authorize @event_detail
     if @event_detail.save
-      redirect_to occasion_event_path(@occasion, @event), :notice => "Successfully updated."
+      redirect_to occasion_event_path(@occasion, @event), notice: 'Successfully updated.'
     end
   end
 
   def destroy
     authorize @event_detail
     @event_detail.destroy
-    redirect_to occasion_event_path(@occasion, @event), :notice => "Successfully deleted time slot."
+    redirect_to occasion_event_path(@occasion, @event), notice: 'Successfully deleted time slot.'
   end
-
-
 
   private
 
@@ -68,6 +64,4 @@ class EventDetailsController < ApplicationController
   def event_detail_params
     params.require(:event_detail).permit(:capacity, :date_started, :start_time, :end_time)
   end
-
-
 end

@@ -16,7 +16,7 @@ class EventDetail < ApplicationRecord
   belongs_to :event, dependent: :destroy
   has_many :registrations
   has_many :participants, through: :registrations
-  validates :start_time, :end_time,  presence: true
+  validates :start_time, :end_time, presence: true
   validates_uniqueness_of :start_time, :end_time
   validates :capacity, presence: true
   validates :date_started, presence: true
@@ -25,7 +25,7 @@ class EventDetail < ApplicationRecord
   def end_must_be_after_start
     if self.start_time != nil && self.end_time != nil
       if self.start_time >= self.end_time
-        errors.add(:end_time, "must be after start time")
+        errors.add(:end_time, 'must be after start time')
       end
     end
   end
@@ -50,7 +50,7 @@ class EventDetail < ApplicationRecord
     # Go through participants to decrease capacity
     @remaining = self.capacity
     self.participants.each do |p|
-      if p.member_type == "Team"
+      if p.member_type == 'Team'
         # team members
         members = p.member.students.count
         @remaining -= members

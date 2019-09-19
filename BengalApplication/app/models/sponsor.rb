@@ -14,8 +14,5 @@ class Sponsor < ApplicationRecord
   accepts_nested_attributes_for :user
   accepts_nested_attributes_for :supervisor
   has_many :events
-
-
-
   validates :name, presence: true
 end

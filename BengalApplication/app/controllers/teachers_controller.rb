@@ -1,6 +1,5 @@
 class TeachersController < ApplicationController
-  before_action :authenticate_user!, except: [:new, :create]
-
+  before_action :authenticate_user!, except: %i[new create]
 
   # shows teacher new page
   def new
@@ -17,7 +16,7 @@ class TeachersController < ApplicationController
     if @teacher.save
       # sign in teacher and redirect to students new page
       sign_in @teacher.user
-      redirect_to "/students/new"
+      redirect_to '/students/new'
     else
       render :new
     end
@@ -28,28 +27,25 @@ class TeachersController < ApplicationController
     @teacher = Teacher.find(params[:id])
     authorize @teacher
     @students = organize_students(@teacher.students)
-    add_breadcrumb "Home", @teacher
+    add_breadcrumb 'Home', @teacher
   end
 
   # shows the print page for class registration
   def print_class_registrations
     @teacher = Teacher.find(params[:id])
     @students = @teacher.students
-
   end
 
   # shows class registrations page
   def class_registrations
-
     # display every student registrations
     @teacher = Teacher.find(params[:id])
     @students = @teacher.students
 
     # add breadcrumbs
-    add_breadcrumb "Home", current_user.meta
-    add_breadcrumb "Class Registrations", controller: "teachers", action: "class_registrations", id: @teacher.id
+    add_breadcrumb 'Home', current_user.meta
+    add_breadcrumb 'Class Registrations', controller: 'teachers', action: 'class_registrations', id: @teacher.id
   end
-
 
   # def edit
   #   @teacher = Teacher.find(params[:id])
@@ -75,11 +71,11 @@ class TeachersController < ApplicationController
   private
 
   def teacher_params
-    params.require(:teacher).permit(:school, :name, :student_count, :chaperone_count, user_attributes: [:id, :email, :password, :password_confirmation])
+    params.require(:teacher).permit(:school, :name, :student_count, :chaperone_count, user_attributes: %i[id email password password_confirmation])
   end
 
   # sort students by name
   def organize_students(students_list)
-    students_list.sort_by{|s| s.name}
+    students_list.sort_by { |s| s.name }
   end
 end
