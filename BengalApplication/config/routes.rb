@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   get "students/print_schedule/:id" => "students#print_schedule"
   get "groupings/add/:id/:team_id" => "groupings#add"
   get 'registrations/index/:part_id' => "registrations#index"
-  get "registrations/register/:part_id/:id" => "registrations#register"
+  post "registrations/register/:part_id/:id" => "registrations#register"
   get "registrations/events/:part_id/:id" => "registrations#events"
   post 'teams/:id/register_members' => "teams#register_members"
   get "teams/:id/invite" => "teams#invite"

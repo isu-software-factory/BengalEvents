@@ -3,24 +3,24 @@ require 'rails_helper'
 RSpec.feature "Students", type: :feature do
   context "create student" do
     before(:each) do
-      @teacher = Teacher.create(chaperone_count: 3, student_count: 23, school: "valley", name: "teacher", user_attributes: {email: "te@gmail.com", password: "password"}, participant_attributes: {})
-      login_as(@teacher.user, :scope => :user)
+      @teacher = Teacher.create(name: "Kelly", school: "Pocatello", student_count: 1, chaperone_count: 1, user_attributes:{email: "teach@gmail.com", password: "password"}, participant_attributes:{})
+      login_as(@teacher.user)
       visit new_student_path
     end
+
     scenario "should be successful" do
       within("form") do
-        fill_in "student[name]", with: "student"
-        fill_in "student[user_attributes][email]", with: "s@gmail.com"
+        fill_in "name1", with: "student"
+        fill_in "email1", with: "s@gmail.com"
       end
         click_button "Add Student"
         expect(@teacher.students.count).to eq(1)
-        expect(page).to have_content("Add students here")
     end
 
     scenario "should fail" do
       within("form") do
-        fill_in "student[name]", with: ""
-        fill_in "student[user_attributes][email]", with: "s@gmail.com"
+        fill_in "name1", with: ""
+        fill_in "email1", with: "s@gmail.com"
       end
       click_button "Add Student"
       expect(@teacher.students.count).to eq(0)
@@ -28,31 +28,34 @@ RSpec.feature "Students", type: :feature do
     end
   end
 
-  # Will not be implemented
-  # context "update student" do
-  #   before(:each) do
-  #     teacher = Teacher.create(chaperone_count: 3, student_count: 23, school: "valley", name: "teacher", user_attributes: {email: "te@gmail.com", password: "password"})
-  #     @student = teacher.students.build(name: "Bill", user_attributes: {email: "student@gmail.com", password: "password"})
-  #     @student.save
-  #     login_as(@student.user, :scope => :user)
-  #     visit edit_student_path(@student.id)
-  #   end
-  #   scenario "should be successful" do
-  #     within("form") do
-  #       fill_in  "user[password]", with: "newpassword"
-  #     end
-  #     click_button "update"
-  #     expect(@student.user.password).to eq("newpassword")
-  #     expect(page).to have_content("Student main page")
-  #   end
-  #   scenario "should fail" do
-  #     within("form") do
-  #       fill_in "user[password]", with: ""
-  #       expect(@student.user.password).to eq("password")
-  #       expect(page).to have_content("Password can't be blank")
-  #     end
-  #   end
-  # end
+
+  context "update student" do
+    before(:each) do
+      teacher = Teacher.create(chaperone_count: 3, student_count: 23, school: "valley", name: "teacher", user_attributes: {email: "te@gmail.com", password: "password"})
+      @student = teacher.students.build(name: "Bill", user_attributes: {email: "student@gmail.com", password: "password"}, participant_attributes: {})
+      @student.save
+      login_as(@student.user)
+      visit edit_user_registration_path(@student.user)
+    end
+
+    scenario "should be successful" do
+      within("form#edit_user") do
+        fill_in  "user_password", with: "newpassword"
+        fill_in "user_password_confirmation", with: "newpassword"
+        fill_in "user_current_password", with: "password"
+      end
+      click_button "Update"
+      expect(page).to have_content("Your account has been updated successfully.")
+    end
+
+    scenario "should fail" do
+      within("form#edit_user") do
+        fill_in "user_email", with: ""
+      end
+      click_button "Update"
+      expect(page).to have_content("Email can't be blank")
+    end
+  end
 
   # Not yet implemented
   # context "destroy student" do

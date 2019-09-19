@@ -17,3 +17,12 @@ two:
   supervisor_id: 2
   description: "Program in Python"
   isMakeAhead: true
+
+three:
+  id: 3
+  name: "Computers"
+  location_id: 1
+  occasion_id: 2
+  supervisor_id: 1
+  description: "Programs Python"
+  isMakeAhead: true

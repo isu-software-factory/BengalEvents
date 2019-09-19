@@ -17,6 +17,7 @@ SimpleCov.start
 # it.
 Selenium::WebDriver::Chrome.driver_path = "./spec/chrome/chromedriver.exe"
 Capybara.default_driver = :selenium_chrome
+
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|
 

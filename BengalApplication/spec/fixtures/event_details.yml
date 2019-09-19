@@ -39,3 +39,11 @@ five:
   end_time: 2019-07-01 22:36:06
   event_id: 1
   date_started: 2019-07-01
+
+six:
+  id: 6
+  capacity: 2
+  start_time: 2019-07-01 21:36:06
+  end_time: 2019-07-01 22:36:06
+  event_id: 3
+  date_started: 2019-07-01

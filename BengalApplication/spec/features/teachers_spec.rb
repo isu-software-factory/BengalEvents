@@ -13,17 +13,17 @@ RSpec.feature "Teachers", type: :feature do
 
     scenario "should be successful" do
       within('form') do
-        fill_in 'teacher[student_count]', with: 202
+        fill_in 'teacher[student_count]', with: 2
         fill_in 'teacher[user_attributes][email]', with: "da2@gmail.com"
         fill_in 'teacher[user_attributes][password]', with: "password"
         fill_in 'teacher[user_attributes][password_confirmation]', with: "password"
       end
-      click_button 'Confirm'
-      expect(page).to have_content("Teachers Main Page")
+      click_button 'Create Account'
+      expect(page).to have_content("Enter student emails to register")
     end
 
     scenario "should fail" do
-      click_button "Confirm"
+      click_button "Create Account"
       expect(page).to have_content("Student count can't be blank")
       expect(page).to have_content("User email can't be blank")
       expect(page).to have_content("User password can't be blank")
@@ -33,14 +33,15 @@ RSpec.feature "Teachers", type: :feature do
   context "update teacher" do
     before do
       @teacher = Teacher.create(school: "Valley", chaperone_count: 23, student_count: 232, name: "Sally", user_attributes: {email: "t@gmail.com", password: "password"}, participant_attributes: {})
-      login_as(@teacher.user, :scope => :user)
+      login_as(@teacher.user)
     end
+
     scenario "should be successful" do
      visit edit_teacher_path(@teacher)
       within("form")do
        fill_in "teacher[name]", with: "valley"
        fill_in "teacher[school]", with: 'Daniel'
-        fill_in 'teacher[chaperone_count]', with: 23
+       fill_in 'teacher[chaperone_count]', with: 23
       end
       click_button 'Confirm'
       expect(page).to have_content("Successfully updated")
