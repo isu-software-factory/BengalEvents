@@ -90,4 +90,28 @@ RSpec.feature "Registrations", type: :feature do
       expect(page).not_to have_content("Computers")
     end
   end
+
+  context "Waitlist method" do
+    before do
+      @occasion = occasions(:two)
+      @event_detail = event_details(:six)
+      @teacher = Teacher.create(name: "Kelly", school: "Valley", student_count: 23, chaperone_count: 2, user_attributes: {email: "tech@gmail.com", password: "password"}, participant_attributes: {})
+      @student = @teacher.students.build(name: "Dan", user_attributes: {email: "student@gmail.com", password: 'password'}, participant_attributes: {})
+      @student.save
+      @student2 = @teacher.students.build(name: "Tim", user_attributes: {email: "student2@gmail.com", password: 'password'}, participant_attributes: {})
+      @student2.save
+      login_as(@teacher.user)
+    end
+
+    it "will add the teacher to the waitlist successfully" do
+      @event_detail.register_participant(@student.participant)
+      @event_detail.register_participant(@student2.participant)
+
+      visit "registrations/events/#{@teacher.participant.id}/#{@occasion.id}"
+      page.execute_script %Q{ $('#hide_down').removeClass('hide').addClass('show')}
+
+      click_button("Add To WaitList")
+      expect(page).to have_content("You have been added to the WaitList")
+    end
+  end
 end
