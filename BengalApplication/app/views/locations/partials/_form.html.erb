@@ -14,21 +14,22 @@
 
   <%= f.fields_for :time_slots do |ff| %>
     <div class="form-group">
-      <%= ff.label :interval, "Interval:", class: "col-md-4 control-label" %>
-      <div class="col-xs-2">
-        <%= ff.text_field :interval, class: "form-control" %>
+      <%= ff.label :interval, "Interval(in minutes):", class: "col-md-4 control-label" %>
+      <div class="col-xs-1">
+        <%= ff.number_field :interval, class: "form-control col-xs-1", min: "0" %><span></span>
       </div>
     </div>
+
     <div class="form-group">
       <%= ff.label :start_time, "Start Time:", class: "col-md-4 control-label" %>
-      <div class="col-xs-1">
-        <%= ff.time_select :start_time, {minute_step: 15}, class: "form-control" %>
+      <div class="col-xs-2">
+        <%= ff.time_select :start_time, {minute_step: 15}, class: "selectPicker" %>
       </div>
     </div>
     <div class="form-group">
       <%= ff.label :end_time, "End Time:", class: "col-md-4 control-label" %>
-      <div class="col-xs-1">
-        <%= ff.time_select :end_time, {minute_step: 15}, class: "form-control" %>
+      <div class="col-xs-2">
+        <%= ff.time_select :end_time, {minute_step: 15}, class: "selectPicker" %>
       </div>
     </div>
   <% end %>
