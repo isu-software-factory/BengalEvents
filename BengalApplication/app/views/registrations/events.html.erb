@@ -47,7 +47,7 @@
                 <td><%= ed.end_time %></td>
                 <td><%= button_to "Register", {controller: "registrations", action: "register", part_id: @participant_id, id: ed.id}, class: "button", id: "Register_button" %>
                   <% if ed.capacity_remaining == 0 %> |
-                    <%= link_to "Add to WaitList", controller: "registrations", action: "add_to_waitlist", part_id: @participant_id, id: ed.id %>
+                    <%= button_to "Add to WaitList", {controller: "registrations", action: "add_to_waitlist", part_id: @participant_id, id: ed.id} %>
                   <% end %>
               </tr>
             <% end %>

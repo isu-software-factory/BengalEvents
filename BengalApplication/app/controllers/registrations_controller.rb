@@ -82,8 +82,9 @@ class RegistrationsController < ApplicationController
     @event_detail = EventDetail.find(params[:id])
 
     @event_detail.waitlist.participants << @participant
-    redirect_to @participant.member, :notice => "You have been added to the waitlist"
+    redirect_to @participant.member, :notice => "You have been added to the WaitList"
   end
+
   def drop
     # drop participants from events
     @participant = Participant.find(params[:part_id])
