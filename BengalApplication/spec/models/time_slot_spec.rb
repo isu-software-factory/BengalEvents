@@ -11,13 +11,12 @@ RSpec.describe TimeSlot, type: :model do
     end
 
     it "ensures start time" do
-      @time_slot = @location.time_slots.build(end_time: @end_time, interval: 60).save
-      expect(@time_slot).to eq(false)
+      expect{@location.time_slots.build(end_time: @end_time, interval: 60).save}.to raise_error(ArgumentError)
+
     end
 
     it "ensures end time" do
-      @time_slot = @location.time_slots.build(start_time: @start_time, interval: 60).save
-      expect(@time_slot).to eq(false)
+      expect{@location.time_slots.build(start_time: @start_time, interval: 60).save}.to raise_error(ArgumentError)
     end
 
     it "ensures interval" do
@@ -28,6 +27,16 @@ RSpec.describe TimeSlot, type: :model do
     it "should create time slot successfully" do
       @time_slot = @location.time_slots.build(start_time: @start_time, end_time: @end_time, interval: 60).save
       expect(@time_slot).to eq(true)
+    end
+
+    # it "should throw error for overlapping reservation" do
+    #   @time_slot = @location.time_slots.build(start_time: @start_time, end_time: @end_time, interval: 60).save
+    #   expect{@location.time_slots.build(start_time: @start_time, end_time: @end_time, interval: 60)}.to raise_error
+    # end
+    #
+    it "should not save if end time is before start time" do
+      @time_slot = @location.time_slots.build(start_time: @end_time, end_time: @start_time, interval: 60).save
+      expect(@time_slot).to eq(false)
     end
   end
 

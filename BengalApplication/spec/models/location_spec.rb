@@ -6,6 +6,7 @@ RSpec.describe Location, type: :model do
   context "validation tests" do
     before do
       @occasion = occasions(:one)
+
     end
 
 
@@ -20,8 +21,13 @@ RSpec.describe Location, type: :model do
       expect(@location).to eq(false)
     end
     it "should create location successfully" do
-      @location = @occasion.locations.build(name: "SUB").save
+      @location = @occasion.locations.build(name: "BALLROOM").save
       expect(@location).to eq(true)
+    end
+
+    it "should not save if interval is blank when being created with time_slot" do
+      @location = @occasion.locations.build(name: "BALLROOM", time_slots_attributes: {start_time: @occasion.start_date, end_time: @occasion.end_date, interval: 60}).save
+      expect(@location).to eq(false)
     end
   end
 

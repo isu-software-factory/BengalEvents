@@ -4,7 +4,7 @@ RSpec.describe EventDetail, type: :model do
   fixtures :sponsors, :supervisors, :teachers, :students,
            :occasions, :coordinators, :locations, :time_slots,
            :events, :event_details, :teams, :participants,
-           :groupings
+           :groupings, :waitlists
 
   context "validation tests" do
     before do
@@ -213,13 +213,30 @@ RSpec.describe EventDetail, type: :model do
       end
     end
 
-    context "Mailing Tests" do
-      pending
+    context "Wait List" do
+      before do
+        @event = events(:one)
+        @event_detail = event_details(:three)
+        @student = students(:student_1)
+        @teacher = teachers(:teacher_emily)
+      end
+
+      it "add participant to event detail automatically and drop from waitlist" do
+        @event_detail.waitlist.participants << @student.participant
+        @event_detail.wait_list_check
+        expect(@event_detail.waitlist.participants.count).to eq(0)
+      end
     end
 
-    context "Waitlist tests" do
-      it "checks to waitlist" do
-        pending
+    context "Email" do
+      before do
+        @event_detail = event_details(:six)
+        @student = students(:student_1)
+      end
+
+      it "should send an email if event is MakeAhead" do
+        @event_detail.register_participant(@student.participant)
+        expect(@event_detail.participants.count).to eq(1)
       end
     end
   end
