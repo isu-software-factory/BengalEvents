@@ -64,8 +64,7 @@ RSpec.feature "Occasions", type: :feature do
 
   context "destroy occasion" do
     before(:each) do
-      @coordinator = coordinators(:coordinator_rebeca)
-      @occasion = occasions(:one)
+      @coordinator = coordinators(:coordinator_Steven)
 
       login_as(@coordinator.user)
       visit coordinator_path(@coordinator.id)

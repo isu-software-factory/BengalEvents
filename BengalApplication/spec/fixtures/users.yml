@@ -15,8 +15,6 @@ teacher:
  meta_type: "Teacher"
  meta_id: 1
 
-
-
 student_1:
  id: 2
  email: "robert@gmail.com"
@@ -68,6 +66,12 @@ coordinator:
  meta_id: 1
  meta_type: "Coordinator"
 
+coordinator_2:
+ id: 10
+ email: "stev@gmail.com"
+ encrypted_password: "password"
+ meta_id: 2
+ meta_type: "Coordinator"
 
 
 sponsor:

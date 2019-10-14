@@ -110,7 +110,7 @@ RSpec.feature "Registrations", type: :feature do
       visit "registrations/events/#{@teacher.participant.id}/#{@occasion.id}"
       page.execute_script %Q{ $('#hide_down').removeClass('hide').addClass('show')}
 
-      click_button("Add To WaitList")
+      click_button("Add to WaitList")
       expect(page).to have_content("You have been added to the WaitList")
     end
   end
