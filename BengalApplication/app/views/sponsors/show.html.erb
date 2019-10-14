@@ -22,7 +22,7 @@
       <tr>
         <% current_user.meta.supervisor.events.each do |e| %>
         <tr>
-          <th scope="row"><%= link_to e.name, controller: "event_details", action: "show", id: e.id %></th>
+          <th scope="row"><%= link_to e.name, action:  %></th>
           <td> <%= e.description %></td>
           <td> <%= e.isMakeAhead %></td>
           <td><%= e.location.name %></td>

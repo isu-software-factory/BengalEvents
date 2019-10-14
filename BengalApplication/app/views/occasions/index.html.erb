@@ -1,11 +1,11 @@
 <% content_for :title, "Occasions" %>
 <h1>Occasions</h1>
-<h2> List of Occcasions</h2>
+<hr>
 <div class="container">
   <div class="row">
     <% @occasions.each do |occasion| %>
-      <div class="col-sm-9">
-        <div class="card border-dark" style="max-width: 25%;">
+      <div class="col-sm">
+        <div class="card border-dark mb-3 w-75">
           <div class="card-header">
             <h4> <%= occasion.name %>  </h4>
             <span>Created By: <%= occasion.coordinator.user.email %></span>
@@ -23,16 +23,16 @@
                 <%= link_to "Delete", occasion_path(occasion.id), class: "btn btn-danger", data: {method: :delete, confirm: "Are you sure?"} %>
               <% end %></p>
             <hr>
-            <div class="card-text">
-              <%= link_to "Choose", occasion_path(occasion.id), class: "btn btn-primary" %>
-            </div>
+            <p class="card-text">
+              <span> <%= link_to "Click Here", occasion_path(occasion.id), class: "btn btn-primary" %> to see the list of events. </span>
+            </p>
           </div>
         </div>
       </div>
     <% end %>
 
     <% if policy(@occasions).create? %>
-      <div class="col-sm-3">
+      <div class="col-2">
         <div class="card border-dark" style="max-width: 18rem;">
           <div class="card-header">Actions</div>
           <div class="card-body text-dark">
