@@ -44,7 +44,7 @@ class OccasionsController < ApplicationController
       redirect_to occasions_path, :notice => 'Successfully updated Occasion.'
     else
       flash[:errors] = @occasion.errors.full_messages
-       redirect_back(fallback_location: edit_occasion_path(@occasion.id))
+       render :edit
     end
   end
 
