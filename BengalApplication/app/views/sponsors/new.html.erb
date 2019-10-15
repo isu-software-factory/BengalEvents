@@ -1,7 +1,7 @@
 <h1>To Create an account fill in the information.</h1>
 <% if @sponsor.errors.any? %>
   <div id="error_explanation">
-    <h2>The form has <%= pluralize(@sponsor.errors.count, "error") %></h2>
+    <h2>Please fix <%= pluralize(@sponsor.errors.count, "error") %> to proceed. </h2>
     <ul>
       <% @sponsor.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
@@ -9,7 +9,6 @@
     </ul>
   </div>
 <% end %>
-
 <div class="container">
   <div id="loginbox" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
     <div class="panel panel-info">

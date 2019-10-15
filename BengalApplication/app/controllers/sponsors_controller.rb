@@ -13,7 +13,7 @@ class SponsorsController < ApplicationController
       sign_in @sponsor.user
       redirect_to @sponsor
     else
-      redirect_to new_sponsor_path
+      render :new
     end
   end
 
