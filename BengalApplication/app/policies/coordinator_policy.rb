@@ -1,4 +1,8 @@
 class CoordinatorPolicy < ApplicationPolicy
+  def new?
+    # only a admin can create a Coordinator
+    @user.meta_type == "Admin"
+  end
 
   def show?
     # only Coordinator can see their page
