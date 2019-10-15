@@ -27,6 +27,6 @@ class LocationPolicy < ApplicationPolicy
 
   def destroy?
     # Only Coordinator can delete the Location
-    user.meta_type == "Coordinator"
+    user.meta_type == "Coordinator" || user.meta_type == "Admin"
   end
 end
