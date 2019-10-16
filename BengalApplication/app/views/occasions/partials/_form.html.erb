@@ -1,3 +1,14 @@
+<% if @occasion.errors.any? %>
+  <div id="error_explanation">
+    <h2>Please fix <%= pluralize(@occasion.errors.count, "error") %> to proceed. </h2>
+    <ul>
+      <% @occasion.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
 <%= form_for @occasion, :html => {:class => "form-horizontal center"} do |f| %>
   <div class="form-group">
     <%= f.label :name, "Occasion Name:", class: "col-md-4 control-label" %>
@@ -30,3 +41,4 @@
     </div>
   </div>
 <% end %>
+
