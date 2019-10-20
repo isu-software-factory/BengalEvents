@@ -64,13 +64,15 @@ RSpec.feature "Occasions", type: :feature do
 
   context "destroy occasion" do
     before(:each) do
-      @coordinator = coordinators(:coordinator_Steven)
+      @coordinator = Coordinator.create(name: "Sam", user_attributes: {email: "Sam@gmail.com", password: "password"})
+      @occasion = @coordinator.occasions.build(name: "Hal", description: "cool", start_date: Time.now, end_date: Time.now)
 
       login_as(@coordinator.user)
       visit coordinator_path(@coordinator.id)
     end
     scenario "should be successful" do
-      click_link "Delete"
+      #click_link('Delete', :match => :first)
+      find('a', match: :first, text: "Delete").click
       page.driver.browser.switch_to.alert.accept
       expect(page).to have_content("Successfully Deleted Occasion.")
     end
