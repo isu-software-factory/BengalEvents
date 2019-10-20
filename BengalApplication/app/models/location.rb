@@ -12,12 +12,11 @@
 
 class Location < ApplicationRecord
   belongs_to :occasion
-
   has_many :time_slots, dependent: :destroy
   has_many :events
-
   validates :name, uniqueness: true, presence: true
 
-  accepts_nested_attributes_for :time_slots, allow_destroy: true,
-                                reject_if: ->(attrs) { attrs['interval'].blank? }
+  accepts_nested_attributes_for :time_slots,
+                                allow_destroy: true,
+                                :reject_if => proc { |att| att[:interval].blank? }
 end
