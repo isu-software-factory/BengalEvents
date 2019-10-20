@@ -16,7 +16,7 @@
     <div class="form-group">
       <%= ff.label :interval, "Interval(in minutes):", class: "col-md-4 control-label" %>
       <div class="col-xs-1">
-        <%= ff.number_field :interval, class: "form-control col-xs-1", min: "0" %><span></span>
+        <%= ff.number_field :interval,  required: true, class: "form-control col-xs-1", min: "0" %>
       </div>
     </div>
 
