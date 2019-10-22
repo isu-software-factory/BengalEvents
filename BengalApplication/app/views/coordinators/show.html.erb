@@ -3,9 +3,9 @@
 <hr>
 <div class="container">
   <div class="row">
-    <% @occasions.each do |occasion| %>
-      <div class="col-sm">
-        <div class="card border-dark mb-3 w-75">
+    <div class="col-sm style:'width: 18rem;'">
+      <% @occasions.each do |occasion| %>
+          <div class="card mb-3 border-dark">
           <div class="card-header">
             <h4> <%= occasion.name %>  </h4>
             <span>Created By: <%= occasion.coordinator.user.email %></span>
@@ -24,14 +24,14 @@
               <% end %></p>
             <hr>
             <p class="card-text">
-             <span> <%= link_to "Click Here", occasion_path(occasion.id), class: "btn btn-primary" %> to see the list of events. </span>
+              <span> <%= link_to "Click Here", occasion_path(occasion.id), class: "btn btn-primary" %> to see the list of events. </span>
             </p>
           </div>
         </div>
-      </div>
-    <% end %>
+      <% end %>
+    </div>
 
-    <div class="col-sm-3">
+    <div class="col-sm-2">
       <div class="card border-dark mb-3" style="max-width: 18rem;">
         <div class="card-header">Actions</div>
         <div class="card-body text-dark">
