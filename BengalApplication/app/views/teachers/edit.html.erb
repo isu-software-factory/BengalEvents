@@ -1,56 +1,65 @@
 
 <%=form_for @teacher do |f| %>
 
-  <div class="row">
-    <div class="column">  <%=f.label :name, "Teacher Name" %>
-    </div>
-    <div class="column"> <%=f.text_field(:name )%>
+
+  <div class="container">
+    <div id="loginbox" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <div class="panel-title">Account Settings</div>
+        </div>
+        <div style="padding-top:30px" class="panel-body">
+          <%= form_for @teacher, class: "form-horizontal" do |f| %>
+
+            <div style="margin-bottom: 25px" class="input-group">
+              <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+              <%= f.text_field :name, placeholder: "Full Name", class: "form-control" %>
+            </div>
+
+            <div style="margin-bottom: 25px" class="input-group">
+              <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+              <%= f.text_field :school, placeholder: "School", class: "form-control" %>
+            </div>
+
+            <div style="margin-bottom: 25px" class="input-group">
+              <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+              <%= f.text_field :student_count, placeholder: "Number of Students", class: "form-control" %>
+            </div>
+
+            <div style="margin-bottom: 25px" class="input-group">
+              <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+              <%= f.text_field :chaperone_count, placeholder: "Number of Chaperones", class: "form-control" %>
+            </div>
+
+            <%= f.fields_for :user do |u| %>
+
+              <div style="margin-bottom: 25px" class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                <%= u.email_field :email, placeholder: "Email", class: "form-control" %>
+              </div>
+
+              <div style="margin-bottom: 25px" class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                <%= u.password_field :password, placeholder: "New Password", autofocus: true, autocomplete: "new-password", class: "form-control" %>
+              </div>
+              <div style="margin-bottom: 25px" class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                <%= u.password_field :password_confirmation, placeholder: "Confirm New Password", autocomplete: "off", class: "form-control" %>
+              </div>
+            <% end %>
+            <div style="margin-top:10px" class="form-group">
+              <!-- Button -->
+              <div class="col-sm-12 controls">
+                <%= submit_tag "Update", class: "btn btn-success" %>
+                <%= link_to "Cancel", current_user.meta, class: "button-small" %>
+              </div>
+            </div>
+
+          <% end %>
+        </div>
+      </div>
     </div>
   </div>
-
-  <div class="row">
-    <div class="column"> <%=f.label :school, "School Name" %>
-    </div>
-    <div class="column"> <%=f.text_field(:school )%>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="column"> <%=f.label :chaperone_count, "Expected Number of Chaperones" %>
-    </div>
-    <div class="column"> <%=f.text_field(:chaperone_count )%>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="column"><%=f.label :student_count, "Expected Number of Students" %>
-    </div>
-    <div class="column"><%=f.text_field(:student_count )%>
-    </div>
-  </div>
-  <%=f.fields_for :user do |u| %>
-
-    <div class="row">
-      <%= u.hidden_field :reset_password_token %>
-      <div class="column"> <%=u.label :email %>
-      </div>
-      <div class="column"> <%=u.email_field :email %>
-      </div>
-      <div class="field">
-        <%= u.label :password, "New password" %><br />
-        <% if @minimum_password_length %>
-          <em>(<%= @minimum_password_length %> characters minimum)</em><br />
-        <% end %>
-        <%= u.password_field :password, autofocus: true, autocomplete: "new-password" %>
-      </div>
-
-      <div class="field">
-        <%= u.label :password_confirmation, "Confirm new password" %><br />
-        <%= u.password_field :password_confirmation, autocomplete: "off" %>
-      </div>
-    </div>
-  <%end %>
-  <div class="actions"><%=submit_tag "Confirm", class: "button" %></div>
 <%end %>
 
 
