@@ -4,6 +4,8 @@ class TeachersController < ApplicationController
   # shows teacher new page
   def new
     @teacher = Teacher.new
+
+    
     @teacher.build_user
   end
 
@@ -52,6 +54,7 @@ class TeachersController < ApplicationController
     authorize @teacher
 
     # add breadcrumbs
+    add_breadcrumb "Home", current_user.meta
     add_breadcrumb "Account Settings", edit_teacher_path(@teacher)
   end
 
