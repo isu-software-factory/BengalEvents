@@ -3,45 +3,48 @@
 <hr>
 <div class="container">
   <div class="row">
-    <% @occasions.each do |occasion| %>
-      <div class="col-sm">
-        <div class="card border-dark mb-3 w-75">
-          <div class="card-header">
-            <h4> <%= occasion.name %>  </h4>
-            <span>Created By: <%= occasion.coordinator.user.email %></span>
+    <div class="col">
+      <div class="card-columns">
+        <% @occasions.each do |occasion| %>
+          <div class="card mb-5 border-dark">
+            <div class="card-header">
+              <h4> <%= occasion.name %>  </h4>
+              <span>Created By: <%= occasion.coordinator.user.email %></span>
+            </div>
+            <div class="card-body text-dark">
+              <p class="card-text">Name: <%= occasion.name %></p>
+              <p class="card-text">Description: <%= occasion.description %></p>
+              <p class="card-text">Start Date: <%= occasion.start_date.strftime("%Y-%m-%d") %></p>
+              <p class="card-text">End Date: <%= occasion.end_date.strftime("%Y-%m-%d") %></p>
+              <p>
+                <% if policy(occasion).edit? %>
+                  <%= link_to "Edit", edit_occasion_path(occasion.id), class: "btn btn-secondary" %>
+                <% end %>
+                <% if policy(occasion).destroy? %>
+                  <%= link_to "Delete", occasion_path(occasion.id), class: "btn btn-danger", data: {method: :delete, confirm: "Are you sure?"} %>
+                <% end %></p>
+              <hr>
+              <p class="card-text">
+                <span> <%= link_to "Click Here", occasion_path(occasion.id), class: "btn btn-primary" %> to see the list of events. </span>
+              </p>
+            </div>
           </div>
-          <div class="card-body text-dark">
-            <p class="card-text">Name: <%= occasion.name %></p>
-            <p class="card-text">Description: <%= occasion.description %></p>
-            <p class="card-text">Start Date: <%= occasion.start_date.strftime("%Y-%m-%d") %></p>
-            <p class="card-text">End Date: <%= occasion.end_date.strftime("%Y-%m-%d") %></p>
-            <p>
-              <% if policy(occasion).edit? %>
-                <%= link_to "Edit", edit_occasion_path(occasion.id), class: "btn btn-secondary" %>
-              <% end %>
-              <% if policy(occasion).destroy? %>
-                <%= link_to "Delete", occasion_path(occasion.id), class: "btn btn-danger", data: {method: :delete, confirm: "Are you sure?"} %>
-              <% end %></p>
-            <hr>
-            <p class="card-text">
-              <span> <%= link_to "Click Here", occasion_path(occasion.id), class: "btn btn-primary" %> to see the list of events. </span>
-            </p>
-          </div>
-        </div>
+        <% end %>
       </div>
-    <% end %>
+    </div>
 
-    <% if policy(@occasions).create? %>
-      <div class="col-2">
-        <div class="card border-dark" style="max-width: 18rem;">
-          <div class="card-header">Actions</div>
-          <div class="card-body text-dark">
-            <p>To create a new Occasion: </p>
+    <div class="col-sm-2">
+      <div class="card border-dark mb-3" style="max-width: 18rem;">
+        <div class="card-header">Actions</div>
+        <div class="card-body text-dark">
+          <p>To create a new Occasion: </p>
+          <% if policy(@occasions).create? %>
             <%= link_to "Click Here", new_occasion_path, class: "btn-btn-success" %>
-          </div>
+          <% end %>
         </div>
       </div>
-    <% end %>
+    </div>
+
   </div>
 </div>
 

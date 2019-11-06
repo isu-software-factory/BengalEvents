@@ -3,38 +3,43 @@
     <p><%= e %></p>
   <% end %>
 <% end %>
+<div class="container">
+  <div class="card border-dark">
+    <div class="card-header dark-header "><h1> Location Information</h1></div>
+    <div class="card-body text-dark bengal-body">
+        <%= form_for([@occasion, @location], :html => {:class => "form-horizontal center"}) do |f| %>
+          <div class="form-group">
+            <%= f.label :location, "Location:", class: "col-md-4 control-label" %>
+            <div class="col-xs-2">
+              <%= f.text_field :name, class: "form-control" %>
+            </div>
+          </div>
 
-<%= form_for([@occasion, @location], :html => {:class => "form-horizontal center"}) do |f| %>
-  <div class="form-group">
-    <%= f.label :location, "Location:", class: "col-md-4 control-label" %>
-    <div class="col-xs-2">
-      <%= f.text_field :name, class: "form-control" %>
+          <%= f.fields_for :time_slots do |ff| %>
+            <div class="form-group">
+              <%= ff.label :interval, "Interval(in minutes):", class: "col-md-4 control-label" %>
+              <div class="col-xs-1">
+                <%= ff.number_field :interval, required: true, class: "form-control col-xs-1", min: "0" %>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <%= ff.label :start_time, "Start Time:", class: "col-md-4 control-label" %>
+              <div class="col-xs-2">
+                <%= ff.time_select :start_time, {minute_step: 15}, class: "selectPicker" %>
+              </div>
+            </div>
+            <div class="form-group">
+              <%= ff.label :end_time, "End Time:", class: "col-md-4 control-label" %>
+              <div class="col-xs-2">
+                <%= ff.time_select :end_time, {minute_step: 15}, class: "selectPicker" %>
+              </div>
+            </div>
+          <% end %>
+          <div class="col-md-5 control-label">
+            <%= f.submit "Create", class: "btn btn-default btn-primary" %>
+          </div>
+        <% end %>
+      </div>
     </div>
   </div>
-
-  <%= f.fields_for :time_slots do |ff| %>
-    <div class="form-group">
-      <%= ff.label :interval, "Interval(in minutes):", class: "col-md-4 control-label" %>
-      <div class="col-xs-1">
-        <%= ff.number_field :interval,  required: true, class: "form-control col-xs-1", min: "0" %>
-      </div>
-    </div>
-
-    <div class="form-group">
-      <%= ff.label :start_time, "Start Time:", class: "col-md-4 control-label" %>
-      <div class="col-xs-2">
-        <%= ff.time_select :start_time, {minute_step: 15}, class: "selectPicker" %>
-      </div>
-    </div>
-    <div class="form-group">
-      <%= ff.label :end_time, "End Time:", class: "col-md-4 control-label" %>
-      <div class="col-xs-2">
-        <%= ff.time_select :end_time, {minute_step: 15}, class: "selectPicker" %>
-      </div>
-    </div>
-  <% end %>
-    <div class="col-md-5 control-label">
-      <%= f.submit "Create", class: "btn btn-default btn-primary" %>
-    </div>
-<% end %>
-
