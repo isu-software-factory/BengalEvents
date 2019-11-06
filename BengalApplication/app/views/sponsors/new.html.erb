@@ -1,4 +1,4 @@
-<h1>To Create an account fill in the information.</h1>
+
 <% if @sponsor.errors.any? %>
   <div id="error_explanation">
     <h2>Please fix <%= pluralize(@sponsor.errors.count, "error") %> to proceed. </h2>
@@ -44,7 +44,9 @@
           <div style="margin-top:10px" class="form-group">
             <!-- Button -->
             <div class="col-sm-12 controls">
-              <%= submit_tag "Create Account", class: "btn btn-success" %></div>
+              <%= submit_tag "Create Account", class: "btn btn-success" %>
+              <%= link_to "Cancel", root_path, class: "button-small" %>
+            </div>
           </div>
         <% end %>
       </div>

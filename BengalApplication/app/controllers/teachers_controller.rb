@@ -4,6 +4,7 @@ class TeachersController < ApplicationController
   # shows teacher new page
   def new
     @teacher = Teacher.new
+
     @teacher.build_user
   end
 
@@ -47,26 +48,27 @@ class TeachersController < ApplicationController
     add_breadcrumb 'Class Registrations', controller: 'teachers', action: 'class_registrations', id: @teacher.id
   end
 
-  # def edit
-  #   @teacher = Teacher.find(params[:id])
-  #   authorize @teacher
-  #
-  #   # add breadcrumbs
-  #   add_breadcrumb "Account Settings", edit_teacher_path(@teacher)
-  # end
+  def edit
+    @teacher = Teacher.find(params[:id])
+    authorize @teacher
 
-  # # shows edit page
-  # def update
-  #   @teacher = Teacher.find(params[:id])
-  #   authorize @teacher
-  #
-  #   # update teacher and redirect to teacher page
-  #   if @teacher.update_attributes(teacher_params)
-  #     redirect_to @teacher, :notice => "Successfully updated"
-  #   else
-  #     render 'edit'
-  #   end
-  # end
+    # add breadcrumbs
+    add_breadcrumb "Home", current_user.meta
+    add_breadcrumb "Account Settings", edit_teacher_path(@teacher)
+  end
+
+  # shows edit page
+  def update
+    @teacher = Teacher.find(params[:id])
+    authorize @teacher
+
+    # update teacher and redirect to teacher page
+    if @teacher.update_attributes(teacher_params)
+      redirect_to @teacher, :notice => "Successfully updated"
+    else
+      render 'edit'
+    end
+  end
 
   private
 

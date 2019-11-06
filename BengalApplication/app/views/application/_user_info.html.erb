@@ -10,7 +10,11 @@
         <span class="glyphicon glyphicon-cog"></span>
         <%= current_user.meta.name %></a>
       <div class="dropdown-menu menu-container dropdown-menu-right">
-        <%= link_to "Account Settings", edit_user_registration_path, class: "dropdown-item" %>
+        <% if (current_user.meta_type == "Teacher") %>
+          <%= link_to "Account Settings", edit_teacher_path(current_user.meta), class: "dropdown-item" %>
+        <%else %>
+          <%= link_to "Account Settings", edit_user_registration_path, class: "dropdown-item" %>
+        <%end %>
         <%= link_to "Log Out", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
       </div>
     </div>

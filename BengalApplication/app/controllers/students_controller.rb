@@ -48,6 +48,9 @@ class StudentsController < ApplicationController
   def new
     @student = Student.new
     @student.build_user
+
+    add_breadcrumb "Home", current_user.meta
+    add_breadcrumb "Adding Students", new_student_path
     authorize @student
   end
 
@@ -96,7 +99,7 @@ class StudentsController < ApplicationController
     @teacher.students << @student
 
     # create password
-    random_password = ('0'..'z').to_a.sample.first(8).join
+    random_password = rand(36**8).to_s(36)
     @student.user.password = random_password
     @student.user.password_confirmation = random_password
 

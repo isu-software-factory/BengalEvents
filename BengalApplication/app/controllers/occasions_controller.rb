@@ -4,6 +4,8 @@ class OccasionsController < ApplicationController
 
   def index
     @occasions = Occasion.all
+    add_breadcrumb "Home", current_user.meta
+    add_breadcrumb "Occasion List", occasions_path
   end
 
   def new
@@ -35,6 +37,9 @@ class OccasionsController < ApplicationController
   def edit
     @occasion = Occasion.find(params[:id])
     authorize @occasion
+    add_breadcrumb "Home", current_user.meta
+    add_breadcrumb @occasion.name,occasion_path(@occasion)
+    add_breadcrumb "Edit", edit_occasion_path(@occasion)
   end
 
   def update

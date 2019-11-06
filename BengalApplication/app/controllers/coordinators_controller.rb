@@ -3,11 +3,15 @@ class CoordinatorsController < ApplicationController
 
   def new
     @coordinator = Coordinator.new
+    authorize @coordinator
     @coordinator.build_user
+    add_breadcrumb "Home", current_user.meta
+    add_breadcrumb "Create New Coordinator", new_coordinator_path
   end
 
   def create
     @coordinator = Coordinator.new(coordinator_params)
+    authorize @coordinator
     Supervisor.create(director: @coordinator)
     if @coordinator.save
       sign_in @coordinator.user

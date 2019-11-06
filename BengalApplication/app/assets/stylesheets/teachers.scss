@@ -3,6 +3,25 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 
+
+.button-small {
+  background-color: rgb(109, 110, 113); /* ISU medium gray */
+  border: 2px solid rgb(109, 110, 113);
+  color: white;
+  padding: 5px 15px;
+  border-radius: 2px;
+  text-align: center;
+  text-decoration: none !important;
+  display: inline-block;
+  font-size: 14px;
+  -webkit-transition-duration: 0.4s;
+  transition-duration: 0.4s;
+}
+.button-small:hover {
+  background-color: white;
+  color: black;
+}
+
 .student-bar{
   background: red;
   color: white;
