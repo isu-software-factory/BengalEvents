@@ -6,7 +6,11 @@
     <% end %>
   </td>
   <td><%= event.description %></td>
-  <td><%= event.isMakeAhead %></td>
+  <% if event.isMakeAhead %>
+    <td> Yes</td>
+  <% else %>
+    <td> No</td>
+  <% end %>
   <td><%= event.location.name %></td>
   <td>
     <%# if policy(event).edit? %>
