@@ -13,7 +13,7 @@ class TeamsController < ApplicationController
     if @continue
       redirect_to @team, :notice => "Invited members to team"
     else
-      render 'invite'
+      redirect_to controller: "teams", action: "invite"
     end
   end
 
