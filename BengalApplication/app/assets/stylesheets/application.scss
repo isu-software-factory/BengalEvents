@@ -15,117 +15,114 @@
 @import "bootstrap";
 
 body {
-    font-family: tahoma, geneva, sans-serif;
-  margin: 0;
+  font-family: tahoma, geneva, sans-serif;
+  font-size: 15px;
 }
 
 h1, a {
-    color: rgb(244, 121, 32); /*ISU Orange */
-    margin-bottom: 10px;
+  color: rgb(244, 121, 32); /*ISU Orange */
+  margin-bottom: 10px;
 }
 
 a:hover {
-    color: rgb(247, 148, 30);
-    text-decoration: none !important;
+  color: rgb(247, 148, 30);
 }
 
 .header {
-    padding: 10px 16px;
-    background: rgba(5, 5, 5, .7);
-    color: #f1f1f1;
-    text-align: right;
-    height: 120px;
-    position: relative;
+  padding: 10px 16px;
+  background: rgba(5, 5, 5, .7);
+  color: #f1f1f1;
+  text-align: right;
+  height: 120px;
+  position: relative;
 }
 
 /* Hide alert and notice if empty */
 .notice:empty, .alert:empty {
-    display: none;
+  display: none;
 }
+
 .button {
-    background-color: rgb(109, 110, 113); /* ISU medium gray */
-    border: 2px solid rgb(109, 110, 113);
-    color: white;
-    padding: 8px 20px;
-    border-radius: 2px;
-    text-align: center;
-    text-decoration: none !important;
-    display: inline-block;
-    font-size: 14px;
-    -webkit-transition-duration: 0.4s;
-    transition-duration: 0.4s;
+  background-color: rgb(109, 110, 113); /* ISU medium gray */
+  border: 2px solid rgb(109, 110, 113);
+  color: white;
+  padding: 8px 20px;
+  border-radius: 2px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  -webkit-transition-duration: 0.4s;
+  transition-duration: 0.4s;
 }
+
 .button:hover {
-    background-color: white;
-    color: black;
-    margin: 5px 0 0 0;
+  background-color: white;
+  color: black;
+  margin: 5px 0 0 0;
 }
+
 .sign-in-links {
-    position: absolute;
-    bottom: 0;
-    right: 16px;
-    color: rgb(244, 121, 32);
+  position: absolute;
+  bottom: 0;
+  right: 16px;
+  color: rgb(244, 121, 32);
 }
 
-.sign-in-links:hover{
-    color: white;
-    cursor: pointer;
+.sign-in-links:hover {
+  color: white;
+  cursor: pointer;
 }
 
-.menu{
-    position: absolute;;
-    bottom: 0;
-    right: 16px;
+.menu {
+  position: absolute;;
+  bottom: 0;
+  right: 16px;
 }
 
-.content{
-    padding: 25px 10px;
+.content {
+  padding: 25px 10px;
 }
 
-.login_block{
-    /*border-left-width: 5px;*/
-    border-left-color: #1c2324;
-    border-width: medium;
-    height: 500px;
-    width: 500px;
-    text-align: center;
+.login_block {
+  border-left-color: #1c2324;
+  border-width: medium;
+  height: 500px;
+  width: 500px;
+  text-align: center;
 }
 
-.field{
-    width: 250px;
+.field {
+  width: 250px;
 }
 
-.field_container{
-    padding-left: 125px;
+.field_container {
+  padding-left: 125px;
 }
 
-.checkbox_container{
-    margin-top: 10px;
-    margin-bottom: 20px;
+.checkbox_container {
+  margin-top: 10px;
+  margin-bottom: 20px;
 }
 
-.full_button{
-    width: 250px;
+.full_button {
+  width: 250px;
 }
 
-.button_container{
-    padding-left: 10px;
-    margin-top: 5px;
+.button_container {
+  padding-left: 10px;
+  margin-top: 5px;
 }
 
-.navigation{
-    background-color: rgba(244,121,32, 0.8);
-    padding-left: 90px;
-    padding-top: 5px;
-    font-size: 20px;
+.navigation {
+  background-color: rgba(244, 121, 32, 0.8);
+  padding-left: 90px;
+  padding-top: 5px;
+  font-size: 20px;
 }
 
-.navigation a{
-    color: #ffffff;
-}
-
-.navigation a:hover{
-    color: rgb(130,130,130);
+.navigation a {
+  color: #ffffff;
 }
 
 /*Growling Gray 130,130, 130
@@ -133,8 +130,4 @@ a:hover {
   Rorange 244,121,32
   Rorange Light 246,146,64
   Growling Gray Light 230,231,232
-  */
-/*.sign_up{*/
-/*    margin-top: 50px;*/
-/*    text-decoration-color: #ffffff;*/
-/*}*/
+*/
