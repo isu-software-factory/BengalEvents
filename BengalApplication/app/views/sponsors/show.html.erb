@@ -1,37 +1,53 @@
 <button class="btn btn-primary btn-lg float-right">
   <span class="glyphicon glyphicon-print" aria-hidden="true"> </span><%= link_to "  Print", {controller: "sponsors", action: "pdfshow", part_id: @sponsor.id}, target: :_blank %>
 </button>
-
 <h1>Welcome, <%= @sponsor.name %></h1>
 
-<h3>Event (<%= current_user.meta.supervisor.events.count %>)</h3>
+<div class="container">
+  <div class="row">
 
-<% if current_user.meta.supervisor.events.present? %>
-  <table class="table">
-    <thead class="thead-dark">
-    <tr>
-      <th scope="col">Name</th>
-      <th scope="col">Description</th>
-      <th scope="col">Make Ahead</th>
-      <th scope="col">Location</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-      <% if current_user.meta.supervisor.events.any? %>
-      <tr>
-        <% current_user.meta.supervisor.events.each do |e| %>
-        <tr>
-          <th scope="row"><%= link_to e.name, controller: "events", action: "show", id: e.id, occasion_id: e.occasion.id%></th>
-          <td> <%= e.description %></td>
-          <td> <%= e.isMakeAhead %></td>
-          <td><%= e.location.name %></td>
+    <div class="col">
+      <% if current_user.meta.supervisor.events.present? %>
+        <h3>Event (<%= current_user.meta.supervisor.events.count %>)</h3>
+        <table class="table">
+          <thead class="thead-dark">
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Description</th>
+            <th scope="col">Make Ahead</th>
+            <th scope="col">Location</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <% if current_user.meta.supervisor.events.any? %>
+            <tr>
+              <% current_user.meta.supervisor.events.each do |e| %>
+              <tr>
+                <th scope="row"><%= link_to e.name, controller: "events", action: "show", id: e.id, occasion_id: e.occasion.id %></th>
+                <td> <%= e.description %></td>
+                <td> <%= e.isMakeAhead %></td>
+                <td><%= e.location.name %></td>
+            <% end %>
+          <% end %>
+          </tr>
+          </tbody>
+        </table>
+      <% else %>
+        <p class="display-4">There are no events under you. Click on the link to create one.</p>
       <% end %>
-    <% end %>
-    </tr>
-    </tbody>
-  </table>
-<% else %>
-  <p>There are no events under you. Click on the link to create one.</p>
-<% end %>
-<%= link_to "Create an Event", occasions_path %>
+    </div>
+
+
+    <div class="col-sm-2">
+      <div class="card border-dark mb-3" style="max-width: 18rem;">
+        <div class="card-header">Actions</div>
+        <div class="card-body text-dark">
+          <p>To create a new Event: </p>
+          <%= link_to "Click Here", occasions_path, class: "btn-btn-success" %>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

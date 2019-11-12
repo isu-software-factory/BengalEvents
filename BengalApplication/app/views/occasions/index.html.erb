@@ -33,17 +33,17 @@
       </div>
     </div>
 
-    <div class="col-sm-2">
-      <div class="card border-dark mb-3" style="max-width: 18rem;">
-        <div class="card-header">Actions</div>
-        <div class="card-body text-dark">
-          <p>To create a new Occasion: </p>
-          <% if policy(@occasions).create? %>
+    <% if policy(@occasions).create? %>
+      <div class="col-sm-2">
+        <div class="card border-dark mb-3" style="max-width: 18rem;">
+          <div class="card-header">Actions</div>
+          <div class="card-body text-dark">
+            <p>To create a new Occasion: </p>
             <%= link_to "Click Here", new_occasion_path, class: "btn-btn-success" %>
-          <% end %>
+          </div>
         </div>
       </div>
-    </div>
+    <% end %>
 
   </div>
 </div>
