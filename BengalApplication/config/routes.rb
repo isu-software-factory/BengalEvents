@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   get 'groupings/add'
   devise_for :users, skip: :devise_registration
-
+  resources :admins
   resources :teachers
   resources :students
   resources :sponsors

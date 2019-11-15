@@ -10,6 +10,8 @@ class HomeroutesController < ApplicationController
         redirect_to coordinator_path(current_user.meta.id)
       elsif current_user.meta_type == 'Sponsor'
         redirect_to sponsor_path(current_user.meta.id)
+      elsif current_user.meta_type == "Admin"
+        redirect_to admin_path(current_user.meta.id)
       end
     end
     # if user isn't signed in then show events for current occasion

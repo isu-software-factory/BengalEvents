@@ -39,11 +39,10 @@ RSpec.feature "Teachers", type: :feature do
     scenario "should be successful" do
      visit edit_teacher_path(@teacher)
       within("form")do
-       fill_in "teacher[name]", with: "valley"
-       fill_in "teacher[school]", with: 'Daniel'
-       fill_in 'teacher[chaperone_count]', with: 23
+       fill_in "teacher[student_count]", with: "5"
+       fill_in "teacher[user][current_password]", with: "password"
       end
-      click_button 'Confirm'
+      click_button 'Update'
       expect(page).to have_content("Successfully updated")
     end
 
@@ -52,7 +51,7 @@ RSpec.feature "Teachers", type: :feature do
      within('form') do
        fill_in "School", with: ""
       end
-      click_button "Confirm"
+      click_button "Update"
       expect(page).to have_content "School can't be blank"
     end
   end

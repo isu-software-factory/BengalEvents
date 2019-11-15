@@ -46,6 +46,10 @@
                 <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
                 <%= u.password_field :password_confirmation, placeholder: "Confirm New Password", autocomplete: "off", class: "form-control" %>
               </div>
+              <div style="margin-bottom: 25px" class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                <%= u.password_field :current_password, placeholder: "Current Password", autocomplete: "current-password", class: "form-control" %>
+              </div>
             <% end %>
             <div style="margin-top:10px" class="form-group">
               <!-- Button -->

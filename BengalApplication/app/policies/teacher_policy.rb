@@ -16,7 +16,7 @@ class TeacherPolicy < ApplicationPolicy
   end
 
   def destroy?
-    # only coordinators or admin can delete a teacher
+    # only coordinators or admins can delete a teacher
     @user.meta_type == "Coordinator" || @user.meta_type == "Admin"
   end
 end
