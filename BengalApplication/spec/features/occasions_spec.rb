@@ -14,9 +14,6 @@ RSpec.feature "Occasions", type: :feature do
         select("2019", from: "occasion[start_date(1i)]")
         select("September", from: "occasion[start_date(2i)]")
         select("23", from: "occasion[start_date(3i)]")
-        select("2019", from: "occasion[end_date(1i)]")
-        select("October", from: "occasion[end_date(2i)]")
-        select("23", from: "occasion[end_date(3i)]")
       end
     end
 
@@ -26,7 +23,7 @@ RSpec.feature "Occasions", type: :feature do
         fill_in "occasion[description]", with: "Stem Day"
       end
       click_button 'Create'
-      expect(page).to have_content("Fill in the details.")
+      expect(page).to have_content("BengalEvents")
 
     end
 
@@ -65,7 +62,7 @@ RSpec.feature "Occasions", type: :feature do
   context "destroy occasion" do
     before(:each) do
       @coordinator = Coordinator.create(name: "Sam", user_attributes: {email: "Sam@gmail.com", password: "password"})
-      @occasion = @coordinator.occasions.build(name: "Hal", description: "cool", start_date: Time.now, end_date: Time.now)
+      @occasion = @coordinator.occasions.build(name: "Hal", description: "cool", start_date: Time.now)
 
       login_as(@coordinator.user)
       visit coordinator_path(@coordinator.id)

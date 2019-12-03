@@ -15,6 +15,7 @@ ActiveRecord::Schema.define(version: 2019_12_03_014204) do
   create_table "admins", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "name"
   end
 
   create_table "coordinators", force: :cascade do |t|

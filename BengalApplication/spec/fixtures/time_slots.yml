@@ -1,6 +1,5 @@
 one:
   id: 1
   location_id: 1
-  interval: 60
   start_time: 2019-07-05 01:05:35
   end_time: 2019-07-05 05:05:35
