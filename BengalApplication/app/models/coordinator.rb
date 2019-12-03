@@ -17,6 +17,5 @@ class Coordinator < ApplicationRecord
 
   has_many :occasions
   has_many :events
-
   validates :name, presence: true
 end

@@ -91,5 +91,5 @@ def set_occasion
 end
 
 def event_params
-  params.require(:event).permit(:name, :location_id, :description, :isMakeAhead)
+  params.require(:event).permit(:name, :location_id, :description, :isMakeAhead, :isCompetetion)
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_15_231029) do
+ActiveRecord::Schema.define(version: 2019_12_03_014204) do
 
   create_table "admins", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -34,19 +34,8 @@ ActiveRecord::Schema.define(version: 2019_09_15_231029) do
     t.index ["event_id"], name: "index_event_details_on_event_id"
   end
 
-  create_table "events", force: :cascade do |t|
-    t.string "name"
-    t.text "description"
-    t.boolean "isMakeAhead", default: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "occasion_id"
-    t.integer "location_id"
-    t.integer "supervisor_id"
-    t.index ["location_id"], name: "index_events_on_location_id"
-    t.index ["occasion_id"], name: "index_events_on_occasion_id"
-    t.index ["supervisor_id"], name: "index_events_on_supervisor_id"
-  end
+# Could not dump table "events" because of following StandardError
+#   Unknown type 'bool' for column 'isCompetetion'
 
   create_table "groupings", force: :cascade do |t|
     t.integer "team_id"
@@ -68,7 +57,6 @@ ActiveRecord::Schema.define(version: 2019_09_15_231029) do
   create_table "occasions", force: :cascade do |t|
     t.string "name"
     t.datetime "start_date"
-    t.datetime "end_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "coordinator_id"
@@ -137,7 +125,6 @@ ActiveRecord::Schema.define(version: 2019_09_15_231029) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "location_id"
-    t.integer "interval"
     t.index ["location_id"], name: "index_time_slots_on_location_id"
   end
 
