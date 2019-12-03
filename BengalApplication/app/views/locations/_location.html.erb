@@ -23,7 +23,6 @@
           <div class="card-body">
             <p>Start Time: <%= t.start_time.strftime("%H:%M %p") %> </p>
             <p> End Time: <%= t.end_time.strftime("%H:%M %p") %> </p>
-            <p> Interval: <%= t.interval %> minutes </p>
             <% if policy(location).edit? %>
               <%#= link_to "Edit", edit_occasion_location_path(@occasion, location) %>
             <% end %>

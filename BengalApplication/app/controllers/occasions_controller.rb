@@ -66,7 +66,7 @@ class OccasionsController < ApplicationController
   private
 
   def occasion_params
-    params.require(:occasion).permit(:start_date, :end_date, :description, :name)
+    params.require(:occasion).permit(:start_date, :description, :name)
   end
 end
 

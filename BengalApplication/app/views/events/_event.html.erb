@@ -11,6 +11,11 @@
   <% else %>
     <td> No</td>
   <% end %>
+  <% if event.isCompetetion %>
+    <td> Yes</td>
+  <% else %>
+    <td> No</td>
+  <% end %>
   <td><%= event.location.name %></td>
   <td>
     <%# if policy(event).edit? %>

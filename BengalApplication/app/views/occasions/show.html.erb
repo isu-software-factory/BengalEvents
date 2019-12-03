@@ -31,6 +31,8 @@
             <th scope="col">Name</th>
             <th scope="col">Description</th>
             <th scope="col">Make Ahead</th>
+            <th scope="col">Competetion</th>
+
             <th scope="col">Location</th>
             <th scope="col">Actions</th>
             <th scope="col">Created By</th>
@@ -48,7 +50,6 @@
         <div class="card-body text-dark">
           <p class="card-text">Occasion Name: <%= @occasion.name %></p>
           <p class="card-text">Start Time: <%= @occasion.start_date.strftime("%Y-%m-%d") %></p>
-          <p class="card-text">End Time: <%= @occasion.end_date.strftime("%Y-%m-%d") %></p>
         </div>
       </div>
       <div class="card border-dark mb-3" style="max-width: 18rem;">

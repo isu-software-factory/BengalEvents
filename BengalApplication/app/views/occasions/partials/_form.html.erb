@@ -11,7 +11,7 @@
 
 <div class="container">
   <div class="card border-dark mb-3">
-    <div class="card-header dark-header "><h1>Occasion Information</h1></div>
+    <div class="card-header dark-header "><h1>Occasion Information</h1><span>This is where you </span></div>
     <div class="card-body text-dark bengal-body">
       <div class="container">
           <%= form_for @occasion, :html => {:class => "form-horizontal center"} do |f| %>
@@ -31,12 +31,6 @@
               <%= f.label :start_date, "Start Date:", class: "col-md-4 control-label" %>
               <div class="col-xs-3">
                 <%= f.date_select :start_date,  placeholder: "Start Date", class: "control-label" %>
-              </div>
-            </div>
-            <div class="form-group">
-              <%= f.label :end_date, "End Date:", class: "col-md-4 control-label" %>
-              <div class="col-xs-3">
-                <%= f.date_select :end_date, placeholder: "End Date", class: "form-control" %>
               </div>
             </div>
             <div class="form-group">

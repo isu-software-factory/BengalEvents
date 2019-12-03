@@ -16,7 +16,6 @@ class TimeSlot < ApplicationRecord
   validate :no_reservation_overlap
   validates :start_time, presence: true
   validates :end_time, presence: true
-  validates :interval, presence: true
 
   def no_reservation_overlap
     result = TimeSlot.joins(:location => :occasion).where(locations: {name: location.name}).where(start_time: start_time...end_time) or

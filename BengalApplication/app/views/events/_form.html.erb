@@ -42,6 +42,12 @@
             <%= f.check_box :isMakeAhead, class: "form-check-input" %>
           </div>
         </div>
+        <div class="form-group">
+          <%= f.label :isCompetetion, "Is this a Competetion?", class: "col-md-4 control-label" %>
+          <div class="col-md-4">
+            <%= f.check_box :isCompetetion, class: "form-check-input" %>
+          </div>
+        </div>
         <div class="col-md-5 control-label">
           <%= f.submit "Confirm", class: "btn btn-default btn-primary" %>
         </div>

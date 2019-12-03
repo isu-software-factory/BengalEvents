@@ -15,7 +15,6 @@
               <p class="card-text">Name: <%= occasion.name %></p>
               <p class="card-text">Description: <%= occasion.description %></p>
               <p class="card-text">Start Date: <%= occasion.start_date.strftime("%Y-%m-%d") %></p>
-              <p class="card-text">End Date: <%= occasion.end_date.strftime("%Y-%m-%d") %></p>
               <p>
                 <% if policy(occasion).edit? %>
                   <%= link_to "Edit", edit_occasion_path(occasion.id), class: "btn btn-secondary" %>

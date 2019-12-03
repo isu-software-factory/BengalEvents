@@ -5,46 +5,54 @@
     <% end %>
   <% end %>
 
-  <h2>Input Capacity, Start-time, and End-time for each sessions</h2>
-<br>
-  <%= form_for([@occasion, @event, @event_detail], :html => {:class => "form-horizontal center"}) do |f| %>
-    <div class="form-group">
-      <%= f.label :capacity, " Maximum Capacity:", class: "col-md-4 control-label" %>
-      <div class="col-xs-2">
-        <%= f.text_field :capacity, placeholder: "Capacity", class: "form-control" %>
+  <div class="container">
+    <div class="card border-dark mb-3">
+      <div class="card-header dark-header "><h2>Enter the time for the Event.</h2>
+      </div>
+      <div class="card-body text-dark bengal-body">
+        <div class="container">
+          <%= form_for([@occasion, @event, @event_detail], :html => {:class => "form-horizontal center"}) do |f| %>
+            <div class="form-group">
+              <%= f.label :capacity, " Maximum Capacity:", class: "col-md-4 control-label" %>
+              <div class="col-xs-2">
+                <%= f.text_field :capacity, placeholder: "Capacity", class: "form-control" %>
+              </div>
+            </div>
+            <p>
+              <%= hidden_field_tag 'location_name', @event.location.name %>
+            </p>
+<!--            <div class="form-group">-->
+              <%#= f.label :date_started, "Starting Date:", class: "col-md-4 control-label" %>
+<!--              <div class="col-xs-2">-->
+                <%#= f.select(:date_started, [['Select One', ""],], {}, id: 'selectDate', class: "form-control") %>
+<!--              </div>-->
+<!--            </div>-->
+            <div class="form-group">
+              <%= f.label :start_time, "Start Time:", class: "col-md-4 control-label" %>
+              <div class="col-xs-2">
+                <%= f.time_select(:start_time,  class: "form-control") %>
+              </div>
+            </div>
+            <div class="form-group">
+              <%= f.label :end_time, "End Time:", class: "col-md-4 control-label" %>
+              <div class="col-xs-2">
+                <%= f.time_select(:end_time, class: "form-control") %>
+              </div>
+            </div>
+            <!--    <p>-->
+            <%#= f.label :end_time %>
+            <%#= f.select(:end_time, [['Select One', ""],], {}, id: 'selectEndTime') %>
+            <!--    </p>-->
+            <div class="form-group">
+              <div class="col-md-4 control-label">
+                <%= f.submit "Create", class: "btn btn-default btn-primary" %>
+              </div>
+            </div>
+          <% end %>
+        </div>
       </div>
     </div>
-    <p>
-      <%= hidden_field_tag 'location_name', @event.location.name %>
-    </p>
-    <div class="form-group">
-      <%= f.label :date_started, "Starting Date:", class: "col-md-4 control-label" %>
-      <div class="col-xs-2">
-        <%= f.select(:date_started, [['Select One', ""],], {}, id: 'selectDate', placeholder: "Capacity", class: "form-control") %>
-      </div>
-    </div>
-    <div class="form-group">
-      <%= f.label :start_time, "Start Time:", class: "col-md-4 control-label" %>
-      <div class="col-xs-2">
-        <%= f.select(:start_time, [['Select One', ""],], {}, id: 'selectStartTime', placeholder: "Capacity", class: "form-control") %>
-      </div>
-    </div>
-    <div class="form-group">
-      <%= f.label :end_time, "End Time:", class: "col-md-4 control-label" %>
-      <div class="col-xs-2">
-        <%= f.select(:end_time, [['Select One', ""],], {}, id: 'selectEndTime', placeholder: "Capacity", class: "form-control") %>
-      </div>
-    </div>
-    <!--    <p>-->
-    <%#= f.label :end_time %>
-    <%#= f.select(:end_time, [['Select One', ""],], {}, id: 'selectEndTime') %>
-    <!--    </p>-->
-    <div class="form-group">
-      <div class="col-md-4 control-label">
-        <%= f.submit "Create", class: "btn btn-default btn-primary" %>
-      </div>
-    </div>
-  <% end %>
+  </div>
 
-  <%= link_to "Go Back", occasion_event_path(@occasion, @event),class: "btn btn-primary" %>
+  <%#= link_to "Go Back", occasion_event_path(@occasion, @event), class: "btn btn-primary" %>
 </div>
