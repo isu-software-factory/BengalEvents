@@ -19,7 +19,7 @@
         </thead>
         <tbody>
           <% @students.each do |s| %>
-            <tr>
+            <tr class="see-student" >
               <th scope="row"><%=s.participant.event_details.count > 0 ? (link_to s.name, {controller: "students", action: "schedule", id: s.id}) :s.name %></th>
               <td><%=s.user.email %></td>
               <td><%= s.participant.event_details.count > 0 ? "Yes":"No" %></td>
@@ -35,12 +35,21 @@
         <div class="card border-dark mb-3" style="max-width: 18rem;">
           <div class="card-header">Actions</div>
           <div class="card-body text-dark">
-            <p class="card-text">If you forgot to add a student, then you can add another student here.</p>
-            <p class="card-text"><%=link_to "Add Student", new_student_path %></p>
-            <p class="card-text">You can register for events yourself. Register for an event to participate in.</p>
-            <p class="card-text"><%=link_to "Register for events", controller: "registrations", action: "index", part_id: @teacher.participant.id %></p>
-            <p class="card-text">You can view the registration details of all your class as one class.</p>
-            <p class="card-text"><%=link_to "View Class Registrations", controller: "teachers", action: "class_registrations", id: @teacher.id%></p>
+            <div class="indent-bellow">
+            <button class="btn button-small" title="Add or Remove students">
+              <span class="fa fa-user-plus"> </span><%=link_to " New Students", new_student_path %>
+            </button>
+            </div>
+            <div class="indent-bellow">
+            <button class="btn button-small" title="Register for events">
+              <span class="fa-edit"></span><%=link_to " Register", controller: "registrations", action: "index", part_id: @teacher.participant.id %>
+            </button>
+            </div>
+            <div class="indent-bellow">
+            <button class="btn button-small" title="View My Student's Registrations">
+              <span class="fas fa-eye"></span><%=link_to " Class Registrations", controller: "teachers", action: "class_registrations", id: @teacher.id%>
+            </button>
+            </div>
           </div>
         </div>
       </div>
@@ -55,20 +64,18 @@
           <thead class="thead-dark">
             <tr>
               <th scope="col">Name</th>
-              <th scope="col">Description</th>
               <th scope="col">Start Time</th>
-              <th scope="col">End Time</th>
-              <th scope="col">Remove</th>
+              <th scope="col">Location</th>
+              <th scope="col">Modify</th>
             </tr>
           </thead>
           <tbody>
             <%@teacher.participant.event_details.each do |s| %>
           <tr>
             <th scope="row"><%=Event.find(s.event_id).name %></th>
-            <td><%=Event.find(s.event_id).description %></td>
-            <td><%=s.start_time %></td>
-            <td><%=s.end_time %></td>
-            <td><%=button_to("Drop",  {method: :post, controller: "registrations", action: :drop, part_id: @teacher.participant.id, id:s.id}, class: "button", data: {confirm: "Are you sure?"}) %></td>
+            <td><%=s.start_time.strftime("%l:%M %p") %> -  <%=s.end_time.strftime("%l:%M %p")%></td>
+            <td><%=Event.find(s.event_id).location.name %></td>
+            <td><%=button_to("Drop",  {method: :post, controller: "registrations", action: :drop, part_id: @teacher.participant.id, id:s.id}, class: "button", title: "Unregister for event", data: {confirm: "Are you sure?"}) %></td>
           </tr>
             <%end %>
           </tbody>

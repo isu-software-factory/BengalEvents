@@ -7,10 +7,8 @@
           <thead class="thead-dark">
           <tr>
             <th scope="col">Name</th>
-            <th scope="col">Description</th>
             <th scope="col">Location</th>
             <th scope="col">Start Time</th>
-            <th scope="col">End Time</th>
             <th scope="col">Modify</th>
           </tr>
           </thead>
@@ -19,13 +17,11 @@
             <% @student.participant.event_details.each do |s| %>
             <tr>
               <th scope="row"><%= Event.find(s.event_id).name %></th>
-              <td><%= Event.find(s.event_id).description %></td>
               <td><%= Event.find(s.event_id).location.name %></td>
-              <td><%= s.start_time.strftime("%F %H:%M %p") %></td>
-              <td><%= s.end_time.strftime("%F %H:%M %p") %></td>
+              <td><%= s.start_time.strftime("%l:%M %p") %> - <%= s.end_time.strftime("%l:%M %p") %></td>
               <td>
                 <%= button_to("Drop", {method: :post, controller: "registrations",
-                                       action: :drop, part_id: @student.participant.id, id: s.id}, class: "button",
+                                       action: :drop, part_id: @student.participant.id, id: s.id}, class: "button", title: "Unregister for event",
                               data: {confirm: "Are you sure?"}) %>
               </td>
             </tr>
@@ -50,12 +46,18 @@
       <div class="card border-dark mb-3" style="max-width: 18rem;">
         <div class="card-header">Actions</div>
         <div class="card-body text-dark">
-          <p>Register for events to be able to participate in them.</p>
-          <p class="card-text"><%= link_to "Register For Events", controller: "registrations", action: "index", part_id: @student.participant.id %></p>
-          <p>Create a team so that you and your team members can register for events and participate as a group.</p>
-          <p class="card-text"><%= link_to "Create Team", new_team_path %></p>
-          <p>You can print your registrations here.</p>
-          <button class="btn btn-primary">
+          <div class="indent-bellow">
+          <button class="btn button-small" title="Build a team">
+            <span class="fa fa-users"> </span><%= link_to " Create Team", new_team_path %>
+          </button>
+          </div>
+          <div class="indent-bellow">
+          <button class="btn button-small" title="Register For Events">
+            <span class="fa fa-edit"></span>
+            <%= link_to "Register For Events", controller: "registrations", action: "index", part_id: @student.participant.id %>
+          </button>
+          </div>
+          <button class="btn button-small" title="Print My Schedule">
             <span class="glyphicon glyphicon-print" aria-hidden="true"> </span><%= link_to "  Print", {controller: "students", action: "print_schedule", id: @student.id}, target: :_blank %>
           </button>
         </div>

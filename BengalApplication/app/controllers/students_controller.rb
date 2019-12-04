@@ -41,7 +41,7 @@ class StudentsController < ApplicationController
     end
 
     # list of card styles
-    @random_card = %w[bg-primary bg-success bg-info bg-dark]
+    @random_card = %w[rorange growling-gray bg-dark orange]
   end
 
   # shows the student new page

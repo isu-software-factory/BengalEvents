@@ -1,10 +1,10 @@
   <div class="col-sm-6">
     <div class="card border-dark mb-3 w-75">
-      <div class="card-header">Time Slot</div>
+      <div class="card-header">Session</div>
       <div class="card-body text-dark">
         <p class="card-text">Capacity: <%= event_detail.capacity_remaining %></p>
-        <p class="card-text">Starts At: <%= event_detail.start_time.strftime("%F %H:%M %p") %></p>
-        <p class="card-text">Ends At: <%= event_detail.end_time.strftime("%F %H:%M %p") %></p>
+        <p class="card-text">Starts At: <%= event_detail.start_time.strftime("%l:%M %p") %></p>
+        <p class="card-text">Ends At: <%= event_detail.end_time.strftime("%l:%M %p") %></p>
         <%= link_to "Delete ", occasion_event_event_detail_path(@occasion, @event, event_detail), class: "btn btn-danger", method: :delete, data: {confirm: "Are you sure?"} %>
         <%#= link_to "Edit ", edit_occasion_event_event_detail_path(@occasion, @event, event_detail) %>
       </div>
