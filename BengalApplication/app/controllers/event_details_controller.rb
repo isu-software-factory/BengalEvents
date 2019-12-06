@@ -11,8 +11,8 @@ class EventDetailsController < ApplicationController
 
     add_breadcrumb "Home", current_user.meta
     add_breadcrumb @occasion.name, @occasion
-    add_breadcrumb @event.name, occasion_events_path(@event)
-    add_breadcrumb "New Time Slot", new_occasion_event_event_detail_path(@occasion, @event)
+    add_breadcrumb @event.name, occasion_event_path(@occasion, @event)
+    add_breadcrumb "New Session", new_occasion_event_event_detail_path(@occasion, @event)
   end
 
   def create

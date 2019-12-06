@@ -1,14 +1,12 @@
-<button class="btn btn-primary btn-lg float-right">
-  <span class="glyphicon glyphicon-print" aria-hidden="true"> </span><%= link_to "  Print", {controller: "sponsors", action: "pdfshow", part_id: @sponsor.id}, target: :_blank %>
-</button>
-<h1>Welcome, <%= @sponsor.name %></h1>
+
+
 
 <div class="container">
   <div class="row">
 
     <div class="col">
       <% if current_user.meta.supervisor.events.present? %>
-        <h3>Event (<%= current_user.meta.supervisor.events.count %>)</h3>
+        <h3>Events</h3>
         <table class="table">
           <thead class="thead-dark">
           <tr>
@@ -43,8 +41,16 @@
       <div class="card border-dark mb-3" style="max-width: 18rem;">
         <div class="card-header">Actions</div>
         <div class="card-body text-dark">
-          <p>To create a new Event: </p>
-          <%= link_to "Click Here", occasions_path, class: "btn-btn-success" %>
+          <div class="indent-bellow">
+            <button class="btn button-small indent-bellow" title="Make An Event">
+              <span class="fas fa-calendar-plus"></span><%= link_to " Create Event", occasions_path, class: "btn-btn-success" %>
+            </button>
+          </div>
+          <div class="indent-bellow">
+            <button class="btn button-small" class="Print My Events" title="Print My Events">
+              <span class="glyphicon glyphicon-print" aria-hidden="true"> </span><%= link_to "  Print", {controller: "sponsors", action: "pdfshow", part_id: @sponsor.id}, target: :_blank %>
+            </button>
+          </div>
         </div>
       </div>
     </div>

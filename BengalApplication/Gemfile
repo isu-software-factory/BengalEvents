@@ -81,7 +81,7 @@ gem 'jquery-rails'
 gem 'breadcrumbs_on_rails'
 
 # icons
-gem 'font-awesome-rails'
+gem 'font-awesome-sass', "~> 5.11.2"
 
 gem 'bootstrap-sass'
 gem 'rubocop', require: false

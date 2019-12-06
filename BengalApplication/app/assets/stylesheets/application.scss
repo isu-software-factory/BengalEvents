@@ -11,16 +11,14 @@
  * It is generally better to create a new file per style scope.
 //= require_tree .
  */
-/*
-*= require font-awesome
- */
 
+@import "font-awesome-sprockets";
+@import "font-awesome";
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
 
 body {
-  font-family: tahoma, geneva, sans-serif;
   font-size: 15px;
   font-family: FontAwesome;
 }

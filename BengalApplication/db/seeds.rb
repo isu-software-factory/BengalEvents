@@ -23,9 +23,9 @@ Coordinator.create!([{
     superviosr_attributes: {}
                      }])
 
-EventDetail.create!([{
-
-                     }])
+# EventDetail.create!([{
+#
+#                      }])
 
 Event.create!([{
     name: "Robotics",
@@ -112,18 +112,15 @@ Student.create!([{
           password: "password"
       },
       participant_attributes: {}
-                 },
-                {
-      name: ""
                  }])
 
-Teacher.create!([{
-
-                 }])
-
-Team.create!([{
-
-              }])
+# Teacher.create!([{
+#
+#                  }])
+#
+# Team.create!([{
+#
+#               }])
 
 
 p "Done"

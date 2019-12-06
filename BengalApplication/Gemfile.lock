@@ -124,8 +124,8 @@ GEM
     execjs (2.7.0)
     ffi (1.11.2)
     ffi (1.11.2-x64-mingw32)
-    font-awesome-rails (4.7.0.5)
-      railties (>= 3.2, < 6.1)
+    font-awesome-sass (5.11.2)
+      sassc (>= 1.11)
     gherkin (5.1.0)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
@@ -324,7 +324,7 @@ DEPENDENCIES
   database_cleaner
   devise (>= 4.7.1)
   duktape
-  font-awesome-rails
+  font-awesome-sass (~> 5.11.2)
   hirb
   jbuilder (~> 2.5)
   jquery-rails

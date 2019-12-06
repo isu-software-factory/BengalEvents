@@ -24,7 +24,7 @@ class TimeSlotsController < ApplicationController
 
   def destroy
     @time_slot.destroy
-    redirect_to occasion_location_path(@occasion, @location), notice: "Successfully deleted time slot"
+    redirect_to occasion_location_path(@occasion, @location), notice: "Successfully deleted session"
   end
 end
 

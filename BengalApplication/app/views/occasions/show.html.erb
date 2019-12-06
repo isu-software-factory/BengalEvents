@@ -49,7 +49,7 @@
         <div class="card-header">Occasion's Information</div>
         <div class="card-body text-dark">
           <p class="card-text">Occasion Name: <%= @occasion.name %></p>
-          <p class="card-text">Start Time: <%= @occasion.start_date.strftime("%Y-%m-%d") %></p>
+          <p class="card-text">Start Date: <%= @occasion.start_date.strftime("%Y-%m-%d") %></p>
         </div>
       </div>
       <div class="card border-dark mb-3" style="max-width: 18rem;">
@@ -60,8 +60,9 @@
             <%= link_to "Add Location", new_occasion_location_path(@occasion, @location), class: "btn btn-primary" %>
             <hr>
           <% end %>
-          <p class="card-text"> To create an <span class="font-weight-bold">Event</span>
-            <%= link_to "Click Here", new_occasion_event_path(@occasion, @event), class: "btn btn-success" %> </p>
+          <button class="btn button-small" title="Create A New Event For <%=@occasion.name %>">
+            <span class="fas fa-calendar-plus"></span><%= link_to " Create Event", new_occasion_event_path(@occasion, @event) %> </p>
+          </button>
         </div>
       </div>
     </div>
