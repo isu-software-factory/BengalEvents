@@ -24,7 +24,9 @@
                 <% end %></p>
               <hr>
               <p class="card-text">
-                <span> <%= link_to "Click Here", occasion_path(occasion.id), class: "btn btn-primary" %> to see the list of events. </span>
+                <button class="btn button-small" title="View list of events in occasion">
+                  <span class="far fa-eye"></span><%= link_to "View Events", occasion_path(occasion.id), class: "btn button-small" %>
+                </button>
               </p>
             </div>
           </div>
@@ -36,9 +38,10 @@
       <div class="card border-dark mb-3" style="max-width: 18rem;">
         <div class="card-header">Actions</div>
         <div class="card-body text-dark">
-          <p>To create a new Occasion: </p>
           <% if policy(@occasions).create? %>
-            <%= link_to "Click Here", new_occasion_path, class: "btn-btn-success" %>
+            <button class="btn button-small" title="Create a new occasion">
+              <span class="far fa-calendar-plus"></span><%= link_to "New Occasion", new_occasion_path %>
+            </button>
           <% end %>
         </div>
       </div>
