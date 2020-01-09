@@ -6,3 +6,7 @@ $(document).on('ready page:load turbolinks:load', function (){
        print(this);
    }
 });
+
+function addNewStudent(){
+    var nameField = document.createElement('input');
+}
