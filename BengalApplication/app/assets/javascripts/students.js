@@ -9,4 +9,7 @@ $(document).on('ready page:load turbolinks:load', function (){
 
 function addNewStudent(){
     var nameField = document.createElement('input');
+    nameField.setAttribute("type", "text");
+    document.body.appendChild(nameField);
+
 }
