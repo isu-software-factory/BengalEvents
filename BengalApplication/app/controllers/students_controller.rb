@@ -46,12 +46,12 @@ class StudentsController < ApplicationController
 
   # shows the student new page
   def new
-    @student = Student.new
-    @student.build_user
+    @students = current_user.meta.students.all
+
 
     add_breadcrumb "Home", current_user.meta
     add_breadcrumb "Adding Students", new_student_path
-    authorize @student
+
   end
 
   # creates a new student

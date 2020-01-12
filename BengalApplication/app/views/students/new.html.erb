@@ -1,26 +1,42 @@
 
 
 <div class="container">
-  <div id="loginbox" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+  <div id="loginbox" style="margin-top:50px;" class="mainbox col-md-9 col-md-offset-2 col-sm-8 col-sm-offset-2">
     <div class="panel panel-default">
       <div class="panel-heading">
         <div class="panel-title">Enter Student Names and Emails</div>
       </div>
-      <div style="padding-top:30px" class="panel-body">
-        <%= form_tag controller: "students", action: "create" do %>
-          <%for student in 1..@teacher.student_count do %>
 
-      <div style="margin-bottom: 25px" class="input-group">
-            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-            <%=text_field_tag "name" +student.to_s, nil, placeholder: "Student Name"  %>
-        <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-            <%=text_field_tag "email" + student.to_s, nil, placeholder: "Student Email"  %>
-          </div>
-            <%end %>
+      <div style="padding-top:30px" class="panel-body">
+        <%= form_tag({controller: "students", action: "create"}, {id: "student-form"}) do %>
+          <%for student in @students do %>
+            <div class="row" >
+              <div class="col-lg-4">
+                <div class="input-group">
+                  <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                  <%=text_field_tag "name", student.name %>
+                </div>
+              </div>
+              <div class="col-lg-4">
+                <div class="input-group">
+                  <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                  <%=text_field_tag "email", student.user.email  %>
+                </div>
+              </div>
+              <div class="col-lg-4">
+                <div style="margin-bottom: 25px" class="input-group">
+                  <button class="button-small" type="button" title="Remove Student"><i class="glyphicon glyphicon-minus"></i></button>
+                  <%if (@students.last == student) %>
+                    <button class="button-small left-indent" type="button" onclick="addNewStudent()" title="Add New Student"><i class="glyphicon glyphicon-plus"></i></button>
+                  <%end %>
+                </div>
+              </div>
+            </div>
+          <%end %>
           <div style="margin-top:10px" class="form-group">
             <!-- Button -->
             <div class="col-sm-12 controls">
-              <%=submit_tag "Add Students", class: "button" %>
+              <%=submit_tag "Submit Changes", class: "button" %>
             </div>
           </div>
         <%end %>
@@ -28,15 +44,15 @@
     </div>
   </div>
 </div>
-<button>Add Student</button>
 
-<% if @student.errors.any? %>
-  <div id="error_explanation">
-    <h2><%= pluralize(@student.errors.count, "error") %> prohibited this post from being saved:</h2>
-    <ul>
-      <% @student.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-    </ul>
-  </div>
-<% end %>
+
+<%# if @student.errors.any? %>
+<!--  <div id="error_explanation">-->
+<!--    <h2><%#= pluralize(@student.errors.count, "error") %> prohibited this post from being saved:</h2>-->
+<!--    <ul>-->
+      <%# @student.errors.full_messages.each do |msg| %>
+<!--        <li><%#= msg %></li>-->
+      <%# end %>
+<!--    </ul>-->
+<!--  </div>-->
+<%# end %>
