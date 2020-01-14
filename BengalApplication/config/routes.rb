@@ -22,7 +22,7 @@ Rails.application.routes.draw do
   post "registrations/drop/:part_id/:id" => "registrations#drop"
   post "registrations/add_to_waitlist/:part_id/:id" => "registrations#add_to_waitlist"
   get "slots/:name" => "events#location_timeslots"
-
+  post "students/update_new_students" => "students#update_new_students"
 
   resources :teams
   resources :occasions do

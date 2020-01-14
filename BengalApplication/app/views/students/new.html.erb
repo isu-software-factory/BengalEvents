@@ -1,33 +1,33 @@
 
 
 <div class="container">
-  <div id="loginbox" style="margin-top:50px;" class="mainbox col-md-9 col-md-offset-2 col-sm-8 col-sm-offset-2">
+  <div id="loginbox" style="margin-top:50px;" class="mainbox col-md-10 col-md-offset-1 col-sm-8 col-sm-offset-2">
     <div class="panel panel-default">
       <div class="panel-heading">
         <div class="panel-title">Enter Student Names and Emails</div>
       </div>
 
       <div style="padding-top:30px" class="panel-body">
-        <%= form_tag({controller: "students", action: "create"}, {id: "student-form"}) do %>
+        <%= form_tag({controller: "students", action: "update_new_students"}, {id: "student-form"}) do %>
           <%for student in @students do %>
             <div class="row" >
               <div class="col-lg-4">
-                <div class="input-group">
+                <div class="input-group bottom-indent">
                   <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
                   <%=text_field_tag "name", student.name %>
                 </div>
               </div>
               <div class="col-lg-4">
-                <div class="input-group">
+                <div class="input-group bottom-indent">
                   <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
                   <%=text_field_tag "email", student.user.email  %>
                 </div>
               </div>
               <div class="col-lg-4">
-                <div style="margin-bottom: 25px" class="input-group">
-                  <button class="button-small" type="button" title="Remove Student"><i class="glyphicon glyphicon-minus"></i></button>
+                <div class="input-group bottom-indent">
+                  <button class="button-small glyphicon glyphicon-minus" type="button" title="Remove Student"></button>
                   <%if (@students.last == student) %>
-                    <button class="button-small left-indent" type="button" onclick="addNewStudent()" title="Add New Student"><i class="glyphicon glyphicon-plus"></i></button>
+                    <button class="button-small left-indent glyphicon glyphicon-plus" type="button" onclick="addNewStudent()" title="Add New Student"></button>
                   <%end %>
                 </div>
               </div>

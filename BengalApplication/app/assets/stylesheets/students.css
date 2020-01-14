@@ -1,4 +1,6 @@
-
+.bottom-indent{
+    margin-bottom: 25px;
+}
 .growling-gray{
     background-color: rgb(130,130,130);
 }

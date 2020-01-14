@@ -1,5 +1,5 @@
 class StudentsController < ApplicationController
-  before_action :prepare_teacher, only: %i[new create student_emails student_names]
+  before_action :prepare_teacher, only: %i[new create student_emails student_names, update_new_students]
   before_action :authenticate_user!, except: :new
 
   def index
@@ -67,6 +67,26 @@ class StudentsController < ApplicationController
     redirect_to teacher_path(@teacher.id)
   end
 
+
+
+  def update_new_students
+    names = student_names
+    emails = student_emails
+
+    count = 0
+
+    # check to see if student is already in the database
+    for name in names do
+      unless Student.exists?(:name => name)
+        create_students(name, emails[count]);
+      end
+      lasd
+      count += 1
+    end
+
+    redirect_to current_user.meta
+  end
+
   private
 
   def prepare_teacher
@@ -77,8 +97,8 @@ class StudentsController < ApplicationController
   def student_names
     names = []
     # add each name into names array
-    for num in 1..@teacher.student_count do
-      names << params['name' + num.to_s]
+    params.each do |name|
+      names << name
     end
     names
   end
@@ -87,8 +107,8 @@ class StudentsController < ApplicationController
   def student_emails
     emails = []
     # adds every email from params to emails array
-    for num in 1..@teacher.student_count do
-      emails << params['email' + num.to_s]
+    params.each do |email|
+      emails << email
     end
     emails
   end
