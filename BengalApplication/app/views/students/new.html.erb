@@ -9,18 +9,20 @@
 
       <div style="padding-top:30px" class="panel-body">
         <%= form_tag({controller: "students", action: "update_new_students"}, {id: "student-form"}) do %>
+          <%studentCount = 0%>
           <%for student in @students do %>
+            <%studentCount += 1 %>
             <div class="row" >
               <div class="col-lg-4">
                 <div class="input-group bottom-indent">
                   <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                  <%=text_field_tag "name", student.name %>
+                  <%=text_field_tag "name_" + studentCount.to_s, student.name %>
                 </div>
               </div>
               <div class="col-lg-4">
                 <div class="input-group bottom-indent">
                   <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-                  <%=text_field_tag "email", student.user.email  %>
+                  <%=text_field_tag "email_" + studentCount.to_s, student.user.email  %>
                 </div>
               </div>
               <div class="col-lg-4">

@@ -12,6 +12,9 @@ $(document).on('ready page:load turbolinks:load', function (){
         $(this).parent().parent().parent().prev().children().last().children().last().append(createButton("plus"));
         $(this).parent().parent().parent().remove();
     });
+
+    // student number
+    studentCount = $("#student-form").children().last().prev().children().last().prev().find("input").attr("id").split('_').pop();
 });
 
 
@@ -21,17 +24,16 @@ $(document).on('ready page:load turbolinks:load', function (){
 
 // new students page
 function addNewStudent(){
+    studentCount = parseInt(studentCount) + 1;
     // remove the previous add button
     removePreviousButton();
 
     // text field
     var nameField = document.createElement('input');
-    nameField.setAttribute("type", "text");
-    nameField.setAttribute("placeholder", "Name");
+    setAttributes(nameField, "Name", studentCount);
 
     var emailField = document.createElement("input");
-    emailField.setAttribute("type", "text");
-    emailField.setAttribute("placeholder", "Student Email");
+    setAttributes(emailField, "Email", studentCount);
 
     // icon
     var nIcon = createSpan("user");
@@ -53,6 +55,13 @@ function addNewStudent(){
 
 }
 
+// set attributes to the text fields
+function setAttributes(element, names, count){
+    element.setAttribute("type", "text");
+    element.setAttribute("placeholder", "Student " + names);
+    element.setAttribute("id", names.toLowerCase());
+    element.setAttribute("name", names.toLowerCase() + "_" + count);
+}
 
 
 function removePreviousButton(){

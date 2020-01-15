@@ -80,14 +80,29 @@ class StudentsController < ApplicationController
       unless Student.exists?(:name => name)
         create_students(name, emails[count]);
       end
-      lasd
       count += 1
     end
+
+    # check to see if a student was removed
+    remove_students(names)
 
     redirect_to current_user.meta
   end
 
+
   private
+
+  def remove_students(names)
+    students = Student.all
+
+    for student in students
+      # remove student
+      unless names.include?(student.name)
+        student.delete
+      end
+    end
+  end
+
 
   def prepare_teacher
     @teacher = Teacher.find(current_user.meta.id)
@@ -97,8 +112,11 @@ class StudentsController < ApplicationController
   def student_names
     names = []
     # add each name into names array
-    params.each do |name|
-      names << name
+
+    params.each do |key, value|
+      if key.start_with?("name")
+        names << value
+      end
     end
     names
   end
@@ -107,8 +125,10 @@ class StudentsController < ApplicationController
   def student_emails
     emails = []
     # adds every email from params to emails array
-    params.each do |email|
-      emails << email
+    params.each do |key, value|
+      if key.start_with?("email")
+        emails << value
+      end
     end
     emails
   end
@@ -125,7 +145,7 @@ class StudentsController < ApplicationController
 
     # send an email to student if student saves
     if @student.save
-      UserMailer.login_email(@student, @student.user, random_password).deliver_now
+      #UserMailer.login_email(@student, @student.user, random_password).deliver_now
       true
     else
       false
