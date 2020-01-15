@@ -137,8 +137,8 @@ function newRow(){
 
 // insert row in DOM
 function setRow(element){
-    var container = document.getElementById("student-form");
-    return container.insertBefore(element, container.childNodes.item(container.childElementCount - 1).nextSibling);
+    $(element).insertAfter($("#student-form").children().last().prev());
+    return element;
 }
 
 // creates div input group class for css

@@ -10,25 +10,25 @@
       <div style="padding-top:30px" class="panel-body">
         <%= form_tag({controller: "students", action: "update_new_students"}, {id: "student-form"}) do %>
           <%studentCount = 0%>
-          <%for student in @students do %>
+          <%for student in (@students.empty? ? 0..0 : @students) do %>
             <%studentCount += 1 %>
             <div class="row" >
               <div class="col-lg-4">
                 <div class="input-group bottom-indent">
                   <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                  <%=text_field_tag "name_" + studentCount.to_s, student.name %>
+                  <%=text_field_tag "name_" + studentCount.to_s, @students.empty? ? nil : student.name, placeholder: @students.empty? ? "Student Name" : nil %>
                 </div>
               </div>
               <div class="col-lg-4">
                 <div class="input-group bottom-indent">
                   <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-                  <%=text_field_tag "email_" + studentCount.to_s, student.user.email  %>
+                  <%=text_field_tag "email_" + studentCount.to_s, @students.empty? ? nil : student.user.email, placeholder: @students.empty? ? "Student Email" : nil%>
                 </div>
               </div>
               <div class="col-lg-4">
                 <div class="input-group bottom-indent">
                   <button class="button-small glyphicon glyphicon-minus" type="button" title="Remove Student"></button>
-                  <%if (@students.last == student) %>
+                  <%if (@students.last == student || @students.empty?) %>
                     <button class="button-small left-indent glyphicon glyphicon-plus" type="button" onclick="addNewStudent()" title="Add New Student"></button>
                   <%end %>
                 </div>

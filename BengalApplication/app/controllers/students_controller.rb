@@ -49,6 +49,7 @@ class StudentsController < ApplicationController
     @students = current_user.meta.students.all
 
 
+
     add_breadcrumb "Home", current_user.meta
     add_breadcrumb "Adding Students", new_student_path
 
