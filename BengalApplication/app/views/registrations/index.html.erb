@@ -12,7 +12,6 @@
     <tr>
       <td scope="row"><%= link_to o.name, controller: "registrations", action: "events", part_id: @participant_id, id: o.id %></td>
       <td><%= o.start_date.strftime("%F") %></td>
-      <td><%= o.end_date.strftime("%F") %></td>
     </tr>
   <% end %>
   </tbody>

@@ -83,5 +83,8 @@ gem 'breadcrumbs_on_rails'
 # icons
 gem 'font-awesome-sass', "~> 5.11.2"
 
+# get os name
+gem 'os'
+
 gem 'bootstrap-sass'
 gem 'rubocop', require: false

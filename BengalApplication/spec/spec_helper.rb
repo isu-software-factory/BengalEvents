@@ -7,6 +7,7 @@ require 'simplecov'
 require 'capybara'
 require 'webdrivers'
 require 'capybara/email/rspec'
+require 'os'
 SimpleCov.start
 # Given that it is always loaded, you are encouraged to keep this file as
 # light-weight as possible. Requiring heavyweight dependencies from this file
@@ -15,7 +16,7 @@ SimpleCov.start
 # a separate helper file that requires the additional dependencies and performs
 # the additional setup, and require it from the spec files that actually need
 # it.
-Selenium::WebDriver::Chrome::Service.driver_path = "./spec/chrome/chromedriver.exe"
+Selenium::WebDriver::Chrome::Service.driver_path = OS.windows? ? "./spec/Chrome/chromedriver.exe" : "./spec/ChromeLinux/chromedriver"
 Capybara.default_driver = :selenium_chrome
 
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration

@@ -12,6 +12,28 @@
 </div>
 
 <h1>Events</h1>
+<div class="container">
+  <%@events.each do |e| %>
+    <div class="row">
+      <div class="col-lg-8">
+        <table class="table">
+          <thead class="thead-dark">
+          <tr>
+            <th>Name</th>
+            <th>Location</th>
+            <th>Status</th>
+          </tr>
+          </thead>
+          <tbody>
+            <td><%=e.name %></td>
+            <td><%=e.location.name %></td>
+            <td><%=check_box_tag("registered", value="0", title="Register") %> <span class="glyphicon glyphicon-remove left-indent-more"></span></td>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  <% end %>
+</div>
 <table class="table">
   <thead class="thead-dark">
   <tr>

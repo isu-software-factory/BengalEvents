@@ -30,7 +30,3 @@ student_5:
   name: "Paul"
   teacher_id: 1
 
-student_6:
-  id: 6
-  name: "Bruce"
-  teacher_id: 1

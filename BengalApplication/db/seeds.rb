@@ -97,27 +97,67 @@ Supervisor.create!([{
                     }])
 
 
-Student.create!([{
-      name: "Jimmy",
-      user_attributes: {
-          email: "timmy@gmail.com",
-          password: "password"
-      },
-      participant_attributes: {}
-                 },
-                {
-      name: "Catie",
-      user_attributes: {
-          email: "Catie23@gmail.com",
-          password: "password"
-      },
-      participant_attributes: {}
-                 }])
+Student.create!([
+      {
+                    name: "Jimmy Rodrigus",
+                    user_attributes: {email: "timmy@gmail.com",
+                                      password: "password"},
+                    participant_attributes: {}
+      },{
+                    name: "Catie Madison",
+                    user_attributes: {email: "Catie23@gmail.com",
+                                      password: "password"},
+                    participant_attributes: {}
+      },{
+                     name: "Billy Thomas",
+                     user_attributes:{email: "bil@gmail.com",
+                                      passowrd: "password"},
+                     participant_attributes:{}
+      },{
+                     name: "Catie Johnson",
+                     user_attributes: {email: "cAt@gmail.com",
+                                       password: "password"},
+                     participant_attributes: {}
+      },{
+                     name: "Thomas Wayne",
+                     user_attributes: {email: "tom@gmail.com",
+                                       password: "password"},
+                     participant_attributes: {}
+      },{
+                     name: "Clark Fin",
+                     user_attributes: {email: "clArk@gmail.com",
+                                       password: "password"},
+                     participant_attributes: {}
+      },{
+                     name: "David Madison",
+                     user_attributes: {email: "dav@gmail.com",
+                                       password: "password"},
+                     participant_attributes:{}
+      },{
+                     name: "Cleveland Brown",
+                     user_attributes: {email: "cle@gmail.com",
+                                       password: "password"},
+                     participant_attributes:{}
+      },{
+                     name: "Glenn Quagmire",
+                     user_attributes: {email: "glen@gmail.com",
+                                       password: "password"},
+                     participant_attributes:{}
+      }
+                ])
 
-# Teacher.create!([{
-#
-#                  }])
-#
+ Teacher.create!([
+       {
+            name: "Steven Monroe",
+            student_count: 8,
+            chaperone_count: 2,
+            user_attributes: {email: "mon@gmail.com",
+                              password: "password"},
+            participant_attributes:{}
+       }
+
+                  ])
+
 # Team.create!([{
 #
 #               }])
