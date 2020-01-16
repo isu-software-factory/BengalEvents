@@ -22,10 +22,10 @@ Coordinator.create!([{
     },
     superviosr_attributes: {}
                      }])
-
-# EventDetail.create!([{
-#
-#                      }])
+ #
+ #EventDetail.create!([{
+ #
+ #                    }])
 
 Event.create!([{
     name: "Robotics",
@@ -69,12 +69,14 @@ Event.create!([{
                }])
 
 
+
 Occasion.create!([{
     name: "Bengal Stem Day",
     start_date: 2019-06-25,
     coordinator_id: 1,
     description: "STEM related activities"
                   }])
+
 
 Sponsor.create!([{
     name: "Carlos"
@@ -158,9 +160,15 @@ Student.create!([
 
                   ])
 
-# Team.create!([{
-#
-#               }])
+ Team.create!([{
+                   name: "Tigers",
+                   lead: 1
+              },{
+                   name: "Lions",
+                   lead: 4
+               }])
+
+
 
 
 p "Done"
