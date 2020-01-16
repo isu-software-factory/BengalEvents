@@ -9,7 +9,9 @@ $(document).on('ready page:load turbolinks:load', function (){
     // new student page
     // assign function to all minus buttons
     $("button").click(function() {
-        $(this).parent().parent().parent().prev().children().last().children().last().append(createButton("plus"));
+        if ($("#student-form").find("button").last().prev()[0] === $(this)[0])
+            $(this).parent().parent().parent().prev().children().last().children().last().append(createButton("plus"));
+
         $(this).parent().parent().parent().remove();
     });
 
@@ -66,6 +68,7 @@ function setAttributes(element, names, count){
 
 function removePreviousButton(){
     $("#student-form").find("button").last().remove();
+
 }
 
 function createButton(type){
@@ -78,7 +81,8 @@ function createButton(type){
         button.setAttribute("class", "button-small glyphicon glyphicon-minus");
         // remove fields and add plus button before this element
         $(button).click(function() {
-            $(this).parent().parent().parent().prev().children().last().children().last().append(createButton("plus"));
+            if (($("#student-form").find("button").last().prev()[0] === $(this)[0]))
+                $(this).parent().parent().parent().prev().children().last().children().last().append(createButton("plus"));
             $(this).parent().parent().parent().remove();
         });
     }else{
@@ -91,11 +95,6 @@ function createButton(type){
     return button;
 }
 
-function setIconToButton(icon){
-    var iElement = document.createElement("i");
-    iElement.setAttribute("class", "glyphicon glyphicon-"+icon);
-    return iElement;
-}
 
 
 // create a span element with icon
