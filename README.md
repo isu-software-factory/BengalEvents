@@ -23,3 +23,8 @@
    -  To check the version of any gem installed, type bundle show [gemname] in the terminal. In the sqlite3 case,`bundle show sqlite3`
 - In terminal, run 'rails server'
 - Go to "localhost:3000" in browser to see homepage.
+
+## Testing
+- When testing with Capybara and Selenium make sure that you have chrome installed before your run the tests. It will throw an error otherwise.
+- To run the features tests with Selenium, run using `rspec spec/features` to run all features tests. 
+- To run the model tests, run using `rspec spec/models` to run all model tests.
