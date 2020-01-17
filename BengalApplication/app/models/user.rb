@@ -22,4 +22,5 @@ class User < ApplicationRecord
   belongs_to :meta, polymorphic: true
   validates :encrypted_password,presence:true
   validates :email, presence: true
+  validates_uniqueness_of :email
 end

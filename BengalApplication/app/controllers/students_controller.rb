@@ -49,7 +49,6 @@ class StudentsController < ApplicationController
     @students = current_user.meta.students.all
 
 
-
     add_breadcrumb "Home", current_user.meta
     add_breadcrumb "Adding Students", new_student_path
 
@@ -73,13 +72,14 @@ class StudentsController < ApplicationController
   def update_new_students
     names = student_names
     emails = student_emails
+    redirect = false
 
     count = 0
 
     # check to see if student is already in the database
-    for name in names do
-      unless Student.exists?(:name => name)
-        create_students(name, emails[count]);
+    for email in emails do
+      unless User.exists?(:email => email)
+        redirect = create_students(names[count], email);
       end
       count += 1
     end
@@ -87,7 +87,14 @@ class StudentsController < ApplicationController
     # check to see if a student was removed
     remove_students(names)
 
-    redirect_to current_user.meta
+    if redirect
+      redirect_to current_user.meta
+    else
+      flash[:errors] = @student.errors.full_messages
+      flash[:errors] = @student.user.errors.full_messages
+      redirect_back(fallback_location: current_user)
+    end
+
   end
 
 

@@ -47,6 +47,12 @@
   </div>
 </div>
 
+<% content_for(:title, "New Students") %>
+<% if flash[:errors] %>
+  <% flash[:errors].each do |e| %>
+    <p><%= e %></p>
+  <% end %>
+<% end %>
 
 <%# if @student.errors.any? %>
 <!--  <div id="error_explanation">-->

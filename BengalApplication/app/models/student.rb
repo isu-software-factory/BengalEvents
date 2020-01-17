@@ -19,4 +19,6 @@ class Student < ApplicationRecord
   has_many :groupings
   has_many :teams, through: :groupings
   validates :name, presence: true
+
+
 end
