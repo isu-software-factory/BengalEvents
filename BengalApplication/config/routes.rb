@@ -1,6 +1,11 @@
 Rails.application.routes.draw do
   get 'groupings/add'
-  devise_for :users, skip: :devise_registration
+  devise_for :users, skip: [:devise_registration]
+  as :user do
+    get 'sign_in', to: 'homeroutes#routes'
+    get 'sign_up', to: 'homeroutes#routes'
+  end
+
   resources :admins
   resources :teachers
   resources :students

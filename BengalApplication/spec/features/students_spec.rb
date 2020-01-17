@@ -63,6 +63,19 @@ RSpec.feature "Students", type: :feature do
   end
 
 
+  context "update student through student" do
+    before(:each) do
+      @student = students(:student_1)
+      login_as(@student.user)
+      visit edit_user_registration_path(@student.user)
+    end
+
+    scenario "should be successful" do
+
+    end
+  end
+
+
    context "destroy student through teacher" do
      before(:each) do
        @teacher = teachers(:teacher_emily)

@@ -9,10 +9,13 @@ class User::SessionsController < Devise::SessionsController
   # end
 
   # POST /resource/sign_in
-  # def create
+  #def create
   #   super
   # end
 
+   def aut_options
+     {:scope => resource_name, :recall => "homeroutes#routes"}
+   end
   # DELETE /resource/sign_out
   # def destroy
   #   super
