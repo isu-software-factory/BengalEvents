@@ -1,5 +1,5 @@
 class RegistrationsController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: :registers
 
 
   def register
@@ -98,5 +98,19 @@ class RegistrationsController < ApplicationController
     redirect_to @participant.member
   end
 
+  def registers
+    event = Event.find(id: params[:id])
+    participant = current_user.participant
+
+    # add participant to event
+    success = event.register_participant(participant)
+
+    if success
+      render json: {data: {success: true}}
+    else
+      render json: {data: {success: false}}
+    end
+
+  end
 
 end

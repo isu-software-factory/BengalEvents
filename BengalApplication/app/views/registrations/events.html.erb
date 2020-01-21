@@ -27,13 +27,15 @@
           <tbody>
             <td><%=e.name %></td>
             <td><%=e.location.name %></td>
-            <td><%=check_box_tag("registered", value="0", title="Register") %> <span class="glyphicon glyphicon-remove left-indent-more"></span></td>
+            <td><%=check_box_tag("registered", value=e.id) %> <span class="glyphicon glyphicon-remove left-indent-more"></span></td>
           </tbody>
         </table>
       </div>
     </div>
   <% end %>
 </div>
+
+
 <table class="table">
   <thead class="thead-dark">
   <tr>
