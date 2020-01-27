@@ -87,13 +87,14 @@ class StudentsController < ApplicationController
     # check to see if a student was removed
     remove_students(names)
 
-    if redirect
-      redirect_to current_user.meta
-    else
-      flash[:errors] = @student.errors.full_messages
-      flash[:errors] = @student.user.errors.full_messages
-      redirect_back(fallback_location: current_user)
-    end
+
+      if redirect
+        redirect_to current_user.meta
+      else
+        flash[:errors] = @student.errors.full_messages
+        flash[:errors] = @student.user.errors.full_messages
+        redirect_back(fallback_location: current_user)
+      end
 
   end
 
@@ -158,5 +159,9 @@ class StudentsController < ApplicationController
     else
       false
     end
+  end
+
+  def check_submission
+
   end
 end

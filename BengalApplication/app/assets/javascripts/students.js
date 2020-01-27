@@ -131,7 +131,6 @@ function newRow(){
     row.setAttribute("class", "row");
 
     return setRow(row);
-
 }
 
 // insert row in DOM
@@ -154,3 +153,6 @@ function newDivInputGroup(row){
     row.appendChild(col);
     return div;
 }
+
+
+

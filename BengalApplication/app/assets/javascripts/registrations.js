@@ -22,11 +22,11 @@ $(document).on('ready page:load turbolinks:load', function(){
 
     // assign all checkbox with function
     $("input[type='checkbox']").change(function(){
-        const event_id = $(this).val();
+        const event_id = parseInt($(this).val());
 
         // use ajax to send back info
         Rails.ajax({
-            url: '/register',
+            url: `/register/${event_id}`,
             type: 'GET',
             dataType: "json",
             success: function(data){

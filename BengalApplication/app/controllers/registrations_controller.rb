@@ -99,8 +99,8 @@ class RegistrationsController < ApplicationController
   end
 
   def registers
-    event = Event.find(id: params[:id])
-    participant = current_user.participant
+    event = EventDetail.find(params[:id].to_i)
+    participant = current_user.meta.participant
 
     # add participant to event
     success = event.register_participant(participant)
