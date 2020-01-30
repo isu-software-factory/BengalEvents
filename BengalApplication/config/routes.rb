@@ -28,7 +28,8 @@ Rails.application.routes.draw do
   post "registrations/add_to_waitlist/:part_id/:id" => "registrations#add_to_waitlist"
   get "slots/:name" => "events#location_timeslots"
   post "students/update_new_students" => "students#update_new_students"
-  get "register" => "registrations#registers"
+  get "register/:id" => "registrations#registers"
+  post "students/errors" => "students#errors"
 
 
   resources :teams

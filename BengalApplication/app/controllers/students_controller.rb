@@ -56,20 +56,22 @@ class StudentsController < ApplicationController
 
   # creates a new student
   def create
-    names = student_names
-    emails = student_emails
-    authorize Student
-
-    # for each student in array, create a student
-    for each in 0..(names.count - 1) do
-      success = create_students(names[each], emails[each])
-    end
-    redirect_to teacher_path(@teacher.id)
+    respond_to do |format|
+      if redirect
+        #redirect_to current_user.meta
+        format.js
+        format.html
+      else
+        flash[:errors] = @student.errors.full_messages
+        flash[:errors] = @student.user.errors.full_messages
+        #redirect_to "students/new"
+        format.js
+        format.html
+      end
+      end
   end
 
-
-
-  def update_new_students
+  def errors
     names = student_names
     emails = student_emails
     redirect = false
@@ -88,14 +90,12 @@ class StudentsController < ApplicationController
     remove_students(names)
 
     if redirect
-      redirect_to current_user.meta
+      render json: {results: {show: false}}
     else
-      flash[:errors] = @student.errors.full_messages
-      flash[:errors] = @student.user.errors.full_messages
-      redirect_back(fallback_location: current_user)
+      render json: {results: {show: true}}
     end
-
   end
+
 
 
   private
@@ -158,5 +158,9 @@ class StudentsController < ApplicationController
     else
       false
     end
+  end
+
+  def check_submission
+
   end
 end

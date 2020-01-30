@@ -7,8 +7,8 @@
         <div class="panel-title">Enter Student Names and Emails</div>
       </div>
 
-      <div style="padding-top:30px" class="panel-body">
-        <%= form_tag({controller: "students", action: "update_new_students"}, {id: "student-form"}) do %>
+      <div style="padding-top:30px" id="student-box" class="panel-body">
+        <%= form_tag({controller: "students", action: "create"}, {id: "student-form"}) do %>
           <%studentCount = 0%>
           <%for student in (@students.empty? ? 0..0 : @students) do %>
             <%studentCount += 1 %>
@@ -38,7 +38,7 @@
           <div style="margin-top:10px" class="form-group">
             <!-- Button -->
             <div class="col-sm-12 controls">
-              <%=submit_tag "Submit Changes", class: "button" %>
+              <%=submit_tag "Submit Changes", class: "button", id: "Submit-Students"%>
             </div>
           </div>
         <%end %>
@@ -47,20 +47,10 @@
   </div>
 </div>
 
-<% content_for(:title, "New Students") %>
-<% if flash[:errors] %>
-  <% flash[:errors].each do |e| %>
-    <p><%= e %></p>
-  <% end %>
-<% end %>
-
-<%# if @student.errors.any? %>
-<!--  <div id="error_explanation">-->
-<!--    <h2><%#= pluralize(@student.errors.count, "error") %> prohibited this post from being saved:</h2>-->
-<!--    <ul>-->
-      <%# @student.errors.full_messages.each do |msg| %>
-<!--        <li><%#= msg %></li>-->
-      <%# end %>
-<!--    </ul>-->
-<!--  </div>-->
+<%# content_for(:title, "New Students") %>
+<%# if flash[:errors] %>
+  <%# flash[:errors].each do |e| %>
+<!--    <p><%#= e %></p>-->
+  <%# end %>
 <%# end %>
+

@@ -17,6 +17,19 @@ $(document).on('ready page:load turbolinks:load', function (){
 
     // student number
     studentCount = $("#student-form").children().last().prev().children().last().prev().find("input").attr("id").split('_').pop();
+
+    // load errors
+    $("#Submit-Students").click(function(event){
+        event.preventDefault();
+        Rails.ajax({
+            url: `errors`,
+            type: 'POST',
+            data: $("#student-form").serialize(),
+            success: function(result){
+                alert("Worked");
+            }
+        })
+    });
 });
 
 
@@ -131,7 +144,6 @@ function newRow(){
     row.setAttribute("class", "row");
 
     return setRow(row);
-
 }
 
 // insert row in DOM
@@ -154,3 +166,6 @@ function newDivInputGroup(row){
     row.appendChild(col);
     return div;
 }
+
+
+

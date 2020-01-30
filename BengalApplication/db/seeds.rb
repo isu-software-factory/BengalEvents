@@ -6,167 +6,146 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-Coordinator.create!([{
-    name: "Tom",
-    user_attributes: {
-        email: "tom23@gmail.com",
-        password: "password"
-    },
-    supervisor_attributes: {}
-                     },
-                    {
-    name: "Sam",
-    user_attributes: {
-        email: "Sam@gmail.com",
-        password: "password"
-    },
-    superviosr_attributes: {}
-                     }])
- #
- #EventDetail.create!([{
- #
- #                    }])
-
-Event.create!([{
-    name: "Robotics",
-    occasion_id: 1,
-    supervisor_id: 1,
-    description: "All about robots",
-    isMakeAhead: false,
-    isCompetetion: false
-               },
-              {
-    name: "Chemistry",
-    occasion_id: 1,
-    supervisor_id: 3,
-    description: "Teaching entry chemistry.",
-    isMakeAhead: false,
-    isCompetetion: false
-               },
-              {
-    name: "Racing",
-    occasion_id: 1,
-    supervisor_id: 2,
-    description: "Racing with cars",
-    isMakeAhead: true,
-    isCompetetion: true
-               },
-              {
-    name: "Mouse Trap Car",
-    occasion_id: 2,
-    supervisor_id: 3,
-    description: "Build a mousetrap car",
-    isMakAhead: true,
-    isCompetetion: false
-               },
-              {
-    name: "Wood Carving",
-    occasion_id: 1,
-    supervisor_id: 2,
-    description: "Carve your own objects with wood",
-    isMakeAhead: false,
-    isCompetetion: true
-               }])
+User.create!([{
+                  first_name: "Billy",
+                  last_name: "Jones",
+                  email: "bil@gmail.com",
+                  password: "password",
+                  user_name: "bil232",
+              },{
+                  first_name: "Tim",
+                  last_name: "Dunken",
+                  email: "dunkMe@gmail.com",
+                  password: "password",
+                  user_name: "timmy23db"
+              },{
+                  first_name: "Ben",
+                  last_name: "Smith",
+                  email: "student@gmail.com",
+                  password: "password",
+                  user_name: "firstStudent25"
+              },{
+                  first_name: "Chuck",
+                  last_name: "Norris",
+                  email: "Nor@gmail.com",
+                  password: "password",
+                  user_name: "Strong25Fast"
+              },{
+                  first_name: "Javier",
+                  last_name: "Floris",
+                  email: "Javi@gmail.com",
+                  password: "password",
+                  user_name: "JUnit4Floris"
+              },{
+                  first_name: "Emily",
+                  last_name: "Udy",
+                  email: "Udy@gmail.com",
+                  password: "password",
+                  user_name: "Emmy2Ballen"
+              },{
+                  first_name: "Adhar",
+                  last_name: "Bhattarai",
+                  email: "Adhar@gmail.com",
+                  password: "password",
+                  user_name: "Adhar22"
+              },{
+                  fist_name: "Victor",
+                  last_name: "Valdes",
+                  email: "Victory@gmail.com",
+                  password: "password",
+                  user_name: "JustDoIt4Nike"
+              },{
+                  first_name: "Miriam",
+                  last_name: "Dance",
+                  email: "dancmiri@isu.edu"
+              }])
 
 
-
-Occasion.create!([{
-    name: "Bengal Stem Day",
-    start_date: 2019-06-25,
-    coordinator_id: 1,
-    description: "STEM related activities"
-                  }])
-
-
-Sponsor.create!([{
-    name: "Carlos"
-                 },
-                {
-    name: "Ben"
-                 }])
-
-Supervisor.create!([{
-      director_id: 1,
-      director_type: "Sponsor"
-                   },
-                   {
-      director_id: 2,
-      director_type: "Sponsor"
-                    },
-                   {
-      director_id: 1,
-      director_type: "Coordinator"
+Assignment.create!([{
+                        user_id: 1,
+                        role_id: 1
+                    },{
+                        user_id: 2,
+                        role_id: 2
+                    },{
+                        user_id: 3,
+                        role_id: 2
+                    },{
+                        user_id: 4,
+                        role_id: 2
+                    },{
+                        user_id: 5,
+                        role_id: 2
+                    },{
+                        user_id: 6,
+                        role_id: 2
+                    },{
+                        user_id: 7,
+                        role_id: 3
+                    },{
+                        user_id: 8,
+                        role_id: 4
+                    },{
+                        user_id: 9,
+                        role_id: 5
                     }])
 
 
-Student.create!([
-      {
-                    name: "Jimmy Rodrigus",
-                    user_attributes: {email: "timmy@gmail.com",
-                                      password: "password"},
-                    participant_attributes: {}
-      },{
-                    name: "Catie Madison",
-                    user_attributes: {email: "Catie23@gmail.com",
-                                      password: "password"},
-                    participant_attributes: {}
-      },{
-                     name: "Billy Thomas",
-                     user_attributes:{email: "bil@gmail.com",
-                                      passowrd: "password"},
-                     participant_attributes:{}
-      },{
-                     name: "Catie Johnson",
-                     user_attributes: {email: "cAt@gmail.com",
-                                       password: "password"},
-                     participant_attributes: {}
-      },{
-                     name: "Thomas Wayne",
-                     user_attributes: {email: "tom@gmail.com",
-                                       password: "password"},
-                     participant_attributes: {}
-      },{
-                     name: "Clark Fin",
-                     user_attributes: {email: "clArk@gmail.com",
-                                       password: "password"},
-                     participant_attributes: {}
-      },{
-                     name: "David Madison",
-                     user_attributes: {email: "dav@gmail.com",
-                                       password: "password"},
-                     participant_attributes:{}
-      },{
-                     name: "Cleveland Brown",
-                     user_attributes: {email: "cle@gmail.com",
-                                       password: "password"},
-                     participant_attributes:{}
-      },{
-                     name: "Glenn Quagmire",
-                     user_attributes: {email: "glen@gmail.com",
-                                       password: "password"},
-                     participant_attributes:{}
-      }
-                ])
+Role.create!([{
+                  role_name: "Teacher",
+                  role_name: "Student",
+                  role_name: "Admin",
+                  role_name: "Sponsor",
+                  role_name: "Coordinator"
+              }])
 
- Teacher.create!([
-       {
-            name: "Steven Monroe",
-            student_count: 8,
-            chaperone_count: 2,
-            user_attributes: {email: "mon@gmail.com",
-                              password: "password"},
-            participant_attributes:{}
-       }
 
-                  ])
 
- Team.create!([{
-                   name: "Tigers",
-                   lead: 1
-              },{
-                   name: "Lions",
-                   lead: 4
+
+Event.create!([{
+                   name: "Bengal Stem Day",
+                   description: "Stem Related Activities",
+                   start_date: DateTime.new(2020,4,20)
+
                }])
+
+Activity.create!([{
+                      name: "Robotics",
+                      description: "Drive a robot.",
+                      equipment: "Boxes to use as obstacles.",
+                      # need to finish
+                  },{
+                      name: "Raspberry Pi",
+                      description: "Learning how to program a raspberry pi",
+                      equipment: "None"
+                      # need to finish
+                  }])
+
+Sessison.create!({
+                     start_time: DateTime.new(2020,4,20,15),
+                     end_time: DateTime.new(2020,4,20,16),
+                     capacity: 25,
+                     activity_id: 1
+                 },{
+                     start_time: DateTime.new(2020,4,20,17),
+                     end_time: DateTime.new(2020, 4,20, 18),
+                     capacity: 20,
+                     activity_id: 1
+                 },{
+                     start_time: DateTime.new(2020,4,20,13),
+                     end_time: DateTime.new(2020,4,20,14),
+                     capacity: 10,
+                     activity_id: 2
+                 })
+
+
+ #Team.create!([{
+ #                  name: "Tigers",
+ #                  lead: 2
+ #             },{
+ #                  name: "Lions",
+ #                  lead: 4
+ #              }])
 
 
 
