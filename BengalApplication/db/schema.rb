@@ -10,105 +10,94 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_03_014204) do
+ActiveRecord::Schema.define(version: 2020_01_30_231914) do
 
-  create_table "admins", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+  create_table "activities", force: :cascade do |t|
     t.string "name"
-  end
-
-  create_table "coordinators", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "name"
-  end
-
-  create_table "event_details", force: :cascade do |t|
-    t.integer "capacity"
-    t.datetime "start_time"
-    t.datetime "end_time"
-    t.integer "event_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.date "date_started"
-    t.index ["event_id"], name: "index_event_details_on_event_id"
-  end
-
-# Could not dump table "events" because of following StandardError
-#   Unknown type 'bool' for column 'isCompetetion'
-
-  create_table "locations", force: :cascade do |t|
-    t.string "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "occasion_id"
-    t.index ["occasion_id"], name: "index_locations_on_occasion_id"
-  end
-
-  create_table "occasions", force: :cascade do |t|
-    t.string "name"
-    t.datetime "start_date"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "coordinator_id"
     t.string "description"
-    t.index ["coordinator_id"], name: "index_occasions_on_coordinator_id"
-  end
-
-  create_table "participants", force: :cascade do |t|
+    t.string "equipment"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "member_id"
-    t.string "member_type"
-    t.integer "waitlist_id"
-    t.index ["waitlist_id"], name: "index_participants_on_waitlist_id"
+    t.integer "events_id"
+    t.index ["events_id"], name: "index_activities_on_events_id"
   end
 
-  create_table "sponsors", force: :cascade do |t|
+  create_table "activity_types", force: :cascade do |t|
+    t.boolean "isMakeAhead"
+    t.boolean "isCompetetion"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "assignments", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "role_id"
+    t.index ["role_id"], name: "index_assignments_on_role_id"
+    t.index ["user_id"], name: "index_assignments_on_user_id"
+  end
+
+  create_table "events", force: :cascade do |t|
+    t.datetime "start_date"
     t.string "name"
-  end
-
-  create_table "students", force: :cascade do |t|
+    t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "teacher_id"
-    t.string "name"
-    t.index ["teacher_id"], name: "index_students_on_teacher_id"
   end
 
-  create_table "supervisors", force: :cascade do |t|
+  create_table "groupings", force: :cascade do |t|
+    t.integer "team_id"
+    t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "director_id"
-    t.string "director_type"
+    t.index ["team_id"], name: "index_groupings_on_team_id"
+    t.index ["user_id"], name: "index_groupings_on_user_id"
   end
 
-  create_table "teachers", force: :cascade do |t|
+  create_table "registrations", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "session_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "school"
-    t.integer "chaperone_count"
-    t.integer "student_count"
-    t.string "name"
+    t.index ["session_id"], name: "index_registrations_on_session_id"
+    t.index ["user_id"], name: "index_registrations_on_user_id"
   end
 
-  create_table "time_slots", force: :cascade do |t|
+  create_table "roles", force: :cascade do |t|
+    t.string "role_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "sessions", force: :cascade do |t|
     t.datetime "start_time"
     t.datetime "end_time"
+    t.integer "capacity"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "location_id"
-    t.index ["location_id"], name: "index_time_slots_on_location_id"
+    t.integer "activities_id"
+    t.index ["activities_id"], name: "index_sessions_on_activities_id"
   end
 
-  create_table "waitlists", force: :cascade do |t|
+  create_table "teams", force: :cascade do |t|
+    t.string "lead"
+    t.string "team_name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "event_detail_id"
-    t.index ["event_detail_id"], name: "index_waitlists_on_event_detail_id"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "user_name"
+    t.string "first_name"
+    t.string "last_name"
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
 end
