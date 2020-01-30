@@ -29,6 +29,7 @@ Rails.application.routes.draw do
   get "slots/:name" => "events#location_timeslots"
   post "students/update_new_students" => "students#update_new_students"
   get "register/:id" => "registrations#registers"
+  post "students/errors" => "students#errors"
 
 
   resources :teams

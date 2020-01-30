@@ -106,9 +106,9 @@ class RegistrationsController < ApplicationController
     success = event.register_participant(participant)
 
     if success
-      render json: {data: {success: true}}
+      render json: {data: {registered: true}}
     else
-      render json: {data: {success: false}}
+      render json: {data: {registered: false}}
     end
 
   end
