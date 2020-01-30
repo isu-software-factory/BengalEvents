@@ -19,8 +19,9 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-  belongs_to :meta, polymorphic: true
   validates :encrypted_password,presence:true
-  validates :email, presence: true
-  validates_uniqueness_of :email
+  #validates :email, presence: true
+  #validates :user_name, presence: true
+  #
+  #validates_uniqueness_of :email, :user_name
 end

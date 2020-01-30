@@ -49,7 +49,7 @@ User.create!([{
                   password: "password",
                   user_name: "Adhar22"
               },{
-                  fist_name: "Victor",
+                  first_name: "Victor",
                   last_name: "Valdes",
                   email: "Victory@gmail.com",
                   password: "password",
@@ -57,7 +57,9 @@ User.create!([{
               },{
                   first_name: "Miriam",
                   last_name: "Dance",
-                  email: "dancmiri@isu.edu"
+                  email: "dancmiri@isu.edu",
+                  password: "password",
+                  user_name: "Miriam007"
               }])
 
 
@@ -92,11 +94,15 @@ Assignment.create!([{
 
 
 Role.create!([{
-                  role_name: "Teacher",
-                  role_name: "Student",
-                  role_name: "Admin",
-                  role_name: "Sponsor",
+                  role_name: "Teacher"
+              },{
+                  role_name: "Student"
+              },{
                   role_name: "Coordinator"
+              },{
+                  role_name: "Admin"
+              },{
+                  role_name: "Sponsor"
               }])
 
 

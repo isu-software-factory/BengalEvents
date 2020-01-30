@@ -1,24 +1,16 @@
-# == Schema Information
-#
-# Table name: events
-#
-#  id          :integer          not null, primary key
-#  name        :string
-#  location    :string
-#  description :text
-#  isMakeAhead :boolean
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
-#  occasion_id :integer
-#  sponsor_id  :integer
-#
-
 class Event < ApplicationRecord
-  belongs_to :occasion
-  belongs_to :supervisor
-  belongs_to :location
-  has_many :event_details, dependent: :destroy
-
-  validates :name, presence: true
+  has_many :activities, dependent: :destroy
+  #has_many :locations, dependent: :destroy
+  validates :name, :start_date, presence: true
   validates :description, presence: true
+  # validate :end_must_be_after_start
+
+  #   def end_must_be_after_start
+  #     # make sure that neither dates are nil before running method
+  #     if self.start_date != nil && self.end_date != nil
+  #       if self.start_date > self.end_date
+  #         errors.add(:end_time, 'must be after start time')
+  #       end
+  #     end
+  #   end
 end
