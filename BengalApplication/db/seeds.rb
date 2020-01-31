@@ -64,6 +64,18 @@ User.create!([{
                   user_name: "Miriam"
               }])
 
+Role.create!([{
+                  role_name: "Teacher" ,
+              },{
+                  role_name: "Student",
+              },{
+                  role_name: "Sponsor",
+              },{
+                  role_name: "Admin",
+              },  {
+                  role_name: "Coordinator"
+
+              }])
 
 Assignment.create!([{
                         user_id: 1,
@@ -93,22 +105,6 @@ Assignment.create!([{
                         user_id: 9,
                         role_id: 5
                     }])
-
-
-Role.create!([{
-                  role_name: "Teacher" ,
-              },{
-                  role_name: "Student",
-              },{
-                  role_name: "Sponsor",
-              },{
-                  role_name: "Admin",
-              },  {
-                role_name: "Coordinator"
-
-}])
-
-
 
 
 Event.create!([{
