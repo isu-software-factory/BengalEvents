@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_31_222416) do
+ActiveRecord::Schema.define(version: 2020_01_31_232305) do
 
   create_table "activities", force: :cascade do |t|
     t.string "name"
@@ -55,6 +55,13 @@ ActiveRecord::Schema.define(version: 2020_01_31_222416) do
     t.index ["user_id"], name: "index_groupings_on_user_id"
   end
 
+  create_table "locations", force: :cascade do |t|
+    t.string "location_name"
+    t.string "address"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "registrations", force: :cascade do |t|
     t.integer "user_id"
     t.integer "session_id"
@@ -70,14 +77,32 @@ ActiveRecord::Schema.define(version: 2020_01_31_222416) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "rooms", force: :cascade do |t|
+    t.string "room_number"
+    t.string "room_name"
+    t.integer "location_id"
+    t.integer "session_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["location_id"], name: "index_rooms_on_location_id"
+    t.index ["session_id"], name: "index_rooms_on_session_id"
+  end
+
   create_table "sessions", force: :cascade do |t|
     t.datetime "start_time"
     t.datetime "end_time"
     t.integer "capacity"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "activity_id"
-    t.index ["activity_id"], name: "index_sessions_on_activity_id"
+  end
+
+  create_table "teachers", force: :cascade do |t|
+    t.string "school_name"
+    t.integer "chaperone_count"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "role_id"
+    t.index ["role_id"], name: "index_teachers_on_role_id"
   end
 
   create_table "teams", force: :cascade do |t|
@@ -100,6 +125,13 @@ ActiveRecord::Schema.define(version: 2020_01_31_222416) do
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  end
+
+  create_table "waitlists", force: :cascade do |t|
+    t.integer "session_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["session_id"], name: "index_waitlists_on_session_id"
   end
 
 end
