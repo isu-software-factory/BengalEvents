@@ -16,6 +16,9 @@ SimpleCov.start
 # a separate helper file that requires the additional dependencies and performs
 # the additional setup, and require it from the spec files that actually need
 # it.
+#
+
+# if the os is windows then use the windows chrome driver else use linux chrome driver
 Selenium::WebDriver::Chrome::Service.driver_path = OS.windows? ? "./spec/Chrome/chromedriver.exe" : "./spec/ChromeLinux/chromedriver"
 Capybara.default_driver = :selenium_chrome
 
