@@ -76,8 +76,8 @@ ActiveRecord::Schema.define(version: 2020_01_31_222416) do
     t.integer "capacity"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "activities_id"
-    t.index ["activities_id"], name: "index_sessions_on_activities_id"
+    t.integer "activity_id"
+    t.index ["activity_id"], name: "index_sessions_on_activity_id"
   end
 
   create_table "teams", force: :cascade do |t|
