@@ -29,13 +29,15 @@ User.create!([{
                   last_name: "Norris",
                   email: "Nor@gmail.com",
                   password: "password",
-                  user_name: "Strong25Fast"
+                  user_name: "Strong25Fast",
+                  waitlist_id: 1
               },{
                   first_name: "Javier",
                   last_name: "Floris",
                   email: "Javi@gmail.com",
                   password: "password",
-                  user_name: "JUnit4Floris"
+                  user_name: "JUnit4Floris",
+                  waitlist_id: 2
               },{
                   first_name: "Emily",
                   last_name: "Udy",
@@ -170,15 +172,56 @@ Room.create!([{
                   room_name: "Ballroom"
               }])
 
- #Team.create!([{
- #                  name: "Tigers",
- #                  lead: 2
- #             },{
- #                  name: "Lions",
- #                  lead: 4
- #              }])
+Grouping.create!([{
+                      team_id: 1,
+                      user_id: 2
+                  },{
+                      team_id: 1,
+                      user_id: 4
+                  },
+                  {
+                      team_id: 2,
+                      user_id: 3
+                  },{
+                      team_id: 2,
+                      user_id: 5
+                  }])
 
 
+ Team.create!([{
+                   name: "Tigers",
+                   lead: 2
+              },{
+                   name: "Lions",
+                   lead: 3
+               }])
 
+
+Registration.create!([{
+                          session_id: 1,
+                          user_id: 1
+                      },{
+                          session_id: 1,
+                          user_id: 2
+                      },{
+                          session_id: 2,
+                          user_id: 3
+                      },{
+                          session_id: 2,
+                          user_id: 4
+                      },{
+                          session_id: 3,
+                          user_id: 1
+                      },{
+                          session_id: 3,
+                          user_id: 3
+                      }])
+
+
+Waitlist.create!([{
+                      session_id: 1
+                  },{
+                      session_id: 2
+                  }])
 
 p "Done"

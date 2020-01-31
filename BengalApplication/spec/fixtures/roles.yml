@@ -1,0 +1,10 @@
+
+
+teacher:
+  id: 1
+  role_name: "Teacher"
+
+student:
+  id: 2
+  role_name: "Student"
+

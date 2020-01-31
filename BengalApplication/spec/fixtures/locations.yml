@@ -1,9 +1,6 @@
 one:
   id: 1
-  name: "Gym"
-  occasion_id: 1
+  location_name: "SUB"
+  address: "921 S 8th Ave, Pocatello, ID 83209"
 
-two:
-  id: 2
-  name: "SUB"
-  occasion_id: 2
+

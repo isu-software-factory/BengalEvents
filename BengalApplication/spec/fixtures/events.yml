@@ -3,26 +3,6 @@
 one:
   id: 1
   name: "Robotics"
-  location_id: 1
-  occasion_id: 1
-  supervisor_id: 1
   description: "All about robots"
-  isMakeAhead: false
+  start_date: 2020-06-25 00:00:00
 
-two:
-  id: 2
-  name: "Computer Science"
-  location_id: 2
-  occasion_id: 1
-  supervisor_id: 2
-  description: "Program in Python"
-  isMakeAhead: true
-
-three:
-  id: 3
-  name: "Computers"
-  location_id: 1
-  occasion_id: 2
-  supervisor_id: 1
-  description: "Programs Python"
-  isMakeAhead: true
