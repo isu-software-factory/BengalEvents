@@ -4,6 +4,8 @@ class CreateActivities < ActiveRecord::Migration[5.2]
       t.string :name
       t.string :description
       t.string :equipment
+      t.boolean :ismakeahead
+      t.boolean :iscompetetion
       t.timestamps
     end
   end

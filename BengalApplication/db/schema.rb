@@ -16,15 +16,8 @@ ActiveRecord::Schema.define(version: 2020_01_31_232305) do
     t.string "name"
     t.string "description"
     t.string "equipment"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "event_id"
-    t.index ["event_id"], name: "index_activities_on_event_id"
-  end
-
-  create_table "activity_types", force: :cascade do |t|
-    t.boolean "isMakeAhead"
-    t.boolean "isCompetetion"
+    t.boolean "ismakeahead"
+    t.boolean "iscompetetion"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -94,6 +87,8 @@ ActiveRecord::Schema.define(version: 2020_01_31_232305) do
     t.integer "capacity"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "activity_id"
+    t.index ["activity_id"], name: "index_sessions_on_activity_id"
   end
 
   create_table "teachers", force: :cascade do |t|
