@@ -133,7 +133,7 @@ Session.create!([{
                      start_time: DateTime.new(2020,4,20,15),
                      end_time: DateTime.new(2020,4,20,16),
                      capacity: 25,
-                     activity_id: 1
+                     activity_id: 1,
                  },{
                      start_time: DateTime.new(2020,4,20,17),
                      end_time: DateTime.new(2020, 4,20, 18),
@@ -146,6 +146,29 @@ Session.create!([{
                      activity_id: 2
                  }])
 
+Teacher.create!([{
+                     school_name: "Pocatello High School",
+                     chaperone_count: 2,
+                     role_id: 1
+                 }])
+
+
+Location.create!([{
+                      location_name: "SUB",
+                      address: "921 S 8th Ave, Pocatello, ID 83209"
+                  }])
+
+Room.create!([{
+                  room_number: 102,
+                  session_id: 1,
+                  location_id: 1,
+                  room_name: "Cafe"
+              },{
+                  room_number: 203,
+                  session_id: 3,
+                  location_id: 1,
+                  room_name: "Ballroom"
+              }])
 
  #Team.create!([{
  #                  name: "Tigers",
