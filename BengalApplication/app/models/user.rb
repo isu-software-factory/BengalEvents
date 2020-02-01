@@ -21,7 +21,9 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   validates :encrypted_password,presence:true
   has_many :assignments
-  belongs_to :waitlist
+  has_many :groupings
+  has_many :teams, through: :groupings
+
   #validates :email, presence: true
   #validates :user_name, presence: true
   #

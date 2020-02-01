@@ -9,7 +9,5 @@
 #
 teacher_emily:
   id: 1
-  name: "Emily Udy"
-  student_count: 30
   chaperone_count: 5
-  school: "Valley"
+  school_name: "Pocatello"

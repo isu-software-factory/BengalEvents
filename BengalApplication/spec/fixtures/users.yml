@@ -12,50 +12,65 @@ teacher:
  id: 1
  email: "emily@gmail.com"
  encrypted_password: "password"
- meta_type: "Teacher"
- meta_id: 1
+ role_id: 1
+ user_name: "EmmyUsa21"
+ first_name: "Emily"
+ last_name: "Udy"
 
 student_1:
  id: 2
  email: "robert@gmail.com"
  encrypted_password: "password"
- meta_id: 1
- meta_type: "Student"
+ role_id: 2
+ user_name: "rob23s"
+ first_name: "Robert"
+ last_name: "Williams"
 
 student_2:
  id: 3
  email: "bigben@gmail.com"
  encrypted_password: "password"
- meta_id: 2
- meta_type: "Student"
+ role_id: 2
+ user_name: "bigBen23"
+ first_name: "Ben"
+ last_name: "Stubs"
+
 
 student_3:
  id: 4
- email: "cartmen@gmail.com"
+ email: "cartman@gmail.com"
  encrypted_password: "password"
- meta_id: 3
- meta_type: "Student"
+ role_id: 2
+ user_name: "CartmanDo@3"
+ first_name: "Eric"
+ last_name: "Cartman"
 
 student_4:
  id: 5
  email: "sarah@gmail.com"
  encrypted_password: "password"
- meta_id: 4
- meta_type: "Student"
+ role_id: 2
+ user_name: "Sarah21For"
+ first_name: "Sarah"
+ last_name: "Connor"
 
 student_5:
  id: 6
  email: "sally@gmail.com"
  encrypted_password: "password"
- meta_id: 5
- meta_type: "Student"
+ role_id: 2
+ user_name: "SillySally80"
+ first_name: "Sally"
+ last_name: "Martin"
 
 student_6:
  id: 7
  email: "clark@gmail.com"
  encrypted_password: "password"
- meta_id: 6
- meta_type: "Student"
+ role_id: 2
+ user_name: "Clark21Will"
+ first_name: "Clark"
+ last_name: "Kent"
 
 
 
@@ -63,15 +78,10 @@ coordinator:
  id: 8
  email: "rebeca@gmail.com"
  encrypted_password: "password"
- meta_id: 1
- meta_type: "Coordinator"
-
-coordinator_2:
- id: 10
- email: "stev@gmail.com"
- encrypted_password: "password"
- meta_id: 2
- meta_type: "Coordinator"
+ role_id: 3
+ user_name: "rebMe22"
+ first_name: "Rebeca"
+ last_name: "Waters"
 
 
 
@@ -79,5 +89,7 @@ sponsor:
  id: 9
  email: "carlos@gmail.com"
  encrypted_password: "password"
- meta_id: 1
- meta_type: "Sponsor"
+ role_id: 4
+ user_name: "Carlos58"
+ first_name: "Carlos"
+ last_name: "Brown"
