@@ -20,6 +20,8 @@ ActiveRecord::Schema.define(version: 2020_01_31_232305) do
     t.boolean "iscompetetion"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "event_id"
+    t.index ["event_id"], name: "index_activities_on_event_id"
   end
 
   create_table "assignments", force: :cascade do |t|

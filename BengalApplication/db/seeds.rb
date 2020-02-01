@@ -63,6 +63,20 @@ User.create!([{
               }])
 
 
+Role.create!([{
+                  role_name: "Teacher" ,
+              },{
+                  role_name: "Student",
+              },{
+                  role_name: "Sponsor",
+              },{
+                  role_name: "Admin",
+              },  {
+                  role_name: "Coordinator"
+
+              }])
+
+
 Assignment.create!([{
                         user_id: 1,
                         role_id: 1
@@ -93,18 +107,6 @@ Assignment.create!([{
                     }])
 
 
-Role.create!([{
-                  role_name: "Teacher" ,
-              },{
-                  role_name: "Student",
-              },{
-                  role_name: "Sponsor",
-              },{
-                  role_name: "Admin",
-              },  {
-                role_name: "Coordinator"
-
-}])
 
 
 

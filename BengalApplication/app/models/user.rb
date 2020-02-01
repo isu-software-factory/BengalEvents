@@ -20,6 +20,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   validates :encrypted_password,presence:true
+  has_many :assignments
+  belongs_to :waitlist
   #validates :email, presence: true
   #validates :user_name, presence: true
   #
