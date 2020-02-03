@@ -142,6 +142,11 @@ Session.create!([{
                      end_time: DateTime.new(2020,4,20,14),
                      capacity: 10,
                      activity_id: 2
+                 },{
+                    start_time: DateTime.new(2020,4,2,13),
+                    end_time: DateTime.new(2020,4,3,14),
+                    capacity: 2,
+                    activity_id: 2
                  }])
 
 Teacher.create!([{
@@ -209,6 +214,9 @@ Registration.create!([{
                       },{
                           session_id: 3,
                           user_id: 3
+                      },{
+                          session_id: 4,
+                          user_id: 2
                       }])
 
 
