@@ -1,22 +1,21 @@
 require 'rails_helper'
 
 RSpec.describe Team, type: :model do
-  fixtures :teams, :students, :teachers, :event_details,
-           :participants
+
 
   context "validation test" do
     it "ensures name presence" do
-      team = Team.new(name: "", lead: 1).save
+      team = Team.new(team_name: "", lead: 1).save
       expect(team).to eq(false)
     end
 
     it "ensures team lead presence" do
-      team = Team.new(name: "Bears").save
+      team = Team.new(team_name: "Bears").save
       expect(team).to eq(false)
     end
 
     it "successfully creates a team" do
-      team = Team.new(name: "Bears").save
+      team = Team.new(team_name: "Bears", lead: 1).save
       expect(team).to eq(true)
     end
   end
@@ -30,17 +29,18 @@ RSpec.describe Team, type: :model do
     end
 
     it "should have a team lead" do
-      expect(@team.lead).to eq(@student.id)
+      expect(User.find(@team.lead)).to eq(@student)
     end
 
     it "can have members" do
       expect(@team.users.count).to eq(2)
     end
 
-    #it "can have a session" do
-    #  @session.register_participant(@team.participant)
-    #  expect(@session.users.first).to eq(@team)
-    #end
+    it "can have a session" do
+      pending "Undecided how to implement"
+      #@session.register_participant(@team.participant)
+      #expect(@session.users.first).to eq(@team)
+    end
   end
 
   context "Method testing" do
@@ -56,7 +56,7 @@ RSpec.describe Team, type: :model do
 
       it "should add a student to team" do
         @team.register_member(@student3)
-        expect(@team.students.first).to eq(@student)
+        expect(@team.users.first).to eq(@student)
       end
 
       it "should not add a student if capacity is 4" do
@@ -82,8 +82,8 @@ RSpec.describe Team, type: :model do
 
     context "get_lead" do
       before do
-        @student = students(:student_1)
-        @team = teams(:team_1)
+        @student = User.find(2)
+        @team = Team.find(1)
       end
 
       it "should return the student lead of team" do
