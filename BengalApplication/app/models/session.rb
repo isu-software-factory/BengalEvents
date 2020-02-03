@@ -17,38 +17,41 @@ class Session < ApplicationRecord
   #      end
   #    end
   #  end
-  ## register participant to event detail
-  ## Makes sure that participant isn't already registered and that the capacity is zero
-  #  def register_participant(participant)
-  #    unless self.participants.include?(participant)
-  #      unless self.capacity_remaining == 0
-  #        self.participants << participant
-  #        send_make_ahead(participant)
-  #        true
-  #      else
-  #        false
-  #      end
-  #    else
-  #      false
-  #    end
-  #  end
-  #
-  ## Capacity remaining for event detail
-  #  def capacity_remaining
-  #    # Go through participants to decrease capacity
-  #    @remaining = self.capacity
-  #    self.participants.each do |p|
-  #      if p.member_type == 'Team'
-  #        # team members
-  #        members = p.member.students.count
-  #        @remaining -= members
-  #      else
-  #        @remaining -= 1
-  #      end
-  #    end
-  #    @remaining
-  #  end
-  #
+
+  # register participant to session
+  # Makes sure that participant isn't already registered and that the capacity is zero
+    def register_participant(participant)
+      unless self.users.include?(participant)
+        unless self.capacity_remaining == 0
+          self.users << participant
+          send_make_ahead(participant)
+          true
+        else
+          false
+        end
+      else
+        false
+      end
+    end
+
+
+  # Capacity remaining for event detail
+    def capacity_remaining
+      # Go through participants to decrease capacity
+      @remaining = self.capacity
+      self.users.each do |p|
+        #if p.member_type == 'Team'
+        #  # team members
+        #  members = p.member.students.count
+        #  @remaining -= members
+        #else
+          @remaining -= 1
+        #end
+      end
+      @remaining
+    end
+
+
   ## sends an email to a participant and automatically registers student for event
   #  def wait_list_check
   #    # checks to see if the even has a spot open and if there is anyone on the wait list
@@ -66,22 +69,23 @@ class Session < ApplicationRecord
   #      end
   #    end
   #  end
-  #
-  ## make ahead email will be sent to all registered participant
-  #  def send_make_ahead(participant)
-  #    if self.event.isMakeAhead
-  #      # send email one week prior to event
-  #      @week = self.date_started - 7
-  #      @day = self.date_started - 1
-  #
-  #      if @week > Date.today
-  #        UserMailer.event_notice(participant, self.event).deliver_later(wait_until: @week)
-  #      end
-  #
-  #      # send an email 1 day before event
-  #      if @day > Date.today
-  #        UserMailer.event_notice(participant, self.event).deliver_later(wait_until: @day)
-  #      end
-  #    end
-  #  end
+
+
+  # make ahead email will be sent to all registered participant
+    def send_make_ahead(participant)
+      if self.event.isMakeAhead
+        # send email one week prior to event
+        @week = self.date_started - 7
+        @day = self.date_started - 1
+
+        if @week > Date.today
+          UserMailer.event_notice(participant, self.event).deliver_later(wait_until: @week)
+        end
+
+        # send an email 1 day before event
+        if @day > Date.today
+          UserMailer.event_notice(participant, self.event).deliver_later(wait_until: @day)
+        end
+      end
+    end
 end

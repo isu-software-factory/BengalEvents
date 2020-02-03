@@ -15,22 +15,22 @@ class Team < ApplicationRecord
 
   validates :team_name, presence: true
 
-# register a member (max 4) and return true if registered
-#  def register_member(student)
-#    # add student if count is less than 4
-#    if self.students.count < 4
-#      unless self.students.include?(student)
-#        self.students << student
-#        true
-#      else
-#        false
-#      end
-#    else
-#      false
-#    end
-#  end
-#
-#  def get_lead
-#    Student.find(self.lead)
-#  end
+  #register a member (max 4) and return true if registered
+  def register_member(student)
+    # add student if count is less than 4
+    if self.users.count < 4
+      unless self.users.include?(student)
+        self.students << student
+        true
+      else
+        false
+      end
+    else
+      false
+    end
+  end
+
+  def get_lead
+    Student.find(self.lead)
+  end
 end

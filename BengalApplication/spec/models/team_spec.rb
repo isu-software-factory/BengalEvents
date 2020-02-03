@@ -6,7 +6,12 @@ RSpec.describe Team, type: :model do
 
   context "validation test" do
     it "ensures name presence" do
-      team = Team.new(name: "").save
+      team = Team.new(name: "", lead: 1).save
+      expect(team).to eq(false)
+    end
+
+    it "ensures team lead presence" do
+      team = Team.new(name: "Bears").save
       expect(team).to eq(false)
     end
 
@@ -16,11 +21,12 @@ RSpec.describe Team, type: :model do
     end
   end
 
+
   context "association test" do
     before do
-      @team = teams(:team_1)
-      @event_detail = event_details(:one)
-      @student = students(:student_1)
+      @team = Team.first
+      @session = Session.first
+      @student = User.find(2)
     end
 
     it "should have a team lead" do
@@ -28,27 +34,28 @@ RSpec.describe Team, type: :model do
     end
 
     it "can have members" do
-      expect(@team.students.count).to eq(2)
+      expect(@team.users.count).to eq(2)
     end
 
-    it "can have an event detail" do
-      @event_detail.register_participant(@team.participant)
-      expect(@event_detail.participants.first).to eq(@team.participant)
-    end
+    #it "can have a session" do
+    #  @session.register_participant(@team.participant)
+    #  expect(@session.users.first).to eq(@team)
+    #end
   end
 
   context "Method testing" do
     context "register_member" do
       before do
-        @team = teams(:team_1)
-        @student = students(:student_1)
-        @student2 = students(:student_2)
-        @student3 = students(:student_3)
-        @student4 = students(:student_4)
+        @team = Team.first
+        @student = User.find(2)
+        @student2 = User.find(3)
+        @student3 = User.find(4)
+        @student4 = User.find(5)
+        @student5 = User.find(6)
       end
 
       it "should add a student to team" do
-        @team.register_member(@student)
+        @team.register_member(@student3)
         expect(@team.students.first).to eq(@student)
       end
 
