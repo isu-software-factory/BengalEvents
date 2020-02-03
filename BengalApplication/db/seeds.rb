@@ -30,14 +30,14 @@ User.create!([{
                   email: "Nor@gmail.com",
                   password: "password",
                   user_name: "Strong25Fast",
-                  waitlist_id: 1
+                  #waitlist_id: 1
               },{
                   first_name: "Javier",
                   last_name: "Floris",
                   email: "Javi@gmail.com",
                   password: "password",
                   user_name: "JUnit4Floris",
-                  waitlist_id: 2
+                  #waitlist_id: 2
               },{
                   first_name: "Emily",
                   last_name: "Udy",
@@ -168,6 +168,14 @@ Room.create!([{
                   room_name: "Ballroom"
               }])
 
+Team.create!([{
+                  team_name: "Tigers",
+                  lead: 2
+              },{
+                  team_name: "Lions",
+                  lead: 3
+              }])
+
 Grouping.create!([{
                       team_id: 1,
                       user_id: 2
@@ -182,16 +190,6 @@ Grouping.create!([{
                       team_id: 2,
                       user_id: 5
                   }])
-
-
- Team.create!([{
-                   name: "Tigers",
-                   lead: 2
-              },{
-                   name: "Lions",
-                   lead: 3
-               }])
-
 
 Registration.create!([{
                           session_id: 1,
@@ -214,10 +212,10 @@ Registration.create!([{
                       }])
 
 
-Waitlist.create!([{
-                      session_id: 1
-                  },{
-                      session_id: 2
-                  }])
+#Waitlist.create!([{
+#                      session_id: 1
+#                  },{
+#                      session_id: 2
+#                  }])
 
 p "Done"
