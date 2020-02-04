@@ -2,8 +2,8 @@ Rails.application.routes.draw do
   get 'groupings/add'
   devise_for :users, skip: [:devise_registration]
   as :user do
-    get 'sign_in', to: 'homeroutes#routes'
-    get 'sign_up', to: 'homeroutes#routes'
+    get 'sign_in', to: 'homeroutes#home'
+    get 'sign_up', to: 'homeroutes#home'
   end
 
   resources :admins
@@ -40,8 +40,9 @@ Rails.application.routes.draw do
     end
   end
 
-  get "homeroutes/routes" => 'homeroutes#routes'
-  root 'homeroutes#routes'
+  get "homeroutes/home" => 'homeroutes#home'
+  get 'homeroutes/user' => 'homeroutes#user'
+  root 'homeroutes#home'
 # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
 end

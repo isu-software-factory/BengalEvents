@@ -1,23 +1,17 @@
 class HomeroutesController < ApplicationController
-  def routes
+  def home
     # user signed in then redirect them to their page
     if user_signed_in?
-      if current_user.meta_type == 'Teacher'
-        redirect_to teacher_path(current_user.meta.id)
-      elsif current_user.meta_type == 'Student'
-        redirect_to student_path(current_user.meta.id)
-      elsif current_user.meta_type == 'Coordinator'
-        redirect_to coordinator_path(current_user.meta.id)
-      elsif current_user.meta_type == 'Sponsor'
-        redirect_to sponsor_path(current_user.meta.id)
-      elsif current_user.meta_type == "Admin"
-        redirect_to admin_path(current_user.meta.id)
-      end
+      redirect_to :controller => "homeroutes", :action => "user"
     end
     # if user isn't signed in then show events for current occasion
-    unless Occasion.first.nil?
-      @occasion = Occasion.first
-      @events = @occasion.events
+    unless Event.first.nil?
+      @event = Event.first
+      @activities = @event.activities
     end
+  end
+
+  def users
+
   end
 end

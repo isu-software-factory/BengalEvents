@@ -14,7 +14,7 @@ class User::SessionsController < Devise::SessionsController
   # end
 
    def aut_options
-     {:scope => resource_name, :recall => "homeroutes#routes"}
+     {:scope => resource_name, :recall => "homeroutes#home"}
    end
   # DELETE /resource/sign_out
   # def destroy

@@ -10,10 +10,10 @@ RSpec.feature "Homeroutes", type: :feature do
       @sponsor = Sponsor.create(name: "Bill", user_attributes: {email: "sponsor@gmail.com", password: "password"}, supervisor_attributes: {})
       @coordinator = Coordinator.create(name: "Kelly", user_attributes: {email: "coordinator@gmail.com", password: "password"}, supervisor_attributes: {})
 
-      visit "homeroutes/routes"
+      visit "homeroutes/home"
     end
 
-    it "routes sponsor" do
+    it "home sponsor" do
       # fill form
       within("form#sign_in") do
         fill_in "user[email]", with: "#{@sponsor.user.email}"
@@ -23,7 +23,7 @@ RSpec.feature "Homeroutes", type: :feature do
       expect(page).to have_content(" #{@sponsor.name}")
     end
 
-    it "routes teacher" do
+    it "home teacher" do
       # fill form
       within("form#sign_in") do
         fill_in "user[email]", with: "#{@teacher.user.email}"
@@ -33,7 +33,7 @@ RSpec.feature "Homeroutes", type: :feature do
       expect(page).to have_content("#{@teacher.name}")
     end
 
-    it "routes coordinator" do
+    it "home coordinator" do
       # fill form
       within("form#sign_in") do
         fill_in "user[email]", with: "#{@coordinator.user.email}"
@@ -43,7 +43,7 @@ RSpec.feature "Homeroutes", type: :feature do
       expect(page).to have_content("#{@coordinator.name}")
     end
 
-    it "routes student" do
+    it "home student" do
       # fill form
       within("form#sign_in") do
         fill_in "user[email]", with: "#{@student.user.email}"
@@ -53,8 +53,8 @@ RSpec.feature "Homeroutes", type: :feature do
       expect(page).to have_content("#{@student.name}")
     end
 
-    it "routes to homeroutes routes page" do
-      visit "homeroutes/routes"
+    it "home to homeroutes home page" do
+      visit "homeroutes/home"
       expect(page).to have_content("Upcoming Events")
     end
   end
