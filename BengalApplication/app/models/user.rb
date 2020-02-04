@@ -25,7 +25,7 @@ class User < ApplicationRecord
   has_many :groupings
   has_many :teams, through: :groupings
   has_many :roles, through: :assignments
-  has_many :teachers
+  has_one :teacher
 
   validates :email, presence: true
   validates :user_name, presence: true
@@ -35,8 +35,8 @@ class User < ApplicationRecord
 
 
   def extra_properties?
-    if (self.roles.first == "Teacher")
-      self.roles.first.find(self.id)
+    if (self.roles.first.role_name == "Teacher")
+      self.teacher
     else
       false
     end

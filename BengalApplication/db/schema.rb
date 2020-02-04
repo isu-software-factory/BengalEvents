@@ -100,9 +100,7 @@ ActiveRecord::Schema.define(version: 2020_02_04_004150) do
     t.integer "chaperone_count"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "role_id"
     t.integer "user_id"
-    t.index ["role_id"], name: "index_teachers_on_role_id"
     t.index ["user_id"], name: "index_teachers_on_user_id"
   end
 

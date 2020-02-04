@@ -185,7 +185,6 @@ Session.create!([{
 Teacher.create!([{
                      school_name: "Pocatello High School",
                      chaperone_count: 2,
-                     role_id: 1,
                      user_id: 1
                  }])
 

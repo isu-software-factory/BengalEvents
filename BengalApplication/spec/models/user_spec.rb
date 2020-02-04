@@ -68,7 +68,7 @@ RSpec.describe User, type: :model do
     end
 
     it "if user is not a teacher then they don't have extra properties" do
-      expect(@user3.roles.first.extra_properties?).to eq(false)
+      expect(@user3.extra_properties?).to eq(false)
     end
 
     it "can have a sponsor" do
