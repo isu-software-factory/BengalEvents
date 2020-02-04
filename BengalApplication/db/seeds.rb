@@ -11,7 +11,7 @@ User.create!([{
                   last_name: "Jones",
                   email: "bil@gmail.com",
                   password: "password",
-                  user_name: "bil232",
+                  user_name: "bil232"
               },{
                   first_name: "Tim",
                   last_name: "Dunken",
@@ -145,7 +145,10 @@ Activity.create!([{
                       name: "Robotics",
                       description: "Drive a robot.",
                       equipment: "Boxes to use as obstacles.",
-                      event_id: 1
+                      ismakeahead: 0,
+                      iscompetetion: 1,
+                      event_id: 1,
+                      user_id: 1
                   },{
                       name: "Raspberry Pi",
                       description: "Learning how to program a raspberry pi",

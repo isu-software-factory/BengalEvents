@@ -19,15 +19,18 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-  validates :encrypted_password,presence:true
   has_many :assignments
+  has_many :user
   has_many :groupings
   has_many :teams, through: :groupings
   has_many :roles, through: :assignments
+  has_many :teachers
 
   validates :email, presence: true
   validates :user_name, presence: true
   validates_uniqueness_of :email, :user_name
   validates :first_name, presence: true
   validates :last_name, presence: true
+  validates :encrypted_password,presence:true
+
 end
