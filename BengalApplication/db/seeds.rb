@@ -153,8 +153,11 @@ Activity.create!([{
                       name: "Raspberry Pi",
                       description: "Learning how to program a raspberry pi",
                       equipment: "None",
-                      event_id: 1
-                      # need to finish
+                      event_id: 1,
+                      user_id: 1,
+                      ismakeahead: 0,
+                      iscompetetion: 0
+
                   }])
 
 Session.create!([{
@@ -182,7 +185,8 @@ Session.create!([{
 Teacher.create!([{
                      school_name: "Pocatello High School",
                      chaperone_count: 2,
-                     role_id: 1
+                     role_id: 1,
+                     user_id: 1
                  }])
 
 
