@@ -21,9 +21,11 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   validates :encrypted_password,presence:true
   has_many :assignments
+  has_many :user
   has_many :groupings
   has_many :teams, through: :groupings
   has_many :roles, through: :assignments
+  has_many :teachers
 
   validates :email, presence: true
   validates :user_name, presence: true
