@@ -30,4 +30,15 @@ class User < ApplicationRecord
   validates_uniqueness_of :email, :user_name
   validates :first_name, presence: true
   validates :last_name, presence: true
+
+
+  def extra_properties?
+    if (self.roles.first == "Teacher")
+      self.roles.first.find(self.id)
+    else
+      false
+    end
+
+  end
+
 end

@@ -48,7 +48,7 @@ RSpec.describe User, type: :model do
       @coordinator = Role.find(5)
       @participant = Role.find(6)
       @organizer = Role.find(7)
-
+      @properties = Teacher.first
     end
 
     it "can have a student" do
@@ -61,6 +61,14 @@ RSpec.describe User, type: :model do
 
     it "can have a teacher" do
       expect(@user2.roles.first).to eq(@teacher)
+    end
+
+    it "teacher can have extra properties" do
+      expect(@user2.extra_properties?).to eq(@properties)
+    end
+
+    it "if user is not a teacher then they don't have extra properties" do
+      expect(@user3.roles.first.extra_properties?).to eq(false)
     end
 
     it "can have a sponsor" do
