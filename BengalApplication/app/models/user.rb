@@ -23,9 +23,11 @@ class User < ApplicationRecord
   has_many :assignments
   has_many :groupings
   has_many :teams, through: :groupings
+  has_many :roles, through: :assignments
 
-  #validates :email, presence: true
-  #validates :user_name, presence: true
-  #
-  #validates_uniqueness_of :email, :user_name
+  validates :email, presence: true
+  validates :user_name, presence: true
+  validates_uniqueness_of :email, :user_name
+  validates :first_name, presence: true
+  validates :last_name, presence: true
 end
