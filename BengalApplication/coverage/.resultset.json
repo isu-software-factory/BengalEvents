@@ -1,10 +1,42 @@
 {
   "RSpec": {
     "coverage": {
-      "/home/canojuan/RubymineProjects/BengalEvents/BengalApplication/spec/models/role_spec.rb": [
+      "/home/canojuan/RubymineProjects/BengalEvents/BengalApplication/spec/models/user_spec.rb": [
         1,
         null,
         1,
+        null,
+        1,
+        1,
+        1,
+        1,
+        null,
+        null,
+        1,
+        1,
+        1,
+        null,
+        null,
+        1,
+        1,
+        1,
+        null,
+        null,
+        1,
+        1,
+        1,
+        null,
+        null,
+        1,
+        1,
+        1,
+        null,
+        null,
+        1,
+        1,
+        1,
+        null,
+        null,
         null,
         1,
         1,
@@ -96,7 +128,7 @@
         null,
         null,
         1,
-        7,
+        13,
         null,
         null,
         1,
@@ -113,11 +145,11 @@
         null,
         null,
         1,
-        7,
+        13,
         null,
         null,
         1,
-        7,
+        13,
         null,
         null,
         1,
@@ -854,6 +886,6 @@
         null
       ]
     },
-    "timestamp": 1580774882
+    "timestamp": 1580776380
   }
 }

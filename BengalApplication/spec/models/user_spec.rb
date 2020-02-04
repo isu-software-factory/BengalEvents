@@ -55,16 +55,28 @@ RSpec.describe User, type: :model do
       expect(@user.roles.first).to eq(@student)
     end
 
+    it "can have a participant" do
+      expect(@user2.roles[1]).to eq(@participant)
+    end
+
     it "can have a teacher" do
-      expect(@user1.roles.first).to eq(@teacher)
+      expect(@user2.roles.first).to eq(@teacher)
     end
 
     it "can have a sponsor" do
-      expect(@user2.roles).to eq(@sponsor)
+      expect(@user3.roles.first).to eq(@sponsor)
+    end
+
+    it "can have a organizer" do
+      expect(@user3.roles[1]).to eq(@organizer)
     end
 
     it "can have a coordinator" do
-      expect(@user3.roles).to eq(@coordinator)
+      expect(@user4.roles.first).to eq(@coordinator)
+    end
+
+    it "can have an admin" do
+      expect(@user5.roles.first).to eq(@admin)
     end
   end
 end
