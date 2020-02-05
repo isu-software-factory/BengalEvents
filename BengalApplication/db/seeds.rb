@@ -131,6 +131,9 @@ Assignment.create!([{
                     },{
                         user_id: 9,
                         role_id: 7
+                    },{
+                        user_id: 9,
+                        role_id: 4
                     }])
 
 

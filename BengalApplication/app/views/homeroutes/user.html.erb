@@ -1,1 +1,7 @@
-<h1>Hi</h1>
+
+
+<%if current_user.roles.first.role_name == "Student" || @admin %>
+   <%= render :partial => "students/show" %>
+<%elsif(current_user.roles.first.role_name == "Teacher") || @admin %>
+    <%= render :partial => "teachers/show" %>
+<%end%>

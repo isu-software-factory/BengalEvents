@@ -40,9 +40,9 @@ class RegistrationsController < ApplicationController
 
   def events
     @participant_id = params[:part_id]
-    @participant = Participant.find(@participant_id)
-    @occasion = Occasion.find(params[:id])
-    @events = @occasion.events
+    @participant = User.find(params[:id])
+    @occasion = Event.first
+    @events = @occasion.activities
     # authorize participant as a registration policy
     authorize @participant, policy_class: RegistrationPolicy
     if @participant.member_type == "Team"
