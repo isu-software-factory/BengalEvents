@@ -20,25 +20,25 @@ Rails.application.routes.draw do
   get "groupings/add/:id/:team_id" => "groupings#add"
   get 'registrations/index/:part_id' => "registrations#index"
   post "registrations/register/:part_id/:id" => "registrations#register"
-  get "registrations/events/:part_id/:id" => "registrations#events"
+  get "registrations/activities/:part_id/:id" => "registrations#activities"
   post 'teams/:id/register_members' => "teams#register_members"
   get "teams/:id/invite" => "teams#invite"
   post "groupings/drop/:part_id/:id" => "groupings#drop"
   post "registrations/drop/:part_id/:id" => "registrations#drop"
   post "registrations/add_to_waitlist/:part_id/:id" => "registrations#add_to_waitlist"
-  get "slots/:name" => "events#location_timeslots"
+  get "slots/:name" => "activities#location_timeslots"
   post "students/update_new_students" => "students#update_new_students"
   get "register/:id" => "registrations#registers"
   post "students/errors" => "students#errors"
 
-
-  resources :teams
-  resources :occasions do
-    resources :locations
-    resources :events do
-      resources :event_details
-    end
-  end
+resources :events
+  # resources :teams
+  # resources :EventsController do
+  #   resources :locations
+  #   resources :ActivitiesController do
+  #     resources :event_details
+  #   end
+  # end
 
   get "homeroutes/home" => 'homeroutes#home'
   get 'homeroutes/user' => 'homeroutes#user'

@@ -53,7 +53,7 @@ class RegistrationsController < ApplicationController
     else
       add_breadcrumb "Home", current_user.meta
       add_breadcrumb "Occasions", controller: "registrations", action: "index", part_id: @participant_id
-      add_breadcrumb "Registration", controller: "registrations", action: "events", part_id: @participant_id, id: @occasion.id
+      add_breadcrumb "Registration", controller: "registrations", action: "activities", part_id: @participant_id, id: @occasion.id
     end
 
 
@@ -77,7 +77,7 @@ class RegistrationsController < ApplicationController
   end
 
   def add_to_waitlist
-    # adds the participant to the events waitlist
+    # adds the participant to the activities waitlist
     @participant = Participant.find(params[:part_id])
     @event_detail = EventDetail.find(params[:id])
 
@@ -86,7 +86,7 @@ class RegistrationsController < ApplicationController
   end
 
   def drop
-    # drop participants from events
+    # drop participants from activities
     @participant = Participant.find(params[:part_id])
     @event_detail = EventDetail.find(params[:id])
 

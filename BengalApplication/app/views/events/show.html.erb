@@ -1,38 +1,73 @@
+<% content_for(:title, "#{@occasion.name}") %>
 <div class="container">
   <div class="row">
-    <div class="col-sm">
-      <h2> Sessions for <%= @event.name %> event</h2>
-      <br>
-      <div class="row">
-        <%= render @event.event_details %>
+    <div class="col border-right">
+
+      <h1> <%= @occasion.name %> </h1>
+
+      <% if current_user.meta.is_a? Coordinator %>
+
+        <div class="alert alert-success" id="flash" role="alert">
+          <a href="#" class="close" data-dismiss="alert" aria-label="close"> &#88; </a>
+          <h4 class="alert-heading">What is this?</h4>
+          <p>- List of the Locations that you can choose from to create an event.</p>
+        </div>
+      <% end %>
+      <%= render @occasion.locations %>
+      <hr>
+
+      <!-- Start of event Partial-->
+      <h2>Events</h2>
+      <div class="alert alert-success" id="flash1" role="alert">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close"> &#88; </a>
+        <h4 class="alert-heading">What is this?</h4>
+        <p> - These are the list of events created under this occasion.</p>
       </div>
 
-      <p><%= link_to "Go Back", occasion_path(@occasion), class: "btn button-small" %></p>
+      <% if current_user.meta.supervisor.events.present? %>
+        <table class="table">
+          <thead class="thead-dark">
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Description</th>
+            <th scope="col">Make Ahead</th>
+            <th scope="col">Competetion</th>
+
+            <th scope="col">Location</th>
+            <th scope="col">Actions</th>
+            <th scope="col">Created By</th>
+          </tr>
+          </thead>
+          <%= render @occasion.events %>
+        </table>
+      <% end %>
+      <!--      End of event Partial-->
     </div>
 
-    <div class="col-sm-3">
-      <div>
-        <div class="card border-dark mb-3" style="max-width: 18rem;">
-          <div class="card-header">Event's Information</div>
-          <div class="card-body text-dark">
-            <p class="card-text">Event Name: <%= @event.name %></p>
-            <p class="card-text">Description: <%= @event.description %></p>
-            <p class="card-text">Make Ahead: <%= @event.isMakeAhead %></p>
-          </div>
+    <div class="col-sm-2">
+      <div class="card border-dark mb-3" style="max-width: 18rem;">
+        <div class="card-header">Occasion's Information</div>
+        <div class="card-body text-dark">
+          <p class="card-text">Occasion Name: <%= @occasion.name %></p>
+          <p class="card-text">Start Date: <%= @occasion.start_date.strftime("%Y-%m-%d") %></p>
         </div>
       </div>
-
-
       <div class="card border-dark mb-3" style="max-width: 18rem;">
         <div class="card-header">Actions</div>
         <div class="card-body text-dark">
-          <div>
-            <button class="btn button-small" title="Create New Session For Event">
-              <span class="far fa-calendar-alt"></span><%= link_to " Create Time slots", new_occasion_event_event_detail_path(@occasion, @event, @event_detail) %>
-            </button>
-          </div>
+          <% if policy(@location).new? %>
+            <p class="card-text">Create a Location for the sponsor to choose from for their event.</p>
+            <%= link_to "Add Location", new_occasion_location_path(@occasion, @location), class: "btn btn-primary" %>
+            <hr>
+          <% end %>
+          <button class="btn button-small" title="Create A New Event For <%=@occasion.name %>">
+            <span class="fas fa-calendar-plus"></span><%= link_to " Create Event", new_occasion_activity_path(@occasion, @event) %> </p>
+          </button>
         </div>
       </div>
     </div>
   </div>
 </div>
+
+
+

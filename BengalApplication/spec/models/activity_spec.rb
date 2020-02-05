@@ -20,7 +20,7 @@ RSpec.describe Activity, type: :model do
     end
 
     it "belongs to a user" do
-      #expect(@activity.user.)
+      expect(@activity.user). to eq(@user)
     end
   end
 

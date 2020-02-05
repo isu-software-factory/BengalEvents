@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.feature "EventDetails", type: :feature do
-  fixtures :sponsors, :users, :occasions, :events, :locations, :event_details, :coordinators
+  fixtures :sponsors, :users, :events, :activities, :locations, :event_details, :coordinators
   context "create a new event detail" do
     before do
       @occasion = occasions(:one)
@@ -38,9 +38,9 @@ RSpec.feature "EventDetails", type: :feature do
 
   # context "update event detail" do
   #   before do
-  #     @occasion = occasions(:one)
+  #     @occasion = events(:one)
   #     @location = locations(:one)
-  #     @event = events(:one)
+  #     @event = activities(:one)
   #     @event.location = @location
   #     @event_detail = event_details(:one)
   #     @sponsor = sponsors(:sponsor_carlos)
@@ -74,7 +74,7 @@ RSpec.feature "EventDetails", type: :feature do
       @coordinator = coordinators(:coordinator_rebeca)
       # log in
       login_as(@coordinator.user)
-      visit occasion_event_path(occasion_id: @occasion.id, id: @event.id)
+      visit occasion_activity_path(occasion_id: @occasion.id, id: @event.id)
     end
 
     it "should successfully delete" do

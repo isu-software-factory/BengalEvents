@@ -1,1 +1,4 @@
-<%=render  partial: "events/form" %>
+<%content_for(:title,"Edit | #{@event.name}") %>
+<h1>Edit <%= @event.name %></h1>
+<%= render partial:"events/partials/form" %>
+

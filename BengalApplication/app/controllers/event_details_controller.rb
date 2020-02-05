@@ -11,7 +11,7 @@ class EventDetailsController < ApplicationController
 
     add_breadcrumb "Home", current_user.meta
     add_breadcrumb @occasion.name, @occasion
-    add_breadcrumb @event.name, occasion_event_path(@occasion, @event)
+    add_breadcrumb @event.name, occasion_activity_path(@occasion, @event)
     add_breadcrumb "New Session", new_occasion_event_event_detail_path(@occasion, @event)
   end
 
@@ -27,7 +27,7 @@ class EventDetailsController < ApplicationController
       @waitlist.event_detail = @event_details
       @waitlist.save
       # binding.pry
-      redirect_to occasion_event_path(@occasion, @event), notice: 'Successfully created Event Session.'
+      redirect_to occasion_activity_path(@occasion, @event), notice: 'Successfully created Event Session.'
     else
       flash[:errors] = @event_details.errors.full_messages
       redirect_back(fallback_location: new_occasion_event_event_detail_path(@occasion, @event))
@@ -37,8 +37,8 @@ class EventDetailsController < ApplicationController
   def edit
     authorize @event_detail
     add_breadcrumb "Home", current_user.meta
-    add_breadcrumb @occasion.name, occasion_path(@occasion)
-    add_breadcrumb @event.name, occasion_event_path(@occasion, @event)
+    add_breadcrumb @occasion.name, event_path(@occasion)
+    add_breadcrumb @event.name, occasion_activity_path(@occasion, @event)
     add_breadcrumb "Edit Time Slot", edit_occasion_event_event_detail_path(@occasion, @event, @event_detail)
   end
 
@@ -48,14 +48,14 @@ class EventDetailsController < ApplicationController
     @event_detail.end_time = @event_detail.date_started.to_s + ' ' + @event_detail.end_time.strftime('%H:%M')
     authorize @event_detail
     if @event_detail.save
-      redirect_to occasion_event_path(@occasion, @event), notice: 'Successfully updated.'
+      redirect_to occasion_activity_path(@occasion, @event), notice: 'Successfully updated.'
     end
   end
 
   def destroy
     authorize @event_detail
     @event_detail.destroy
-    redirect_to occasion_event_path(@occasion, @event), notice: 'Successfully deleted time slot.'
+    redirect_to occasion_activity_path(@occasion, @event), notice: 'Successfully deleted time slot.'
   end
 
   private

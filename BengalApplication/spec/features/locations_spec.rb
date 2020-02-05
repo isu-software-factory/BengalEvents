@@ -1,14 +1,14 @@
 require 'rails_helper'
 
 RSpec.feature "Locations", type: :feature do
-  fixtures :coordinators, :occasions, :locations, :users
+  fixtures :coordinators, :events, :locations, :users
 
 
   # Will not be implemented
   # context "GET #index" do
   #   before do
   #     @coordinator = Coordinator.create(name: "Emily", user_attributes: {email: "l@gmail.com", password: "password"})
-  #     @occasion = @coordinator.occasions.build(name: "StemDay", start_date: Time.now, end_date: Time.now, description: "Science")
+  #     @occasion = @coordinator.events.build(name: "StemDay", start_date: Time.now, end_date: Time.now, description: "Science")
   #     @occasion.save
   #     @location = @occasion.locations.build(name: "Gym")
   #     @location.save
@@ -82,7 +82,7 @@ RSpec.feature "Locations", type: :feature do
   # context "delete location" do
   #   before do
   #     @coordinator = coordinators(:coordinator_rebeca)
-  #     @occasion = occasions(:one)
+  #     @occasion = events(:one)
   #
   #     login_as(@coordinator.user)
   #     visit occasions_path(occasion_id: @occasion.id)

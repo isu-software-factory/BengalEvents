@@ -17,15 +17,15 @@
               <p class="card-text">Start Date: <%= occasion.start_date.strftime("%Y-%m-%d") %></p>
               <p>
                 <% if policy(occasion).edit? %>
-                  <%= link_to "Edit", edit_occasion_path(occasion.id), class: "btn btn-secondary" %>
+                  <%= link_to "Edit", edit_event_path(occasion.id), class: "btn btn-secondary" %>
                 <% end %>
                 <% if policy(occasion).destroy? %>
-                  <%= link_to "Delete", occasion_path(occasion.id), class: "btn btn-danger", data: {method: :delete, confirm: "Are you sure?"} %>
+                  <%= link_to "Delete", event_path(occasion.id), class: "btn btn-danger", data: {method: :delete, confirm: "Are you sure?"} %>
                 <% end %></p>
               <hr>
               <p class="card-text">
                 <button class="btn button-small" title="View list of events in occasion">
-                  <span class="far fa-eye"></span><%= link_to "View Events", occasion_path(occasion.id), class: "btn button-small" %>
+                  <span class="far fa-eye"></span><%= link_to "View Events", event_path(occasion.id), class: "btn button-small" %>
                 </button>
               </p>
             </div>
@@ -40,7 +40,7 @@
         <div class="card-body text-dark">
           <% if policy(@occasions).create? %>
             <button class="btn button-small" title="Create a new occasion">
-              <span class="far fa-calendar-plus"></span><%= link_to "New Occasion", new_occasion_path %>
+              <span class="far fa-calendar-plus"></span><%= link_to "New Occasion", new_event_path %>
             </button>
           <% end %>
         </div>

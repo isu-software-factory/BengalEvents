@@ -1,2 +1,9 @@
-<h2>Create an Event under this <%= @occasion.name %> Occasion</h2>
-<%=render  partial: "events/form" %>
+<% content_for(:title, "Create Occasion") %>
+<% if flash[:errors] %>
+  <% flash[:errors].each do |e| %>
+    <p><%= e %></p>
+  <% end %>
+<% end %>
+
+<%= render partial: "events/partials/form" %>
+

@@ -4,7 +4,7 @@ class HomeroutesController < ApplicationController
     if user_signed_in?
       redirect_to :controller => "homeroutes", :action => "user"
     end
-    # if user isn't signed in then show events for current occasion
+    # if user isn't signed in then show activities for current occasion
     unless Event.first.nil?
       @event = Event.first
       @activities = @event.activities

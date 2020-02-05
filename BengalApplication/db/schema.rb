@@ -35,7 +35,7 @@ ActiveRecord::Schema.define(version: 2020_02_04_004150) do
     t.index ["user_id"], name: "index_assignments_on_user_id"
   end
 
-  create_table "events", force: :cascade do |t|
+  create_table "activities", force: :cascade do |t|
     t.datetime "start_date"
     t.string "name"
     t.string "description"
