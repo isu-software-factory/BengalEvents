@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   resources :sponsors
   resources :coordinators
 
+  get "teachers/:id" => "teachers#show"
   get "sponsors/pdf/:id" => "sponsors#pdfshow"
   get "teams/pdf/:id" => "teams#teamschedulepdf"
   get "teachers/class_registrations/:id" => "teachers#class_registrations"

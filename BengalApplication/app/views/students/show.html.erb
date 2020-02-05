@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-sm">
       <h3>Registration Details</h3>
-      <% if @student.participant.event_details.count > 0 %>
+      <% if current_user.sessions.count > 0 %>
         <table class="table">
           <thead class="thead-dark">
           <tr>
@@ -14,14 +14,14 @@
           </thead>
           <tbody>
           <tr>
-            <% @student.participant.event_details.each do |s| %>
+            <% current_user.sessions.each do |s| %>
             <tr>
-              <th scope="row"><%= Event.find(s.event_id).name %></th>
-              <td><%= Event.find(s.event_id).location.name %></td>
+              <th scope="row"><%= s.activity.name %></th>
+<!--              <td><%#= s.activity.location.name %></td>-->
               <td><%= s.start_time.strftime("%l:%M %p") %> - <%= s.end_time.strftime("%l:%M %p") %></td>
               <td>
                 <%= button_to("Drop", {method: :post, controller: "registrations",
-                                       action: :drop, part_id: @student.participant.id, id: s.id}, class: "button", title: "Unregister for event",
+                                       action: :drop, part_id: current_user.id, id: s.id}, class: "button", title: "Unregister for event",
                               data: {confirm: "Are you sure?"}) %>
               </td>
             </tr>
@@ -36,8 +36,8 @@
         <div class="card border-dark mb-3" style="max-width: 18rem;">
           <div class="card-header">Your Teacher's Information</div>
           <div class="card-body text-dark">
-            <p class="card-text">Teacher: <%= @student.teacher.name %></p>
-            <p class="card-text">School Name: <%= @student.teacher.school %></p>
+<!--            <p class="card-text">Teacher: <%#= current_user.teacher.name %></p>-->
+<!--            <p class="card-text">School Name: <%#= current_user.teacher.school %></p>-->
           </div>
         </div>
       </div>
@@ -54,11 +54,11 @@
           <div class="indent-bellow">
           <button class="btn button-small" title="Register For Events">
             <span class="fa fa-edit"></span>
-            <%= link_to "Register For Events", controller: "registrations", action: "index", part_id: @student.participant.id %>
+            <%= link_to "Register For Events", controller: "registrations", action: "index", part_id: current_user.id %>
           </button>
           </div>
           <button class="btn button-small" title="Print My Schedule">
-            <span class="glyphicon glyphicon-print" aria-hidden="true"> </span><%= link_to "  Print", {controller: "students", action: "print_schedule", id: @student.id}, target: :_blank %>
+            <span class="glyphicon glyphicon-print" aria-hidden="true"> </span><%= link_to "  Print", {controller: "students", action: "print_schedule", id: current_user.id}, target: :_blank %>
           </button>
         </div>
       </div>
@@ -67,18 +67,22 @@
 
   <div class="team-bar"><h2>My Teams</h2></div>
   <div class="row"></div>
-  <% unless @student.teams.count == 0 %>
+  <% unless current_user.teams.count == 0 %>
     <% for t in 1..@teams %>
       <div class="row">
         <% for i in 0..2 %>
-          <% if @student.teams[@count] != nil %>
+          <% if current_user.teams[@count] != nil %>
             <div class="col-sm-4">
-              <a href=<%= team_path(@student.teams[@count]) %>>
+              <a href=<%= team_path(current_user.teams[@count]) %>>
                 <div class="card-w-100 text-white <%= @random_card[Random.rand(4)] %> mb-3 link-card">
-                  <div class="card-header">Team <%= @student.teams[@count].name %></div>
+                  <div class="card-header">Team <%= current_user.teams[@count].team_name %></div>
                   <div class="card-body">
                     <p>This team has registered
+<<<<<<< HEAD
                       for <%= @student.teams[@count].participant.event_details.count %> <%= @student.teams[@count].participant.event_details.count == 1 ? "event." : "activities." %></p>
+=======
+<!--                      for <%#= @student.teams[@count].participant.event_details.count %> <%#= @student.teams[@count].participant.event_details.count == 1 ? "event." : "events." %></p>-->
+>>>>>>> e61a1e9f68cee10c122b6e53f77b2dc1eba2d7dc
                   </div>
                 </div>
               </a>
@@ -92,5 +96,6 @@
     <% end %>
   <% end %>
 </div>
+
 
 

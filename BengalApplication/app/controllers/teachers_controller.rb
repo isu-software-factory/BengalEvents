@@ -25,10 +25,10 @@ class TeachersController < ApplicationController
 
   # shows teacher main page
   def show
-    @teacher = Teacher.find(params[:id])
-    authorize @teacher
-    @students = organize_students(@teacher.students)
-    add_breadcrumb 'Home', @teacher
+    @teacher = User.find(params[:id])
+    authorize @teacher, policy_class: TeacherPolicy
+    #@students = organize_students(@teacher.students)
+    add_breadcrumb 'Home', root_path
   end
 
   # shows the print page for class registration
@@ -78,6 +78,6 @@ class TeachersController < ApplicationController
 
   # sort students by name
   def organize_students(students_list)
-    students_list.sort_by { |s| s.name }
+    students_list.sort_by { |s| s.last_name }
   end
 end

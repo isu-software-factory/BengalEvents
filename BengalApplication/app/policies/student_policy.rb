@@ -12,7 +12,7 @@ class StudentPolicy < ApplicationPolicy
 
   def show?
     # only students can see their page
-    (@user.meta_type == "Student" && @user.meta.id == @record.id)
+    (@user.roles.first.role_name == "Student" && @user.id == @record.id) || @user.roles.first.role_name == "Teacher" || @user.roles.exists?(name: "Admin")
   end
 
   def edit?
