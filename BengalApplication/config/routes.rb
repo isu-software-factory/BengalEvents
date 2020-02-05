@@ -32,6 +32,7 @@ Rails.application.routes.draw do
   post "students/errors" => "students#errors"
 
 resources :events
+  resources :activities
   # resources :teams
   # resources :EventsController do
   #   resources :locations

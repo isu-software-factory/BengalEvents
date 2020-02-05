@@ -29,10 +29,10 @@ class EventsController < ApplicationController
 
   def show
     @location = Location.all
-    @occasion = Occasion.find(params[:id])
-    authorize @occasion
-    add_breadcrumb 'Home', current_user.meta
-    add_breadcrumb @occasion.name, event_path(@occasion)
+    @event = Event.find(params[:id])
+    # authorize @occasion
+    add_breadcrumb 'Home', current_user
+    add_breadcrumb @event.name, event_path(@event)
   end
 
   def edit
