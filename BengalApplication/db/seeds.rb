@@ -47,7 +47,7 @@ User.create!([{
               },{
                   first_name: "Adhar",
                   last_name: "Bhattarai",
-                  email: "Adhar@gmail.com",
+                  email: "adhar@gmail.com",
                   password: "password",
                   user_name: "Adhar22"
               },{

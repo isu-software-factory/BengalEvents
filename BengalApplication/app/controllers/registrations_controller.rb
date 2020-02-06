@@ -4,14 +4,19 @@ class RegistrationsController < ApplicationController
 
   def register
     # get participant and event detail
-    @participant = Participant.find(params[:part_id])
-    @event_detail = EventDetail.find(params[:id])
-    @event = @event_detail.event
+    # @participant = Participant.find(params[:part_id])
+    @user = User.find(params[:user_id])
+    # @event_detail = EventDetail.find(params[:id])
+    @session = Session.find(params[:id])
+
+    @activity = @session.activity
+    # @event = @event_detail.event
+    #
     # authorize participant as a registration policy
-    authorize @participant, policy_class: RegistrationPolicy
+    # authorize @participant, policy_class: RegistrationPolicy
 
     # add participant to event
-    success = @event_detail.register_participant(@participant)
+     success = @event_detail.register_participant(@participant)
 
     if success
       #sadfasd

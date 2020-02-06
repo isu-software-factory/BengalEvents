@@ -13,7 +13,7 @@
       <% if current_user.meta.supervisor.events.any? %>
       <tr>
         <% current_user.meta.supervisor.events.each do |e| %>
-          <%# e.event_details.each do |d| %>
+          <%# e.sessions.each do |d| %>
         <tr>
           <th scope="row"><%= e.name %></th>
           <td> <%= e.description %></td>

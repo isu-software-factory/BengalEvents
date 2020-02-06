@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.feature "EventDetails", type: :feature do
-  fixtures :sponsors, :users, :events, :activities, :locations, :event_details, :coordinators
+  fixtures :sponsors, :users, :events, :activities, :locations, :sessions, :coordinators
   context "create a new event detail" do
     before do
       @occasion = occasions(:one)
@@ -42,7 +42,7 @@ RSpec.feature "EventDetails", type: :feature do
   #     @location = locations(:one)
   #     @event = activities(:one)
   #     @event.location = @location
-  #     @event_detail = event_details(:one)
+  #     @event_detail = sessions(:one)
   #     @sponsor = sponsors(:sponsor_carlos)
   #     # log in
   #     login_as(@sponsor.user)

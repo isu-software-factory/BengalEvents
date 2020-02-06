@@ -16,8 +16,8 @@
 //= require activestorage
 //= require turbolinks
 
-$('document').ready(function() {
-    setTimeout(function() {
+$('document').ready(function () {
+    setTimeout(function () {
         $('.alert-success').slideUp();
     }, 3000);
 });
@@ -30,4 +30,9 @@ function stickyHeader() {
     } else {
         header.classList.remove("sticky");
     }
+}
+
+function remove_fields(link) {
+    $(link).previous("input[type=hidden]").value = "1";
+    $(link).up("fields").hide();
 }
