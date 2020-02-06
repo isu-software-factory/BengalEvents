@@ -42,12 +42,12 @@
             </div>
             <div class="indent-bellow">
             <button class="btn button-small" title="Register for events">
-              <span class="fa-edit"></span><%=link_to " Register", controller: "registrations", action: "index", part_id: @teacher.id %>
+              <span class="fa-edit"></span><%=link_to " Register", controller: "registrations", action: "index", part_id: @user.id %>
             </button>
             </div>
             <div class="indent-bellow">
             <button class="btn button-small" title="View My Student's Registrations">
-              <span class="fas fa-eye"></span><%=link_to " Class Registrations", controller: "teachers", action: "class_registrations", id: @teacher.id%>
+              <span class="fas fa-eye"></span><%=link_to " Class Registrations", controller: "teachers", action: "class_registrations", id: @user.id%>
             </button>
             </div>
           </div>
@@ -58,7 +58,7 @@
 
   <div class="row">
     <div class="col-sm">
-      <% if @teacher.sessions.count > 0 %>
+      <% if @user.sessions.count > 0 %>
         <h2>Events Registered For</h2>
         <table class="table">
           <thead class="thead-dark">
@@ -70,12 +70,12 @@
             </tr>
           </thead>
           <tbody>
-            <%@teacher.sessions.each do |s| %>
+            <%@user.sessions.each do |s| %>
           <tr>
             <th scope="row"><%=s.activity.name %></th>
             <td><%=s.start_time.strftime("%l:%M %p") %> -  <%=s.end_time.strftime("%l:%M %p")%></td>
 <!--            <td><%#=Event.find(s.event_id).location.name %></td>-->
-            <td><%=button_to("Drop",  {method: :post, controller: "registrations", action: :drop, part_id: @teacher.id, id:s.id}, class: "button", title: "Unregister for event", data: {confirm: "Are you sure?"}) %></td>
+            <td><%=button_to("Drop",  {method: :post, controller: "registrations", action: :drop, part_id: @user.id, id:s.id}, class: "button", title: "Unregister for event", data: {confirm: "Are you sure?"}) %></td>
           </tr>
             <%end %>
           </tbody>

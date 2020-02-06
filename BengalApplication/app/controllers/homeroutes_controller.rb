@@ -2,12 +2,13 @@ class HomeroutesController < ApplicationController
   def home
     # user signed in then redirect them to their page
     if user_signed_in?
-      role = current_user.roles.first.role_name
-      if role == "Teacher"
-        redirect_to teacher_path(current_user.id)
-      elsif role == "Student"
-        redirect_to student_path(current_user.id)
-      end
+      redirect_to controller: "homeroutes", action: "user", id: current_user.id
+      # role = current_user.roles.first.role_name
+      # if role == "Teacher"
+      #   redirect_to teacher_path(current_user.id)
+      # elsif role == "Student"
+      #   redirect_to student_path(current_user.id)
+      # end
     end
     # if user isn't signed in then show activities for current occasion
     unless Event.first.nil?
@@ -18,11 +19,24 @@ class HomeroutesController < ApplicationController
 
   def user
     role = current_user.roles.first.role_name
+    @user = User.find(params[:id])
     @admin = false
     if role == "Teacher" || role == "Admin" || role == "Coordinator"
       @admin = true
     end
+
+    @show = check_user
   end
 
+
+  private
+
+  def check_user
+    if (params[:id].to_i != current_user.id)
+      true
+    else
+      false
+    end
+  end
 
 end

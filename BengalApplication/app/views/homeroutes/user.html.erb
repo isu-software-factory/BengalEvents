@@ -1,7 +1,11 @@
 
 
-<%if current_user.roles.first.role_name == "Student" || @admin %>
+<%if current_user.roles.first.role_name == "Student" || (@admin && @show) %>
    <%= render :partial => "students/show" %>
+  <%#= render :partial => "registrations/events", :locals => {:@activities => Event.first.activities} %>
 <%elsif(current_user.roles.first.role_name == "Teacher") || @admin %>
     <%= render :partial => "teachers/show" %>
+  <%#= render :partial => "registrations/events", :locals => {:@activities => Event.first.activities} %>
 <%end%>
+
+<%= @user.roles.first.role_name == "Student" || @user.roles.first.role_name == "Teacher" ? (render :partial => "registrations/events", :locals => {:@activities => Event.first.activities}) : nil%>
