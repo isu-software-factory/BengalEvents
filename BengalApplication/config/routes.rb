@@ -20,7 +20,10 @@ Rails.application.routes.draw do
   get "students/print_schedule/:id" => "students#print_schedule"
   get "groupings/add/:id/:team_id" => "groupings#add"
   get 'registrations/index/:part_id' => "registrations#index"
-  post "registrations/register/:part_id/:id" => "registrations#register"
+  # post "registrations/register/:part_id/:id" => "registrations#register"
+  post "registrations/register/:user_id/:id" => "registrations#register"
+
+
   get "registrations/activities/:part_id/:id" => "registrations#activities"
   post 'teams/:id/register_members' => "teams#register_members"
   get "teams/:id/invite" => "teams#invite"
@@ -30,6 +33,7 @@ Rails.application.routes.draw do
   get "slots/:name" => "activities#location_timeslots"
   post "students/update_new_students" => "students#update_new_students"
   get "register/:id" => "registrations#registers"
+
   post "students/errors" => "students#errors"
 
 resources :events
@@ -38,7 +42,7 @@ resources :events
   # resources :EventsController do
   #   resources :locations
   #   resources :ActivitiesController do
-  #     resources :event_details
+  #     resources :sessions
   #   end
   # end
 

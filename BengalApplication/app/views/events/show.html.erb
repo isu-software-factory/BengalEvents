@@ -33,14 +33,13 @@
           <th scope="col">Description</th>
           <th scope="col">Make Ahead</th>
           <th scope="col">Competetion</th>
-
-<!--          <th scope="col">Location</th>-->
-          <th scope="col">Actions</th>
           <th scope="col">Created By</th>
+          <th scope="col">Sessions</th>
+          <th scope="col">Actions</th>
+
         </tr>
         </thead>
         <% for activities in @event.activities %>
-
           <tbody>
           <td>  <%= activities.name %></td>
           <td>  <%= activities.description %></td>
@@ -48,10 +47,20 @@
           <td>  <%= activities.iscompetetion %></td>
 
           <td>  <%= activities.user.email %></td>
-          <td><%= link_to "Edit", edit_activity_path(activities) %></td>
+          <td>
+            <% for session in activities.sessions %>
+              <p> Start Time: <%= session.start_time.strftime("%l:%M %p") %></p>
+              <p> End Time: <%= session.end_time.strftime("%l:%M %p") %></p>
+              <p> Capacity: <%= session.capacity %></p>
+              <%= button_to "Register", {controller: "registrations", action: "register",
+                                         id: session.id, user_id: current_user.id},
+                            class: "button", id: "Register_button" %>
+            <% end %>
+
+            <td><%= link_to "Edit", edit_activity_path(activities) %></td>
 
 
-      <% end %>
+        <% end %>
 
         <%#= render @occasion.events %>
         </tbody>

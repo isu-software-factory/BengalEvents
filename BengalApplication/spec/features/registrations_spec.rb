@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 RSpec.feature "Registrations", type: :feature do
-  fixtures :waitlists, :event_details, :users, :participants, :events, :supervisors, :activities
-  context "register for event_details" do
+  fixtures :waitlists, :sessions, :users, :participants, :events, :supervisors, :activities
+  context "register for sessions" do
     before do
       @teacher = Teacher.create(name: "Em", student_count: 23, chaperone_count: 4, school: "pocatello", user_attributes: {email: "te@gmail.com", password: "password"}, participant_attributes: {})
       @student = @teacher.students.build(name: "Bill", user_attributes: {email: "stu@gmail.com", password: "password"}, participant_attributes: {})

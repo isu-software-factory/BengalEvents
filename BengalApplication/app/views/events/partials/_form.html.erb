@@ -34,14 +34,15 @@
             </div>
           </div>
           <%= f.fields_for :activities do |act| %>
-            <%= act.label :name, "Activity Name" %>
-            <%= act.text_area :name, placeholder: "Activity Name" %>
-            <%= act.label :description, "Description" %>
-            <%= act.text_area :description, placeholder: "Description" %>
-            <%= act.hidden_field :user_id, value: current_user.id %>
-            <%= act.check_box :_destroy %>
-
-      <% end %>
+            <p class="fields">
+              <%= act.label :name, "Activity Name" %>
+              <%= act.text_area :name, placeholder: "Activity Name" %>
+              <%= act.label :description, "Description" %>
+              <%= act.text_area :description, placeholder: "Description" %>
+              <%= act.hidden_field :user_id, value: current_user.id %>
+              <%= act.check_box :_destroy %>
+            </p>
+          <% end %>
           <div class="form-group">
             <div class="col-md-4 control-label">
               <%= f.submit "Create", class: "btn btn-default btn-primary" %>

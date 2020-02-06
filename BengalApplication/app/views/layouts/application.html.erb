@@ -8,8 +8,8 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
   <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-  <% if controller.controller_name == "event_details" %>
-    <%= javascript_include_tag 'application', :event_details, 'data-turbolinks-track': 'reload' %>
+  <% if controller.controller_name == "sessions" %>
+    <%= javascript_include_tag 'application', :sessions, 'data-turbolinks-track': 'reload' %>
   <% elsif controller.controller_name == "registrations" %>
     <%= javascript_include_tag 'application', :registrations, 'data-turbolinks-track': 'reload' %>
   <% elsif controller.controller_name == "students" %>
