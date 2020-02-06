@@ -5,7 +5,7 @@ RSpec.feature "TimeSlots", type: :feature do
   # context "GET #index" do
   #   before do
   #     @coordinator = Coordinator.create(name:"coord", user_attributes: {email: "coordinaotr@gmail.com", password: "password"})
-  #     @occasion = @coordinator.occasions.build(name: "BengalEvents", start_date: Time.now, end_date: Time.now)
+  #     @occasion = @coordinator.events.build(name: "BengalEvents", start_date: Time.now, end_date: Time.now)
   #     @occasion.save
   #     @location = @occasion.locations.build(name: "Gym")
   #     @location.save
@@ -66,7 +66,7 @@ RSpec.feature "TimeSlots", type: :feature do
   # context "delete time_slot" do
   #   before do
   #     @coordinator = Coordinator.create(name:"coord", user_attributes: {email: "coordinaotr@gmail.com", password: "password"})
-  #     @occasion = @coordinator.occasions.build(name: "BengalEvents", start_date: Time.now, end_date: Time.now, description: "Stem Day")
+  #     @occasion = @coordinator.events.build(name: "BengalEvents", start_date: Time.now, end_date: Time.now, description: "Stem Day")
   #     @occasion.save
   #     @location = @occasion.locations.build(name: "Gym")
   #     @location.save

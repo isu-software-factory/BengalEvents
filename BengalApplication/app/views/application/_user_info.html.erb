@@ -8,10 +8,10 @@
     <div class="dropdown menu">
       <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         <span class="glyphicon glyphicon-cog"></span>
-        <%= current_user.meta.name %></a>
+        <%= current_user.first_name %></a>
       <div class="dropdown-menu menu-container dropdown-menu-right">
-        <% if (current_user.meta_type == "Teacher") %>
-          <%= link_to "Account Settings", edit_teacher_path(current_user.meta), class: "dropdown-item" %>
+        <% if (current_user.roles.first.role_name == "Teacher") %>
+          <%= link_to "Account Settings", edit_teacher_path(current_user), class: "dropdown-item" %>
         <%else %>
           <%= link_to "Account Settings", edit_user_registration_path, class: "dropdown-item" %>
         <%end %>

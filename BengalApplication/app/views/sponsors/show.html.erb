@@ -22,7 +22,7 @@
             <tr>
               <% current_user.meta.supervisor.events.each do |e| %>
               <tr>
-                <th scope="row"><%= link_to e.name, controller: "events", action: "show", id: e.id, occasion_id: e.occasion.id %></th>
+                <th scope="row"><%= link_to e.name, controller: "activities", action: "show", id: e.id, occasion_id: e.occasion.id %></th>
                 <td> <%= e.description %></td>
                 <td> <%= e.isMakeAhead %></td>
                 <td><%= e.location.name %></td>
@@ -43,7 +43,7 @@
         <div class="card-body text-dark">
           <div class="indent-bellow">
             <button class="btn button-small indent-bellow" title="Make An Event">
-              <span class="fas fa-calendar-plus"></span><%= link_to " Create Event", occasions_path, class: "btn-btn-success" %>
+              <span class="fas fa-calendar-plus"></span><%= link_to " Create Event", events_path, class: "btn-btn-success" %>
             </button>
           </div>
           <div class="indent-bellow">

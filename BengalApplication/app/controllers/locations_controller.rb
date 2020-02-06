@@ -21,7 +21,7 @@ class LocationsController < ApplicationController
     # pry
     authorize @location
     if @location.save
-      redirect_to occasion_path(@occasion), notice: 'Successfully created Location.'
+      redirect_to event_path(@occasion), notice: 'Successfully created Location.'
     else
       flash[:errors] = @location.errors.full_messages
       redirect_back(fallback_location: new_occasion_location_path)
@@ -37,10 +37,10 @@ class LocationsController < ApplicationController
     @occasion = Occasion.find(params[:occasion_id])
     @location = Location.find(params[:id])
     if @location.update(location_params)
-      redirect_to occasion_path(@occasion), notice: 'Successfully updated Location.'
+      redirect_to event_path(@occasion), notice: 'Successfully updated Location.'
     else
       flash[:errors] = @location.errors.full_messages
-      redirect_back(fallback_location: edit_occasion_event_path)
+      redirect_back(fallback_location: edit_occasion_activity_path)
     end
   end
 
@@ -55,7 +55,7 @@ class LocationsController < ApplicationController
     location = Location.find(params[:id])
     authorize location
     location.destroy
-    redirect_to occasion_path(@occasion), notice: 'Successfully deleted Location.'
+    redirect_to event_path(@occasion), notice: 'Successfully deleted Location.'
   end
 
   private

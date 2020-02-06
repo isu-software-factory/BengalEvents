@@ -1,9 +1,0 @@
-<% content_for(:title, "Create Occasion") %>
-<% if flash[:errors] %>
-  <% flash[:errors].each do |e| %>
-    <p><%= e %></p>
-  <% end %>
-<% end %>
-
-<%= render partial: "occasions/partials/form" %>
-

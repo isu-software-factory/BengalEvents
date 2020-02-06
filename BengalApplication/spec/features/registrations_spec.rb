@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 RSpec.feature "Registrations", type: :feature do
-  fixtures :waitlists, :event_details, :users, :participants, :occasions, :supervisors, :events
-  context "register for event_details" do
+  fixtures :waitlists, :sessions, :users, :participants, :events, :supervisors, :activities
+  context "register for sessions" do
     before do
       @teacher = Teacher.create(name: "Em", student_count: 23, chaperone_count: 4, school: "pocatello", user_attributes: {email: "te@gmail.com", password: "password"}, participant_attributes: {})
       @student = @teacher.students.build(name: "Bill", user_attributes: {email: "stu@gmail.com", password: "password"}, participant_attributes: {})
@@ -15,7 +15,7 @@ RSpec.feature "Registrations", type: :feature do
     end
 
     it "click on registration link to register for event, should be successful" do
-      visit "registrations/events/#{@teacher.participant.id}/#{@occasion.id}"
+      visit "registrations/activities/#{@teacher.participant.id}/#{@occasion.id}"
       page.execute_script %Q{ $('#hide_down').removeClass('hide').addClass('show')}
       click_button("Register")
       expect(page).to have_content("#{@teacher.name}")
@@ -23,7 +23,7 @@ RSpec.feature "Registrations", type: :feature do
 
     it "should fail due to double registration" do
       @event_detail.register_participant(@teacher.participant)
-      visit "registrations/events/#{@teacher.participant.id}/#{@occasion.id}"
+      visit "registrations/activities/#{@teacher.participant.id}/#{@occasion.id}"
 
       page.execute_script %Q{ $('#hide_down').removeClass('hide').addClass('show')}
       click_button "Register"
@@ -34,7 +34,7 @@ RSpec.feature "Registrations", type: :feature do
     it "should fail due to full capacity" do
       @event_detail.register_participant(@student.participant)
       @event_detail.register_participant(@student2.participant)
-      visit "registrations/events/#{@teacher.participant.id}/#{@occasion.id}"
+      visit "registrations/activities/#{@teacher.participant.id}/#{@occasion.id}"
 
       page.execute_script %Q{ $('#hide_down').removeClass('hide').addClass('show')}
       click_button "Register"
@@ -50,7 +50,7 @@ RSpec.feature "Registrations", type: :feature do
       @teacher = Teacher.create(name: "Kelly", school: "Valley", student_count: 23, chaperone_count: 2, user_attributes: {email: "tech@gmail.com", password: "password"}, participant_attributes: {})
     end
 
-    it 'should redirect user to list of events to register' do
+    it 'should redirect user to list of activities to register' do
       login_as(@teacher.user)
       visit "registrations/index/#{@teacher.participant.id}"
       click_link "ASM"
@@ -58,16 +58,16 @@ RSpec.feature "Registrations", type: :feature do
     end
   end
 
-  context "events method" do
+  context "activities method" do
     before do
       @occasion = occasions(:two)
       @event = events(:three)
       @teacher = Teacher.create(name: "Kelly", school: "Valley", student_count: 23, chaperone_count: 2, user_attributes: {email: "tech@gmail.com", password: "password"}, participant_attributes: {})
     end
 
-    it "should display list of events to register" do
+    it "should display list of activities to register" do
       login_as(@teacher.user)
-      visit "registrations/events/#{@teacher.participant.id}/#{@occasion.id}"
+      visit "registrations/activities/#{@teacher.participant.id}/#{@occasion.id}"
       expect(page).to have_content(@event.name)
     end
   end
@@ -107,7 +107,7 @@ RSpec.feature "Registrations", type: :feature do
       @event_detail.register_participant(@student.participant)
       @event_detail.register_participant(@student2.participant)
 
-      visit "registrations/events/#{@teacher.participant.id}/#{@occasion.id}"
+      visit "registrations/activities/#{@teacher.participant.id}/#{@occasion.id}"
       page.execute_script %Q{ $('#hide_down').removeClass('hide').addClass('show')}
 
       click_button("Add to WaitList")

@@ -12,11 +12,11 @@
         </tr>
         </thead>
         <tbody>
-        <% if @events == nil %>
+        <% if @activities == nil %>
           <p> There are no events at the moment.</p>
         <% else %>
-          <% @events.each do |e| %>
-            <% e.event_details.each do |ev| %>
+          <% @activities.each do |e| %>
+            <% e.sessions.each do |ev| %>
               <tr>
                 <th scope="row"><%= e.name %></th>
                 <td><%= e.description %></td>

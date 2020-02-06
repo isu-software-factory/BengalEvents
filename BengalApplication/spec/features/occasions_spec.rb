@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.feature "Occasions", type: :feature do
-  fixtures :coordinators, :users, :occasions
+  fixtures :coordinators, :users, :events
 
   context "create new occasion" do
     before(:each) do
@@ -9,7 +9,7 @@ RSpec.feature "Occasions", type: :feature do
       @coordinator = coordinators(:coordinator_rebeca)
       login_as(@coordinator.user)
 
-      visit new_occasion_path
+      visit new_event_path
       within('form') do
         select("2019", from: "occasion[start_date(1i)]")
         select("September", from: "occasion[start_date(2i)]")
@@ -39,7 +39,7 @@ RSpec.feature "Occasions", type: :feature do
       @occasion = occasions(:one)
 
       login_as(@coordinator.user)
-      visit edit_occasion_path(@occasion)
+      visit edit_event_path(@occasion)
     end
 
     scenario "should be successful" do

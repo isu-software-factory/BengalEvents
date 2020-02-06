@@ -23,6 +23,8 @@ class User < ApplicationRecord
   has_many :assignments
   has_many :user
   has_many :groupings
+  has_many :registrations
+  has_many :sessions, through: :registrations
   has_many :teams, through: :groupings
   has_many :roles, through: :assignments
   has_one :teacher

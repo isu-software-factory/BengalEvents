@@ -1,0 +1,38 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm">
+      <h2> Sessions for <%= @event.name %> event</h2>
+      <br>
+      <div class="row">
+        <%= render @event.event_details %>
+      </div>
+
+      <p><%= link_to "Go Back", event_path(@occasion), class: "btn button-small" %></p>
+    </div>
+
+    <div class="col-sm-3">
+      <div>
+        <div class="card border-dark mb-3" style="max-width: 18rem;">
+          <div class="card-header">Event's Information</div>
+          <div class="card-body text-dark">
+            <p class="card-text">Event Name: <%= @event.name %></p>
+            <p class="card-text">Description: <%= @event.description %></p>
+            <p class="card-text">Make Ahead: <%= @event.isMakeAhead %></p>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="card border-dark mb-3" style="max-width: 18rem;">
+        <div class="card-header">Actions</div>
+        <div class="card-body text-dark">
+          <div>
+            <button class="btn button-small" title="Create New Session For Event">
+              <span class="far fa-calendar-alt"></span><%= link_to " Create Time slots", new_occasion_event_event_detail_path(@occasion, @event, @event_detail) %>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

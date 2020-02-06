@@ -47,7 +47,7 @@ User.create!([{
               },{
                   first_name: "Adhar",
                   last_name: "Bhattarai",
-                  email: "Adhar@gmail.com",
+                  email: "adhar@gmail.com",
                   password: "password",
                   user_name: "Adhar22"
               },{
@@ -131,6 +131,9 @@ Assignment.create!([{
                     },{
                         user_id: 9,
                         role_id: 7
+                    },{
+                        user_id: 9,
+                        role_id: 4
                     }])
 
 

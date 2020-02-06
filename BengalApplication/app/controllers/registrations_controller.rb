@@ -4,14 +4,19 @@ class RegistrationsController < ApplicationController
 
   def register
     # get participant and event detail
-    @participant = Participant.find(params[:part_id])
-    @event_detail = EventDetail.find(params[:id])
-    @event = @event_detail.event
+    # @participant = Participant.find(params[:part_id])
+    @user = User.find(params[:user_id])
+    # @event_detail = EventDetail.find(params[:id])
+    @session = Session.find(params[:id])
+
+    @activity = @session.activity
+    # @event = @event_detail.event
+    #
     # authorize participant as a registration policy
-    authorize @participant, policy_class: RegistrationPolicy
+    # authorize @participant, policy_class: RegistrationPolicy
 
     # add participant to event
-    success = @event_detail.register_participant(@participant)
+     success = @event_detail.register_participant(@participant)
 
     if success
       #sadfasd
@@ -40,9 +45,9 @@ class RegistrationsController < ApplicationController
 
   def events
     @participant_id = params[:part_id]
-    @participant = Participant.find(@participant_id)
-    @occasion = Occasion.find(params[:id])
-    @events = @occasion.events
+    @participant = User.find(params[:id])
+    @occasion = Event.first
+    @events = @occasion.activities
     # authorize participant as a registration policy
     authorize @participant, policy_class: RegistrationPolicy
     if @participant.member_type == "Team"
@@ -53,7 +58,7 @@ class RegistrationsController < ApplicationController
     else
       add_breadcrumb "Home", current_user.meta
       add_breadcrumb "Occasions", controller: "registrations", action: "index", part_id: @participant_id
-      add_breadcrumb "Registration", controller: "registrations", action: "events", part_id: @participant_id, id: @occasion.id
+      add_breadcrumb "Registration", controller: "registrations", action: "activities", part_id: @participant_id, id: @occasion.id
     end
 
 
@@ -77,7 +82,7 @@ class RegistrationsController < ApplicationController
   end
 
   def add_to_waitlist
-    # adds the participant to the events waitlist
+    # adds the participant to the activities waitlist
     @participant = Participant.find(params[:part_id])
     @event_detail = EventDetail.find(params[:id])
 
@@ -86,7 +91,7 @@ class RegistrationsController < ApplicationController
   end
 
   def drop
-    # drop participants from events
+    # drop participants from activities
     @participant = Participant.find(params[:part_id])
     @event_detail = EventDetail.find(params[:id])
 

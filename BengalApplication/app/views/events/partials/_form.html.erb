@@ -1,0 +1,65 @@
+<% if @event.errors.any? %>
+  <div id="error_explanation">
+    <h2>Please fix <%= pluralize(@event.errors.count, "error") %> to proceed. </h2>
+    <ul>
+      <% @event.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<div class="container">
+  <div class="card border-dark mb-3">
+    <div class="card-header dark-header "><h1>Event Information</h1><span></span></div>
+    <div class="card-body text-dark bengal-body">
+      <div class="container">
+        <%= form_for @event, :html => {:class => "form-horizontal center"} do |f| %>
+          <div class="form-group">
+            <%= f.label :name, "Event Name:", class: "col-md-4 control-label" %>
+            <div class="col-xs-2">
+              <%= f.text_field :name, placeholder: "Event Name", class: "form-control" %>
+            </div>
+          </div>
+          <div class="form-group">
+            <%= f.label :description, "Description:", class: "col-md-4 control-label" %>
+            <div class="col-xs-3">
+              <%= f.text_area :description, placeholder: "Detailed Description", class: "form-control" %>
+            </div>
+          </div>
+          <div class="form-group">
+            <%= f.label :start_date, "Start Date:", class: "col-md-4 control-label" %>
+            <div class="col-xs-3">
+              <%= f.date_select :start_date, placeholder: "Start Date", class: "control-label" %>
+            </div>
+          </div>
+          <%= f.fields_for :activities do |act| %>
+            <p class="fields">
+              <%= act.label :name, "Activity Name" %>
+              <%= act.text_area :name, placeholder: "Activity Name" %>
+              <%= act.label :description, "Description" %>
+              <%= act.text_area :description, placeholder: "Description" %>
+              <%= act.hidden_field :user_id, value: current_user.id %>
+              <%= act.check_box :_destroy %>
+            </p>
+          <% end %>
+          <div class="form-group">
+            <div class="col-md-4 control-label">
+              <%= f.submit "Create", class: "btn btn-default btn-primary" %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+

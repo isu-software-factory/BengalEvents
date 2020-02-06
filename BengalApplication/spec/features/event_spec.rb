@@ -1,7 +1,7 @@
 require 'rails_helper'
 include Warden::Test::Helpers
 RSpec.feature "Events", type: :feature do
-  fixtures :occasions, :events, :locations, :sponsors, :supervisors
+  fixtures :events, :activities, :locations, :sponsors, :supervisors
 
   context "create new event" do
     before(:each) do
@@ -13,7 +13,7 @@ RSpec.feature "Events", type: :feature do
       @sponsor = sponsors(:sponsor_carlos)
       # log in
       login_as(@sponsor.user)
-      visit new_occasion_event_path(@occasion.id)
+      visit new_occasion_activity_path(@occasion.id)
 
       within('form') do
        fill_in "event[name]", with: "Robotics"
@@ -46,7 +46,7 @@ RSpec.feature "Events", type: :feature do
       @sponsor = sponsors(:sponsor_carlos)
       # log in
       login_as(@sponsor.user)
-      visit edit_occasion_event_path(occasion_id: @occasion.id, id: @event.id)
+      visit edit_occasion_activity_path(occasion_id: @occasion.id, id: @event.id)
     end
 
     scenario "should be successful" do
@@ -80,7 +80,7 @@ RSpec.feature "Events", type: :feature do
       @occasion = occasions(:one)
       # log in
       login_as(@sponsor.user)
-      visit occasion_path(@occasion.id)
+      visit event_path(@occasion.id)
     end
 
     scenario "should be successful" do

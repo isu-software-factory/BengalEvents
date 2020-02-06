@@ -10,7 +10,7 @@ class RegistrationPolicy < ApplicationPolicy
   end
 
   def events?
-    # only teachers, students, and teams can see registration for events
+    # only teachers, students, and teams can see registration for activities
     if user.meta_type == "Student"
       record.member_type == "Student" || record.member_type == "Team"
     else
@@ -19,7 +19,7 @@ class RegistrationPolicy < ApplicationPolicy
   end
 
   def index?
-    # only teachers, students, and teams can see registration for occasions
+    # only teachers, students, and teams can see registration for events
     if user.meta_type == "Student"
       record.member_type == "Student" || record.member_type == "Team"
     else

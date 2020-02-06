@@ -2,7 +2,7 @@ class TeacherPolicy < ApplicationPolicy
 
   def show?
     # only teacher can view teacher page
-    @user.meta_type == "Teacher" && @user.meta.id == @record.id
+    @user.roles.first.role_name == "Teacher" && @user.id == @record.id || @user.roles.exists?([role_name: "Admin"])
   end
 
   def edit?

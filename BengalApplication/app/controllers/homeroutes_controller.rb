@@ -1,23 +1,42 @@
 class HomeroutesController < ApplicationController
-  def routes
+  def home
     # user signed in then redirect them to their page
     if user_signed_in?
-      if current_user.meta_type == 'Teacher'
-        redirect_to teacher_path(current_user.meta.id)
-      elsif current_user.meta_type == 'Student'
-        redirect_to student_path(current_user.meta.id)
-      elsif current_user.meta_type == 'Coordinator'
-        redirect_to coordinator_path(current_user.meta.id)
-      elsif current_user.meta_type == 'Sponsor'
-        redirect_to sponsor_path(current_user.meta.id)
-      elsif current_user.meta_type == "Admin"
-        redirect_to admin_path(current_user.meta.id)
-      end
+      redirect_to controller: "homeroutes", action: "user", id: current_user.id
+      # role = current_user.roles.first.role_name
+      # if role == "Teacher"
+      #   redirect_to teacher_path(current_user.id)
+      # elsif role == "Student"
+      #   redirect_to student_path(current_user.id)
+      # end
     end
-    # if user isn't signed in then show events for current occasion
-    unless Occasion.first.nil?
-      @occasion = Occasion.first
-      @events = @occasion.events
+    # if user isn't signed in then show activities for current occasion
+    unless Event.first.nil?
+      @event = Event.first
+      @activities = @event.activities
     end
   end
+
+  def user
+    role = current_user.roles.first.role_name
+    @user = User.find(params[:id])
+    @admin = false
+    if role == "Teacher" || role == "Admin" || role == "Coordinator"
+      @admin = true
+    end
+
+    @show = check_user
+  end
+
+
+  private
+
+  def check_user
+    if (params[:id].to_i != current_user.id)
+      true
+    else
+      false
+    end
+  end
+
 end

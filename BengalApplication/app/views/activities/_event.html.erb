@@ -2,7 +2,7 @@
 <tr>
   <td>
     <% if policy(event).show? %>
-      <%= link_to event.name, occasion_event_path(@occasion, event) %>
+      <%= link_to event.name, occasion_activity_path(@occasion, event) %>
     <% end %>
   </td>
   <td><%= event.description %></td>
@@ -22,7 +22,7 @@
     <%#= link_to "Edit", edit_occasion_event_path(@occasion, event) %>
     <%# end %>
     <% if policy(event).destroy? %>
-      <%= link_to "Delete", occasion_event_path(@occasion, event), method: :delete, data: {confirm: "Are you sure?"} %>
+      <%= link_to "Delete", occasion_activity_path(@occasion, event), method: :delete, data: {confirm: "Are you sure?"} %>
     <% end %>
   </td>
   <td><%= event.supervisor.director.user.email %></td>
