@@ -21,6 +21,13 @@ class HomeroutesController < ApplicationController
      end
 
      @show = check_user
+
+     add_breadcrumb "Home", root_path
+
+     if check_user
+       add_breadcrumb @user.first_name, root_path(@user.id)
+     end
+
    end
 
   def new
