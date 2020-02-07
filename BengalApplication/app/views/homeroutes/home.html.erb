@@ -34,9 +34,10 @@
         <h2>Please Sign In</h2>
 
         <%= form_for(:user, :url => session_path(:user), :html => {id: "sign_in"}) do |f| %>
-          <div class="field_container"><%= f.text_field :email, placeholder: "Email address", class: "field form-control" %></div>
-          <div class="field_container"><%= f.password_field :password, placeholder: "Password", class: "field form-control" %></div>
-          <div class="checkbox_container"<%= f.check_box :remember_me, class: "check_box" %> <%= f.label "Remember me" %>
+          <div class="field_container"> <%= f.text_field :login, placeholder: "Username or email", class: "field form-control" %></div>
+            <!--          <div class="field_container"><%#= f.text_field :email, placeholder: "Email address", class: "field form-control" %></div>-->
+            <div class="field_container"><%= f.password_field :password, placeholder: "Password", class: "field form-control" %></div>
+            <div class="checkbox_container"<%= f.check_box :remember_me, class: "check_box" %> <%= f.label "Remember me" %>
           </div>
           <div class="button_container"><%= f.submit 'Sign in', class: "button full_button" %></div>
           <a> <%= link_to "Forgot your password?", new_password_path(:user) %></a>
@@ -46,9 +47,9 @@
           <div class="button_container"><%= link_to "Register as Teacher", ({controller: "homeroutes", action: "new", name: "Teacher", method: :get}), class: "button full_button" %></div>
           <div class="button_container"><%= link_to "Register as Sponsor", ({controller: "homeroutes", action: "new", name: "Sponsor", method: :get}), class: "button full_button" %></div>
         </div>
-        </div>
+      </div>
+    </div>
   </div>
-</div>
 
 
 
