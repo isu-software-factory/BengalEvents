@@ -19,9 +19,7 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-  validates :encrypted_password,presence:true
   has_many :assignments
-  has_many :user
   has_many :groupings
   has_many :registrations
   has_many :sessions, through: :registrations
@@ -29,12 +27,19 @@ class User < ApplicationRecord
   has_many :roles, through: :assignments
   has_one :teacher
 
-  validates :email, presence: true
-  validates :user_name, presence: true
-  validates_uniqueness_of :email, :user_name
-  validates :first_name, presence: true
-  validates :last_name, presence: true
+  attr_accessor :login
+  validates :email, :user_name, presence: true, uniqueness: {case_sensitive: false}
+  validates :first_name, :last_name, presence: true
+  validates :encrypted_password,presence:true
+  validates_format_of :username, with: /^[a-zA-Z0-9_\.]*$/, :multiline => true
 
+  validate :validate_username
+
+  def validate_username
+    if User.where(email: username).exists?
+      errors.add(:username, :invalid)
+    end
+  end
 
   def extra_properties?
     if (self.roles.first.role_name == "Teacher")
@@ -42,7 +47,19 @@ class User < ApplicationRecord
     else
       false
     end
+  end
 
+  def login
+    @login || self.user_name || self.email
+  end
+
+  def self.find_for_database_authentication(warden_conditions)
+    conditions = warden_conditions.dup
+    if login = conditions.delete(:login)
+      where(conditions.to_h).where(["lower(user_name) = :value OR lower(email) = :value", { :value => login.downcase }]).first
+    elsif conditions.has_key?(:user_name) || conditions.has_key?(:email)
+      where(conditions.to_h).first
+    end
   end
 
 end
