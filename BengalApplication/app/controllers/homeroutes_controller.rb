@@ -55,24 +55,102 @@ class HomeroutesController < ApplicationController
     @user = User.new(user_params)
     @user.roles << Role.find_by(role_name: "Teacher")
     @user.roles << Role.find_by(role_name: "Participant")
-# asdfa
+
     if @user.save
       # sign in teacher and redirect to students new page
       sign_in @user
       @students = Arra.new
       redirect_to controller: "homeroutes", action: "new", name: "Student"
     else
-       asd
       render :new
     end
   end
 
   def create_student
+    names = student_names
+    emails = student_emails
+    redirect = false
 
+    count = 0
+
+    # check to see if student is already in the database
+    for email in emails do
+      unless User.exists?(:email => email)
+        redirect = create_students(names[count], email);
+      end
+      count += 1
+    end
+
+    # check to see if a student was removed
+    remove_students(names)
+
+    if redirect
+      redirect_to current_user.meta
+    else
+      flash[:errors] = @student.errors.full_messages
+      flash[:errors] = @student.user.errors.full_messages
+      redirect_back(fallback_location: current_user)
+    end
+  end
+
+
+  def remove_students(names)
+    students = Student.all
+
+    for student in students
+      # remove student
+      unless names.include?(student.name)
+        student.delete
+      end
+    end
+  end
+  # returns all the names from params into an array
+  def student_names
+    names = []
+    # add each name into names array
+
+    params.each do |key, value|
+      if key.start_with?("name")
+        names << value
+      end
+    end
+    names
+  end
+
+  # returns emails of all students as an array
+  def student_emails
+    emails = []
+    # adds every email from params to emails array
+    params.each do |key, value|
+      if key.start_with?("email")
+        emails << value
+      end
+    end
+    emails
+  end
+
+  # creates a student
+  def create_students(name1, email1)
+    @student = Student.new(name: name1, user_attributes: { email: email1 }, participant_attributes: {})
+    @teacher.students << @student
+
+    # create password
+    random_password = rand(36**8).to_s(36)
+    @student.user.password = random_password
+    @student.user.password_confirmation = random_password
+
+    # send an email to student if student saves
+    if @student.save
+      #UserMailer.login_email(@student, @student.user, random_password).deliver_now
+      true
+    else
+      false
+    end
   end
 
   def create_sponsor
-
+    # create teacher and role
+    @user = User.new(user_params)
   end
 
   def user_params
