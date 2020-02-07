@@ -8,7 +8,6 @@ Rails.application.routes.draw do
 
   resources :admins
   resources :coordinators
-
   get "teachers/:id" => "teachers#show"
   get "sponsors/pdf/:id" => "sponsors#pdfshow"
   get "teams/pdf/:id" => "teams#teamschedulepdf"
@@ -46,6 +45,8 @@ resources :events
 
   get "homeroutes/home" => 'homeroutes#home'
   get 'homeroutes/user/:id' => 'homeroutes#user', as: "profile"
+  get "homeroutes/new/:name" => "homeroutes#new"
+  post "homeroutes/create" => "homeroutes#create"
   root 'homeroutes#home'
 # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 

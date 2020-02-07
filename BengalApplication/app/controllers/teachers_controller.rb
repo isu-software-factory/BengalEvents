@@ -4,12 +4,13 @@ class TeachersController < ApplicationController
   # shows teacher new page
   def new
     @teacher = Teacher.new
-
+    @controller = params[:name]
     @teacher.build_user
   end
 
   # creates a new teacher
   def create
+    redirect_to root_path
     # create teacher and participant
     @teacher = Teacher.new(teacher_params)
     Participant.create(member: @teacher)
