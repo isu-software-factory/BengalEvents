@@ -36,15 +36,15 @@
           <div class="card-header">Actions</div>
           <div class="card-body text-dark">
             <div class="indent-bellow">
-<!--            <button class="btn button-small" title="Add or Remove students">-->
-<!--              <span class="fa fa-user-plus"> </span><%#=link_to " New Students", new_student_path %>-->
-<!--            </button>-->
-            </div>
-            <div class="indent-bellow">
-            <button class="btn button-small" title="Register for events">
-              <span class="fa-edit"></span><%=link_to " Register", controller: "registrations", action: "index", part_id: @user.id %>
+            <button class="btn button-small" title="Add or Remove students">
+              <span class="fa fa-user-plus"> </span><%=link_to "Add New Sutdents", controller: "homeroutes", action: "new", name: "Student" %>
             </button>
             </div>
+<!--            <div class="indent-bellow">-->
+<!--            <button class="btn button-small" title="Register for events">-->
+<!--              <span class="fa-edit"></span><%#=link_to " Register", controller: "registrations", action: "index", part_id: @user.id %>-->
+<!--            </button>-->
+<!--            </div>-->
             <div class="indent-bellow">
             <button class="btn button-small" title="View My Student's Registrations">
               <span class="fas fa-eye"></span><%=link_to " Class Registrations", controller: "teachers", action: "class_registrations", id: @user.id%>

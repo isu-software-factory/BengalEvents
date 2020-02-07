@@ -12,16 +12,16 @@ class HomeroutesController < ApplicationController
     end
   end
 
-  # def user
-  #   role = current_user.roles.first.role_name
-  #   @user = User.find(params[:id])
-  #   @admin = false
-  #   if role == "Teacher" || role == "Admin" || role == "Coordinator"
-  #     @admin = true
-  #   end
-  #
-  #   @show = check_user
-  # end
+   def user
+     role = current_user.roles.first.role_name
+     @user = User.find(params[:id])
+     @admin = false
+     if role == "Teacher" || role == "Admin" || role == "Coordinator"
+       @admin = true
+     end
+
+     @show = check_user
+   end
 
   def new
     @controller = params[:name]
@@ -34,7 +34,7 @@ class HomeroutesController < ApplicationController
     if @user == "Teacher"
       create_teacher
     elsif @user == "Student"
-      create_students
+      create_student
     else
       create_sponsor
     end
@@ -149,8 +149,18 @@ class HomeroutesController < ApplicationController
   end
 
   def create_sponsor
-    # create teacher and role
+    # create sponsor and role
     @user = User.new(user_params)
+    @user.roles << Role.find_by(role_name: "Sponsor")
+
+    if @user.save
+      # sign in sponsor and redirect to students new page
+      sign_in @user
+
+      redirect_to controller: "events", action: "show"
+    else
+      render :new
+    end
   end
 
   def user_params
