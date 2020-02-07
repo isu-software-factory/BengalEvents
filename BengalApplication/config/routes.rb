@@ -7,9 +7,6 @@ Rails.application.routes.draw do
   end
 
   resources :admins
-  resources :teachers
-  resources :students
-  resources :sponsors
   resources :coordinators
 
   get "teachers/:id" => "teachers#show"
@@ -22,6 +19,7 @@ Rails.application.routes.draw do
   get 'registrations/index/:part_id' => "registrations#index"
   # post "registrations/register/:part_id/:id" => "registrations#register"
   post "registrations/register/:user_id/:id" => "registrations#register"
+
 
 
   get "registrations/activities/:part_id/:id" => "registrations#activities"
@@ -47,7 +45,7 @@ resources :events
   # end
 
   get "homeroutes/home" => 'homeroutes#home'
-  get 'homeroutes/user/:id' => 'homeroutes#user'
+  get 'homeroutes/user/:id' => 'homeroutes#user', as: "profile"
   root 'homeroutes#home'
 # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 

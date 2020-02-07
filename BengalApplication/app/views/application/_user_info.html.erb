@@ -11,7 +11,7 @@
         <%= current_user.first_name %></a>
       <div class="dropdown-menu menu-container dropdown-menu-right">
         <% if (current_user.roles.first.role_name == "Teacher") %>
-          <%= link_to "Account Settings", edit_teacher_path(current_user), class: "dropdown-item" %>
+          <%#= link_to "Account Settings", edit_teacher_path(current_user), class: "dropdown-item" %>
         <%else %>
           <%= link_to "Account Settings", edit_user_registration_path, class: "dropdown-item" %>
         <%end %>

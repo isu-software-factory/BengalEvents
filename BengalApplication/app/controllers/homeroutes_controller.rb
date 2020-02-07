@@ -2,13 +2,8 @@ class HomeroutesController < ApplicationController
   def home
     # user signed in then redirect them to their page
     if user_signed_in?
-      redirect_to controller: "homeroutes", action: "user", id: current_user.id
-      # role = current_user.roles.first.role_name
-      # if role == "Teacher"
-      #   redirect_to teacher_path(current_user.id)
-      # elsif role == "Student"
-      #   redirect_to student_path(current_user.id)
-      # end
+      redirect_to profile_path(current_user.id)
+      #redirect_to controller: "homeroutes", action: "user", id: current_user.id
     end
     # if user isn't signed in then show activities for current occasion
     unless Event.first.nil?
