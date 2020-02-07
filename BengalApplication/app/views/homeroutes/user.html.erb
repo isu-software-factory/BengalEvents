@@ -2,19 +2,21 @@
 <div class="container">
 
 
-<%if current_user.roles.first.role_name == "Student" || (@admin && @show) %>
-   <%= render :partial => "students/show" %>
-<%elsif(current_user.roles.first.role_name == "Teacher") || @admin %>
-    <%= render :partial => "teachers/show" %>
-<%end%>
+<%#if current_user.roles.first.role_name == "Student" || (@admin && @show) %>
+   <%#= render :partial => "students/show" %>
+<%#elsif(current_user.roles.first.role_name == "Teacher") || @admin %>
+    <%#= render :partial => "teachers/show" %>
+<%#end%>
 
 
 
 
 <div class="row">
   <div class="col-sm">
-    <% if @user.sessions.count > 0 %>
-      <h2>Events Registered For</h2>
+    <%# if @user.sessions.count > 0 %>
+    <% if current_user.sessions.count > 0 %>
+
+    <h2>Events Registered For</h2>
       <table class="table">
         <thead class="thead-dark">
         <tr>
@@ -25,12 +27,14 @@
         </tr>
         </thead>
         <tbody>
-        <%@user.sessions.each do |s| %>
-          <tr>
+        <%#@user.sessions.each do |s| %>
+        <%current_user.sessions.each do |s| %>
+
+        <tr>
             <th scope="row"><%=s.activity.name %></th>
             <td><%=s.start_time.strftime("%l:%M %p") %> -  <%=s.end_time.strftime("%l:%M %p")%></td>
             <!--            <td><%#=Event.find(s.event_id).location.name %></td>-->
-            <td><%=button_to("Drop",  {method: :post, controller: "registrations", action: :drop, part_id: @user.id, id:s.id}, class: "button", title: "Unregister for event", data: {confirm: "Are you sure?"}) %></td>
+<!--            <td><%#=button_to("Drop",  {method: :post, controller: "registrations", action: :drop, user_id: @user.id, id:s.id}, class: "button", title: "Unregister for event", data: {confirm: "Are you sure?"}) %></td>-->
           </tr>
         <%end %>
         </tbody>
@@ -39,4 +43,4 @@
   </div>
 </div>
 </div>
-<%= @user.roles.first.role_name == "Student" || @user.roles.first.role_name == "Teacher" ? (render :partial => "registrations/events", :locals => {:@activities => Event.first.activities}) : nil%>
+<%#= @user.roles.first.role_name == "Student" || @user.roles.first.role_name == "Teacher" ? (render :partial => "registrations/events", :locals => {:@activities => Event.first.activities}) : nil%>

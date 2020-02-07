@@ -10,11 +10,11 @@
         <span class="glyphicon glyphicon-cog"></span>
         <%= current_user.first_name %></a>
       <div class="dropdown-menu menu-container dropdown-menu-right">
-        <% if (current_user.roles.first.role_name == "Teacher") %>
+        <%# if (current_user.roles.first.role_name == "Teacher") %>
           <%#= link_to "Account Settings", edit_teacher_path(current_user), class: "dropdown-item" %>
-        <%else %>
+        <%#else %>
           <%= link_to "Account Settings", edit_user_registration_path, class: "dropdown-item" %>
-        <%end %>
+        <%#end %>
         <%= link_to "Log Out", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
       </div>
     </div>

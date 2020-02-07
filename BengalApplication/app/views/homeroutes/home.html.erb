@@ -33,7 +33,9 @@
       <div class="login_block">
         <h2>Please Sign In</h2>
         <%= form_for(:user, :url => session_path(:user), :html => {id: "sign_in"}) do |f| %>
-          <div class="field_container"><%= f.text_field :email, placeholder: "Email address", class: "field form-control" %></div>
+          <!--          <div class="field_container"><%#= f.text_field :email, placeholder: "Email address", class: "field form-control" %></div>-->
+          <p><%= f.label :login %><br/>
+            <%= f.text_field :login %></p>
           <div class="field_container"><%= f.password_field :password, placeholder: "Password", class: "field form-control" %></div>
           <div class="checkbox_container"<%= f.check_box :remember_me, class: "check_box" %> <%= f.label "Remember me" %>
           </div>
@@ -42,7 +44,7 @@
         <% end %>
         <div class="Register">
           <div class="button_container"><%= button_to "Register as Teacher", new_registration_path(:user), method: :get, class: "button full_button" %></div>
-<!--          <div class="button_container"><%#= button_to "Register as Sponsor", new_sponsor_path, method: :get, class: "button full_button" %></div>-->
+          <!--          <div class="button_container"><%#= button_to "Register as Sponsor", new_sponsor_path, method: :get, class: "button full_button" %></div>-->
         </div>
         </div>
   </div>

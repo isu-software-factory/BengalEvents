@@ -12,16 +12,16 @@ class HomeroutesController < ApplicationController
     end
   end
 
-  def user
-    role = current_user.roles.first.role_name
-    @user = User.find(params[:id])
-    @admin = false
-    if role == "Teacher" || role == "Admin" || role == "Coordinator"
-      @admin = true
-    end
-
-    @show = check_user
-  end
+  # def user
+  #   role = current_user.roles.first.role_name
+  #   @user = User.find(params[:id])
+  #   @admin = false
+  #   if role == "Teacher" || role == "Admin" || role == "Coordinator"
+  #     @admin = true
+  #   end
+  #
+  #   @show = check_user
+  # end
 
 
   private

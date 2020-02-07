@@ -1,4 +1,4 @@
-<%add_breadcrumb "Home", current_user.meta %>
+<%add_breadcrumb "Home", current_user %>
 <%add_breadcrumb "Account Settings", edit_user_registration_path %>
 
 <div class="container">
@@ -36,7 +36,7 @@
           <!-- Button -->
           <div class="col-sm-12 controls">
             <%= f.submit "Update", class: "btn btn-success" %>
-            <%= link_to "Cancel", current_user.meta, class: "button-small" %>
+            <%#= link_to "Cancel", current_user, class: "button-small" %>
           </div>
         </div>
           <%end %>
