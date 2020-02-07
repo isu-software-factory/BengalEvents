@@ -12,4 +12,19 @@
 class Registration < ApplicationRecord
   belongs_to :session
   belongs_to :user
+
+  def register_participant(participant)
+    unless self.users.include?(participant)
+      unless self.capacity_remaining == 0
+        self.users << participant
+        #send_make_ahead(participant)
+        true
+      else
+        false
+      end
+    else
+      false
+    end
+  end
+
 end

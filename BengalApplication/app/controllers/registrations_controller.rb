@@ -1,5 +1,5 @@
 class RegistrationsController < ApplicationController
-  before_action :authenticate_user!, except: :registers
+  #before_action :authenticate_user!, except: :registers
 
 
   def register
@@ -16,28 +16,37 @@ class RegistrationsController < ApplicationController
     # authorize @participant, policy_class: RegistrationPolicy
 
     # add participant to event
-     success = @event_detail.register_participant(@participant)
+    # success = @event_detail.register_participant(@participant)
+    #
+    success = @session.register_participant(@user)
 
     if success
       #sadfasd
-      if @event.isMakeAhead
+      if @session.ismakeahead
         redirect_to @participant.member, :notice => "You will be sent and email prior to the event."
       else
         redirect_to @participant.member, :notice => "Successfully registered for #{@event_detail.event.name}"
         #asdfa
       end
     else
-      @event = Event.find(@event_detail.event.id)
-      @occasion = Occasion.find(@event.occasion.id)
+      #@event = Event.find(@event_detail.event.id)
+      #
+      @activity = Activity.find(@session.activity.id)
+
+      #@occasion = Occasion.find(@event.occasion.id)
+      #
+      @event = Event.find(@activity.event.id)
       # capacity is full
-      if @event_detail.capacity_remaining == 0
+      if @session.capacity_remaining == 0
         flash[:alert] = "Event capacity is full. Register for a different event."
-        redirect_to controller: "registrations", action: "events", part_id: @participant.id, id: @occasion.id
+        #redirect_to controller: "registrations", action: "events", part_id: @participant.id, id: @occasion.id
+        redirect_to controller: "registrations", action: "events", user_id: @user.id, id: @event.id
+
         return
       else
         # already registered for event
         flash[:alert] = "You are already registered for this event"
-        redirect_to controller: "registrations", action: "events", part_id: @participant.id, id: @occasion.id
+        redirect_to "/teachers/1"
         return
       end
     end

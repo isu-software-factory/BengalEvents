@@ -10,7 +10,7 @@ class EventsController < ApplicationController
 
   def new
     @event = Event.new
-    1.times {@event.activities.build}
+    4.times {@event.activities.build}
     # authorize @occasion
     add_breadcrumb 'Home', current_user
     add_breadcrumb 'New Occasion', new_event_path
