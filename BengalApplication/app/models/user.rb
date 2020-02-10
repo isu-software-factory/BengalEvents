@@ -26,7 +26,7 @@ class User < ApplicationRecord
   has_many :teams, through: :groupings
   has_many :roles, through: :assignments
   has_one :teacher
-  belongs_to :teacher
+  belongs_to :teacher, optional: true
 
   attr_accessor :login
   validates :email, :user_name, presence: true, uniqueness: {case_sensitive: false}
