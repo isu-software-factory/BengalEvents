@@ -12,35 +12,35 @@
 </div>
 
 
-<div class="container">
-  <h2>Activities</h2>
-  <div class="row">
-    <div class="col-lg-12">
-      <table class="table">
-        <thead class="thead-dark">
-        <tr>
-          <th>Name</th>
-          <th>Time</th>
-          <th>Spots Left</th>
-          <th>Description</th>
-          <th>Status</th>
-        </tr>
-        </thead>
-        <% @activities.each do |e| %>
-          <% e.sessions.each do |s| %>
-            <tbody>
-            <td><%= e.sessions.include?(s) && e.sessions.first != s ? " " : e.name %></td>
-            <td><%= s.start_time.strftime("%l:%M %p") %> -  <%=s.end_time.strftime("%l:%M %p")%></td>
-            <td><%= s.capacity_remaining %></td>
-            <td><%= e.description %></td>
-            <td class="registered"><%= @user.sessions.include?(s) ? "Registered" : check_box_tag("registered", value = s.id) %></td>
-            </tbody>
-          <% end %>
-        <% end %>
-      </table>
-    </div>
-  </div>
-</div>
+<!--<div class="container">-->
+<!--  <h2>Activities</h2>-->
+<!--  <div class="row">-->
+<!--    <div class="col-lg-12">-->
+<!--      <table class="table">-->
+<!--        <thead class="thead-dark">-->
+<!--        <tr>-->
+<!--          <th>Name</th>-->
+<!--          <th>Time</th>-->
+<!--          <th>Spots Left</th>-->
+<!--          <th>Description</th>-->
+<!--          <th>Status</th>-->
+<!--        </tr>-->
+<!--        </thead>-->
+<%# @activities.each do |e| %>
+<%# e.sessions.each do |s| %>
+<!--            <tbody>-->
+<!--            <td><%#= e.sessions.include?(s) && e.sessions.first != s ? " " : e.name %></td>-->
+<!--            <td><%#= s.start_time.strftime("%l:%M %p") %> -  <%#=s.end_time.strftime("%l:%M %p")%></td>-->
+<!--            <td><%#= s.capacity_remaining %></td>-->
+<!--            <td><%#= e.description %></td>-->
+<!--            <td class="registered"><%#= @user.sessions.include?(s) ? "Registered" : check_box_tag("registered", value = s.id) %></td>-->
+<!--            </tbody>-->
+<%# end %>
+<%# end %>
+<!--      </table>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
 
 
 <!--<div>-->
@@ -95,5 +95,58 @@
 <!--</div>-->
 
 
+<div class="container">
+  <h2>Activities</h2>
+  <div class="row">
+    <div class="col-lg-12">
+      <table class="table">
+        <thead class="thead-dark">
+        <tr>
+          <th>Name</th>
+          <th>Time</th>
+          <th>Spots Left</th>
+          <th>Description</th>
+          <th>Status</th>
+        </tr>
+        </thead>
+        <% @activities.each do |e| %>
+          <% e.sessions.each do |s| %>
+            <tbody>
+            <td><%= e.sessions.include?(s) && e.sessions.first != s ? " " : e.name %></td>
+            <td><%= s.start_time.strftime("%l:%M %p") %> -  <%= s.end_time.strftime("%l:%M %p") %></td>
+            <td><%= s.capacity_remaining %></td>
+            <td><%= e.description %></td>
+            <td class="registered"><%= @user.sessions.include?(s) ? "Registered" : check_box_tag("registered", value = s.id) %></td>
+            </tbody>
+          <% end %>
+        <% end %>
+      </table>
+    </div>
+  </div>
+</div>
 
 
+
+<!--<div class="container">-->
+<!--  <h2>Activities</h2>-->
+<!--  <div class="row">-->
+<!--    <div class="col-lg-12">-->
+<!--      <table class="table">-->
+<!--        <thead class="thead-dark">-->
+<!--        <tr>-->
+<!--          <th>Name</th>-->
+<!--          <th>Description</th>-->
+<!--        </tr>-->
+<!--        </thead>-->
+        <%# @activities.each do |e| %>
+<!--          <tbody>-->
+<!--            <td><%#=e.name %></td>-->
+<!--            <td><%#=e.description %></td>-->
+<!--            <button type="button" class="Chevron down"  data-toggel="collapse" data-target="#demo"></button>-->
+<!--            <div id="demo" class="collapse">This is a test</div>-->
+<!--          </tbody>-->
+        <%# end %>
+<!--      </table>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->

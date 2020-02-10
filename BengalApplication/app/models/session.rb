@@ -22,17 +22,30 @@ class Session < ApplicationRecord
   # register participant to session
   # Makes sure that participant isn't already registered and that the capacity is zero
     def register_participant(participant)
-      unless self.users.include?(participant)
-        unless self.capacity_remaining == 0
+      unless self.capacity_remaining == 0
+        unless self.users.include?(participant)
           self.users << participant
-          #send_make_ahead(participant)
           true
         else
-          false
+          self.teams << participant
+          true
         end
       else
         false
       end
+
+        # refactoring code
+      # unless self.users.include?(participant)
+      #  unless self.capacity_remaining == 0
+      #    self.users << participant
+      #    #send_make_ahead(participant)
+      #    true
+      #  else
+      #    false
+      #  end
+      #else
+      #  false
+      #end
     end
 
 

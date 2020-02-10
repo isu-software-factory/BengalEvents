@@ -55,6 +55,7 @@ RSpec.describe Session, type: :model do
   context "method tests" do
     before(:each) do
       @session = Session.last
+      @teacher = User.find(1)
       @student = User.find(3)
       @student2 = User.find(2)
       @student3 = User.find(4)
@@ -78,11 +79,17 @@ RSpec.describe Session, type: :model do
       end
 
       it "should allow teachers to register" do
-        pending "needs to be implemented"
+        expect(@session.users.include?(@teacher)).to eq(false)
+        success = @session.register_participant(@teacher)
+        expect(success).to eq(true)
+        expect(@session.users.include?(@teacher)).to eq(true)
       end
 
       it "should allow students to register" do
-        pending "needs to be implemented"
+        expect(@session.users.include?(@student3)).to eq(false)
+        success = @session.register_participant(@student3)
+        expect(success).to eq(true)
+        expect(@session.users.include?(@student3)).to eq(true)
       end
 
       it "should allow teams to register" do

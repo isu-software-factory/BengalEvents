@@ -31,13 +31,13 @@ class User < ApplicationRecord
   validates :email, :user_name, presence: true, uniqueness: {case_sensitive: false}
   validates :first_name, :last_name, presence: true
   validates :encrypted_password,presence:true
-  validates_format_of :username, with: /^[a-zA-Z0-9_\.]*$/, :multiline => true
+  validates_format_of :user_name, with: /^[a-zA-Z0-9_\.]*$/, :multiline => true
 
   validate :validate_username
 
   def validate_username
-    if User.where(email: username).exists?
-      errors.add(:username, :invalid)
+    if User.where(email: user_name).exists?
+      errors.add(:user_name, :invalid)
     end
   end
 
