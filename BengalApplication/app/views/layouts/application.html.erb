@@ -12,13 +12,9 @@
     <%= javascript_include_tag 'application', :sessions, 'data-turbolinks-track': 'reload' %>
   <% elsif controller.controller_name == "registrations" %>
     <%= javascript_include_tag 'application', :registrations, 'data-turbolinks-track': 'reload' %>
-  <% elsif controller.controller_name == "students" %>
-    <%= javascript_include_tag 'application', :students, 'data-turbolinks-track': 'reload' %>
-  <% elsif controller.controller_name == "teachers" %>
-    <%= javascript_include_tag 'application', :teachers, 'data-turbolinks-track': 'reload' %>
-  <% elsif controller.controller_name == "sponsors" %>
-    <%= javascript_include_tag 'application', :sponsors, 'data-turbolinks-track': 'reload' %>
-  <% elsif controller.controller_name == "teams" %>
+    <%elsif controller.controller_name == "homeroutes" %>
+    <%= javascript_include_tag 'application', :homeroutes, 'data-turbolinks-track': 'reload' %>
+<% elsif controller.controller_name == "teams" %>
     <%= javascript_include_tag 'application', :teams, 'data-turbolinks-track': 'reload' %>
   <% else %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>

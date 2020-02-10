@@ -12,7 +12,7 @@ Rails.application.config.assets.precompile += %w( registrations.js )
 Rails.application.config.assets.precompile += %w( students.js )
 Rails.application.config.assets.precompile += %w( sponsors.js )
 Rails.application.config.assets.precompile += %w( teams.js )
-Rails.application.config.assets.precompile += %w( teachers.js )
+Rails.application.config.assets.precompile += %w( homeroutes.js )
 # Precompile additional assets.
 # application.js, application.scss, and all non-JS/CSS in the app/assets
 # folder are already added.

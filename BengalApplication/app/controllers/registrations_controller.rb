@@ -101,20 +101,20 @@ class RegistrationsController < ApplicationController
 
   def drop
     # drop participants from activities
-    @participant = Participant.find(params[:part_id])
-    @event_detail = EventDetail.find(params[:id])
+    @participant = User.find(params[:user_id])
+    @event_detail = Session.find(params[:id])
 
-    authorize @participant, policy_class: RegistrationPolicy
-    @event_detail.participants.delete(@participant)
+    #authorize @participant, policy_class: RegistrationPolicy
+    @event_detail.users.delete(@participant)
 
     # when participant is drop check waitlist
-    @event_detail.wait_list_check
-    redirect_to @participant.member
+    #@event_detail.wait_list_check
+    redirect_to root_path
   end
 
   def registers
-    event = EventDetail.find(params[:id].to_i)
-    participant = current_user.meta.participant
+    event = Session.find(params[:id].to_i)
+    participant = current_user
 
     # add participant to event
     success = event.register_participant(participant)
