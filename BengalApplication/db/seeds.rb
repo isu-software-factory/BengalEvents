@@ -17,19 +17,22 @@ User.create!([{
                   last_name: "Dunken",
                   email: "dunkMe@gmail.com",
                   password: "password",
-                  user_name: "timmy23db"
+                  user_name: "timmy23db",
+                  teacher_id: 1
               },{
                   first_name: "Ben",
                   last_name: "Smith",
                   email: "student@gmail.com",
                   password: "password",
-                  user_name: "firstStudent25"
+                  user_name: "firstStudent25",
+                  teacher_id: 1
               },{
                   first_name: "Chuck",
                   last_name: "Norris",
                   email: "Nor@gmail.com",
                   password: "password",
                   user_name: "Strong25Fast",
+                  teacher_id: 1
                   #waitlist_id: 1
               },{
                   first_name: "Javier",
@@ -37,13 +40,15 @@ User.create!([{
                   email: "Javi@gmail.com",
                   password: "password",
                   user_name: "JUnit4Floris",
+                  teacher_id: 1
                   #waitlist_id: 2
               },{
                   first_name: "Emily",
                   last_name: "Udy",
                   email: "Udy@gmail.com",
                   password: "password",
-                  user_name: "Emmy2Ballen"
+                  user_name: "Emmy2Ballen",
+                  teacher_id: 1
               },{
                   first_name: "Adhar",
                   last_name: "Bhattarai",
@@ -148,19 +153,27 @@ Activity.create!([{
                       name: "Robotics",
                       description: "Drive a robot.",
                       equipment: "Boxes to use as obstacles.",
-                      ismakeahead: 0,
-                      iscompetetion: 1,
+                      ismakeahead: false,
+                      iscompetetion: false,
                       event_id: 1,
-                      user_id: 1
+                      user_id: 7
                   },{
                       name: "Raspberry Pi",
                       description: "Learning how to program a raspberry pi",
                       equipment: "None",
                       event_id: 1,
-                      user_id: 1,
-                      ismakeahead: 0,
-                      iscompetetion: 0
+                      user_id: 7,
+                      ismakeahead: false,
+                      iscompetetion: false
 
+                  },{
+                      name: "Developing A Game",
+                      description: "Develop a game using python",
+                      equipment: "None",
+                      event_id: 1,
+                      user_id: 9,
+                      ismakeahead: false,
+                      iscompetetion: true
                   }])
 
 Session.create!([{
@@ -183,6 +196,11 @@ Session.create!([{
                     end_time: DateTime.new(2020,4,3,14),
                     capacity: 2,
                     activity_id: 2
+                 },{
+                     start_time: DateTime.new(2020,4,20,4),
+                     end_time: DateTime.new(2020,4,20,12),
+                     capacity: 2,
+                     activity_id: 3
                  }])
 
 Teacher.create!([{
@@ -255,6 +273,13 @@ Registration.create!([{
                           user_id: 2
                       }])
 
+Team_Registration.create!([{
+                               session_id: 5,
+                               team_id: 1
+                           },{
+                               session_id: 5,
+                               team_id: 2
+                           }])
 
 #Waitlist.create!([{
 #                      session_id: 1
