@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_04_004150) do
+ActiveRecord::Schema.define(version: 2020_02_10_234129) do
 
   create_table "activities", force: :cascade do |t|
     t.string "name"
@@ -104,6 +104,15 @@ ActiveRecord::Schema.define(version: 2020_02_04_004150) do
     t.index ["user_id"], name: "index_teachers_on_user_id"
   end
 
+  create_table "team_registrations", force: :cascade do |t|
+    t.integer "team_id"
+    t.integer "session_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["session_id"], name: "index_team_registrations_on_session_id"
+    t.index ["team_id"], name: "index_team_registrations_on_team_id"
+  end
+
   create_table "teams", force: :cascade do |t|
     t.string "lead"
     t.string "team_name"
@@ -123,8 +132,10 @@ ActiveRecord::Schema.define(version: 2020_02_04_004150) do
     t.integer "waitlist_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "teacher_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["teacher_id"], name: "index_users_on_teacher_id"
     t.index ["waitlist_id"], name: "index_users_on_waitlist_id"
   end
 
