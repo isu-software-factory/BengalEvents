@@ -6,6 +6,8 @@ class ActivitiesController < ApplicationController
 
   def new
     @activity = Activity.new
+    4.times {@activity.sessions.build}
+
     # @event = Event.find(params[:event_id])
     # authorize @event
     add_breadcrumb 'Home', current_user
@@ -105,5 +107,5 @@ private
 # end
 
 def activity_params
-  params.require(:activity).permit(:name, :description, :ismakeahead, :iscompetetion).merge(user_id: current_user.id)
+  params.require(:activity).permit(:name, :description, :ismakeahead, :iscompetetion, user_id: current_user.id)
 end

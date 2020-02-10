@@ -8,10 +8,10 @@
     <div class="card-header dark-header "><h1> Activity Information</h1></div>
     <div class="card-body text-dark bengal-body">
       <%#= form_for([@occasion, @event], :html => {:class => "form-horizontal center"}) do |f| %>
-        <%= form_for([@activity], :html => {:class => "form-horizontal center"}) do |f| %>
+      <%= form_for([@activity], :html => {:class => "form-horizontal center"}) do |f| %>
 
 
-    <div class="form-group">
+        <div class="form-group">
           <%= f.label :name, "Activity Name:", class: "col-md-4 control-label" %>
           <div class="col-xs-2">
             <%= f.text_field :name, class: "form-control" %>
@@ -28,12 +28,12 @@
           </div>
         </div>
 
-<!--        <div class="form-group">-->
-          <%#= f.label :location_id, class: "col-md-4 control-label" %>
-<!--          <div class="col-xs-2">-->
-            <%#= f.collection_select :location_id, Location.order(:name), :id, :name, {:prompt => "Select a Location"}, class: "location-select form-control" %>
-<!--          </div>-->
-<!--        </div>-->
+        <!--        <div class="form-group">-->
+        <%#= f.label :location_id, class: "col-md-4 control-label" %>
+        <!--          <div class="col-xs-2">-->
+        <%#= f.collection_select :location_id, Location.order(:name), :id, :name, {:prompt => "Select a Location"}, class: "location-select form-control" %>
+        <!--          </div>-->
+        <!--        </div>-->
         <!--  <p>-->
         <%#= f.label :location_id %>
         <%#= f.collection_select :location_id, Location.order(:name), :id, :name, {:prompt => "Select a Location"}, class: "location-select" %>
@@ -49,8 +49,33 @@
           <div class="col-md-4">
             <%= f.check_box :iscompetetion, class: "form-check-input" %>
           </div>
-
         </div>
+
+          <%= f.fields_for :activities do |session| %>
+          <hr>
+          <h2>Sessions</h2>
+          <div class="form-group">
+              <%= session.label :start_time, "Start Time" , class: "col-md-4 control-label"%>
+              <div class="col-md-4">
+                <%= session.time_select :start_time, class: "form-check-input"  %>
+              </div>
+            </div>
+          <div class="form-group">
+            <%= session.label :end_time, "Start Time" , class: "col-md-4 control-label"%>
+            <div class="col-md-4">
+              <%= session.time_select :end_time, class: "form-check-input"  %>
+            </div>
+          </div>
+          <div class="form-group">
+            <%= session.label :capacity, "Capacity" , class: "col-md-4 control-label"%>
+            <div class="col-md-4">
+              <%= session.select :capacity, options_for_select(0..500), class: "form-check-input"  %>
+            </div>
+          </div>
+          <hr>
+            <%#= act.hidden_field :user_id, value: current_user.id %>
+            <%#= session.check_box :_destroy %>
+          <% end %>
         <%= f.hidden_field :event_id, value: params[:event_id] %>
         <div class="col-md-5 control-label">
           <%= f.submit "Confirm", class: "btn btn-default btn-primary" %>

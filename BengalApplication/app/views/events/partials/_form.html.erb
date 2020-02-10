@@ -35,7 +35,7 @@
           </div>
           <%= f.fields_for :activities do |act| %>
             <p class="fields">
-              <%= act.label :name, "Activity Name" %>
+              <%= act.label :name, "Activity Name", class: "col-md-4 control-label" %>
               <%= act.text_area :name, placeholder: "Activity Name" %>
               <%= act.label :description, "Description" %>
               <%= act.text_area :description, placeholder: "Description" %>
