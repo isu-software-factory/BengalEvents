@@ -6,7 +6,7 @@ RSpec.describe Activity, type: :model do
     @event = Event.first
     @activity = Activity.first
     @session = Session.first
-    @user = User.first
+    @user = User.find(7)
   end
 
   context "Associations Test" do
