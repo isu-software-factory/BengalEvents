@@ -44,7 +44,7 @@ class User < ApplicationRecord
 
   def extra_properties?
     if (self.roles.first.role_name == "Teacher")
-      self.teacher
+      Teacher.find_by(user_id: self.id)
     else
       false
     end

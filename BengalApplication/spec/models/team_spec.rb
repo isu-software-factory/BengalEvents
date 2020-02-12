@@ -22,10 +22,11 @@ RSpec.describe Team, type: :model do
 
 
   context "association test" do
-    before do
-      @team = Team.first
+    before(:each) do
+      @team = Team.last
       @session = Session.first
-      @student = User.find(2)
+      @session2 = Session.last
+      @student = User.find(4)
     end
 
     it "should have a team lead" do
@@ -37,15 +38,14 @@ RSpec.describe Team, type: :model do
     end
 
     it "can have a session" do
-      pending "Undecided how to implement"
-      #@session.register_participant(@team.participant)
-      #expect(@session.users.first).to eq(@team)
+      @session2.register_participant(@team)
+      expect(@session2.teams.include?(@team)).to eq(true)
     end
   end
 
   context "Method testing" do
     context "register_member" do
-      before do
+      before(:each) do
         @team = Team.first
         @student = User.find(2)
         @student2 = User.find(3)
@@ -81,7 +81,7 @@ RSpec.describe Team, type: :model do
     end
 
     context "get_lead" do
-      before do
+      before(:each) do
         @student = User.find(2)
         @team = Team.find(1)
       end

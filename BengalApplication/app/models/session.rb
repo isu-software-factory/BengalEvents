@@ -3,6 +3,7 @@ class Session < ApplicationRecord
   has_many :rooms
   has_many :registrations
   has_many :team_registration
+  has_many :teams, through: :team_registration
   has_many :users, through: :registrations
   validates :start_time, :end_time, presence: true
   validates_uniqueness_of :start_time, :end_time
@@ -22,49 +23,50 @@ class Session < ApplicationRecord
 
   # register participant to session
   # Makes sure that participant isn't already registered and that the capacity is zero
-    def register_participant(participant)
-      unless self.capacity_remaining == 0
-        unless self.users.include?(participant)
-          self.users << participant
-          true
-        else
-          self.teams << participant
-          true
-        end
+  def register_participant(participant)
+    success = false
+    unless self.capacity_remaining == 0
+      if self.activity.iscompetetion
+        success = self.register_team(participant)
       else
-        false
+        success = self.register_user(participant)
       end
-
-        # refactoring code
-      # unless self.users.include?(participant)
-      #  unless self.capacity_remaining == 0
-      #    self.users << participant
-      #    #send_make_ahead(participant)
-      #    true
-      #  else
-      #    false
-      #  end
-      #else
-      #  false
-      #end
     end
+    success
+  end
+
+  def register_user(user)
+    unless self.users.include?(user)
+      self.users << user
+      return true
+    end
+    false
+  end
+
+  def register_team(team)
+    unless self.teams.include?(team)
+      self.teams << team
+      return true
+    end
+    false
+  end
 
 
   # Capacity remaining for event detail
-    def capacity_remaining
-      # Go through participants to decrease capacity
-      @remaining = self.capacity
-      self.users.each do |p|
-        #if p.member_type == 'Team'
-        #  # team members
-        #  members = p.member.students.count
-        #  @remaining -= members
-        #else
-          @remaining -= 1
-        #end
+  def capacity_remaining
+    # Go through participants to decrease capacity
+    @remaining = self.capacity
+    if self.activity.iscompetetion
+      self.teams.each do |t|
+        @remaining -= 1
       end
-      @remaining
+    else
+      self.users.each do |p|
+        @remaining -= 1
+      end
     end
+    @remaining
+  end
 
 
   ## sends an email to a participant and automatically registers student for event
@@ -87,20 +89,21 @@ class Session < ApplicationRecord
 
 
   # make ahead email will be sent to all registered participant
-    def send_make_ahead(participant)
-      if self.event.isMakeAhead
-        # send email one week prior to event
-        @week = self.date_started - 7
-        @day = self.date_started - 1
+  def send_make_ahead(participant)
+    if self.event.isMakeAhead
+      # send email one week prior to event
+      @week = self.date_started - 7
+      @day = self.date_started - 1
 
-        if @week > Date.today
-          UserMailer.event_notice(participant, self.event).deliver_later(wait_until: @week)
-        end
+      if @week > Date.today
+        UserMailer.event_notice(participant, self.event).deliver_later(wait_until: @week)
+      end
 
-        # send an email 1 day before event
-        if @day > Date.today
-          UserMailer.event_notice(participant, self.event).deliver_later(wait_until: @day)
-        end
+      # send an email 1 day before event
+      if @day > Date.today
+        UserMailer.event_notice(participant, self.event).deliver_later(wait_until: @day)
       end
     end
+  end
+
 end

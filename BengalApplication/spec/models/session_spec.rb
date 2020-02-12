@@ -54,11 +54,15 @@ RSpec.describe Session, type: :model do
 
   context "method tests" do
     before(:each) do
-      @session = Session.last
+      @session = Session.find(4)
+      @session2 = Session.last
       @teacher = User.find(1)
       @student = User.find(3)
       @student2 = User.find(2)
       @student3 = User.find(4)
+      @team = Team.find(2)
+      @team2 = Team.first
+      @team3 = Team.last
     end
 
     context "register_participant method" do
@@ -93,8 +97,23 @@ RSpec.describe Session, type: :model do
       end
 
       it "should allow teams to register" do
-        pending "needs to be implemented"
+        expect(@session2.teams.include?(@team)).to eq(false)
+        success = @session2.register_participant(@team)
+        expect(success).to eq(true)
+        expect(@session2.teams.include?(@team)).to eq(true)
       end
+
+      it "should not allow a team to register twice" do
+        success = @session2.register_participant(@team2)
+        expect(success).to eq(false)
+      end
+
+      it "should not allow a team to register if the capacity is zero" do
+        @session2.register_participant(@team)
+        success = @session2.register_participant(@team3)
+        expect(success).to eq(false)
+      end
+
     end
 
     context "capacity_remaining method" do

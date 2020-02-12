@@ -194,7 +194,7 @@ Session.create!([{
                      start_time: DateTime.new(2020, 4, 20, 15),
                      end_time: DateTime.new(2020, 4, 20, 16),
                      capacity: 25,
-                     activity_id: 1,
+                     activity_id: 1
                  }, {
                      start_time: DateTime.new(2020, 4, 20, 17),
                      end_time: DateTime.new(2020, 4, 20, 18),
@@ -241,6 +241,9 @@ Team.create!([{
               }, {
                   team_name: "Lions",
                   lead: 3
+              }, {
+                  team_name: "Bears",
+                  lead: 4
               }])
 
 Grouping.create!([{
@@ -256,6 +259,12 @@ Grouping.create!([{
                   }, {
                       team_id: 2,
                       user_id: 5
+                  }, {
+                      team_id: 3,
+                      user_id: 5
+                  }, {
+                      team_id: 3,
+                      user_id: 4
                   }])
 
 Registration.create!([{
@@ -282,12 +291,10 @@ Registration.create!([{
                       }])
 
 TeamRegistration.create!([{
-                               session_id: 5,
-                               team_id: 1
-                           }, {
-                               session_id: 5,
-                               team_id: 2
-                           }])
+                              session_id: 5,
+                              team_id: 1
+                          },
+                         ])
 
 #Waitlist.create!([{
 #                      session_id: 1

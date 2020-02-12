@@ -80,7 +80,7 @@ RSpec.describe User, type: :model do
     end
 
     it "can have a coordinator" do
-      expect(@user4.roles.first).to eq(@coordinator)
+      expect(@user4.roles[0]).to eq(@coordinator)
     end
 
     it "can have an admin" do
