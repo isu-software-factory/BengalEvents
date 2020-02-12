@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_10_234129) do
+ActiveRecord::Schema.define(version: 2020_02_12_073725) do
 
   create_table "activities", force: :cascade do |t|
     t.string "name"
@@ -137,6 +137,11 @@ ActiveRecord::Schema.define(version: 2020_02_10_234129) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["teacher_id"], name: "index_users_on_teacher_id"
     t.index ["waitlist_id"], name: "index_users_on_waitlist_id"
+  end
+
+  create_table "waitlists", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end

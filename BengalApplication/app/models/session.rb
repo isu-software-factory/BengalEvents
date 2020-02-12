@@ -8,6 +8,7 @@ class Session < ApplicationRecord
   validates :start_time, :end_time, presence: true
   validates_uniqueness_of :start_time, :end_time
   validates :capacity, presence: true
+  has_one :waitlist
 
   #has_one :waitlist
 

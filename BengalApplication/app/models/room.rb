@@ -4,4 +4,5 @@ class Room < ApplicationRecord
 
   validates :room_number, presence: true
 
+
 end
