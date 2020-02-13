@@ -4,6 +4,8 @@ class EventsController < ApplicationController
 
   def index
     @events = Event.all
+    @activities = Event.first.activities
+    @user = current_user
     add_breadcrumb "Home", current_user
     add_breadcrumb "Occasion List", events_path
   end

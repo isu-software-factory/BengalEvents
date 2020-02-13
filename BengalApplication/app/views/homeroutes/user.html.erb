@@ -41,4 +41,3 @@
   </div>
 </div>
 </div>
-<%= @user.roles.first.role_name == "Student" || @user.roles.first.role_name == "Teacher" ? (render :partial => "registrations/events", :locals => {:@activities => Event.first.activities, :@user => @user}) : nil%>

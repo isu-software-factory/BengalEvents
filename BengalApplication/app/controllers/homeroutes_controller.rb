@@ -32,7 +32,11 @@ class HomeroutesController < ApplicationController
 
   def new
     @controller = params[:name]
-    @user = User.new
+    if @controller == "Student"
+      @students = Teacher.find(current_user.id).users
+    else
+      @user = User.new
+    end
   end
 
   def create
