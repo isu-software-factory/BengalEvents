@@ -43,6 +43,7 @@ resources :events
   #   end
   # end
 
+  get "/drop_activity/:session_id/:user_id" => "registrations#drop_activity"
   get "homeroutes/home" => 'homeroutes#home'
   get 'homeroutes/user/:id' => 'homeroutes#user', as: "profile"
   get "homeroutes/new/:name" => "homeroutes#new"

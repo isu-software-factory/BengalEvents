@@ -72,7 +72,8 @@
                   <tr>
                     <th>Time</th>
                     <th>Spots Left</th>
-                    <th>Status</th>
+                    <th >Status</th>
+                    <th>Unregister</th>
                   </tr>
                   </thead>
                   <tbody>
@@ -80,7 +81,8 @@
                     <tr class="events">
                       <td><%= s.start_time.strftime("%l:%M %p") %> -  <%= s.end_time.strftime("%l:%M %p") %></td>
                       <td><%= s.capacity_remaining %></td>
-                      <td class="registered"><%= @user.sessions.include?(s) ? "Registered" : check_box_tag("registered", value = s.id) %></td>
+                      <td class="registered"><%= @user.sessions.include?(s) ? "Registered" : check_box_tag("registered", value = s.id, false, title: "Register for activity") %> </td>
+                      <td><%= @user.sessions.include?(s) ? content_tag(:button, "", class: ["button-small", "glyphicon", "glyphicon-remove", "left-indent", "remove-button"], title: "Unregister for activity", user_id: @user.id, session_id: s.id) : nil %></td>
                     </tr>
                   <% end %>
                   </tbody>

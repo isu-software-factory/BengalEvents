@@ -100,16 +100,20 @@ class RegistrationsController < ApplicationController
   end
 
   def drop
-    # drop participants from activities
-    @participant = User.find(params[:user_id])
-    @event_detail = Session.find(params[:id])
-
     #authorize @participant, policy_class: RegistrationPolicy
-    @event_detail.users.delete(@participant)
-
+    drop_user
     # when participant is drop check waitlist
     #@event_detail.wait_list_check
     redirect_to root_path
+  end
+
+  def drop_activity
+    success = drop_user
+    if success
+      render json: {drop: {success: true}}
+    else
+      render json: {drop: {success: false}}
+    end
   end
 
   def registers
@@ -120,11 +124,26 @@ class RegistrationsController < ApplicationController
     success = event.register_participant(participant)
 
     if success
-      render json: {data: {registered: true}}
+      render json: {data: {registered: true, user: participant.id}}
     else
       render json: {data: {registered: false}}
     end
 
   end
 
+  private
+
+  def drop_user
+    # drop participants from activities
+    @session = Session.find(params[:session_id])
+    @user = User.find(params[:user_id])
+
+    @session.users.delete(@user)
+
+    if !@session.users.include?(@user)
+      true
+    else
+      false
+    end
+  end
 end
