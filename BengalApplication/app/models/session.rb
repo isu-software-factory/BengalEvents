@@ -10,6 +10,7 @@ class Session < ApplicationRecord
   validates :capacity, presence: true
   has_one :waitlist
 
+  validates :start_date, :end_date, overlap: true
   #has_one :waitlist
 
   #  validate :end_must_be_after_start

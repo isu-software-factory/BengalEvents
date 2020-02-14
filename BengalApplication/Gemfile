@@ -79,7 +79,7 @@ gem 'simplecov', require: false, group: :test
 gem 'rails-controller-testing'
 gem 'jquery-rails'
 gem 'breadcrumbs_on_rails'
-
+gem 'validates_overlap'
 # icons
 gem 'font-awesome-sass', "~> 5.11.2"
 

@@ -20,7 +20,7 @@ class EventsController < ApplicationController
 
   def create
     @event = Event.new(event_params)
-    # authorize occasion
+    # authorize events
     if @event.save
       redirect_to events_path
     else
@@ -71,7 +71,7 @@ class EventsController < ApplicationController
   def event_params
     params.require(:event).permit(:start_date, :description, :name,
                                   activities_attributes: [:id, :name, :description, :user_id,
-                                                          :_destroy, session_attributes:[ :id, :start_time, :end_time, :capacity]])
+                                                          :_destroy, sessions_attributes:[ :id, :start_time, :end_time, :capacity]])
   end
 end
 
