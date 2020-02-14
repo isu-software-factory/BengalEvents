@@ -47,7 +47,7 @@
 <div class="container">
   <div class="">
     <% @events.each do |event| %>
-      <h2 class="accordian"><%= event.name %> <span class="badge badge-secondary">
+      <h2 class="accordian"><%= event.name %> <span class="badge badge-danger">
         Starts at <%= event.start_date.strftime("%d/%m/%Y") %></span></h2>
 
       <div class="row">
