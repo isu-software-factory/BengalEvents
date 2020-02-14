@@ -12,7 +12,7 @@ class EventsController < ApplicationController
 
   def new
     @event = Event.new
-    4.times {@event.activities.build}
+    2.times {@event.activities.build.sessions.build}
     # authorize @occasion
     add_breadcrumb 'Home', current_user
     add_breadcrumb 'New Occasion', new_event_path
@@ -70,7 +70,8 @@ class EventsController < ApplicationController
 
   def event_params
     params.require(:event).permit(:start_date, :description, :name,
-                                  activities_attributes: [:id, :name, :description, :user_id, :_destroy])
+                                  activities_attributes: [:id, :name, :description, :user_id,
+                                                          :_destroy, session_attributes:[ :id, :start_time, :end_time, :capacity]])
   end
 end
 

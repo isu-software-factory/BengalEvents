@@ -15,7 +15,7 @@
     <div class="card-body text-dark bengal-body">
       <div class="container">
         <%= form_for @event, :html => {:class => "form-horizontal center"} do |f| %>
-          <div class="form-group">
+          <div class="form-group-row">
             <%= f.label :name, "Event Name:", class: "col-md-4 control-label" %>
             <div class="col-xs-2">
               <%= f.text_field :name, placeholder: "Event Name", class: "form-control" %>
@@ -33,16 +33,28 @@
               <%= f.date_select :start_date, placeholder: "Start Date", class: "control-label" %>
             </div>
           </div>
+          <hr>
           <%= f.fields_for :activities do |act| %>
             <p class="fields">
+              <h3>Activity</h3>
               <%= act.label :name, "Activity Name", class: "col-md-4 control-label" %>
               <%= act.text_area :name, placeholder: "Activity Name" %>
               <%= act.label :description, "Description" %>
               <%= act.text_area :description, placeholder: "Description" %>
               <%= act.hidden_field :user_id, value: current_user.id %>
-              <%= act.check_box :_destroy %>
-            </p>
+              <%= act.fields_for :sessions do |session| %>
+                <h3>Session</h3>
+                <%= session.label :start_time, "Start Time", class: "" %>
+                <%= session.time_select :start_time, class: "" %>
+                <%= session.label :end_time, "Start Time", class: "" %>
+                <%= session.time_select :end_time, class: "" %>
+                <%= session.label :capacity, "Capacity", class: "" %>
+                <%= session.select :capacity, options_for_select(0..500), class: "" %>
+              <hr>
+            <% end %>
+            <%= act.check_box :_destroy %>
           <% end %>
+
           <div class="form-group">
             <div class="col-md-4 control-label">
               <%= f.submit "Create", class: "btn btn-default btn-primary" %>
@@ -53,13 +65,6 @@
     </div>
   </div>
 </div>
-
-
-
-
-
-
-
 
 
 

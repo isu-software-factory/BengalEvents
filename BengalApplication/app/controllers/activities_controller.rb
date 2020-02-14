@@ -8,6 +8,7 @@ class ActivitiesController < ApplicationController
     @activity = Activity.new
     4.times {@activity.sessions.build}
 
+
     # @event = Event.find(params[:event_id])
     # authorize @event
     add_breadcrumb 'Home', current_user
