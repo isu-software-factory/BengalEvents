@@ -18,6 +18,7 @@ class HomeroutesController < ApplicationController
      @admin = false
      if role == "Teacher" || role == "Admin" || role == "Coordinator"
        @admin = true
+       @students = Teacher.find(current_user.id).users
      end
 
      @show = check_user
@@ -78,7 +79,8 @@ class HomeroutesController < ApplicationController
   end
 
   def create_student
-    names = student_names
+    first_names = student_names("first")
+    last_names = student_names("last")
     emails = student_emails
     redirect = false
 
@@ -87,41 +89,42 @@ class HomeroutesController < ApplicationController
     # check to see if student is already in the database
     for email in emails do
       unless User.exists?(:email => email)
-        redirect = create_students(names[count], email);
+        redirect = create_students(first_names[count], last_names[count], email);
       end
       count += 1
     end
 
     # check to see if a student was removed
-    remove_students(names)
+    remove_students(emails)
+
 
     if redirect
-      redirect_to current_user.meta
+      redirect_to root_path
     else
-      flash[:errors] = @student.errors.full_messages
-      flash[:errors] = @student.user.errors.full_messages
-      redirect_back(fallback_location: current_user)
+      # flash[:errors] = @student.errors.full_messages
+      redirect_back(fallback_location: root_path)
     end
   end
 
 
-  def remove_students(names)
-    students = Student.all
+  def remove_students(email)
+    students = User.all
 
     for student in students
       # remove student
-      unless names.include?(student.name)
+      unless email.include?(student.email) || (student.id == current_user.id)
         student.delete
       end
     end
   end
+
   # returns all the names from params into an array
-  def student_names
+  def student_names(name)
     names = []
     # add each name into names array
 
     params.each do |key, value|
-      if key.start_with?("name")
+      if key.start_with?(name)
         names << value
       end
     end
@@ -141,20 +144,30 @@ class HomeroutesController < ApplicationController
   end
 
   # creates a student
-  def create_students(name1, email1)
-    @student = Student.new(name: name1, user_attributes: { email: email1 }, participant_attributes: {})
-    @teacher.students << @student
+  def create_students(f_name, l_name, email1)
+    @student = User.new(first_name: f_name, last_name: l_name)
+    @teacher = Teacher.find(current_user.id)
+    if email1.include?("@")
+      @student.email = email1
+      @student.user_name = create_user_name(f_name, l_name)
+      asd
+    else
+      @student.user_name = email1
+      @student.email = nil
+    end
+      @teacher.users << @student
 
     # create password
     random_password = rand(36**8).to_s(36)
-    @student.user.password = random_password
-    @student.user.password_confirmation = random_password
+    @student.password = random_password
+    @student.password_confirmation = random_password
 
     # send an email to student if student saves
     if @student.save
       #UserMailer.login_email(@student, @student.user, random_password).deliver_now
       true
     else
+      asd
       false
     end
   end
@@ -172,6 +185,11 @@ class HomeroutesController < ApplicationController
     else
       render :new
     end
+  end
+
+  def create_user_name(f_name, l_name)
+    user_name = l_name + f_name + rand(36**2).to_s(36)
+    user_name
   end
 
   def user_params
