@@ -65,7 +65,7 @@
   </div>
   <%else %>
   <div class="container">
-    <div id="loginbox" style="margin-top:50px;" class="mainbox col-md-10 col-md-offset-1 col-sm-8 col-sm-offset-2">
+    <div id="loginbox" style="margin-top:50px;" class="mainbox col-md-12 col-md-offset-1 col-sm-8 col-sm-offset-2">
       <div class="panel panel-default">
         <div class="panel-heading">
           <div class="panel-title">Enter Student Names and Emails</div>
@@ -81,11 +81,11 @@
                 <div class="col-lg-3">
                   <div class="input-group bottom-indent">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                    <%=text_field_tag "name_" + studentCount.to_s, @students.empty? ? nil : student.first_name, placeholder: @students.empty? ? "Student's First Name" : nil, class: "text-fields"%>
+                    <%=text_field_tag "name_" + studentCount.to_s, @students.empty? ? nil : student.first_name, placeholder: @students.empty? ? "Student's First Name" : nil%>
                   </div>
                 </div>
                 <div class="col-lg-3">
-                  <div class="input-group bottom-indent text-fields">
+                  <div class="input-group bottom-indent">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
                     <%=text_field_tag "name_" + studentCount.to_s, @students.empty? ? nil : student.last_name, placeholder: @students.empty? ? "Student's Last Name" : nil %>
                   </div>
@@ -93,7 +93,7 @@
                 <div class="col-lg-3">
                   <div class="input-group bottom-indent">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-                    <%=text_field_tag "email_" + studentCount.to_s, @students.empty? ? nil : student.email, placeholder: @students.empty? ? "Student Email" : nil, class: "text-fields"%>
+                    <%=text_field_tag "email_" + studentCount.to_s, @students.empty? ? nil : student.email, placeholder: @students.empty? ? "Student Email" : nil%>
                   </div>
                 </div>
                 <div class="col-lg-3">
