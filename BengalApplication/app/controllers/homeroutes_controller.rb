@@ -21,6 +21,19 @@ class HomeroutesController < ApplicationController
        @students = Teacher.find(current_user.id).users
      end
 
+     @teams = 1
+     @count = 0
+     @increase = 1
+     for i in 1..@user.teams.count
+       if @increase == 4
+         @teams += 1
+         @increase = 0
+       end
+       @increase += 1
+     end
+
+     # list of card styles
+     @random_card = %w[rorange growling-gray bg-dark orange]
      @show = check_user
 
      add_breadcrumb "Home", root_path
@@ -56,9 +69,9 @@ class HomeroutesController < ApplicationController
 
   def check_user
     if (params[:id].to_i != current_user.id)
-      true
-    else
       false
+    else
+      true
     end
   end
 
@@ -88,7 +101,7 @@ class HomeroutesController < ApplicationController
 
     # check to see if student is already in the database
     for email in emails do
-      unless User.exists?(:email => email)
+      unless User.exists?(:email => email) || User.exists?(:user_name => email)
         redirect = create_students(first_names[count], last_names[count], email);
       end
       count += 1
@@ -98,10 +111,10 @@ class HomeroutesController < ApplicationController
     remove_students(emails)
 
 
-    if redirect
+    if redirect[0]
       redirect_to root_path
     else
-      # flash[:errors] = @student.errors.full_messages
+       flash[:errors] = redirect[1]
       redirect_back(fallback_location: root_path)
     end
   end
@@ -150,10 +163,9 @@ class HomeroutesController < ApplicationController
     if email1.include?("@")
       @student.email = email1
       @student.user_name = create_user_name(f_name, l_name)
-      asd
     else
       @student.user_name = email1
-      @student.email = nil
+      @student.email = ""
     end
       @teacher.users << @student
 
@@ -162,13 +174,15 @@ class HomeroutesController < ApplicationController
     @student.password = random_password
     @student.password_confirmation = random_password
 
+
     # send an email to student if student saves
     if @student.save
       #UserMailer.login_email(@student, @student.user, random_password).deliver_now
-      true
+      errors = [true, @student.errors.full_messages]
+      return errors
     else
-      asd
-      false
+      errors = [false, @student.errors.full_messages]
+      return errors
     end
   end
 

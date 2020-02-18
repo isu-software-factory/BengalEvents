@@ -32,7 +32,7 @@ Rails.application.routes.draw do
   get "register/:id" => "registrations#registers"
 
   post "students/errors" => "students#errors"
-
+  resources :teams
 resources :events
   resources :activities
   # resources :teams

@@ -1,0 +1,61 @@
+<div class="col-sm-3">
+  <div>
+    <div class="card border-dark mb-3" style="max-width: 18rem;">
+      <div class="card-header">Your Teacher's Information</div>
+      <div class="card-body text-dark">
+        <p class="card-text">Teacher: <%= @user.teacher.user.first_name + " " + @user.teacher.user.last_name %></p>
+        <p class="card-text">School Name: <%= @user.teacher.school_name %></p>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="card border-dark mb-3" style="max-width: 18rem;">
+    <div class="card-header">Actions</div>
+    <div class="card-body text-dark">
+      <div class="indent-bellow">
+        <button class="btn button-small" title="Build a team">
+          <span class="fa fa-users"> </span><%= link_to " Create Team", new_team_path %>
+        </button>
+      </div>
+      <div class="indent-bellow">
+        <button class="btn button-small" title="Register For Events">
+          <span class="fa fa-edit"></span>
+          <%= link_to "Register For Events", controller: "events", action: "index" %>
+        </button>
+      </div>
+      <button class="btn button-small" title="Print My Schedule">
+<!--        <span class="glyphicon glyphicon-print" aria-hidden="true"> </span><%#= link_to "  Print", {controller: "students", action: "print_schedule", id: @student.id}, target: :_blank %>-->
+      </button>
+    </div>
+  </div>
+</div>
+
+
+
+<!--<div class="team-bar"><h2>My Teams</h2></div>-->
+<!--<div class="row"></div>-->
+<%# unless @user.teams.count == 0 %>
+  <%# for t in 1..@teams %>
+<!--    <div class="row">-->
+      <%# for i in 0..2 %>
+        <%# if @user.teams[@count] != nil %>
+<!--          <div class="col-sm-4">-->
+<!--            <a href=<%#= team_path(@user.teams[@count]) %>>-->
+<!--              <div class="card-w-100 text-white <%#= @random_card[Random.rand(4)] %> mb-3 link-card">-->
+<!--                <div class="card-header">Team <%#= @user.teams[@count].team_name %></div>-->
+<!--                <div class="card-body">-->
+<!--                  <p>This team has registered-->
+<!--                    for <%#= @user.teams[@count].sessions.count %> <%#= @user.teams[@count].sessions.count == 1 ? "event." : "events." %></p>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </a>-->
+<!--          </div>-->
+          <%# @count += 1 %>
+        <%# else %>
+          <%# break %>
+        <%# end %>
+      <%# end %>
+<!--    </div>-->
+  <%# end %>
+<%# end %>
