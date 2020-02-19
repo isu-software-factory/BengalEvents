@@ -8,6 +8,7 @@ Rails.application.routes.draw do
 
   resources :admins
   resources :coordinators
+  get "events/index/:role/:id" => "events#index"
   get "teachers/:id" => "teachers#show"
   get "sponsors/pdf/:id" => "sponsors#pdfshow"
   get "teams/pdf/:id" => "teams#teamschedulepdf"
@@ -29,7 +30,8 @@ Rails.application.routes.draw do
   post "registrations/add_to_waitlist/:part_id/:id" => "registrations#add_to_waitlist"
   get "slots/:name" => "activities#location_timeslots"
   post "students/update_new_students" => "students#update_new_students"
-  get "register/:id" => "registrations#registers"
+
+  get "register/:role/:session_id/:id" => "registrations#registers"
 
   post "students/errors" => "students#errors"
   resources :teams
@@ -43,7 +45,7 @@ resources :events
   #   end
   # end
 
-  get "/drop_activity/:session_id/:user_id" => "registrations#drop_activity"
+  get "/drop_activity/:role/:session_id/:id" => "registrations#drop_activity"
   get "homeroutes/home" => 'homeroutes#home'
   get 'homeroutes/user/:id' => 'homeroutes#user', as: "profile"
   get "homeroutes/new/:name" => "homeroutes#new"

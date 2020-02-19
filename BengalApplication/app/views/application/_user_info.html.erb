@@ -1,7 +1,7 @@
 <% if signed_in? %>
   <% if controller.controller_name == "teams" %>
     <% unless params[:id] == nil %>
-      <div class="team_name"><h1>Team <%= Team.find(params[:id]).name %></h1></div>
+      <div class="team_name"><h1>Team <%= Team.find(params[:id]).team_name %></h1></div>
     <% end %>
   <% end %>
   <% unless (controller.action_name == "pdfshow") || (controller.action_name == "teamschedulepdf" || controller.action_name == "print_schedule") || (controller.action_name == "print_class_registrations")   %>

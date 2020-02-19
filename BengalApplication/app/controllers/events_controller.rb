@@ -5,7 +5,14 @@ class EventsController < ApplicationController
   def index
     @events = Event.all
     @activities = Event.first.activities
-    @user = current_user
+    @role = ""
+    if params[:role] == "Team"
+      @role = "Team"
+      @user = Team.find(params[:id])
+    else
+      @role = "User"
+      @user = Team.find(params[:id])
+    end
     add_breadcrumb "Home", current_user
     add_breadcrumb "Occasion List", events_path
   end

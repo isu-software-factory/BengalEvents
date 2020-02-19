@@ -38,16 +38,16 @@ class TeamsController < ApplicationController
 
   def invite
     @team = Team.find(params[:id])
-    authorize @team
-    add_breadcrumb 'Home', current_user.meta
+
+    add_breadcrumb 'Home', root_path
     add_breadcrumb 'Team', @team
     add_breadcrumb 'Invite Members', ""
   end
 
   def show
     @team = Team.find(params[:id])
-    authorize @team
-    add_breadcrumb 'Home', current_user.meta
+
+    add_breadcrumb 'Home', root_path
     add_breadcrumb 'Team', team_path(@team)
   end
 
@@ -57,8 +57,8 @@ class TeamsController < ApplicationController
 
   def new
     @team = Team.new
-    authorize @team
-    add_breadcrumb 'Home', student_path(current_user.meta)
+
+    add_breadcrumb 'Home', root_path
     add_breadcrumb 'Create Team', ""
   end
 
@@ -66,9 +66,8 @@ class TeamsController < ApplicationController
     # create team
     @emails = team_emails
     @team = Team.new(team_params)
-    authorize @team
-    @student = Student.find(current_user.meta.id)
-    Participant.create(member: @team)
+    @student = current_user
+
     # add team lead
     @team.lead = @student.id
     if @team.save
@@ -90,11 +89,11 @@ class TeamsController < ApplicationController
   private
 
   def get_user
-    current_user.meta
+    current_user
   end
 
   def team_params
-    params.require(:team).permit(:name)
+    params.require(:team).permit(:team_name)
   end
 
   def team_emails

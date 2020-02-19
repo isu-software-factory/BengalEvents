@@ -29,12 +29,13 @@ $(document).on('ready page:load turbolinks:load', function() {
 
     function register_check_box(checkBox) {
         const event_id = parseInt($(checkBox).val());
-
+        const user_id = $(checkBox).attr("user_id");
+        const role = $(checkBox).attr("role");
         const checkboxs = checkBox;
         var parent = $(checkBox).parent();
         // use ajax to send back info
         Rails.ajax({
-            url: `/register/${event_id}`,
+            url: `/register/${role}/${event_id}/${user_id}`,
             type: 'GET',
             dataType: "json",
             success: function (data) {
@@ -44,8 +45,9 @@ $(document).on('ready page:load turbolinks:load', function() {
                     parent.text("Registered");
                     checkboxs.remove();
                     button = $("<button class='button-small glyphicon glyphicon-remove left-indent remove-button'></button>");
-                    button.attr("user_id", data.data.user);
+                    button.attr("user_id", user_id);
                     button.attr("session_id", event_id);
+                    button.attr("role", role);
                     button.click(function(){remove_activity(this)});
                     parent.next().append(button);
                 } else if (!data.data.registered) {
@@ -58,8 +60,9 @@ $(document).on('ready page:load turbolinks:load', function() {
     function remove_activity (button){
         const user_id = $(button).attr("user_id");
         const event_id = $(button).attr("session_id");
+        const role = $(button).attr("role");
         Rails.ajax({
-            url: `/drop_activity/${event_id}/${user_id}`,
+            url: `/drop_activity/${role}/${event_id}/${user_id}`,
             type: 'GET',
             dataType: "json",
             success: function(data){
@@ -67,6 +70,8 @@ $(document).on('ready page:load turbolinks:load', function() {
                 parent.prev().text("");
                 check_box = $("<input type='checkbox' name='register'>");
                 check_box.attr("value", event_id);
+                check_box.attr("role", role);
+                check_box.attr("user_id", user_id);
                 check_box.attr("title", "Register for activity");
                 check_box.click(function(){register_check_box(this);});
                 parent.prev().append(check_box);

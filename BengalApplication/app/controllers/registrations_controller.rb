@@ -108,18 +108,12 @@ class RegistrationsController < ApplicationController
   end
 
   def drop_activity
-    success = drop_user
-    if success
-      render json: {drop: {success: true}}
-    else
-      render json: {drop: {success: false}}
-    end
+    drop_user
   end
 
   def registers
-    event = Session.find(params[:id].to_i)
-    participant = current_user
-
+    event = Session.find(params[:session_id].to_i)
+    participant = get_participant
     # add participant to event
     success = event.register_participant(participant)
 
@@ -133,17 +127,26 @@ class RegistrationsController < ApplicationController
 
   private
 
+  def get_participant
+    if params[:role] == "Team"
+      participant = Team.find(params[:id])
+      participant
+    else
+      participant = User.find(params[:id])
+      participant
+    end
+  end
+
   def drop_user
     # drop participants from activities
     @session = Session.find(params[:session_id])
-    @user = User.find(params[:user_id])
 
-    @session.users.delete(@user)
+    @user = get_participant
 
-    if !@session.users.include?(@user)
-      true
+    if params[:role] == "Team"
+      @session.teams.delete(@user)
     else
-      false
+      @session.users.delete(@user)
     end
   end
 end

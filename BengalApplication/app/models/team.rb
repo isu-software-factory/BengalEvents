@@ -11,7 +11,8 @@
 class Team < ApplicationRecord
   has_many :groupings
   has_many :users, through: :groupings
-  
+  has_many :team_registrations
+  has_many :sessions, through: :team_registrations
 
   validates :team_name, presence: true
   validates :lead, presence: true
