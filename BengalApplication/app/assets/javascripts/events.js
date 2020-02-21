@@ -80,36 +80,146 @@ $(document).on('ready page:load turbolinks:load', function() {
         })
     }
 
-
+    // location number
+    locationCount = 1;
+    roomCount = 1;
 
     // creating a new event
-    $("button").click(function(){
-        // add plus button
-
-            $(this).parent().parent().parent().prev().children().last().children().last().append(createButton("plus"));
-
-        // remove row
-        $(this).parent().parent().parent().remove();
-    })
+    // $("button").click(function(){
+    //     // add plus button
+    //
+    //         $(this).parent().parent().parent().prev().children().last().children().last().append(createButton("plus"));
+    //
+    //     // remove row
+    //     $(this).parent().parent().parent().remove();
+    // })
 
 
 });
 
-function createNewLoaction(){
+function addNewLocation(){
+    locationCount = parseInt(locationCount) + 1;
+
+    // Text fields
+    var locationName = document.createElement("input");
+    setAttributes(locationName, "Location Name", locationCount, 1);
+
+    var locationAddress = document.createElement("input");
+    setAttributes(locationAddress, "Address (optional)", locationCount, 2);
+
+    // buttons
+    var minusButton = createButton("minus", "Location");
+    var addButton = createButton("plus", "Location");
+
+    // set row
+    var row = newRow("Location");
+
+    // set elements
+    setToDiv(locationName, row);
+    setToDiv(locationAddress, row);
+    setButtonsToDiv(minusButton, addButton, row);
+}
+
+function addNewRoom(){
+    roomCount = parseInt(roomCount) + 1;
+
+    // Text fields
+    var roomNumber = document.createElement("input");
+    setAttributes(roomNumber, "Room Number", roomCount, 1);
+
+    var roomName = document.createElement("input");
+    setAttributes(roomName, "Room Name (optional)", roomCount, 2);
+
+    // buttons
+    var minusButton = createButton("minus", "Room");
+    var addButton = createButton("plus", "Room");
+
+    // set row
+    var row = newRow("Room");
+
+    // set elements
+    setToDiv(roomNumber, row);
+    setToDiv(roomName, row);
+    setButtonsToDiv(minusButton, addButton, row);
+}
+
+
+function setToDiv(element, row){
+    var div = newDivGroup(row);
+    div.appendChild(element);
+}
+
+function newDivGroup(row){
+    var div = document.createElement("div");
+    div.setAttribute("class", "col-lg-4");
+
+    // append child to row
+    row.appendChild(div);
+    return div;
+}
+
+function setButtonsToDiv(mButton, aButton, row){
+    var div = newDivGroup(row);
+    div.appendChild(mButton);
+    div.appendChild(aButton);
+}
+
+// create a new div with class row
+function newRow(page) {
+    // new div with class row
+    var row = document.createElement('div');
+    row.setAttribute("class", "row");
+
+    if (page === "Location") {
+        // new container for row
+        var pageLocation = document.createElement("div");
+        pageLocation.setAttribute("class", "Location");
+        return setRow(pageLocation, row, "Room");
+    }
+    else {
+        return setRow($(".Room").last(), row, "Location");
+    }
+}
+
+function setRoomRow(element){
 
 }
 
-function createNewRoom(){
+// set row in location or room div
+function setRow(container, element, location){
+    // insert container
+    $(container).insertAfter($("." + location).last());
 
+    // create hr element
+    var hr = document.createElement("hr");
+    $(hr).insertAfter("." + location).last();
+
+    container.appendChild(element);
+    alert("It worked");
+    return element;
 }
 
-function createButton(type){
+
+// set attributes to the text fields
+function setAttributes(element, names, count, order){
+    element.setAttribute("type", "text");
+    element.setAttribute("placeholder", names);
+    element.setAttribute("id", names.toLowerCase());
+    element.setAttribute("name", names.toLowerCase() + "_" + count);
+    if (order == 1)
+        element.setAttribute("class", "form-control left-indent-more");
+    else
+        element.setAttribute("class", "form-control");
+}
+
+
+function createButton(type, location){
     var button = document.createElement("button");
     button.setAttribute("type", "button");
 
     if (type === "minus"){
         // set attributes
-        button.setAttribute("title", "Remove This Location");
+        button.setAttribute("title", "Remove This " + location);
         button.setAttribute("class", "button-small glyphicon glyphicon-minus");
         // remove fields and add plus button before this element
         $(button).click(function() {
@@ -119,9 +229,12 @@ function createButton(type){
         });
     }else{
         // set attributes
-        button.setAttribute("title", "Add New Student");
-        button.setAttribute("onClick", "addNewStudent()");
+        if (location === "Location")
+            button.setAttribute("onClick", "addNewLocation()");
+        else
+            button.setAttribute("onClick", "addNewRoom()");
         button.setAttribute("class", "button-small left-indent glyphicon glyphicon-plus");
+        button.setAttribute("title", "Add New " + location);
     }
 
     return button;

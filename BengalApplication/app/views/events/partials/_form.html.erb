@@ -39,7 +39,7 @@
           </div>
         </div>
 
-        <div id="Loaction">
+        <div class="Location">
           <div class="row">
             <div class="col-lg-4">
               <%= text_field_tag "Location", nil, placeholder: "Location Name", class: "form-control left-indent-more" %>
@@ -48,12 +48,12 @@
               <%= text_field_tag "Address", nil, placeholder: "Address (optional)", class: "form-control" %>
             </div>
             <div class="col-lg-4">
-              <button class="button-small glyphicon glyphicon-plus" type="button" title="Add a new location"></button>
+              <button class="button-small glyphicon glyphicon-plus" type="button" onclick="addNewLocation()" title="Add a new location"></button>
             </div>
           </div>
         </div>
         <hr>
-        <div id="Room">
+        <div class="Room">
           <div class="row">
             <div class="col-lg-3 sub-section left-indent-more">
               <%= text_field_tag "Room_number_1", nil, placeholder: "Room #", class: "form-control" %>

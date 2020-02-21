@@ -1,14 +1,13 @@
-
 // printing page
-$(document).on('ready page:load turbolinks:load', function (){
+$(document).on('ready page:load turbolinks:load', function () {
     var element = document.getElementById("student-schedule");
-    if (element != null){
+    if (element != null) {
         print(this);
     }
 
     // new student page
     // assign function to all minus buttons
-    $("button").click(function() {
+    $("button").click(function () {
         if ($("#student-form").find("button").last().prev()[0] === $(this)[0])
             $(this).parent().parent().parent().prev().children().last().children().last().append(createButton("plus"));
 
@@ -33,12 +32,8 @@ $(document).on('ready page:load turbolinks:load', function (){
 });
 
 
-
-
-
-
 // new students page
-function addNewStudent(){
+function addNewStudent() {
     studentCount = parseInt(studentCount) + 1;
     // remove the previous add button
     removePreviousButton();
@@ -76,11 +71,11 @@ function addNewStudent(){
 }
 
 // set attributes to the text fields
-function setAttributes(element, names, count){
+function setAttributes(element, names, count) {
     element.setAttribute("type", "text");
-    if (names === "Email"){
+    if (names === "Email") {
         element.setAttribute("placeholder", "Student " + names + " or Username");
-    }else{
+    } else {
         element.setAttribute("placeholder", names + " Name");
     }
     element.setAttribute("id", names.toLowerCase());
@@ -88,25 +83,25 @@ function setAttributes(element, names, count){
 }
 
 
-function removePreviousButton(){
+function removePreviousButton() {
     $("#student-form").find("button").last().remove();
 }
 
-function createButton(type){
+function createButton(type) {
     var button = document.createElement("button");
     button.setAttribute("type", "button");
 
-    if (type === "minus"){
+    if (type === "minus") {
         // set attributes
         button.setAttribute("title", "Remove This Student");
         button.setAttribute("class", "button-small glyphicon glyphicon-minus");
         // remove fields and add plus button before this element
-        $(button).click(function() {
+        $(button).click(function () {
             if (($("#student-form").find("button").last().prev()[0] === $(this)[0]))
                 $(this).parent().parent().parent().prev().children().last().children().last().append(createButton("plus"));
             $(this).parent().parent().parent().remove();
         });
-    }else{
+    } else {
         // set attributes
         button.setAttribute("title", "Add New Student");
         button.setAttribute("onClick", "addNewStudent()");
@@ -117,28 +112,27 @@ function createButton(type){
 }
 
 
-
 // create a span element with icon
-function createSpan(type){
+function createSpan(type) {
     var span = document.createElement("span");
     span.setAttribute("class", "input-group-addon");
 
     var icon = document.createElement("i");
-    icon.setAttribute("class", "glyphicon glyphicon-"+type);
+    icon.setAttribute("class", "glyphicon glyphicon-" + type);
 
     span.appendChild(icon);
     return span;
 }
 
 // set the elements to a div
-function setToDiv(element, icon, row){
+function setToDiv(element, icon, row) {
     var div = newDivInputGroup(row);
 
     div.appendChild(icon);
     div.appendChild(element);
 }
 
-function setButtonsToDiv(minusButton, addButton, row){
+function setButtonsToDiv(minusButton, addButton, row) {
     var div = newDivInputGroup(row);
 
     div.appendChild(minusButton);
@@ -146,7 +140,7 @@ function setButtonsToDiv(minusButton, addButton, row){
 }
 
 // create a new div with class row
-function newRow(){
+function newRow() {
     // new div with class row
     var row = document.createElement('div');
     row.setAttribute("class", "row");
@@ -155,25 +149,25 @@ function newRow(){
 }
 
 // insert row in DOM
-function setRow(element){
-    $(element).insertAfter($("#student-form").children().last().prev());
-    return element;
-}
+    function setRow(element) {
+        $(element).insertAfter($("#student-form").children().last().prev());
+        return element;
+    }
 
 // creates div input group class for css
-function newDivInputGroup(row){
-    var div = document.createElement('div');
-    div.setAttribute("class", "input-group bottom-indent");
+    function newDivInputGroup(row) {
+        var div = document.createElement('div');
+        div.setAttribute("class", "input-group bottom-indent");
 
 
-    var col = document.createElement('div');
-    col.setAttribute("class", "col-lg-3");
+        var col = document.createElement('div');
+        col.setAttribute("class", "col-lg-3");
 
-    // append child's
-    col.appendChild(div);
-    row.appendChild(col);
-    return div;
-}
+        // append child's
+        col.appendChild(div);
+        row.appendChild(col);
+        return div;
+    }
 
 
 
