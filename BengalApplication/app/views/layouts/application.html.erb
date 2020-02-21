@@ -7,6 +7,8 @@
   <%= csp_meta_tag %>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
+
+
   <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
   <% if controller.controller_name == "sessions" %>
     <%= javascript_include_tag 'application', :sessions, 'data-turbolinks-track': 'reload' %>
@@ -30,7 +32,7 @@
     <%= render 'user_info' %>
   </div>
   <div class="navigation">
-<!--   <span> <%#= render_breadcrumbs :separator => ' / ' %> </span>-->
+   <span> <%= render_breadcrumbs :separator => ' / ' %> </span>
   </div>
   <div class="content">
     <p class="alert alert-success"><%= notice %></p>

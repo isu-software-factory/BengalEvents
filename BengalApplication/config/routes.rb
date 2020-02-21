@@ -9,10 +9,8 @@ Rails.application.routes.draw do
   resources :admins
   resources :coordinators
   get "events/index/:role/:id" => "events#index"
-  get "teachers/:id" => "teachers#show"
   get "sponsors/pdf/:id" => "sponsors#pdfshow"
   get "teams/pdf/:id" => "teams#teamschedulepdf"
-  get "teachers/class_registrations/:id" => "teachers#class_registrations"
   get "students/schedule/:id" => "students#schedule"
   get "students/print_schedule/:id" => "students#print_schedule"
   get "groupings/add/:id/:team_id" => "groupings#add"
@@ -26,7 +24,7 @@ Rails.application.routes.draw do
   post 'teams/:id/register_members' => "teams#register_members"
   get "teams/:id/invite" => "teams#invite"
   post "groupings/drop/:part_id/:id" => "groupings#drop"
-  post "registrations/drop/:user_id/:id" => "registrations#drop"
+  post "registrations/drop/:role/:session_id/:id" => "registrations#drop"
   post "registrations/add_to_waitlist/:part_id/:id" => "registrations#add_to_waitlist"
   get "slots/:name" => "activities#location_timeslots"
   post "students/update_new_students" => "students#update_new_students"

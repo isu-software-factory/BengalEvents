@@ -3,7 +3,11 @@
   <div class="row">
     <div class="col border-right">
 
-      <h1> <%= @event.name %> </h1>
+      <h1 class="accordian"><%= @event.name %>
+         <%=link_to " Edit", edit_event_path(@event), class: "btn button-small glyphicon glyphicon-edit" %>
+        <%= link_to "Delete", event_path(@event.id), class: "btn btn-danger", data: {method: :delete, confirm: "Are you sure?"} %></h1>
+
+
 
       <%# if current_user.is_a? Coordinator %>
 

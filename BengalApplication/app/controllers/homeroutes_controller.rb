@@ -2,8 +2,7 @@ class HomeroutesController < ApplicationController
   def home
     # user signed in then redirect them to their page
     if user_signed_in?
-      redirect_to profile_path(current_user.id)
-      #redirect_to controller: "homeroutes", action: "user", id: current_user.id
+      redirect_to controller: "events", action: "index", role: "User", id: current_user.id
     end
     # if user isn't signed in then show activities for current occasion
     unless Event.first.nil?
@@ -12,37 +11,40 @@ class HomeroutesController < ApplicationController
     end
   end
 
-   def user
-     role = current_user.roles.first.role_name
-     @user = User.find(params[:id])
-     @admin = false
-     if role == "Teacher" || role == "Admin" || role == "Coordinator"
-       @admin = true
-       @students = Teacher.find(current_user.id).users
-     end
+  def user
+    @role = current_user.roles.first.role_name
+    @user = User.find(params[:id])
+    @admin = false
+    @events = Event.all
 
-     @teams = 1
-     @count = 0
-     @increase = 1
-     for i in 1..@user.teams.count
-       if @increase == 4
-         @teams += 1
-         @increase = 0
-       end
-       @increase += 1
-     end
+    if @role == "Teacher"
+      @admin = true
+      @students = Teacher.find(current_user.id).users
+    end
 
-     # list of card styles
-     @random_card = %w[rorange growling-gray bg-dark orange]
-     @show = check_user
+    if @role == "Student" || !@show
+      @teams = 1
+      @count = 0
+      @increase = 1
+      for i in 1..@user.teams.count
+        if @increase == 4
+          @teams += 1
+          @increase = 0
+        end
+        @increase += 1
+      end
+      # list of card styles
+      @random_card = %w[rorange growling-gray bg-dark orange]
+    end
 
-     add_breadcrumb "Home", root_path
+    @show = check_user
+    add_breadcrumb "Home", root_path(role: "User", id: @user.id)
 
-     if check_user
-       add_breadcrumb @user.first_name, root_path(@user.id)
-     end
+    if check_user
+      add_breadcrumb @user.first_name + " Profile", profile_path(@user)
+    end
 
-   end
+  end
 
   def new
     @controller = params[:name]
@@ -114,7 +116,7 @@ class HomeroutesController < ApplicationController
     if redirect[0]
       redirect_to root_path
     else
-       flash[:errors] = redirect[1]
+      flash[:errors] = redirect[1]
       redirect_back(fallback_location: root_path)
     end
   end
@@ -167,10 +169,10 @@ class HomeroutesController < ApplicationController
       @student.user_name = email1
       @student.email = ""
     end
-      @teacher.users << @student
+    @teacher.users << @student
 
     # create password
-    random_password = rand(36**8).to_s(36)
+    random_password = rand(36 ** 8).to_s(36)
     @student.password = random_password
     @student.password_confirmation = random_password
 
@@ -202,7 +204,7 @@ class HomeroutesController < ApplicationController
   end
 
   def create_user_name(f_name, l_name)
-    user_name = l_name + f_name + rand(36**2).to_s(36)
+    user_name = l_name + f_name + rand(36 ** 2).to_s(36)
     user_name
   end
 

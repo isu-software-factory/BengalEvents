@@ -13,7 +13,7 @@
         <%# if (current_user.roles.first.role_name == "Teacher") %>
           <%#= link_to "Account Settings", edit_teacher_path(current_user), class: "dropdown-item" %>
         <%#else %>
-          <%= link_to "Account Settings", edit_user_registration_path, class: "dropdown-item" %>
+          <%= link_to "Account Settings", edit_user_registration_path(current_user), class: "dropdown-item" %>
         <%#end %>
         <%= link_to "Log Out", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
       </div>

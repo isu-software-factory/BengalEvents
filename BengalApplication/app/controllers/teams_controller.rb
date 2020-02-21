@@ -46,8 +46,10 @@ class TeamsController < ApplicationController
 
   def show
     @team = Team.find(params[:id])
+    @role = "Team"
 
     add_breadcrumb 'Home', root_path
+    add_breadcrumb current_user.first_name + " Profile", profile_path(current_user)
     add_breadcrumb 'Team', team_path(@team)
   end
 

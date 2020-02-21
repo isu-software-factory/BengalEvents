@@ -104,7 +104,8 @@ class RegistrationsController < ApplicationController
     drop_user
     # when participant is drop check waitlist
     #@event_detail.wait_list_check
-    redirect_to root_path
+    @user = get_participant
+    params[:role] == "Team" ? (redirect_to team_path(@user)) : (redirect_to profile_path(@user))
   end
 
   def drop_activity

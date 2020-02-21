@@ -11,23 +11,22 @@ class EventsController < ApplicationController
       @user = Team.find(params[:id])
     else
       @role = "User"
-      @user = Team.find(params[:id])
+      @user = User.find(params[:id])
     end
-    add_breadcrumb "Home", current_user
-    add_breadcrumb "Occasion List", events_path
+    add_breadcrumb "Home", root_path(role: @role, id: @user.id)
   end
 
   def new
     @event = Event.new
     2.times {@event.activities.build.sessions.build}
-    # authorize @occasion
-    add_breadcrumb 'Home', current_user
-    add_breadcrumb 'New Occasion', new_event_path
+    authorize @event
+    add_breadcrumb 'Home', root_path
+    add_breadcrumb 'New Event', new_event_path
   end
 
   def create
     @event = Event.new(event_params)
-    # authorize events
+    authorize @event
     if @event.save
       redirect_to events_path
     else
@@ -39,22 +38,22 @@ class EventsController < ApplicationController
   def show
     @location = Location.all
     @event = Event.find(params[:id])
-    # authorize @occasion
-    #add_breadcrumb 'Home', current_user
-    #add_breadcrumb @event.name, event_path(@event)
+    authorize @event
+    add_breadcrumb 'Home', root_path
+    add_breadcrumb @event.name, event_path(@event)
   end
 
   def edit
     @event = Event.find(params[:id])
-    # authorize @occasion
-    add_breadcrumb "Home", current_user
+    authorize @event
+    add_breadcrumb "Home", root_path
     add_breadcrumb @event.name, event_path
     # add_breadcrumb "Edit", edit_event_path(@event)
   end
 
   def update
     @event = Event.find(params[:id])
-    # authorize @occasion
+    authorize @event
     if @event.update(event_params)
       redirect_to events_path, :notice => 'Successfully updated Occasion.'
     else
@@ -65,7 +64,7 @@ class EventsController < ApplicationController
 
   def destroy
     event = Event.find(params[:id])
-    # authorize occasion
+    authorize event
     if event.destroy
       redirect_to events_path, notice: 'Successfully Deleted Occasion.'
     else

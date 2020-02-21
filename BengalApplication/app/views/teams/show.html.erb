@@ -26,7 +26,7 @@
               <td><%=s.start_time.strftime("%l:%M %p") %> -  <%= s.end_time.strftime("%l:%M %p") %></td>
               <%if policy(@team).change? %>
                 <td>
-                  <%=button_to("Drop Event", {controller: "registrations", user_id: @team.id, id: s.id, action: :drop}, class: "button", data: {confirm: "Are you sure?"}) %>
+                  <%=button_to("Drop Event", {controller: "registrations", id: @team.id, session_id: s.id, role: @role, action: :drop}, class: "button", data: {confirm: "Are you sure?"}) %>
                 </td>
               <%end %>
             </tr>

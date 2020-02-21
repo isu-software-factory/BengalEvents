@@ -80,4 +80,50 @@ $(document).on('ready page:load turbolinks:load', function() {
         })
     }
 
+
+
+    // creating a new event
+    $("button").click(function(){
+        // add plus button
+
+            $(this).parent().parent().parent().prev().children().last().children().last().append(createButton("plus"));
+
+        // remove row
+        $(this).parent().parent().parent().remove();
+    })
+
+
 });
+
+function createNewLoaction(){
+
+}
+
+function createNewRoom(){
+
+}
+
+function createButton(type){
+    var button = document.createElement("button");
+    button.setAttribute("type", "button");
+
+    if (type === "minus"){
+        // set attributes
+        button.setAttribute("title", "Remove This Location");
+        button.setAttribute("class", "button-small glyphicon glyphicon-minus");
+        // remove fields and add plus button before this element
+        $(button).click(function() {
+            if (($("#student-form").find("button").last().prev()[0] === $(this)[0]))
+                $(this).parent().parent().parent().prev().children().last().children().last().append(createButton("plus"));
+            $(this).parent().parent().parent().remove();
+        });
+    }else{
+        // set attributes
+        button.setAttribute("title", "Add New Student");
+        button.setAttribute("onClick", "addNewStudent()");
+        button.setAttribute("class", "button-small left-indent glyphicon glyphicon-plus");
+    }
+
+    return button;
+}
+
