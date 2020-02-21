@@ -2,7 +2,10 @@
 
 ## A replacement webapp for the Bengal STEM Day and other events.
 
-### Guide for Installation and initial operation
+### Ruby Version
+- The ruby version installed currently is 2.5.5.
+
+### Guide for Installation and initial configuration
 
 - Download rails packages software at "http://railsinstaller.org/en" based on your operating system.
     - This bundled download includes Ruby, Rails, Git, Bundler, Sqlite, and more.
@@ -24,8 +27,36 @@
 - In terminal, run 'rails server'
 - Go to "localhost:3000" in browser to see homepage.
 
+## Database Intilization
+   This app use mysql 2 as the backend database. 
+   - Before configuring the database, please install mysql server.
+        - sudo wget http://repo.mysql.com/mysql-community-release-el7-5.noarch.rpm
+        - sudo rpm -ivh mysql-community-release-el7-5.noarch.rpm
+- You’ll need to start the MySQL service by entering:
+        - sudo systemctl start mysqld
+- To check the status of MySQL use the command:
+        - sudo systemctl status mysqld
+   
+ - To configure the database:
+   - Install mysql 2 gem. This can be done my adding "gem mysql2" in the GemFile.
+   - To allow rails to use database, go to config/database.yml and setup the database. Use the following in the database.yml file.   
+       - adapter: mysql2
+       - encoding: utf8
+       - database: bengalevents
+       - username: someuser
+       - password: somepassword
+   - Run rails db:create db:migrate --trace from the command line to make sure it works.
+   
 ## Testing
 - When testing with Capybara and Selenium make sure that you have chrome installed before your run the tests. It will throw an error otherwise. Also make sure that the chrome version is 79 or it will not work either. 
 - Only works on **Linux** and **Windows**
 - To run the features tests with Selenium, run using `rspec spec/features` to run all features tests. 
 - To run the model tests, run using `rspec spec/models` to run all model tests.
+
+
+## Deployment instructions
+
+For deploying please see the attached document named "Deployment.docx" in docs folder.
+
+
+
