@@ -115,13 +115,17 @@ class RegistrationsController < ApplicationController
   def registers
     event = Session.find(params[:session_id].to_i)
     participant = get_participant
-    # add participant to event
-    success = event.register_participant(participant)
+    success = false
+    # authorize participant as a registration policy
+
+      # add participant to event
+      success = event.register_participant(participant)
+
 
     if success
       render json: {data: {registered: true, user: participant.id}}
     else
-      render json: {data: {registered: false}}
+      render json: {data: {registered: false, error: "Access Denied"}}
     end
 
   end

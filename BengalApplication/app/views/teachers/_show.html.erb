@@ -6,55 +6,64 @@
 
 
 
-  <div class="row">
-      <div class="col-sm">
-      <h2>My Students</h2>
-      <table class="table">
-        <thead class="thead-dark">
-        <tr>
-          <th scope="col">Name</th>
-          <th scope="col">Email</th>
-          <th scope="col">Registered For Activities</th>
+<div class="row">
+  <div class="col-sm">
+    <h2>My Students</h2>
+    <table class="table">
+      <thead class="thead-dark">
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Email</th>
+        <th scope="col">Registered For Activities</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @students.each do |s| %>
+        <tr class="see-student">
+          <th scope="row">
+            <div class="dropdown">
+              <a class="btn dropdown-toggle" href="#" role="button" id="dropdownMenuLink1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
+              <%= s.first_name + " " + s.last_name %>
+              <div class="dropdown-menu menu-container dropdown-menu-left">
+                <%=link_to "Register For Student", {controller: "events", action: "index", id: s.id, role: "User"}, class: "dropdown-item", title: "Register in place of the student" %>
+                <%=link_to "Request New Password", root_path, title: "Request a new password for student", class: "dropdown-item" %>
+              </div>
+            </div>
+          </th>
+          <td><%= s.email %></td>
+          <td><%= s.sessions.count > 0 ? "Yes" : "No" %></td>
         </tr>
-        </thead>
-        <tbody>
-          <% @students.each do |s| %>
-            <tr class="see-student" >
-              <th scope="row"><%=s.sessions.count > 0 ? (link_to s.first_name + " " + s.last_name, {controller: "students", action: "schedule", id: s.id}) :s.first_name + " " + s.last_name %></th>
-              <td><%=s.email %></td>
-              <td><%= s.sessions.count > 0 ? "Yes":"No" %></td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
-    </div>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
 
 
-    <div class="col-sm-3">
-      <div>
-        <div class="card border-dark mb-3" style="max-width: 22rem;">
-          <div class="card-header">Actions</div>
-          <div class="card-body text-dark">
-            <div class="indent-bellow">
+  <div class="col-sm-3">
+    <div>
+      <div class="card border-dark mb-3" style="max-width: 22rem;">
+        <div class="card-header">Actions</div>
+        <div class="card-body text-dark">
+          <div class="indent-bellow">
             <button class="btn button-small" title="Add or Remove students">
-              <span class="fa fa-user-plus"> </span><%=link_to " Add New Sutdents", controller: "homeroutes", action: "new", name: "Student" %>
+              <span class="fa fa-user-plus"> </span><%= link_to " Add New Sutdents", controller: "homeroutes", action: "new", name: "Student" %>
             </button>
-            </div>
-            <div class="indent-bellow">
+          </div>
+          <div class="indent-bellow">
             <button class="btn button-small" title="Register for events">
-              <span class="fa fa-edit"></span><%=link_to " Register", controller: "events", action: "index", title: "Register for activities"%>
+              <span class="fa fa-edit"></span><%= link_to " Register", controller: "events", action: "index", title: "Register for activities" %>
             </button>
-            </div>
-            <div class="indent-bellow">
+          </div>
+          <div class="indent-bellow">
             <button class="btn button-small" title="View My Student's Registrations">
-<!--              <span class="fas fa-eye"></span><%#=link_to " Class Registrations", controller: "teachers", action: "class_registrations", id: @user.id%>-->
+              <!--              <span class="fas fa-eye"></span><%#=link_to " Class Registrations", controller: "teachers", action: "class_registrations", id: @user.id%>-->
             </button>
-            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
+</div>
 
 
 

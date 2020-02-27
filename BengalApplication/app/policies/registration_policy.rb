@@ -9,6 +9,11 @@ class RegistrationPolicy < ApplicationPolicy
     end
   end
 
+  def registers?
+    role = user.roles.first.role_name
+    user.id == record.id || role == "Teacher" || role == "Admin" || role == "Coordinator"
+  end
+
   def events?
     # only teachers, students, and teams can see registration for activities
     if user.meta_type == "Student"

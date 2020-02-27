@@ -27,8 +27,11 @@ class EventsController < ApplicationController
   def create
     @event = Event.new(event_params)
     authorize @event
+    # create locations and rooms
+    create_locations
+
     if @event.save
-      redirect_to events_path
+      redirect_to root_path(role: "User", id: current_user.id)
     else
       flash[:errors] = @event.errors.full_messages
       redirect_back(fallback_location: new_event_path)
@@ -58,7 +61,7 @@ class EventsController < ApplicationController
       redirect_to events_path, :notice => 'Successfully updated Occasion.'
     else
       flash[:errors] = @events.errors.full_messages
-       render :edit
+      render :edit
     end
   end
 
@@ -75,9 +78,52 @@ class EventsController < ApplicationController
   private
 
   def event_params
-    params.require(:event).permit(:start_date, :description, :name,
-                                  activities_attributes: [:id, :name, :description, :user_id,
-                                                          :_destroy, sessions_attributes:[ :id, :start_time, :end_time, :capacity]])
+    params.permit(:name, :start_date, :description)
   end
+
+  # get locations from parameters
+  def get_values(name)
+    values = []
+    # add locations to locatinos array
+    params.each do |key, value|
+      if key.start_with?(name)
+        values << value
+      end
+    end
+    values
+  end
+
+  def create_locations
+    locations = get_values("location")
+    addresses = get_values("address")
+    new_locations = []
+    count = 0
+
+    # create locations
+    locations.each do |location|
+      new_locations << Location.create(location_name: location, address: addresses[count])
+      count += 1
+    end
+
+    add_rooms(new_locations)
+  end
+
+  def add_rooms(locations)
+    room_numbers = get_values("room_number")
+    room_names = get_values("room_name")
+    count = 0
+    location_count = -1
+    # create rooms and add them to locations
+    room_numbers.each do |room|
+      if room.start_with?("room_number_New")
+        location_count += 1
+        locations[location_count].rooms.create(room_number: room, room_name: room_names[count])
+      else
+        locations[location_count].rooms.create(room_number: room, room_name: room_names[count])
+      end
+      count += 1
+    end
+  end
+
 end
 

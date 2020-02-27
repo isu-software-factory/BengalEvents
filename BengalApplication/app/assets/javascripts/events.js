@@ -1,5 +1,9 @@
+$(document).on('ready page:load turbolinks:load', function () {
+  // assign datepicker
+    $("#start_date").datepicker({
+        dateFormat: "yy-mm-dd"
+    });
 
-$(document).on('ready page:load turbolinks:load', function() {
 // assign all checkbox with function
     $("input[type='checkbox']").change(function () {
         register_check_box(this);
@@ -7,22 +11,22 @@ $(document).on('ready page:load turbolinks:load', function() {
 
     $(".accordion").hide();
 
-    $(".accordion").parent().parent().prev().click(function(){
+    $(".accordion").parent().parent().prev().click(function () {
         const accordion = $(this).next().children().first().children().first();
         down_icon = "glyphicon glyphicon-menu-down";
         up_icon = "glyphicon glyphicon-menu-up";
-        if (accordion.hasClass("Down")){
+        if (accordion.hasClass("Down")) {
             accordion.slideUp();
             accordion.removeClass("Down");
             $(this).children().last().children().first().removeClass(up_icon).addClass(down_icon);
-        }else {
+        } else {
             accordion.slideDown();
             accordion.addClass("Down");
             $(this).children().last().children().first().removeClass(down_icon).addClass(up_icon);
         }
     });
 
-    $(".remove-button").click(function(){
+    $(".remove-button").click(function () {
         remove_activity(this);
     });
 
@@ -48,7 +52,9 @@ $(document).on('ready page:load turbolinks:load', function() {
                     button.attr("user_id", user_id);
                     button.attr("session_id", event_id);
                     button.attr("role", role);
-                    button.click(function(){remove_activity(this)});
+                    button.click(function () {
+                        remove_activity(this)
+                    });
                     parent.next().append(button);
                 } else if (!data.data.registered) {
                     alert("false");
@@ -57,7 +63,7 @@ $(document).on('ready page:load turbolinks:load', function() {
         })
     }
 
-    function remove_activity (button){
+    function remove_activity(button) {
         const user_id = $(button).attr("user_id");
         const event_id = $(button).attr("session_id");
         const role = $(button).attr("role");
@@ -65,7 +71,7 @@ $(document).on('ready page:load turbolinks:load', function() {
             url: `/drop_activity/${role}/${event_id}/${user_id}`,
             type: 'GET',
             dataType: "json",
-            success: function(data){
+            success: function (data) {
                 parent = $(button).parent();
                 parent.prev().text("");
                 check_box = $("<input type='checkbox' name='register'>");
@@ -73,7 +79,9 @@ $(document).on('ready page:load turbolinks:load', function() {
                 check_box.attr("role", role);
                 check_box.attr("user_id", user_id);
                 check_box.attr("title", "Register for activity");
-                check_box.click(function(){register_check_box(this);});
+                check_box.click(function () {
+                    register_check_box(this);
+                });
                 parent.prev().append(check_box);
                 $(button).remove();
             }
@@ -84,155 +92,205 @@ $(document).on('ready page:load turbolinks:load', function() {
     locationCount = 1;
     roomCount = 1;
 
-    // creating a new event
-    // $("button").click(function(){
-    //     // add plus button
-    //
-    //         $(this).parent().parent().parent().prev().children().last().children().last().append(createButton("plus"));
-    //
-    //     // remove row
-    //     $(this).parent().parent().parent().remove();
-    // })
-
-
+    $("button").each(function () {
+        // check to see that the div is a room
+        if ($(this).parent().parent().parent().attr("class") == "Room") {
+            // add function to button
+            $(this).click(function () {
+                addNewRoom($(this).parent().parent().parent(), $(this));
+            })
+        } else {
+            // add function to button
+            $(this).click(function () {
+                addNewLocation($(this));
+            })
+        }
+    })
 });
 
-function addNewLocation(){
+function addNewLocation(button) {
     locationCount = parseInt(locationCount) + 1;
+
+    // remove the previous add button
+    removePreviousButton(button);
 
     // Text fields
     var locationName = document.createElement("input");
-    setAttributes(locationName, "Location Name", locationCount, 1);
+    setAttributes(locationName, "Location Name", "Location Name", "", locationCount, "left-indent-more");
 
     var locationAddress = document.createElement("input");
-    setAttributes(locationAddress, "Address (optional)", locationCount, 2);
+    setAttributes(locationAddress, "Address (optional)", "Address", "", locationCount, "");
 
     // buttons
     var minusButton = createButton("minus", "Location");
     var addButton = createButton("plus", "Location");
 
-    // set row
-    var row = newRow("Location");
+    // set new container for elements
+    var row = newRow();
+    var container = newContainer();
 
+
+    setRow(container, row, true, true);
     // set elements
     setToDiv(locationName, row);
     setToDiv(locationAddress, row);
-    setButtonsToDiv(minusButton, addButton, row);
+    setButtonsToDiv(minusButton, addButton, row, "Location");
+
+    // add room below
+    // new room container
+    var row2 = newRow();
+    var room = newRoomContainer();
+    setRow(room, row2, true, true);
+    addNewRoom($(room), null, "_New_");
 }
 
-function addNewRoom(){
-    roomCount = parseInt(roomCount) + 1;
+function addNewRoom(room, button, eClass) {
+    if (button != null)
+        removePreviousButton(button);
 
+    roomCount = parseInt(roomCount) + 1;
+    room = room[0];
+
+    if (eClass == null) eClass = "";
     // Text fields
     var roomNumber = document.createElement("input");
-    setAttributes(roomNumber, "Room Number", roomCount, 1);
+    setAttributes(roomNumber, "Room #", "Room Number", eClass, roomCount, "");
 
     var roomName = document.createElement("input");
-    setAttributes(roomName, "Room Name (optional)", roomCount, 2);
+    setAttributes(roomName, "Room Name (optional)", "Room Name", eClass, roomCount, "");
 
     // buttons
     var minusButton = createButton("minus", "Room");
     var addButton = createButton("plus", "Room");
 
-    // set row
-    var row = newRow("Room");
+    // new row within room div
+    row = newRow();
+    setRow(room, row, false, false);
+
 
     // set elements
-    setToDiv(roomNumber, row);
-    setToDiv(roomName, row);
-    setButtonsToDiv(minusButton, addButton, row);
+    setToDiv(roomNumber, row, "Room", "left-indent-more");
+    setToDiv(roomName, row, "Room");
+    setButtonsToDiv(minusButton, addButton, row, "Room");
 }
 
 
-function setToDiv(element, row){
-    var div = newDivGroup(row);
+function setToDiv(element, row, type, eClass) {
+
+    var div = newDivGroup(row, type, eClass);
     div.appendChild(element);
 }
 
-function newDivGroup(row){
+function newDivGroup(row, type, eClass) {
     var div = document.createElement("div");
-    div.setAttribute("class", "col-lg-4");
-
+    if (type == "Room") {
+        div.setAttribute("class", "col-lg-3 sub-section " + eClass);
+    } else {
+        div.setAttribute("class", "col-lg-4");
+    }
     // append child to row
     row.appendChild(div);
     return div;
 }
 
-function setButtonsToDiv(mButton, aButton, row){
-    var div = newDivGroup(row);
+function setButtonsToDiv(mButton, aButton, row, type) {
+    var div = newDivGroup(row, type);
     div.appendChild(mButton);
     div.appendChild(aButton);
 }
 
 // create a new div with class row
-function newRow(page) {
+function newRow() {
     // new div with class row
     var row = document.createElement('div');
     row.setAttribute("class", "row");
 
-    if (page === "Location") {
-        // new container for row
-        var pageLocation = document.createElement("div");
-        pageLocation.setAttribute("class", "Location");
-        return setRow(pageLocation, row, "Room");
-    }
-    else {
-        return setRow($(".Room").last(), row, "Location");
-    }
+    return row;
 }
 
-function setRoomRow(element){
+// creates a location container
+function newContainer() {
+    // new container for row
+    var pageLocation = document.createElement("div");
+    pageLocation.setAttribute("class", "Location");
+    return pageLocation;
+}
 
+// creates a new room container
+function newRoomContainer() {
+    // new container for room
+    var room = document.createElement("div");
+    room.setAttribute("class", "Room");
+    return room;
 }
 
 // set row in location or room div
-function setRow(container, element, location){
-    // insert container
-    $(container).insertAfter($("." + location).last());
+function setRow(container, element, setHr, insertContainer) {
 
-    // create hr element
-    var hr = document.createElement("hr");
-    $(hr).insertAfter("." + location).last();
+    if (setHr) {
+        // create hr element
+        var hr = document.createElement("hr");
+        $(hr).insertAfter($("#event-form").children().last().prev());
+    }
+    if (insertContainer)
+    // insert container
+        $(container).insertAfter($("#event-form").children().last().prev());
 
     container.appendChild(element);
-    alert("It worked");
     return element;
 }
 
 
 // set attributes to the text fields
-function setAttributes(element, names, count, order){
+function setAttributes(element, placeholder, names, eName, count, eClass) {
     element.setAttribute("type", "text");
-    element.setAttribute("placeholder", names);
-    element.setAttribute("id", names.toLowerCase());
-    element.setAttribute("name", names.toLowerCase() + "_" + count);
-    if (order == 1)
-        element.setAttribute("class", "form-control left-indent-more");
-    else
-        element.setAttribute("class", "form-control");
+    element.setAttribute("placeholder", placeholder);
+    element.setAttribute("name", names.toLowerCase() + "_" + eName + count);
+    element.setAttribute("class", "form-control " + eClass);
 }
 
 
-function createButton(type, location){
+function createButton(type, location) {
     var button = document.createElement("button");
     button.setAttribute("type", "button");
 
-    if (type === "minus"){
+    if (type === "minus") {
         // set attributes
         button.setAttribute("title", "Remove This " + location);
         button.setAttribute("class", "button-small glyphicon glyphicon-minus");
         // remove fields and add plus button before this element
-        $(button).click(function() {
-            if (($("#student-form").find("button").last().prev()[0] === $(this)[0]))
-                $(this).parent().parent().parent().prev().children().last().children().last().append(createButton("plus"));
-            $(this).parent().parent().parent().remove();
+        $(button).click(function () {
+            // add plus button back to the previous row
+            if ($(this).parent().parent().parent().find("button").last().prev().is($(this))){
+                if ($(this).parent().parent().parent().attr("class") == "Room")
+                    $(this).parent().parent().prev().children().last().append(createButton("plus", location));
+                else
+
+                    $(".Location").last().prev().prev().prev().prev().children().last().children().last().append(createButton("plus", location));
+            }
+
+            if (location == "Location") {
+                // remove location and rooms
+                $(this).parent().parent().parent().prev().remove(); // previous hr
+                $(this).parent().parent().parent().next().remove(); // next hr
+                $(this).parent().parent().parent().next().remove();  // Room
+                $(this).parent().parent().parent().remove(); // Location
+            }
+            else {
+                $(this).parent().parent().remove();
+            }
+
         });
-    }else{
+    } else {
         // set attributes
         if (location === "Location")
-            button.setAttribute("onClick", "addNewLocation()");
+            $(button).click(function () {
+                addNewLocation($(this));
+            });
         else
-            button.setAttribute("onClick", "addNewRoom()");
+            $(button).click(function () {
+                addNewRoom($(this).parent().parent().parent(), $(this));
+            });
         button.setAttribute("class", "button-small left-indent glyphicon glyphicon-plus");
         button.setAttribute("title", "Add New " + location);
     }
@@ -240,3 +298,6 @@ function createButton(type, location){
     return button;
 }
 
+function removePreviousButton(button) {
+    button.remove();
+}
