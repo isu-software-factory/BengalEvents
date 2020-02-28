@@ -2,109 +2,76 @@ require 'rails_helper'
 
 RSpec.feature "Registrations", type: :feature do
   context "register for sessions" do
-    before do
+    before(:each) do
       @teacher = User.first
       @student = User.find(2)
       @student2 = User.find(3)
+      @session = Session.find(4)
       login_as(@student2)
+      visit root_path(role: "User", id: @student2.id)
     end
 
     it "click on checkbox to register for activity, should be successful" do
-      first(".Registered").set(true)
+      # click first row
+      first(".event-collapse").click()
+      check "register"
       expect(first(".registered")).to have_content("Registered")
     end
 
-    it "should fail due to double registration" do
-      @event_detail.register_participant(@teacher.participant)
-      visit "registrations/activities/#{@teacher.participant.id}/#{@occasion.id}"
-
-      page.execute_script %Q{ $('#hide_down').removeClass('hide').addClass('show')}
-      click_button "Register"
-
-      expect(page).to have_content("You are already registered for this event")
+    it "should not allow due to double registration" do
+      first(".event-collapse").click()
+      check "register"
+      expect(first(".registered")).not_to have_field("register")
     end
 
     it "should fail due to full capacity" do
-      @event_detail.register_participant(@student.participant)
-      @event_detail.register_participant(@student2.participant)
-      visit "registrations/activities/#{@teacher.participant.id}/#{@occasion.id}"
+      # capacity left is 1 - teacher = 0
+      @session.register_participant(@teacher)
+      first(".event-collapse").sibling(".event-collapse").click()
+      check "register"
 
-      page.execute_script %Q{ $('#hide_down').removeClass('hide').addClass('show')}
-      click_button "Register"
-
-      expect(page).to have_content("Event capacity is full. Register for a different event.")
+      # Alert box
+      expect(page).to have_content("Activity capacity is full. Register for a different Activity.")
     end
   end
 
-  context "index method" do
-    before do
-      @occasion = occasions(:two)
-      @event_detail = event_details(:six)
-      @teacher = Teacher.create(name: "Kelly", school: "Valley", student_count: 23, chaperone_count: 2, user_attributes: {email: "tech@gmail.com", password: "password"}, participant_attributes: {})
-    end
-
-    it 'should redirect user to list of activities to register' do
-      login_as(@teacher.user)
-      visit "registrations/index/#{@teacher.participant.id}"
-      click_link "ASM"
-      expect(page).to have_content("Events")
-    end
-  end
 
   context "activities method" do
-    before do
-      @occasion = occasions(:two)
-      @event = events(:three)
-      @teacher = Teacher.create(name: "Kelly", school: "Valley", student_count: 23, chaperone_count: 2, user_attributes: {email: "tech@gmail.com", password: "password"}, participant_attributes: {})
+    before(:each) do
+      @student = User.find(2)
+      @team = Team.first
+      login_as(@student)
     end
 
-    it "should display list of activities to register" do
-      login_as(@teacher.user)
-      visit "registrations/activities/#{@teacher.participant.id}/#{@occasion.id}"
-      expect(page).to have_content(@event.name)
+    it "should display list of non competition activities only to users" do
+      visit root_path(role: "User", id: @student.id)
+      expect(page).to have_content("Bengal Stem Day")
+      expect(page).to have_content("Robotics")
+      expect(page).to have_content("Raspberry Pi")
+    end
+
+    it "should display list of competition activities only to teams" do
+      visit "events/index/Team/1"
+      expect(page).to have_content("Bengal Stem Day")
+      expect(page).to have_content("Developing A Game")
     end
   end
 
   context "drop method" do
-    before do
-      @occasion = occasions(:two)
-      @event_detail = event_details(:six)
-      @teacher = Teacher.create(name: "Kelly", school: "Valley", student_count: 23, chaperone_count: 2, user_attributes: {email: "tech@gmail.com", password: "password"}, participant_attributes: {})
-      @event_detail.register_participant(@teacher.participant)
+    before(:each) do
+      @teacher = User.find(2)
+      login_as(@teacher)
+      visit root_path(role: "User", id: @teacher.id)
     end
 
     it "should successfully remove participant from event" do
-      login_as(@teacher.user)
-      visit "teachers/#{@teacher.id}"
-      expect(page).to have_content("Computers")
+      first(".event-collapse").click()
+      expect(first(".registered")).to have_content("Registered")
+      # click the unregister button
+      find('.remove-button').click()
 
-      click_button "Drop"
-      page.driver.browser.switch_to.alert.accept
-      expect(page).not_to have_content("Computers")
+      expect(first(".registered")).not_to have_content("Registered")
     end
   end
 
-  context "Waitlist method" do
-    before do
-      @occasion = occasions(:two)
-      @event_detail = event_details(:six)
-      @teacher = Teacher.create(name: "Kelly", school: "Valley", student_count: 23, chaperone_count: 2, user_attributes: {email: "tech@gmail.com", password: "password"}, participant_attributes: {})
-      @student = @teacher.students.build(name: "Dan", user_attributes: {email: "student@gmail.com", password: 'password'}, participant_attributes: {})
-      @student.save
-      @student2 = @teacher.students.build(name: "Tim", user_attributes: {email: "student2@gmail.com", password: 'password'}, participant_attributes: {})
-      @student2.save
-      login_as(@teacher.user)
-    end
-
-    it "will add the teacher to the waitlist successfully" do
-      @event_detail.register_participant(@student.participant)
-      @event_detail.register_participant(@student2.participant)
-
-      visit "registrations/activities/#{@teacher.participant.id}/#{@occasion.id}"
-      page.execute_script %Q{ $('#hide_down').removeClass('hide').addClass('show')}
-
-      click_button("Add to WaitList")
-      expect(page).to have_content("You have been added to the WaitList")
-    end
-  end
 end

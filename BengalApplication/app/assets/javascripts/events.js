@@ -4,7 +4,7 @@ $(document).on('ready page:load turbolinks:load', function () {
         dateFormat: "yy-mm-dd"
     });
 
-// assign all checkbox with function
+    // assign all checkbox with function
     $("input[type='checkbox']").change(function () {
         register_check_box(this);
     });
@@ -57,12 +57,13 @@ $(document).on('ready page:load turbolinks:load', function () {
                     });
                     parent.next().append(button);
                 } else if (!data.data.registered) {
-                    alert("false");
+                    $(".content p").last().append(data.data.error);
                 }
             }
         })
     }
 
+    // drop an activity in user
     function remove_activity(button) {
         const user_id = $(button).attr("user_id");
         const event_id = $(button).attr("session_id");
@@ -74,7 +75,7 @@ $(document).on('ready page:load turbolinks:load', function () {
             success: function (data) {
                 parent = $(button).parent();
                 parent.prev().text("");
-                check_box = $("<input type='checkbox' name='register'>");
+                let check_box = $("<input type='checkbox' name='register'>");
                 check_box.attr("value", event_id);
                 check_box.attr("role", role);
                 check_box.attr("user_id", user_id);
@@ -82,6 +83,7 @@ $(document).on('ready page:load turbolinks:load', function () {
                 check_box.click(function () {
                     register_check_box(this);
                 });
+                $(".container p").first().append(data.data.message);
                 parent.prev().append(check_box);
                 $(button).remove();
             }
@@ -99,7 +101,7 @@ $(document).on('ready page:load turbolinks:load', function () {
             $(this).click(function () {
                 addNewRoom($(this).parent().parent().parent(), $(this));
             })
-        } else {
+        } else if($(this).parent().parent().parent().attr("class") == "Location") {
             // add function to button
             $(this).click(function () {
                 addNewLocation($(this));

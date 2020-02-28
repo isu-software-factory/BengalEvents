@@ -110,6 +110,7 @@ class RegistrationsController < ApplicationController
 
   def drop_activity
     drop_user
+    render json: {data: {message: "Successfully Unregistered"}}
   end
 
   def registers
@@ -125,7 +126,12 @@ class RegistrationsController < ApplicationController
     if success
       render json: {data: {registered: true, user: participant.id}}
     else
-      render json: {data: {registered: false, error: "Access Denied"}}
+      error_message = "Access Denied"
+      # capacity is full
+      if event.capacity_remaining == 0
+        error_message = "Activity capacity is full. Register for a different Activity."
+      end
+      render json: {data: {registered: false, error: error_message}}
     end
 
   end
