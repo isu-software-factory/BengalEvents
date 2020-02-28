@@ -1,0 +1,53 @@
+<% content_for :title, "Events" %>
+<h1>Events</h1>
+<hr>
+<div class="container">
+  <div class="row">
+    <div class="col border-right">
+      <div class="card-columns">
+        <% @events.each do |event| %>
+          <div class="card mb-5 border-dark">
+            <div class="card-header">
+              <h4> <%= event.name %>  </h4>
+<!--              <span>Created By: <%#= event.coordinator.user.email %></span>-->
+            </div>
+            <div class="card-body text-dark">
+              <p class="card-text">Name: <%= event.name %></p>
+              <p class="card-text">Description: <%= event.description %></p>
+              <p class="card-text">Start Date: <%= event.start_date.strftime("%Y-%m-%d") %></p>
+              <p>
+                <% if policy(event).edit? %>
+                  <%= link_to "Edit", edit_event_path(event.id), class: "btn btn-secondary" %>
+                <% end %>
+                <% if policy(event).destroy? %>
+                  <%= link_to "Delete", event_path(event.id), class: "btn btn-danger", data: {method: :delete, confirm: "Are you sure?"} %>
+                <% end %></p>
+              <hr>
+              <p class="card-text">
+                <button class="btn button-small" title="View list of events in event">
+                  <span class="far fa-eye"></span><%= link_to "View Events", event_path(event.id), class: "btn button-small" %>
+                </button>
+              </p>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="col-sm-2">
+      <div class="card border-dark mb-3" style="max-width: 18rem;">
+        <div class="card-header">Actions</div>
+        <div class="card-body text-dark">
+          <% if policy(@events).create? %>
+            <button class="btn button-small" title="Create a new event">
+              <span class="far fa-calendar-plus"></span><%= link_to "New Occasion", new_event_path %>
+            </button>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+

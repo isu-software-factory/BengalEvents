@@ -12,56 +12,36 @@
 </div>
 
 
+
+
 <div class="container">
-  <h2>Activities</h2>
-  <div class="row">
-    <div class="col-lg-12">
-      <table class="table">
-        <thead class="event-header">
-        <tr>
-          <th class="name">Name</th>
-          <th>Description</th>
-          <th></th>
-        </tr>
-        </thead>
+  <div class="">
+    <% @events.each do |event| %>
+      <h2 class="accordian"><%= event.name %> <span class="badge badge-danger">
+        Starts at <%= event.start_date.strftime("%d/%m/%Y") %></span></h2>
 
-        <% @activities.each do |e| %>
-          <tr class="event-collapse ">
-            <td class="name"><%= e.name %></td>
-            <td><%= e.description %></td>
-            <td><span class="glyphicon glyphicon-menu-down"></span></td>
-          </tr>
-          <tr>
-            <td colspan="2">
-              <div class="accordion">
-                <table class="table">
-                  <thead class="session-header">
-                  <tr>
-                    <th>Time</th>
-                    <th>Spots Left</th>
-                    <th >Status</th>
-                    <th>Unregister</th>
-                  </tr>
-                  </thead>
-                  <tbody>
-                  <% e.sessions.each do |s| %>
-                    <tr class="events">
-                      <td><%= s.start_time.strftime("%l:%M %p") %> -  <%= s.end_time.strftime("%l:%M %p") %></td>
-                      <td><%= s.capacity_remaining %></td>
-                      <td class="registered"><%= @user.sessions.include?(s) ? "Registered" : check_box_tag("registered", value = s.id, false, title: "Register for activity") %> </td>
-                      <td><%= @user.sessions.include?(s) ? content_tag(:button, "", class: ["button-small", "glyphicon", "glyphicon-remove", "left-indent", "remove-button"], title: "Unregister for activity", user_id: @user.id, session_id: s.id) : nil %></td>
-                    </tr>
-                  <% end %>
-                  </tbody>
-                </table>
+      <div class="row">
+        <div class="col-lg-12">
+          <table class="table">
+            <thead class="event-header">
+            <tr>
+              <th class="name">Name</th>
+              <th>Description</th>
+              <th></th>
+            </tr>
+            </thead>
 
-              </div>
-            </td>
-          </tr>
-        <% end %>
-
-      </table>
+            <% @activities.each do |e| %>
+              <%if e.iscompetetion && @role == "Team"%>
+                <%= render :partial => "registrations/activities", locals: {e: e, role: @role} %>
+              <%elsif !e.iscompetetion && @role == "User" %>
+                <%= render :partial => "registrations/activities", locals: {e: e, role: @role} %>
+                <%end %>
+            <% end %>
+          </table>
+        </div>
+      </div>
+      </div>
+    <% end %>
     </div>
-  </div>
-</div>
 

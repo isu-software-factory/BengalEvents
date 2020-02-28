@@ -9,7 +9,7 @@ class SessionsController < ApplicationController
     @event = Event.find(params[:event_id])
     authorize @event_detail
 
-    add_breadcrumb "Home", current_user.meta
+    add_breadcrumb "Home", root_path
     add_breadcrumb @occasion.name, @occasion
     add_breadcrumb @event.name, occasion_activity_path(@occasion, @event)
     add_breadcrumb "New Session", new_occasion_event_event_detail_path(@occasion, @event)

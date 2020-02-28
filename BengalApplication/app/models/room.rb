@@ -1,6 +1,6 @@
 class Room < ApplicationRecord
   belongs_to :location
-  belongs_to :session
+  has_one :session
 
   validates :room_number, presence: true
 

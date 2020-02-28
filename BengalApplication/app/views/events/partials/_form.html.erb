@@ -10,56 +10,64 @@
 <% end %>
 
 <div class="container">
-  <div class="card border-dark mb-3">
-    <div class="card-header dark-header "><h1>Event Information</h1><span></span></div>
-    <div class="card-body text-dark bengal-body">
-      <div class="container">
-        <%= form_for @event, :html => {:class => "form-horizontal center"} do |f| %>
-          <div class="form-group">
-            <%= f.label :name, "Event Name:", class: "col-md-4 control-label" %>
-            <div class="col-xs-2">
-              <%= f.text_field :name, placeholder: "Event Name", class: "form-control" %>
+  <div class="card mb-3">
+    <div class="card-header event-header"><h1>Event Information</h1></div>
+    <div class="card-body text-dark">
+      <%= form_tag({controller: "events", action: "create"}, {id: "event-form"}) do %>
+        <div class="row">
+          <div class="col-lg-4">
+            <%= text_field_tag "name", nil, placeholder: "Event Name", class: "form-control left-indent-more" %>
+          </div>
+          <div class="col-lg-4">
+            <%= text_area_tag "description", nil, placeholder: "Detailed Description", class: "form-control" %>
+          </div>
+          <div class="col-lg-4">
+            <%= text_field_tag "start_date", nil, placeholder: "Start Date", class: "control-label" %>
+          </div>
+        </div>
+
+        <hr>
+        <div class="row">
+          <div class="col-lg-4">
+            <h2 class="left-indent-more">Locations</h2>
+            <!--            <span class="glyphicon glyphicon-info-sign " title=""></span>-->
+          </div>
+        </div>
+
+        <div class="Location">
+          <div class="row">
+            <div class="col-lg-4">
+              <%= text_field_tag "location_1", nil, placeholder: "Location Name", class: "form-control left-indent-more" %>
+            </div>
+            <div class="col-lg-4">
+              <%= text_field_tag "address_1", nil, placeholder: "Address (optional)", class: "form-control" %>
+            </div>
+            <div class="col-lg-4">
+              <button class="button-small glyphicon glyphicon-plus" type="button" onclick="addNewLocation()" title="Add a new location"></button>
             </div>
           </div>
-          <div class="form-group">
-            <%= f.label :description, "Description:", class: "col-md-4 control-label" %>
-            <div class="col-xs-3">
-              <%= f.text_area :description, placeholder: "Detailed Description", class: "form-control" %>
+        </div>
+        <hr>
+        <div class="Room">
+          <div class="row">
+            <div class="col-lg-3 sub-section left-indent-more">
+              <%= text_field_tag "room_number_New_1", nil, placeholder: "Room #", class: "form-control" %>
+            </div>
+            <div class="col-lg-3 sub-section">
+              <%= text_field_tag "room_name_New_1", nil, placeholder: "Room Name (optional)", class: "form-control" %>
+            </div>
+            <div class="col-lg-3 sub-section">
+              <button class="button-small glyphicon glyphicon-plus" type="button" title="Add a new room"></button>
             </div>
           </div>
-          <div class="form-group">
-            <%= f.label :start_date, "Start Date:", class: "col-md-4 control-label" %>
-            <div class="col-xs-3">
-              <%= f.date_select :start_date, placeholder: "Start Date", class: "control-label" %>
-            </div>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-3 left-indent-more">
+            <%= submit_tag "Save", class: "button button-small" %>
           </div>
-          <%= f.fields_for :activities do |act| %>
-            <p class="fields">
-              <%= act.label :name, "Activity Name", class: "col-md-4 control-label" %>
-              <%= act.text_area :name, placeholder: "Activity Name" %>
-              <%= act.label :description, "Description" %>
-              <%= act.text_area :description, placeholder: "Description" %>
-              <%= act.hidden_field :user_id, value: current_user.id %>
-              <%= act.check_box :_destroy %>
-            </p>
-          <% end %>
-          <div class="form-group">
-            <div class="col-md-4 control-label">
-              <%= f.submit "Create", class: "btn btn-default btn-primary" %>
-            </div>
-          </div>
-        <% end %>
-      </div>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>
-
-
-
-
-
-
-
-
-
-

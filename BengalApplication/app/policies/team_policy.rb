@@ -12,7 +12,7 @@ class TeamPolicy < ApplicationPolicy
 
   def show?
     # only students can see their team
-    @user.meta_type == "Student" && record.students.include?(user.meta)
+    @user.roles.first.role_name == "Student" && record.users.include?(user)
   end
 
   def drop?
@@ -27,6 +27,6 @@ class TeamPolicy < ApplicationPolicy
 
   def change?
     # only team lead can change team details
-    @user.meta_type == "Student" && record.get_lead == @user.meta
+    @user.roles.first.role_name == "Student" && record.get_lead == @user
   end
 end

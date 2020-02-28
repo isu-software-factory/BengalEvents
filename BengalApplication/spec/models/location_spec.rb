@@ -8,11 +8,6 @@ RSpec.describe Location, type: :model do
       expect(location).to eq(false)
     end
 
-    it "ensures address" do
-      location = Location.new(location_name: "SUB").save
-      expect(location).to eq(false)
-    end
-
     it "should create a location successfully" do
       location = Location.new(location_name: "SUB", address: "235 S Ave").save
       expect(location).to eq(true)

@@ -104,46 +104,60 @@ class RegistrationsController < ApplicationController
     drop_user
     # when participant is drop check waitlist
     #@event_detail.wait_list_check
-    redirect_to root_path
+    @user = get_participant
+    params[:role] == "Team" ? (redirect_to team_path(@user)) : (redirect_to profile_path(@user))
   end
 
   def drop_activity
-    success = drop_user
-    if success
-      render json: {drop: {success: true}}
-    else
-      render json: {drop: {success: false}}
-    end
+    drop_user
+    render json: {data: {message: "Successfully Unregistered"}}
   end
 
   def registers
-    event = Session.find(params[:id].to_i)
-    participant = current_user
+    event = Session.find(params[:session_id].to_i)
+    participant = get_participant
+    success = false
+    # authorize participant as a registration policy
 
-    # add participant to event
-    success = event.register_participant(participant)
+      # add participant to event
+      success = event.register_participant(participant)
+
 
     if success
       render json: {data: {registered: true, user: participant.id}}
     else
-      render json: {data: {registered: false}}
+      error_message = "Access Denied"
+      # capacity is full
+      if event.capacity_remaining == 0
+        error_message = "Activity capacity is full. Register for a different Activity."
+      end
+      render json: {data: {registered: false, error: error_message}}
     end
 
   end
 
   private
 
+  def get_participant
+    if params[:role] == "Team"
+      participant = Team.find(params[:id])
+      participant
+    else
+      participant = User.find(params[:id])
+      participant
+    end
+  end
+
   def drop_user
     # drop participants from activities
     @session = Session.find(params[:session_id])
-    @user = User.find(params[:user_id])
 
-    @session.users.delete(@user)
+    @user = get_participant
 
-    if !@session.users.include?(@user)
-      true
+    if params[:role] == "Team"
+      @session.teams.delete(@user)
     else
-      false
+      @session.users.delete(@user)
     end
   end
 end

@@ -3,11 +3,6 @@ require 'rails_helper'
 RSpec.describe User, type: :model do
 
   context "validation tests" do
-    it "ensures email presence" do
-      @user = User.new(password: "password", first_name: "Bill", last_name: "Smith", user_name: "Smith232" ).save
-      expect(@user).to eq(false)
-    end
-
     it "ensures password presence" do
       @user = User.new(email: "em@gmail.com", first_name: "Bill", last_name: "Smith", user_name: "Smith232" ).save
       expect(@user).to eq(false)

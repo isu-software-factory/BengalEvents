@@ -15,6 +15,7 @@
 //= require rails-ujs
 //= require activestorage
 //= require turbolinks
+//= require jquery-ui/widgets/datepicker
 
 $('document').ready(function () {
     setTimeout(function () {

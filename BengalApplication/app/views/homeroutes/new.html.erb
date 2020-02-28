@@ -1,3 +1,4 @@
+
 <%if @controller != "Student" %>
 <div class="container">
     <div id="loginbox" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
@@ -80,13 +81,13 @@
                 <div class="col-lg-3">
                   <div class="input-group bottom-indent">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                    <%=text_field_tag "name_" + studentCount.to_s, @students.empty? ? nil : student.first_name, placeholder: @students.empty? ? "Student's First Name" : nil%>
+                    <%=text_field_tag "first_" + studentCount.to_s, @students.empty? ? nil : student.first_name, placeholder: @students.empty? ? "Student's First Name" : nil%>
                   </div>
                 </div>
                 <div class="col-lg-3">
                   <div class="input-group bottom-indent">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                    <%=text_field_tag "name_" + studentCount.to_s, @students.empty? ? nil : student.last_name, placeholder: @students.empty? ? "Student's Last Name" : nil %>
+                    <%=text_field_tag "last_" + studentCount.to_s, @students.empty? ? nil : student.last_name, placeholder: @students.empty? ? "Student's Last Name" : nil %>
                   </div>
                 </div>
                 <div class="col-lg-3">

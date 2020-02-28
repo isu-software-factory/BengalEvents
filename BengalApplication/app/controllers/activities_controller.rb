@@ -1,18 +1,19 @@
 class ActivitiesController < ApplicationController
   before_action :authenticate_user!
   # before_action :set_occasion, only: %i[new create destroy update edit show]
-  # before_action :set_event, only: %i[destroy update edit show]
-  # after_action :verify_authorized
+  before_action :set_event, only: %i[destroy update edit show]
+  after_action :verify_authorized
 
   def new
     @activity = Activity.new
     4.times {@activity.sessions.build}
 
-    # @event = Event.find(params[:event_id])
+
+    @event = Event.find(params[:event_id])
     # authorize @event
-    add_breadcrumb 'Home', current_user
-    # add_breadcrumb @event.name, @event
-    # add_breadcrumb 'Create Event', new_occasion_activity_path(@occasion)
+    add_breadcrumb 'Home', root_path
+    add_breadcrumb @event.name, @event
+    add_breadcrumb 'Create Event', new_activity_path
   end
 
   def create
@@ -40,10 +41,10 @@ class ActivitiesController < ApplicationController
 
   def edit
     @activity = Activity.find(params[:id])
-    # authorize @event
-    add_breadcrumb "Home", current_user
-    # add_breadcrumb @occasion.name, event_path(@occasion)
-    # add_breadcrumb @event.name, occasion_activity_path(@occasion, @event)
+    authorize @event
+    add_breadcrumb "Home", root_path
+    add_breadcrumb @event.name, event_path(@event)
+    add_breadcrumb @activity.name, activity_path(@activity)
   end
 
   def show
@@ -97,14 +98,10 @@ end
 
 private
 
-#
-# def set_event
-#   @event = Event.find(params[:id])
-# end
-#
-# def set_event
-#   @event = Event.find(params[:event_id])
-# end
+
+def set_event
+  @event = Event.find(params[:id])
+end
 
 def activity_params
   params.require(:activity).permit(:name, :description, :ismakeahead, :iscompetetion, user_id: current_user.id)

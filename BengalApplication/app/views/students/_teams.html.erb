@@ -1,0 +1,26 @@
+<div class="team-bar"><h2>My Teams</h2></div>
+<div class="row"></div>
+  <% unless @user.teams.count == 0 %>
+    <% for t in 1..@teams %>
+      <div class="row">
+        <% for i in 0..2 %>
+          <% if @user.teams[@count] != nil %>
+            <div class="col-sm-4">
+              <a href=<%= team_path(@user.teams[@count]) %>>
+                <div class="card-w-100 text-white <%= @random_card[Random.rand(4)] %> mb-3 link-card">
+                  <div class="card-header">Team <%= @user.teams[@count].team_name %></div>
+                  <div class="card-body">
+                    <p>This team has registered
+                      for <%= @user.teams[@count].sessions.count %> <%= @user.teams[@count].sessions.count == 1 ? "event." : "events." %></p>
+                  </div>
+                </div>
+              </a>
+            </div>
+            <% @count += 1 %>
+          <% else %>
+            <% break %>
+          <% end %>
+        <% end %>
+      </div>
+    <% end %>
+  <% end %>
