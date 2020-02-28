@@ -46,10 +46,6 @@ RSpec.describe Session, type: :model do
       expect(@session.users.first).to eq(@teacher)
       expect(@session.users[1]).to eq(@student)
     end
-
-    it "should have a waitlist" do
-      pending "need to add to seed and database"
-    end
   end
 
   context "method tests" do
@@ -126,10 +122,5 @@ RSpec.describe Session, type: :model do
         expect(@session.capacity_remaining).to eq(1)
       end
     end
-
-    context "wait_list_check method" do
-      pending "waiting to implement"
-    end
-
   end
 end

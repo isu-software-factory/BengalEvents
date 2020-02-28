@@ -1,24 +1,17 @@
 require 'rails_helper'
 
 RSpec.feature "Registrations", type: :feature do
-  fixtures :waitlists, :sessions, :users, :participants, :events, :supervisors, :activities
   context "register for sessions" do
     before do
-      @teacher = Teacher.create(name: "Em", student_count: 23, chaperone_count: 4, school: "pocatello", user_attributes: {email: "te@gmail.com", password: "password"}, participant_attributes: {})
-      @student = @teacher.students.build(name: "Bill", user_attributes: {email: "stu@gmail.com", password: "password"}, participant_attributes: {})
-      @student.save
-      @student2 = @teacher.students.build(name: "Billy", user_attributes: {email: "stud@gmail.com", password: "password"}, participant_attributes: {})
-      @student2.save
-      @occasion = occasions(:two)
-      @event_detail = event_details(:six)
-      login_as(@teacher.user)
+      @teacher = User.first
+      @student = User.find(2)
+      @student2 = User.find(3)
+      login_as(@student2)
     end
 
-    it "click on registration link to register for event, should be successful" do
-      visit "registrations/activities/#{@teacher.participant.id}/#{@occasion.id}"
-      page.execute_script %Q{ $('#hide_down').removeClass('hide').addClass('show')}
-      click_button("Register")
-      expect(page).to have_content("#{@teacher.name}")
+    it "click on checkbox to register for activity, should be successful" do
+      first(".Registered").set(true)
+      expect(first(".registered")).to have_content("Registered")
     end
 
     it "should fail due to double registration" do
