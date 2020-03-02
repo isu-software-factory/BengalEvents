@@ -74,4 +74,32 @@ RSpec.feature "Registrations", type: :feature do
     end
   end
 
+  context "Capacity" do
+    before(:each) do
+      @student = User.find(3)
+      @team = Team.find(2)
+      login_as(@student)
+    end
+
+    it "competition activity should decrease capacity per team" do
+      visit "events/index/Team/2"
+      first(".event-collapse").click()
+      expect(first(".capacity_remaining")).to have_content("1")
+      # register
+      check "register"
+
+      expect(first(".capacity_remaining")).to have_content("0")
+    end
+
+    it "non-competition activity should decrease capacity per participant" do
+      visit root_path(role: "User", id: @student.id)
+      first(".event-collapse").click()
+      expect(first(".capacity_remaining")).to have_content("23")
+      # register
+      check "register"
+
+      expect(first(".capacity_remaining")).to have_content("22")
+    end
+  end
+
 end

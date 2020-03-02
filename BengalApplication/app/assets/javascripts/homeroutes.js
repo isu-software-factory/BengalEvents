@@ -15,7 +15,8 @@ $(document).on('ready page:load turbolinks:load', function () {
     });
 
     // student number
-    studentCount = $("#student-form").children().last().prev().children().last().prev().find("input").attr("id").split('_').pop();
+    if ($("#student-form").length)
+        studentCount = $("#student-form").children().last().prev().children().last().prev().find("input").attr("id").split('_').pop();
 
     // load errors
     // $("#Submit-Students").click(function(event){
@@ -29,7 +30,47 @@ $(document).on('ready page:load turbolinks:load', function () {
     //         }
     //     })
     // });
+
+    // reset student password
+    $(".reset-password").click(function(e){
+        let userId = $(this).attr("user");
+
+        e.preventDefault();
+        // reset password
+        Rails.ajax({
+            url: `/homeroutes/reset_password/${userId}`,
+            type: 'POST',
+            data: "",
+            success: function(result){
+                if (result.data.success)
+                    $(".content p").first().append("Successfully Reset Password. New password has been sent to you by email.")
+            }
+        })
+
+    });
 });
+
+
+// new password
+function displayNewPassword(){
+    let password = prompt("New Password ");
+    return password;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 // new students page

@@ -19,7 +19,7 @@
         <% e.sessions.each do |s| %>
           <tr class="events">
             <td><%= s.start_time.strftime("%l:%M %p") %> -  <%= s.end_time.strftime("%l:%M %p") %></td>
-            <td><%= s.capacity_remaining %></td>
+            <td class="capacity_remaining"><%= s.capacity_remaining %></td>
             <td class="registered"><%= @user.sessions.include?(s) ? "Registered" : check_box_tag("register", value = s.id, false, title: "Register for activity", role: role, user_id: @user.id) %> </td>
             <td><%= @user.sessions.include?(s) ? content_tag(:button, "", class: ["button-small", "glyphicon", "glyphicon-remove", "left-indent", "remove-button"], title: "Unregister for activity", user_id: @user.id, session_id: s.id, role: role) : nil %></td>
           </tr>

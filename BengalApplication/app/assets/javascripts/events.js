@@ -48,7 +48,7 @@ $(document).on('ready page:load turbolinks:load', function () {
                     parent.addClass("registered");
                     parent.text("Registered");
                     checkboxs.remove();
-                    button = $("<button class='button-small glyphicon glyphicon-remove left-indent remove-button'></button>");
+                    let button = $("<button class='button-small glyphicon glyphicon-remove left-indent remove-button'></button>");
                     button.attr("user_id", user_id);
                     button.attr("session_id", event_id);
                     button.attr("role", role);
@@ -56,6 +56,10 @@ $(document).on('ready page:load turbolinks:load', function () {
                         remove_activity(this)
                     });
                     parent.next().append(button);
+
+                    // change capacity
+                    let capacity = parseInt($(button).parent().prev().prev().text()) - 1;
+                    $(button).parent().prev().prev().text(capacity.toString())
                 } else if (!data.data.registered) {
                     $(".content p").last().append(data.data.error);
                 }
@@ -73,6 +77,11 @@ $(document).on('ready page:load turbolinks:load', function () {
             type: 'GET',
             dataType: "json",
             success: function (data) {
+                // change capacity
+                let capacity = parseInt($(button).parent().prev().prev().text()) + 1;
+                $(button).parent().prev().prev().text(capacity.toString());
+
+                // add checkbox and remove button
                 parent = $(button).parent();
                 parent.prev().text("");
                 let check_box = $("<input type='checkbox' name='register'>");

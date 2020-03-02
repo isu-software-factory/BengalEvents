@@ -67,6 +67,18 @@ class HomeroutesController < ApplicationController
     end
   end
 
+
+  def reset_password
+    @user = User.find(params[:id])
+    random_password = rand(36 ** 8).to_s(36)
+    @user.reset_password(random_password, random_password)
+    #UserMailer.reset_email(current_user, @user, random_password).deliver_now
+    render json: {data: {success: true}}
+  end
+
+
+
+
   private
 
   def check_user

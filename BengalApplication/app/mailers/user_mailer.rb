@@ -36,4 +36,11 @@ class UserMailer < ApplicationMailer
       mail(to: @participant.member.user.email, subject: "Event Notice")
     end
   end
+
+  def reset_password(teacher, student, password)
+    @teacher = teacher
+    @password = password
+    @student = student
+    mail(to: @teacher.password, subject: @student.first_name + "'s new password")
+  end
 end

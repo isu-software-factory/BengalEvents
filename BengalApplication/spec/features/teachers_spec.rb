@@ -56,16 +56,19 @@ RSpec.feature "Teachers", type: :feature do
     end
   end
 
-  # Will not be implemented yet
-  # context "destroy teacher" do
-  #  scenario "should be successful" do
-  #    @teacher = Teacher.create(school: "Valley", chaperone_count: 23, student_count: 232, name: "Sally", user_attributes: {email: "t@gmail.com", password: "password"})
-  #    @coordinator = Coordinator.create(name: "Sally", user_attributes: {email: "coordinator@gmail.com", password: "password"})
-  #    login_as(@coordinator.user, :scope => :user)
-  #    visit coordinator_path(@coordinator)
-  #     click_link "Delete"
-  #     expect(page).to have_content "Teacher was successfully deleted"
-  #   end
-  # end
+  context "Controlling Student" do
+    before(:each) do
+      @teacher = User.first
+      login_as(@teacher)
+      visit profile_path(@teacher)
+    end
+
+    it "teacher resets student password and creates a new one" do
+      first(".dropdown-toggle").click
+      sleep(2)
+      find(".reset-password").trigger('click')
+      expect(page).to have_content("Successfully Reset Password")
+    end
+  end
 
 end

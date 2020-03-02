@@ -1,7 +1,6 @@
 require 'rails_helper'
 include Warden::Test::Helpers
 RSpec.feature "Events", type: :feature do
-  fixtures :events, :activities, :locations, :sponsors, :supervisors
 
   context "create new event" do
     before(:each) do
