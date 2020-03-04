@@ -28,12 +28,12 @@ class EventsController < ApplicationController
     @event = Event.new(event_params)
     authorize @event
     # create locations and rooms
-    create_locations
+    errors = create_locations
 
-    if @event.save
-      redirect_to root_path(role: "User", id: current_user.id)
+    if errors.length <= 0 && @event.save
+      redirect_to new_activity_path(event_id: @event.id)
     else
-      flash[:errors] = @event.errors.full_messages
+      flash[:errors] = @event.errors.full_messages + errors
       redirect_back(fallback_location: new_event_path)
     end
   end
@@ -97,15 +97,27 @@ class EventsController < ApplicationController
     locations = get_values("location")
     addresses = get_values("address")
     new_locations = []
+    errors = []
     count = 0
 
     # create locations
     locations.each do |location|
-      new_locations << Location.create(location_name: location, address: addresses[count])
+      local = Location.new(location_name: location, address: addresses[count])
+      if local.save
+        new_locations << local
+      else
+        errors += local.errors.full_messages
+      end
       count += 1
     end
 
-    add_rooms(new_locations)
+    # check locations aren't empty
+    if new_locations.length == 0
+      errors
+    else
+      errors += add_rooms(new_locations)
+      errors
+    end
   end
 
   def add_rooms(locations)
@@ -113,16 +125,27 @@ class EventsController < ApplicationController
     room_names = get_values("room_name")
     count = 0
     location_count = -1
+    errors = []
     # create rooms and add them to locations
     room_numbers.each do |room|
       if room.start_with?("room_number_New")
         location_count += 1
-        locations[location_count].rooms.create(room_number: room, room_name: room_names[count])
+        errors += create_room(room, room_names[count], locations[location_count].id)
       else
-        locations[location_count].rooms.create(room_number: room, room_name: room_names[count])
+        errors += create_room(room, room_names[count], locations[location_count].id)
       end
       count += 1
     end
+    errors
+  end
+
+  def create_room(room, r_name, local_id)
+    errors = []
+    new_room = Room.new(room_number: room, room_name: r_name, location_id: local_id)
+    unless new_room.save
+      errors += new_room.errors.full_messages
+    end
+    errors
   end
 
 end

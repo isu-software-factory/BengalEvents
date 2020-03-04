@@ -6,11 +6,10 @@ class ActivitiesController < ApplicationController
 
   def new
     @activity = Activity.new
-    4.times {@activity.sessions.build}
 
 
     @event = Event.find(params[:event_id])
-    # authorize @event
+    authorize @event
     add_breadcrumb 'Home', root_path
     add_breadcrumb @event.name, @event
     add_breadcrumb 'Create Event', new_activity_path

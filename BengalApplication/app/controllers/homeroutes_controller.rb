@@ -49,7 +49,7 @@ class HomeroutesController < ApplicationController
   def new
     @controller = params[:name]
     if @controller == "Student"
-      @students = Teacher.find(current_user.id).users
+      @students = Teacher.find_by(user_id: current_user.id).users
     else
       @user = User.new
     end
@@ -77,8 +77,6 @@ class HomeroutesController < ApplicationController
   end
 
 
-
-
   private
 
   def check_user
@@ -94,15 +92,41 @@ class HomeroutesController < ApplicationController
     @user = User.new(user_params)
     @user.roles << Role.find_by(role_name: "Teacher")
     @user.roles << Role.find_by(role_name: "Participant")
+    @teacher = Teacher.new(teacher_params)
 
-    if @user.save
+    result = join_teacher(@teacher, @user)
+
+    if result[0]
       # sign in teacher and redirect to students new page
       sign_in @user
-      @students = Arra.new
+      @students = Array.new
       redirect_to controller: "homeroutes", action: "new", name: "Student"
     else
-      render :new
+      flash[:errors] = result[1]
+      redirect_back(fallback_location: {controller: "homeroutes", action: "new", name: "Teacher"})
     end
+  end
+
+  def join_teacher(teacher, user)
+    results = [true,]
+    errors = []
+    @user = user.save
+    if !@user
+      results[0] = false
+      errors += user.errors.full_messages
+      teacher.save
+      errors += teacher.errors.full_messages
+      errors.pop
+    else
+      teacher.user_id = user.id
+      unless teacher.save
+        results[0] = false
+        errors += teacher.errors.full_messages
+      end
+    end
+    @user = user
+    results[1] = errors
+    results
   end
 
   def create_student
@@ -128,7 +152,7 @@ class HomeroutesController < ApplicationController
     if redirect[0]
       redirect_to root_path
     else
-      flash[:errors] = redirect[1]
+      flash[:alert] = redirect[1]
       redirect_back(fallback_location: root_path)
     end
   end
@@ -222,6 +246,10 @@ class HomeroutesController < ApplicationController
 
   def user_params
     params.permit(:user_name, :email, :password, :password_confirmation, :first_name, :last_name)
+  end
+
+  def teacher_params
+    params.permit(:school_name, :chaperone_count)
   end
 
 end

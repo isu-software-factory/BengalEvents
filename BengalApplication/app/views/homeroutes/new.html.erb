@@ -1,3 +1,10 @@
+<% if flash[:errors] %>
+  <% flash[:errors].each do |e| %>
+    <div class="alert alert-danger">
+      <%=e %>
+    </div>
+  <% end %>
+<% end %>
 
 <%if @controller != "Student" %>
 <div class="container">
@@ -12,7 +19,7 @@
             <%if @controller == "Teacher" %>
               <div style="margin-bottom: 25px" class="input-group">
                 <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
-                <%= text_field_tag "school", nil, placeholder: "School", class: "form-control" %>
+                <%= text_field_tag "school_name", nil, placeholder: "School", class: "form-control" %>
               </div>
 
               <div style="margin-bottom: 25px" class="input-group">
@@ -68,7 +75,7 @@
     <div id="loginbox" style="margin-top:50px;" class="mainbox col-md-12 col-md-offset-1 col-sm-8 col-sm-offset-2">
       <div class="panel panel-default">
         <div class="panel-heading">
-          <div class="panel-title">Enter Student Names and Emails</div>
+          <div class="panel-title">Enter Student Name and (Email or Username)</div>
         </div>
 
         <div style="padding-top:30px" id="student-box" class="panel-body">
