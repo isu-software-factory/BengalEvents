@@ -2,29 +2,12 @@ require 'rails_helper'
 
 RSpec.feature "Teachers", type: :feature do
   context "create new teacher" do
-    before(:each) do
-      visit "homeroutes/home"
-      click_link "Register as Teacher"
-      end
 
 
-    scenario "should be successful" do
-      expect(page).to have_content("Sign Up")
-      within('form') do
-        fill_in "school_name", with: "valley"
-        fill_in "chaperone_count", with: 2
-        fill_in 'first_name', with: "Jimmy"
-        fill_in 'last_name', with: "Howard"
-        fill_in 'email', with: "how@gmail.com"
-        fill_in 'user_name', with: "jimIS23"
-        fill_in 'password', with: "password"
-        fill_in "password_confirmation", with: "password"
-      end
-      click_button 'Create Account'
-      expect(page).to have_content("Enter Student Name and (Email or Username)")
-    end
+
 
     scenario "should fail" do
+      visit "/homeroutes/new/Teacher"
       click_button "Create Account"
       expect(page).to have_content("User name can't be blank")
       expect(page).to have_content("Password can't be blank")
@@ -34,7 +17,24 @@ RSpec.feature "Teachers", type: :feature do
       expect(page).to have_content("Last name can't be blank")
     end
   end
+  scenario "should be successful" do
+    visit("/homeroutes/new/" + "Teacher")
+    expect(page).to have_content("Sign Up")
+    within('form') do
+      fill_in "school_name", with: "valley"
+      fill_in "chaperone_count", with: 2
+      fill_in 'first_name', with: "Jimmy"
+      fill_in 'last_name', with: "Howard"
+      fill_in 'email', with: "how@gmail.com"
+      fill_in 'user_name', with: "jimIS23"
+      fill_in 'password', with: "password"
+      fill_in "password_confirmation", with: "password"
+    end
+    click_button 'Create Account'
+    expect(page).to have_content("Enter Student Name and (Email or Username)")
+  end
 end
+
   #context "update teacher" do
   #  before do
   #    @teacher = User.first

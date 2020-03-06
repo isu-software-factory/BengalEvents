@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.feature "EventDetails", type: :feature do
-  fixtures :sponsors, :users, :events, :activities, :locations, :sessions, :coordinators
+
   context "create a new event detail" do
     before do
       @occasion = occasions(:one)
