@@ -16,6 +16,7 @@
 //= require activestorage
 //= require turbolinks
 //= require jquery-ui/widgets/datepicker
+//= require jquery.timepicker.js
 
 $('document').ready(function () {
     setTimeout(function () {

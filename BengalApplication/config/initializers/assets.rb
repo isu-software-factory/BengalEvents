@@ -14,6 +14,7 @@ Rails.application.config.assets.precompile += %w( sponsors.js )
 Rails.application.config.assets.precompile += %w( teams.js )
 Rails.application.config.assets.precompile += %w( homeroutes.js )
 Rails.application.config.assets.precompile += %w( events.js )
+Rails.application.config.assets.precompile += %w( activities.js )
 
 # Precompile additional assets.
 # application.js, application.scss, and all non-JS/CSS in the app/assets

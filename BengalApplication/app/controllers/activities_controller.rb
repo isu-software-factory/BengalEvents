@@ -2,7 +2,7 @@ class ActivitiesController < ApplicationController
   before_action :authenticate_user!
   # before_action :set_occasion, only: %i[new create destroy update edit show]
   before_action :set_event, only: %i[destroy update edit show]
-  after_action :verify_authorized
+ # after_action :verify_authorized
 
   def new
     @activity = Activity.new
@@ -92,6 +92,16 @@ class ActivitiesController < ApplicationController
       end while start_time < end_time
       render json: {results: {dates: dates, times: times}}
     end
+  end
+
+  def get_locations
+    locations = Location.all
+    render json: {results: {locations: locations}}
+  end
+
+  def get_rooms
+    rooms = Location.find_by(location_name: params[:location]).rooms
+    render json: {results: {rooms: rooms}}
   end
 end
 
