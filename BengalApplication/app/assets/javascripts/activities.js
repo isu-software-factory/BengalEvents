@@ -1,7 +1,7 @@
 $(document).on('ready page:load turbolinks:load', function () {
   getLocations();
   $(".start_time").timepicker();
-  $("#locationselect").change(function(){
+  $(".locationselect").change(function(){
       let name = $(this).children("option:selected").val().split("(");
       getRooms(name[0]);
   });
@@ -13,6 +13,7 @@ $(document).on('ready page:load turbolinks:load', function () {
 
 });
 let sessionCount = 1;
+let activityCounter = 1;
 
 // add new session
 function newSession(button){
@@ -32,6 +33,7 @@ function newSession(button){
 
     // create button
     let btn = createButton();
+    let mbtn = createMinusButton();
 
     // create containers
     // create row
@@ -47,14 +49,20 @@ function newSession(button){
     addElementsToColumn(start_date, col1);
     addElementsToColumn(rooms, col2);
     addElementsToColumn(capacity, col3);
+    addElementsToColumn(mbtn, col4);
     addElementsToColumn(btn, col4);
 
     // add columns to row
     addElementsToRow(col1, col2, col3, col4, row);
-
+    addElementsToRow(col3, col4, row);
     // add row to the dom
     addElements(row, button);
+
+    // remove plus button
+    $(button).remove();
 }
+
+
 
 
 
@@ -75,8 +83,6 @@ function addElementsToColumn(element, column){
 function addElementsToRow(col1, col2, col3, col4, row) {
     $(row).append(col1);
     $(row).append(col2);
-    $(row).append(col3);
-    $(row).append(col4);
 }
 
 // adds the elements to the container of button
@@ -104,7 +110,7 @@ function createRow(){
 // create a button
 function createButton(){
     let button = document.createElement("button");
-    $(button).attr("class", "button-small glyphicon glyphicon-plus new-session");
+    $(button).attr("class", "button-small glyphicon glyphicon-plus new-session left-indent");
     $(button).attr("title", "Add New Session");
     $(button).attr("type", "button");
     $(button).click(function () {
@@ -113,6 +119,30 @@ function createButton(){
     return button;
 }
 
+// create minus button
+function createMinusButton(){
+    let mButton = document.createElement("button");
+    $(mButton).attr("class", "button-small glyphicon glyphicon-minus");
+    $(mButton).attr("title", "Remove Session");
+    $(mButton).attr("type", "button");
+    $(mButton).click(function(){
+        removeSession($(this));
+    });
+    return mButton;
+}
+
+
+// remove session elements
+function removeSession(button){
+    addPreviousButton(button);
+    $(button).parent().parent().remove();
+}
+
+// adds button the previous row
+function addPreviousButton(button){
+    let btn = createButton();
+    $(button).parent().parent().prev().children().last().append(btn);
+}
 
 
 
@@ -179,3 +209,118 @@ function createOption(name1, name2){
     $(option).text(name1 + " (" + name2 + ")");
     return option;
 }
+
+
+
+
+
+// create a new element
+function createTag(type, classes, name){
+    let tag = document.createElement("input");
+    $(tag).attr("type", type);
+    $(tag).attr("class", classes);
+    $(tag).attr("name", name);
+    return tag;
+}
+
+
+// add a new activity
+function newActivity(){
+    activityCounter += 1;
+    // new row
+    let parentRow = createRow();
+    let activityContainer = createContainer("col-lg-5 border-right");
+
+    // labels and text fields
+    let lName = createTag("label", "control-label", "");
+    let tName = createTag("text", "form-control", "name" + activityCounter);
+    let nContainer = createContainer("form-group");
+    appendElements(nContainer, lName, tName);
+
+    let lDescription = createTag("label", "control-label", "");
+    let tDescription = createTag("text", "form-control", "name" + activityCounter);
+    let dContainer = createContainer("form-group");
+    appendElements(dContainer, lDescription, tDescription);
+
+    let lMakeAhead = createTag("label", "control-label", "ismakeahead" + activityCounter);
+    let checkBox = createTag("checkbox", "");
+    let mContainer = createContainer("form-group");
+    appendElements(mContainer, lMakeAhead, checkBox);
+
+
+    let lCompetition = createTag("label", "control-label", "iscompetition" + activityCounter);
+    let cCheckBox = createTag("checkbox", "");
+    let cContainer = createContainer("form-group");
+    appendElements(cContainer, lCompetition, cCheckBox);
+
+    let lLocation = createTag("label", "control-label", "Choose Location of Activity");
+    let lSelect = createSelect("form-control locationselect", "location" + activityCounter);
+    let sContainer = createContainer("form-group");
+    appendElements(sContainer, lLocation, lSelect);
+
+    addElementsToContainer(activityContainer, parentRow, nContainer);
+    addElementsToRow(dContainer, mContainer, activityContainer);
+    addElementsToRow(cContainer, sContainer, activityContainer);
+
+
+    appendToForm(parentRow);
+}
+
+function createSelect(classes, name){
+    let select = document.createElement("select");
+    $(select).attr("class", classes);
+    $(select).attr("name", name + activityCounter);
+}
+
+// add row to form
+function appendToForm(row){
+    $("hr").insertAfter($("#activity-form").children().last().prev());
+    $(row).insertAfter($("#activity-form").children().last().prev());
+}
+
+function addElementsToContainer(mainContainer, container, row){
+    $(mainContainer).append(container);
+    $(row).append(mainContainer);
+}
+
+
+// add elements to container
+function appendElements(container, label, element){
+    $(container).append(label);
+    $(container).append(element);
+
+}
+
+
+// create a new container
+function createContainer(classes){
+    let div = document.createElement("div");
+    $(div).attr("class", classes);
+    return div;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

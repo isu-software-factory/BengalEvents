@@ -1,3 +1,5 @@
+//=require coordinators.js
+
 // printing page
 $(document).on('ready page:load turbolinks:load', function () {
     var element = document.getElementById("student-schedule");
@@ -18,18 +20,6 @@ $(document).on('ready page:load turbolinks:load', function () {
     if ($("#student-form").length)
         studentCount = $("#student-form").children().last().prev().children().last().prev().find("input").attr("id").split('_').pop();
 
-    // load errors
-    // $("#Submit-Students").click(function(event){
-    //     event.preventDefault();
-    //     Rails.ajax({
-    //         url: `errors`,
-    //         type: 'POST',
-    //         data: $("#student-form").serialize(),
-    //         success: function(result){
-    //             alert("Worked");
-    //         }
-    //     })
-    // });
 
     // reset student password
     $(".reset-password").click(function(e){
@@ -48,6 +38,11 @@ $(document).on('ready page:load turbolinks:load', function () {
         })
 
     });
+
+    // if coordinator page
+    if ($("#coordinator_page").length)
+        accordion_collapse();
+
 });
 
 
@@ -56,20 +51,6 @@ function displayNewPassword(){
     let password = prompt("New Password ");
     return password;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

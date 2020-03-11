@@ -24,24 +24,23 @@
           <div class="col-lg-5 border-right">
             <div class="form-group">
               <%= label_tag "Activity Name", nil, class: "control-label" %>
-              <%= text_field_tag "name", nil, class: "form-control" %>
+              <%= text_field_tag "name1", nil, class: "form-control" %>
             </div>
             <div class="form-group">
               <%= label_tag "Activity Description", nil, class: "control-label" %>
-              <%= text_field_tag "description", nil, class: "form-control" %>
+              <%= text_field_tag "description1", nil, class: "form-control" %>
             </div>
             <div class="form-group">
-              <%= check_box_tag "ismakeahead" %>
+              <%= check_box_tag "ismakeahead1" %>
               <%= label_tag "Is make ahead", nil, class: "control-label" %>
             </div>
             <div class="form-group">
-              <%= check_box_tag "iscompetetion" %>
+              <%= check_box_tag "iscompetetion1" %>
               <%= label_tag "Is competition", nil, class: "control-label" %>
             </div>
             <div class="form-group">
               <%= label_tag "Choose Location of Activity", nil, class: "control-label" %>
-              <select class="form-control" id="locationselect">
-              </select>
+              <select class="form-control locationselect" name="location1"></select>
             </div>
           </div>
 
@@ -60,7 +59,7 @@
 
             <div class="row">
               <div class="col-lg-3">
-                  <%= text_field_tag "start_time", nil, placeholder: "Time", class: "control-label form-control start_time" %>
+                  <%= text_field_tag "start_time", nil, class: "control-label form-control start_time" %>
               </div>
               <div class="col-lg-3">
                   <select class="form-control roomselect"  title="Choose Room that Session will be hosted at"></select>
@@ -77,10 +76,10 @@
 
         <div class="row">
           <div class="col-lg-1">
-            <%= submit_tag "Confirm", class: "btn button-small" %>
+            <%= submit_tag "Confirm", class: "button-small" %>
           </div>
           <div class="col-lg-1">
-            <button class="btn button-small glyphicon glyphicon-plus" title="Add New Activity"></button>
+            <button class="button-small glyphicon glyphicon-plus" type="button" onclick="newActivity()" title="Add New Activity"></button>
           </div>
         </div>
       <% end %>

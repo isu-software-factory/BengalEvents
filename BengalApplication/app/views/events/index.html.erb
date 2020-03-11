@@ -5,9 +5,6 @@
   <div class="card border-dark mb-3" style="max-width: 18rem;">
     <div class="card-header">Actions</div>
     <div class="card-body text-dark">
-      <%if policy(@events).create? %>
-      <%= link_to " New Event", new_event_path, class: "button glyphicon glyphicon-edit", title: "Create a new event" %>
-        <%end %>
       <%= link_to " Profile", profile_path(current_user), class: "button button-small glyphicon glyphicon-user", title: "Look at your profile" %>
     </div>
   </div>
