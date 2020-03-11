@@ -62,6 +62,10 @@
               <div class="col-lg-2">
                 <%= label_tag "Capacity" %>
               </div>
+              <div class="col-lg-3 form-group">
+                <%=check_box_tag "same_room", value=true, false, title: "Use the same room for all sessions" %>
+                <%=label_tag "Use Same Room" , nil, class: "control-label"%>
+              </div>
             </div>
 
             <div class="row">

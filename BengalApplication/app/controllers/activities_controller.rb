@@ -7,7 +7,7 @@ class ActivitiesController < ApplicationController
   def new
     @activity = Activity.new
     @event = Event.find(params[:event_id])
-    authorize @event
+    authorize @activity
     add_breadcrumb 'Home', root_path
     add_breadcrumb @event.name, @event
     add_breadcrumb 'Create Event', new_activity_path
@@ -15,10 +15,9 @@ class ActivitiesController < ApplicationController
 
   def create
     @event = Event.find(params[:event_id])
-    authorize @event
-
     errors = create_activities(@event)
     if errors.length == 0
+      flash[:notice] = "Successfully Created Activity"
       redirect_to @event
     else
       flash[:errors] = errors
@@ -26,17 +25,6 @@ class ActivitiesController < ApplicationController
     end
   end
 
-  # def create
-  #   @event = current_user.meta.supervisor.events.build(event_params)
-  #   @event.occasion = @occasion
-  #   authorize @event
-  #   if @event.save
-  #     redirect_to new_occasion_event_event_detail_path(@occasion, @event), notice: 'Successfully created Event.'
-  #   else
-  #     flash[:errors] = @event.errors.full_messages
-  #     redirect_back(fallback_location: new_occasion_activity_path)
-  #   end
-  # end
 
   def edit
     @activity = Activity.find(params[:id])
@@ -164,7 +152,8 @@ end
 
 def add_sessions(activities)
   start_time = get_values("start_time")
-  rooms = get_values("room_number")
+  end_time = get_values("end_time")
+  rooms = get_values("room_select")
   capacities = get_values("capacity")
   new_sessions = get_keys("start_time")
   count = 0
@@ -175,22 +164,23 @@ def add_sessions(activities)
   new_sessions.each do |session|
     if session.start_with?("start_time_New")
       activity_count += 1
-      errors += create_session(start_time[count], rooms[count], capacities[count], activities[activity_count])
+      errors += create_session(start_time[count], rooms[count], capacities[count], activities[activity_count], end_time[count])
     else
-      errors += create_session(start_time[count], rooms[count], capacities[count], activities[activity_count])
+      errors += create_session(start_time[count], rooms[count], capacities[count], activities[activity_count], end_time[count])
     end
     count += 1
   end
   errors
 end
 
-def create_session(start_time, room, capacity, activity)
+def create_session(start_time, room, capacity, activity, end_time)
   errors = []
-  new_session = Session.new(start_time: start_time, capacity: capacity, activity_id: activity.id)
+  new_session = Session.new(start_time: start_time, capacity: capacity, activity_id: activity.id, end_time: end_time)
   unless new_session.save
     errors += new_session.errors.full_messages
   else
-    room_update = Room.find_by(room_number: room)
+    room_num = room.split(" (")[0].to_i
+    room_update = Room.find_by(room_number: room_num)
     room_update.update(session_id: new_session.id)
   end
 

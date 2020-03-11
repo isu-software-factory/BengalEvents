@@ -6,7 +6,6 @@ class EventPolicy < ApplicationPolicy
 
   def edit?
     user.roles.first.role_name == "Coordinator" || user.roles.first.role_name == "Admin"
-
   end
 
   def update?
@@ -18,7 +17,7 @@ class EventPolicy < ApplicationPolicy
   end
 
   def show?
-    user.roles.first.role_name == "Coordinator" || user.roles.first.role_name == "Admin"
+    user.roles.first.role_name == "Coordinator" || user.roles.first.role_name == "Admin" || user.roles.first.role_name == "Sponsor"
   end
 
   def destroy?
