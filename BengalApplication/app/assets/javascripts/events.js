@@ -99,10 +99,6 @@ $(document).on('ready page:load turbolinks:load', function () {
         })
     }
 
-    // location number
-    locationCount = 1;
-    roomCount = 1;
-
     $("button").each(function () {
         // check to see that the div is a room
         if ($(this).parent().parent().parent().attr("class") == "Room") {
@@ -119,15 +115,20 @@ $(document).on('ready page:load turbolinks:load', function () {
     })
 });
 
+// location number
+let locationCount = 1;
+let roomCount = 1;
+
+
 function addNewLocation(button) {
-    locationCount = parseInt(locationCount) + 1;
+    locationCount += 1;
 
     // remove the previous add button
     removePreviousButton(button);
 
     // Text fields
     var locationName = document.createElement("input");
-    setAttributes(locationName, "Location Name", "Location Name", "", locationCount, "left-indent-more");
+    setAttributes(locationName, "Location Name", "Location", "", locationCount, "left-indent-more");
 
     var locationAddress = document.createElement("input");
     setAttributes(locationAddress, "Address (optional)", "Address", "", locationCount, "");
@@ -152,7 +153,7 @@ function addNewLocation(button) {
     var row2 = newRow();
     var room = newRoomContainer();
     setRow(room, row2, true, true);
-    addNewRoom($(room), null, "_New_");
+    addNewRoom($(room), null, "New_");
 }
 
 function addNewRoom(room, button, eClass) {
@@ -165,10 +166,10 @@ function addNewRoom(room, button, eClass) {
     if (eClass == null) eClass = "";
     // Text fields
     var roomNumber = document.createElement("input");
-    setAttributes(roomNumber, "Room #", "Room Number", eClass, roomCount, "");
+    setAttributes(roomNumber, "Room #", "Room_Number", eClass, roomCount, "");
 
     var roomName = document.createElement("input");
-    setAttributes(roomName, "Room Name (optional)", "Room Name", eClass, roomCount, "");
+    setAttributes(roomName, "Room Name (optional)", "Room_Name", eClass, roomCount, "");
 
     // buttons
     var minusButton = createButton("minus", "Room");
@@ -303,12 +304,13 @@ function createButton(type, location) {
                 addNewRoom($(this).parent().parent().parent(), $(this));
             });
         button.setAttribute("class", "button-small left-indent glyphicon glyphicon-plus");
-        button.setAttribute("title", "Add New " + location);
+        button.setAttribute("title", "Add A New " + location);
     }
 
     return button;
 }
 
 function removePreviousButton(button) {
-    button.remove();
+    if (button != null)
+        button.remove();
 }

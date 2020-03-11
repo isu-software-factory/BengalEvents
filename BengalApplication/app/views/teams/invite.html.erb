@@ -6,30 +6,47 @@
   <% end %>
 </div>
 
-<h1>Invite Members</h1>
 
-<%=form_tag(controller: "teams", action: "register_members", id: @team.id) do %>
-  <div>
-    <%=label_tag "member email" %>
-    <%=text_field_tag :email1 %>
-  </div>
-  <div>
-    <%=label_tag "member email" %>
-    <%=text_field_tag :email2 %>
-  </div>
-  <div>
-    <%=label_tag "member email" %>
-    <%=text_field_tag :email3 %>
-  </div>
-  <div>
-    <%=label_tag "member email" %>
-    <%=text_field_tag :email4 %>
-  </div>
-  <div>
-    <%=submit_tag "Invite" %>
-  </div>
-<%end %>
+<div class="container">
+  <div id="loginbox" style="margin-top:50px;" class="mainbox col-md-8 col-md-offset-1 col-sm-8 col-sm-offset-2">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <div class="panel-title">Invite Members</div>
+      </div>
+      <div style="padding-top:30px" id="student-box" class="panel-body">
+        <%= form_tag(controller: "teams", action: "register_members", id: @team.id) do %>
+          <div class="row">
+            <div class="col-lg-5 border-right">
+            <div class="input-group bottom-indent profile-field">
+              <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+              <%= text_field_tag :email1, nil, placeholder: "Member Username" %>
+            </div>
+            <div class="input-group bottom-indent profile-field">
+              <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+              <%= text_field_tag :email1, nil, placeholder: "Member Username" %>
+            </div>
+            <div class="input-group bottom-indent profile-field">
+              <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+              <%= text_field_tag :email1, nil, placeholder: "Member Username" %>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <p class="notice">Note: The first team member to accept invite will be added to the team. When team capacity is full, students will not be able to join the team even if they have an invite.</p>
+          </div>
+          </div>
+          <div class="row">
+            <div style="margin-top:10px" class="form-group">
+              <!-- Button -->
+              <div class="col-sm-12 controls">
+                <%= submit_tag "Invite", class: "button button-small" %>
+              </div>
+            </div>
 
-<div>
-<%=link_to "Go Back", @team %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
 </div>
+
+

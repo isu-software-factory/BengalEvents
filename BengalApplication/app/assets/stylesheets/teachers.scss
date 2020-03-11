@@ -3,7 +3,9 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 
-
+.no-bullets li{
+  list-style-type: none;
+}
 .button-small {
   background-color: rgb(109, 110, 113); /* ISU medium gray */
   border: 2px solid rgb(109, 110, 113);

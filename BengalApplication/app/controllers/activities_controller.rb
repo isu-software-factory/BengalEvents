@@ -6,8 +6,6 @@ class ActivitiesController < ApplicationController
 
   def new
     @activity = Activity.new
-
-
     @event = Event.find(params[:event_id])
     authorize @event
     add_breadcrumb 'Home', root_path
@@ -16,12 +14,14 @@ class ActivitiesController < ApplicationController
   end
 
   def create
-    @event = Event.find(params[:activity][:event_id])
-    @activity = @event.activities.build(activity_params)
-    if @activity.save
+    @event = Event.find(params[:event_id])
+    authorize @event
+
+    errors = create_activities(@event)
+    if errors.length == 0
       redirect_to @event
     else
-      flash[:errors] = @activity.errors.full_messages
+      flash[:errors] = errors
       redirect_back(fallback_location: new_activity_path)
     end
   end
@@ -106,6 +106,96 @@ class ActivitiesController < ApplicationController
 end
 
 private
+
+def get_values(name)
+  values = []
+
+  params.each do |key, value|
+    if key.start_with?(name)
+      values << value
+    end
+  end
+  values
+end
+
+def get_keys(name)
+  keys = []
+
+  params.each do |key, value|
+    if key.start_with?(name)
+      keys << key
+    end
+  end
+  keys
+end
+
+
+def create_activities(event)
+  activity_names = get_values("name")
+  descriptions = get_values("description")
+  make_ahead = get_values("ismakeahead")
+  competitions = get_values("iscompetetion")
+  count = 0
+  new_activities = []
+  errors = []
+
+  # create activities
+  activity_names.each do |name|
+    local = Activity.new(name: name, description: descriptions[count], ismakeahead: make_ahead[count], iscompetetion: competitions[count], user_id: current_user.id, event_id: event.id)
+    if local.save
+      new_activities << local
+    else
+      errors += local.errors.full_messages
+    end
+    count += 1
+  end
+
+  # check activities aren't empty
+  if new_activities.length == 0
+    errors
+  else
+    errors += add_sessions(new_activities)
+    errors
+  end
+
+
+end
+
+
+def add_sessions(activities)
+  start_time = get_values("start_time")
+  rooms = get_values("room_number")
+  capacities = get_values("capacity")
+  new_sessions = get_keys("start_time")
+  count = 0
+  activity_count = -1
+  errors = []
+
+  # create rooms and add them to locations
+  new_sessions.each do |session|
+    if session.start_with?("start_time_New")
+      activity_count += 1
+      errors += create_session(start_time[count], rooms[count], capacities[count], activities[activity_count])
+    else
+      errors += create_session(start_time[count], rooms[count], capacities[count], activities[activity_count])
+    end
+    count += 1
+  end
+  errors
+end
+
+def create_session(start_time, room, capacity, activity)
+  errors = []
+  new_session = Session.new(start_time: start_time, capacity: capacity, activity_id: activity.id)
+  unless new_session.save
+    errors += new_session.errors.full_messages
+  else
+    room_update = Room.find_by(room_number: room)
+    room_update.update(session_id: new_session.id)
+  end
+
+  errors
+end
 
 
 def set_event

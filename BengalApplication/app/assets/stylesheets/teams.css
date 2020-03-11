@@ -34,7 +34,17 @@
 }
 .team_name{
     text-align: left;
-    padding-left: 500px;
+    padding-left: 850px;
+    margin-top: 40px;
+}
+
+.bold{
+    font-weight: bold;
+    font-size: 4em;
+}
+
+.notice{
+    font-style: italic;
 }
 
 .dark-header{

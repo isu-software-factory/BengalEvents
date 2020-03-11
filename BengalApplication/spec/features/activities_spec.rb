@@ -4,12 +4,7 @@ RSpec.feature "Events", type: :feature do
 
   context "create new event" do
     before(:each) do
-      Warden.test_reset!
-      @occasion = occasions(:one)
-      @location = locations(:one)
-      @event = events(:one)
-      @event.location = @location
-      @sponsor = sponsors(:sponsor_carlos)
+      @sponsor = User.find()
       # log in
       login_as(@sponsor.user)
       visit new_occasion_activity_path(@occasion.id)

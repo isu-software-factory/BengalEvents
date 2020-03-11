@@ -1,6 +1,9 @@
+<% content_for(:title, "Create Occasion") %>
 <% if flash[:errors] %>
   <% flash[:errors].each do |e| %>
-    <p><%= e %></p>
+    <div class="alert alert-danger">
+      <%=e %>
+    </div>
   <% end %>
 <% end %>
 
@@ -18,55 +21,61 @@
       </div>
     </div>
     <div class="card-body bengal-body">
-      <%= form_tag({controller: "activities", action: "create"}, {id: "activity-form"}) do %>
+      <%= form_tag({controller: "activities", action: "create", event_id: @event}, {id: "activity-form"}) do %>
 
         <div class="row">
-          <div class="col-lg-5 border-right">
+          <div class="col-lg-4 border-right">
             <div class="form-group">
               <%= label_tag "Activity Name", nil, class: "control-label" %>
-              <%= text_field_tag "name", nil, class: "form-control" %>
+              <%= text_field_tag "name_New_1", nil, class: "form-control" %>
             </div>
             <div class="form-group">
               <%= label_tag "Activity Description", nil, class: "control-label" %>
-              <%= text_field_tag "description", nil, class: "form-control" %>
+              <%= text_field_tag "description_1", nil, class: "form-control" %>
             </div>
             <div class="form-group">
-              <%= check_box_tag "ismakeahead" %>
+              <%= check_box_tag "ismakeahead_1" %>
               <%= label_tag "Is make ahead", nil, class: "control-label" %>
             </div>
             <div class="form-group">
-              <%= check_box_tag "iscompetetion" %>
+              <%= check_box_tag "iscompetetion_1" %>
               <%= label_tag "Is competition", nil, class: "control-label" %>
             </div>
             <div class="form-group">
               <%= label_tag "Choose Location of Activity", nil, class: "control-label" %>
-              <select class="form-control" id="locationselect">
+              <select class="form-control" id="locationselect" name="location_select">
               </select>
             </div>
           </div>
 
-          <div class="col-lg-7">
+          <div class="col-lg-8">
             <div class="row">
-              <div class="col-lg-3">
+              <div class="col-lg-2">
                 <%= label_tag "Start Time" %>
+              </div>
+              <div class="col-lg-2">
+                <%= label_tag "End Time" %>
               </div>
               <div class="col-lg-3">
                 <%= label_tag "Room" %>
               </div>
-              <div class="col-lg-3">
+              <div class="col-lg-2">
                 <%= label_tag "Capacity" %>
               </div>
             </div>
 
             <div class="row">
-              <div class="col-lg-3">
-                  <%= text_field_tag "start_time", nil, placeholder: "Time", class: "control-label form-control start_time" %>
+              <div class="col-lg-2">
+                  <%=text_field_tag "start_time_New_1", nil, class: "control-label form-control start_time" %>
+              </div>
+              <div class="col-lg-2">
+                <%= text_field_tag "end_time_1", nil, class: "control-label form-control end_time" %>
               </div>
               <div class="col-lg-3">
-                  <select class="form-control roomselect"  title="Choose Room that Session will be hosted at"></select>
+                  <select class="form-control roomselect" name="room_select_1" title="Choose Room that Session will be hosted at"></select>
               </div>
-              <div class="col-lg-3">
-                  <%= text_field_tag "capacity", nil, class: "control-label form-control" %>
+              <div class="col-lg-2">
+                  <%= text_field_tag "capacity_1", nil, class: "control-label form-control" %>
               </div>
               <div class="col-lg-3">
                 <button class="button-small glyphicon glyphicon-plus new-session" title="Add New Session" type="button"></button>

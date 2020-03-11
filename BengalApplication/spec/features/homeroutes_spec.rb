@@ -14,8 +14,7 @@ RSpec.feature "Homeroutes", type: :feature do
     end
 
     it "home to homeroutes home page" do
-      visit "homeroutes/home"
-      expect(page).to have_content("Upcoming Events")
+      expect(page).to have_content("Upcoming Activities")
     end
 
     context "signing in" do

@@ -56,6 +56,48 @@ RSpec.feature "Events", type: :feature do
         click_button 'Save and Continue'
         expect(page).to have_content("Activity Information")
       end
+
+      scenario "should successfully create many rooms in one location" do
+        within("form") do
+          fill_in "location_1", with: "SUB"
+          fill_in "address_1", with: "921 S 8th Ave, Pocatello, ID 83209"
+          fill_in "room_number_New_1", with: 232
+          fill_in "room_name_New_1", with: "Caffe"
+        end
+        first(:xpath, "//button[@title='Add A New Room']").click
+        within("form") do
+          fill_in "room_number_2", with: 322
+        end
+        first(:xpath, "//button[@title='Add A New Room']").click
+        within("form") do
+          fill_in "room_number_3", with: 212
+        end
+        click_button 'Save and Continue'
+        expect(Location.last.rooms.count).to eq(3)
+      end
+
+      scenario "should successfully create many locations and rooms" do
+        within("form") do
+          fill_in "location_1", with: "SUB"
+          fill_in "address_1", with: "921 S 8th Ave, Pocatello, ID 83209"
+          fill_in "room_number_New_1", with: 232
+          fill_in "room_name_New_1", with: "Caffe"
+        end
+        first(:xpath, "//button[@title='Add A New Room']").click
+        within("form") do
+          fill_in "room_number_2", with: 322
+        end
+        first(:xpath, "//button[@title='Add A New Location']").click
+        within("form") do
+          fill_in "location_2", with: "College of Tech"
+          fill_in "room_number_New_3", with: 121
+        end
+        click_button 'Save and Continue'
+        expect(Location.all.count).to eq(3)
+        expect(Location.last.rooms.count).to eq(1)
+        expect(Location.find(2).rooms.count).to eq(2)
+        expect(Room.all.count).to eq(5)
+      end
     end
 
     context "should fail" do

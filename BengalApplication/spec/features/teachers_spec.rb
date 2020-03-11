@@ -61,18 +61,30 @@ end
   #  end
   #end
 
-  #context "Controlling Student" do
-  #  before(:each) do
-  #    @teacher = User.first
-  #    login_as(@teacher)
-  #    visit profile_path(@teacher)
-  #  end
-  #
-  #  it "teacher resets student password and creates a new one" do
-  #    first(".dropdown-toggle").click
-  #    find(".reset-password").trigger('click')
-  #    expect(page).to have_content("Successfully Reset Password")
-  #  end
-  #end
+  context "Controlling Student" do
+    before(:each) do
+      @teacher = User.first
+      login_as(@teacher)
+      visit profile_path(@teacher)
+    end
+
+    it "teacher resets student password and creates a new one" do
+      button=all(".dropdown-toggle").last
+      button.click
+      option=find("a", text: "Request New Password")
+      option.click
+      expect(page).to have_content("Successfully Reset Password")
+    end
+
+    it "teacher can register the student for an activity" do
+      button=all(".dropdown-toggle").last
+      button.click
+      option=find("a", text: "Register For Student")
+      option.click
+      first(".event-collapse").click
+      check "register"
+      expect(first(".registered")).to have_content("Registered")
+    end
+  end
 
 

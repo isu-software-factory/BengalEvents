@@ -3,7 +3,7 @@ class TeamsController < ApplicationController
 
   def register_members
     # get student emails
-    @student = Student.find(current_user.meta.id)
+    @student = User.find(current_user.id)
     @team = Team.find(params[:id])
     @emails = [params[:email1], params[:email2], params[:email3], params[:email4]]
     # no problems occur?
@@ -24,8 +24,8 @@ class TeamsController < ApplicationController
       unless email == ""
         @user = User.find_by(email: email)
         unless @user.nil?
-          invited_student = Student.find(@user.meta.id)
-          UserMailer.invite(@student, invited_student, team).deliver_now
+          invited_student = User.find(@user.id)
+          #UserMailer.invite(@student, invited_student, team).deliver_now
         else
           flash[:alert] = "no such student exits, #{email}"
           # error occurs
@@ -84,7 +84,7 @@ class TeamsController < ApplicationController
       end
     else
       flash[:alert] = @team.errors.full_messages
-      render :new
+      redirect_back(fallback_location: new_team_path)
     end
   end
 

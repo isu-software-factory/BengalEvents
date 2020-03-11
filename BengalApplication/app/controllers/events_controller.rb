@@ -18,7 +18,6 @@ class EventsController < ApplicationController
 
   def new
     @event = Event.new
-    2.times {@event.activities.build.sessions.build}
     authorize @event
     add_breadcrumb 'Home', root_path
     add_breadcrumb 'New Event', new_event_path
@@ -84,7 +83,7 @@ class EventsController < ApplicationController
   # get locations from parameters
   def get_values(name)
     values = []
-    # add locations to locatinos array
+
     params.each do |key, value|
       if key.start_with?(name)
         values << value
@@ -93,6 +92,18 @@ class EventsController < ApplicationController
     values
   end
 
+  def get_keys(name)
+    keys = []
+
+    params.each do |key, value|
+      if key.start_with?(name)
+        keys << key
+      end
+    end
+    keys
+  end
+
+  # create locations
   def create_locations
     locations = get_values("location")
     addresses = get_values("address")
@@ -120,19 +131,22 @@ class EventsController < ApplicationController
     end
   end
 
+  # create and add rooms to locations
   def add_rooms(locations)
     room_numbers = get_values("room_number")
     room_names = get_values("room_name")
+    room_keys = get_keys("room_number")
     count = 0
     location_count = -1
     errors = []
+
     # create rooms and add them to locations
-    room_numbers.each do |room|
+    room_keys.each do |room|
       if room.start_with?("room_number_New")
         location_count += 1
-        errors += create_room(room, room_names[count], locations[location_count].id)
+        errors += create_room(room_numbers[count], room_names[count], locations[location_count].id)
       else
-        errors += create_room(room, room_names[count], locations[location_count].id)
+        errors += create_room(room_numbers[count], room_names[count], locations[location_count].id)
       end
       count += 1
     end

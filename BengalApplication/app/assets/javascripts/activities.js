@@ -1,34 +1,44 @@
 $(document).on('ready page:load turbolinks:load', function () {
-  getLocations();
-  $(".start_time").timepicker();
-  $("#locationselect").change(function(){
-      let name = $(this).children("option:selected").val().split("(");
-      getRooms(name[0]);
-  });
+    getLocations();
+    $(".start_time").timepicker();
+    $("#locationselect").change(function () {
+        getRooms(getName(this));
+    });
 
-  $(".new-session").click(function(){
-      newSession($(this));
-  })
 
+    $(".new-session").click(function () {
+        newSession($(this));
+    });
 
 });
+
+function getName(selector) {
+    let name = $(selector).children("option:selected").val().split("(");
+    return name[0];
+}
+
+$(document).ready(function () {
+    getRooms(getName("#locationselect"));
+});
+
+
 let sessionCount = 1;
 
 // add new session
-function newSession(button){
+function newSession(button) {
     sessionCount += 1;
     // create text boxes
     let start_date = document.createElement("input");
     $(start_date).attr("type", "text-box");
     $(start_date).timepicker();
-    addAttributes(start_date, "start_date" + sessionCount, "form-control");
+    addAttributes(start_date, "start_date_" + sessionCount, "form-control");
 
     let rooms = document.createElement("select");
-    addAttributes(rooms, "roomselect" + sessionCount, "form-control roomselect");
+    addAttributes(rooms, "rooms_select_" + sessionCount, "form-control roomselect");
 
     let capacity = document.createElement("input");
-    $(capacity).attr("type", "text-box" );
-    addAttributes(capacity, "capacity" + sessionCount, "form-control");
+    $(capacity).attr("type", "text-box");
+    addAttributes(capacity, "capacity_" + sessionCount, "form-control");
 
     // create button
     let btn = createButton();
@@ -57,17 +67,15 @@ function newSession(button){
 }
 
 
-
 // adds attributes to the elements
-function addAttributes(element, name, classes){
+function addAttributes(element, name, classes) {
     $(element).attr("name", name);
     $(element).attr("class", classes);
 }
 
 
-
 // adds elements to the column passed
-function addElementsToColumn(element, column){
+function addElementsToColumn(element, column) {
     $(column).append(element);
 }
 
@@ -88,21 +96,21 @@ function addElements(row, button) {
 
 
 // create a div with class col-lg
-function createColumn(){
+function createColumn() {
     let col = document.createElement("div");
     $(col).attr("class", "col-lg-3");
     return col;
 }
 
 // create a div with class row
-function createRow(){
+function createRow() {
     let row = document.createElement("div");
     $(row).attr("class", "row top-indent");
     return row;
 }
 
 // create a button
-function createButton(){
+function createButton() {
     let button = document.createElement("button");
     $(button).attr("class", "button-small glyphicon glyphicon-plus new-session");
     $(button).attr("title", "Add New Session");
@@ -114,39 +122,15 @@ function createButton(){
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // get the rooms for the location
-function getRooms(location){
+function getRooms(location) {
     removeRooms();
     Rails.ajax({
         url: `get_rooms/${location}`,
         type: 'GET',
         dataType: "json",
-        success: function (data){
-            for(index = 0; index < data.results.rooms.length; index++){
+        success: function (data) {
+            for (index = 0; index < data.results.rooms.length; index++) {
                 $(".roomselect").append(createOption(data.results.rooms[index].room_number, data.results.rooms[index].room_name));
             }
         }
@@ -154,27 +138,27 @@ function getRooms(location){
 }
 
 // removes all rooms
-function removeRooms(){
+function removeRooms() {
     $(".roomselect").children().remove();
 }
 
 
 // get all locations
-function getLocations(){
+function getLocations() {
     Rails.ajax({
         url: `get_locations`,
         type: 'GET',
         dataType: "json",
         success: function (data) {
-            for(index = 0; index < data.results.locations.length; index++) {
-                $("#locationselect").append(createOption(data.results.locations[index].location_name, data.results.locations[index].address ));
+            for (index = 0; index < data.results.locations.length; index++) {
+                $("#locationselect").append(createOption(data.results.locations[index].location_name, data.results.locations[index].address));
             }
         }
     })
 }
 
 // create an option element
-function createOption(name1, name2){
+function createOption(name1, name2) {
     let option = document.createElement("option");
     $(option).text(name1 + " (" + name2 + ")");
     return option;
