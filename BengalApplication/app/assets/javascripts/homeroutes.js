@@ -18,7 +18,7 @@ $(document).on('ready page:load turbolinks:load', function () {
 
     // student number
     if ($("#student-form").length)
-        studentCount = $("#student-form").children().last().prev().children().last().prev().find("input").attr("id").split('_').pop();
+        studentCount = parseInt($("#next_user").val());
 
 
     // reset student password

@@ -48,7 +48,7 @@ resources :events
   get "/drop_activity/:role/:session_id/:id" => "registrations#drop_activity"
   get "homeroutes/home" => 'homeroutes#home'
   get 'homeroutes/user/:id' => 'homeroutes#user', as: "profile"
-  get "homeroutes/new/:name" => "homeroutes#new"
+  get "homeroutes/new/:name" => "homeroutes#new", as: "new_user"
   post "homeroutes/create" => "homeroutes#create"
   root 'homeroutes#home'
   post 'homeroutes/reset_password/:id' => "homeroutes#reset_password", as: "reset_password"

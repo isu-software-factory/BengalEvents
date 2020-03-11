@@ -41,7 +41,7 @@ class HomeroutesController < ApplicationController
     add_breadcrumb "Home", root_path(role: "User", id: @user.id)
 
     if check_user
-      add_breadcrumb @user.first_name + " Profile", profile_path(@user)
+      add_breadcrumb @user.first_name + "'s Profile", profile_path(@user)
     end
 
   end
@@ -50,6 +50,9 @@ class HomeroutesController < ApplicationController
     @controller = params[:name]
     if @controller == "Student"
       @students = Teacher.find_by(user_id: current_user.id).users
+      add_breadcrumb "Home", root_path(role: "User", id: current_user.id)
+      add_breadcrumb current_user.first_name + "'s Profile", profile_path(current_user)
+      add_breadcrumb "Add New Students", new_user_path("Student")
     else
       @user = User.new
     end
@@ -133,40 +136,88 @@ class HomeroutesController < ApplicationController
     first_names = student_names("first")
     last_names = student_names("last")
     emails = student_emails
-    redirect = false
-
+    redirect = [true,]
+    user_ids = student_ids
     count = 0
 
     # check to see if student is already in the database
-    for email in emails do
-      unless User.exists?(:email => email) || User.exists?(:user_name => email)
-        redirect = create_students(first_names[count], last_names[count], email);
+    user_ids.each do |id|
+      unless User.exists?(id: id)
+        redirect = create_students(first_names[count], last_names[count], emails[count], id);
       end
       count += 1
     end
 
     # check to see if a student was removed
-    remove_students(emails)
+    remove_students(user_ids)
+
+    # check for updates in students
+    redirect = update_students(first_names, last_names, emails, user_ids)
 
 
     if redirect[0]
-      redirect_to root_path
+      flash[:notice] = "Students were updated successfully"
+      redirect_to profile_path(current_user)
     else
       flash[:alert] = redirect[1]
-      redirect_back(fallback_location: root_path)
+      redirect_back(fallback_location: profile_path(current_user))
     end
   end
 
+  # will update student details
+  def update_students(f_names, l_names, emails, ids)
+    count = 0
+    errors = [true]
+    ids.each do |id|
+      if f_names[count] == ""
+        errors = [false, "First name can't be blank"]
+      elsif l_names[count] == ""
+        errors = [false, "Last name can't be blank"]
+      elsif emails[count] == ""
+        errors = [false, "User name can't be blank"]
+      else
+        student = User.find(id)
+        unless student.first_name == f_names[count]
+          User.update(student.id, first_name: f_names[count])
+        end
+        unless student.last_name == l_names[count]
+          User.update(student.id, last_name: l_names[count])
+        end
+        if emails[count].include?("@")
+          unless student.email == emails[count]
+            User.update(student.id, email: emails[count])
+          else
+            User.update(student.id, user_name: emails[count])
+          end
+        end
+      end
+      count += 1
+    end
+    errors
+  end
 
-  def remove_students(email)
+  def remove_students(ids)
     students = User.all
 
-    for student in students
+    students.each do |student|
       # remove student
-      unless email.include?(student.email) || (student.id == current_user.id)
+      unless ids.include?(student.id) || (student.id == current_user.id)
         student.delete
       end
     end
+
+  end
+
+  def student_ids
+    ids = []
+
+    params.each do |key, value|
+      if key.start_with?("first")
+        id = key.split("_")
+        ids << id[1].to_i
+      end
+    end
+    ids
   end
 
   # returns all the names from params into an array
@@ -195,7 +246,7 @@ class HomeroutesController < ApplicationController
   end
 
   # creates a student
-  def create_students(f_name, l_name, email1)
+  def create_students(f_name, l_name, email1, id)
     @student = User.new(first_name: f_name, last_name: l_name)
     @teacher = Teacher.find(current_user.id)
     if email1.include?("@")
@@ -206,7 +257,6 @@ class HomeroutesController < ApplicationController
       @student.email = ""
     end
     @teacher.users << @student
-
     # create password
     random_password = rand(36 ** 8).to_s(36)
     @student.password = random_password
@@ -215,6 +265,8 @@ class HomeroutesController < ApplicationController
 
     # send an email to student if student saves
     if @student.save
+      @student.roles << Role.find_by(role_name: "Student")
+      id = @student.id
       #UserMailer.login_email(@student, @student.user, random_password).deliver_now
       errors = [true, @student.errors.full_messages]
       return errors

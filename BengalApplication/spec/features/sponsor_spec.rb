@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.feature "Sponsors", type: :feature do
-  fixtures :sponsors, :users
 
   before do
     visit new_sponsor_path

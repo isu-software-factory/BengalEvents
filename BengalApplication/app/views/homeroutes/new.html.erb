@@ -81,26 +81,25 @@
         <div style="padding-top:30px" id="student-box" class="panel-body">
           <%= form_tag("/homeroutes/create", {id: "student-form"}) do %>
             <%=hidden_field_tag "role", @controller %>
-            <%studentCount = 0%>
+            <%=hidden_field_tag "next_user", User.last.id%>
             <%for student in (@students.empty? ? 0..0 : @students) do %>
-              <%studentCount += 1 %>
               <div class="row" >
                 <div class="col-lg-3">
                   <div class="input-group bottom-indent">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                    <%=text_field_tag "first_" + studentCount.to_s, @students.empty? ? nil : student.first_name, placeholder: @students.empty? ? "Student's First Name" : nil%>
+                    <%=text_field_tag "first_" + student.id.to_s, @students.empty? ? nil : student.first_name, placeholder: @students.empty? ? "Student's First Name" : nil%>
                   </div>
                 </div>
                 <div class="col-lg-3">
                   <div class="input-group bottom-indent">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                    <%=text_field_tag "last_" + studentCount.to_s, @students.empty? ? nil : student.last_name, placeholder: @students.empty? ? "Student's Last Name" : nil %>
+                    <%=text_field_tag "last_" + student.id.to_s, @students.empty? ? nil : student.last_name, placeholder: @students.empty? ? "Student's Last Name" : nil %>
                   </div>
                 </div>
                 <div class="col-lg-3">
                   <div class="input-group bottom-indent">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-                    <%=text_field_tag "email_" + studentCount.to_s, @students.empty? ? nil : student.email, placeholder: @students.empty? ? "Student Email" : nil%>
+                    <%=text_field_tag "email_" + student.id.to_s, @students.empty? ? nil : student.email, placeholder: @students.empty? ? "Student Email" : nil%>
                   </div>
                 </div>
                 <div class="col-lg-3">
