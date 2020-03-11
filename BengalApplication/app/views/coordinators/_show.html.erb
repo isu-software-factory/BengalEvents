@@ -1,52 +1,96 @@
-<% content_for :title, "Events" %>
-<h1>Events</h1>
-<hr>
-<div class="container">
+<div id="coordinator_page" class="container">
   <div class="row">
     <div class="col border-right">
-      <div class="card-columns">
-        <% @events.each do |event| %>
-          <div class="card mb-5 border-dark">
-            <div class="card-header">
-              <h4> <%= event.name %>  </h4>
-            </div>
-            <div class="card-body text-dark">
-              <p class="card-text">Name: <%= event.name %></p>
-              <p class="card-text">Description: <%= event.description %></p>
-              <p class="card-text">Start Date: <%= event.start_date.strftime("%Y-%m-%d") %></p>
-              <p>
-                <% if policy(event).edit? %>
-                  <%= link_to "Edit", edit_event_path(event.id), class: "btn btn-secondary" %>
-                <% end %>
-                <% if policy(event).destroy? %>
-                  <%= link_to "Delete", event_path(event.id), class: "btn btn-danger", data: {method: :delete, confirm: "Are you sure?"} %>
-                <% end %></p>
-              <hr>
-              <p class="card-text">
-                <button class="btn button-small" title="View list of events in event">
-                  <span class="far fa-eye"></span><%= link_to "View Events", event_path(event.id), class: "btn button-small" %>
-                </button>
-              </p>
-            </div>
+      <% @events.each do |event| %>
+        <div class="bottom-indent-more">
+          <h1 class="accordian"><%= event.name %>
+            <%= link_to " Edit", edit_event_path(event), class: "btn button-small glyphicon glyphicon-edit" %>
+            <%= link_to "Delete", event_path(event.id), class: "btn btn-danger", data: {method: :delete, confirm: "Are you sure?"} %>
+            <span class="badge badge-danger">Starts at <%= event.start_date.strftime("%d/%m/%Y") %></span>
+          </h1>
+
+
+          <div class="alert alert-success" id="flash" role="alert">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close"> &#88; </a>
+            <h4 class="alert-heading">What is this?</h4>
+            <p>- List of the Locations that you can choose from to create an event.</p>
           </div>
-        <% end %>
-      </div>
+          <hr>
+          <h2>Activities</h2>
+          <div class="alert alert-success" id="flash1" role="alert">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close"> &#88; </a>
+            <h4 class="alert-heading">What is this?</h4>
+            <p> - These are the list of activities created under this event.</p>
+          </div>
+          <table class="table">
+            <thead class="thead-dark">
+            <tr>
+              <th scope="col">Name</th>
+              <th scope="col">Description</th>
+              <th scope="col">Created By</th>
+              <th scope="col">Actions</th>
+              <th></th>
+            </tr>
+            </thead>
+            <% event.activities.each do |activity| %>
+              <tbody>
+              <tr class="event-collapse">
+                <td>  <%= activity.name %></td>
+                <td>  <%= activity.description %></td>
+                <td>Hi</td>
+                <td><%= link_to "Edit", edit_activity_path(activity), class: "button-small" %> <%= link_to "Delete", activity_path(activity.id), class: "btn btn-danger", data: {method: :delete, confirm: "Are you sure?"} %></td>
+                <td><span class="glyphicon glyphicon-menu-down"></span></td>
+              </tr>
+              <tr>
+                <td colspan="4">
+                  <div class="accordion">
+                    <table class="table">
+                      <thead>
+                      <tr class="session-header">
+                        <th>Sessions</th>
+                        <th>Start Time</th>
+                        <th>Capacity</th>
+                        <td>Spots Left</td>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <% @num = 1 %>
+                      <% activity.sessions.each do |session| %>
+                        <tr>
+                          <td><%= @num %>
+                            <% @num += 1 %></td>
+                          <td><%= session.start_time.strftime("%l:%M %p") %>
+                            -  <%= session.end_time.strftime("%l:%M %p") %></td>
+                          <td><%= session.capacity %></td>
+                          <td><%= session.capacity_remaining %></td>
+                        </tr>
+                      <% end %>
+                      </tbody>
+                    </table>
+                  </div>
+                </td>
+              </tr>
+            <% end %>
+            </tbody>
+          </table>
+        </div>
+      <% end %>
     </div>
 
     <div class="col-sm-2">
       <div class="card border-dark mb-3" style="max-width: 18rem;">
         <div class="card-header">Actions</div>
         <div class="card-body text-dark">
-          <% if policy(@events).create? %>
-            <button class="btn button-small" title="Create a new event">
-              <span class="far fa-calendar-plus"></span><%= link_to "New Occasion", new_event_path %>
-            </button>
-          <% end %>
+          <p class="card-text">Create a Location for the sponsor to choose from for their event.</p>
+          <hr>
+          <%= link_to " New Event", new_event_path, class: "button-small glyphicon glyphicon-edit", title: "Create a new event" %>
         </div>
       </div>
     </div>
-
   </div>
 </div>
+
+
+
 
 

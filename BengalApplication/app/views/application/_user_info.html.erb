@@ -3,6 +3,8 @@
     <% unless params[:id] == nil %>
       <div class="team_name"><h1 class="bold">Team <%= Team.find(params[:id]).team_name %></h1></div>
     <% end %>
+    <%else %>
+    <div class="team_name"><h1><%=current_user.first_name + " " + current_user.last_name %></h1></div>
   <% end %>
   <% unless (controller.action_name == "pdfshow") || (controller.action_name == "teamschedulepdf" || controller.action_name == "print_schedule") || (controller.action_name == "print_class_registrations") %>
     <div class="dropdown menu">

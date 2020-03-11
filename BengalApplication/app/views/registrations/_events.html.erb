@@ -15,11 +15,10 @@
 
 
 <div class="container">
-  <div class="">
     <% @events.each do |event| %>
+    <div class="">
       <h2 class="accordian"><%= event.name %> <span class="badge badge-danger">
         Starts at <%= event.start_date.strftime("%d/%m/%Y") %></span></h2>
-
       <div class="row">
         <div class="col-lg-12">
           <table class="table">
@@ -30,13 +29,12 @@
               <th></th>
             </tr>
             </thead>
-
             <% @activities.each do |e| %>
-              <%if e.iscompetetion && @role == "Team"%>
+              <% if e.iscompetetion && @role == "Team" %>
                 <%= render :partial => "registrations/activities", locals: {e: e, role: @role} %>
-              <%elsif !e.iscompetetion && @role == "User" %>
+              <% elsif !e.iscompetetion && @role == "User" %>
                 <%= render :partial => "registrations/activities", locals: {e: e, role: @role} %>
-                <%end %>
+              <% end %>
             <% end %>
           </table>
         </div>
