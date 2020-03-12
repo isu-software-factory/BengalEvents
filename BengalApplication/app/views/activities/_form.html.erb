@@ -22,7 +22,7 @@
     </div>
     <div class="card-body bengal-body">
       <%= form_tag({controller: "activities", action: "create", event_id: @event}, {id: "activity-form"}) do %>
-
+        <%=hidden_field_tag "max_team_tag_1", value=4%>
         <div class="row">
           <div class="col-lg-4 border-right">
             <div class="form-group">
@@ -38,12 +38,12 @@
               <%= label_tag "Is make ahead", nil, class: "control-label" %>
             </div>
             <div class="form-group">
-              <%= check_box_tag "iscompetetion_1" %>
+              <%= check_box_tag "iscompetetion_1", true, false, class: "competetion" %>
               <%= label_tag "Is competition", nil, class: "control-label" %>
             </div>
             <div class="form-group">
               <%= label_tag "Choose Location of Activity", nil, class: "control-label" %>
-              <select class="form-control" id="locationselect" name="location_select">
+              <select class="form-control locationselect" id="locationselect" name="location_select_1">
               </select>
             </div>
           </div>
@@ -93,7 +93,7 @@
             <%= submit_tag "Confirm", class: "btn button-small" %>
           </div>
           <div class="col-lg-1">
-            <button class="btn button-small glyphicon glyphicon-plus" title="Add New Activity"></button>
+            <button class="btn button-small glyphicon glyphicon-plus new-activity" title="Add New Activity" type="button"></button>
           </div>
         </div>
       <% end %>

@@ -7,7 +7,7 @@ $(document).on('ready page:load turbolinks:load', function () {
         newSession($(this));
     });
 
-    $("#locationselect").change(function () {
+    $(".locationselect").change(function () {
         getRooms(getName(this));
     });
 
@@ -22,7 +22,16 @@ $(document).on('ready page:load turbolinks:load', function () {
             $(".roomselect").prop("disabled", false);
         }
     });
+
+    $(".competetion").click(function(){
+        setSlider(this);
+    });
+
+    $(".new-activity").click(function () {
+        newActivity($(this));
+    })
 });
+
 
 $(document).ready(function () {
     setRooms();
@@ -37,9 +46,26 @@ function setRooms(){
     getRooms(getName("#locationselect"));
 }
 
+function setSlider(e){
+    if($(e).is(":checked")){
+        // create slider
+        let container = createDiv("form-group  slider");
+        let label = createLabel("Team Max Size: 4");
+        let slider = createSlider(activityCount);
+        createSliderEvent(slider, label, $(".max_team_tag_" + activityCount));
+        $(container).append(label);
+        $(container).append(slider);
+        $(container).insertAfter($(e).parent());
 
+    }else{
+        if($(e).parent().next().hasClass("slider")){
+            $(e).parent().next().remove();
+        }
+    }
+}
 
 let sessionCount = 1;
+let activityCount = 1;
 
 function removePreviousButton(button){
     $(button).remove();
@@ -197,7 +223,7 @@ function getLocations() {
         dataType: "json",
         success: function (data) {
             for (index = 0; index < data.results.locations.length; index++) {
-                $("#locationselect").append(createOption(data.results.locations[index].location_name, data.results.locations[index].address));
+                $(".locationselect").append(createOption(data.results.locations[index].location_name, data.results.locations[index].address));
             }
         }
     })
@@ -213,18 +239,117 @@ function createOption(name1, name2) {
 }
 
 
-function createSlider(element, label){
+
+function createDiv(classes){
+    let div = document.createElement("div");
+    $(div).attr("class", classes);
+    return div;
+}
+
+function createLabel(text){
+    let label = document.createElement("label");
+    $(label).text(text);
+    return label;
+}
+
+function createSlider(count){
+    let slider = document.createElement("div");
+    $(slider).attr("class", "bengal-orange team_size_" + count);
+    return slider;
+}
+
+function createSliderEvent(element, label, hiddenField){
     $(function(){
         $(element).slider({
-            range: "max",
+            range: "min",
             min: 2,
             max: 4,
-            value: 2,
+            value: 4,
             slide: function(event,ui){
-                $(label).val(ui.value);
+                $(label).text("Team Max Size: " + ui.value);
+                $(hiddenField).val(ui.value)
             }
         });
-        $(label).val($(element).slider("value"));
+        $(label).text("Team Max Size: " + $(element).slider("value"));
+        $(hiddenField).val($(element).slider("value"));
     })
 
+}
+
+function createInput(type){
+    let tbx = document.createElement("input");
+    $(tbx).attr("type", type);
+    return tbx;
+}
+
+function appendElements(container, element){
+    $(container).append(element);
+}
+
+// create a new activity
+function newActivity(button){
+    activityCount += 1;
+    let lName = createLabel("Activity Name");
+    let lDescription = createLabel("Activity Description");
+    let lMakeAhead = createLabel("Is Make Ahead");
+    let lCompetition = createLabel("Is Competition");
+    let lLocation = createLabel("Choose Location of Activity");
+
+    let tName = createInput("text-box");
+    addAttributes(tName, "name_New_" + activityCount, "form-control");
+    let tDescription = createInput("text-box");
+    addAttributes(tDescription, "name_" + activityCount, "form-control");
+    let tMakeAhead = createInput("checkbox");
+    addAttributes(tMakeAhead, "ismakeahead_" + activityCount, "");
+    let tCompetition = createInput("checkbox");
+    addAttributes(tCompetition, "ismakeahead_" + activityCount, "competition");
+    let tLocation = document.createElement("select");
+    addAttributes(tLocation, "location_select_" + activityCount, "form-control locationselect");
+    let hidden = createInput("hidden");
+    addAttributes(hidden, "max_team_tag_" + activityCount, "max_team_tag_" + activityCount);
+
+    $("#activity-form").append(hidden);
+
+    let con1 = createDiv("form-group");
+    let con2 = createDiv("form-group");
+    let con3 = createDiv("form-group");
+    let con4 = createDiv("form-group");
+    let con5 = createDiv("form-group");
+    let container1 = createDiv("col-lg-4 border-right");
+    let container2 = createDiv("col-lg-8");
+
+    // append elements to containers
+    appendElements(con1, tName);
+    appendElements(con1, lName);
+    appendElements(con2, tDescription);
+    appendElements(con2, lDescription);
+    appendElements(con3, tMakeAhead);
+    appendElements(con3, lMakeAhead);
+    appendElements(con4, tCompetition);
+    appendElements(con4, lCompetition);
+    appendElements(con5, tLocation);
+    appendElements(con5, lLocation);
+
+    // append containers
+    $(container1).append(con1);
+    $(container1).append(con2);
+    $(container1).append(con3);
+    $(container1).append(con4);
+    $(container1).append(con5);
+
+    let hr = document.createElement("hr");
+    $(hr).insertAfter($(".row").last().prev());
+
+
+    let row = createRow();
+    $(row).append(container1);
+    $(row).append(container2);
+    $(row).insertAfter($(hr));
+
+    getLocations();
+    $(tCompetition).click(function(){
+        setSlider(this);
+    })
+
+    
 }

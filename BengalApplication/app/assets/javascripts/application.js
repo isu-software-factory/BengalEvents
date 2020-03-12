@@ -17,6 +17,7 @@
 //= require turbolinks
 //= require jquery-ui/widgets/datepicker
 //= require jquery.timepicker.js
+//= require jquery-ui
 
 $('document').ready(function () {
     setTimeout(function () {

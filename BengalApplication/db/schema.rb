@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_12_073725) do
+ActiveRecord::Schema.define(version: 2020_03_12_211622) do
 
   create_table "activities", force: :cascade do |t|
     t.string "name"
@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 2020_02_12_073725) do
     t.datetime "updated_at", null: false
     t.integer "event_id"
     t.integer "user_id"
+    t.integer "max_team_size"
     t.index ["event_id"], name: "index_activities_on_event_id"
     t.index ["user_id"], name: "index_activities_on_user_id"
   end
@@ -92,6 +93,7 @@ ActiveRecord::Schema.define(version: 2020_02_12_073725) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "activity_id"
+    t.integer "max_team_size"
     t.index ["activity_id"], name: "index_sessions_on_activity_id"
   end
 
