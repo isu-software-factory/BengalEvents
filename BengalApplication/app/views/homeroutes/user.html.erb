@@ -2,7 +2,7 @@
   <% if (@role == "Teacher" || @admin) && @show %>
     <%= render :partial => "teachers/show" %>
     <%= render :partial => "registrations/registrations", locals: {role: @role} %>
-  <% elsif @role == "Student" || (@admin && !@show) %>
+  <% elsif @role == "Student" || (@admin && !@show)%>
     <div class="row">
       <%= render :partial => "registrations/registrations", locals: {role: @role} %>
       <%= render :partial => "students/show" %>
@@ -10,7 +10,6 @@
     <%= render :partial => "students/teams" %>
   <% elsif @role == "Coordinator" || @role == "Admin"%>
     <%= render :partial => "coordinators/show" %>
+    <%= @role %>
   <% end %>
-
-
 </div>

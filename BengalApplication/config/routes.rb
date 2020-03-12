@@ -32,7 +32,7 @@ Rails.application.routes.draw do
   get "activities/get_locations" => "activities#get_locations"
   get "activities/get_rooms/:location" => "activities#get_rooms"
   get "register/:role/:session_id/:id" => "registrations#registers"
-
+  get "all_users" => "homeroutes#all_users", as: "all_users"
   post "students/errors" => "students#errors"
   resources :teams
 resources :events
@@ -52,6 +52,7 @@ resources :events
   post "homeroutes/create" => "homeroutes#create"
   root 'homeroutes#home'
   post 'homeroutes/reset_password/:id' => "homeroutes#reset_password", as: "reset_password"
+  post "delete_user/:id" => "homeroutes#destroy", as: "delete_user"
 # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
 end

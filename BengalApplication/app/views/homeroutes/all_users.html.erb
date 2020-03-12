@@ -1,0 +1,68 @@
+<div id="coordinator_page" class="container">
+  <div class="row">
+    <div class="col border-right">
+      <div class="bottom-indent-more">
+      <h1>Sponsors</h1>
+      <table class="table">
+        <thead class="thead-dark">
+        <tr>
+          <th>Name</th>
+          <th>Visit Profile</th>
+          <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% @sponsors.each do |u| %>
+          <tr>
+            <td><%= u.first_name + " " + u.last_name %></td>
+            <td><%= link_to "Profile", profile_path(u) %></td>
+            <td><%= link_to "Delete", delete_user_path(u.id), class: "btn btn-danger", data: {method: :delete, confirm: "Are you sure?"} %></td>
+        <% end %>
+        </tbody>
+      </table>
+      </div>
+
+      <div class="bottom-indent-more">
+      <h1>Teachers</h1>
+      <table class="table">
+        <thead class="thead-dark">
+        <tr>
+          <th>Name</th>
+          <th>Visit Profile</th>
+          <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% @teachers.each do |u| %>
+          <tr>
+            <td><%= u.first_name + " " + u.last_name %></td>
+            <td><%= link_to "Profile", profile_path(u) %></td>
+            <td><%= link_to "Delete", delete_user_path(u.id), class: "btn btn-danger", data: {method: :delete, confirm: "Are you sure?"} %></td>
+        <% end %>
+        </tbody>
+      </table>
+      </div>
+
+      <div class="bottom-indent-more">
+      <h1>Students</h1>
+      <table class="table">
+        <thead class="thead-dark">
+        <tr>
+          <th>Name</th>
+          <th>Visit Profile</th>
+          <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% @students.each do |u| %>
+          <tr>
+            <td><%= u.first_name + " " + u.last_name %></td>
+            <td><%= link_to "Profile", profile_path(u) %></td>
+            <td><%= link_to "Delete", delete_user_path(u.id), class: "btn btn-danger", data: {method: :delete, confirm: "Are you sure?"} %></td>
+        <% end %>
+        </tbody>
+      </table>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,6 +1,6 @@
 <div class="col-sm">
   <%# if @user.sessions.count > 0 %>
-  <% if current_user.sessions.count > 0 %>
+  <% if @user.sessions.count > 0 %>
 
     <h2>Activities Registered For</h2>
     <table class="table">
@@ -13,7 +13,7 @@
       </thead>
       <tbody>
       <%#@user.sessions.each do |s| %>
-      <% current_user.sessions.each do |s| %>
+      <% @user.sessions.each do |s| %>
 
         <tr>
           <th scope="row"><%= s.activity.name %></th>

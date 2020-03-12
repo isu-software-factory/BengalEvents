@@ -12,17 +12,23 @@ class HomeroutesController < ApplicationController
   end
 
   def user
-    @role = current_user.roles.first.role_name
     @user = User.find(params[:id])
+    @role = @user.roles.first.role_name
+    @current_user_role = current_user.roles.first.role_name
     @admin = false
     @events = Event.all
 
-    if @role == "Teacher"
+    if @current_user_role == "Teacher"
       @admin = true
       @students = Teacher.find(current_user.id).users
+    elsif @current_user_role == "Coordinator"
+      if @role == "Teacher"
+        @admin = true
+        @students = Teacher.find(@user.id).users
+      end
     end
 
-    if @role == "Student" || !@show
+    if @current_user_role == "Student" || !@show
       @teams = 1
       @count = 0
       @increase = 1
@@ -70,6 +76,12 @@ class HomeroutesController < ApplicationController
     end
   end
 
+  def delete
+    @user = User.find(params[:id])
+    authorize @user
+    @user.destroy
+    redirect_to all_users_path, notice: "User deleted."
+  end
 
   def reset_password
     @user = User.find(params[:id])
@@ -79,11 +91,20 @@ class HomeroutesController < ApplicationController
     render json: {data: {success: true}}
   end
 
+  def all_users
+    @teachers = Role.find_by(role_name: "Teacher").users
+    @students = Role.find_by(role_name: "Student").users
+    @sponsors = Role.find_by(role_name: "Sponsor").users
+
+    add_breadcrumb "Home", root_path(role: "User", id: current_user.id)
+    add_breadcrumb current_user.first_name  + "'s Profile", profile_path(current_user)
+    add_breadcrumb "All Users", all_users_path
+  end
 
   private
 
   def check_user
-    if (params[:id].to_i != current_user.id)
+    if (params[:id].to_i != current_user.id && current_user.roles.first.role_name != "Coordinator")
       false
     else
       true

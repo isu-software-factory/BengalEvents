@@ -211,3 +211,20 @@ function createOption(name1, name2) {
     $(option).attr("value", insideText);
     return option;
 }
+
+
+function createSlider(element, label){
+    $(function(){
+        $(element).slider({
+            range: "max",
+            min: 2,
+            max: 4,
+            value: 2,
+            slide: function(event,ui){
+                $(label).val(ui.value);
+            }
+        });
+        $(label).val($(element).slider("value"));
+    })
+
+}

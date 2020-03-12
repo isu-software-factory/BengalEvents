@@ -4,6 +4,7 @@
       <% @events.each do |event| %>
         <div class="bottom-indent-more">
           <h1 class="accordian"><%= event.name %>
+            <%= link_to "New Activity", new_activity_path(event_id: event.id), class: "btn button-small glyphicon glyphicon-plus", title: "Create a new activity for event." %>
             <%= link_to " Edit", edit_event_path(event), class: "btn button-small glyphicon glyphicon-edit" %>
             <%= link_to "Delete", event_path(event.id), class: "btn btn-danger", data: {method: :delete, confirm: "Are you sure?"} %>
             <span class="badge badge-danger">Starts at <%= event.start_date.strftime("%d/%m/%Y") %></span>
@@ -84,6 +85,7 @@
           <p class="card-text">Create a Location for the sponsor to choose from for their event.</p>
           <hr>
           <%= link_to " New Event", new_event_path, class: "button-small glyphicon glyphicon-edit", title: "Create a new event" %>
+          <%= link_to "View All Users", all_users_path, class: "button-small glyphicon glyphicon-user", title: "View All Users Profiles" %>
         </div>
       </div>
     </div>
