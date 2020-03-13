@@ -23,7 +23,7 @@
           <tr class="events">
             <td><%= s.start_time.strftime("%l:%M %p") %> -  <%= s.end_time.strftime("%l:%M %p") %></td>
             <% if @role == "Team" %>
-<!--              <td><%#=s.team %></td>-->
+              <td><%=e.max_team_size %></td>
             <% end %>
             <td class="capacity_remaining"><%= s.capacity_remaining %></td>
             <td class="registered"><%= @user.sessions.include?(s) ? "Registered" : check_box_tag("register", value = s.id, false, title: "Register for activity", role: role, user_id: @user.id) %> </td>

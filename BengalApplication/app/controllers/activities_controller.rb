@@ -126,10 +126,10 @@ def create_activities(event)
   count = 0
   new_activities = []
   errors = []
-  team_sizes = get_values("max_team_size")
+  team_sizes = get_values("max_team_tag")
   # create activities
   activity_names.each do |name|
-    local = Activity.new(name: name, description: descriptions[count], ismakeahead: make_ahead[count], iscompetetion: competitions[count], user_id: current_user.id, event_id: event.id, max_team_size: competitions[count] == "true" ? team_sizes[count] : 0)
+    local = Activity.new(name: name, description: descriptions[count], ismakeahead: make_ahead[count], iscompetetion: competitions[count], user_id: current_user.id, event_id: event.id, max_team_size: competitions[count] == "true" ? team_sizes[count].to_i : 0)
     if local.save
       new_activities << local
     else

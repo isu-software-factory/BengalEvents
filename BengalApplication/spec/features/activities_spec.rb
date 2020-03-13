@@ -14,7 +14,7 @@ RSpec.feature "Events", type: :feature do
       within('form') do
        fill_in "name_New_1", with: "Robots in the gym"
        fill_in "description_1", with: "All about robots"
-       select("SUB (921 S 8th Ave, Pocatello, ID 83209)", from: "location_select")
+       select("SUB (921 S 8th Ave, Pocatello, ID 83209)", from: "location_select_1")
        fill_in "start_time_New_1", with: "9:30"
        fill_in "end_time_1", with: "10:30"
        select("102 (Cafe)", from: "room_select_1")
@@ -29,7 +29,7 @@ RSpec.feature "Events", type: :feature do
       within('form') do
         fill_in "name_New_1", with: "Robots in the gym"
         fill_in "description_1", with: "All about robots"
-        select("SUB (921 S 8th Ave, Pocatello, ID 83209)", from: "location_select")
+        select("SUB (921 S 8th Ave, Pocatello, ID 83209)", from: "location_select_1")
         fill_in "start_time_New_1", with: "9:30"
         fill_in "end_time_1", with: "10:30"
         select("102 (Cafe)", from: "room_select_1")
@@ -53,7 +53,7 @@ RSpec.feature "Events", type: :feature do
       within('form') do
         fill_in "name_New_1", with: "Robots in the gym"
         fill_in "description_1", with: "All about robots"
-        select("SUB (921 S 8th Ave, Pocatello, ID 83209)", from: "location_select")
+        select("SUB (921 S 8th Ave, Pocatello, ID 83209)", from: "location_select_1")
         fill_in "start_time_New_1", with: "9:30"
         fill_in "end_time_1", with: "10:30"
         fill_in "capacity_1", with: "3"
@@ -88,6 +88,37 @@ RSpec.feature "Events", type: :feature do
       expect(page).to have_content("Successfully Created Activity")
 
 
+    end
+
+    scenario "should be successful when multiple activities" do
+      within('form') do
+        fill_in "name_New_1", with: "Robots in the gym"
+        fill_in "description_1", with: "All about robots"
+        select("SUB (921 S 8th Ave, Pocatello, ID 83209)", from: "location_select_1")
+        fill_in "start_time_New_1", with: "9:30"
+        fill_in "end_time_1", with: "10:30"
+        select("102 (Cafe)", from: "room_select_1")
+        fill_in "capacity_1", with: "3"
+      end
+
+      first(:xpath, "//button[@title='Add New Activity']").click
+
+      within('form') do
+        fill_in "name_New_2", with: "Python"
+        fill_in "description_2", with: "Learn Python"
+        select("SUB (921 S 8th Ave, Pocatello, ID 83209)", from: "location_select_2")
+        fill_in "start_time_New_1", with: "5:30"
+        fill_in "end_time_1", with: "6:30"
+        fill_in "capacity_2", with: "3"
+      end
+
+      all(".new-session").last.click
+      within("form") do
+        select("102 (Cafe)", from: "room_select_2")
+        select("203 (Ballroom)", from: "room_select_3")
+      end
+      click_button 'Confirm'
+      expect(page).to have_content("Successfully Created Activity")
     end
 
   #  scenario "should fail" do

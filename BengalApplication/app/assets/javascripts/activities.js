@@ -8,19 +8,11 @@ $(document).on('ready page:load turbolinks:load', function () {
     });
 
     $(".locationselect").change(function () {
-        getRooms(getName(this));
+        getRooms(getName(this), $(this).parent().parent().parent());
     });
 
     $("#same_room").click(function(){
-        if($(this).is(":checked")){
-            $(".roomselect").prop("disabled", "disabled");
-            $(".roomselect").first().prop("disabled", false);
-            $(".roomselect").first().change(function(){
-                $(".roomselect").slice(1).val($(this).children("option:selected").val()).change();
-            })
-        }else{
-            $(".roomselect").prop("disabled", false);
-        }
+        useSameRoom(this);
     });
 
     $(".competetion").click(function(){
@@ -34,16 +26,34 @@ $(document).on('ready page:load turbolinks:load', function () {
 
 
 $(document).ready(function () {
-    setRooms();
+    setRooms($(".col-lg-4").last().children().last().children().last());
 });
+
+function useSameRoom(e){
+    if($(e).is(":checked")){
+        $(".roomselect").each(function (){
+           if ($(this).parent().parent().parent().children().first().children().last().is($(e).parent())){
+               if (!($(this).is($(e).parent().parent().next().children(".col-lg-3").first().children().first()))) {     // make sure that the selector is not the first selector
+                   $(this).prop("disabled", "disabled");
+               }
+           }
+        });
+    }else{
+        $(".roomselect").each(function (){
+            if ($(this).parent().parent().parent().children().first().children().last().is($(e).parent())){
+               $(this).prop("disabled", false);
+            }
+        });
+    }
+}
 
 function getName(selector) {
     let name = $(selector).children("option:selected").val().split("(");
     return name[0];
 }
 
-function setRooms(){
-    getRooms(getName("#locationselect"));
+function setRooms(locations){
+    getRooms(getName(locations), $(locations).parent().parent().parent());
 }
 
 function setSlider(e){
@@ -52,7 +62,7 @@ function setSlider(e){
         let container = createDiv("form-group  slider");
         let label = createLabel("Team Max Size: 4");
         let slider = createSlider(activityCount);
-        createSliderEvent(slider, label, $(".max_team_tag_" + activityCount));
+        createSliderEvent(slider, label, "#max_team_tag_" + activityCount);
         $(container).append(label);
         $(container).append(slider);
         $(container).insertAfter($(e).parent());
@@ -71,10 +81,9 @@ function removePreviousButton(button){
     $(button).remove();
 }
 
-// add new session
-function newSession(button) {
+// creates a new session row and returns the row
+function createSession(){
 
-    sessionCount += 1;
     // create text boxes
     let start_date = document.createElement("input");
     $(start_date).attr("type", "text-box");
@@ -119,11 +128,21 @@ function newSession(button) {
     // add columns to row
     addElementsToRow(col1, col2, col3, col4, col5, row);
 
+    return row
+}
+
+
+// add new session
+function newSession(button) {
+
+    sessionCount += 1;
+   let row = createSession();
+
     // add row to the dom
     addElements(row, button);
 
     // sets the rooms
-    setRooms();
+    setRooms($(row).parent().prev().children().last().children().last());
 
     // remove previous button
     removePreviousButton(button);
@@ -134,6 +153,7 @@ function newSession(button) {
 function addAttributes(element, name, classes) {
     $(element).attr("name", name);
     $(element).attr("class", classes);
+    $(element).attr("id", name);
 }
 
 
@@ -186,7 +206,8 @@ function createButton(type, sessionType) {
         });
     }else{
         $(button).click(function(){
-            $(this).parent().parent().prev().children().last().append(createButton("plus", "new-session"));
+            if ($(this).is($(this).parent().parent().parent().children().last().children().last().children().first()))
+                $(this).parent().parent().prev().children().last().append(createButton("plus", "new-session"));
             $(this).parent().parent().remove();
         })
     }
@@ -195,23 +216,31 @@ function createButton(type, sessionType) {
 
 
 // get the rooms for the location
-function getRooms(location) {
-    removeRooms();
+function getRooms(location, parent) {
+    removeRooms(parent);
     Rails.ajax({
         url: `get_rooms/${location}`,
         type: 'GET',
         dataType: "json",
         success: function (data) {
             for (index = 0; index < data.results.rooms.length; index++) {
-                $(".roomselect").append(createOption(data.results.rooms[index].room_number, data.results.rooms[index].room_name));
+                $(".roomselect").each(function (){
+                    if ($(this).parent().parent().parent().parent().is($(parent))){
+                        $(this).append(createOption(data.results.rooms[index].room_number, data.results.rooms[index].room_name));
+                    }
+                });
             }
         }
     })
 }
 
 // removes all rooms
-function removeRooms() {
-    $(".roomselect").children().remove();
+function removeRooms(parent) {
+    $(".roomselect").each(function (){
+        if ($(this).parent().parent().parent().parent().is($(parent))){
+            $(this).children().remove();
+        }
+    });
 }
 
 
@@ -289,27 +318,33 @@ function appendElements(container, element){
 // create a new activity
 function newActivity(button){
     activityCount += 1;
+    sessionCount += 1;
+
+    // create labels
     let lName = createLabel("Activity Name");
     let lDescription = createLabel("Activity Description");
     let lMakeAhead = createLabel("Is Make Ahead");
     let lCompetition = createLabel("Is Competition");
     let lLocation = createLabel("Choose Location of Activity");
 
+    // create inputs
     let tName = createInput("text-box");
     addAttributes(tName, "name_New_" + activityCount, "form-control");
     let tDescription = createInput("text-box");
-    addAttributes(tDescription, "name_" + activityCount, "form-control");
+    addAttributes(tDescription, "description_" + activityCount, "form-control");
     let tMakeAhead = createInput("checkbox");
     addAttributes(tMakeAhead, "ismakeahead_" + activityCount, "");
     let tCompetition = createInput("checkbox");
-    addAttributes(tCompetition, "ismakeahead_" + activityCount, "competition");
+    addAttributes(tCompetition, "iscompetetion_" + activityCount, "competition");
     let tLocation = document.createElement("select");
     addAttributes(tLocation, "location_select_" + activityCount, "form-control locationselect");
     let hidden = createInput("hidden");
     addAttributes(hidden, "max_team_tag_" + activityCount, "max_team_tag_" + activityCount);
 
+    // append hidden field
     $("#activity-form").append(hidden);
 
+    // create containers
     let con1 = createDiv("form-group");
     let con2 = createDiv("form-group");
     let con3 = createDiv("form-group");
@@ -319,16 +354,16 @@ function newActivity(button){
     let container2 = createDiv("col-lg-8");
 
     // append elements to containers
-    appendElements(con1, tName);
     appendElements(con1, lName);
-    appendElements(con2, tDescription);
+    appendElements(con1, tName);
     appendElements(con2, lDescription);
+    appendElements(con2, tDescription);
     appendElements(con3, tMakeAhead);
     appendElements(con3, lMakeAhead);
     appendElements(con4, tCompetition);
     appendElements(con4, lCompetition);
-    appendElements(con5, tLocation);
     appendElements(con5, lLocation);
+    appendElements(con5, tLocation);
 
     // append containers
     $(container1).append(con1);
@@ -340,7 +375,6 @@ function newActivity(button){
     let hr = document.createElement("hr");
     $(hr).insertAfter($(".row").last().prev());
 
-
     let row = createRow();
     $(row).append(container1);
     $(row).append(container2);
@@ -349,7 +383,56 @@ function newActivity(button){
     getLocations();
     $(tCompetition).click(function(){
         setSlider(this);
-    })
+    });
 
-    
+    $(tLocation).change(function(){
+        getRooms(getName(this), $(this).parent().parent().parent());
+    });
+
+    let row2 = createSession();
+    let row3 = createSessionLabels();
+
+    appendElements(container2, row3);
+    appendElements(container2, row2);
+    // sets the rooms
+    setRooms(tLocation);
+
+}
+// creates all elements for a session
+function createSessionLabels(){
+    // create row and columns
+    let row = createRow();
+    let col1 = createDiv("col-lg-2");
+    let col2 = createDiv("col-lg-2");
+    let col3 = createDiv("col-lg-3");
+    let col4 = createDiv("col-lg-2");
+    let col5 = createDiv("col-lg-3 form-group");
+
+    let lTime = createLabel("Start Time");
+    let lETime = createLabel("End Time");
+    let lRoom = createLabel("Room");
+    let lCapacity = createLabel("Capacity");
+    let tbx = createInput("checkbox");
+    addAttributes(tbx, "same_room_" + sessionCount, "");
+    let lTbx = createLabel("Use Same Room");
+
+    // append elements to columns
+    appendElements(col1, lTime);
+    appendElements(col2, lETime);
+    appendElements(col3, lRoom);
+    appendElements(col4, lCapacity);
+    appendElements(col5, tbx);
+    appendElements(col5, lTbx);
+
+    // append columns to row
+    appendElements(row, col1);
+    appendElements(row, col2);
+    appendElements(row, col3);
+    appendElements(row, col4);
+    appendElements(row, col5);
+    $(tbx).click(function () {
+        useSameRoom(this);
+    });
+    return row;
+
 }

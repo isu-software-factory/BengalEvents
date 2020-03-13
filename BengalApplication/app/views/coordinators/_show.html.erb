@@ -10,19 +10,8 @@
             <span class="badge badge-danger">Starts at <%= event.start_date.strftime("%d/%m/%Y") %></span>
           </h1>
 
-
-          <div class="alert alert-success" id="flash" role="alert">
-            <a href="#" class="close" data-dismiss="alert" aria-label="close"> &#88; </a>
-            <h4 class="alert-heading">What is this?</h4>
-            <p>- List of the Locations that you can choose from to create an event.</p>
-          </div>
           <hr>
           <h2>Activities</h2>
-          <div class="alert alert-success" id="flash1" role="alert">
-            <a href="#" class="close" data-dismiss="alert" aria-label="close"> &#88; </a>
-            <h4 class="alert-heading">What is this?</h4>
-            <p> - These are the list of activities created under this event.</p>
-          </div>
           <table class="table">
             <thead class="thead-dark">
             <tr>
@@ -52,6 +41,7 @@
                         <th>Start Time</th>
                         <th>Capacity</th>
                         <td>Spots Left</td>
+                        <td>Team Size Restriction</td>
                       </tr>
                       </thead>
                       <tbody>
@@ -64,6 +54,11 @@
                             -  <%= session.end_time.strftime("%l:%M %p") %></td>
                           <td><%= session.capacity %></td>
                           <td><%= session.capacity_remaining %></td>
+                          <% if activity.iscompetetion %>
+                            <td><%= activity.max_team_size %></td>
+                          <% else %>
+                            <td>None</td>
+                          <% end %>
                         </tr>
                       <% end %>
                       </tbody>

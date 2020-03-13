@@ -14,27 +14,27 @@
       <img src="./assets/0.10.2/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" style="display:none;">
-      <div class="timestamp">Generated <abbr class="timeago" title="2020-03-12T14:16:01-06:00">2020-03-12T14:16:01-06:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2020-03-13T13:03:38-06:00">2020-03-13T13:03:38-06:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
         <div class="file_list_container" id="AllFiles">
   <h2>
     <span class="group_name">All Files</span>
-    (<span class="covered_percent"><span class="red">69.18%</span></span>
+    (<span class="covered_percent"><span class="red">70.85%</span></span>
      covered at
      <span class="covered_strength">
        <span class="green">
-         1.9
+         2.66
        </span>
     </span> hits/line)
   </h2>
   <a name="AllFiles"></a>
   <div>
     <b>49</b> files in total.
-    <b>597</b> relevant lines. 
-    <span class="green"><b>413</b> lines covered</span> and
-    <span class="red"><b>184</b> lines missed </span>
+    <b>621</b> relevant lines. 
+    <span class="green"><b>440</b> lines covered</span> and
+    <span class="red"><b>181</b> lines missed </span>
   </div>
   <table class="file_list">
     <thead>
@@ -52,12 +52,12 @@
       
       <tr>
         <td class="strong"><a href="#bb929b9f9583a2b6b1bbce1a275d242dd72ff85e" class="src_link" title="app/controllers/activities_controller.rb">app/controllers/activities_controller.rb</a></td>
-        <td class="red strong">68.33 %</td>
+        <td class="red strong">71.07 %</td>
         <td>197</td>
-        <td>120</td>
-        <td>82</td>
-        <td>38</td>
-        <td>6.1</td>
+        <td>121</td>
+        <td>86</td>
+        <td>35</td>
+        <td>9.9</td>
       </tr>
       
       <tr>
@@ -67,7 +67,7 @@
         <td>17</td>
         <td>11</td>
         <td>6</td>
-        <td>2.5</td>
+        <td>3.5</td>
       </tr>
       
       <tr>
@@ -327,7 +327,7 @@
         <td>13</td>
         <td>8</td>
         <td>5</td>
-        <td>0.8</td>
+        <td>0.9</td>
       </tr>
       
       <tr>
@@ -337,7 +337,7 @@
         <td>5</td>
         <td>5</td>
         <td>0</td>
-        <td>2.6</td>
+        <td>3.4</td>
       </tr>
       
       <tr>
@@ -522,10 +522,10 @@
       
       <tr>
         <td class="strong"><a href="#df91efa81b9690c74c7446c040317cc5077e6dda" class="src_link" title="spec/features/activities_spec.rb">spec/features/activities_spec.rb</a></td>
-        <td class="green strong">96.77 %</td>
-        <td>153</td>
-        <td>62</td>
-        <td>60</td>
+        <td class="green strong">97.65 %</td>
+        <td>184</td>
+        <td>85</td>
+        <td>83</td>
         <td>2</td>
         <td>1.1</td>
       </tr>
@@ -537,7 +537,7 @@
         <td>31</td>
         <td>28</td>
         <td>3</td>
-        <td>1.2</td>
+        <td>1.4</td>
       </tr>
       
     </tbody>
@@ -559,11 +559,11 @@
         <div class="source_table" id="bb929b9f9583a2b6b1bbce1a275d242dd72ff85e">
   <div class="header">
     <h3>app/controllers/activities_controller.rb</h3>
-    <h4><span class="red">68.33 %</span> covered</h4>
+    <h4><span class="red">71.07 %</span> covered</h4>
     <div>
-      <b>120</b> relevant lines. 
-      <span class="green"><b>82</b> lines covered</span> and
-      <span class="red"><b>38</b> lines missed.</span>
+      <b>121</b> relevant lines. 
+      <span class="green"><b>86</b> lines covered</span> and
+      <span class="red"><b>35</b> lines missed.</span>
     </div>
   </div>
   
@@ -612,38 +612,38 @@
           <code class="ruby">  def new</code>
         </li>
       
-        <li class="covered" data-hits="3" data-linenumber="8">
-          <span class="hits">3</span>
+        <li class="covered" data-hits="5" data-linenumber="8">
+          <span class="hits">5</span>
           
           <code class="ruby">    @activity = Activity.new</code>
         </li>
       
-        <li class="covered" data-hits="3" data-linenumber="9">
-          <span class="hits">3</span>
+        <li class="covered" data-hits="5" data-linenumber="9">
+          <span class="hits">5</span>
           
           <code class="ruby">    @event = Event.find(params[:event_id])</code>
         </li>
       
-        <li class="covered" data-hits="3" data-linenumber="10">
-          <span class="hits">3</span>
+        <li class="covered" data-hits="5" data-linenumber="10">
+          <span class="hits">5</span>
           
           <code class="ruby">    authorize @activity</code>
         </li>
       
-        <li class="covered" data-hits="3" data-linenumber="11">
-          <span class="hits">3</span>
+        <li class="covered" data-hits="5" data-linenumber="11">
+          <span class="hits">5</span>
           
           <code class="ruby">    add_breadcrumb &#39;Home&#39;, root_path</code>
         </li>
       
-        <li class="covered" data-hits="3" data-linenumber="12">
-          <span class="hits">3</span>
+        <li class="covered" data-hits="5" data-linenumber="12">
+          <span class="hits">5</span>
           
           <code class="ruby">    add_breadcrumb @event.name, @event</code>
         </li>
       
-        <li class="covered" data-hits="3" data-linenumber="13">
-          <span class="hits">3</span>
+        <li class="covered" data-hits="5" data-linenumber="13">
+          <span class="hits">5</span>
           
           <code class="ruby">    add_breadcrumb &#39;Create Event&#39;, new_activity_path</code>
         </li>
@@ -666,20 +666,20 @@
           <code class="ruby">  def create</code>
         </li>
       
-        <li class="covered" data-hits="3" data-linenumber="17">
-          <span class="hits">3</span>
+        <li class="covered" data-hits="4" data-linenumber="17">
+          <span class="hits">4</span>
           
           <code class="ruby">    @event = Event.find(params[:event_id])</code>
         </li>
       
-        <li class="covered" data-hits="3" data-linenumber="18">
-          <span class="hits">3</span>
+        <li class="covered" data-hits="4" data-linenumber="18">
+          <span class="hits">4</span>
           
           <code class="ruby">    errors = create_activities(@event)</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="19">
-          <span class="hits">2</span>
+        <li class="covered" data-hits="3" data-linenumber="19">
+          <span class="hits">3</span>
           
           <code class="ruby">    if errors.length == 0</code>
         </li>
@@ -702,14 +702,14 @@
           <code class="ruby">    else</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="23">
-          
+        <li class="covered" data-hits="1" data-linenumber="23">
+          <span class="hits">1</span>
           
           <code class="ruby">      flash[:errors] = errors</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="24">
-          
+        <li class="covered" data-hits="1" data-linenumber="24">
+          <span class="hits">1</span>
           
           <code class="ruby">      redirect_back(fallback_location: new_activity_path)</code>
         </li>
@@ -1080,14 +1080,14 @@
           <code class="ruby">  def get_locations</code>
         </li>
       
-        <li class="covered" data-hits="3" data-linenumber="86">
-          <span class="hits">3</span>
+        <li class="covered" data-hits="6" data-linenumber="86">
+          <span class="hits">6</span>
           
           <code class="ruby">    locations = Location.all</code>
         </li>
       
-        <li class="covered" data-hits="3" data-linenumber="87">
-          <span class="hits">3</span>
+        <li class="covered" data-hits="6" data-linenumber="87">
+          <span class="hits">6</span>
           
           <code class="ruby">    render json: {results: {locations: locations}}</code>
         </li>
@@ -1110,14 +1110,14 @@
           <code class="ruby">  def get_rooms</code>
         </li>
       
-        <li class="covered" data-hits="6" data-linenumber="91">
-          <span class="hits">6</span>
+        <li class="covered" data-hits="8" data-linenumber="91">
+          <span class="hits">8</span>
           
           <code class="ruby">    rooms = Location.find_by(location_name: params[:location]).rooms</code>
         </li>
       
-        <li class="covered" data-hits="6" data-linenumber="92">
-          <span class="hits">6</span>
+        <li class="covered" data-hits="8" data-linenumber="92">
+          <span class="hits">8</span>
           
           <code class="ruby">    render json: {results: {rooms: rooms}}</code>
         </li>
@@ -1158,8 +1158,8 @@
           <code class="ruby">def get_values(name)</code>
         </li>
       
-        <li class="covered" data-hits="24" data-linenumber="99">
-          <span class="hits">24</span>
+        <li class="covered" data-hits="36" data-linenumber="99">
+          <span class="hits">36</span>
           
           <code class="ruby">  values = []</code>
         </li>
@@ -1170,20 +1170,20 @@
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="24" data-linenumber="101">
-          <span class="hits">24</span>
+        <li class="covered" data-hits="36" data-linenumber="101">
+          <span class="hits">36</span>
           
           <code class="ruby">  params.each do |key, value|</code>
         </li>
       
-        <li class="covered" data-hits="376" data-linenumber="102">
-          <span class="hits">376</span>
+        <li class="covered" data-hits="675" data-linenumber="102">
+          <span class="hits">675</span>
           
           <code class="ruby">    if key.start_with?(name)</code>
         </li>
       
-        <li class="covered" data-hits="28" data-linenumber="103">
-          <span class="hits">28</span>
+        <li class="covered" data-hits="44" data-linenumber="103">
+          <span class="hits">44</span>
           
           <code class="ruby">      values &lt;&lt; value</code>
         </li>
@@ -1200,8 +1200,8 @@
           <code class="ruby">  end</code>
         </li>
       
-        <li class="covered" data-hits="24" data-linenumber="106">
-          <span class="hits">24</span>
+        <li class="covered" data-hits="36" data-linenumber="106">
+          <span class="hits">36</span>
           
           <code class="ruby">  values</code>
         </li>
@@ -1224,8 +1224,8 @@
           <code class="ruby">def get_keys(name)</code>
         </li>
       
-        <li class="covered" data-hits="3" data-linenumber="110">
-          <span class="hits">3</span>
+        <li class="covered" data-hits="4" data-linenumber="110">
+          <span class="hits">4</span>
           
           <code class="ruby">  keys = []</code>
         </li>
@@ -1236,20 +1236,20 @@
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="3" data-linenumber="112">
-          <span class="hits">3</span>
+        <li class="covered" data-hits="4" data-linenumber="112">
+          <span class="hits">4</span>
           
           <code class="ruby">  params.each do |key, value|</code>
         </li>
       
-        <li class="covered" data-hits="47" data-linenumber="113">
-          <span class="hits">47</span>
+        <li class="covered" data-hits="75" data-linenumber="113">
+          <span class="hits">75</span>
           
           <code class="ruby">    if key.start_with?(name)</code>
         </li>
       
-        <li class="covered" data-hits="6" data-linenumber="114">
-          <span class="hits">6</span>
+        <li class="covered" data-hits="9" data-linenumber="114">
+          <span class="hits">9</span>
           
           <code class="ruby">      keys &lt;&lt; key</code>
         </li>
@@ -1266,8 +1266,8 @@
           <code class="ruby">  end</code>
         </li>
       
-        <li class="covered" data-hits="3" data-linenumber="117">
-          <span class="hits">3</span>
+        <li class="covered" data-hits="4" data-linenumber="117">
+          <span class="hits">4</span>
           
           <code class="ruby">  keys</code>
         </li>
@@ -1296,52 +1296,52 @@
           <code class="ruby">def create_activities(event)</code>
         </li>
       
-        <li class="covered" data-hits="3" data-linenumber="122">
-          <span class="hits">3</span>
+        <li class="covered" data-hits="4" data-linenumber="122">
+          <span class="hits">4</span>
           
           <code class="ruby">  activity_names = get_values(&quot;name&quot;)</code>
         </li>
       
-        <li class="covered" data-hits="3" data-linenumber="123">
-          <span class="hits">3</span>
+        <li class="covered" data-hits="4" data-linenumber="123">
+          <span class="hits">4</span>
           
           <code class="ruby">  descriptions = get_values(&quot;description&quot;)</code>
         </li>
       
-        <li class="covered" data-hits="3" data-linenumber="124">
-          <span class="hits">3</span>
+        <li class="covered" data-hits="4" data-linenumber="124">
+          <span class="hits">4</span>
           
           <code class="ruby">  make_ahead = get_values(&quot;ismakeahead&quot;)</code>
         </li>
       
-        <li class="covered" data-hits="3" data-linenumber="125">
-          <span class="hits">3</span>
+        <li class="covered" data-hits="4" data-linenumber="125">
+          <span class="hits">4</span>
           
           <code class="ruby">  competitions = get_values(&quot;iscompetetion&quot;)</code>
         </li>
       
-        <li class="covered" data-hits="3" data-linenumber="126">
-          <span class="hits">3</span>
+        <li class="covered" data-hits="4" data-linenumber="126">
+          <span class="hits">4</span>
           
           <code class="ruby">  count = 0</code>
         </li>
       
-        <li class="covered" data-hits="3" data-linenumber="127">
-          <span class="hits">3</span>
+        <li class="covered" data-hits="4" data-linenumber="127">
+          <span class="hits">4</span>
           
           <code class="ruby">  new_activities = []</code>
         </li>
       
-        <li class="covered" data-hits="3" data-linenumber="128">
-          <span class="hits">3</span>
+        <li class="covered" data-hits="4" data-linenumber="128">
+          <span class="hits">4</span>
           
           <code class="ruby">  errors = []</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="129">
+        <li class="covered" data-hits="4" data-linenumber="129">
+          <span class="hits">4</span>
           
-          
-          <code class="ruby"></code>
+          <code class="ruby">  team_sizes = get_values(&quot;max_team_size&quot;)</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="130">
@@ -1350,26 +1350,26 @@
           <code class="ruby">  # create activities</code>
         </li>
       
-        <li class="covered" data-hits="3" data-linenumber="131">
-          <span class="hits">3</span>
+        <li class="covered" data-hits="4" data-linenumber="131">
+          <span class="hits">4</span>
           
           <code class="ruby">  activity_names.each do |name|</code>
         </li>
       
-        <li class="covered" data-hits="3" data-linenumber="132">
-          <span class="hits">3</span>
+        <li class="covered" data-hits="5" data-linenumber="132">
+          <span class="hits">5</span>
           
-          <code class="ruby">    local = Activity.new(name: name, description: descriptions[count], ismakeahead: make_ahead[count], iscompetetion: competitions[count], user_id: current_user.id, event_id: event.id)</code>
+          <code class="ruby">    local = Activity.new(name: name, description: descriptions[count], ismakeahead: make_ahead[count], iscompetetion: competitions[count], user_id: current_user.id, event_id: event.id, max_team_size: competitions[count] == &quot;true&quot; ? team_sizes[count] : 0)</code>
         </li>
       
-        <li class="covered" data-hits="3" data-linenumber="133">
-          <span class="hits">3</span>
+        <li class="covered" data-hits="5" data-linenumber="133">
+          <span class="hits">5</span>
           
           <code class="ruby">    if local.save</code>
         </li>
       
-        <li class="covered" data-hits="3" data-linenumber="134">
-          <span class="hits">3</span>
+        <li class="covered" data-hits="5" data-linenumber="134">
+          <span class="hits">5</span>
           
           <code class="ruby">      new_activities &lt;&lt; local</code>
         </li>
@@ -1392,8 +1392,8 @@
           <code class="ruby">    end</code>
         </li>
       
-        <li class="covered" data-hits="3" data-linenumber="138">
-          <span class="hits">3</span>
+        <li class="covered" data-hits="5" data-linenumber="138">
+          <span class="hits">5</span>
           
           <code class="ruby">    count += 1</code>
         </li>
@@ -1416,8 +1416,8 @@
           <code class="ruby">  # check activities aren&#39;t empty</code>
         </li>
       
-        <li class="covered" data-hits="3" data-linenumber="142">
-          <span class="hits">3</span>
+        <li class="covered" data-hits="4" data-linenumber="142">
+          <span class="hits">4</span>
           
           <code class="ruby">  if new_activities.length == 0</code>
         </li>
@@ -1434,14 +1434,14 @@
           <code class="ruby">  else</code>
         </li>
       
-        <li class="covered" data-hits="3" data-linenumber="145">
-          <span class="hits">3</span>
+        <li class="covered" data-hits="4" data-linenumber="145">
+          <span class="hits">4</span>
           
           <code class="ruby">    errors += add_sessions(new_activities)</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="146">
-          <span class="hits">2</span>
+        <li class="covered" data-hits="3" data-linenumber="146">
+          <span class="hits">3</span>
           
           <code class="ruby">    errors</code>
         </li>
@@ -1488,50 +1488,50 @@
           <code class="ruby">def add_sessions(activities)</code>
         </li>
       
-        <li class="covered" data-hits="3" data-linenumber="154">
-          <span class="hits">3</span>
+        <li class="covered" data-hits="4" data-linenumber="154">
+          <span class="hits">4</span>
           
           <code class="ruby">  start_time = get_values(&quot;start_time&quot;)</code>
         </li>
       
-        <li class="covered" data-hits="3" data-linenumber="155">
-          <span class="hits">3</span>
+        <li class="covered" data-hits="4" data-linenumber="155">
+          <span class="hits">4</span>
           
           <code class="ruby">  end_time = get_values(&quot;end_time&quot;)</code>
         </li>
       
-        <li class="covered" data-hits="3" data-linenumber="156">
-          <span class="hits">3</span>
+        <li class="covered" data-hits="4" data-linenumber="156">
+          <span class="hits">4</span>
           
           <code class="ruby">  rooms = get_values(&quot;room_select&quot;)</code>
         </li>
       
-        <li class="covered" data-hits="3" data-linenumber="157">
-          <span class="hits">3</span>
+        <li class="covered" data-hits="4" data-linenumber="157">
+          <span class="hits">4</span>
           
           <code class="ruby">  capacities = get_values(&quot;capacity&quot;)</code>
         </li>
       
-        <li class="covered" data-hits="3" data-linenumber="158">
-          <span class="hits">3</span>
+        <li class="covered" data-hits="4" data-linenumber="158">
+          <span class="hits">4</span>
           
           <code class="ruby">  new_sessions = get_keys(&quot;start_time&quot;)</code>
         </li>
       
-        <li class="covered" data-hits="3" data-linenumber="159">
-          <span class="hits">3</span>
+        <li class="covered" data-hits="4" data-linenumber="159">
+          <span class="hits">4</span>
           
           <code class="ruby">  count = 0</code>
         </li>
       
-        <li class="covered" data-hits="3" data-linenumber="160">
-          <span class="hits">3</span>
+        <li class="covered" data-hits="4" data-linenumber="160">
+          <span class="hits">4</span>
           
           <code class="ruby">  activity_count = -1</code>
         </li>
       
-        <li class="covered" data-hits="3" data-linenumber="161">
-          <span class="hits">3</span>
+        <li class="covered" data-hits="4" data-linenumber="161">
+          <span class="hits">4</span>
           
           <code class="ruby">  errors = []</code>
         </li>
@@ -1548,26 +1548,26 @@
           <code class="ruby">  # create rooms and add them to locations</code>
         </li>
       
-        <li class="covered" data-hits="3" data-linenumber="164">
-          <span class="hits">3</span>
+        <li class="covered" data-hits="4" data-linenumber="164">
+          <span class="hits">4</span>
           
           <code class="ruby">  new_sessions.each do |session|</code>
         </li>
       
-        <li class="covered" data-hits="5" data-linenumber="165">
-          <span class="hits">5</span>
+        <li class="covered" data-hits="8" data-linenumber="165">
+          <span class="hits">8</span>
           
           <code class="ruby">    if session.start_with?(&quot;start_time_New&quot;)</code>
         </li>
       
-        <li class="covered" data-hits="3" data-linenumber="166">
-          <span class="hits">3</span>
+        <li class="covered" data-hits="4" data-linenumber="166">
+          <span class="hits">4</span>
           
           <code class="ruby">      activity_count += 1</code>
         </li>
       
-        <li class="covered" data-hits="3" data-linenumber="167">
-          <span class="hits">3</span>
+        <li class="covered" data-hits="4" data-linenumber="167">
+          <span class="hits">4</span>
           
           <code class="ruby">      errors += create_session(start_time[count], rooms[count], capacities[count], activities[activity_count], end_time[count])</code>
         </li>
@@ -1578,8 +1578,8 @@
           <code class="ruby">    else</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="169">
-          <span class="hits">2</span>
+        <li class="covered" data-hits="4" data-linenumber="169">
+          <span class="hits">4</span>
           
           <code class="ruby">      errors += create_session(start_time[count], rooms[count], capacities[count], activities[activity_count], end_time[count])</code>
         </li>
@@ -1590,8 +1590,8 @@
           <code class="ruby">    end</code>
         </li>
       
-        <li class="covered" data-hits="4" data-linenumber="171">
-          <span class="hits">4</span>
+        <li class="covered" data-hits="7" data-linenumber="171">
+          <span class="hits">7</span>
           
           <code class="ruby">    count += 1</code>
         </li>
@@ -1602,8 +1602,8 @@
           <code class="ruby">  end</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="173">
-          <span class="hits">2</span>
+        <li class="covered" data-hits="3" data-linenumber="173">
+          <span class="hits">3</span>
           
           <code class="ruby">  errors</code>
         </li>
@@ -1626,26 +1626,26 @@
           <code class="ruby">def create_session(start_time, room, capacity, activity, end_time)</code>
         </li>
       
-        <li class="covered" data-hits="5" data-linenumber="177">
-          <span class="hits">5</span>
+        <li class="covered" data-hits="8" data-linenumber="177">
+          <span class="hits">8</span>
           
           <code class="ruby">  errors = []</code>
         </li>
       
-        <li class="covered" data-hits="5" data-linenumber="178">
-          <span class="hits">5</span>
+        <li class="covered" data-hits="8" data-linenumber="178">
+          <span class="hits">8</span>
           
           <code class="ruby">  new_session = Session.new(start_time: start_time, capacity: capacity, activity_id: activity.id, end_time: end_time)</code>
         </li>
       
-        <li class="covered" data-hits="5" data-linenumber="179">
-          <span class="hits">5</span>
+        <li class="covered" data-hits="8" data-linenumber="179">
+          <span class="hits">8</span>
           
           <code class="ruby">  unless new_session.save</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="180">
-          
+        <li class="covered" data-hits="2" data-linenumber="180">
+          <span class="hits">2</span>
           
           <code class="ruby">    errors += new_session.errors.full_messages</code>
         </li>
@@ -1656,20 +1656,20 @@
           <code class="ruby">  else</code>
         </li>
       
-        <li class="covered" data-hits="5" data-linenumber="182">
-          <span class="hits">5</span>
+        <li class="covered" data-hits="6" data-linenumber="182">
+          <span class="hits">6</span>
           
           <code class="ruby">    room_num = room.split(&quot; (&quot;)[0].to_i</code>
         </li>
       
-        <li class="covered" data-hits="4" data-linenumber="183">
-          <span class="hits">4</span>
+        <li class="covered" data-hits="5" data-linenumber="183">
+          <span class="hits">5</span>
           
           <code class="ruby">    room_update = Room.find_by(room_number: room_num)</code>
         </li>
       
-        <li class="covered" data-hits="4" data-linenumber="184">
-          <span class="hits">4</span>
+        <li class="covered" data-hits="5" data-linenumber="184">
+          <span class="hits">5</span>
           
           <code class="ruby">    room_update.update(session_id: new_session.id)</code>
         </li>
@@ -1686,8 +1686,8 @@
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="4" data-linenumber="187">
-          <span class="hits">4</span>
+        <li class="covered" data-hits="7" data-linenumber="187">
+          <span class="hits">7</span>
           
           <code class="ruby">  errors</code>
         </li>
@@ -1903,14 +1903,14 @@
           <code class="ruby">  def authenticate_user!(opts={})</code>
         </li>
       
-        <li class="covered" data-hits="17" data-linenumber="23">
-          <span class="hits">17</span>
+        <li class="covered" data-hits="25" data-linenumber="23">
+          <span class="hits">25</span>
           
           <code class="ruby">    if user_signed_in?</code>
         </li>
       
-        <li class="covered" data-hits="17" data-linenumber="24">
-          <span class="hits">17</span>
+        <li class="covered" data-hits="25" data-linenumber="24">
+          <span class="hits">25</span>
           
           <code class="ruby">      super</code>
         </li>
@@ -5097,8 +5097,8 @@
           <code class="ruby">  def new?</code>
         </li>
       
-        <li class="covered" data-hits="3" data-linenumber="4">
-          <span class="hits">3</span>
+        <li class="covered" data-hits="5" data-linenumber="4">
+          <span class="hits">5</span>
           
           <code class="ruby">    user.roles.first.role_name == &quot;Coordinator&quot; || user.roles.first.role_name == &quot;Admin&quot; || user.roles.first.role_name == &quot;Sponsor&quot;</code>
         </li>
@@ -5278,14 +5278,14 @@
           <code class="ruby">  def initialize(user, record)</code>
         </li>
       
-        <li class="covered" data-hits="5" data-linenumber="5">
-          <span class="hits">5</span>
+        <li class="covered" data-hits="7" data-linenumber="5">
+          <span class="hits">7</span>
           
           <code class="ruby">    @user = user</code>
         </li>
       
-        <li class="covered" data-hits="5" data-linenumber="6">
-          <span class="hits">5</span>
+        <li class="covered" data-hits="7" data-linenumber="6">
+          <span class="hits">7</span>
           
           <code class="ruby">    @record = record</code>
         </li>
@@ -9264,10 +9264,10 @@
         <div class="source_table" id="df91efa81b9690c74c7446c040317cc5077e6dda">
   <div class="header">
     <h3>spec/features/activities_spec.rb</h3>
-    <h4><span class="green">96.77 %</span> covered</h4>
+    <h4><span class="green">97.65 %</span> covered</h4>
     <div>
-      <b>62</b> relevant lines. 
-      <span class="green"><b>60</b> lines covered</span> and
+      <b>85</b> relevant lines. 
+      <span class="green"><b>83</b> lines covered</span> and
       <span class="red"><b>2</b> lines missed.</span>
     </div>
   </div>
@@ -9311,8 +9311,8 @@
           <code class="ruby">    before(:each) do</code>
         </li>
       
-        <li class="covered" data-hits="3" data-linenumber="7">
-          <span class="hits">3</span>
+        <li class="covered" data-hits="4" data-linenumber="7">
+          <span class="hits">4</span>
           
           <code class="ruby">      @sponsor = User.find(7)</code>
         </li>
@@ -9323,14 +9323,14 @@
           <code class="ruby">      # log in</code>
         </li>
       
-        <li class="covered" data-hits="3" data-linenumber="9">
-          <span class="hits">3</span>
+        <li class="covered" data-hits="4" data-linenumber="9">
+          <span class="hits">4</span>
           
           <code class="ruby">      login_as(@sponsor)</code>
         </li>
       
-        <li class="covered" data-hits="3" data-linenumber="10">
-          <span class="hits">3</span>
+        <li class="covered" data-hits="4" data-linenumber="10">
+          <span class="hits">4</span>
           
           <code class="ruby">      visit new_activity_path(event_id:1)</code>
         </li>
@@ -9374,7 +9374,7 @@
         <li class="covered" data-hits="1" data-linenumber="17">
           <span class="hits">1</span>
           
-          <code class="ruby">       select(&quot;SUB (921 S 8th Ave, Pocatello, ID 83209)&quot;, from: &quot;location_select&quot;)</code>
+          <code class="ruby">       select(&quot;SUB (921 S 8th Ave, Pocatello, ID 83209)&quot;, from: &quot;location_select_1&quot;)</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="18">
@@ -9464,7 +9464,7 @@
         <li class="covered" data-hits="1" data-linenumber="32">
           <span class="hits">1</span>
           
-          <code class="ruby">        select(&quot;SUB (921 S 8th Ave, Pocatello, ID 83209)&quot;, from: &quot;location_select&quot;)</code>
+          <code class="ruby">        select(&quot;SUB (921 S 8th Ave, Pocatello, ID 83209)&quot;, from: &quot;location_select_1&quot;)</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="33">
@@ -9608,7 +9608,7 @@
         <li class="covered" data-hits="1" data-linenumber="56">
           <span class="hits">1</span>
           
-          <code class="ruby">        select(&quot;SUB (921 S 8th Ave, Pocatello, ID 83209)&quot;, from: &quot;location_select&quot;)</code>
+          <code class="ruby">        select(&quot;SUB (921 S 8th Ave, Pocatello, ID 83209)&quot;, from: &quot;location_select_1&quot;)</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="57">
@@ -9827,367 +9827,553 @@
           <code class="ruby"></code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="93">
+        <li class="covered" data-hits="1" data-linenumber="93">
+          <span class="hits">1</span>
           
-          
-          <code class="ruby">  #  scenario &quot;should fail&quot; do</code>
+          <code class="ruby">    scenario &quot;should be successful when multiple activities&quot; do</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="94">
+        <li class="covered" data-hits="1" data-linenumber="94">
+          <span class="hits">1</span>
           
-          
-          <code class="ruby">  #    click_button &quot;Confirm&quot;</code>
+          <code class="ruby">      within(&#39;form&#39;) do</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="95">
+        <li class="covered" data-hits="1" data-linenumber="95">
+          <span class="hits">1</span>
           
-          
-          <code class="ruby">  #    expect(page).to have_content(&quot;Description can&#39;t be blank&quot;)</code>
+          <code class="ruby">        fill_in &quot;name_New_1&quot;, with: &quot;Robots in the gym&quot;</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="96">
+        <li class="covered" data-hits="1" data-linenumber="96">
+          <span class="hits">1</span>
           
-          
-          <code class="ruby">  #  end</code>
+          <code class="ruby">        fill_in &quot;description_1&quot;, with: &quot;All about robots&quot;</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="97">
+        <li class="covered" data-hits="1" data-linenumber="97">
+          <span class="hits">1</span>
           
-          
-          <code class="ruby">  #end</code>
+          <code class="ruby">        select(&quot;SUB (921 S 8th Ave, Pocatello, ID 83209)&quot;, from: &quot;location_select_1&quot;)</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="98">
+        <li class="covered" data-hits="1" data-linenumber="98">
+          <span class="hits">1</span>
           
-          
-          <code class="ruby"></code>
+          <code class="ruby">        fill_in &quot;start_time_New_1&quot;, with: &quot;9:30&quot;</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="99">
+        <li class="covered" data-hits="1" data-linenumber="99">
+          <span class="hits">1</span>
           
-          
-          <code class="ruby">  #context &quot;update an event&quot; do</code>
+          <code class="ruby">        fill_in &quot;end_time_1&quot;, with: &quot;10:30&quot;</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="100">
+        <li class="covered" data-hits="1" data-linenumber="100">
+          <span class="hits">1</span>
           
-          
-          <code class="ruby">  #  before(:each) do</code>
+          <code class="ruby">        select(&quot;102 (Cafe)&quot;, from: &quot;room_select_1&quot;)</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="101">
+        <li class="covered" data-hits="1" data-linenumber="101">
+          <span class="hits">1</span>
           
-          
-          <code class="ruby">  #    Warden.test_reset!</code>
+          <code class="ruby">        fill_in &quot;capacity_1&quot;, with: &quot;3&quot;</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="102">
           
           
-          <code class="ruby">  #    @occasion = occasions(:one)</code>
+          <code class="ruby">      end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="103">
           
           
-          <code class="ruby">  #    @location = locations(:one)</code>
+          <code class="ruby"></code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="104">
+        <li class="covered" data-hits="1" data-linenumber="104">
+          <span class="hits">1</span>
           
-          
-          <code class="ruby">  #    @event = events(:one)</code>
+          <code class="ruby">      first(:xpath, &quot;//button[@title=&#39;Add New Activity&#39;]&quot;).click</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="105">
           
           
-          <code class="ruby">  #    @event.location = @location</code>
+          <code class="ruby"></code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="106">
+        <li class="covered" data-hits="1" data-linenumber="106">
+          <span class="hits">1</span>
           
-          
-          <code class="ruby">  #    @sponsor = sponsors(:sponsor_carlos)</code>
+          <code class="ruby">      within(&#39;form&#39;) do</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="107">
+        <li class="covered" data-hits="1" data-linenumber="107">
+          <span class="hits">1</span>
           
-          
-          <code class="ruby">  #    # log in</code>
+          <code class="ruby">        fill_in &quot;name_New_2&quot;, with: &quot;Python&quot;</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="108">
+        <li class="covered" data-hits="1" data-linenumber="108">
+          <span class="hits">1</span>
           
-          
-          <code class="ruby">  #    login_as(@sponsor.user)</code>
+          <code class="ruby">        fill_in &quot;description_2&quot;, with: &quot;Learn Python&quot;</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="109">
+        <li class="covered" data-hits="1" data-linenumber="109">
+          <span class="hits">1</span>
           
-          
-          <code class="ruby">  #    visit edit_occasion_activity_path(occasion_id: @occasion.id, id: @event.id)</code>
+          <code class="ruby">        select(&quot;SUB (921 S 8th Ave, Pocatello, ID 83209)&quot;, from: &quot;location_select_2&quot;)</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="110">
+        <li class="covered" data-hits="1" data-linenumber="110">
+          <span class="hits">1</span>
           
-          
-          <code class="ruby">  #  end</code>
+          <code class="ruby">        fill_in &quot;start_time_New_1&quot;, with: &quot;5:30&quot;</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="111">
+        <li class="covered" data-hits="1" data-linenumber="111">
+          <span class="hits">1</span>
           
-          
-          <code class="ruby">  #</code>
+          <code class="ruby">        fill_in &quot;end_time_1&quot;, with: &quot;6:30&quot;</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="112">
+        <li class="covered" data-hits="1" data-linenumber="112">
+          <span class="hits">1</span>
           
-          
-          <code class="ruby">  #  scenario &quot;should be successful&quot; do</code>
+          <code class="ruby">        fill_in &quot;capacity_2&quot;, with: &quot;3&quot;</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="113">
           
           
-          <code class="ruby">  #    # fill form</code>
+          <code class="ruby">      end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="114">
           
           
-          <code class="ruby">  #    within(&#39;form&#39;) do</code>
+          <code class="ruby"></code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="115">
+        <li class="covered" data-hits="1" data-linenumber="115">
+          <span class="hits">1</span>
           
-          
-          <code class="ruby">  #      fill_in &quot;event[name]&quot;, with: &quot;Biology&quot;</code>
+          <code class="ruby">      all(&quot;.new-session&quot;).last.click</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="116">
+        <li class="covered" data-hits="1" data-linenumber="116">
+          <span class="hits">1</span>
           
-          
-          <code class="ruby">  #      select(&quot;SUB&quot;, from: &#39;event[location_id]&#39;)</code>
+          <code class="ruby">      within(&quot;form&quot;) do</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="117">
+        <li class="covered" data-hits="1" data-linenumber="117">
+          <span class="hits">1</span>
           
-          
-          <code class="ruby">  #      fill_in &quot;event[description]&quot;, with: &quot;Science&quot;</code>
+          <code class="ruby">        select(&quot;102 (Cafe)&quot;, from: &quot;room_select_2&quot;)</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="118">
+        <li class="covered" data-hits="1" data-linenumber="118">
+          <span class="hits">1</span>
           
-          
-          <code class="ruby">  #    end</code>
+          <code class="ruby">        select(&quot;203 (Ballroom)&quot;, from: &quot;room_select_3&quot;)</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="119">
           
           
-          <code class="ruby">  #      click_button &quot;Confirm&quot;</code>
+          <code class="ruby">      end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="120">
+        <li class="covered" data-hits="1" data-linenumber="120">
+          <span class="hits">1</span>
           
-          
-          <code class="ruby">  #      expect(page).to have_content(&quot;Successfully updated Event.&quot;)</code>
+          <code class="ruby">      click_button &#39;Confirm&#39;</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="121">
+        <li class="covered" data-hits="1" data-linenumber="121">
+          <span class="hits">1</span>
           
-          
-          <code class="ruby">  #  end</code>
+          <code class="ruby">      expect(page).to have_content(&quot;Successfully Created Activity&quot;)</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="122">
           
           
-          <code class="ruby">  #</code>
+          <code class="ruby">    end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="123">
           
           
-          <code class="ruby">  #  scenario &quot;should fail&quot; do</code>
+          <code class="ruby"></code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="124">
           
           
-          <code class="ruby">  #    # fill form</code>
+          <code class="ruby">  #  scenario &quot;should fail&quot; do</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="125">
           
           
-          <code class="ruby">  #    within(&#39;form&#39;) do</code>
+          <code class="ruby">  #    click_button &quot;Confirm&quot;</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="126">
           
           
-          <code class="ruby">  #      fill_in &quot;event[name]&quot;, with: &quot;&quot;</code>
+          <code class="ruby">  #    expect(page).to have_content(&quot;Description can&#39;t be blank&quot;)</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="127">
           
           
-          <code class="ruby">  #      select(&quot;SUB&quot;, from: &#39;event[location_id]&#39;)</code>
+          <code class="ruby">  #  end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="128">
           
           
-          <code class="ruby">  #      fill_in &quot;event[description]&quot;, with: &quot;Science&quot;</code>
+          <code class="ruby">  #end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="129">
           
           
-          <code class="ruby">  #    end</code>
+          <code class="ruby"></code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="130">
           
           
-          <code class="ruby">  #    click_button &quot;Confirm&quot;</code>
+          <code class="ruby">  #context &quot;update an event&quot; do</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="131">
           
           
-          <code class="ruby">  #    expect(page).to have_content(&quot;Name can&#39;t be blank&quot;)</code>
+          <code class="ruby">  #  before(:each) do</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="132">
           
           
-          <code class="ruby">  #  end</code>
+          <code class="ruby">  #    Warden.test_reset!</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="133">
           
           
-          <code class="ruby">  #end</code>
+          <code class="ruby">  #    @occasion = occasions(:one)</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="134">
           
           
-          <code class="ruby">  #</code>
+          <code class="ruby">  #    @location = locations(:one)</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="135">
           
           
-          <code class="ruby">  #context &quot;destroy event&quot; do</code>
+          <code class="ruby">  #    @event = events(:one)</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="136">
           
           
-          <code class="ruby">  #  before(:each) do</code>
+          <code class="ruby">  #    @event.location = @location</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="137">
           
           
-          <code class="ruby">  #    @event = events(:one)</code>
+          <code class="ruby">  #    @sponsor = sponsors(:sponsor_carlos)</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="138">
           
           
-          <code class="ruby">  #    @event.location = @location</code>
+          <code class="ruby">  #    # log in</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="139">
           
           
-          <code class="ruby">  #    @sponsor = sponsors(:sponsor_carlos)</code>
+          <code class="ruby">  #    login_as(@sponsor.user)</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="140">
           
           
-          <code class="ruby">  #    @occasion = occasions(:one)</code>
+          <code class="ruby">  #    visit edit_occasion_activity_path(occasion_id: @occasion.id, id: @event.id)</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="141">
           
           
-          <code class="ruby">  #    # log in</code>
+          <code class="ruby">  #  end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="142">
           
           
-          <code class="ruby">  #    login_as(@sponsor.user)</code>
+          <code class="ruby">  #</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="143">
           
           
-          <code class="ruby">  #    visit event_path(@occasion.id)</code>
+          <code class="ruby">  #  scenario &quot;should be successful&quot; do</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="144">
           
           
-          <code class="ruby">  #  end</code>
+          <code class="ruby">  #    # fill form</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="145">
           
           
-          <code class="ruby">  #</code>
+          <code class="ruby">  #    within(&#39;form&#39;) do</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="146">
           
           
-          <code class="ruby">  #  scenario &quot;should be successful&quot; do</code>
+          <code class="ruby">  #      fill_in &quot;event[name]&quot;, with: &quot;Biology&quot;</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="147">
           
           
-          <code class="ruby">  #    #click destroy</code>
+          <code class="ruby">  #      select(&quot;SUB&quot;, from: &#39;event[location_id]&#39;)</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="148">
           
           
-          <code class="ruby">  #    click_link &quot;Delete&quot;</code>
+          <code class="ruby">  #      fill_in &quot;event[description]&quot;, with: &quot;Science&quot;</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="149">
           
           
-          <code class="ruby">  #    page.driver.browser.switch_to.alert.accept</code>
+          <code class="ruby">  #    end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="150">
           
           
-          <code class="ruby">  #    expect(page).to have_content &quot;Event was successfully deleted&quot;</code>
+          <code class="ruby">  #      click_button &quot;Confirm&quot;</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="151">
           
           
-          <code class="ruby">  #  end</code>
+          <code class="ruby">  #      expect(page).to have_content(&quot;Successfully updated Event.&quot;)</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="152">
           
           
-          <code class="ruby">  end</code>
+          <code class="ruby">  #  end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="153">
+          
+          
+          <code class="ruby">  #</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="154">
+          
+          
+          <code class="ruby">  #  scenario &quot;should fail&quot; do</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="155">
+          
+          
+          <code class="ruby">  #    # fill form</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="156">
+          
+          
+          <code class="ruby">  #    within(&#39;form&#39;) do</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="157">
+          
+          
+          <code class="ruby">  #      fill_in &quot;event[name]&quot;, with: &quot;&quot;</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="158">
+          
+          
+          <code class="ruby">  #      select(&quot;SUB&quot;, from: &#39;event[location_id]&#39;)</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="159">
+          
+          
+          <code class="ruby">  #      fill_in &quot;event[description]&quot;, with: &quot;Science&quot;</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="160">
+          
+          
+          <code class="ruby">  #    end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="161">
+          
+          
+          <code class="ruby">  #    click_button &quot;Confirm&quot;</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="162">
+          
+          
+          <code class="ruby">  #    expect(page).to have_content(&quot;Name can&#39;t be blank&quot;)</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="163">
+          
+          
+          <code class="ruby">  #  end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="164">
+          
+          
+          <code class="ruby">  #end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="165">
+          
+          
+          <code class="ruby">  #</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="166">
+          
+          
+          <code class="ruby">  #context &quot;destroy event&quot; do</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="167">
+          
+          
+          <code class="ruby">  #  before(:each) do</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="168">
+          
+          
+          <code class="ruby">  #    @event = events(:one)</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="169">
+          
+          
+          <code class="ruby">  #    @event.location = @location</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="170">
+          
+          
+          <code class="ruby">  #    @sponsor = sponsors(:sponsor_carlos)</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="171">
+          
+          
+          <code class="ruby">  #    @occasion = occasions(:one)</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="172">
+          
+          
+          <code class="ruby">  #    # log in</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="173">
+          
+          
+          <code class="ruby">  #    login_as(@sponsor.user)</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="174">
+          
+          
+          <code class="ruby">  #    visit event_path(@occasion.id)</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="175">
+          
+          
+          <code class="ruby">  #  end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="176">
+          
+          
+          <code class="ruby">  #</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="177">
+          
+          
+          <code class="ruby">  #  scenario &quot;should be successful&quot; do</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="178">
+          
+          
+          <code class="ruby">  #    #click destroy</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="179">
+          
+          
+          <code class="ruby">  #    click_link &quot;Delete&quot;</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="180">
+          
+          
+          <code class="ruby">  #    page.driver.browser.switch_to.alert.accept</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="181">
+          
+          
+          <code class="ruby">  #    expect(page).to have_content &quot;Event was successfully deleted&quot;</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="182">
+          
+          
+          <code class="ruby">  #  end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="183">
+          
+          
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="184">
           
           
           <code class="ruby">end</code>
@@ -10464,8 +10650,8 @@
           <code class="ruby">  config.before(:each) do</code>
         </li>
       
-        <li class="covered" data-hits="3" data-linenumber="43">
-          <span class="hits">3</span>
+        <li class="covered" data-hits="4" data-linenumber="43">
+          <span class="hits">4</span>
           
           <code class="ruby">    DatabaseCleaner.strategy = :transaction</code>
         </li>
@@ -10500,8 +10686,8 @@
           <code class="ruby">    # with the specs, so continue to use transaction strategy for speed.</code>
         </li>
       
-        <li class="covered" data-hits="3" data-linenumber="49">
-          <span class="hits">3</span>
+        <li class="covered" data-hits="4" data-linenumber="49">
+          <span class="hits">4</span>
           
           <code class="ruby">    driver_shares_db_connection_with_specs = Capybara.current_driver == :selenium_chrome</code>
         </li>
@@ -10512,8 +10698,8 @@
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="3" data-linenumber="51">
-          <span class="hits">3</span>
+        <li class="covered" data-hits="4" data-linenumber="51">
+          <span class="hits">4</span>
           
           <code class="ruby">    unless driver_shares_db_connection_with_specs</code>
         </li>
@@ -10566,8 +10752,8 @@
           <code class="ruby">  config.before(:each) do</code>
         </li>
       
-        <li class="covered" data-hits="3" data-linenumber="60">
-          <span class="hits">3</span>
+        <li class="covered" data-hits="4" data-linenumber="60">
+          <span class="hits">4</span>
           
           <code class="ruby">    DatabaseCleaner.start</code>
         </li>
@@ -10590,8 +10776,8 @@
           <code class="ruby">  config.append_after(:each) do</code>
         </li>
       
-        <li class="covered" data-hits="3" data-linenumber="64">
-          <span class="hits">3</span>
+        <li class="covered" data-hits="4" data-linenumber="64">
+          <span class="hits">4</span>
           
           <code class="ruby">    DatabaseCleaner.clean</code>
         </li>
