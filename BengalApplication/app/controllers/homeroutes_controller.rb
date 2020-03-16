@@ -185,6 +185,7 @@ class HomeroutesController < ApplicationController
     end
   end
 
+
   # will update student details
   def update_students(f_names, l_names, emails, ids)
     count = 0

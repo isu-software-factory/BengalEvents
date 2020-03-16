@@ -35,6 +35,7 @@ Rails.application.routes.draw do
   get "all_users" => "homeroutes#all_users", as: "all_users"
   post "students/errors" => "students#errors"
   resources :teams
+  get "activities/report" => "activities#report", as: "report"
 resources :events
   resources :activities
   # resources :teams

@@ -1,0 +1,19 @@
+<table>
+  <thead>
+    <tr>
+      <td>Activity</td>
+      <th>Registered Participants</th>
+      <th>Schools Attending Activity</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%@activities.each do |a| %>
+      <tr>
+        <td><%=a.name %></td>
+<!--        <td><%#=a.users %></td>-->
+      </tr>
+    <% end %>
+    <tr>
+    </tr>
+  </tbody>
+</table>

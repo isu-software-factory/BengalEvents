@@ -436,3 +436,16 @@ function createSessionLabels(){
     return row;
 
 }
+
+
+
+
+
+
+// view report page
+
+
+
+
+
+

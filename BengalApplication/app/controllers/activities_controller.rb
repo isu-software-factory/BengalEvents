@@ -43,6 +43,12 @@ class ActivitiesController < ApplicationController
 
   end
 
+  def report
+    @users = User.all
+    @teachers = Teacher.all
+    @activities = Activity.all
+  end
+
   def update
     # authorize @event
     @activity = Activity.find(params[:id])
