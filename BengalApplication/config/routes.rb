@@ -29,8 +29,9 @@ Rails.application.routes.draw do
   get "slots/:name" => "activities#location_timeslots"
   post "students/update_new_students" => "students#update_new_students"
 
-  get "activities/get_locations" => "activities#get_locations"
-  get "activities/get_rooms/:location" => "activities#get_rooms"
+  get "/get_locations" => "activities#get_locations"
+  get "/get_rooms/:location" => "activities#get_rooms"
+  get "/get_session_rooms/:activity" => "activities#get_session_rooms"
   get "register/:role/:session_id/:id" => "registrations#registers"
   get "all_users" => "homeroutes#all_users", as: "all_users"
   post "students/errors" => "students#errors"

@@ -233,7 +233,13 @@ Room.create!([{
                   session_id: 3,
                   location_id: 1,
                   room_name: "Ballroom"
-              }])
+              }, {
+                  room_number: 303,
+                  session_id: 2,
+                  location_id: 1,
+                  room_name: ""
+              }
+              ])
 
 Team.create!([{
                   team_name: "Tigers",

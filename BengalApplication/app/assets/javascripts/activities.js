@@ -11,37 +11,62 @@ $(document).on('ready page:load turbolinks:load', function () {
         getRooms(getName(this), $(this).parent().parent().parent());
     });
 
-    $("#same_room").click(function(){
+    $("#same_room").click(function () {
         useSameRoom(this);
     });
 
-    $(".competetion").click(function(){
+    $(".competetion").click(function () {
         setSlider(this);
     });
 
+    // check if checkbox is checked
+    setSlider($(".competetion").first());
+
     $(".new-activity").click(function () {
         newActivity($(this));
-    })
+    });
+
 });
 
 
 $(document).ready(function () {
     setRooms($(".col-lg-4").last().children().last().children().last());
+
+    if (($("#name_New_1").attr("value") != "")) {
+        setEditRooms();
+    }
 });
 
-function useSameRoom(e){
-    if($(e).is(":checked")){
-        $(".roomselect").each(function (){
-           if ($(this).parent().parent().parent().children().first().children().last().is($(e).parent())){
-               if (!($(this).is($(e).parent().parent().next().children(".col-lg-3").first().children().first()))) {     // make sure that the selector is not the first selector
-                   $(this).prop("disabled", "disabled");
-               }
-           }
+function setEditRooms() {
+    let activity = $("#activity_id").val();
+    Rails.ajax({
+        url: `/get_session_rooms/${activity}`,
+        type: 'GET',
+        dataType: "json",
+        success: function (data) {
+            let index = 0;
+            $(".roomselect").each(function () {
+                $(this).val(data.results.rooms[index].room_number + " (" + data.results.rooms[index].room_name + ")").change();
+                index++;
+            });
+
+        }
+    })
+}
+
+function useSameRoom(e) {
+    if ($(e).is(":checked")) {
+        $(".roomselect").each(function () {
+            if ($(this).parent().parent().parent().children().first().children().last().is($(e).parent())) {
+                if (!($(this).is($(e).parent().parent().next().children(".col-lg-3").first().children().first()))) {     // make sure that the selector is not the first selector
+                    $(this).prop("disabled", "disabled");
+                }
+            }
         });
-    }else{
-        $(".roomselect").each(function (){
-            if ($(this).parent().parent().parent().children().first().children().last().is($(e).parent())){
-               $(this).prop("disabled", false);
+    } else {
+        $(".roomselect").each(function () {
+            if ($(this).parent().parent().parent().children().first().children().last().is($(e).parent())) {
+                $(this).prop("disabled", false);
             }
         });
     }
@@ -52,12 +77,12 @@ function getName(selector) {
     return name[0];
 }
 
-function setRooms(locations){
+function setRooms(locations) {
     getRooms(getName(locations), $(locations).parent().parent().parent());
 }
 
-function setSlider(e){
-    if($(e).is(":checked")){
+function setSlider(e) {
+    if ($(e).is(":checked")) {
         // create slider
         let container = createDiv("form-group  slider");
         let label = createLabel("Team Max Size: 4");
@@ -67,8 +92,8 @@ function setSlider(e){
         $(container).append(slider);
         $(container).insertAfter($(e).parent());
 
-    }else{
-        if($(e).parent().next().hasClass("slider")){
+    } else {
+        if ($(e).parent().next().hasClass("slider")) {
             $(e).parent().next().remove();
         }
     }
@@ -77,12 +102,12 @@ function setSlider(e){
 let sessionCount = 1;
 let activityCount = 1;
 
-function removePreviousButton(button){
+function removePreviousButton(button) {
     $(button).remove();
 }
 
 // creates a new session row and returns the row
-function createSession(){
+function createSession() {
 
     // create text boxes
     let start_date = document.createElement("input");
@@ -136,7 +161,7 @@ function createSession(){
 function newSession(button) {
 
     sessionCount += 1;
-   let row = createSession();
+    let row = createSession();
 
     // add row to the dom
     addElements(row, button);
@@ -204,8 +229,8 @@ function createButton(type, sessionType) {
         $(button).click(function () {
             newSession($(this));
         });
-    }else{
-        $(button).click(function(){
+    } else {
+        $(button).click(function () {
             if ($(this).is($(this).parent().parent().parent().children().last().children().last().children().first()))
                 $(this).parent().parent().prev().children().last().append(createButton("plus", "new-session"));
             $(this).parent().parent().remove();
@@ -219,13 +244,13 @@ function createButton(type, sessionType) {
 function getRooms(location, parent) {
     removeRooms(parent);
     Rails.ajax({
-        url: `get_rooms/${location}`,
+        url: `/get_rooms/${location}`,
         type: 'GET',
         dataType: "json",
         success: function (data) {
             for (index = 0; index < data.results.rooms.length; index++) {
-                $(".roomselect").each(function (){
-                    if ($(this).parent().parent().parent().parent().is($(parent))){
+                $(".roomselect").each(function () {
+                    if ($(this).parent().parent().parent().parent().is($(parent))) {
                         $(this).append(createOption(data.results.rooms[index].room_number, data.results.rooms[index].room_name));
                     }
                 });
@@ -236,8 +261,8 @@ function getRooms(location, parent) {
 
 // removes all rooms
 function removeRooms(parent) {
-    $(".roomselect").each(function (){
-        if ($(this).parent().parent().parent().parent().is($(parent))){
+    $(".roomselect").each(function () {
+        if ($(this).parent().parent().parent().parent().is($(parent))) {
             $(this).children().remove();
         }
     });
@@ -247,7 +272,7 @@ function removeRooms(parent) {
 // get all locations
 function getLocations() {
     Rails.ajax({
-        url: `get_locations`,
+        url: `/get_locations`,
         type: 'GET',
         dataType: "json",
         success: function (data) {
@@ -268,33 +293,32 @@ function createOption(name1, name2) {
 }
 
 
-
-function createDiv(classes){
+function createDiv(classes) {
     let div = document.createElement("div");
     $(div).attr("class", classes);
     return div;
 }
 
-function createLabel(text){
+function createLabel(text) {
     let label = document.createElement("label");
     $(label).text(text);
     return label;
 }
 
-function createSlider(count){
+function createSlider(count) {
     let slider = document.createElement("div");
     $(slider).attr("class", "bengal-orange team_size_" + count);
     return slider;
 }
 
-function createSliderEvent(element, label, hiddenField){
-    $(function(){
+function createSliderEvent(element, label, hiddenField) {
+    $(function () {
         $(element).slider({
             range: "min",
             min: 2,
             max: 4,
             value: 4,
-            slide: function(event,ui){
+            slide: function (event, ui) {
                 $(label).text("Team Max Size: " + ui.value);
                 $(hiddenField).val(ui.value)
             }
@@ -305,18 +329,18 @@ function createSliderEvent(element, label, hiddenField){
 
 }
 
-function createInput(type){
+function createInput(type) {
     let tbx = document.createElement("input");
     $(tbx).attr("type", type);
     return tbx;
 }
 
-function appendElements(container, element){
+function appendElements(container, element) {
     $(container).append(element);
 }
 
 // create a new activity
-function newActivity(button){
+function newActivity(button) {
     activityCount += 1;
     sessionCount += 1;
 
@@ -381,11 +405,11 @@ function newActivity(button){
     $(row).insertAfter($(hr));
 
     getLocations();
-    $(tCompetition).click(function(){
+    $(tCompetition).click(function () {
         setSlider(this);
     });
 
-    $(tLocation).change(function(){
+    $(tLocation).change(function () {
         getRooms(getName(this), $(this).parent().parent().parent());
     });
 
@@ -398,8 +422,9 @@ function newActivity(button){
     setRooms(tLocation);
 
 }
+
 // creates all elements for a session
-function createSessionLabels(){
+function createSessionLabels() {
     // create row and columns
     let row = createRow();
     let col1 = createDiv("col-lg-2");
@@ -436,10 +461,6 @@ function createSessionLabels(){
     return row;
 
 }
-
-
-
-
 
 
 // view report page

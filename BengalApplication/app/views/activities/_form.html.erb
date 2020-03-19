@@ -2,7 +2,7 @@
 <% if flash[:errors] %>
   <% flash[:errors].each do |e| %>
     <div class="alert alert-danger">
-      <%=e %>
+      <%= e %>
     </div>
   <% end %>
 <% end %>
@@ -21,24 +21,25 @@
       </div>
     </div>
     <div class="card-body bengal-body">
-      <%= form_tag({controller: "activities", action: "create", event_id: @event}, {id: "activity-form"}) do %>
-        <%=hidden_field_tag "max_team_tag_1", value=4%>
+      <%= form_tag({controller: "activities", action: @action, event_id: @event}, {id: "activity-form"}) do %>
+        <%= hidden_field_tag "max_team_tag_1", value = 4 %>
+        <%= hidden_field_tag "activity_id", @edit ? value=@activity.id : value=nil %>
         <div class="row">
           <div class="col-lg-4 border-right">
             <div class="form-group">
               <%= label_tag "Activity Name", nil, class: "control-label" %>
-              <%= text_field_tag "name_New_1", nil, class: "form-control" %>
+              <%= text_field_tag "name_New_1", @edit ? value = @activity.name : value = nil, class: "form-control" %>
             </div>
             <div class="form-group">
               <%= label_tag "Activity Description", nil, class: "control-label" %>
-              <%= text_field_tag "description_1", nil, class: "form-control" %>
+              <%= text_field_tag "description_1", @edit ? value = @activity.description : value = nil, class: "form-control" %>
             </div>
             <div class="form-group">
-              <%= check_box_tag "ismakeahead_1" %>
+              <%= check_box_tag "ismakeahead_1", true, @edit ? checked = @activity.ismakeahead : checked = false %>
               <%= label_tag "Is make ahead", nil, class: "control-label" %>
             </div>
             <div class="form-group">
-              <%= check_box_tag "iscompetetion_1", true, false, class: "competetion" %>
+              <%= check_box_tag "iscompetetion_1", true, @edit ? checked = @activity.iscompetetion : checked = false, class: "competetion" %>
               <%= label_tag "Is competition", nil, class: "control-label" %>
             </div>
             <div class="form-group">
@@ -63,28 +64,30 @@
                 <%= label_tag "Capacity" %>
               </div>
               <div class="col-lg-3 form-group">
-                <%=check_box_tag "same_room", value=true, false, title: "Use the same room for all sessions" %>
-                <%=label_tag "Use Same Room" , nil, class: "control-label"%>
+                <%= check_box_tag "same_room", value = true, false, title: "Use the same room for all sessions" %>
+                <%= label_tag "Use Same Room", nil, class: "control-label" %>
               </div>
             </div>
 
-            <div class="row">
-              <div class="col-lg-2">
-                  <%=text_field_tag "start_time_New_1", nil, class: "control-label form-control start_time" %>
-              </div>
-              <div class="col-lg-2">
-                <%= text_field_tag "end_time_1", nil, class: "control-label form-control end_time" %>
-              </div>
-              <div class="col-lg-3">
-                  <select class="form-control roomselect" name="room_select_1" title="Choose Room that Session will be hosted at"></select>
-              </div>
-              <div class="col-lg-2">
-                  <%= text_field_tag "capacity_1", nil, class: "control-label form-control" %>
-              </div>
-              <div class="col-lg-3">
-                <button class="button-small glyphicon glyphicon-plus new-session" title="Add New Session" type="button"></button>
-              </div>
-            </div>
+              <% for s in (@sessions.empty? ? 0..0 : @sessions) %>
+                <div class="row">
+                  <div class="col-lg-2">
+                    <%= text_field_tag "start_time_New_1", @edit ? value = s.start_time : value = nil, class: "control-label form-control start_time" %>
+                  </div>
+                  <div class="col-lg-2">
+                    <%= text_field_tag "end_time_1", @edit ? value = s.end_time : value = nil, class: "control-label form-control end_time" %>
+                  </div>
+                  <div class="col-lg-3">
+                    <select class="form-control roomselect" name="room_select_1" title="Choose Room that Session will be hosted at"></select>
+                  </div>
+                  <div class="col-lg-2">
+                    <%= text_field_tag "capacity_1", @edit ? value = s.capacity : value = nil, class: "control-label form-control" %>
+                  </div>
+                  <div class="col-lg-3">
+                    <button class="button-small glyphicon glyphicon-plus new-session" title="Add New Session" type="button"></button>
+                  </div>
+                </div>
+            <% end %>
           </div>
         </div>
 

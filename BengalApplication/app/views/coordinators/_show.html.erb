@@ -28,7 +28,7 @@
                 <td>  <%= activity.name %></td>
                 <td>  <%= activity.description %></td>
                 <td>Hi</td>
-                <td><span class="glyphicon glyphicon-eye-open"><%= link_to "View Report", edit_activity_path(activity), class: "button-small-view" %></span><%= link_to "Edit", edit_activity_path(activity), class: "button" %> <%= link_to "Delete", activity_path(activity.id), class: "btn btn-danger", data: {method: :delete, confirm: "Are you sure?"} %></td>
+                <td><%= link_to "Edit", edit_activity_path(activity), class: "button-small" %> <%= link_to "Delete", activity_path(activity.id), class: "btn btn-danger", data: {method: :delete, confirm: "Are you sure?"} %></td>
                 <td><span class="glyphicon glyphicon-menu-down"></span></td>
               </tr>
               <tr>
@@ -39,6 +39,7 @@
                       <tr class="session-header">
                         <th>Sessions</th>
                         <th>Start Time</th>
+<!--                        <th>Location</th>-->
                         <th>Capacity</th>
                         <td>Spots Left</td>
                         <td>Team Size Restriction</td>
@@ -52,6 +53,7 @@
                             <% @num += 1 %></td>
                           <td><%= session.start_time.strftime("%l:%M %p") %>
                             -  <%= session.end_time.strftime("%l:%M %p") %></td>
+<!--                          <td><%#=session.rooms.first.room_number %></td>-->
                           <td><%= session.capacity %></td>
                           <td><%= session.capacity_remaining %></td>
                           <% if activity.iscompetetion %>
@@ -81,7 +83,7 @@
           <hr>
           <%= link_to " New Event", new_event_path, class: "button-small glyphicon glyphicon-edit", title: "Create a new event" %>
           <%= link_to "View All Users", all_users_path, class: "button-small glyphicon glyphicon-user", title: "View All Users Profiles" %>
-          <%= link_to "View Report", activities_report_path, class: "button" %>
+          <%#= link_to "View Report", activities_report_path, class: "button" %>
         </div>
       </div>
     </div>

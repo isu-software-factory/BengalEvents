@@ -1,13 +1,15 @@
 class ActivitiesController < ApplicationController
   before_action :authenticate_user!
   # before_action :set_occasion, only: %i[new create destroy update edit show]
-  before_action :set_event, only: %i[destroy update edit show]
+  before_action :set_event, only: %i[destroy update show]
  # after_action :verify_authorized
 
   def new
     @activity = Activity.new
+    @sessions = []
     @event = Event.find(params[:event_id])
     authorize @activity
+    @action = "create"
     add_breadcrumb 'Home', root_path
     add_breadcrumb @event.name, @event
     add_breadcrumb 'Create Event', new_activity_path
@@ -28,7 +30,11 @@ class ActivitiesController < ApplicationController
 
   def edit
     @activity = Activity.find(params[:id])
-    authorize @event
+    @event = @activity.event
+    authorize @activity
+    @sessions = @activity.sessions
+    @edit = true
+    @action = "update"
     add_breadcrumb "Home", root_path
     add_breadcrumb @event.name, event_path(@event)
     add_breadcrumb @activity.name, activity_path(@activity)
@@ -68,6 +74,16 @@ class ActivitiesController < ApplicationController
     else
       flash[:error] = 'We were unable to destroy the event.'
     end
+  end
+
+  def get_session_rooms
+    activity = Activity.find(params[:activity])
+    rooms = []
+    activity.sessions.each do |s|
+      rooms << s.rooms.first
+    end
+    rooms = rooms.reverse
+    render json: {results: {rooms: rooms}}
   end
 
   def location_timeslots
