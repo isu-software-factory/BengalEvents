@@ -1,47 +1,23 @@
 {
   "RSpec": {
     "coverage": {
-      "/home/canojuan/RubymineProjects/BengalEvents/BengalApplication/spec/features/activities_spec.rb": [
+      "C:/BengalEvents/BengalApplication/spec/features/activities_spec.rb": [
         1,
         1,
         1,
         null,
         1,
         1,
-        4,
+        5,
         null,
-        4,
-        4,
-        null,
-        null,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        null,
-        null,
-        1,
-        1,
+        5,
+        5,
         null,
         null,
         1,
         1,
         1,
         1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        null,
-        null,
-        1,
-        null,
         1,
         1,
         1,
@@ -61,13 +37,6 @@
         1,
         1,
         1,
-        null,
-        null,
-        1,
-        null,
-        1,
-        1,
-        1,
         1,
         null,
         null,
@@ -77,36 +46,57 @@
         1,
         1,
         1,
+        1,
+        null,
+        null,
+        1,
+        1,
+        null,
+        null,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
         null,
         null,
         1,
         null,
+        null,
+        1,
+        1,
         1,
         1,
         null,
         null,
+        1,
+        null,
+        null,
+        1,
+        1,
+        1,
+        1,
+        null,
+        null,
+        1,
+        1,
+        null,
+        null,
+        1,
+        1,
         1,
         1,
         1,
         0,
         0,
-        null,
-        null,
-        null,
-        null,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
+        0,
         null,
         null,
         1,
-        null,
+        1,
         1,
         1,
         1,
@@ -117,41 +107,39 @@
         null,
         null,
         1,
+        null,
+        1,
+        1,
+        1,
+        1,
+        1,
         1,
         1,
         1,
         null,
+        null,
         1,
         1,
         null,
         null,
         null,
+        1,
+        1,
+        1,
+        1,
+        1,
+        null,
+        1,
+        1,
         null,
         null,
+        1,
         null,
+        1,
+        1,
         null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
+        1,
+        1,
         null,
         null,
         null,
@@ -187,7 +175,7 @@
         null,
         null
       ],
-      "/home/canojuan/RubymineProjects/BengalEvents/BengalApplication/spec/rails_helper.rb": [
+      "C:/BengalEvents/BengalApplication/spec/rails_helper.rb": [
         null,
         1,
         1,
@@ -230,15 +218,15 @@
         null,
         null,
         1,
-        4,
+        5,
         null,
         null,
         1,
         null,
         null,
-        4,
+        5,
         null,
-        4,
+        5,
         null,
         null,
         null,
@@ -247,11 +235,11 @@
         null,
         null,
         1,
-        4,
+        5,
         null,
         null,
         1,
-        4,
+        5,
         null,
         null,
         1,
@@ -282,7 +270,7 @@
         null,
         null
       ],
-      "/home/canojuan/RubymineProjects/BengalEvents/BengalApplication/config/environment.rb": [
+      "C:/BengalEvents/BengalApplication/config/environment.rb": [
         null,
         1,
         null,
@@ -290,7 +278,7 @@
         1,
         null
       ],
-      "/home/canojuan/RubymineProjects/BengalEvents/BengalApplication/config/application.rb": [
+      "C:/BengalEvents/BengalApplication/config/application.rb": [
         1,
         null,
         1,
@@ -314,13 +302,13 @@
         null,
         null
       ],
-      "/home/canojuan/RubymineProjects/BengalEvents/BengalApplication/config/boot.rb": [
+      "C:/BengalEvents/BengalApplication/config/boot.rb": [
         1,
         null,
         1,
         1
       ],
-      "/home/canojuan/RubymineProjects/BengalEvents/BengalApplication/config/environments/test.rb": [
+      "C:/BengalEvents/BengalApplication/config/environments/test.rb": [
         1,
         null,
         null,
@@ -382,7 +370,7 @@
         null,
         null
       ],
-      "/home/canojuan/RubymineProjects/BengalEvents/BengalApplication/config/initializers/application_controller_renderer.rb": [
+      "C:/BengalEvents/BengalApplication/config/initializers/application_controller_renderer.rb": [
         null,
         null,
         null,
@@ -392,7 +380,7 @@
         null,
         null
       ],
-      "/home/canojuan/RubymineProjects/BengalEvents/BengalApplication/config/initializers/assets.rb": [
+      "C:/BengalEvents/BengalApplication/config/initializers/assets.rb": [
         null,
         null,
         null,
@@ -417,7 +405,7 @@
         null,
         null
       ],
-      "/home/canojuan/RubymineProjects/BengalEvents/BengalApplication/config/initializers/backtrace_silencers.rb": [
+      "C:/BengalEvents/BengalApplication/config/initializers/backtrace_silencers.rb": [
         null,
         null,
         null,
@@ -426,7 +414,7 @@
         null,
         null
       ],
-      "/home/canojuan/RubymineProjects/BengalEvents/BengalApplication/config/initializers/content_security_policy.rb": [
+      "C:/BengalEvents/BengalApplication/config/initializers/content_security_policy.rb": [
         null,
         null,
         null,
@@ -453,20 +441,20 @@
         null,
         null
       ],
-      "/home/canojuan/RubymineProjects/BengalEvents/BengalApplication/config/initializers/cookies_serializer.rb": [
+      "C:/BengalEvents/BengalApplication/config/initializers/cookies_serializer.rb": [
         null,
         null,
         null,
         null,
         1
       ],
-      "/home/canojuan/RubymineProjects/BengalEvents/BengalApplication/config/initializers/customize_error.rb": [
+      "C:/BengalEvents/BengalApplication/config/initializers/customize_error.rb": [
         null,
         1,
         0,
         null
       ],
-      "/home/canojuan/RubymineProjects/BengalEvents/BengalApplication/config/initializers/devise.rb": [
+      "C:/BengalEvents/BengalApplication/config/initializers/devise.rb": [
         null,
         null,
         null,
@@ -768,13 +756,13 @@
         null,
         null
       ],
-      "/home/canojuan/RubymineProjects/BengalEvents/BengalApplication/config/initializers/filter_parameter_logging.rb": [
+      "C:/BengalEvents/BengalApplication/config/initializers/filter_parameter_logging.rb": [
         null,
         null,
         null,
         1
       ],
-      "/home/canojuan/RubymineProjects/BengalEvents/BengalApplication/config/initializers/inflections.rb": [
+      "C:/BengalEvents/BengalApplication/config/initializers/inflections.rb": [
         null,
         null,
         null,
@@ -792,13 +780,13 @@
         null,
         null
       ],
-      "/home/canojuan/RubymineProjects/BengalEvents/BengalApplication/config/initializers/mime_types.rb": [
+      "C:/BengalEvents/BengalApplication/config/initializers/mime_types.rb": [
         null,
         null,
         null,
         1
       ],
-      "/home/canojuan/RubymineProjects/BengalEvents/BengalApplication/config/initializers/wrap_parameters.rb": [
+      "C:/BengalEvents/BengalApplication/config/initializers/wrap_parameters.rb": [
         null,
         null,
         null,
@@ -814,7 +802,7 @@
         null,
         null
       ],
-      "/home/canojuan/RubymineProjects/BengalEvents/BengalApplication/config/routes.rb": [
+      "C:/BengalEvents/BengalApplication/config/routes.rb": [
         1,
         1,
         1,
@@ -846,6 +834,8 @@
         1,
         1,
         null,
+        1,
+        1,
         1,
         1,
         1,
@@ -874,7 +864,7 @@
         null,
         null
       ],
-      "/home/canojuan/RubymineProjects/BengalEvents/BengalApplication/app/models/user.rb": [
+      "C:/BengalEvents/BengalApplication/app/models/user.rb": [
         null,
         null,
         null,
@@ -951,12 +941,12 @@
         null,
         null
       ],
-      "/home/canojuan/RubymineProjects/BengalEvents/BengalApplication/app/models/application_record.rb": [
+      "C:/BengalEvents/BengalApplication/app/models/application_record.rb": [
         1,
         1,
         null
       ],
-      "/home/canojuan/RubymineProjects/BengalEvents/BengalApplication/lib/custom_failure.rb": [
+      "C:/BengalEvents/BengalApplication/lib/custom_failure.rb": [
         null,
         1,
         1,
@@ -972,67 +962,67 @@
         null,
         null
       ],
-      "/home/canojuan/RubymineProjects/BengalEvents/BengalApplication/app/helpers/activities_helper.rb": [
+      "C:/BengalEvents/BengalApplication/app/helpers/activities_helper.rb": [
         1,
         null
       ],
-      "/home/canojuan/RubymineProjects/BengalEvents/BengalApplication/app/helpers/admins_helper.rb": [
+      "C:/BengalEvents/BengalApplication/app/helpers/admins_helper.rb": [
         1,
         null
       ],
-      "/home/canojuan/RubymineProjects/BengalEvents/BengalApplication/app/helpers/application_helper.rb": [
+      "C:/BengalEvents/BengalApplication/app/helpers/application_helper.rb": [
         1,
         null
       ],
-      "/home/canojuan/RubymineProjects/BengalEvents/BengalApplication/app/helpers/coordinators_helper.rb": [
+      "C:/BengalEvents/BengalApplication/app/helpers/coordinators_helper.rb": [
         1,
         null
       ],
-      "/home/canojuan/RubymineProjects/BengalEvents/BengalApplication/app/helpers/events_helper.rb": [
+      "C:/BengalEvents/BengalApplication/app/helpers/events_helper.rb": [
         1,
         null
       ],
-      "/home/canojuan/RubymineProjects/BengalEvents/BengalApplication/app/helpers/groupings_helper.rb": [
+      "C:/BengalEvents/BengalApplication/app/helpers/groupings_helper.rb": [
         1,
         null
       ],
-      "/home/canojuan/RubymineProjects/BengalEvents/BengalApplication/app/helpers/homeroutes_helper.rb": [
+      "C:/BengalEvents/BengalApplication/app/helpers/homeroutes_helper.rb": [
         1,
         null
       ],
-      "/home/canojuan/RubymineProjects/BengalEvents/BengalApplication/app/helpers/locations_helper.rb": [
+      "C:/BengalEvents/BengalApplication/app/helpers/locations_helper.rb": [
         1,
         null
       ],
-      "/home/canojuan/RubymineProjects/BengalEvents/BengalApplication/app/helpers/registrations_helper.rb": [
+      "C:/BengalEvents/BengalApplication/app/helpers/registrations_helper.rb": [
         1,
         null
       ],
-      "/home/canojuan/RubymineProjects/BengalEvents/BengalApplication/app/helpers/sessions_helper.rb": [
+      "C:/BengalEvents/BengalApplication/app/helpers/sessions_helper.rb": [
         1,
         null
       ],
-      "/home/canojuan/RubymineProjects/BengalEvents/BengalApplication/app/helpers/sponsors_helper.rb": [
+      "C:/BengalEvents/BengalApplication/app/helpers/sponsors_helper.rb": [
         1,
         null
       ],
-      "/home/canojuan/RubymineProjects/BengalEvents/BengalApplication/app/helpers/students_helper.rb": [
+      "C:/BengalEvents/BengalApplication/app/helpers/students_helper.rb": [
         1,
         null
       ],
-      "/home/canojuan/RubymineProjects/BengalEvents/BengalApplication/app/helpers/teachers_helper.rb": [
+      "C:/BengalEvents/BengalApplication/app/helpers/teachers_helper.rb": [
         1,
         null
       ],
-      "/home/canojuan/RubymineProjects/BengalEvents/BengalApplication/app/helpers/teams_helper.rb": [
+      "C:/BengalEvents/BengalApplication/app/helpers/teams_helper.rb": [
         1,
         null
       ],
-      "/home/canojuan/RubymineProjects/BengalEvents/BengalApplication/app/helpers/time_slots_helper.rb": [
+      "C:/BengalEvents/BengalApplication/app/helpers/time_slots_helper.rb": [
         1,
         null
       ],
-      "/home/canojuan/RubymineProjects/BengalEvents/BengalApplication/app/controllers/activities_controller.rb": [
+      "C:/BengalEvents/BengalApplication/app/controllers/activities_controller.rb": [
         1,
         1,
         null,
@@ -1040,6 +1030,8 @@
         null,
         null,
         1,
+        5,
+        5,
         5,
         5,
         5,
@@ -1051,52 +1043,72 @@
         1,
         4,
         4,
-        3,
+        4,
+        4,
+        4,
+        null,
+        0,
+        0,
+        null,
+        null,
+        null,
+        null,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        null,
+        null,
+        1,
+        0,
+        null,
+        0,
+        0,
+        0,
+        null,
+        null,
+        null,
+        1,
+        0,
+        0,
+        0,
+        null,
+        null,
+        1,
+        null,
+        0,
+        0,
+        0,
+        0,
+        null,
+        0,
+        0,
+        null,
+        null,
+        null,
+        1,
+        0,
+        0,
+        0,
+        null,
+        0,
+        null,
+        null,
+        null,
+        1,
+        1,
+        1,
+        1,
         2,
-        2,
         null,
         1,
         1,
-        null,
-        null,
-        null,
-        null,
-        1,
-        0,
-        0,
-        0,
-        0,
-        0,
-        null,
-        null,
-        1,
-        0,
-        null,
-        0,
-        0,
-        0,
-        null,
-        null,
-        null,
-        1,
-        null,
-        0,
-        0,
-        0,
-        0,
-        null,
-        0,
-        0,
-        null,
-        null,
-        null,
-        1,
-        0,
-        0,
-        0,
-        null,
-        0,
-        null,
         null,
         null,
         1,
@@ -1118,37 +1130,37 @@
         null,
         null,
         1,
-        6,
-        6,
+        7,
+        7,
         null,
         null,
         1,
-        8,
-        8,
-        null,
-        null,
-        null,
-        1,
-        null,
-        1,
-        36,
-        null,
-        36,
-        675,
-        44,
-        null,
-        null,
-        36,
-        null,
-        null,
-        1,
-        4,
-        null,
-        4,
-        75,
+        9,
         9,
         null,
         null,
+        null,
+        1,
+        null,
+        1,
+        36,
+        null,
+        36,
+        693,
+        47,
+        null,
+        null,
+        36,
+        null,
+        null,
+        1,
+        4,
+        null,
+        4,
+        77,
+        8,
+        null,
+        null,
         4,
         null,
         null,
@@ -1178,48 +1190,46 @@
         0,
         null,
         4,
+        4,
+        null,
+        null,
+        null,
+        null,
+        1,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        null,
+        null,
+        4,
+        8,
+        5,
+        5,
+        null,
         3,
         null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        1,
-        4,
-        4,
-        4,
-        4,
-        4,
-        4,
-        4,
-        4,
-        null,
-        null,
-        4,
         8,
-        4,
-        4,
         null,
         4,
-        null,
-        7,
-        null,
-        3,
         null,
         null,
         1,
         8,
         8,
         8,
-        2,
+        0,
         null,
-        6,
-        5,
-        5,
+        8,
+        8,
+        8,
         null,
         null,
-        7,
+        8,
         null,
         null,
         null,
@@ -1231,7 +1241,7 @@
         0,
         null
       ],
-      "/home/canojuan/RubymineProjects/BengalEvents/BengalApplication/app/controllers/application_controller.rb": [
+      "C:/BengalEvents/BengalApplication/app/controllers/application_controller.rb": [
         1,
         1,
         null,
@@ -1254,8 +1264,8 @@
         null,
         null,
         1,
-        25,
-        25,
+        31,
+        31,
         null,
         0,
         null,
@@ -1267,7 +1277,7 @@
         null,
         null
       ],
-      "/home/canojuan/RubymineProjects/BengalEvents/BengalApplication/app/models/activity.rb": [
+      "C:/BengalEvents/BengalApplication/app/models/activity.rb": [
         1,
         1,
         null,
@@ -1280,7 +1290,7 @@
         null,
         null
       ],
-      "/home/canojuan/RubymineProjects/BengalEvents/BengalApplication/app/models/event.rb": [
+      "C:/BengalEvents/BengalApplication/app/models/event.rb": [
         1,
         1,
         1,
@@ -1299,7 +1309,7 @@
         null,
         null
       ],
-      "/home/canojuan/RubymineProjects/BengalEvents/BengalApplication/app/policies/activity_policy.rb": [
+      "C:/BengalEvents/BengalApplication/app/policies/activity_policy.rb": [
         1,
         null,
         1,
@@ -1307,7 +1317,7 @@
         null,
         null,
         1,
-        0,
+        1,
         null,
         null,
         1,
@@ -1327,31 +1337,31 @@
         null,
         null
       ],
-      "/home/canojuan/RubymineProjects/BengalEvents/BengalApplication/app/policies/application_policy.rb": [
+      "C:/BengalEvents/BengalApplication/app/policies/application_policy.rb": [
         1,
         1,
         null,
         1,
-        7,
-        7,
+        10,
+        10,
         null,
         null,
         null,
         null
       ],
-      "/home/canojuan/RubymineProjects/BengalEvents/BengalApplication/app/models/assignment.rb": [
+      "C:/BengalEvents/BengalApplication/app/models/assignment.rb": [
         1,
         1,
         1,
         null
       ],
-      "/home/canojuan/RubymineProjects/BengalEvents/BengalApplication/app/models/role.rb": [
+      "C:/BengalEvents/BengalApplication/app/models/role.rb": [
         1,
         1,
         1,
         null
       ],
-      "/home/canojuan/RubymineProjects/BengalEvents/BengalApplication/app/models/location.rb": [
+      "C:/BengalEvents/BengalApplication/app/models/location.rb": [
         1,
         1,
         null,
@@ -1359,7 +1369,7 @@
         null,
         null
       ],
-      "/home/canojuan/RubymineProjects/BengalEvents/BengalApplication/app/models/room.rb": [
+      "C:/BengalEvents/BengalApplication/app/models/room.rb": [
         1,
         1,
         1,
@@ -1369,7 +1379,7 @@
         null,
         null
       ],
-      "/home/canojuan/RubymineProjects/BengalEvents/BengalApplication/app/models/session.rb": [
+      "C:/BengalEvents/BengalApplication/app/models/session.rb": [
         1,
         1,
         1,
@@ -1482,7 +1492,7 @@
         null,
         null
       ],
-      "/home/canojuan/RubymineProjects/BengalEvents/BengalApplication/app/controllers/events_controller.rb": [
+      "C:/BengalEvents/BengalApplication/app/controllers/events_controller.rb": [
         1,
         1,
         null,
@@ -1523,11 +1533,11 @@
         null,
         null,
         1,
-        2,
-        2,
-        2,
-        2,
-        2,
+        4,
+        4,
+        4,
+        4,
+        4,
         null,
         null,
         1,
@@ -1650,7 +1660,7 @@
         null,
         null
       ],
-      "/home/canojuan/RubymineProjects/BengalEvents/BengalApplication/app/policies/event_policy.rb": [
+      "C:/BengalEvents/BengalApplication/app/policies/event_policy.rb": [
         1,
         null,
         1,
@@ -1670,7 +1680,7 @@
         null,
         null,
         1,
-        2,
+        4,
         null,
         null,
         1,
@@ -1679,6 +1689,6 @@
         null
       ]
     },
-    "timestamp": 1584126218
+    "timestamp": 1584893256
   }
 }

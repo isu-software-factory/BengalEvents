@@ -167,8 +167,6 @@ def create_activities(event)
     errors += add_sessions(new_activities)
     errors
   end
-
-
 end
 
 

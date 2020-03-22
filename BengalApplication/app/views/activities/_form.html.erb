@@ -21,9 +21,10 @@
       </div>
     </div>
     <div class="card-body bengal-body">
-      <%= form_tag({controller: "activities", action: @action, event_id: @event}, {id: "activity-form"}) do %>
+      <%= form_tag({controller: "activities", action: @action, event_id: @event.id}, {id: "activity-form"}) do %>
         <%= hidden_field_tag "max_team_tag_1", value = 4 %>
         <%= hidden_field_tag "activity_id", @edit ? value=@activity.id : value=nil %>
+        <%= hidden_field_tag "activity", value=@action %>
         <div class="row">
           <div class="col-lg-4 border-right">
             <div class="form-group">

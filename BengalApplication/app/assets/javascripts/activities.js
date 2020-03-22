@@ -30,9 +30,9 @@ $(document).on('ready page:load turbolinks:load', function () {
 
 
 $(document).ready(function () {
-    setRooms($(".col-lg-4").last().children().last().children().last());
+    setTimeout(function() {setRooms($(".col-lg-4").last().children().last().children().last())},200);
 
-    if (($("#name_New_1").attr("value") != "")) {
+    if (($("#name_New_1").attr("value") != undefined)) {
         setEditRooms();
     }
 });
@@ -59,18 +59,21 @@ function useSameRoom(e) {
         $(".roomselect").each(function () {
             if ($(this).parent().parent().parent().children().first().children().last().is($(e).parent())) {
                 if (!($(this).is($(e).parent().parent().next().children(".col-lg-3").first().children().first()))) {     // make sure that the selector is not the first selector
-                    $(this).prop("disabled", "disabled");
+                    $(this).css("pointer-events", "none");
+                }else{
+                    $(this).parent().parent().parent().children().children().children(".roomselect").slice(1).val($(this).children("option:selected").val()).change();
                 }
             }
         });
     } else {
         $(".roomselect").each(function () {
             if ($(this).parent().parent().parent().children().first().children().last().is($(e).parent())) {
-                $(this).prop("disabled", false);
+                $(this).css("pointer-events", "auto");
             }
         });
     }
 }
+
 
 function getName(selector) {
     let name = $(selector).children("option:selected").val().split("(");
@@ -107,13 +110,16 @@ function removePreviousButton(button) {
 }
 
 // creates a new session row and returns the row
-function createSession() {
+function createSession(New) {
+    if (New === undefined) {
+        New = "";
+    }
 
     // create text boxes
     let start_date = document.createElement("input");
     $(start_date).attr("type", "text-box");
     $(start_date).timepicker();
-    addAttributes(start_date, "start_time_" + sessionCount, "form-control");
+    addAttributes(start_date, "start_time_" + New + sessionCount, "form-control");
 
     let end_time = document.createElement("input");
     $(end_time).attr("type", "text-box");
@@ -340,7 +346,7 @@ function appendElements(container, element) {
 }
 
 // create a new activity
-function newActivity(button) {
+function newActivity() {
     activityCount += 1;
     sessionCount += 1;
 
@@ -413,13 +419,18 @@ function newActivity(button) {
         getRooms(getName(this), $(this).parent().parent().parent());
     });
 
-    let row2 = createSession();
+    let row2 = createSession("New_");
     let row3 = createSessionLabels();
 
     appendElements(container2, row3);
     appendElements(container2, row2);
+
     // sets the rooms
-    setRooms(tLocation);
+    // if (waitForElementToDisplay("#location_select_" + activityCount, 5000)){
+    //     alert("Passed");
+    //     setRooms(tLocation);
+    // }
+    setTimeout(function(){setRooms("#location_select_" + activityCount)}, 200);
 
 }
 
@@ -438,7 +449,7 @@ function createSessionLabels() {
     let lRoom = createLabel("Room");
     let lCapacity = createLabel("Capacity");
     let tbx = createInput("checkbox");
-    addAttributes(tbx, "same_room_" + sessionCount, "");
+    addAttributes(tbx, "same_room" + sessionCount, "");
     let lTbx = createLabel("Use Same Room");
 
     // append elements to columns
@@ -455,6 +466,7 @@ function createSessionLabels() {
     appendElements(row, col3);
     appendElements(row, col4);
     appendElements(row, col5);
+
     $(tbx).click(function () {
         useSameRoom(this);
     });
