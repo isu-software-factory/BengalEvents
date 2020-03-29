@@ -21,10 +21,10 @@
       </div>
     </div>
     <div class="card-body bengal-body">
-      <%= form_tag({controller: "activities", action: @action, event_id: @event.id}, {id: "activity-form"}) do %>
+      <%= form_tag(@action, id: "activity-form") do %>
         <%= hidden_field_tag "max_team_tag_1", value = 4 %>
-        <%= hidden_field_tag "activity_id", @edit ? value=@activity.id : value=nil %>
-        <%= hidden_field_tag "activity", value=@action %>
+        <%= hidden_field_tag "activity_id", @edit ? value = @activity.id : value = nil %>
+        <%= hidden_field_tag "activity", value = @action %>
         <div class="row">
           <div class="col-lg-4 border-right">
             <div class="form-group">
@@ -70,24 +70,33 @@
               </div>
             </div>
 
-              <% for s in (@sessions.empty? ? 0..0 : @sessions) %>
-                <div class="row">
-                  <div class="col-lg-2">
-                    <%= text_field_tag "start_time_New_1", @edit ? value = s.start_time : value = nil, class: "control-label form-control start_time" %>
-                  </div>
-                  <div class="col-lg-2">
-                    <%= text_field_tag "end_time_1", @edit ? value = s.end_time : value = nil, class: "control-label form-control end_time" %>
-                  </div>
-                  <div class="col-lg-3">
-                    <select class="form-control roomselect" name="room_select_1" title="Choose Room that Session will be hosted at"></select>
-                  </div>
-                  <div class="col-lg-2">
-                    <%= text_field_tag "capacity_1", @edit ? value = s.capacity : value = nil, class: "control-label form-control" %>
-                  </div>
-                  <div class="col-lg-3">
-                    <button class="button-small glyphicon glyphicon-plus new-session" title="Add New Session" type="button"></button>
-                  </div>
+            <%@index = 0 %>
+            <% for s in (@sessions.empty? ? 0..0 : @sessions) %>
+              <%@index += 1 %>
+              <div class="row top-indent">
+                <div class="col-lg-2">
+                  <%= text_field_tag (@sessions.first == s) || @sessions.empty? ? "start_time_New_" + @index.to_s: "start_time_" + @index.to_s, @edit ? value = s.start_time.strftime("%l:%M %p") : value = nil, class: "control-label form-control start_time" %>
                 </div>
+                <div class="col-lg-2">
+                  <%= text_field_tag "end_time_" + @index.to_s, @edit ? value = s.end_time.strftime("%l:%M %p") : value = nil, class: "control-label form-control end_time" %>
+                </div>
+                <div class="col-lg-3">
+                  <%=select_tag "room_select_" + @index.to_s, nil, class: "form-control roomselect", title: "Choose Room that Session will be hosted at" %>
+                </div>
+                <div class="col-lg-2">
+                  <%= text_field_tag "capacity_" + @index.to_s, @edit ? value = s.capacity : value = nil, class: "control-label form-control" %>
+                </div>
+                <% if s == @sessions.last || @sessions.empty? %>
+                  <div class="col-lg-3">
+                    <button class="button-small left-indent glyphicon glyphicon-minus" title="Remove Session" type="button"></button>
+                    <button class="button-small left-indent glyphicon glyphicon-plus new-session" title="Add New Session" type="button"></button>
+                  </div>
+                <% else %>
+                  <div class="col-lg-3">
+                    <button class="button-small left-indent glyphicon glyphicon-minus" title="Remove Session" type="button"></button>
+                  </div>
+                <% end %>
+              </div>
             <% end %>
           </div>
         </div>

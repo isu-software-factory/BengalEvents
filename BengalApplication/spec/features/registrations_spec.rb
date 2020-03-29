@@ -35,6 +35,27 @@ RSpec.feature "Registrations", type: :feature do
     end
   end
 
+  context "teams registering" do
+    before(:each) do
+      @student = User.find(2)
+      @team = Team.find(2)
+      login_as(@student)
+      visit root_path(role: "Team", id: @team.id)
+    end
+
+    it "should not allow a team to register if the team restriction is not met" do
+      @team.register_member(@student)
+      first(".event-collapse").click
+      check "register"
+      expect(page).to have_content("Your team does not meet the team size restriction")
+    end
+
+    it "should successfully register a team" do
+      first(".event-collapse").click
+      check "register"
+      expect(first(".registered")).to have_content("Registered")
+    end
+  end
 
   context "activities method" do
     before(:each) do

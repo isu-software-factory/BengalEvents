@@ -123,14 +123,11 @@ class RegistrationsController < ApplicationController
       success = event.register_participant(participant)
 
 
-    if success
+    if success[0]
       render json: {data: {registered: true, user: participant.id}}
     else
       error_message = "Access Denied"
-      # capacity is full
-      if event.capacity_remaining == 0
-        error_message = "Activity capacity is full. Register for a different Activity."
-      end
+      error_message = success[1]
       render json: {data: {registered: false, error: error_message}}
     end
 

@@ -33,7 +33,7 @@ $(document).ready(function () {
     setTimeout(function() {setRooms($(".col-lg-4").last().children().last().children().last())},200);
 
     if (($("#name_New_1").attr("value") != undefined)) {
-        setEditRooms();
+        setTimeout(function() {setEditRooms()}, 200);
     }
 });
 
@@ -44,12 +44,11 @@ function setEditRooms() {
         type: 'GET',
         dataType: "json",
         success: function (data) {
-            let index = 0;
-            $(".roomselect").each(function () {
-                $(this).val(data.results.rooms[index].room_number + " (" + data.results.rooms[index].room_name + ")").change();
-                index++;
-            });
-
+            var i;
+            for(i = 0; i < $(".roomselect").length; i++){
+                let room = $(".roomselect").get(i);
+                $(room).val(data.results.rooms[i].room_number + " (" + data.results.rooms[i].room_name + ")").change();
+            }
         }
     })
 }

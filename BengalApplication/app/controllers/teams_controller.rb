@@ -5,9 +5,9 @@ class TeamsController < ApplicationController
     # get student emails
     @student = User.find(current_user.id)
     @team = Team.find(params[:id])
-    @emails = [params[:email1], params[:email2], params[:email3], params[:email4]]
-    # no problems occur?
-    @continue = send_emails(@emails, @team)
+    @emails = team_emails
+
+    @continue = add_members(@emails, @team)
 
     # redirect student to student page if emails are sent
     if @continue
@@ -17,29 +17,12 @@ class TeamsController < ApplicationController
     end
   end
 
-  def send_emails(emails, team)
-    @pass = true
-    # send emails if students have an account
-    emails.each do |email|
-      unless email == ""
-        @user = User.find_by(email: email)
-        unless @user.nil?
-          invited_student = User.find(@user.id)
-          #UserMailer.invite(@student, invited_student, team).deliver_now
-        else
-          flash[:alert] = "no such student exits, #{email}"
-          # error occurs
-          @pass = false
-        end
-      end
-    end
-    @pass
-  end
 
   def invite
     @team = Team.find(params[:id])
 
     add_breadcrumb 'Home', root_path
+    add_breadcrumb current_user.first_name + "'s Profile", profile_path(current_user)
     add_breadcrumb 'Team', @team
     add_breadcrumb 'Invite Members', ""
   end
@@ -49,7 +32,7 @@ class TeamsController < ApplicationController
     @role = "Team"
 
     add_breadcrumb 'Home', root_path
-    add_breadcrumb current_user.first_name + " Profile", profile_path(current_user)
+    add_breadcrumb current_user.first_name + "'s Profile", profile_path(current_user)
     add_breadcrumb 'Team', team_path(@team)
   end
 
@@ -61,7 +44,8 @@ class TeamsController < ApplicationController
     @team = Team.new
 
     add_breadcrumb 'Home', root_path
-    add_breadcrumb 'Create Team', ""
+    add_breadcrumb current_user.first_name + "'s Profile", profile_path(current_user)
+    add_breadcrumb 'Create Team', new_team_path
   end
 
   def create
@@ -76,11 +60,11 @@ class TeamsController < ApplicationController
       # add lead as member
       @team.register_member(@student)
       # invite members
-      continue = send_emails(@emails, @team)
+      continue = add_members(@emails, @team)
       if continue
         redirect_to @team
       else
-        render 'invite'
+        redirect_to @team
       end
     else
       flash[:alert] = @team.errors.full_messages
@@ -99,6 +83,24 @@ class TeamsController < ApplicationController
   end
 
   def team_emails
-    emails = [params[:email1], params[:email2], params[:email3], params[:email4]]
+    emails = [params[:email1], params[:email2], params[:email3]]
+  end
+
+  def add_members(emails, team)
+    @pass = true
+    # send emails if students have an account
+    emails.each do |email|
+      unless email == ""
+        @user = User.find_by(user_name: email)
+        unless @user.nil?
+          team.register_member(@user)
+        else
+          flash[:alert] = "no such student exits, #{email}"
+          # error occurs
+          @pass = false
+        end
+      end
+    end
+    @pass
   end
 end

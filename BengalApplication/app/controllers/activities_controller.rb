@@ -1,7 +1,7 @@
 class ActivitiesController < ApplicationController
   before_action :authenticate_user!
   # before_action :set_occasion, only: %i[new create destroy update edit show]
-  before_action :set_event, only: %i[destroy update show]
+  before_action :set_event, only: %i[destroy show]
  # after_action :verify_authorized
 
   def new
@@ -9,7 +9,7 @@ class ActivitiesController < ApplicationController
     @sessions = []
     @event = Event.find(params[:event_id])
     authorize @activity
-    @action = "create"
+    @action = "create/" + @event.id.to_s
     add_breadcrumb 'Home', root_path
     add_breadcrumb @event.name, @event
     add_breadcrumb 'Create Event', new_activity_path
@@ -59,7 +59,15 @@ class ActivitiesController < ApplicationController
     # authorize @event
     @activity = Activity.find(params[:id])
     @event = @activity.event
-    if @activity.update(activity_params)
+
+    # update sessions
+    index = 1
+    @activity.sessions.each do |session|
+      update_sessions(session, index)
+      index += 1
+    end
+
+    if @activity.update(name: params[:name_New_1], description: params[:description_1], iscompetetion: params[:iscompetetion_1], ismakeahead: params[:ismakeahead_1])
       redirect_to @event, notice: 'Successfully updated Event.'
     else
       flash[:errors] = @activity.errors.full_messages
@@ -80,28 +88,10 @@ class ActivitiesController < ApplicationController
     activity = Activity.find(params[:activity])
     rooms = []
     activity.sessions.each do |s|
-      rooms << s.rooms.first
+      rooms << s.room
     end
-    rooms = rooms.reverse
+    rooms = rooms
     render json: {results: {rooms: rooms}}
-  end
-
-  def location_timeslots
-    location = Location.find_by(name: params[:name])
-    time_slots = location.time_slots
-    return render json: {results: {dates: [], times: []}} if time_slots.empty?
-
-    results = time_slots.each do |time|
-      dates = ((location.occasion.start_date.to_date)...(location.occasion.end_date.to_date)).to_a
-      start_time = time.start_time
-      end_time = time.end_time
-      times = [start_time.strftime('%H:%M')]
-      begin
-        start_time += time.interval.minutes
-        times << start_time.strftime('%H:%M')
-      end while start_time < end_time
-      render json: {results: {dates: dates, times: times}}
-    end
   end
 
   def get_locations
@@ -139,6 +129,20 @@ def get_keys(name)
   keys
 end
 
+def get_param_with_index(name, index)
+
+  params.each do |key, value|
+    if key.start_with?(name) && key.ends_with?(index.to_s)
+      return value
+    end
+  end
+end
+
+def update_sessions(session, index)
+  room_num = get_param_with_index("room_select", index).split(" (")[0].to_i
+  session.update(start_time: get_param_with_index("start_time", index), end_time: get_param_with_index("end_time", index), capacity: get_param_with_index("capacity", index),  room_id: Room.find_by(room_number: room_num).id)
+
+end
 
 def create_activities(event)
   activity_names = get_values("name")
@@ -195,15 +199,11 @@ end
 
 def create_session(start_time, room, capacity, activity, end_time)
   errors = []
-  new_session = Session.new(start_time: start_time, capacity: capacity, activity_id: activity.id, end_time: end_time)
+  room_num = room.split(" (")[0].to_i
+  new_session = Session.new(start_time: start_time, capacity: capacity, activity_id: activity.id, end_time: end_time, room_id: Room.find_by(room_number: room_num).id)
   unless new_session.save
     errors += new_session.errors.full_messages
-  else
-    room_num = room.split(" (")[0].to_i
-    room_update = Room.find_by(room_number: room_num)
-    room_update.update(session_id: new_session.id)
   end
-
   errors
 end
 
@@ -212,6 +212,4 @@ def set_event
   @event = Event.find(params[:id])
 end
 
-def activity_params
-  params.require(:activity).permit(:name, :description, :ismakeahead, :iscompetetion, user_id: current_user.id)
-end
+

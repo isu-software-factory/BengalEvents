@@ -17,7 +17,7 @@ RSpec.feature "Teams", type: :feature do
       expect(page).to have_content("Team Tigers")
     end
 
-    it "fails to create a team" do
+    it "fails to create a team without name" do
       within("form") do
         fill_in "team[team_name]", with: ""
       end
@@ -37,7 +37,7 @@ RSpec.feature "Teams", type: :feature do
     it "successfully invites students" do
       visit "teams/#{@team.id}/invite"
       within("form") do
-        fill_in "email1", with: @student2.email
+        fill_in "email1", with: @student2.user_name
       end
       click_button "Invite"
       expect(page).to have_content("Invited members to team")

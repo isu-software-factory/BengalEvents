@@ -83,11 +83,10 @@ RSpec.feature "Events", type: :feature do
 
       check "same_room"
       click_button "Confirm"
-      Capybara.default_max_wait_time = 500
       expect(Activity.find(4).sessions.count).to eq(3)
-      expect(Activity.find(4).sessions.first.rooms.first.room_number).to eq("203")
-      expect(Activity.find(4).sessions[1].rooms.first.room_number).to eq("203")
-      expect(Activity.find(4).sessions[2].rooms.first.room_number).to eq("203")
+      expect(Activity.find(4).sessions.first.room.room_number).to eq("203")
+      expect(Activity.find(4).sessions[1].room.room_number).to eq("203")
+      expect(Activity.find(4).sessions[2].room.room_number).to eq("203")
       expect(page).to have_content("Successfully Created Activity")
     end
 
@@ -132,11 +131,61 @@ RSpec.feature "Events", type: :feature do
       scenario "should be successful when name is updated" do
         # fill form
         within('form') do
-          fill_in "name_New_1", with: "Robots in the gym"
+          fill_in "name_New_1", with: "Droids"
         end
         click_button "Confirm"
+        expect(Activity.first.name).to eq("Droids")
         expect(page).to have_content("Successfully updated Event.")
       end
+
+      scenario "should be successful when description is updated" do
+        # fill form
+        within('form') do
+          fill_in "description_1", with: "Program"
+        end
+        click_button "Confirm"
+        expect(Activity.first.description).to eq("Program")
+        expect(page).to have_content("Successfully updated Event.")
+      end
+
+      scenario "should be successful when iscompetetion is updated" do
+        within('form') do
+          check "iscompetetion_1"
+        end
+        click_button "Confirm"
+        expect(Activity.first.iscompetetion).to eq(true)
+        expect(page).to have_content("Successfully updated Event.")
+      end
+
+      scenario "should be successful when session time is updated" do
+        within("form") do
+          fill_in "start_time_New_1", with: "10:30"
+          fill_in "end_time_1", with: "11:30"
+        end
+        click_button "Confirm"
+        start_time = Time.new(2020,3,29,10,30,0, "-06:00")
+        end_time = Time.new(2020, 3, 29, 11, 30, 0, "-06:00")
+        expect(Activity.first.sessions.first.start_time).to eq(start_time)
+        expect(Activity.first.sessions.first.end_time).to eq(end_time)
+      end
+
+      scenario "should be successful when session capacity is updated" do
+        within("form") do
+          fill_in "capacity_1", with: "5"
+        end
+        click_button "Confirm"
+        expect(Activity.first.sessions.first.capacity).to eq(5)
+      end
+
+      scenario "should be successful when session room is updated" do
+        within("form") do
+          select("203 (Ballroom)", from: "room_select_1")
+        end
+        click_button "Confirm"
+        expect(Activity.first.sessions.first.room.room_number).to eq("203")
+      end
+
+
       #
       # scenario "should fail" do
       #   # fill form

@@ -6,14 +6,21 @@ class EventsController < ApplicationController
     @events = Event.all
     @activities = Event.first.activities
     @role = ""
+    add_breadcrumb "Home", root_path(role: "User", id: current_user.id)
     if params[:role] == "Team"
       @role = "Team"
       @user = Team.find(params[:id])
+      add_breadcrumb current_user.first_name + "'s Profile", profile_path(current_user)
+      add_breadcrumb "Team", team_path(@user.id)
+      add_breadcrumb "Team Registration", root_path(role: @role, id: @user.id)
     else
       @role = "User"
       @user = User.find(params[:id])
+      if (current_user.roles.first.role_name == "Teacher" && @user.id != current_user.id)
+        add_breadcrumb current_user.first_name + "'s Profile", profile_path(current_user)
+        add_breadcrumb "Register For " + @user.first_name, ""
+      end
     end
-    add_breadcrumb "Home", root_path(role: @role, id: @user.id)
   end
 
   def new

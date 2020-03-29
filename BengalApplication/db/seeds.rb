@@ -186,38 +186,10 @@ Activity.create!([{
                       equipment: "None",
                       event_id: 1,
                       user_id: 9,
+                      max_team_size: 2,
                       ismakeahead: false,
                       iscompetetion: true
                   }])
-
-Session.create!([{
-                     start_time: DateTime.new(2020, 4, 20, 15),
-                     end_time: DateTime.new(2020, 4, 20, 16),
-                     capacity: 25,
-                     activity_id: 1
-                 }, {
-                     start_time: DateTime.new(2020, 4, 20, 17),
-                     end_time: DateTime.new(2020, 4, 20, 18),
-                     capacity: 20,
-                     activity_id: 1
-                 }, {
-                     start_time: DateTime.new(2020, 4, 20, 13),
-                     end_time: DateTime.new(2020, 4, 20, 14),
-                     capacity: 10,
-                     activity_id: 2
-                 }, {
-                     start_time: DateTime.new(2020, 4, 2, 13),
-                     end_time: DateTime.new(2020, 4, 3, 14),
-                     capacity: 2,
-                     activity_id: 2
-                 }, {
-                     start_time: DateTime.new(2020, 4, 20, 4),
-                     end_time: DateTime.new(2020, 4, 20, 12),
-                     capacity: 2,
-                     activity_id: 3
-                 }])
-
-
 Location.create!([{
                       location_name: "SUB",
                       address: "921 S 8th Ave, Pocatello, ID 83209"
@@ -225,21 +197,50 @@ Location.create!([{
 
 Room.create!([{
                   room_number: 102,
-                  session_id: 1,
                   location_id: 1,
                   room_name: "Cafe"
               }, {
                   room_number: 203,
-                  session_id: 3,
                   location_id: 1,
                   room_name: "Ballroom"
               }, {
                   room_number: 303,
-                  session_id: 2,
                   location_id: 1,
                   room_name: ""
               }
-              ])
+             ])
+Session.create!([{
+                     start_time: DateTime.new(2020, 4, 20, 15),
+                     end_time: DateTime.new(2020, 4, 20, 16),
+                     capacity: 25,
+                     activity_id: 1,
+                     room_id: 1
+                 }, {
+                     start_time: DateTime.new(2020, 4, 20, 17),
+                     end_time: DateTime.new(2020, 4, 20, 18),
+                     capacity: 20,
+                     activity_id: 1,
+                     room_id: 1
+                 }, {
+                     start_time: DateTime.new(2020, 4, 20, 13),
+                     end_time: DateTime.new(2020, 4, 20, 14),
+                     capacity: 10,
+                     activity_id: 2,
+                     room_id: 1
+                 }, {
+                     start_time: DateTime.new(2020, 4, 2, 13),
+                     end_time: DateTime.new(2020, 4, 3, 14),
+                     capacity: 2,
+                     activity_id: 2,
+                     room_id: 2
+                 }, {
+                     start_time: DateTime.new(2020, 4, 20, 4),
+                     end_time: DateTime.new(2020, 4, 20, 12),
+                     capacity: 2,
+                     activity_id: 3,
+                     room_id: 3
+                 }])
+
 
 Team.create!([{
                   team_name: "Tigers",
@@ -258,6 +259,9 @@ Grouping.create!([{
                   }, {
                       team_id: 1,
                       user_id: 4
+                  }, {
+                      team_id: 1,
+                      user_id: 3
                   },
                   {
                       team_id: 2,
@@ -265,7 +269,10 @@ Grouping.create!([{
                   }, {
                       team_id: 2,
                       user_id: 5
-                  }, {
+                  },{
+                      team_id: 2,
+                      user_id: 2
+                  },{
                       team_id: 3,
                       user_id: 5
                   }, {

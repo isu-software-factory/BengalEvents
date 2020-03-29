@@ -37,15 +37,10 @@ Rails.application.routes.draw do
   post "students/errors" => "students#errors"
   resources :teams
   get "activities/report" => "activities#report", as: "report"
+  post "activities/create/:event_id" => "activities#create"
+  post "/activities/:id/update" => "activities#update"
 resources :events
   resources :activities
-  # resources :teams
-  # resources :EventsController do
-  #   resources :locations
-  #   resources :ActivitiesController do
-  #     resources :sessions
-  #   end
-  # end
 
   get "/drop_activity/:role/:session_id/:id" => "registrations#drop_activity"
   get "homeroutes/home" => 'homeroutes#home'

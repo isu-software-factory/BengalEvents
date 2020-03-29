@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_12_211622) do
+ActiveRecord::Schema.define(version: 2020_03_23_190949) do
 
   create_table "activities", force: :cascade do |t|
     t.string "name"
@@ -79,11 +79,9 @@ ActiveRecord::Schema.define(version: 2020_03_12_211622) do
     t.string "room_number"
     t.string "room_name"
     t.integer "location_id"
-    t.integer "session_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["location_id"], name: "index_rooms_on_location_id"
-    t.index ["session_id"], name: "index_rooms_on_session_id"
   end
 
   create_table "sessions", force: :cascade do |t|
@@ -93,7 +91,9 @@ ActiveRecord::Schema.define(version: 2020_03_12_211622) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "activity_id"
+    t.integer "room_id"
     t.index ["activity_id"], name: "index_sessions_on_activity_id"
+    t.index ["room_id"], name: "index_sessions_on_room_id"
   end
 
   create_table "teachers", force: :cascade do |t|

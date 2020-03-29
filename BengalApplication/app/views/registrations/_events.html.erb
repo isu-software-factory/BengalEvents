@@ -15,10 +15,10 @@
 
 
 <div class="container">
-    <% @events.each do |event| %>
+  <% @events.each do |event| %>
     <div class="">
       <h2 class="accordian"><%= event.name %> <span class="badge badge-danger">
-        Starts at <%= event.start_date.strftime("%d/%m/%Y") %></span></h2>
+        Starts <%= event.start_date.strftime("%d/%m/%Y") %></span></h2>
       <div class="row">
         <div class="col-lg-12">
           <table class="table">
@@ -39,7 +39,7 @@
           </table>
         </div>
       </div>
-      </div>
-    <% end %>
     </div>
+  <% end %>
+</div>
 

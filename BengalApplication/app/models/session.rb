@@ -1,6 +1,6 @@
 class Session < ApplicationRecord
   belongs_to :activity
-  has_many :rooms
+  belongs_to :room
   has_many :registrations
   has_many :team_registration
   has_many :teams, through: :team_registration
@@ -26,31 +26,42 @@ class Session < ApplicationRecord
   # register participant to session
   # Makes sure that participant isn't already registered and that the capacity is zero
   def register_participant(participant)
-    success = false
+    success = [false]
     unless self.capacity_remaining == 0
       if self.activity.iscompetetion
         success = self.register_team(participant)
       else
         success = self.register_user(participant)
       end
+    else
+      success = [false, "Activity capacity is full. Register for a different Activity."]
     end
     success
   end
 
   def register_user(user)
+    success = [false]
     unless self.users.include?(user)
       self.users << user
-      return true
+      success = [true, ""]
+    else
+      success = [false, "You have already registered for this event"]
     end
-    false
+    success
   end
 
   def register_team(team)
-    unless self.teams.include?(team)
+    success = [false]
+    if self.teams.include?(team)
       self.teams << team
-      return true
+      success = [false,"Your team is already registered for this event"]
+    elsif (self.activity.max_team_size < team.users.count || self.activity.max_team_size < team.users.count )
+      success = [false, "Your team does not meet the team size restriction"]
+    else
+      self.teams << team
+      success = [true, ""]
     end
-    false
+    success
   end
 
 
