@@ -1,7 +1,7 @@
 <% if signed_in? %>
   <% if controller.controller_name == "teams" %>
     <% unless params[:id] == nil %>
-      <div class="team_name"><h1 class="bold">Team <%= Team.find(params[:id]).team_name %></h1></div>
+      <div class="team_name"><h1>Team <%= Team.find(params[:id]).team_name %></h1></div>
     <% end %>
     <%else %>
     <div class="team_name"><h1><%=current_user.first_name + " " + current_user.last_name %></h1></div>

@@ -2,12 +2,12 @@ class TeamPolicy < ApplicationPolicy
 
   def new?
     # only a student can create a team
-    @user.meta_type == "Student"
+    @user.roles.first.role_name == "Student"
   end
 
   def invite?
     # only a team lead can invite members
-   @user.meta_type == "Student" && record.lead == user.meta.id
+   @user.roles.first.role_name == "Student" && record.get_lead == user
   end
 
   def show?
@@ -17,12 +17,12 @@ class TeamPolicy < ApplicationPolicy
 
   def drop?
     # only a team lead can delete a member
-    @user.meta_type == "Student" && record.get_lead == @user.meta
+    @user.roles.first.role_name == "Student" && record.get_lead == @user
   end
 
   def create?
     # only a student can create a team
-    @user.meta_type == "Student"
+    @user.roles.first.role_name == "Student"
   end
 
   def change?

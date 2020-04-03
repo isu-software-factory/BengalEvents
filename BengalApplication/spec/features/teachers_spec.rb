@@ -3,11 +3,8 @@ require 'rails_helper'
 RSpec.feature "Teachers", type: :feature do
   context "create new teacher" do
 
-
-
-
     scenario "should fail" do
-      visit "/homeroutes/new/Teacher"
+      visit new_user_path("Teacher")
       click_button "Create Account"
       expect(page).to have_content("User name can't be blank")
       expect(page).to have_content("Password can't be blank")
@@ -18,7 +15,7 @@ RSpec.feature "Teachers", type: :feature do
     end
   end
   scenario "should be successful" do
-    visit("/homeroutes/new/" + "Teacher")
+    visit new_user_path("Teacher")
     expect(page).to have_content("Sign Up")
     within('form') do
       fill_in "school_name", with: "valley"

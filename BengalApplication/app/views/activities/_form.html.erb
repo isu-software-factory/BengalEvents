@@ -66,7 +66,8 @@
               </div>
               <div class="col-lg-3 form-group">
                 <%= check_box_tag "same_room", value = true, false, title: "Use the same room for all sessions" %>
-                <%= label_tag "Use Same Room", nil, class: "control-label" %>
+                <%= label_tag "Same Room", nil, class: "control-label" %>
+                <span class="glyphicon glyphicon-info-sign" data-toggle="tooltip" data-placement="top" title="Check the checkbox to use the same room for all sessions. Create all sessions and choose the room in the first session before checking the checkbox."></span>
               </div>
             </div>
 

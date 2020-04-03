@@ -4,7 +4,6 @@ class EventsController < ApplicationController
 
   def index
     @events = Event.all
-    @activities = Event.first.activities
     @role = ""
     add_breadcrumb "Home", root_path(role: "User", id: current_user.id)
     if params[:role] == "Team"
@@ -25,6 +24,9 @@ class EventsController < ApplicationController
 
   def new
     @event = Event.new
+    @action = "create"
+    @edit = false
+    @locations = Location.all
     authorize @event
     add_breadcrumb 'Home', root_path
     add_breadcrumb 'New Event', new_event_path
@@ -54,6 +56,9 @@ class EventsController < ApplicationController
 
   def edit
     @event = Event.find(params[:id])
+    @action = "update"
+    @locations = Location.all
+    @edit = true
     authorize @event
     add_breadcrumb "Home", root_path
     add_breadcrumb @event.name, event_path
@@ -64,10 +69,10 @@ class EventsController < ApplicationController
     @event = Event.find(params[:id])
     authorize @event
     if @event.update(event_params)
-      redirect_to events_path, :notice => 'Successfully updated Occasion.'
+      redirect_to profile_path(current_user), :notice => 'Successfully Updated ' + @event.name
     else
-      flash[:errors] = @events.errors.full_messages
-      render :edit
+      flash[:errors] = @event.errors.full_messages
+      redirect_back(fallback_location: edit_event_path(@event))
     end
   end
 
@@ -75,9 +80,9 @@ class EventsController < ApplicationController
     event = Event.find(params[:id])
     authorize event
     if event.destroy
-      redirect_to events_path, notice: 'Successfully Deleted Occasion.'
+      redirect_to profile_path(current_user), notice: 'Successfully Deleted Event.'
     else
-      flash[:error] = 'We were unable to destroy the Occasion.'
+      flash[:error] = 'We were unable to destroy the Event'
     end
   end
 

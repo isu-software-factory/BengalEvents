@@ -103,11 +103,22 @@ $(document).on('ready page:load turbolinks:load', function () {
         // check to see that the div is a room
         if ($(this).parent().parent().parent().attr("class") == "Room") {
             // add function to button
-            $(this).click(function () {
-                addNewRoom($(this).parent().parent().parent(), $(this));
-            })
+            if ($(this).hasClass("glyphicon-minus")){
+                $(this).click(function(){
+                    removeSection(this, "Room");
+                })
+            }else {
+                $(this).click(function () {
+                    addNewRoom($(this).parent().parent().parent(), $(this));
+                })
+            }
         } else if($(this).parent().parent().parent().attr("class") == "Location") {
             // add function to button
+            if ($(this).hasClass("glyphicon-minus")){
+                $(this).click(function(){
+                    removeSection($(this), "Location");
+                })
+            }
             $(this).click(function () {
                 addNewLocation($(this));
             })
@@ -269,45 +280,50 @@ function createButton(type, location) {
     if (type === "minus") {
         // set attributes
         button.setAttribute("title", "Remove This " + location);
-        button.setAttribute("class", "button-small glyphicon glyphicon-minus");
+        button.setAttribute("class", "button-small left-indent glyphicon glyphicon-minus");
         // remove fields and add plus button before this element
         $(button).click(function () {
             // add plus button back to the previous row
-            if ($(this).parent().parent().parent().find("button").last().prev().is($(this))){
-                if ($(this).parent().parent().parent().attr("class") == "Room")
-                    $(this).parent().parent().prev().children().last().append(createButton("plus", location));
-                else
-
-                    $(".Location").last().prev().prev().prev().prev().children().last().children().last().append(createButton("plus", location));
-            }
-
-            if (location == "Location") {
-                // remove location and rooms
-                $(this).parent().parent().parent().prev().remove(); // previous hr
-                $(this).parent().parent().parent().next().remove(); // next hr
-                $(this).parent().parent().parent().next().remove();  // Room
-                $(this).parent().parent().parent().remove(); // Location
-            }
-            else {
-                $(this).parent().parent().remove();
-            }
-
+            removeSection(this, location);
         });
     } else {
-        // set attributes
-        if (location === "Location")
-            $(button).click(function () {
-                addNewLocation($(this));
-            });
-        else
-            $(button).click(function () {
-                addNewRoom($(this).parent().parent().parent(), $(this));
-            });
-        button.setAttribute("class", "button-small left-indent glyphicon glyphicon-plus");
-        button.setAttribute("title", "Add A New " + location);
+        addSection(button, location);
     }
 
     return button;
+}
+
+function addSection(button, location){
+    if (location === "Location")
+        $(button).click(function () {
+            addNewLocation($(this));
+        });
+    else
+        $(button).click(function () {
+            addNewRoom($(this).parent().parent().parent(), $(this));
+        });
+    button.setAttribute("class", "button-small left-indent glyphicon glyphicon-plus");
+    button.setAttribute("title", "Add A New " + location);
+}
+
+function removeSection(e, location){
+    if ($(e).parent().parent().parent().find("button").last().prev().is($(e))){
+        if ($(e).parent().parent().parent().attr("class") == "Room")
+            $(e).parent().parent().prev().children().last().append(createButton("plus", location));
+        else
+            $(".Location").last().prev().prev().prev().prev().children().last().children().last().append(createButton("plus", location));
+    }
+
+    if (location == "Location") {
+        // remove location and rooms
+        $(e).parent().parent().parent().prev().remove(); // previous hr
+        $(e).parent().parent().parent().next().remove(); // next hr
+        $(e).parent().parent().parent().next().remove();  // Room
+        $(e).parent().parent().parent().remove(); // Location
+    }
+    else {
+        $(e).parent().parent().remove();
+    }
 }
 
 function removePreviousButton(button) {

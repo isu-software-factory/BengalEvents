@@ -83,7 +83,7 @@
             <p><%=link_to "Invite Members", ({controller: "teams", action: "invite", id: @team.id}), class: "button" %></p>
             <%if @team.users.count > 1 %>
               <p>You can register for events as a team. Every member will participate in the event.</p>
-              <p><%=link_to "Register For Events", ({controller: "events", action: "index", role: "Team", id: @team.id}), class: "button"%></p>
+              <p><%=link_to "Register For Activities", ({controller: "events", action: "index", role: "Team", id: @team.id}), class: "button"%></p>
             <%else %>
 
               <p>You have to have at least two members to register for an event as a team.</p>

@@ -21,7 +21,7 @@ RSpec.feature "Events", type: :feature do
         within('form') do
           fill_in "location_1", with: "SUB"
           fill_in "room_number_New_1", with: 232
-          fill_in "room_name_New_1", with: "Caffe"
+          fill_in "room_name_1", with: "Caffe"
         end
         click_button 'Save and Continue'
         expect(page).to have_content("Activity Information")
@@ -51,7 +51,7 @@ RSpec.feature "Events", type: :feature do
           fill_in "location_1", with: "SUB"
           fill_in "address_1", with: "921 S 8th Ave, Pocatello, ID 83209"
           fill_in "room_number_New_1", with: 232
-          fill_in "room_name_New_1", with: "Caffe"
+          fill_in "room_name_1", with: "Caffe"
         end
         click_button 'Save and Continue'
         expect(page).to have_content("Activity Information")
@@ -62,7 +62,7 @@ RSpec.feature "Events", type: :feature do
           fill_in "location_1", with: "SUB"
           fill_in "address_1", with: "921 S 8th Ave, Pocatello, ID 83209"
           fill_in "room_number_New_1", with: 232
-          fill_in "room_name_New_1", with: "Caffe"
+          fill_in "room_name_1", with: "Caffe"
         end
         first(:xpath, "//button[@title='Add A New Room']").click
         within("form") do
@@ -81,7 +81,7 @@ RSpec.feature "Events", type: :feature do
           fill_in "location_1", with: "SUB"
           fill_in "address_1", with: "921 S 8th Ave, Pocatello, ID 83209"
           fill_in "room_number_New_1", with: 232
-          fill_in "room_name_New_1", with: "Caffe"
+          fill_in "room_name_1", with: "Caffe"
         end
         first(:xpath, "//button[@title='Add A New Room']").click
         within("form") do
@@ -96,7 +96,7 @@ RSpec.feature "Events", type: :feature do
         expect(Location.all.count).to eq(3)
         expect(Location.last.rooms.count).to eq(1)
         expect(Location.find(2).rooms.count).to eq(2)
-        expect(Room.all.count).to eq(5)
+        expect(Room.all.count).to eq(6)
       end
     end
 
@@ -109,7 +109,7 @@ RSpec.feature "Events", type: :feature do
           fill_in "location_1", with: "SUB"
           fill_in "address_1", with: "921 S 8th Ave, Pocatello, ID 83209"
           fill_in "room_number_New_1", with: 232
-          fill_in "room_name_New_1", with: "Caffe"
+          fill_in "room_name_1", with: "Caffe"
         end
         click_button "Save and Continue"
         expect(page).to have_content("Name can't be blank")
@@ -122,7 +122,7 @@ RSpec.feature "Events", type: :feature do
           fill_in "location_1", with: "SUB"
           fill_in "address_1", with: "921 S 8th Ave, Pocatello, ID 83209"
           fill_in "room_number_New_1", with: 232
-          fill_in "room_name_New_1", with: "Caffe"
+          fill_in "room_name_1", with: "Caffe"
         end
         click_button "Save and Continue"
         expect(page).to have_content("Description can't be blank")
@@ -135,7 +135,7 @@ RSpec.feature "Events", type: :feature do
           fill_in "location_1", with: "SUB"
           fill_in "address_1", with: "921 S 8th Ave, Pocatello, ID 83209"
           fill_in "room_number_New_1", with: 232
-          fill_in "room_name_New_1", with: "Caffe"
+          fill_in "room_name_1", with: "Caffe"
         end
         click_button "Save and Continue"
         expect(page).to have_content("Start date can't be blank")
@@ -167,45 +167,79 @@ RSpec.feature "Events", type: :feature do
     end
   end
 
-  #context "update occasion" do
-  #  before do
-  #    @coordinator = coordinators(:coordinator_rebeca)
-  #    @occasion = occasions(:one)
-  #
-  #    login_as(@coordinator.user)
-  #    visit edit_event_path(@occasion)
-  #  end
-  #
-  #  scenario "should be successful" do
-  #    within("form") do
-  #      fill_in "occasion[name]", with: "Bengal"
-  #    end
-  #    click_button 'Create'
-  #    expect(page).to have_content("Occasions")
-  #  end
-  #
-  #  scenario "should fail" do
-  #    within('form') do
-  #      fill_in "occasion[name]", with: ""
-  #    end
-  #    click_button "Create"
-  #    expect(page).to have_content "Name can't be blank"
-  #  end
-  #end
-  #
-  #context "destroy occasion" do
-  #  before(:each) do
-  #    @coordinator = Coordinator.create(name: "Sam", user_attributes: {email: "Sam@gmail.com", password: "password"})
-  #    @occasion = @coordinator.occasions.build(name: "Hal", description: "cool", start_date: Time.now)
-  #
-  #    login_as(@coordinator.user)
-  #    visit coordinator_path(@coordinator.id)
-  #  end
-  #  scenario "should be successful" do
-  #    #click_link('Delete', :match => :first)
-  #    find('a', match: :first, text: "Delete").click
-  #    page.driver.browser.switch_to.alert.accept
-  #    expect(page).to have_content("Successfully Deleted Occasion.")
-  #  end
-  #end
+  context "update occasion" do
+   before(:each) do
+     @coordinator = User.find(8)
+     @event = Event.first
+
+     login_as(@coordinator)
+     visit edit_event_path(@event)
+   end
+
+   scenario "should be successful when name is changed" do
+     within("form") do
+       fill_in "name", with: "BengalEventsAgain"
+     end
+     click_button 'Update'
+     expect(page).to have_content("Successfully Updated " + "BengalEventsAgain")
+     expect(Event.first.name).to eq("BengalEventsAgain")
+   end
+
+   scenario "should be successful when description is changed" do
+     within("form") do
+       fill_in "description", with: "Stem Day Will Be Updated"
+     end
+     click_button 'Update'
+     expect(page).to have_content("Successfully Updated " + @event.name)
+     expect(Event.first.description).to eq("Stem Day Will Be Updated")
+   end
+
+   scenario "should be successful when start date is changed" do
+     within("form") do
+       fill_in "start_date", with: "2020-04-05"
+     end
+     click_button 'Update'
+     expect(page).to have_content("Successfully Updated " + @event.name)
+   end
+
+   scenario "should fail without name" do
+     within('form') do
+       fill_in "name", with: ""
+     end
+     click_button "Update"
+     expect(page).to have_content "Name can't be blank"
+   end
+
+   scenario "should fail without description" do
+     within('form') do
+       fill_in "description", with: ""
+     end
+     click_button "Update"
+     expect(page).to have_content "Description can't be blank"
+   end
+
+   scenario "should fail without start_date" do
+     within('form') do
+       fill_in "start_date", with: ""
+     end
+     click_button "Update"
+     expect(page).to have_content "Start date can't be blank"
+   end
+  end
+
+  context "destroy event" do
+   before(:each) do
+     @coordinator = User.find(8)
+     @event = Event.first
+
+     login_as(@coordinator)
+     visit profile_path(@coordinator)
+   end
+
+   scenario "should be successful" do
+     find('a', match: :first, text: "Delete").click
+     page.driver.browser.switch_to.alert.accept
+     expect(page).to have_content("Successfully Deleted Event")
+   end
+  end
 end
