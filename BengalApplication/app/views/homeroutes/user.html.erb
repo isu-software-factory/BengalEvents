@@ -1,15 +1,14 @@
 <div class="container">
-  <% if (@role == "Teacher" || @admin) && @show %>
+  <% if @role == "Teacher" %>
     <%= render :partial => "teachers/show" %>
     <%= render :partial => "registrations/registrations", locals: {role: @role} %>
-  <% elsif @role == "Student" || (@admin && !@show)%>
+  <% elsif @role == "Student" %>
     <div class="row">
       <%= render :partial => "registrations/registrations", locals: {role: @role} %>
       <%= render :partial => "students/show" %>
     </div>
     <%= render :partial => "students/teams" %>
-  <% elsif @role == "Coordinator" || @role == "Admin"%>
+  <% elsif @role == "Coordinator" || @role == "Admin" || @role == "Sponsor"%>
     <%= render :partial => "coordinators/show" %>
-    <%= @role %>
   <% end %>
 </div>

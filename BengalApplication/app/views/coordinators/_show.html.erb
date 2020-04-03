@@ -4,9 +4,11 @@
       <% @events.each do |event| %>
         <div class="bottom-indent-more">
           <h1 class="accordian"><%= event.name %>
-            <%= link_to " Activity", new_activity_path(event_id: event.id), class: "btn button-small glyphicon glyphicon-plus", title: "Create a new activity for event." %>
-            <%= link_to " Edit", edit_event_path(event), class: "btn button-small glyphicon glyphicon-edit" %>
-            <%= link_to "Delete", event_path(event.id), class: "btn btn-danger", data: {method: :delete, confirm: "Are you sure?"} %>
+            <%= link_to "Activity", new_activity_path(event_id: event.id), class: "btn button-small glyphicon glyphicon-plus", title: "Create a new activity for event." %>
+            <% if policy(event).destroy? %>
+              <%= link_to "Edit", edit_event_path(event), class: "btn button-small glyphicon glyphicon-edit" %>
+              <%= link_to "Delete", event_path(event.id), class: "btn btn-danger", data: {method: :delete, confirm: "Are you sure?"} %>
+            <% end %>
             <span class="badge badge-danger">Starts at <%= event.start_date.strftime("%d/%m/%Y") %></span>
           </h1>
 
@@ -28,7 +30,11 @@
                 <td>  <%= activity.name %></td>
                 <td>  <%= activity.description %></td>
                 <td><%= activity.user.first_name %></td>
-                <td><%= link_to "Edit", edit_activity_path(activity), class: "button-small" %> <%= link_to "Delete", activity_path(activity.id), class: "btn btn-danger", data: {method: :delete, confirm: "Are you sure?"} %></td>
+                <td>
+                  <% if policy(activity).destroy? %>
+                    <%= link_to "Edit", edit_activity_path(activity), class: "button-small" %> <%= link_to "Delete", activity_path(activity.id), class: "btn btn-danger", data: {method: :delete, confirm: "Are you sure?"} %>
+                  <% end %>
+                </td>
                 <td><span class="glyphicon glyphicon-menu-down"></span></td>
               </tr>
               <tr>
@@ -75,16 +81,17 @@
       <% end %>
     </div>
 
-    <div class="col-sm-2.1">
-      <div class="card border-dark mb-3" style="max-width: 18rem;">
-        <div class="card-header">Actions</div>
-        <div class="card-body text-dark">
-          <%= link_to " Event", new_event_path, class: "button-small glyphicon glyphicon-plus", title: "Create a new event" %>
-          <%= link_to " Users", all_users_path, class: "button-small glyphicon glyphicon-user", title: "View All Users Profiles" %>
-          <%= link_to " Reports", report_path, class: "button-small glyphicon glyphicon-stats", title: "View Reports" %>
+    <% if policy(Event).new? %>
+      <div class="col-sm-2">
+        <div class="card border-dark mb-3" style="max-width: 18rem;">
+          <div class="card-header">Actions</div>
+          <div class="card-body text-dark">
+            <%= link_to " Event", new_event_path, class: "button-small glyphicon glyphicon-plus", title: "Create a new event" %>
+            <%= link_to " Users", all_users_path, class: "button-small glyphicon glyphicon-user", title: "View All Users Profiles" %>
+          </div>
         </div>
       </div>
-    </div>
+    <% end %>
   </div>
 </div>
 

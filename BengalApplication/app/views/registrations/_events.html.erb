@@ -29,7 +29,7 @@
               <th></th>
             </tr>
             </thead>
-            <% @activities.each do |e| %>
+            <% event.activities.each do |e| %>
               <% if e.iscompetetion && @role == "Team" %>
                 <%= render :partial => "registrations/activities", locals: {e: e, role: @role} %>
               <% elsif !e.iscompetetion && @role == "User" %>

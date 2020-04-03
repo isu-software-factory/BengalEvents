@@ -51,5 +51,44 @@ RSpec.feature "Teams", type: :feature do
       click_button "Invite"
       expect(page).to have_content("no such student exits, random@gmail.com")
     end
+
+    it "should fail due to max capacity reach" do
+      @teacher = User.first
+      @team = Team.create(team_name: "Lions", lead: 2)
+      # register leader
+      @student5 = User.find(2)
+      @team.register_member(@student5)
+
+      @student = User.find(3)
+      @student2 = User.find(4)
+      @student3 = User.find(5)
+      @student4 = User.find(6)
+
+      @team.register_member(@student)
+      @team.register_member(@student2)
+      @team.register_member(@student3)
+      visit "groupings/add/#{@student4.id}/#{@team.id}"
+      expect(Team.find(4).users.count).to eq(4)
+      expect(page).to have_content("Member limit of 4 reached. No more room for new member")
+    end
+  end
+
+  context "drop a member" do
+    before do
+      @student = User.find(4)
+      @team = Team.find(3)
+      @student2 = User.find(5)
+      login_as(@student)
+      visit "teams/#{@team.id}"
+    end
+
+    it "should successfully drop a student" do
+      expect(page).to have_content("Chuck Norris")
+      expect(page).to have_content("Javier Floris")
+      click_button "Drop"
+      page.driver.browser.switch_to.alert.accept
+      expect(page).to have_content("Dropped #{@student2.first_name} #{@student2.last_name} from team.")
+      expect(Team.find(3).users.count).to eq(1)
+    end
   end
 end

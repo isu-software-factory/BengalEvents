@@ -23,6 +23,9 @@ $('document').ready(function () {
     setTimeout(function () {
         $('.alert-success').slideUp();
     }, 3000);
+    $(function(){
+        $('[data-toggle="tooltip"]').tooltip();
+    })
 });
 
 function stickyHeader() {
@@ -39,3 +42,4 @@ function remove_fields(link) {
     $(link).previous("input[type=hidden]").value = "1";
     $(link).up("fields").hide();
 }
+

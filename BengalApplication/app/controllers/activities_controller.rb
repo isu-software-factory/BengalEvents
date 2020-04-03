@@ -1,7 +1,7 @@
 class ActivitiesController < ApplicationController
   before_action :authenticate_user!
   # before_action :set_occasion, only: %i[new create destroy update edit show]
-  before_action :set_event, only: %i[destroy show]
+  before_action :set_event, only: %i[show]
  # after_action :verify_authorized
 
   def new
@@ -10,9 +10,8 @@ class ActivitiesController < ApplicationController
     @event = Event.find(params[:event_id])
     authorize @activity
     @action = "create/" + @event.id.to_s
-    add_breadcrumb 'Home', root_path
-    add_breadcrumb @event.name, @event
-    add_breadcrumb 'Create Event', new_activity_path
+    add_breadcrumb 'Home', profile_path(current_user)
+    add_breadcrumb 'Create Activity', new_activity_path
   end
 
   def create
@@ -35,19 +34,10 @@ class ActivitiesController < ApplicationController
     @sessions = @activity.sessions
     @edit = true
     @action = "update"
-    add_breadcrumb "Home", root_path
-    add_breadcrumb @event.name, event_path(@event)
-    add_breadcrumb @activity.name, activity_path(@activity)
+    add_breadcrumb "Home", profile_path(current_user)
+    add_breadcrumb "Edit " + @activity.name, activity_path(@activity)
   end
 
-  def show
-    authorize @event
-
-    add_breadcrumb "Home", current_user.meta
-    add_breadcrumb @occasion.name, @occasion
-    add_breadcrumb @event.name, occasion_activities_path(@event)
-
-  end
 
   def report
     @users = User.all
@@ -76,11 +66,12 @@ class ActivitiesController < ApplicationController
   end
 
   def destroy
-    authorize @event
-    if @event.destroy
-      redirect_to event_path(@occasion), notice: 'Successfully Deleted Event.'
+    @activity = Activity.find(params[:id])
+    authorize @activity
+    if @activity.destroy
+      redirect_to profile_path(current_user), notice: 'Successfully Deleted Activity.'
     else
-      flash[:error] = 'We were unable to destroy the event.'
+      flash[:error] = 'We were unable to destroy the activity.'
     end
   end
 

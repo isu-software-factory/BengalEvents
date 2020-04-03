@@ -2,7 +2,12 @@ class HomeroutesController < ApplicationController
   def home
     # user signed in then redirect them to their page
     if user_signed_in?
-      redirect_to controller: "events", action: "index", role: "User", id: current_user.id
+      role = current_user.roles.first.role_name
+      if role == "Coordinator" || role == "Sponsor" || role == "Admin"
+        redirect_to profile_path(current_user)
+      else
+        redirect_to controller: "events", action: "index", role: "User", id: current_user.id
+      end
     end
     # if user isn't signed in then show activities for current occasion
     unless Event.first.nil?
@@ -21,7 +26,7 @@ class HomeroutesController < ApplicationController
     if @current_user_role == "Teacher"
       @admin = true
       @students = Teacher.find(current_user.id).users
-    elsif @current_user_role == "Coordinator"
+    elsif @current_user_role == "Coordinator" || @current_user_role == "Admin"
       if @role == "Teacher"
         @admin = true
         @students = Teacher.find(@user.id).users
@@ -43,12 +48,15 @@ class HomeroutesController < ApplicationController
       @random_card = %w[rorange growling-gray bg-dark orange]
     end
 
-    @show = check_user
-    add_breadcrumb "Home", root_path(role: "User", id: @user.id)
-
-    if check_user
-      add_breadcrumb @user.first_name + "'s Profile", profile_path(@user)
+    if @current_user_role == "Coordinator" || @current_user_role == "Admin"
+      add_breadcrumb "Home", profile_path(current_user)
+    else
+      add_breadcrumb "Home", root_path(role: "User", id: @user.id)
+      if check_user
+        add_breadcrumb @user.first_name + "'s Profile", profile_path(@user)
+      end
     end
+
 
   end
 
@@ -97,7 +105,7 @@ class HomeroutesController < ApplicationController
     @sponsors = Role.find_by(role_name: "Sponsor").users
 
     add_breadcrumb "Home", root_path(role: "User", id: current_user.id)
-    add_breadcrumb current_user.first_name  + "'s Profile", profile_path(current_user)
+    add_breadcrumb current_user.first_name + "'s Profile", profile_path(current_user)
     add_breadcrumb "All Users", all_users_path
   end
 
@@ -302,15 +310,29 @@ class HomeroutesController < ApplicationController
     # create sponsor and role
     @user = User.new(user_params)
     @user.roles << Role.find_by(role_name: "Sponsor")
+    result = save_sponsor(@user)
 
-    if @user.save
+    if result[0]
       # sign in sponsor and redirect to students new page
       sign_in @user
-
-      redirect_to controller: "events", action: "show"
+      redirect_to controller: "events", action: "index", role: "User", id: current_user.id
     else
-      render :new
+      flash[:errors] = result[1]
+      redirect_back(fallback_location: new_user_path("Sponsor"))
     end
+  end
+
+  def save_sponsor(user)
+    results = [true,]
+    errors = []
+    @user = user.save
+    if !@user
+      results[0] = false
+      errors += user.errors.full_messages
+    end
+    @user = user
+    results[1] = errors
+    results
   end
 
   def create_user_name(f_name, l_name)

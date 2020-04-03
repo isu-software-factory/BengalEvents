@@ -1,70 +1,72 @@
-<% if @event.errors.any? %>
-  <div id="error_explanation">
-    <h2>Please fix <%= pluralize(@event.errors.count, "error") %> to proceed. </h2>
-    <ul>
-      <% @event.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-    </ul>
-  </div>
+
+<% if flash[:errors] %>
+  <% flash[:errors].each do |e| %>
+    <div class="alert alert-danger">
+      <%= e %>
+    </div>
+  <% end %>
 <% end %>
 
 <div class="container">
   <div class="card mb-3">
     <div class="card-header event-header"><h1>Event Information</h1></div>
     <div class="card-body text-dark">
-      <%= form_tag({controller: "events", action: "create"}, {id: "event-form"}) do %>
+      <%= form_tag(@action, id: "event-form") do %>
         <div class="row">
           <div class="col-lg-4">
-            <%= text_field_tag "name", nil, placeholder: "Event Name", class: "form-control left-indent-more" %>
+            <%= text_field_tag "name", @edit ? @event.name : nil, placeholder: "Event Name", class: "form-control left-indent-more" %>
           </div>
           <div class="col-lg-4">
-            <%= text_area_tag "description", nil, placeholder: "Detailed Description", class: "form-control" %>
+            <%= text_area_tag "description", @edit ? @event.description : nil, placeholder: "Detailed Description", class: "form-control" %>
           </div>
           <div class="col-lg-4">
-            <%= text_field_tag "start_date", nil, placeholder: "Start Date", class: "control-label" %>
+            <%= text_field_tag "start_date", @edit ? @event.start_date : nil, placeholder: "Start Date", class: "control-label" %>
           </div>
         </div>
 
         <hr>
+        <% if !@edit %>
         <div class="row">
           <div class="col-lg-4">
-            <h2 class="left-indent-more">Locations</h2>
-            <!--            <span class="glyphicon glyphicon-info-sign " title=""></span>-->
+            <h2 class="left-indent-more">Locations
+              <span class="glyphicon glyphicon-info-sign small-icon" data-toggle="tooltip" data-placement="top" title="Enter the Locations that the event will be held at. You can add more locations if needed. Inside the locations you add the room numbers that will be available."></span>
+            </h2>
           </div>
         </div>
 
-        <div class="Location">
-          <div class="row">
-            <div class="col-lg-4">
-              <%= text_field_tag "location_1", nil, placeholder: "Location Name", class: "form-control left-indent-more" %>
-            </div>
-            <div class="col-lg-4">
-              <%= text_field_tag "address_1", nil, placeholder: "Address (optional)", class: "form-control" %>
-            </div>
-            <div class="col-lg-4">
-              <button class="button-small glyphicon glyphicon-plus" type="button" title="Add A New Location"></button>
-            </div>
-          </div>
-        </div>
-        <hr>
-        <div class="Room">
-          <div class="row">
-            <div class="col-lg-3 sub-section left-indent-more">
-              <%= text_field_tag "room_number_New_1", nil, placeholder: "Room #", class: "form-control" %>
-            </div>
-            <div class="col-lg-3 sub-section">
-              <%= text_field_tag "room_name_New_1", nil, placeholder: "Room Name (optional)", class: "form-control" %>
-            </div>
-            <div class="col-lg-3 sub-section">
-              <button class="button-small glyphicon glyphicon-plus" type="button" title="Add A New Room"></button>
+
+          <div class="Location">
+            <div class="row">
+              <div class="col-lg-4">
+                <%= text_field_tag "location_1", nil, placeholder: "Location Name", class: "form-control left-indent-more" %>
+              </div>
+              <div class="col-lg-4">
+                <%= text_field_tag "address_1", nil, placeholder: "Address (optional)", class: "form-control" %>
+              </div>
+              <div class="col-lg-4">
+                <button class="button-small glyphicon glyphicon-plus" type="button" title="Add A New Location"></button>
+              </div>
             </div>
           </div>
-        </div>
+          <hr>
+          <div class="Room">
+            <div class="row">
+              <div class="col-lg-3 sub-section left-indent-more">
+                <%= text_field_tag "room_number_New_1", nil, placeholder: "Room #", class: "form-control" %>
+              </div>
+              <div class="col-lg-3 sub-section">
+                <%= text_field_tag "room_name_1", nil, placeholder: "Room Name (optional)", class: "form-control" %>
+              </div>
+              <div class="col-lg-3 sub-section">
+                <button class="button-small glyphicon glyphicon-plus" type="button" title="Add A New Room"></button>
+              </div>
+            </div>
+          </div>
+        <% end %>
 
         <div class="row">
           <div class="col-lg-3 left-indent-more">
-            <%= submit_tag "Save and Continue", class: "button button-small" %>
+            <%= submit_tag @edit ? "Update" : "Save and Continue", class: "button button-small" %>
           </div>
         </div>
       <% end %>

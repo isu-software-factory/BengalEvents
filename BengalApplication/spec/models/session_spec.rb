@@ -25,7 +25,7 @@ RSpec.describe Session, type: :model do
     end
 
     it "should save successfully" do
-      session = @activity.sessions.new(start_time: @start_time, end_time: @end_time, capacity: 5).save
+      session = @activity.sessions.new(start_time: @start_time, end_time: @end_time, capacity: 5, room_id: 1).save
       expect(session).to eq(true)
     end
   end
@@ -56,58 +56,60 @@ RSpec.describe Session, type: :model do
       @student = User.find(3)
       @student2 = User.find(2)
       @student3 = User.find(4)
-      @team = Team.find(2)
+      @team = Team.find(3)
       @team2 = Team.first
       @team3 = Team.last
+      @team4 = Team.create(team_name: "Polar Bears", lead: 2)
+      @team4.register_member(@student2)
     end
 
     context "register_participant method" do
       it "should successfully register a user" do
         success = @session.register_participant(@student)
-        expect(success).to eq(true)
+        expect(success[0]).to eq(true)
       end
 
       it "should not allow a user to register twice" do
         success = @session.register_participant(@student2)
-        expect(success).to eq(false)
+        expect(success[0]).to eq(false)
       end
 
       it "should not allow a user to register if the capacity is zero" do
         @session.register_participant(@student3)
         success = @session.register_participant(@student)
-        expect(success).to eq(false)
+        expect(success[0]).to eq(false)
       end
 
       it "should allow teachers to register" do
         expect(@session.users.include?(@teacher)).to eq(false)
         success = @session.register_participant(@teacher)
-        expect(success).to eq(true)
+        expect(success[0]).to eq(true)
         expect(@session.users.include?(@teacher)).to eq(true)
       end
 
       it "should allow students to register" do
         expect(@session.users.include?(@student3)).to eq(false)
         success = @session.register_participant(@student3)
-        expect(success).to eq(true)
+        expect(success[0]).to eq(true)
         expect(@session.users.include?(@student3)).to eq(true)
       end
 
       it "should allow teams to register" do
         expect(@session2.teams.include?(@team)).to eq(false)
         success = @session2.register_participant(@team)
-        expect(success).to eq(true)
+        expect(success[0]).to eq(true)
         expect(@session2.teams.include?(@team)).to eq(true)
       end
 
       it "should not allow a team to register twice" do
         success = @session2.register_participant(@team2)
-        expect(success).to eq(false)
+        expect(success[0]).to eq(false)
       end
 
       it "should not allow a team to register if the capacity is zero" do
-        @session2.register_participant(@team)
+        @session2.register_participant(@team4)
         success = @session2.register_participant(@team3)
-        expect(success).to eq(false)
+        expect(success[0]).to eq(false)
       end
 
     end

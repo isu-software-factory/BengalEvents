@@ -7,17 +7,12 @@
          <%=link_to " Edit", edit_event_path(@event), class: "btn button-small glyphicon glyphicon-edit" %>
         <%= link_to "Delete", event_path(@event.id), class: "btn btn-danger", data: {method: :delete, confirm: "Are you sure?"} %></h1>
 
-
-
-      <%# if current_user.is_a? Coordinator %>
-
       <div class="alert alert-success" id="flash" role="alert">
         <a href="#" class="close" data-dismiss="alert" aria-label="close"> &#88; </a>
         <h4 class="alert-heading">What is this?</h4>
         <p>- List of the Locations that you can choose from to create an event.</p>
       </div>
-      <%# end %>
-      <%#= render @occasion.locations %>
+
       <hr>
 
       <!-- Start of event Partial-->
@@ -27,8 +22,6 @@
         <h4 class="alert-heading">What is this?</h4>
         <p> - These are the list of activities created under this event.</p>
       </div>
-
-      <%# if current_user.meta.supervisor.events.present? %>
 
       <table class="table">
         <thead class="thead-dark">
@@ -66,12 +59,9 @@
 
         <% end %>
 
-        <%#= render @occasion.events %>
         </tbody>
       </table>
 
-      <%# end %>
-      <!--      End of event Partial-->
     </div>
 
     <div class="col-sm-2">
@@ -87,7 +77,6 @@
         <div class="card-body text-dark">
           <%# if policy(@location).new? %>
           <p class="card-text">Create a Location for the sponsor to choose from for their event.</p>
-          <%#= link_to "Add Location", new_occasion_location_path(@occasion, @location), class: "btn btn-primary" %>
           <hr>
           <%# end %>
           <button class="btn button-small" title="Create A New Event For <%= @event.name %>">

@@ -37,20 +37,25 @@ RSpec.feature "Registrations", type: :feature do
 
   context "teams registering" do
     before(:each) do
-      @student = User.find(2)
+      @student = User.find(3)
+      @student2 = User.find(4)
       @team = Team.find(2)
-      login_as(@student)
-      visit root_path(role: "Team", id: @team.id)
+      @team2 = Team.find(3)
     end
 
     it "should not allow a team to register if the team restriction is not met" do
-      @team.register_member(@student)
+      login_as(@student)
+      visit team_path(@team)
+      click_link "Register For Activities"
       first(".event-collapse").click
       check "register"
       expect(page).to have_content("Your team does not meet the team size restriction")
     end
 
     it "should successfully register a team" do
+      login_as(@student2)
+      visit team_path(@team2)
+      click_link "Register For Activities"
       first(".event-collapse").click
       check "register"
       expect(first(".registered")).to have_content("Registered")
@@ -97,13 +102,14 @@ RSpec.feature "Registrations", type: :feature do
 
   context "Capacity" do
     before(:each) do
-      @student = User.find(3)
-      @team = Team.find(2)
+      @student = User.find(4)
+      @team = Team.find(3)
       login_as(@student)
     end
 
     it "competition activity should decrease capacity per team" do
-      visit "events/index/Team/2"
+      visit team_path(@team)
+      click_link "Register For Activities"
       first(".event-collapse").click()
       expect(first(".capacity_remaining")).to have_content("1")
       # register

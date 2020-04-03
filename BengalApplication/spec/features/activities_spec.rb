@@ -1,6 +1,6 @@
 require 'rails_helper'
 include Warden::Test::Helpers
-RSpec.feature "Events", type: :feature do
+RSpec.feature "Activities", type: :feature do
 
   context "create new event" do
     before(:each) do
@@ -10,7 +10,7 @@ RSpec.feature "Events", type: :feature do
       visit new_activity_path(event_id: 1)
     end
 
-    scenario "should be successful with all inputs entered" do
+    it "should be successful with all inputs entered" do
       within('form') do
         fill_in "name_New_1", with: "Robots in the gym"
         fill_in "description_1", with: "All about robots"
@@ -25,7 +25,7 @@ RSpec.feature "Events", type: :feature do
       expect(page).to have_content("Successfully Created Activity")
     end
 
-    scenario "should be successful with multiple sessions" do
+    it "should be successful with multiple sessions" do
       within('form') do
         fill_in "name_New_1", with: "Robots in the gym"
         fill_in "description_1", with: "All about robots"
@@ -49,7 +49,7 @@ RSpec.feature "Events", type: :feature do
       expect(page).to have_content("Successfully Created Activity")
     end
 
-    scenario "should be successful when using same room checkbox" do
+    it "should be successful when using same room checkbox" do
       within('form') do
         fill_in "name_New_1", with: "Robots in the gym"
         fill_in "description_1", with: "All about robots"
@@ -90,7 +90,7 @@ RSpec.feature "Events", type: :feature do
       expect(page).to have_content("Successfully Created Activity")
     end
 
-    scenario "should be successful when multiple activities" do
+    it "should be successful when multiple activities" do
       within('form') do
         fill_in "name_New_1", with: "Robots in the gym"
         fill_in "description_1", with: "All about robots"
@@ -118,7 +118,7 @@ RSpec.feature "Events", type: :feature do
     end
 
 
-    context "update an event" do
+    context "update an activity" do
       before(:each) do
         @coordinator = User.find(9)
         @event = Event.first
@@ -128,7 +128,7 @@ RSpec.feature "Events", type: :feature do
         visit edit_activity_path(event_id: @event.id, id: @activity.id)
       end
 
-      scenario "should be successful when name is updated" do
+      it "should be successful when name is updated" do
         # fill form
         within('form') do
           fill_in "name_New_1", with: "Droids"
@@ -138,7 +138,7 @@ RSpec.feature "Events", type: :feature do
         expect(page).to have_content("Successfully updated Event.")
       end
 
-      scenario "should be successful when description is updated" do
+      it "should be successful when description is updated" do
         # fill form
         within('form') do
           fill_in "description_1", with: "Program"
@@ -148,7 +148,7 @@ RSpec.feature "Events", type: :feature do
         expect(page).to have_content("Successfully updated Event.")
       end
 
-      scenario "should be successful when iscompetetion is updated" do
+      it "should be successful when iscompetetion is updated" do
         within('form') do
           check "iscompetetion_1"
         end
@@ -157,19 +157,19 @@ RSpec.feature "Events", type: :feature do
         expect(page).to have_content("Successfully updated Event.")
       end
 
-      scenario "should be successful when session time is updated" do
+      it "should be successful when session time is updated" do
         within("form") do
           fill_in "start_time_New_1", with: "10:30"
           fill_in "end_time_1", with: "11:30"
         end
         click_button "Confirm"
-        start_time = Time.new(2020,3,29,10,30,0, "-06:00")
-        end_time = Time.new(2020, 3, 29, 11, 30, 0, "-06:00")
+        start_time = Time.new(2020,3,30,10,30,0, "-06:00")
+        end_time = Time.new(2020, 3, 30, 11, 30, 0, "-06:00")
         expect(Activity.first.sessions.first.start_time).to eq(start_time)
         expect(Activity.first.sessions.first.end_time).to eq(end_time)
       end
 
-      scenario "should be successful when session capacity is updated" do
+      it "should be successful when session capacity is updated" do
         within("form") do
           fill_in "capacity_1", with: "5"
         end
@@ -177,7 +177,7 @@ RSpec.feature "Events", type: :feature do
         expect(Activity.first.sessions.first.capacity).to eq(5)
       end
 
-      scenario "should be successful when session room is updated" do
+      it "should be successful when session room is updated" do
         within("form") do
           select("203 (Ballroom)", from: "room_select_1")
         end
@@ -187,7 +187,7 @@ RSpec.feature "Events", type: :feature do
 
 
       #
-      # scenario "should fail" do
+      # it "should fail" do
       #   # fill form
       #   within('form') do
       #     fill_in "event[name]", with: ""
@@ -210,7 +210,7 @@ RSpec.feature "Events", type: :feature do
     #     visit event_path(@occasion.id)
     #   end
     #
-    #   scenario "should be successful" do
+    #   it "should be successful" do
     #     #click destroy
     #     click_link "Delete"
     #     page.driver.browser.switch_to.alert.accept
