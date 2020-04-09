@@ -51,7 +51,7 @@ resources :events
   post "homeroutes/create" => "homeroutes#create"
   root 'homeroutes#home'
   post 'homeroutes/reset_password/:id' => "homeroutes#reset_password", as: "reset_password"
-  post "delete_user/:id" => "homeroutes#destroy", as: "delete_user"
+  delete "delete_user/:id" => "homeroutes#delete", as: "delete_user"
 # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
 end

@@ -1,3 +1,6 @@
+let sessionCount = 1;
+let activityCount = 1;
+
 $(document).on('ready page:load turbolinks:load', function () {
     getLocations();
     $(".start_time").timepicker();
@@ -30,13 +33,19 @@ $(document).on('ready page:load turbolinks:load', function () {
 
 
 $(document).ready(function () {
-    setTimeout(function() {setRooms($(".col-lg-4").last().children().last().children().last())},200);
+    setTimeout(function () {
+        setRooms($(".col-lg-4").last().children().last().children().last())
+    }, 200);
 
     if (($("#name_New_1").attr("value") != undefined)) {
-        setTimeout(function() {setEditRooms()}, 200);
+        setTimeout(function () {
+            setEditRooms()
+        }, 200);
     }
+    sessionCount = parseInt($("#sessions_count").val());
 });
 
+// When editing activity, will set the rooms for the sessions
 function setEditRooms() {
     let activity = $("#activity_id").val();
     Rails.ajax({
@@ -45,7 +54,7 @@ function setEditRooms() {
         dataType: "json",
         success: function (data) {
             var i;
-            for(i = 0; i < $(".roomselect").length; i++){
+            for (i = 0; i < $(".roomselect").length; i++) {
                 let room = $(".roomselect").get(i);
                 $(room).val(data.results.rooms[i].room_number + " (" + data.results.rooms[i].room_name + ")").change();
             }
@@ -53,13 +62,14 @@ function setEditRooms() {
     })
 }
 
+// disables all room select except the first
 function useSameRoom(e) {
     if ($(e).is(":checked")) {
         $(".roomselect").each(function () {
             if ($(this).parent().parent().parent().children().first().children().last().is($(e).parent())) {
                 if (!($(this).is($(e).parent().parent().next().children(".col-lg-3").first().children().first()))) {     // make sure that the selector is not the first selector
                     $(this).css("pointer-events", "none");
-                }else{
+                } else {
                     $(this).parent().parent().parent().children().children().children(".roomselect").slice(1).val($(this).children("option:selected").val()).change();
                 }
             }
@@ -83,6 +93,10 @@ function setRooms(locations) {
     getRooms(getName(locations), $(locations).parent().parent().parent());
 }
 
+function setNewRoom(locations, selector) {
+    getNewRoom(getName(locations), selector);
+}
+
 function setSlider(e) {
     if ($(e).is(":checked")) {
         // create slider
@@ -101,8 +115,6 @@ function setSlider(e) {
     }
 }
 
-let sessionCount = 1;
-let activityCount = 1;
 
 function removePreviousButton(button) {
     $(button).remove();
@@ -158,7 +170,7 @@ function createSession(New) {
     // add columns to row
     addElementsToRow(col1, col2, col3, col4, col5, row);
 
-    return row
+    return [row, rooms];
 }
 
 
@@ -166,13 +178,13 @@ function createSession(New) {
 function newSession(button) {
 
     sessionCount += 1;
-    let row = createSession();
-
+    let elements = createSession();
+    let row = elements[0];
     // add row to the dom
     addElements(row, button);
 
     // sets the rooms
-    setRooms($(row).parent().prev().children().last().children().last());
+    setNewRoom($(row).parent().prev().children().last().children().last(), elements[1]);
 
     // remove previous button
     removePreviousButton(button);
@@ -244,6 +256,20 @@ function createButton(type, sessionType) {
     return button;
 }
 
+
+// get the rooms for one room select element
+function getNewRoom(location, selector) {
+    Rails.ajax({
+        url: `/get_rooms/${location}`,
+        type: 'GET',
+        dataType: "json",
+        success: function(data){
+            for(index = 0; index < data.results.rooms.length; index++){
+                $(selector).append(createOption(data.results.rooms[index].room_number, data.results.rooms[index].room_name));
+            }
+        }
+    })
+}
 
 // get the rooms for the location
 function getRooms(location, parent) {
@@ -410,26 +436,27 @@ function newActivity() {
     $(row).insertAfter($(hr));
 
     getLocations();
+    // competition slider
     $(tCompetition).click(function () {
         setSlider(this);
     });
-
+    // change in location
     $(tLocation).change(function () {
         getRooms(getName(this), $(this).parent().parent().parent());
     });
 
-    let row2 = createSession("New_");
+    let elements = createSession("New_");
+    let row2 = elements[0];
     let row3 = createSessionLabels();
+
 
     appendElements(container2, row3);
     appendElements(container2, row2);
 
-    // sets the rooms
-    // if (waitForElementToDisplay("#location_select_" + activityCount, 5000)){
-    //     alert("Passed");
-    //     setRooms(tLocation);
-    // }
-    setTimeout(function(){setRooms("#location_select_" + activityCount)}, 200);
+
+    setTimeout(function () {
+        setRooms("#location_select_" + activityCount)
+    }, 200);
 
 }
 
@@ -449,7 +476,7 @@ function createSessionLabels() {
     let lCapacity = createLabel("Capacity");
     let tbx = createInput("checkbox");
     addAttributes(tbx, "same_room" + sessionCount, "");
-    let lTbx = createLabel("Use Same Room");
+    let lTbx = createLabel(" Same room");
 
     // append elements to columns
     appendElements(col1, lTime);

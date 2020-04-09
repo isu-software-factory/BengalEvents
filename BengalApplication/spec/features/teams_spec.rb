@@ -77,6 +77,7 @@ RSpec.feature "Teams", type: :feature do
     before do
       @student = User.find(4)
       @team = Team.find(3)
+      @team2 = Team.first
       @student2 = User.find(5)
       login_as(@student)
       visit "teams/#{@team.id}"
@@ -89,6 +90,15 @@ RSpec.feature "Teams", type: :feature do
       page.driver.browser.switch_to.alert.accept
       expect(page).to have_content("Dropped #{@student2.first_name} #{@student2.last_name} from team.")
       expect(Team.find(3).users.count).to eq(1)
+    end
+
+    it "should be successful if a member wants to leave" do
+      visit "teams/#{@team2.id}"
+      expect(page).to have_content("Tigers")
+      click_button "Leave This Team"
+      page.driver.browser.switch_to.alert.accept
+      expect(page).to have_content("You Have Left Team #{@team2.team_name}")
+      expect(@team2.users.count).to eq(2)
     end
   end
 end

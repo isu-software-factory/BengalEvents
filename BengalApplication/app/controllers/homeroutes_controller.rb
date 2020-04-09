@@ -88,7 +88,7 @@ class HomeroutesController < ApplicationController
     @user = User.find(params[:id])
     authorize @user
     @user.destroy
-    redirect_to all_users_path, notice: "User deleted."
+    redirect_to all_users_path, notice: "Successfully Deleted User"
   end
 
   def reset_password
@@ -108,6 +108,7 @@ class HomeroutesController < ApplicationController
     add_breadcrumb current_user.first_name + "'s Profile", profile_path(current_user)
     add_breadcrumb "All Users", all_users_path
   end
+
 
   private
 

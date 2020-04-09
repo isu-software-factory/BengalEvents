@@ -27,7 +27,7 @@ class GroupingsController < ApplicationController
       redirect_to @team, :notice => "Dropped #{@student.first_name} #{@student.last_name} from team."
     else
       @team.users.delete(@student)
-      redirect_to @student, :notice => "Left team #{@team.name}"
+      redirect_to profile_path(@student), :notice => "You Have Left Team #{@team.team_name}"
     end
   end
 end

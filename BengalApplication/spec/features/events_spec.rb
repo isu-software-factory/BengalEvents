@@ -167,7 +167,7 @@ RSpec.feature "Events", type: :feature do
     end
   end
 
-  context "update occasion" do
+  context "update event" do
    before(:each) do
      @coordinator = User.find(8)
      @event = Event.first
@@ -197,9 +197,10 @@ RSpec.feature "Events", type: :feature do
    scenario "should be successful when start date is changed" do
      within("form") do
        fill_in "start_date", with: "2020-04-05"
+       fill_in "name", with: "BengalEventsAgain"
      end
      click_button 'Update'
-     expect(page).to have_content("Successfully Updated " + @event.name)
+     expect(page).to have_content("Successfully Updated BengalEventsAgain")
    end
 
    scenario "should fail without name" do
@@ -221,6 +222,7 @@ RSpec.feature "Events", type: :feature do
    scenario "should fail without start_date" do
      within('form') do
        fill_in "start_date", with: ""
+       fill_in "name", with: "BengalEventsAgain"
      end
      click_button "Update"
      expect(page).to have_content "Start date can't be blank"

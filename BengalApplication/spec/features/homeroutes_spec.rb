@@ -65,4 +65,18 @@ RSpec.feature "Homeroutes", type: :feature do
       end
     end
   end
+
+  context "all user profiles" do
+    before(:each) do
+      @coordinator = User.find(9)
+      login_as(@coordinator)
+      visit all_users_path
+    end
+
+    scenario "Should successfully delete any user" do
+      first(".btn-danger").click
+      page.driver.browser.switch_to.alert.accept
+      expect(page).to have_content("Successfully Deleted User")
+    end
+  end
 end
