@@ -1,186 +1,12 @@
 {
   "RSpec": {
     "coverage": {
+<<<<<<< HEAD
       "C:/BengalEvents/BengalApplication/spec/features/homeroutes_spec.rb": [
         1,
-        null,
-        1,
-        null,
-        1,
-        1,
-        6,
-        6,
-        6,
-        6,
-        6,
-        null,
-        6,
-        null,
-        null,
-        1,
-        1,
-        null,
-        null,
-        1,
-        null,
-        1,
-        1,
-        1,
-        1,
-        null,
-        1,
-        1,
-        null,
-        null,
-        1,
-        1,
-        1,
-        1,
-        null,
-        1,
-        1,
-        null,
-        null,
-        1,
-        1,
-        1,
-        1,
-        null,
-        1,
-        1,
-        null,
-        null,
-        1,
-        1,
-        1,
-        1,
-        null,
-        1,
-        1,
-        null,
-        null,
-        1,
-        1,
-        1,
-        1,
-        null,
-        1,
-        1,
-        null,
-        null,
-        null,
-        null,
-        1,
-        1,
-        1,
-        1,
-        1,
-        null,
-        null,
-        1,
-        1,
-        1,
-        1,
-        null,
-        null,
-        null
-      ],
-      "C:/BengalEvents/BengalApplication/spec/rails_helper.rb": [
-        null,
-        1,
-        1,
-        1,
-        1,
-        null,
-        1,
-        1,
-        1,
-        1,
-        1,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        1,
-        1,
-        null,
-        0,
-        0,
-        null,
-        1,
-        1,
-        null,
-        null,
-        null,
-        1,
-        7,
-        null,
-        null,
-        1,
-        null,
-        null,
-        7,
-        null,
-        7,
-        null,
-        null,
-        null,
-        0,
-        null,
-        null,
-        null,
-        1,
-        7,
-        null,
-        null,
-        1,
-        7,
-        null,
-        null,
-        1,
-        null,
-        null,
-        null,
-        1,
-        1,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        1,
-        1,
-        null,
-        1,
-        null,
-        null,
-        null,
-        null
-      ],
-      "C:/BengalEvents/BengalApplication/config/environment.rb": [
+=======
+      "C:/Users/Porter/Desktop/RubyMine/Work Projects/BengalEvents/BengalApplication/config/environment.rb": [
+>>>>>>> 8529fef1515cf4a1f684b5fec3edb3a044247b73
         null,
         1,
         null,
@@ -188,13 +14,24 @@
         1,
         null
       ],
-      "C:/BengalEvents/BengalApplication/config/application.rb": [
+      "C:/Users/Porter/Desktop/RubyMine/Work Projects/BengalEvents/BengalApplication/config/application.rb": [
         1,
+<<<<<<< HEAD
+        6,
+        6,
+        6,
+        6,
+        6,
+=======
         null,
         1,
         1,
+>>>>>>> 8529fef1515cf4a1f684b5fec3edb3a044247b73
         null,
+        6,
         null,
+<<<<<<< HEAD
+=======
         1,
         null,
         1,
@@ -212,13 +49,13 @@
         null,
         null
       ],
-      "C:/BengalEvents/BengalApplication/config/boot.rb": [
+      "C:/Users/Porter/Desktop/RubyMine/Work Projects/BengalEvents/BengalApplication/config/boot.rb": [
         1,
         null,
         1,
         1
       ],
-      "C:/BengalEvents/BengalApplication/config/environments/test.rb": [
+      "C:/Users/Porter/Desktop/RubyMine/Work Projects/BengalEvents/BengalApplication/config/environments/test.rb": [
         1,
         null,
         null,
@@ -245,13 +82,50 @@
         null,
         null,
         1,
+>>>>>>> 8529fef1515cf4a1f684b5fec3edb3a044247b73
         null,
         null,
         1,
         null,
         null,
         1,
+<<<<<<< HEAD
         null,
+        1,
+        1,
+        1,
+        1,
+=======
+        null,
+        1,
+        null,
+        null,
+        null,
+>>>>>>> 8529fef1515cf4a1f684b5fec3edb3a044247b73
+        null,
+        null,
+        null,
+        1,
+        1,
+        1,
+        1,
+<<<<<<< HEAD
+        null,
+        1,
+        1,
+        null,
+        null,
+        1,
+        1,
+        1,
+        1,
+        null,
+        1,
+        1,
+=======
+        1,
+        1,
+        1,
         1,
         null,
         null,
@@ -259,9 +133,57 @@
         null,
         null,
         null,
+        null,
+        null,
+        null,
+        null,
+>>>>>>> 8529fef1515cf4a1f684b5fec3edb3a044247b73
+        null,
+        null
+      ],
+      "C:/Users/Porter/Desktop/RubyMine/Work Projects/BengalEvents/BengalApplication/config/initializers/application_controller_renderer.rb": [
+        null,
+<<<<<<< HEAD
         1,
         1,
         1,
+        1,
+=======
+        null,
+        null,
+        null,
+>>>>>>> 8529fef1515cf4a1f684b5fec3edb3a044247b73
+        null,
+        null,
+        null,
+<<<<<<< HEAD
+        1,
+        1,
+        1,
+        1,
+        null,
+        1,
+=======
+        null
+      ],
+      "C:/Users/Porter/Desktop/RubyMine/Work Projects/BengalEvents/BengalApplication/config/initializers/assets.rb": [
+        null,
+        null,
+        null,
+>>>>>>> 8529fef1515cf4a1f684b5fec3edb3a044247b73
+        1,
+        null,
+        null,
+        null,
+        null,
+        1,
+        1,
+        1,
+        1,
+<<<<<<< HEAD
+=======
+        1,
+>>>>>>> 8529fef1515cf4a1f684b5fec3edb3a044247b73
         1,
         1,
         1,
@@ -271,7 +193,9 @@
         null,
         null,
         null,
-        null,
+        null
+      ],
+      "C:/Users/Porter/Desktop/RubyMine/Work Projects/BengalEvents/BengalApplication/config/initializers/backtrace_silencers.rb": [
         null,
         null,
         null,
@@ -280,93 +204,68 @@
         null,
         null
       ],
-      "C:/BengalEvents/BengalApplication/config/initializers/application_controller_renderer.rb": [
+      "C:/Users/Porter/Desktop/RubyMine/Work Projects/BengalEvents/BengalApplication/config/initializers/content_security_policy.rb": [
         null,
         null,
         null,
         null,
         null,
         null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+<<<<<<< HEAD
+        1,
+        7,
+=======
+>>>>>>> 8529fef1515cf4a1f684b5fec3edb3a044247b73
+        null,
+        null,
+        null,
+        null,
+<<<<<<< HEAD
+        7,
+        null,
+        7,
+=======
+        null,
+>>>>>>> 8529fef1515cf4a1f684b5fec3edb3a044247b73
         null,
         null
       ],
-      "C:/BengalEvents/BengalApplication/config/initializers/assets.rb": [
-        null,
-        null,
-        null,
-        1,
-        null,
-        null,
-        null,
-        null,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        null,
-        null,
-        null,
-        null,
-        null
-      ],
-      "C:/BengalEvents/BengalApplication/config/initializers/backtrace_silencers.rb": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-      ],
-      "C:/BengalEvents/BengalApplication/config/initializers/content_security_policy.rb": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-      ],
-      "C:/BengalEvents/BengalApplication/config/initializers/cookies_serializer.rb": [
+      "C:/Users/Porter/Desktop/RubyMine/Work Projects/BengalEvents/BengalApplication/config/initializers/cookies_serializer.rb": [
         null,
         null,
         null,
         null,
         1
       ],
-      "C:/BengalEvents/BengalApplication/config/initializers/customize_error.rb": [
+      "C:/Users/Porter/Desktop/RubyMine/Work Projects/BengalEvents/BengalApplication/config/initializers/customize_error.rb": [
         null,
         1,
+<<<<<<< HEAD
+        7,
+        null,
+        null,
+        1,
+        7,
+=======
         0,
         null
       ],
-      "C:/BengalEvents/BengalApplication/config/initializers/devise.rb": [
+      "C:/Users/Porter/Desktop/RubyMine/Work Projects/BengalEvents/BengalApplication/config/initializers/devise.rb": [
         null,
         null,
+>>>>>>> 8529fef1515cf4a1f684b5fec3edb3a044247b73
         null,
         null,
         1,
@@ -666,13 +565,13 @@
         null,
         null
       ],
-      "C:/BengalEvents/BengalApplication/config/initializers/filter_parameter_logging.rb": [
+      "C:/Users/Porter/Desktop/RubyMine/Work Projects/BengalEvents/BengalApplication/config/initializers/filter_parameter_logging.rb": [
         null,
         null,
         null,
         1
       ],
-      "C:/BengalEvents/BengalApplication/config/initializers/inflections.rb": [
+      "C:/Users/Porter/Desktop/RubyMine/Work Projects/BengalEvents/BengalApplication/config/initializers/inflections.rb": [
         null,
         null,
         null,
@@ -690,13 +589,13 @@
         null,
         null
       ],
-      "C:/BengalEvents/BengalApplication/config/initializers/mime_types.rb": [
+      "C:/Users/Porter/Desktop/RubyMine/Work Projects/BengalEvents/BengalApplication/config/initializers/mime_types.rb": [
         null,
         null,
         null,
         1
       ],
-      "C:/BengalEvents/BengalApplication/config/initializers/wrap_parameters.rb": [
+      "C:/Users/Porter/Desktop/RubyMine/Work Projects/BengalEvents/BengalApplication/config/initializers/wrap_parameters.rb": [
         null,
         null,
         null,
@@ -712,7 +611,7 @@
         null,
         null
       ],
-      "C:/BengalEvents/BengalApplication/config/routes.rb": [
+      "C:/Users/Porter/Desktop/RubyMine/Work Projects/BengalEvents/BengalApplication/config/routes.rb": [
         1,
         1,
         1,
@@ -744,8 +643,6 @@
         1,
         1,
         null,
-        1,
-        1,
         1,
         1,
         1,
@@ -771,7 +668,7 @@
         null,
         null
       ],
-      "C:/BengalEvents/BengalApplication/app/models/user.rb": [
+      "C:/Users/Porter/Desktop/RubyMine/Work Projects/BengalEvents/BengalApplication/app/models/user.rb": [
         null,
         null,
         null,
@@ -848,12 +745,12 @@
         null,
         null
       ],
-      "C:/BengalEvents/BengalApplication/app/models/application_record.rb": [
+      "C:/Users/Porter/Desktop/RubyMine/Work Projects/BengalEvents/BengalApplication/app/models/application_record.rb": [
         1,
         1,
         null
       ],
-      "C:/BengalEvents/BengalApplication/lib/custom_failure.rb": [
+      "C:/Users/Porter/Desktop/RubyMine/Work Projects/BengalEvents/BengalApplication/lib/custom_failure.rb": [
         null,
         1,
         1,
@@ -869,66 +766,63 @@
         null,
         null
       ],
-      "C:/BengalEvents/BengalApplication/app/helpers/activities_helper.rb": [
+      "C:/Users/Porter/Desktop/RubyMine/Work Projects/BengalEvents/BengalApplication/app/helpers/activities_helper.rb": [
         1,
         null
       ],
-      "C:/BengalEvents/BengalApplication/app/helpers/admins_helper.rb": [
+      "C:/Users/Porter/Desktop/RubyMine/Work Projects/BengalEvents/BengalApplication/app/helpers/admins_helper.rb": [
         1,
         null
       ],
-      "C:/BengalEvents/BengalApplication/app/helpers/application_helper.rb": [
+      "C:/Users/Porter/Desktop/RubyMine/Work Projects/BengalEvents/BengalApplication/app/helpers/application_helper.rb": [
         1,
         null
       ],
-      "C:/BengalEvents/BengalApplication/app/helpers/coordinators_helper.rb": [
+      "C:/Users/Porter/Desktop/RubyMine/Work Projects/BengalEvents/BengalApplication/app/helpers/coordinators_helper.rb": [
         1,
         null
       ],
-      "C:/BengalEvents/BengalApplication/app/helpers/events_helper.rb": [
+      "C:/Users/Porter/Desktop/RubyMine/Work Projects/BengalEvents/BengalApplication/app/helpers/events_helper.rb": [
         1,
         null
       ],
-      "C:/BengalEvents/BengalApplication/app/helpers/groupings_helper.rb": [
+      "C:/Users/Porter/Desktop/RubyMine/Work Projects/BengalEvents/BengalApplication/app/helpers/groupings_helper.rb": [
         1,
         null
       ],
-      "C:/BengalEvents/BengalApplication/app/helpers/homeroutes_helper.rb": [
+      "C:/Users/Porter/Desktop/RubyMine/Work Projects/BengalEvents/BengalApplication/app/helpers/homeroutes_helper.rb": [
         1,
         null
       ],
-      "C:/BengalEvents/BengalApplication/app/helpers/locations_helper.rb": [
+      "C:/Users/Porter/Desktop/RubyMine/Work Projects/BengalEvents/BengalApplication/app/helpers/locations_helper.rb": [
         1,
         null
       ],
-      "C:/BengalEvents/BengalApplication/app/helpers/registrations_helper.rb": [
+      "C:/Users/Porter/Desktop/RubyMine/Work Projects/BengalEvents/BengalApplication/app/helpers/registrations_helper.rb": [
         1,
         null
       ],
-      "C:/BengalEvents/BengalApplication/app/helpers/sessions_helper.rb": [
+      "C:/Users/Porter/Desktop/RubyMine/Work Projects/BengalEvents/BengalApplication/app/helpers/sessions_helper.rb": [
         1,
         null
       ],
-      "C:/BengalEvents/BengalApplication/app/helpers/sponsors_helper.rb": [
+      "C:/Users/Porter/Desktop/RubyMine/Work Projects/BengalEvents/BengalApplication/app/helpers/sponsors_helper.rb": [
         1,
         null
       ],
-      "C:/BengalEvents/BengalApplication/app/helpers/students_helper.rb": [
+      "C:/Users/Porter/Desktop/RubyMine/Work Projects/BengalEvents/BengalApplication/app/helpers/students_helper.rb": [
         1,
         null
       ],
-      "C:/BengalEvents/BengalApplication/app/helpers/teachers_helper.rb": [
+      "C:/Users/Porter/Desktop/RubyMine/Work Projects/BengalEvents/BengalApplication/app/helpers/teachers_helper.rb": [
         1,
         null
       ],
-      "C:/BengalEvents/BengalApplication/app/helpers/teams_helper.rb": [
+      "C:/Users/Porter/Desktop/RubyMine/Work Projects/BengalEvents/BengalApplication/app/helpers/teams_helper.rb": [
         1,
         null
       ],
-      "C:/BengalEvents/BengalApplication/app/helpers/time_slots_helper.rb": [
-        1,
-        null
-      ],
+<<<<<<< HEAD
       "C:/BengalEvents/BengalApplication/app/controllers/homeroutes_controller.rb": [
         1,
         1,
@@ -1697,6 +1591,9 @@
         null,
         1,
         1,
+=======
+      "C:/Users/Porter/Desktop/RubyMine/Work Projects/BengalEvents/BengalApplication/app/helpers/time_slots_helper.rb": [
+>>>>>>> 8529fef1515cf4a1f684b5fec3edb3a044247b73
         1,
         null,
         null,
@@ -1704,6 +1601,10 @@
         null
       ]
     },
+<<<<<<< HEAD
     "timestamp": 1586449410
+=======
+    "timestamp": 1585848080
+>>>>>>> 8529fef1515cf4a1f684b5fec3edb3a044247b73
   }
 }

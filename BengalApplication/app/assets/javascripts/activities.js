@@ -499,7 +499,14 @@ function createSessionLabels() {
     return row;
 
 }
-
+/*
+}
+//use date picker to select information for certain dates
+function showDateInformation() {
+    $(#reportDatePicker).click(function () {
+        //change the values shown in tables for the given dates
+})
+*/
 
 // view report page
 

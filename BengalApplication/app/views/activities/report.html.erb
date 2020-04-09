@@ -1,19 +1,74 @@
-<table>
+<div id="reports_page" class="container">
+  <table>
   <thead>
-    <tr>
-      <td>Activity</td>
-      <th>Registered Participants</th>
-      <th>Schools Attending Activity</th>
-    </tr>
-  </thead>
   <tbody>
-    <%@activities.each do |a| %>
+  <%#@activities.each do |a| %>
+  <tr>
+    <%# @events.each do |event| %>
+    <h1>Bengal Stem Day</h1>
+    <h2>View Reports</h2>
+    <table class="table">
+      <thead class="thead-dark">
       <tr>
-        <td><%=a.name %></td>
-<!--        <td><%#=a.users %></td>-->
+        <th scope="col">Activity Type:</th>
+        <th scope="col">Ran By Affiliation:</th>
+        <th scope="col">Total Participants</th>
+        <th scope="col">Sponsored by:</th>
       </tr>
-    <% end %>
-    <tr>
-    </tr>
+      </thead>
+      <%# event.activities.each do |activity| %>
+        <tbody>
+        <tr class="event-collapse">
+          <td>Raspberry pi</td>
+<!--          <td> <%#activity.name %></td>  ran by what affiliation here. The other ones need activity.affiliation, participant number, and sponsor-->
+          <td>ISU CS Department</td>
+          <td>500</td>
+          <td>CostCo</td>
+          <td><span class="glyphicon glyphicon-menu-down"></span></td>
+        </tr>
+        <tr>
+          <td colspan="4">
+            <div class="accordion">
+              <table class="table">
+                <thead>
+                <tr class="session-header">
+                  <th>Info Here</th>
+                  <th>Info Here</th>
+                  <th>Info Here</th>
+                  <th>Info Here</th>
+                  <th>Info Here</th>
+                  <th>Info Here</th>
+                </tr>
+                </thead>
+<!--                <tbody>-->
+                <%# @num = 1 %>
+                <%# activity.sessions.each do |session| %>
+<!--                <tr>-->
+<!--                  <td><%# @num%>-->
+
+
+<!--                  </td>-->
+<!--                </tr>-->
+                <%# end %>
+<!--                </tbody>-->
+              </table>
+            </div>
+          </td>
+
+        </tr>
+        </tbody>
+      <div class="col-sm-2.1">
+        <div class="card border-dark mb-3" style="max-width: 18rem;">
+          <div class="card-header">Select Date</div>
+          <div id="start_date" class="datepicker">
+          </div>
+        </div>
+      </div>
+    </table>
+
+  </tr>
   </tbody>
+  <%#end %>
 </table>
+<%#end %>
+</div>
