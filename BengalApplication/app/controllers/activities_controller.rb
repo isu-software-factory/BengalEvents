@@ -235,7 +235,9 @@ def create_session(start_time, room, capacity, activity, end_time)
   errors = []
   room_num = room.split(" (")[0].to_i
   new_session = Session.new(start_time: start_time, capacity: capacity, activity_id: activity.id, end_time: end_time, room_id: Room.find_by(room_number: room_num).id)
-  unless new_session.save
+  if new_session.save
+    new_session.waitlist = Waitlist.create()
+  else
     errors += new_session.errors.full_messages
   end
   errors

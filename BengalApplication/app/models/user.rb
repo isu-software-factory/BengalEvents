@@ -27,6 +27,7 @@ class User < ApplicationRecord
   has_many :roles, through: :assignments
   has_one :teacher
   belongs_to :teacher, optional: true
+  has_one :waitlist
 
 
   attr_accessor :login

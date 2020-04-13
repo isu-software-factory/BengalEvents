@@ -42,7 +42,6 @@ User.create!([{
                   password: "password",
                   user_name: "Strong25Fast",
                   teacher_id: 1
-                  #waitlist_id: 1
               }, {
                   first_name: "Javier",
                   last_name: "Floris",
@@ -309,10 +308,10 @@ TeamRegistration.create!([{
                           },
                          ])
 
-#Waitlist.create!([{
-#                      session_id: 1
-#                  },{
-#                      session_id: 2
-#                  }])
+Waitlist.create!([{
+                     session_id: 4
+                 },{
+                     session_id: 2
+                 }])
 
 p "Done"

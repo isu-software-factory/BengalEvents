@@ -53,6 +53,7 @@ resources :events
   post 'homeroutes/reset_password/:id' => "homeroutes#reset_password", as: "reset_password"
   delete "delete_user/:id" => "homeroutes#delete", as: "delete_user"
   get "activity/spreadsheet/:id.xls" => "activities#spread_sheet", as: "activity_spread_sheet"
+  
 # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
 end
