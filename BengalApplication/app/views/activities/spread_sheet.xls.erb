@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+          xmlns:x="urn:schemas-microsoft-com:office:excel"
+          xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+          xmlns:html="https://www.w3.org/TR/REC-html40/">
+  <Worksheet ss:Name="Sheet1">
+    <Table>
+      <ss:Column ss:Index="2" ss:Width="110"/>
+      <ss:Column ss:Index="1" ss:Width="100"/>
+      <Row>
+        <Cell><Data ss:Type="String">Attendance</Data></Cell>
+        <Cell><Data ss:Type="String">Participant Name</Data></Cell>
+        <Cell><Data ss:Type="String">Score</Data></Cell>
+      </Row>
+      <%@session.users.each do |user| %>
+        <Row>
+          <Cell><Data ss:Type="String"></Data></Cell>
+          <Cell><Data ss:Type="String"><%=user.first_name + " " + user.last_name %></Data></Cell>
+          <Cell><Data ss:Type="String"></Data></Cell>
+        </Row>
+      <% end %>
+    </Table>
+  </Worksheet>
+</Workbook>

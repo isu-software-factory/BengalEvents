@@ -3,7 +3,6 @@ class ActivitiesController < ApplicationController
   # before_action :set_occasion, only: %i[new create destroy update edit show]
   before_action :set_event, only: %i[show]
  # after_action :verify_authorized
-
   def new
     @activity = Activity.new
     @sessions = []
@@ -72,6 +71,23 @@ class ActivitiesController < ApplicationController
     else
       flash[:error] = 'We were unable to destroy the activity.'
     end
+  end
+
+  def spread_sheet
+    @session = Session.find(params[:id])
+    respond_to do |format|
+      format.html
+      format.xls
+    end
+    # workbook = RubyXL::Workbook.new
+    # worksheet = workbook.add_worksheet("Sheet1")
+    # worksheet.add_cell(0,0, "")
+    # worksheet.add_cell(0,1, "Participant Name" )
+    # worksheet.add_cell(0,2, "Score")
+    # send_data(workbook.stream.read,
+    #           filename: "activityworkbook.xlsx",
+    #           disposition: "attachment",
+    #           type: "application/excel")
   end
 
   def get_session_rooms
