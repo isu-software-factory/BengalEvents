@@ -23,10 +23,16 @@
           <tr class="events">
             <td><%= s.start_time.strftime("%l:%M %p") %> -  <%= s.end_time.strftime("%l:%M %p") %></td>
             <% if @role == "Team" %>
-              <td><%=e.max_team_size %></td>
+              <td><%= e.max_team_size %></td>
             <% end %>
             <td class="capacity_remaining"><%= s.capacity_remaining %></td>
-            <td class="registered"><%= @user.sessions.include?(s) ? "Registered" : check_box_tag("register", value = s.id, false, title: "Register for activity", role: role, user_id: @user.id) %> <%=s.capacity_remaining == 0 ? link_to "Add To Waitlist",  %></td>
+            <td class="registered">
+              <% if s.capacity_remaining == 0 && !(s.users.include?(@user)) %>
+                <%= s.waitlist.users.include?(@user) ? "On Wait List" : link_to("Add To Waitlist", waitlist_path(@user.id, s.id)) %>
+              <% else %>
+                <%= @user.sessions.include?(s) ? "Registered" : check_box_tag("register", value = s.id, false, title: "Register for activity", role: role, user_id: @user.id) %>
+              <% end %>
+            </td>
             <td><%= @user.sessions.include?(s) ? content_tag(:button, "", class: ["button-small", "glyphicon", "glyphicon-remove", "left-indent", "remove-button"], title: "Unregister for activity", user_id: @user.id, session_id: s.id, role: role) : nil %></td>
           </tr>
         <% end %>

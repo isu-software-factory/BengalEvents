@@ -78,8 +78,7 @@ $(document).on('ready page:load turbolinks:load', function () {
             dataType: "json",
             success: function (data) {
                 // change capacity
-                let capacity = parseInt($(button).parent().prev().prev().text()) + 1;
-                $(button).parent().prev().prev().text(capacity.toString());
+                $(button).parent().prev().prev().text(data.data.capacity.toString());
 
                 // add checkbox and remove button
                 parent = $(button).parent();

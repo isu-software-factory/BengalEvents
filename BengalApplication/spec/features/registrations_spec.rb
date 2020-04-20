@@ -135,14 +135,20 @@ RSpec.feature "Registrations", type: :feature do
       @student2 = User.find(4)
       @session = Session.find(4)
       @session.register_participant(@student)
+      @session.waitlist.users << @student2
       login_as(@student)
       visit root_path(role: "User", id: @student.id)
     end
     scenario "user drops session should successfully register user in wait list" do
-      first(".event-collapse").click
-      first(".remove-button").click
-      expect(@student2.sessions.include?(@session)).to eq(true)
-
+      expect(Session.find(4).waitlist.users.include?(@student2)).to eq(true)
+      tbl = all(".event-collapse").last
+      tbl.click
+      expect(page).to have_content("0")
+      expect(page).to have_content("8")
+      btn = all(".remove-button").last
+      btn.click
+      expect(Session.find(4).users.include?(@student2)).to eq(true)
+      expect(Session.find(4).waitlist.users.include?(@student2)).to eq(false)
     end
   end
 

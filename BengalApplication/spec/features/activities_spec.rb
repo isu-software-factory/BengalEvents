@@ -194,6 +194,7 @@ RSpec.feature "Activities", type: :feature do
         fill_in "end_time_6", with: "8:30"
         fill_in "capacity_6", with: "3"
       end
+      sleep 2
       click_button "Confirm"
       expect(page).to have_content("Successfully Updated Activity.")
       expect(Activity.first.sessions.count).to eq(3)
@@ -209,10 +210,62 @@ RSpec.feature "Activities", type: :feature do
       visit profile_path(@coordinator)
     end
 
-    scenario"should be successful" do
+    scenario "should be successful" do
       find(".table").first(".btn-danger").click
       page.driver.browser.switch_to.alert.accept
       expect(page).to have_content "Successfully Deleted Activity."
+    end
+  end
+
+  context "download spreadsheets" do
+    before(:each) do
+      DOWNLOAD_PATH = Rails.root.join("tmp/downloads").to_s
+
+
+      Capybara.register_driver :selenium do |app|
+        options = Selenium::WebDriver::Chrome::Options.new
+
+        options.add_argument('--headless')
+        options.add_argument('--no-sandbox')
+        options.add_argument('--disable-gpu')
+        options.add_argument('--disable-popup-blocking')
+        options.add_argument('--window-size=1366,768')
+
+        options.add_preference(:download, directory_upgrade: true,
+                               prompt_for_download: false,
+                               default_directory:
+                                   DOWNLOAD_PATH)
+
+        options.add_preference(:browser, set_download_behavior: {behavior: 'allow'})
+
+        driver = Capybara::Selenium::Driver.new(app, browser: :chrome, options: options)
+
+        bridge = driver.browser.send(:bridge)
+
+        path = '/session/:session_id/chromium/send_command'
+        path[':session_id'] = bridge.session_id
+
+        bridge.http.call(:post, path, cmd: 'Page.setDownloadBehavior',
+                         params: {
+                             behavior: 'allow',
+                             downloadPath: DOWNLOAD_PATH
+                         })
+
+        driver
+      end
+
+      @coordinator = User.find(9)
+      login_as(@coordinator)
+      visit profile_path(@coordinator)
+    end
+
+    it "should be successful" do
+      first(".event-collapse").click
+      first(:xpath, ".//a[@title='Download activity spread sheet']").click
+      # page.response.headers["Content-Disposition"].should include("filename=\"#{Activity.first.name}\"")
+      sleep 10
+      full_path = DOWNLOAD_PATH + "/Robotics.xlsx"
+      expect(File.exist?(full_path)).to eq(true)
     end
   end
 end

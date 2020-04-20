@@ -2,10 +2,6 @@
 
 // printing page
 $(document).on('ready page:load turbolinks:load', function () {
-    var element = document.getElementById("student-schedule");
-    if (element != null) {
-        print(this);
-    }
 
     // new student page
     // assign function to all minus buttons
@@ -46,13 +42,13 @@ $(document).on('ready page:load turbolinks:load', function () {
 });
 
 
-// new password
-function displayNewPassword(){
-    let password = prompt("New Password ");
-    return password;
+
+// print the page
+function print_this(){
+    $(".navigation").remove();
+    $(".menu").remove();
+    print(this)
 }
-
-
 
 // new students page
 function addNewStudent() {

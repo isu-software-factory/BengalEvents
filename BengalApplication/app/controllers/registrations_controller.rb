@@ -109,7 +109,7 @@ class RegistrationsController < ApplicationController
 
   def drop_activity
     drop_user
-    render json: {data: {message: "Successfully Unregistered"}}
+    render json: {data: {message: "Successfully Unregistered", capacity: Session.find(params[:session_id]).capacity_remaining}}
   end
 
   def registers

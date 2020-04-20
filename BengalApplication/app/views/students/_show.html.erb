@@ -25,7 +25,7 @@
         </button>
       </div>
       <button class="btn button-small" title="Print My Schedule">
-<!--        <span class="glyphicon glyphicon-print" aria-hidden="true"> </span><%#= link_to "  Print", {controller: "students", action: "print_schedule", id: @student.id}, target: :_blank %>-->
+        <span class="glyphicon glyphicon-print" aria-hidden="true"> </span><%= link_to "  Print", schedule_path(@user.id), target: :_blank %>
       </button>
     </div>
   </div>

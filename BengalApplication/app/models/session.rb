@@ -88,13 +88,12 @@ class Session < ApplicationRecord
     if self.capacity_remaining > 0
       if self.waitlist.users.count > 0
         # get first person on wait_list
-        @participant = self.waitlist.participants[0]
-
+        @participant = self.waitlist.users[0]
         # register participant and send email
         self.register_participant(@participant)
 
         # remove participant from waitlist
-        self.waitlist.participants.delete(@participant)
+        self.waitlist.users.delete(@participant)
       end
     end
   end

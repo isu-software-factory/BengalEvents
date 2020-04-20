@@ -268,10 +268,10 @@ Grouping.create!([{
                   }, {
                       team_id: 2,
                       user_id: 5
-                  },{
+                  }, {
                       team_id: 2,
                       user_id: 2
-                  },{
+                  }, {
                       team_id: 3,
                       user_id: 5
                   }, {
@@ -309,9 +309,15 @@ TeamRegistration.create!([{
                          ])
 
 Waitlist.create!([{
-                     session_id: 4
-                 },{
-                     session_id: 2
-                 }])
+                      session_id: 4
+                  }, {
+                      session_id: 2
+                  }, {
+                      session_id: 1
+                  }, {
+                      session_id: 3
+                  }, {
+                      session_id: 5
+                  }])
 
 p "Done"
