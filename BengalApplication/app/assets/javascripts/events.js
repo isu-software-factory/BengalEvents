@@ -330,3 +330,6 @@ function removePreviousButton(button) {
     if (button != null)
         button.remove();
 }
+$("#reports_start_date").datepicker({
+    dateFormat: "yy-mm-dd"
+});

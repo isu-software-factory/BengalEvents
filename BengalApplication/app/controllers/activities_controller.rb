@@ -41,6 +41,7 @@ class ActivitiesController < ApplicationController
 
   def report
     @users = User.all
+    add_breadcrumb "Home", profile_path(current_user)
     @teachers = Teacher.all
     @activities = Activity.all
   end
