@@ -27,6 +27,7 @@
               <div class="dropdown-menu menu-container dropdown-menu-left">
                 <%=link_to "Register For Student", {controller: "events", action: "index", id: s.id, role: "User"}, class: "dropdown-item", title: "Register in place of the student" %>
                 <%=link_to "Request New Password", root_path("User", 1), user: s.id, title: "Request a new password for student", class: "dropdown-item reset-password", remote: true %>
+                <%=link_to "Print Schedule", schedule_path(s.id), title: "Print Student Schedule", class: "dropdown-item", target: :blank %>
               </div>
             </div>
           </th>
@@ -56,7 +57,7 @@
           </div>
           <div class="indent-bellow">
             <button class="btn button-small" title="View My Student's Registrations">
-              <!--              <span class="fas fa-eye"></span><%#=link_to " Class Registrations", controller: "teachers", action: "class_registrations", id: @user.id%>-->
+                            <span class="glyphicon glyphicon-print"></span><%=link_to " Print Class Registrations", class_registrations_path(@user.id), target: :blank%>
             </button>
           </div>
         </div>

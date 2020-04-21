@@ -1,0 +1,31 @@
+<script>print_this()</script>
+<div class="container">
+  <div class="col-lg-12">
+    <h2>Registration Details</h2>
+    <% if @student.sessions.count > 0 %>
+      <table class="table">
+        <thead class="thead-dark">
+        <tr>
+          <th scope="col">Name</th>
+          <th scope="col">Description</th>
+          <th scope="col">Location</th>
+          <th scope="col">Start Time</th>
+          <th scope="col">End Time</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <% @student.sessions.each do |s| %>
+          <tr>
+            <th scope="row"><%= s.activity.name %></th>
+            <td><%= s.activity.description %></td>
+            <td><%= s.room.location.location_name %></td>
+            <td><%= s.start_time.strftime("%H:%M %p") %></td>
+            <td><%= s.end_time.strftime("%H:%M %p") %></td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+    <% end %>
+  </div>
+</div>

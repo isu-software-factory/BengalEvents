@@ -54,8 +54,8 @@ class Session < ApplicationRecord
     success = [false]
     if self.teams.include?(team)
       self.teams << team
-      success = [false,"Your team is already registered for this event"]
-    elsif (self.activity.max_team_size < team.users.count || self.activity.max_team_size < team.users.count )
+      success = [false, "Your team is already registered for this event"]
+    elsif (self.activity.max_team_size < team.users.count || self.activity.max_team_size < team.users.count)
       success = [false, "Your team does not meet the team size restriction"]
     else
       self.teams << team
@@ -83,22 +83,20 @@ class Session < ApplicationRecord
 
 
   ## sends an email to a participant and automatically registers student for event
-  #  def wait_list_check
-  #    # checks to see if the even has a spot open and if there is anyone on the wait list
-  #    if self.capacity_remaining > 0
-  #      if self.waitlist.participants.count > 0
-  #        # get first person on wait_list
-  #        @participant = self.waitlist.participants[0]
-  #
-  #        # register participant and send email
-  #        self.register_participant(@participant)
-  #        UserMailer.notice(@participant, self).deliver_now
-  #
-  #        # remove participant from waitlist
-  #        self.waitlist.participants.delete(@participant)
-  #      end
-  #    end
-  #  end
+  def wait_list_check
+    # checks to see if the session has a spot open and if there is, register the first person on the waitlist
+    if self.capacity_remaining > 0
+      if self.waitlist.users.count > 0
+        # get first person on wait_list
+        @participant = self.waitlist.users[0]
+        # register participant and send email
+        self.register_participant(@participant)
+
+        # remove participant from waitlist
+        self.waitlist.users.delete(@participant)
+      end
+    end
+  end
 
 
   # make ahead email will be sent to all registered participant

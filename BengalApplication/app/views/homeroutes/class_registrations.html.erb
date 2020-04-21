@@ -1,0 +1,37 @@
+<div class="container">
+  <div class="col-lg-12">
+<script>print_this()</script>
+<%@students.each do |s| %>
+  <div class="student-name"><h3><%=s.first_name + " " + s.last_name %></h3></div>
+  <%if s.sessions.count > 0 %>
+    <div class="increase-bottom-margin">
+  <table class="table increase-bottom-margin">
+    <thead class="thead-dark">
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Description</th>
+      <th scope="col">Location</th>
+      <th scope="col">Start Time</th>
+      <th scope="col">End Time</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <% s.sessions.each do |e| %>
+      <tr>
+        <th scope="row"><%= e.activity.name %></th>
+        <td><%= e.activity.description %></td>
+        <td><%= e.room.location.location_name + ": " + e.room.room_number + " " + e.room.room_name %></td>
+        <td><%= e.start_time.strftime("%H:%M %p") %></td>
+        <td><%= e.end_time.strftime("%H:%M %p") %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+    </div>
+    <%else %>
+    <div class=" increase-bottom-margin">This student has not registered for events yet.</div>
+  <%end %>
+<%end %>
+  </div>
+</div>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_23_190949) do
+ActiveRecord::Schema.define(version: 2020_04_13_231353) do
 
   create_table "activities", force: :cascade do |t|
     t.string "name"
@@ -143,6 +143,8 @@ ActiveRecord::Schema.define(version: 2020_03_23_190949) do
   create_table "waitlists", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "session_id"
+    t.index ["session_id"], name: "index_waitlists_on_session_id"
   end
 
 end

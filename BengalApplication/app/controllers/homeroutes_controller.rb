@@ -88,7 +88,7 @@ class HomeroutesController < ApplicationController
     @user = User.find(params[:id])
     authorize @user
     @user.destroy
-    redirect_to all_users_path, notice: "User deleted."
+    redirect_to all_users_path, notice: "Successfully Deleted User"
   end
 
   def reset_password
@@ -107,6 +107,21 @@ class HomeroutesController < ApplicationController
     add_breadcrumb "Home", root_path(role: "User", id: current_user.id)
     add_breadcrumb current_user.first_name + "'s Profile", profile_path(current_user)
     add_breadcrumb "All Users", all_users_path
+  end
+
+  def class_registrations
+    @teacher = Teacher.find_by(user_id: User.find(params[:id]))
+    @students = @teacher.users
+    add_breadcrumb "Home", root_path(role: "User", id: current_user.id)
+    add_breadcrumb current_user.first_name + "'s Profile", profile_path(current_user)
+    add_breadcrumb "Class Registrations", class_registrations_path(current_user.id)
+  end
+
+  def schedule
+    @student = User.find(params[:id])
+    add_breadcrumb "Home", root_path(role: "User", id: current_user.id)
+    add_breadcrumb current_user.first_name + "'s Profile", profile_path(current_user)
+    add_breadcrumb current_user.first_name + "'s Schedule", schedule_path(@student.id)
   end
 
   private

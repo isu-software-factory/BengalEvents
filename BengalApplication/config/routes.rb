@@ -51,7 +51,11 @@ resources :events
   post "homeroutes/create" => "homeroutes#create"
   root 'homeroutes#home'
   post 'homeroutes/reset_password/:id' => "homeroutes#reset_password", as: "reset_password"
-  post "delete_user/:id" => "homeroutes#destroy", as: "delete_user"
+  delete "delete_user/:id" => "homeroutes#delete", as: "delete_user"
+  get "activity/spreadsheet/:id.xls" => "activities#spread_sheet", as: "activity_spread_sheet"
+  get "waitlist/:id/:session_id" => "activities#waitlist", as: "waitlist"
+  get "class/registrations/:id" => "homeroutes#class_registrations", as: "class_registrations"
+  get "schedule/:id" => "homeroutes#schedule", as: "schedule"
 # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
 end

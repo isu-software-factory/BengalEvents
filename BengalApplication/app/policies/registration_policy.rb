@@ -2,7 +2,8 @@ class RegistrationPolicy < ApplicationPolicy
 
   def register?
     # only teachers, students, and teams can register
-    if user.meta_type == "Student"
+    role = user.roles.first.role_name
+    if role == "Student"
       record.member_type == "Student" || record.member_type == "Team"
     else
       record.member_type == "Teacher"

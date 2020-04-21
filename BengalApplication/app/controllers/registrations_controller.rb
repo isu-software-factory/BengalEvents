@@ -102,15 +102,14 @@ class RegistrationsController < ApplicationController
   def drop
     #authorize @participant, policy_class: RegistrationPolicy
     drop_user
-    # when participant is drop check waitlist
-    #@event_detail.wait_list_check
+
     @user = get_participant
     params[:role] == "Team" ? (redirect_to team_path(@user)) : (redirect_to profile_path(@user))
   end
 
   def drop_activity
     drop_user
-    render json: {data: {message: "Successfully Unregistered"}}
+    render json: {data: {message: "Successfully Unregistered", capacity: Session.find(params[:session_id]).capacity_remaining}}
   end
 
   def registers
@@ -156,5 +155,7 @@ class RegistrationsController < ApplicationController
     else
       @session.users.delete(@user)
     end
+    # check the wait list
+    @session.wait_list_check
   end
 end

@@ -78,9 +78,12 @@ gem 'pundit'
 gem 'hirb'
 gem 'simplecov', require: false, group: :test
 gem 'rails-controller-testing'
+# jquery
 gem 'jquery-ui-rails'
 gem 'jquery-rails'
+# breadcrumbs
 gem 'breadcrumbs_on_rails'
+
 gem 'validates_overlap'
 # icons
 gem 'font-awesome-sass', "~> 5.11.2"
@@ -90,3 +93,5 @@ gem 'os'
 
 gem 'bootstrap-sass'
 gem 'rubocop', require: false
+
+gem 'rubyXL'

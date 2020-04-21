@@ -124,5 +124,30 @@ RSpec.describe Session, type: :model do
         expect(@session.capacity_remaining).to eq(1)
       end
     end
+
+    context "check_wait_list method" do
+      it "should successfully add the first person on wait list to session" do
+          @session.register_participant(@student)
+          @session.waitlist.users << @student3
+          @session.users.delete(@student)
+          @session.wait_list_check
+          expect(@session.users.include?(@student3)).to eq(true)
+      end
+
+      it "should not work if there are no users on the waitlist" do
+        @session.register_participant(@student)
+        @session.users.delete(@student)
+        @session.wait_list_check
+        expect(@session.users.include?(@student3)).to eq(false)
+      end
+
+      it "should not work if the capacity remaining is 0" do
+        @session.register_participant(@student)
+        expect(@session.capacity_remaining).to eq(0)
+        @session.waitlist.users << @student3
+        @session.wait_list_check
+        expect(@session.users.include?(@student3)).to eq(false)
+      end
+    end
   end
 end

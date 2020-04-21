@@ -2,7 +2,9 @@ class ActivitiesController < ApplicationController
   before_action :authenticate_user!
   # before_action :set_occasion, only: %i[new create destroy update edit show]
   before_action :set_event, only: %i[show]
- # after_action :verify_authorized
+  # after_action :verify_authorized
+  require 'rubyXL/convenience_methods/worksheet'
+  require 'rubyXL/convenience_methods/cell'
 
   def new
     @activity = Activity.new
@@ -19,7 +21,7 @@ class ActivitiesController < ApplicationController
     errors = create_activities(@event)
     if errors.length == 0
       flash[:notice] = "Successfully Created Activity"
-      redirect_to @event
+      redirect_to profile_path(current_user)
     else
       flash[:errors] = errors
       redirect_back(fallback_location: new_activity_path)
@@ -51,15 +53,14 @@ class ActivitiesController < ApplicationController
     @activity = Activity.find(params[:id])
     @event = @activity.event
 
+    # delete sessions
+    delete_sessions(@activity)
+
     # update sessions
-    index = 1
-    @activity.sessions.each do |session|
-      update_sessions(session, index)
-      index += 1
-    end
+    update_sessions(@activity)
 
     if @activity.update(name: params[:name_New_1], description: params[:description_1], iscompetetion: params[:iscompetetion_1], ismakeahead: params[:ismakeahead_1])
-      redirect_to @event, notice: 'Successfully updated Event.'
+      redirect_to profile_path(current_user), notice: 'Successfully Updated Activity.'
     else
       flash[:errors] = @activity.errors.full_messages
       redirect_back(fallback_location: edit_activity_path(@activity))
@@ -74,6 +75,41 @@ class ActivitiesController < ApplicationController
     else
       flash[:error] = 'We were unable to destroy the activity.'
     end
+  end
+
+  def waitlist
+    @user = User.find(params[:id])
+    @session = Session.find(params[:session_id])
+    @session.waitlist.users << @user
+    redirect_back(fallback_location: root_path(role: "User", id: @user.id))
+  end
+
+  def spread_sheet
+    @session = Session.find(params[:id])
+    # create workbook
+    workbook = RubyXL::Workbook.new
+    worksheet = workbook[0]
+    # add headers
+    worksheet.add_cell(0, 0, "Attendance")
+    worksheet.add_cell(0, 1, "Participant Name")
+    worksheet.add_cell(0, 2, "Score")
+
+    worksheet.change_column_width(0, 15)
+    worksheet.change_column_width(1, 20)
+    # cell coordinates
+    x = 1
+    y = 1
+    # fill cells with data
+    @session.users.each do |u|
+      worksheet.add_cell(y, x, u.first_name + " " + u.last_name)
+      y += 1
+    end
+    # download
+    send_data(workbook.stream.string,
+              disposition: "attachment",
+              type: "application/excel",
+              filename: @session.activity.name + ".xlsx"
+    )
   end
 
   def get_session_rooms
@@ -122,7 +158,6 @@ def get_keys(name)
 end
 
 def get_param_with_index(name, index)
-
   params.each do |key, value|
     if key.start_with?(name) && key.ends_with?(index.to_s)
       return value
@@ -130,10 +165,38 @@ def get_param_with_index(name, index)
   end
 end
 
-def update_sessions(session, index)
-  room_num = get_param_with_index("room_select", index).split(" (")[0].to_i
-  session.update(start_time: get_param_with_index("start_time", index), end_time: get_param_with_index("end_time", index), capacity: get_param_with_index("capacity", index),  room_id: Room.find_by(room_number: room_num).id)
+# get ids from keys with only one underscore
+def get_ids(name)
+  ids = []
+  params.each do |key, value|
+    if key.start_with?(name)
+      ids << key.split("_")[1].to_i
+    end
+  end
+  ids
+end
 
+def update_sessions(activity)
+  ids = get_keys("end_time")
+  ids.each do |id|
+    id = id.split("end_time_")[1].to_i
+    if activity.has_session(id.to_i)
+      room_num = get_param_with_index("room_select", id).split(" (")[0].to_i
+      Session.find(id).update(start_time: get_param_with_index("start_time", id), end_time: get_param_with_index("end_time", id), capacity: get_param_with_index("capacity", id), room_id: Room.find_by(room_number: room_num).id)
+    else
+      create_session(get_param_with_index("start_time", id), get_param_with_index("room_select", id), get_param_with_index("capacity", id), activity, get_param_with_index("end_time", id))
+    end
+  end
+end
+
+def delete_sessions(activity)
+  ids = get_ids("capacity")
+  activity.sessions.each do |s|
+    # remove session
+    unless ids.include?(s.id)
+      s.destroy
+    end
+  end
 end
 
 def create_activities(event)
@@ -193,7 +256,9 @@ def create_session(start_time, room, capacity, activity, end_time)
   errors = []
   room_num = room.split(" (")[0].to_i
   new_session = Session.new(start_time: start_time, capacity: capacity, activity_id: activity.id, end_time: end_time, room_id: Room.find_by(room_number: room_num).id)
-  unless new_session.save
+  if new_session.save
+    new_session.waitlist = Waitlist.create()
+  else
     errors += new_session.errors.full_messages
   end
   errors

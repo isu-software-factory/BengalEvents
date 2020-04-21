@@ -14,7 +14,7 @@
 
           <hr>
           <h2>Activities</h2>
-          <table class="table">
+          <table class="table" >
             <thead class="thead-dark">
             <tr>
               <th scope="col">Name</th>
@@ -29,10 +29,11 @@
               <tr class="event-collapse">
                 <td>  <%= activity.name %></td>
                 <td>  <%= activity.description %></td>
-                <td><%= activity.user.first_name %></td>
+                <td><%= activity.user != nil ? activity.user.first_name : "N/A" %></td>
                 <td>
                   <% if policy(activity).destroy? %>
-                    <%= link_to "Edit", edit_activity_path(activity), class: "button-small" %> <%= link_to "Delete", activity_path(activity.id), class: "btn btn-danger", data: {method: :delete, confirm: "Are you sure?"} %>
+                    <%= link_to "Edit", edit_activity_path(activity), class: "button-small" %>
+                    <%= link_to "Delete", activity_path(activity.id), class: "btn btn-danger", title: "Delete Activity", data: {method: :delete, confirm: "Are you sure?"} %>
                   <% end %>
                 </td>
                 <td><span class="glyphicon glyphicon-menu-down"></span></td>
@@ -47,8 +48,9 @@
                         <th>Start Time</th>
                         <th>Location</th>
                         <th>Capacity</th>
-                        <td>Spots Left</td>
-                        <td>Team Size Restriction</td>
+                        <th>Spots Left</th>
+                        <th>Team Size Restriction</th>
+                        <th>Download</th>
                       </tr>
                       </thead>
                       <tbody>
@@ -67,6 +69,7 @@
                           <% else %>
                             <td>None</td>
                           <% end %>
+                          <td> <%= link_to "Spreadsheet", activity_spread_sheet_path(session.id), title: "Download activity spread sheet" %></td>
                         </tr>
                       <% end %>
                       </tbody>

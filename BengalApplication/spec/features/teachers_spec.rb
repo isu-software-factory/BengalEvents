@@ -32,31 +32,6 @@ RSpec.feature "Teachers", type: :feature do
   end
 end
 
-  #context "update teacher" do
-  #  before do
-  #    @teacher = User.first
-  #    login_as(@teacher)
-  #  end
-  #
-  #  scenario "should be successful" do
-  #   visit edit_teacher_path(@teacher)
-  #    within("form")do
-  #     fill_in "teacher[student_count]", with: "5"
-  #     fill_in "teacher[user][current_password]", with: "password"
-  #    end
-  #    click_button 'Update'
-  #    expect(page).to have_content("Successfully updated")
-  #  end
-  #
-  #  scenario "should fail" do
-  #    visit edit_teacher_path(@teacher)
-  #   within('form') do
-  #     fill_in "School", with: ""
-  #    end
-  #    click_button "Update"
-  #    expect(page).to have_content "School can't be blank"
-  #  end
-  #end
 
   context "Controlling Student" do
     before(:each) do
