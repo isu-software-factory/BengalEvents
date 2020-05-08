@@ -51,13 +51,18 @@
             </button>
           </div>
           <div class="indent-bellow">
-            <button class="btn button-small" title="Register for events">
-              <span class="fa fa-edit"></span><%= link_to " Register", controller: "events", action: "index", title: "Register for activities" %>
+            <button class="btn button-small" title="View My Student's Registrations">
+              <span class="glyphicon glyphicon-print"></span><%=link_to " Class Registrations", class_registrations_path(@user.id), target: :blank%>
             </button>
           </div>
           <div class="indent-bellow">
-            <button class="btn button-small" title="View My Student's Registrations">
-                            <span class="glyphicon glyphicon-print"></span><%=link_to " Print Class Registrations", class_registrations_path(@user.id), target: :blank%>
+            <button class="btn button-small" title="Download My Class Attendance Sheet">
+              <span class="glyphicon glyphicon-download-alt"></span><%=link_to " Class Attendance", attendance_path(@user.id)%>
+            </button>
+          </div>
+          <div class="indent-bellow">
+            <button class="btn button-small" title="Register for events">
+              <span class="fa fa-edit"></span><%= link_to " Register", controller: "events", action: "index", title: "Register for activities" %>
             </button>
           </div>
         </div>

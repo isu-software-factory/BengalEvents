@@ -57,4 +57,14 @@ RSpec.describe Activity, type: :model do
       expect(@activity). to eq(true)
     end
   end
+
+  context "method tests" do
+    before(:each) do
+      @activity = Activity.first
+    end
+
+    it "total_participants should return the total number of participants in an activity" do
+      expect(@activity.total_participants).to eq(4)
+    end
+  end
 end

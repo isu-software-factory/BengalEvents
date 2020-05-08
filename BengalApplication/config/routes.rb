@@ -56,6 +56,10 @@ resources :events
   get "waitlist/:id/:session_id" => "activities#waitlist", as: "waitlist"
   get "class/registrations/:id" => "homeroutes#class_registrations", as: "class_registrations"
   get "schedule/:id" => "homeroutes#schedule", as: "schedule"
+  get "class/attendance/:id" => "homeroutes#class_attendance", as: "attendance"
+  get "admin_setup" => "setups#admin_setup", as: "admin_setup"
+  post "create_admin" => "setups#create_admin"
+  get "site_settings" => "setups#site_settings", as: "site_settings"
 # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
 end

@@ -147,6 +147,7 @@ RSpec.feature "Registrations", type: :feature do
       expect(page).to have_content("8")
       btn = all(".remove-button").last
       btn.click
+      sleep(2)
       expect(Session.find(4).users.include?(@student2)).to eq(true)
       expect(Session.find(4).waitlist.users.include?(@student2)).to eq(false)
     end

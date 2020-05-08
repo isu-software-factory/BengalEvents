@@ -1,17 +1,15 @@
 class ActivitiesController < ApplicationController
   before_action :authenticate_user!
-  # before_action :set_occasion, only: %i[new create destroy update edit show]
   before_action :set_event, only: %i[show]
-  # after_action :verify_authorized
-  require 'rubyXL/convenience_methods/worksheet'
-  require 'rubyXL/convenience_methods/cell'
-
+  require 'active_support/core_ext/hash'
   def new
+    @event = Event.find(params[:event_id])
     @activity = Activity.new
     @sessions = []
-    @event = Event.find(params[:event_id])
     authorize @activity
-    @action = "create/" + @event.id.to_s
+    # the action passed to the form
+    @action = 'create/' + @event.id.to_s
+    # breadcrumbs for coordinator/sponsor
     add_breadcrumb 'Home', profile_path(current_user)
     add_breadcrumb 'Create Activity', new_activity_path
   end
@@ -19,8 +17,9 @@ class ActivitiesController < ApplicationController
   def create
     @event = Event.find(params[:event_id])
     errors = create_activities(@event)
-    if errors.length == 0
-      flash[:notice] = "Successfully Created Activity"
+    # any errors with creating activity or sessions
+    if errors.empty?
+      flash[:notice] = 'Successfully Created Activity'
       redirect_to profile_path(current_user)
     else
       flash[:errors] = errors
@@ -28,40 +27,31 @@ class ActivitiesController < ApplicationController
     end
   end
 
-
   def edit
     @activity = Activity.find(params[:id])
-    @event = @activity.event
     authorize @activity
+    # set variables
+    @event = @activity.event
     @sessions = @activity.sessions
     @edit = true
-    @action = "update"
-    add_breadcrumb "Home", profile_path(current_user)
-    add_breadcrumb "Edit " + @activity.name, activity_path(@activity)
-  end
-
-
-  def report
-    @users = User.all
-    add_breadcrumb "Home", profile_path(current_user)
-    @teachers = Teacher.all
-    @activities = Activity.all
+    @action = 'update'
+    # breadcrumb for coordinators/sponsor
+    add_breadcrumb 'Home', profile_path(current_user)
+    add_breadcrumb 'Edit ' + @activity.name, activity_path(@activity)
   end
 
   def update
-    # authorize @event
     @activity = Activity.find(params[:id])
     @event = @activity.event
-
     # delete sessions
     delete_sessions(@activity)
-
     # update sessions
     update_sessions(@activity)
-
+    # update activity
     if @activity.update(name: params[:name_New_1], description: params[:description_1], iscompetetion: params[:iscompetetion_1], ismakeahead: params[:ismakeahead_1])
       redirect_to profile_path(current_user), notice: 'Successfully Updated Activity.'
     else
+      # show errors
       flash[:errors] = @activity.errors.full_messages
       redirect_back(fallback_location: edit_activity_path(@activity))
     end
@@ -77,13 +67,23 @@ class ActivitiesController < ApplicationController
     end
   end
 
+  # overtime report of activities
+  def report
+    @activities = Activity.all
+    add_breadcrumb 'Home', profile_path(current_user)
+    add_breadcrumb 'Reports', report_path
+  end
+
+  # add user to the waitlist of session
   def waitlist
     @user = User.find(params[:id])
     @session = Session.find(params[:session_id])
+    # add user to waitlist
     @session.waitlist.users << @user
     redirect_back(fallback_location: root_path(role: "User", id: @user.id))
   end
 
+  # session participant spreadsheet
   def spread_sheet
     @session = Session.find(params[:id])
     # create workbook
@@ -93,7 +93,7 @@ class ActivitiesController < ApplicationController
     worksheet.add_cell(0, 0, "Attendance")
     worksheet.add_cell(0, 1, "Participant Name")
     worksheet.add_cell(0, 2, "Score")
-
+    # change column width
     worksheet.change_column_width(0, 15)
     worksheet.change_column_width(1, 20)
     # cell coordinates
@@ -112,6 +112,32 @@ class ActivitiesController < ApplicationController
     )
   end
 
+  # download attendance rate spreadsheet
+  def attendance_rate
+    @activity = Activity.find(params[:id])
+    # create workbook
+    workbook = RubyXL::Workbook.new
+    worksheet = workbook[0]
+    # add headers
+    worksheet.add_cell(0, 0, "Date")
+    worksheet.add_cell(0, 1, "Participants")
+
+    worksheet.change_column_width(0, 15)
+    worksheet.change_column_width(1, 20)
+    # cell coordinates
+    x = 1
+    y = 1
+    # fill cells with data
+
+    # download
+    send_data(workbook.stream.string,
+              disposition: "attachment",
+              type: "application/excel",
+              filename: @session.activity.name + ".xlsx"
+    )
+  end
+
+  # returns the rooms in activity
   def get_session_rooms
     activity = Activity.find(params[:activity])
     rooms = []
@@ -122,11 +148,13 @@ class ActivitiesController < ApplicationController
     render json: {results: {rooms: rooms}}
   end
 
+  # return all locations
   def get_locations
     locations = Location.all
     render json: {results: {locations: locations}}
   end
 
+  # return the rooms in the location
   def get_rooms
     rooms = Location.find_by(location_name: params[:location]).rooms
     render json: {results: {rooms: rooms}}
@@ -135,9 +163,9 @@ end
 
 private
 
+# return the values in param name
 def get_values(name)
   values = []
-
   params.each do |key, value|
     if key.start_with?(name)
       values << value
@@ -146,9 +174,9 @@ def get_values(name)
   values
 end
 
+# return the keys with the given name
 def get_keys(name)
   keys = []
-
   params.each do |key, value|
     if key.start_with?(name)
       keys << key
@@ -157,6 +185,7 @@ def get_keys(name)
   keys
 end
 
+# return the value with the given name and index
 def get_param_with_index(name, index)
   params.each do |key, value|
     if key.start_with?(name) && key.ends_with?(index.to_s)
@@ -175,11 +204,12 @@ def get_ids(name)
   end
   ids
 end
-
+# update sessions
 def update_sessions(activity)
   ids = get_keys("end_time")
   ids.each do |id|
     id = id.split("end_time_")[1].to_i
+    # checks if activity has a session with the given index
     if activity.has_session(id.to_i)
       room_num = get_param_with_index("room_select", id).split(" (")[0].to_i
       Session.find(id).update(start_time: get_param_with_index("start_time", id), end_time: get_param_with_index("end_time", id), capacity: get_param_with_index("capacity", id), room_id: Room.find_by(room_number: room_num).id)

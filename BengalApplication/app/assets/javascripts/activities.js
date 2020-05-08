@@ -10,6 +10,10 @@ $(document).on('ready page:load turbolinks:load', function () {
         newSession($(this));
     });
 
+    $(".glyphicon-minus").click(function(){
+        removeSession(this);
+    });
+
     $(".locationselect").change(function () {
         getRooms(getName(this), $(this).parent().parent().parent());
     });
@@ -31,7 +35,7 @@ $(document).on('ready page:load turbolinks:load', function () {
 
     $("#reports_start_date").datepicker({
         dateFormat: "yy-mm-dd"
-    })
+    });
 
     $(".accordion").hide();
 
@@ -60,7 +64,7 @@ $(document).ready(function () {
     if (($("#name_New_1").attr("value") != undefined)) {
         setTimeout(function () {
             setEditRooms()
-        }, 200);
+        }, 300);
     }
     sessionCount = parseInt($("#sessions_count").val());
 });
@@ -268,14 +272,17 @@ function createButton(type, sessionType) {
         });
     } else {
         $(button).click(function () {
-            if ($(this).is($(this).parent().parent().parent().children().last().children().last().children().first()))
-                $(this).parent().parent().prev().children().last().append(createButton("plus", "new-session"));
-            $(this).parent().parent().remove();
+            removeSession(this);
         })
     }
     return button;
 }
 
+function removeSession(button){
+    if ($(button).is($(button).parent().parent().parent().children().last().children().last().children().first()))
+        $(button).parent().parent().prev().children().last().append(createButton("plus", "new-session"));
+    $(button).parent().parent().remove();
+}
 
 // get the rooms for one room select element
 function getNewRoom(location, selector) {

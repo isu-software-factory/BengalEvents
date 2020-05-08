@@ -13,11 +13,12 @@
 //= require jquery3
 //= require bootstrap-sprockets
 //= require rails-ujs
+//= require jquery-ui
 //= require activestorage
 //= require turbolinks
 //= require jquery-ui/widgets/datepicker
 //= require jquery.timepicker.js
-//= require jquery-ui
+
 
 $('document').ready(function () {
     setTimeout(function () {

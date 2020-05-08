@@ -1,11 +1,9 @@
 class EventsController < ApplicationController
   before_action :authenticate_user!
-  # after_action :verify_authorized, except: %i[index destroy create show new edit]
 
   def index
     @events = Event.all
-    @role = ""
-    add_breadcrumb "Home", root_path(role: "User", id: current_user.id)
+    add_home_breadcrumb
     if params[:role] == "Team"
       @role = "Team"
       @user = Team.find(params[:id])
@@ -28,7 +26,7 @@ class EventsController < ApplicationController
     @edit = false
     @locations = Location.all
     authorize @event
-    add_breadcrumb 'Home', root_path
+    add_home_breadcrumb
     add_breadcrumb 'New Event', new_event_path
   end
 
@@ -50,7 +48,7 @@ class EventsController < ApplicationController
     @location = Location.all
     @event = Event.find(params[:id])
     authorize @event
-    add_breadcrumb 'Home', root_path
+    add_home_breadcrumb
     add_breadcrumb @event.name, event_path(@event)
   end
 
@@ -60,9 +58,8 @@ class EventsController < ApplicationController
     @locations = Location.all
     @edit = true
     authorize @event
-    add_breadcrumb "Home", root_path
-    add_breadcrumb @event.name, event_path
-    # add_breadcrumb "Edit", edit_event_path(@event)
+    add_home_breadcrumb
+    add_breadcrumb "Edit " + @event.name, edit_event_path(@event)
   end
 
   def update

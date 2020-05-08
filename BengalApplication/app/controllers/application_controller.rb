@@ -1,16 +1,20 @@
 class ApplicationController < ActionController::Base
-  before_action :configure_permitted_parameters, if: :devise_controller?
-
-
   include Pundit
+  before_action :configure_permitted_parameters, if: :devise_controller?
+  before_action :configure_setup, except: [:admin_setup, :create_admin, :site_settings]
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
   protect_from_forgery with: :exception
+  # rubyXL methods
+  require 'rubyXL/convenience_methods/worksheet'
+  require 'rubyXL/convenience_methods/cell'
 
   protected
-
-  # def configure_permitted_parameters
-  #   devise_parameter_sanitizer.permit(:sign_up, keys: [:user_name, :first_name, :last_name])
-  # end
+  # first time setup
+  def configure_setup
+    unless Setup.first.configure
+      redirect_to admin_setup_path
+    end
+  end
 
   def configure_permitted_parameters
     added_attrs = [:user_name, :email, :password, :password_confirmation, :remember_me]
@@ -30,5 +34,14 @@ class ApplicationController < ActionController::Base
   def user_not_authorized
     flash[:alert] = 'Access Denied'
     redirect_to (request.referrer || root_path)
+  end
+
+  def add_home_breadcrumb
+    role = current_user.roles.first.role_name
+    if role != "Student" || role != "Teacher"
+      add_breadcrumb "Home", profile_path(current_user)
+    else
+      add_breadcrumb "Home", root_path(role: "User", id: current_user.id)
+    end
   end
 end

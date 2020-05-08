@@ -1,76 +1,32 @@
 <div id="reports_page" class="container">
-  <table>
-    <thead>
-    <tbody>
-    <%#@activities.each do |a| %>
+  <%# @events.each do |event| %>
+  <h1>Bengal Stem Day</h1>
+  <h2>View Reports</h2>
+  <table class="table">
+    <thead class="thead-dark">
     <tr>
-      <%# @events.each do |event| %>
-      <h1>Bengal Stem Day</h1>
-      <h2>View Reports</h2>
-      <table class="table">
-        <thead class="thead-dark">
-        <tr>
-          <th scope="col">Activity Type:</th>
-          <th scope="col">Ran By Affiliation:</th>
-          <th scope="col">Total Participants:</th>
-          <th scope="col">Sponsored by:</th>
-        </tr>
-        </thead>
-        <%# event.activities.each do |activity| %>
-        <tbody>
-        <tr class="event-collapse">
-          <td>Raspberry pi</td>
-          <!--          <td> <%#activity.name %></td>  ran by what affiliation here. The other ones need activity.affiliation, participant number, and sponsor-->
-          <td>ISU CS Department</td><!--Affiliation-->
-          <td>500</td><!--Total participants-->
-          <td>CostCo</td><!--Sponsored by-->
-          <td><span class="glyphicon glyphicon-menu-down"></span></td>
-        </tr>
-        <tr>
-          <td colspan="4">
-            <div class="accordion">
-              <table class="table">
-                <thead>
-                <tr class="session-header">
-                  <th>Info Here</th>
-                  <th>Info Here</th>
-                  <th>Info Here</th>
-                  <th>Info Here</th>
-                  <th>Info Here</th>
-                  <th>Info Here</th>
-                </tr>
-                </thead>
-                <!--                <tbody>-->
-                <%# @num = 1 %>
-                <%# activity.sessions.each do |session| %>
-                <!--                <tr>-->
-                <!--                  <td><%# @num%>-->
-
-
-                <!--                  </td>-->
-                <!--                </tr>-->
-                <%# end %>
-                <!--                </tbody>-->
-              </table>
-            </div>
-          </td>
-<!--          <script>-->
-<!--              $( function() {-->
-<!--                  $( "#reports_start_date" ).datepicker({-->
-<!--                      dateFormat: "yy-mm-dd"-->
-<!--                  });-->
-<!--              } );-->
-<!--          </script>-->
-        </tr>
-        </tbody>
-        <div class="col-sm-2.1">
-          <p>Date: <input type="text" id="reports_start_date"></p>
-        </div>
-      </table>
-
+      <th scope="col">Activity</th>
+      <th scope="col">Activity Type:</th>
+      <th scope="col">Ran By Affiliation:</th>
+      <th scope="col">Total Participants:</th>
+      <th scope="col">Sponsored by:</th>
+      <th scope="col"></th>
     </tr>
+    </thead>
+    <tbody>
+    <% @activities.each do |activity| %>
+      <tr class="event-collapse">
+        <td><%= activity.name %></td>
+        <td><%= activity.iscompetetion ? "Competetion" : "Non-Competition" %></td>
+        <td>ISU CS Department</td><!--Affiliation-->
+        <td><%= activity.total_participants %></td><!--Total participants-->
+        <td><%= activity.user.first_name + " " + activity.user.last_name %></td><!--Sponsored by-->
+        <td><span class="glyphicon glyphicon-tasks" title="See All Reports"></span></td>
+      </tr>
+    <% end %>
     </tbody>
-    <%#end %>
+    <div class="col-sm-2.1">
+      <p>Date: <input type="text" id="reports_start_date"></p>
+    </div>
   </table>
-<%#end %>
 </div>

@@ -1,0 +1,56 @@
+<% if flash[:errors] %>
+  <% flash[:errors].each do |e| %>
+    <div class="alert alert-danger">
+      <%=e %>
+    </div>
+  <% end %>
+<% end %>
+
+<div class="container">
+  <div id="loginbox" style="margin-top:50px;" class="mainbox col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-1">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <div class="panel-title">Admin Setup</div>
+      </div>
+
+      <div style="padding-top:30px" id="student-box" class="panel-body">
+          <!--ISU logo image here-->
+        <%=form_tag("create_admin") do%>
+          <div style="margin-bottom: 25px" class="input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+            <%= text_field_tag "first_name", nil, placeholder: "First Name", class: "form-control" %>
+          </div>
+
+          <div style="margin-bottom: 25px" class="input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+            <%= text_field_tag "last_name", nil, placeholder: "Last Name", class: "form-control" %>
+          </div>
+
+          <div style="margin-bottom: 25px" class="input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+            <%= text_field_tag 'user_name', nil,  placeholder: "User Name", class: "form-control" %>
+          </div>
+
+          <div style="margin-bottom: 25px" class="input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+            <%= email_field_tag 'email', nil, placeholder: "Email", class: "form-control" %>
+          </div>
+
+          <div style="margin-bottom: 25px" class="input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+            <%= password_field_tag 'password', nil, placeholder: "Password", class: "form-control" %>
+          </div>
+
+          <div style="margin-bottom: 25px" class="input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+            <%= password_field_tag 'password_confirmation', nil, placeholder: "Confirm Password", class: "form-control" %>
+          </div>
+
+          <div class="col-sm-12 controls">
+            <%=submit_tag "Next", class: "button button-right"%>
+          </div>
+        <%end %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -16,4 +16,13 @@ class Activity < ApplicationRecord
     end
     includes
   end
+
+  # get the total number of participants
+  def total_participants
+    total = 0
+    self.sessions.each do |s|
+      total += s.users.count
+    end
+    total
+  end
 end

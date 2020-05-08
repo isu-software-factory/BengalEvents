@@ -1,4 +1,5 @@
 class HomeroutesController < ApplicationController
+  # redirects user
   def home
     # user signed in then redirect them to their page
     if user_signed_in?
@@ -9,6 +10,7 @@ class HomeroutesController < ApplicationController
         redirect_to controller: "events", action: "index", role: "User", id: current_user.id
       end
     end
+
     # if user isn't signed in then show activities for current occasion
     unless Event.first.nil?
       @event = Event.first
@@ -16,6 +18,7 @@ class HomeroutesController < ApplicationController
     end
   end
 
+  # sets the user page
   def user
     @user = User.find(params[:id])
     @role = @user.roles.first.role_name
@@ -48,15 +51,10 @@ class HomeroutesController < ApplicationController
       @random_card = %w[rorange growling-gray bg-dark orange]
     end
 
-    if @current_user_role == "Coordinator" || @current_user_role == "Admin"
-      add_breadcrumb "Home", profile_path(current_user)
-    else
-      add_breadcrumb "Home", root_path(role: "User", id: @user.id)
-      if check_user
-        add_breadcrumb @user.first_name + "'s Profile", profile_path(@user)
-      end
+    add_home_breadcrumb
+    if check_user
+      add_breadcrumb @user.first_name + "'s Profile", profile_path(@user)
     end
-
 
   end
 
@@ -64,7 +62,7 @@ class HomeroutesController < ApplicationController
     @controller = params[:name]
     if @controller == "Student"
       @students = Teacher.find_by(user_id: current_user.id).users
-      add_breadcrumb "Home", root_path(role: "User", id: current_user.id)
+      add_home_breadcrumb
       add_breadcrumb current_user.first_name + "'s Profile", profile_path(current_user)
       add_breadcrumb "Add New Students", new_user_path("Student")
     else
@@ -74,7 +72,6 @@ class HomeroutesController < ApplicationController
 
   def create
     @user = params[:role]
-
     if @user == "Teacher"
       create_teacher
     elsif @user == "Student"
@@ -110,11 +107,41 @@ class HomeroutesController < ApplicationController
   end
 
   def class_registrations
-    @teacher = Teacher.find_by(user_id: User.find(params[:id]))
+    @teacher = Teacher.find_by(user_id: params[:id])
     @students = @teacher.users
     add_breadcrumb "Home", root_path(role: "User", id: current_user.id)
     add_breadcrumb current_user.first_name + "'s Profile", profile_path(current_user)
     add_breadcrumb "Class Registrations", class_registrations_path(current_user.id)
+  end
+
+  def class_attendance
+    @teacher = Teacher.find_by(user_id: params[:id])
+    @students = @teacher.users
+
+    # create workbook
+    workbook = RubyXL::Workbook.new
+    worksheet = workbook[0]
+    # add headers
+    worksheet.add_cell(0, 0, "Attendance")
+    worksheet.add_cell(0, 1, "Students")
+
+    worksheet.change_column_width(0, 10)
+    worksheet.change_column_width(1, 12)
+    # cell coordinates
+    x = 1
+    y = 1
+    # fill cells with data
+    @students.each do |u|
+      worksheet.add_cell(y, x, u.first_name + " " + u.last_name)
+      y += 1
+    end
+    # download
+    send_data(workbook.stream.string,
+              disposition: "attachment",
+              type: "application/excel",
+              filename: "Class" + ".xlsx"
+    )
+
   end
 
   def schedule

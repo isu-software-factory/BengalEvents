@@ -22,6 +22,8 @@
     <%= javascript_include_tag 'application', :teams, 'data-turbolinks-track': 'reload' %>
   <% elsif controller.controller_name == "activities" %>
     <%= javascript_include_tag 'application', :activities, 'data-turbolinks-track': 'reload' %>
+  <% elsif controller.controller_name == "setups" %>
+    <%= javascript_include_tag 'application', :setups, 'data-turbolinks-track': 'reload' %>
   <% else %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   <% end %>
