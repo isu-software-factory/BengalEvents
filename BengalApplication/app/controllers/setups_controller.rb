@@ -20,7 +20,24 @@ class SetupsController < ApplicationController
   end
 
   def site_settings
+    @setting = Setting.new
+  end
 
+  def save_settings
+    @setting = Setting.new(primary_color: params["primary-colors"], secondary_color: params["secondary-colors"], site_name: params["site-name"])
+    if @setting.save
+      redirect_to root_path
+    else
+      flash[:errors] = @setting.errors.full_messages
+      redirect_back(fallback_location: site_settings_path)
+    end
+  end
+
+  def load_settings
+    @settings = Setting.first
+    @primary = @settings.primary_color
+    @secondary = @settings.secondary_color
+    render json: {settings: {primary: @primary, secondary: @secondary}}
   end
 
   private
@@ -28,6 +45,7 @@ class SetupsController < ApplicationController
   def get_params
     params.permit(:first_name, :last_name, :user_name, :email, :password, :password_confirmation)
   end
+
   def create_roles
     roles = ["Student", "Teacher", "Admin", "Coordinator", "Sponsor"]
     roles.each do |r|

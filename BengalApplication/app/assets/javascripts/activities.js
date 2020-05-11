@@ -33,8 +33,13 @@ $(document).on('ready page:load turbolinks:load', function () {
         newActivity($(this));
     });
 
+    // add datepicker to textbox
     $("#reports_start_date").datepicker({
         dateFormat: "yy-mm-dd"
+    });
+
+    $("#reports_start_date").change(function(){
+        loadActivities(this.value);
     });
 
     $(".accordion").hide();
@@ -84,6 +89,50 @@ function setEditRooms() {
             }
         }
     })
+}
+
+
+// loads the activities for the given date
+function loadActivities(date) {
+    Rails.ajax({
+        url: `/load_activities/${date}`,
+        type: 'GET',
+        dataType: "json",
+        success: function (data) {
+            $("#table-container").children().remove();
+            if (data.activities.activity.length > 0) {
+                for (i = 0; i < data.activities.activity.length; i++) {
+                    let activity = data.activities.activity[i].name;
+                    let part = data.activities.participants[i];
+                    let type = "";
+                    if (data.activities.activity[i].iscompetetion) {
+                        type = "Competition"
+                    } else {
+                        type = "Non-Competition"
+                    }
+                    $("#body").append(tableRow(activity, type, part, "David"));
+                }
+            }else{
+                $("#table-container").append($("<h2>No Events Occured On This Date</h2>"));
+            }
+        }
+    })
+}
+
+function tableRow(name, type, participants, sponsor){
+    let row = $("<tr></tr>");
+    row.addClass("event-collapse");
+    row.append(createTD(name));
+    row.append(createTD(type));
+    row.append(createTD(participants));
+    row.append(createTD(sponsor));
+    return row;
+}
+
+function createTD(value){
+    let td = $("<td></td>");
+    $(td).text(value);
+    return td;
 }
 
 // disables all room select except the first

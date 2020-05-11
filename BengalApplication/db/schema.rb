@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_27_214826) do
+ActiveRecord::Schema.define(version: 2020_05_11_155930) do
 
   create_table "activities", force: :cascade do |t|
     t.string "name"
@@ -94,6 +94,15 @@ ActiveRecord::Schema.define(version: 2020_04_27_214826) do
     t.integer "room_id"
     t.index ["activity_id"], name: "index_sessions_on_activity_id"
     t.index ["room_id"], name: "index_sessions_on_room_id"
+  end
+
+  create_table "settings", force: :cascade do |t|
+    t.string "primary_color"
+    t.string "secondary_color"
+    t.string "tertiary_color"
+    t.string "site_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "setups", force: :cascade do |t|

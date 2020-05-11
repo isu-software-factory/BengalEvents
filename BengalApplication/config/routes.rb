@@ -60,6 +60,9 @@ resources :events
   get "admin_setup" => "setups#admin_setup", as: "admin_setup"
   post "create_admin" => "setups#create_admin"
   get "site_settings" => "setups#site_settings", as: "site_settings"
+  post "save_settings" => "setups#save_settings", as: "save_settings"
+  get "load_settings" => "setups#load_settings"
+  get "load_activities/:date" => "activities#load_activities"
 # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
 end
