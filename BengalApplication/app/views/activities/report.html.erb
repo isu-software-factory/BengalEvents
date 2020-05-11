@@ -2,8 +2,15 @@
   <%# @events.each do |event| %>
   <h1>Bengal Stem Day</h1>
   <h2>View Reports</h2>
-  <div class="col-sm-2.1">
-    <p>Date: <input type="text" id="reports_start_date"></p>
+  <div class="row">
+    <div class="col-sm-2.1">
+      <p>Date: <input type="text" id="reports_start_date"></p>
+    </div>
+    <div class="col-sm-2.1">
+      <button class="button-small left-indent-more" onclick="loadEvent()">Load</button>
+    </div>
+  </div>
+  <div id="activity-notice">
   </div>
   <table class="table">
     <thead class="thead-dark">
@@ -16,17 +23,15 @@
     </tr>
     </thead>
     <tbody id="body">
-    <div id="table-container">
-      <% @activities.each do |activity| %>
-        <tr class="event-collapse">
-          <td><%= activity.name %></td>
-          <td><%= activity.iscompetetion ? "Competetion" : "Non-Competition" %></td>
-          <td><%= activity.total_participants %></td><!--Total participants-->
-          <td><%= activity.user.first_name + " " + activity.user.last_name %></td><!--Sponsored by-->
-          <td><span class="glyphicon glyphicon-tasks" title="See All Reports"></span></td>
-        </tr>
-      <% end %>
-    </div>
+    <% @activities.each do |activity| %>
+      <tr class="event-collapse">
+        <td><%= activity.name %></td>
+        <td><%= activity.iscompetetion ? "Competetion" : "Non-Competition" %></td>
+        <td><%= activity.total_participants %></td><!--Total participants-->
+        <td><%= activity.user.first_name + " " + activity.user.last_name %></td><!--Sponsored by-->
+        <td><span class="glyphicon glyphicon-tasks" title="See All Reports"></span></td>
+      </tr>
+    <% end %>
     </tbody>
   </table>
 </div>

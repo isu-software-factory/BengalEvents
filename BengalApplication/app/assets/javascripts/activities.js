@@ -38,10 +38,6 @@ $(document).on('ready page:load turbolinks:load', function () {
         dateFormat: "yy-mm-dd"
     });
 
-    $("#reports_start_date").change(function(){
-        loadActivities(this.value);
-    });
-
     $(".accordion").hide();
 
     $(".accordion").parent().parent().prev().click(function () {
@@ -62,9 +58,11 @@ $(document).on('ready page:load turbolinks:load', function () {
 
 
 $(document).ready(function () {
-    setTimeout(function () {
-        setRooms($(".col-lg-4").last().children().last().children().last())
-    }, 200);
+    if (($("#name_New_1").attr("value") != undefined)) {
+        setTimeout(function () {
+            setRooms($(".col-lg-4").last().children().last().children().last())
+        }, 200);
+    }
 
     if (($("#name_New_1").attr("value") != undefined)) {
         setTimeout(function () {
@@ -91,16 +89,22 @@ function setEditRooms() {
     })
 }
 
+// onclick button event to load activities
+function loadEvent(){
+    loadActivities($("#reports_start_date").val());
+}
 
 // loads the activities for the given date
 function loadActivities(date) {
+    $("#body").children().remove();
+    $("#activity-notice").children().remove();
+    $("#activity-notice").append($("<h2>Loading...</h2>"));
     Rails.ajax({
         url: `/load_activities/${date}`,
         type: 'GET',
         dataType: "json",
         success: function (data) {
-            $("#table-container").children().remove();
-            if (data.activities.activity.length > 0) {
+            if (data.activities != undefined) {
                 for (i = 0; i < data.activities.activity.length; i++) {
                     let activity = data.activities.activity[i].name;
                     let part = data.activities.participants[i];
@@ -112,8 +116,10 @@ function loadActivities(date) {
                     }
                     $("#body").append(tableRow(activity, type, part, "David"));
                 }
+                $("#activity-notice").children().remove();
             }else{
-                $("#table-container").append($("<h2>No Events Occured On This Date</h2>"));
+                $("#activity-notice").children().remove();
+                $("#activity-notice").append($("<h2>No Events Occured On This Date</h2>"));
             }
         }
     })
