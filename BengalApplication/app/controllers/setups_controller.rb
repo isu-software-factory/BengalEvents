@@ -1,7 +1,7 @@
 class SetupsController < ApplicationController
   def admin_setup
     # set configure to true
-
+    Setup.create(configure: true)
     # create user roles
     create_roles
     @user = User.new
