@@ -1,4 +1,15 @@
-<%= form_tag("create_admin") do %>
+<% if flash[:errors] %>
+  <% flash[:errors].each do |e| %>
+    <div class="alert alert-danger">
+      <%=e %>
+    </div>
+  <% end %>
+<% end %>
+<%= form_tag("save_settings") do %>
   <%= text_field_tag "primary-colors" %>
-  <%#= text_field_tag "secondary-colors" %>
+  <%= text_field_tag "secondary-colors" %>
+  <%= text_field_tag "site-name" %>
+  <%= file_field_tag "logo" %>
+  <img id="logo-image" src="#"/>
+  <%= submit_tag "Save and Continue", class: "button-small" %>
 <% end %>

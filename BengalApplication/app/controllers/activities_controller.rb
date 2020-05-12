@@ -148,6 +148,22 @@ class ActivitiesController < ApplicationController
     render json: {results: {rooms: rooms}}
   end
 
+  # returns the activities for a given date
+  def load_activities
+    @event = Event.find_by(start_date: DateTime.parse(params[:date]))
+    if @event
+      total_part = []
+      @event.activities.each do |a|
+        total = 0
+        a.sessions.each do |s|
+          total += s.users.count
+        end
+        total_part << total
+      end
+      render json: {activities: {activity: @event.activities, participants: total_part}}
+    end
+  end
+
   # return all locations
   def get_locations
     locations = Location.all

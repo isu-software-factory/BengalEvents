@@ -33,6 +33,7 @@ $(document).on('ready page:load turbolinks:load', function () {
         newActivity($(this));
     });
 
+    // add datepicker to textbox
     $("#reports_start_date").datepicker({
         dateFormat: "yy-mm-dd"
     });
@@ -57,9 +58,11 @@ $(document).on('ready page:load turbolinks:load', function () {
 
 
 $(document).ready(function () {
-    setTimeout(function () {
-        setRooms($(".col-lg-4").last().children().last().children().last())
-    }, 200);
+    if (($("#name_New_1").attr("value") != undefined)) {
+        setTimeout(function () {
+            setRooms($(".col-lg-4").last().children().last().children().last())
+        }, 200);
+    }
 
     if (($("#name_New_1").attr("value") != undefined)) {
         setTimeout(function () {
@@ -84,6 +87,58 @@ function setEditRooms() {
             }
         }
     })
+}
+
+// onclick button event to load activities
+function loadEvent(){
+    loadActivities($("#reports_start_date").val());
+}
+
+// loads the activities for the given date
+function loadActivities(date) {
+    $("#body").children().remove();
+    $("#activity-notice").children().remove();
+    $("#activity-notice").append($("<h2>Loading...</h2>"));
+    Rails.ajax({
+        url: `/load_activities/${date}`,
+        type: 'GET',
+        dataType: "json",
+        success: function (data) {
+            if (data.activities != undefined) {
+                for (i = 0; i < data.activities.activity.length; i++) {
+                    let activity = data.activities.activity[i].name;
+                    let part = data.activities.participants[i];
+                    let type = "";
+                    if (data.activities.activity[i].iscompetetion) {
+                        type = "Competition"
+                    } else {
+                        type = "Non-Competition"
+                    }
+                    $("#body").append(tableRow(activity, type, part, "David"));
+                }
+                $("#activity-notice").children().remove();
+            }else{
+                $("#activity-notice").children().remove();
+                $("#activity-notice").append($("<h2>No Events Occured On This Date</h2>"));
+            }
+        }
+    })
+}
+
+function tableRow(name, type, participants, sponsor){
+    let row = $("<tr></tr>");
+    row.addClass("event-collapse");
+    row.append(createTD(name));
+    row.append(createTD(type));
+    row.append(createTD(participants));
+    row.append(createTD(sponsor));
+    return row;
+}
+
+function createTD(value){
+    let td = $("<td></td>");
+    $(td).text(value);
+    return td;
 }
 
 // disables all room select except the first
