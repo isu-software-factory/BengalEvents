@@ -1,0 +1,10 @@
+<% if flash[:errors] %>
+  <% flash[:errors].each do |e| %>
+    <div class="alert alert-danger">
+      <%=e %>
+    </div>
+  <% end %>
+<% end %>
+<%= form_tag("save_settings") do %>
+  <%=render partial: "setups/settings" %>
+<% end %>

@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   include Pundit
   before_action :configure_permitted_parameters, if: :devise_controller?
-  before_action :configure_setup, except: [:admin_setup, :create_admin, :site_settings]
+  before_action :configure_setup, except: [:admin_setup, :create_admin, :new_settings]
   # after_action :load_css
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
   protect_from_forgery with: :exception

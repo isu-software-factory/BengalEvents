@@ -31,3 +31,4 @@ end
 # application.js, application.scss, and all non-JS/CSS in the app/assets
 # folder are already added.
 # Rails.application.config.assets.precompile += %w( admins.js admins.css)
+Rails.application.config.assets.precompile += %w(custom.scss.erb)

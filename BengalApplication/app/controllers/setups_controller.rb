@@ -12,14 +12,14 @@ class SetupsController < ApplicationController
     @user = User.new(get_params)
     if @user.save
       @user.roles << Role.find_by(role_name: "Admin")
-      redirect_to site_settings_path
+      redirect_to new_settings_path
     else
       flash[:errors] = @user.errors.full_messages
       redirect_back(fallback_location: admin_setup_path)
     end
   end
 
-  def site_settings
+  def new_settings
     @setting = Setting.new
   end
 
@@ -30,22 +30,31 @@ class SetupsController < ApplicationController
       redirect_to root_path
     else
       flash[:errors] = @setting.errors.full_messages
-      redirect_back(fallback_location: site_settings_path)
+      redirect_back(fallback_location: new_settings_path)
     end
   end
 
-  # def load_settings
-  #   @settings = Setting.first
-  #   @primary = @settings.primary_color
-  #   @secondary = @settings.secondary_color
-  #   render json: {settings: {primary: @primary, secondary: @secondary}}
-  # end
+  def edit_settings
+    @setting = Setting.first
+    add_home_breadcrumb
+    add_breadcrumb "Site Settings", edit_settings_path
+  end
+
+  def update_settings
+    @setting = Setting.first
+    if @setting.update(setting_params)
+      redirect_to profile_path(current_user)
+    else
+      redirect_back(fallback_location: edit_settings_path)
+    end
+  end
 
   private
 
-  def load_settings
-
+  def setting_params
+    params.permit(:primary_color, :secondary_color)
   end
+
 
   def get_params
     params.permit(:first_name, :last_name, :user_name, :email, :password, :password_confirmation)

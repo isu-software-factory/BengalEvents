@@ -3,12 +3,12 @@
 
 $(document).on('ready page:load turbolinks:load', function () {
     // change colors
-    $("#primary-colors").minicolors();
-    $("#secondary-colors").minicolors();
-    $("#primary-colors").change(function () {
+    $("#primary-color").minicolors();
+    $("#secondary-color").minicolors();
+    $("#primary-color").change(function () {
         $(".header").css("background-color", this.value);
     });
-    $("#secondary-colors").change(function () {
+    $("#secondary-color").change(function () {
         $(".navigation").css("background-color", this.value);
     });
 
