@@ -26,6 +26,7 @@ class SetupsController < ApplicationController
   def save_settings
     @setting = Setting.new(primary_color: params["primary-colors"], secondary_color: params["secondary-colors"], site_name: params["site-name"])
     if @setting.save
+      load_settings
       redirect_to root_path
     else
       flash[:errors] = @setting.errors.full_messages
@@ -33,14 +34,18 @@ class SetupsController < ApplicationController
     end
   end
 
-  def load_settings
-    @settings = Setting.first
-    @primary = @settings.primary_color
-    @secondary = @settings.secondary_color
-    render json: {settings: {primary: @primary, secondary: @secondary}}
-  end
+  # def load_settings
+  #   @settings = Setting.first
+  #   @primary = @settings.primary_color
+  #   @secondary = @settings.secondary_color
+  #   render json: {settings: {primary: @primary, secondary: @secondary}}
+  # end
 
   private
+
+  def load_settings
+
+  end
 
   def get_params
     params.permit(:first_name, :last_name, :user_name, :email, :password, :password_confirmation)

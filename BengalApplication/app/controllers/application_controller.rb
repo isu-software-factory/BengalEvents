@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
   include Pundit
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :configure_setup, except: [:admin_setup, :create_admin, :site_settings]
+  # after_action :load_css
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
   protect_from_forgery with: :exception
   # rubyXL methods
@@ -9,6 +10,13 @@ class ApplicationController < ActionController::Base
   require 'rubyXL/convenience_methods/cell'
 
   protected
+
+  def load_css
+    css = ".primary {background-color: orange; }"
+    render text: css, content_type: "text/css"
+  end
+
+
   # first time setup
   def configure_setup
     unless Setup.first.configure
