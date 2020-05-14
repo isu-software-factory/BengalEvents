@@ -58,5 +58,26 @@
 
 For deploying please see the attached document named "Deployment.docx" in docs folder.
 
+## Docker Instructions
 
+- Install Docker 
+    - In the terminal, run 'sudo apt-get update'
+    - 'sudo apt-get update'
+    - 'sudo apt-get install docker-ce docker-ce-cli container.io'
+- Verify Docker Engine is installed correctly, run
+    - 'sudo docker run hello-world'
+- Install Docker-Compose 
+    - In the terminal, run 'sudo apt-get install curl -y'
+    - 'sudo curl -L "https://github.com/docker/compose/releases/download/1.25.5/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose'
+- Verify Docker-Compose Version/Installation 
+    - 'docker-compose -v'
+- Create Docker Image
+    - In the 'BengalApplication' folder, pull latest update 'git pull origin dev'
+    - sudo docker-compose run --rm web rake db:migrate
+- Run Docker Image
+    - sudo docker-compose up
+    - check localhost:3000, it should be running in the Admin Setup page.
+
+    
+ 
 
