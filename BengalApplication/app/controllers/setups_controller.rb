@@ -43,6 +43,7 @@ class SetupsController < ApplicationController
   def update_settings
     @setting = Setting.first
     if @setting.update(setting_params)
+      
       redirect_to profile_path(current_user)
     else
       redirect_back(fallback_location: edit_settings_path)

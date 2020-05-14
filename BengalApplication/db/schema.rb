@@ -40,6 +40,7 @@ ActiveRecord::Schema.define(version: 2020_05_11_155930) do
     t.datetime "start_date"
     t.string "name"
     t.string "description"
+    t.boolean "visible"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

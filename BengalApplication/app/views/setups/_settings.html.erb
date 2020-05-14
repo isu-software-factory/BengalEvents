@@ -1,6 +1,30 @@
-<%= text_field_tag "primary-color"  %>
-<%= text_field_tag "secondary-color" %>
-<%= text_field_tag "site-name" %>
-<%= file_field_tag "logo" %>
-<img id="logo-image" src="#"/>
-<%= submit_tag "Save and Continue", class: "button-small" %>
+
+<div>
+
+  <h1>School Information Input</h1>
+  <table class ="table">
+    <%= form_tag("save_settings") do %>
+      <tr>
+        <td>Select your school's primary color:</td>
+        <td><%= text_field_tag "primary_color" %></td>
+      </tr>
+      <tr>
+        <td>Select your schools secondary color:</td>
+        <td><%= text_field_tag "secondary_color" %></td>
+      </tr>
+      <tr>
+        <td>Select your site name:</td>
+        <td><%= text_field_tag "site-name" %></td>
+      </tr>
+      <tr>
+        <td>Import your logo</td>
+        <td><%= file_field_tag "logo" %></td>
+      </tr>
+      <tr>
+        <td><%= submit_tag "Save and Continue", class: "button-small" %></td>
+        <td><img id="logo-image" src="#"/></td>
+      </tr>
+
+    <% end %>
+  </table>
+</div>

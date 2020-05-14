@@ -4,6 +4,7 @@ class CreateEvent < ActiveRecord::Migration[5.2]
       t.datetime :start_date
       t.string :name
       t.string :description
+      t.boolean :visible
       t.timestamps
     end
   end
