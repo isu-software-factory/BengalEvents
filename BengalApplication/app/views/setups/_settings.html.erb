@@ -21,10 +21,10 @@
         <td><%= file_field_tag "logo" %></td>
       </tr>
       <tr>
-        <td><%= submit_tag "Save and Continue", class: "button-small" %></td>
+        <td><%= Setting.first != nil ? link_to("Reset Default", default_settings_path, class: "button-small solid-element", data: {confirm: "Are you sure?"}): "" %></td>
+        <td><%= submit_tag "Save and Continue", class: "button-small solid-element" %></td>
         <td><img id="logo-image" src="#"/></td>
       </tr>
-
     <% end %>
   </table>
 </div>

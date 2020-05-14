@@ -50,6 +50,12 @@ class SetupsController < ApplicationController
     end
   end
 
+  def reset_default
+    @setting = Setting.first
+    @setting.reset_default
+    redirect_to edit_settings_path
+  end
+
   private
 
   def setting_params

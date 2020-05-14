@@ -2,30 +2,11 @@
     margin-bottom: 25px;
 }
 
-
 .small-icon{
     font-size: 0.5em;
 }
 
-/*.tooltip-container .tooltiptext::after{*/
-/*    content: " ";*/
-/*    position: absolute;*/
-/*    top: 100%;*/
-/*    left: 5%;*/
-/*    !*margin-left: -5px;*!*/
-/*    border-width: 8px;*/
-/*    border-style: solid;*/
-/*    background-color: white;*/
-/*    border-color: black transparent transparent transparent;*/
-/*}*/
 
 .tooltip-container:hover .tooltiptext{
     visibility: visible;
 }
-/*.line{*/
-/*    background-color: #999999;*/
-/*    border-width: 1px;*/
-/*    border-style: solid;*/
-/*    margin-bottom: 15px;*/
-/*    margin-top: 5px;*/
-/*}*/
