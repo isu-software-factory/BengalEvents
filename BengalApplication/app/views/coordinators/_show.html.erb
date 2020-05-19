@@ -4,10 +4,10 @@
       <% @events.each do |event| %>
         <div class="bottom-indent-more">
           <h1 class="accordian"><%= event.name %>
-            <%= link_to "Activity", new_activity_path(event_id: event.id), class: "btn button-small glyphicon glyphicon-plus", title: "Create a new activity for event." %>
+            <%= link_to "Activity", new_activity_path(event_id: event.id), class: "button-small primary-button  glyphicon glyphicon-plus", title: "Create a new activity for event." %>
             <% if policy(event).destroy? %>
-              <%= link_to "Edit", edit_event_path(event), class: "btn button-small glyphicon glyphicon-edit" %>
-              <%= link_to "Delete", event_path(event.id), class: "btn btn-danger", data: {method: :delete, confirm: "Are you sure?"} %>
+              <%= link_to " Edit", edit_event_path(event), class: "primary-button  button-small glyphicon glyphicon-edit" %>
+              <%= link_to "Delete", event_path(event.id), class: "btn-danger button-small", data: {method: :delete, confirm: "Are you sure?"} %>
             <% end %>
             <span class="badge badge-danger">Starts at <%= event.start_date.strftime("%d/%m/%Y") %></span>
           </h1>
@@ -26,13 +26,13 @@
             </thead>
             <% event.activities.each do |activity| %>
               <tbody>
-              <tr class="event-collapse">
+              <tr class="event-collapse solid-element">
                 <td>  <%= activity.name %></td>
                 <td>  <%= activity.description %></td>
                 <td><%= activity.user != nil ? activity.user.first_name : "N/A" %></td>
                 <td>
                   <% if policy(activity).destroy? %>
-                    <%= link_to "Edit", edit_activity_path(activity), class: "button-small" %>
+                    <%= link_to "Edit", edit_activity_path(activity), class: "primary-button button" %>
                     <%= link_to "Delete", activity_path(activity.id), class: "btn btn-danger", title: "Delete Activity", data: {method: :delete, confirm: "Are you sure?"} %>
 
                   <% end %>
@@ -44,7 +44,7 @@
                   <div class="accordion">
                     <table class="table">
                       <thead>
-                      <tr class="session-header">
+                      <tr class="session-header secondary-color">
                         <th>Sessions</th>
                         <th>Start Time</th>
                         <th>Location</th>
@@ -70,7 +70,7 @@
                           <% else %>
                             <td>None</td>
                           <% end %>
-                          <td> <%= link_to "Spreadsheet", activity_spread_sheet_path(session.id), title: "Download activity spread sheet" %></td>
+                          <td> <%= link_to "Spreadsheet", activity_spread_sheet_path(session.id), title: "Download  activity spread sheet" %></td>
                         </tr>
                       <% end %>
                       </tbody>
@@ -90,9 +90,9 @@
         <div class="card border-dark mb-3" style="max-width: 18rem;">
           <div class="card-header">Actions</div>
           <div class="card-body text-dark">
-            <%= link_to " Event", new_event_path, class: "button-small glyphicon glyphicon-plus", title: "Create a new event" %>
-            <%= link_to " Users", all_users_path, class: "button-small glyphicon glyphicon-user", title: "View All Users Profiles" %>
-            <%= link_to " Reports", report_path, class: "button-small glyphicon glyphicon-stats", title: "View Reports" %>
+            <%= link_to " Event", new_event_path, class: "primary-button  button-small glyphicon glyphicon-plus", title: "Create a new event" %>
+            <%= link_to " Users", all_users_path, class: "primary-button  button-small glyphicon glyphicon-user", title: "View All Users Profiles" %>
+            <%= link_to " Reports", report_path, class: "primary-button   button-small glyphicon glyphicon-stats", title: "View Reports" %>
           </div>
         </div>
       </div>

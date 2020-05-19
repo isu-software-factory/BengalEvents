@@ -1,31 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
-<% content_for :css do %>
-  <style>
-    <%cache(Setting.first) do%>
-    .primary-color {
-      background-color: <%=Setting.first.primary_color %>;
-    }
-
-    .secondary-color {
-      background-color: <%=Setting.first.secondary_color %>;
-    }
-
-    .solid-element {
-      background-color: <%=Setting.first.primary_color %>;
-    }
-
-    .solid-element:hover {
-      background-color: <%=Setting.first.secondary_color %>;
-    }
-
-    <%end %>
-
-  </style>
-<% end %>
-<%= yield :css %>
 <head>
+  <% content_for :css do %>
+    <style>
+      <%cache(Setting.first) do%>
+      .primary-color {
+        background-color: <%=Setting.first.primary_color %>;
+      }
 
+      .secondary-color {
+        background-color: <%=Setting.first.secondary_color %>;
+      }
+
+      .additional-color{
+        background-color: <%=Setting.first.additional_color %>;
+      }
+      .solid-element {
+        background-color: <%=Setting.first.primary_color %>;
+      }
+
+      .solid-element:hover {
+        background-color: <%=Setting.first.secondary_color %>;
+      }
+
+      .primary-button{
+        background-color: <%=Setting.first.primary_color %>;
+        font-family: <%=Setting.first.font %>;
+      }
+
+      .primary-button a{
+        color: white;
+      }
+
+      .primary-font::before{
+        font-family: <%=Setting.first.font %>;
+      }
+
+      .primary-font a:hover{
+        color: <%=Setting.first.additional_color %>;
+      }
+
+      .h1-header{
+        color: <%=Setting.first.additional_color %>;
+        margin-bottom: 10px;
+      }
+
+      .link{
+        color: <%=Setting.first.additional_color %>;
+        margin-bottom: 10px;
+      }
+
+
+      <%end %>
+
+    </style>
+  <% end %>
+  <%= yield :css %>
   <title><%=(Setting.first.site_name) %></title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -56,10 +86,10 @@
 </head>
 
 
-<body>
+<body class="primary-font">
 <div>
   <div class="header primary-color" id="header">
-    <%= link_to image_tag("LogoWide-ScienceEngineeringWhite.png", height: '110', width: '550', :alt => "University Logo", class: "float-left"), root_path %>
+    <%= link_to image_tag(Setting.first == nil ? "LogoWide-ScienceEngineeringWhite.png" :Setting.first.logo, height: '110', width: '550', :alt => "University Logo", class: "float-left"), root_path %>
     <%= render 'user_info' %>
   </div>
   <div class="navigation secondary-color">

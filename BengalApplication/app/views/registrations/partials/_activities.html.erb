@@ -1,4 +1,4 @@
-<tr class="event-collapse">
+<tr class="event-collapse solid-element">
   <td class="name"><%= e.name %></td>
   <td><%= e.description %></td>
   <td><span class="glyphicon glyphicon-menu-down"></span></td>
@@ -33,7 +33,7 @@
                 <%= @user.sessions.include?(s) ? "Registered" : check_box_tag("register", value = s.id, false, title: "Register for activity", role: role, user_id: @user.id) %>
               <% end %>
             </td>
-            <td><%= @user.sessions.include?(s) ? content_tag(:button, "", class: ["button-small", "glyphicon", "glyphicon-remove", "left-indent", "remove-button"], title: "Unregister for activity", user_id: @user.id, session_id: s.id, role: role) : nil %></td>
+            <td><%= @user.sessions.include?(s) ? content_tag(:button, "", class: ["button-small", "solid-color", "glyphicon", "glyphicon-remove", "left-indent", "remove-button"], title: "Unregister for activity", user_id: @user.id, session_id: s.id, role: role) : nil %></td>
           </tr>
         <% end %>
         </tbody>

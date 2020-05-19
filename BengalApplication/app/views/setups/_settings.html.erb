@@ -3,28 +3,40 @@
 
   <h1>School Information Input</h1>
   <table class ="table">
-    <%= form_tag("save_settings") do %>
+    <%= form_tag("save_settings", html: {multipart: true}) do %>
       <tr>
         <td>Select your school's primary color:</td>
-        <td><%= text_field_tag "primary_color" %></td>
+        <td><%= text_field_tag "primary_color", @setting.primary_color %></td>
       </tr>
       <tr>
         <td>Select your schools secondary color:</td>
-        <td><%= text_field_tag "secondary_color" %></td>
+        <td><%= text_field_tag "secondary_color", @setting.secondary_color %></td>
+      </tr>
+      <tr>
+        <td>Select additional color: </td>
+        <td><%= text_field_tag "additional_color", @setting.additional_color %></td>
+      </tr>
+      <tr>
+        <td>Select font</td>
+        <td><select id="font" name="font">
+          <% @fonts.each do |font| %>
+            <option><%=font %></option>
+          <%end %>
+        </select></td>
       </tr>
       <tr>
         <td>Select your site name:</td>
-        <td><%= text_field_tag "site-name" %></td>
+        <td><%= text_field_tag "site_name", @setting.site_name %></td>
       </tr>
       <tr>
         <td>Import your logo</td>
-        <td><%= file_field_tag "logo" %></td>
+        <td><%= file_field_tag "logo", multipart: true, direct_upload: true%></td>
       </tr>
       <tr>
         <td><%= Setting.first != nil ? link_to("Reset Default", default_settings_path, class: "button-small solid-element", data: {confirm: "Are you sure?"}): "" %></td>
         <td><%= submit_tag "Save and Continue", class: "button-small solid-element" %></td>
-        <td><img id="logo-image" src="#"/></td>
       </tr>
     <% end %>
   </table>
 </div>
+<img id="logo-image" src="#"/>

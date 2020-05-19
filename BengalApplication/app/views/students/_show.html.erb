@@ -14,17 +14,17 @@
     <div class="card-header">Actions</div>
     <div class="card-body text-dark">
       <div class="indent-bellow">
-        <button class="button button-small" title="Build a team">
+        <button class="button primary-button button-small" title="Build a team">
           <span class="fa fa-users"> </span><%= link_to " Create Team", new_team_path %>
         </button>
       </div>
       <div class="indent-bellow">
-        <button class="button button-small" title="Register For Events">
+        <button class="button primary-button button-small" title="Register For Events">
           <span class="fa fa-edit"></span>
           <%= link_to "Register", controller: "events", action: "index", role: "User", id: @user.id, title: "Register for activities" %>
         </button>
       </div>
-      <button class="btn button-small" title="Print My Schedule">
+      <button class="primary-button button button-small" title="Print My Schedule">
         <span class="glyphicon glyphicon-print" aria-hidden="true"> </span><%= link_to "  Print", schedule_path(@user.id), target: :_blank %>
       </button>
     </div>

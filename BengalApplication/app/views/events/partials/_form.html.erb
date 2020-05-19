@@ -44,7 +44,7 @@
                 <%= text_field_tag "address_1", nil, placeholder: "Address (optional)", class: "form-control" %>
               </div>
               <div class="col-lg-4">
-                <button class="button-small glyphicon glyphicon-plus" type="button" title="Add A New Location"></button>
+                <button class="button-small solid-element glyphicon glyphicon-plus" type="button" title="Add A New Location"></button>
               </div>
             </div>
           </div>
@@ -58,7 +58,7 @@
                 <%= text_field_tag "room_name_1", nil, placeholder: "Room Name (optional)", class: "form-control" %>
               </div>
               <div class="col-lg-3 sub-section">
-                <button class="button-small glyphicon glyphicon-plus" type="button" title="Add A New Room"></button>
+                <button class="button-small solid-element glyphicon glyphicon-plus" type="button" title="Add A New Room"></button>
               </div>
             </div>
           </div>
@@ -66,7 +66,7 @@
 
         <div class="row">
           <div class="col-lg-3 left-indent-more">
-            <%= submit_tag @edit ? "Update" : "Save and Continue", class: "button button-small" %>
+            <%= submit_tag @edit ? "Update" : "Save and Continue", class: "button solid-element button-small" %>
           </div>
         </div>
       <% end %>

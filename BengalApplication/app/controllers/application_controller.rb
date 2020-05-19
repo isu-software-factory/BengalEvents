@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   include Pundit
-  before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :configure_setup, except: [:admin_setup, :create_admin, :new_settings]
+  before_action :configure_permitted_parameters, if: :devise_controller?
 
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
   protect_from_forgery with: :exception
@@ -40,7 +40,7 @@ class ApplicationController < ActionController::Base
 
   def add_home_breadcrumb
     role = current_user.roles.first.role_name
-    if role != "Student" || role != "Teacher"
+    if role != "Student" && role != "Teacher"
       add_breadcrumb "Home", profile_path(current_user)
     else
       add_breadcrumb "Home", root_path(role: "User", id: current_user.id)

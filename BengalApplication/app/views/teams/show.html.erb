@@ -26,7 +26,7 @@
               <td><%=s.start_time.strftime("%l:%M %p") %> -  <%= s.end_time.strftime("%l:%M %p") %></td>
               <%if policy(@team).change? %>
                 <td>
-                  <%=button_to("Drop Event", {controller: "registrations", id: @team.id, session_id: s.id, role: @role, action: :drop}, class: "button", data: {confirm: "Are you sure?"}) %>
+                  <%=button_to("Drop Event", {controller: "registrations", id: @team.id, session_id: s.id, role: @role, action: :drop}, class: "button solid-element", data: {confirm: "Are you sure?"}) %>
                 </td>
               <%end %>
             </tr>
@@ -64,7 +64,7 @@
                   <%if m == @team.get_lead %>
                     <td>Can't Drop Team Lead</td>
                   <%else %>
-                    <td><%=button_to("Drop",  {method: :post, controller: "groupings", action: :drop, part_id: m.id, id: @team.id}, class: "button", data: {confirm: "Are you sure?"})%></td>
+                    <td><%=button_to("Drop",  {method: :post, controller: "groupings", action: :drop, part_id: m.id, id: @team.id}, class: "button solid-element", data: {confirm: "Are you sure?"})%></td>
                   <%end %>
                 <%end %>
               </tr>
@@ -80,20 +80,20 @@
         <div class="card-body">
           <%if policy(@team).change? %>
             <p>Invite members to join your team.</p>
-            <p><%=link_to "Invite Members", ({controller: "teams", action: "invite", id: @team.id}), class: "button" %></p>
+            <p><%=link_to "Invite Members", ({controller: "teams", action: "invite", id: @team.id}), class: "button solid-element" %></p>
             <%if @team.users.count > 1 %>
               <p>You can register for events as a team. Every member will participate in the event.</p>
-              <p><%=link_to "Register For Activities", ({controller: "events", action: "index", role: "Team", id: @team.id}), class: "button"%></p>
+              <p><%=link_to "Register For Activities", ({controller: "events", action: "index", role: "Team", id: @team.id}), class: "button solid-element"%></p>
             <%else %>
 
               <p>You have to have at least two members to register for an event as a team.</p>
             <%end %>
             <%else %>
               <p>Your team lead will register the team for events. Talk to them to agree on what events you want to take.</p>
-              <p><%=button_to("Leave This Team",  {method: :post, controller: "groupings", action: :drop, part_id: current_user.id, id: @team.id}, class: "btn btn-info", data: {confirm: "Are you sure?"}) %></p>
+              <p><%=button_to("Leave This Team",  {method: :post, controller: "groupings", action: :drop, part_id: current_user.id, id: @team.id}, class: "solid-element btn-info", data: {confirm: "Are you sure?"}) %></p>
           <%end %>
           <p>You can print your team schedule here.</p>
-          <button class="btn button">
+          <button class="solid-element button">
             <span class="glyphicon glyphicon-print" aria-hidden="true"> </span><%= link_to "  Print", {controller: "teams", action: "teamschedulepdf", part_id: @team.id}, target: :_blank %>
           </button>
         </div>

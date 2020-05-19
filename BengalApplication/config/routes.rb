@@ -8,7 +8,7 @@ Rails.application.routes.draw do
 
   resources :admins
   resources :coordinators
-  get "events/index/:role/:id" => "events#index"
+  get "events/index/:role/:id" => "events#index", as: "register_for_activity"
   get "sponsors/pdf/:id" => "sponsors#pdfshow"
   get "teams/pdf/:id" => "teams#teamschedulepdf"
   get "students/schedule/:id" => "students#schedule"

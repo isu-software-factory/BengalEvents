@@ -25,9 +25,9 @@
               <a class="btn dropdown-toggle" href="#" role="button" id="dropdownMenuLink1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
               <%= s.first_name + " " + s.last_name %>
               <div class="dropdown-menu menu-container dropdown-menu-left">
-                <%=link_to "Register For Student", {controller: "events", action: "index", id: s.id, role: "User"}, class: "dropdown-item", title: "Register in place of the student" %>
-                <%=link_to "Request New Password", root_path("User", 1), user: s.id, title: "Request a new password for student", class: "dropdown-item reset-password", remote: true %>
-                <%=link_to "Print Schedule", schedule_path(s.id), title: "Print Student Schedule", class: "dropdown-item", target: :blank %>
+                <%= link_to "Register For Student", {controller: "events", action: "index", id: s.id, role: "User"}, class: "dropdown-item", title: "Register in place of the student" %>
+                <%= link_to "Request New Password", root_path("User", 1), user: s.id, title: "Request a new password for student", class: "dropdown-item reset-password", remote: true %>
+                <%= link_to "Print Schedule", schedule_path(s.id), title: "Print Student Schedule", class: "dropdown-item", target: :blank %>
               </div>
             </div>
           </th>
@@ -46,24 +46,24 @@
         <div class="card-header">Actions</div>
         <div class="card-body text-dark">
           <div class="indent-bellow">
-            <button class="solid-element button-small" title="Add or Remove students">
-              <span class="fa fa-user-plus"> </span><%= link_to " Add New Sutdents", controller: "homeroutes", action: "new", name: "Student" %>
-            </button>
+            <span class="primary-button button-small"><i class="fa fa-user-plus"></i>
+              <%= link_to " New Sutdents", {controller: "homeroutes", action: "new", name: "Student"}, title: "Add or Remove Students" %>
+</span>
           </div>
           <div class="indent-bellow">
-            <button class="solid-element button-small" title="View My Student's Registrations">
-              <span class="glyphicon glyphicon-print"></span><%=link_to " Class Registrations", class_registrations_path(@user.id), target: :blank%>
-            </button>
+            <span class="primary-button button-small"><i class="glyphicon glyphicon-print"></i>
+            <%= link_to " Class Registrations", class_registrations_path(@user.id), title: "View My Student's Registrations", target: :blank %>
+            </span>
           </div>
           <div class="indent-bellow">
-            <button class="solid-element button-small" title="Download My Class Attendance Sheet">
-              <span class="glyphicon glyphicon-download-alt"></span><%=link_to " Class Attendance", attendance_path(@user.id)%>
-            </button>
+            <span class="primary-button button-small"><i class="glyphicon glyphicon-download-alt"></i>
+            <%= link_to " Class Attendance", attendance_path(@user.id), title: "Download My Class Attendance Sheet" %>
+            </span>
           </div>
           <div class="indent-bellow">
-            <button class="solid-element button-small" title="Register for events">
-              <span class="fa fa-edit"></span><%= link_to " Register", controller: "events", action: "index", title: "Register for activities" %>
-            </button>
+            <span class="primary-button button-small"><i class="fa fa-edit"></i>
+            <%= link_to " Register", register_for_activity_path(role: "User", id: @user.id), title: "Register for activities" %>
+            </span>
           </div>
         </div>
       </div>

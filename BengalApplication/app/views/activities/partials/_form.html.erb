@@ -90,12 +90,12 @@
                 </div>
                 <% if s == @sessions.last || @sessions.empty? %>
                   <div class="col-lg-3">
-                    <button class="button-small left-indent glyphicon glyphicon-minus" title="Remove Session" type="button"></button>
-                    <button class="button-small left-indent glyphicon glyphicon-plus new-session" title="Add New Session" type="button"></button>
+                    <button class="button-small solid-element left-indent glyphicon glyphicon-minus" title="Remove Session" type="button"></button>
+                    <button class="button-small solid-element left-indent glyphicon glyphicon-plus new-session" title="Add New Session" type="button"></button>
                   </div>
                 <% else %>
                   <div class="col-lg-3">
-                    <button class="button-small left-indent glyphicon glyphicon-minus" title="Remove Session" type="button"></button>
+                    <button class="button-small solid-element left-indent glyphicon glyphicon-minus" title="Remove Session" type="button"></button>
                   </div>
                 <% end %>
               </div>
@@ -108,7 +108,7 @@
             <%= submit_tag "Confirm", class: "btn button-small" %>
           </div>
           <div class="col-lg-1">
-            <button class="btn button-small glyphicon glyphicon-plus new-activity" title="Add New Activity" type="button"></button>
+            <button class="solid-element button-small glyphicon glyphicon-plus new-activity" title="Add New Activity" type="button"></button>
           </div>
         </div>
       <% end %>
