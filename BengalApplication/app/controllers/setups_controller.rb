@@ -2,13 +2,9 @@ class SetupsController < ApplicationController
   before_action :get_fonts, only: ['new_settings', 'edit_settings']
 
   def admin_setup
-    # create settings
-    Setting.create()
-    Setting.first.logo.attach(io: File.open("app/assets/images/LogoWide-ScienceEngineeringWhite.png"), filename: "LogoWide-ScienceEngineeringWhite.png")
-    # set configure to true
-    Setup.create(configure: true)
-    # create user roles
-    create_roles
+    unless Setup.exists?(id: 1)
+      set_settings
+    end
     @user = User.new
   end
 
@@ -83,5 +79,15 @@ class SetupsController < ApplicationController
 
   def get_fonts
     @fonts = ["Arial", "Sans-Serif", "Times New Roman", "Times", "Courier", "Verdana", "Georgia", "Palatino", "Bookman", "Comic Sans MS", "Arial Black", "Impact" ]
+  end
+
+  def set_settings
+    # create settings
+    Setting.create()
+    Setting.first.logo.attach(io: File.open("app/assets/images/LogoWide-ScienceEngineeringWhite.png"), filename: "LogoWide-ScienceEngineeringWhite.png")
+    # set configure to true
+    Setup.create(configure: true)
+    # create user roles
+    create_roles
   end
 end
