@@ -8,7 +8,7 @@
   <% end %>
   <% unless (controller.action_name == "pdfshow") || (controller.action_name == "teamschedulepdf" || controller.action_name == "print_schedule") || (controller.action_name == "print_class_registrations") %>
     <div class="dropdown menu">
-      <a class="button-small secondary-color dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <a class="button-small-view primary-button dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         <span class="glyphicon glyphicon-cog"></span>
         <%= current_user.first_name %></a>
       <div class="dropdown-menu menu-container dropdown-menu-right">

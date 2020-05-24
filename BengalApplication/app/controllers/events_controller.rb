@@ -83,10 +83,17 @@ class EventsController < ApplicationController
     end
   end
 
+  def change_visibility
+    @checked = params[:change]
+    @event = Event.find(params[:id])
+    @checked == "true" ? @event.update(visible: false) : @event.update(visible: true)
+    head :no_content
+  end
+
   private
 
   def event_params
-    params.permit(:name, :start_date, :description)
+    params.permit(:name, :start_date, :description, :visible_constraint)
   end
 
   # get locations from parameters

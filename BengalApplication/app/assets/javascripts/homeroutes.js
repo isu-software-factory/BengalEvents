@@ -3,6 +3,15 @@
 // printing page
 $(document).on('ready page:load turbolinks:load', function () {
 
+    // if home page
+    // if ($("#check_visible").length){
+    //     $("#check_visible").change(function(){
+    //         if ($(this).is(":checked")){
+    //
+    //         }
+    //     })
+    // }
+
     // new student page
     // assign function to all minus buttons
     if ($("#student-form").length) {

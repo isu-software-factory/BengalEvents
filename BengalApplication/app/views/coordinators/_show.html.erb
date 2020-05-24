@@ -8,7 +8,14 @@
             <% if policy(event).destroy? %>
               <%= link_to " Edit", edit_event_path(event), class: "primary-button  button-small glyphicon glyphicon-edit" %>
               <%= link_to "Delete", event_path(event.id), class: "btn-danger button-small", data: {method: :delete, confirm: "Are you sure?"} %>
-            <% end %>
+              <%= check_box_tag "check_visible", event.visible, checked=event.visible,
+              data: {
+                  remote: true,
+                  url: event_visibility_url(event.id, event.visible.to_s),
+                  method: "POST"
+              }%>
+              <span class="glyphicon glyphicon-info-sign small-icon" data-toggle="tooltip" data-placement="top" title=""></span>
+          <% end %>
             <span class="badge badge-danger">Starts at <%= event.start_date.strftime("%d/%m/%Y") %></span>
           </h1>
 
@@ -90,9 +97,15 @@
         <div class="card border-dark mb-3" style="max-width: 18rem;">
           <div class="card-header">Actions</div>
           <div class="card-body text-dark">
+            <div class="indent-bellow">
             <%= link_to " Event", new_event_path, class: "primary-button  button-small glyphicon glyphicon-plus", title: "Create a new event" %>
+            </div>
+            <div class="indent-bellow">
             <%= link_to " Users", all_users_path, class: "primary-button  button-small glyphicon glyphicon-user", title: "View All Users Profiles" %>
+            </div>
+            <div class="indent-bellow">
             <%= link_to " Reports", report_path, class: "primary-button   button-small glyphicon glyphicon-stats", title: "View Reports" %>
+            </div>
           </div>
         </div>
       </div>

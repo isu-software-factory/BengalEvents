@@ -2,9 +2,9 @@
   <div class="col-lg-12">
 <script>print_this()</script>
 <%@students.each do |s| %>
-  <div class="student-name"><h3><%=s.first_name + " " + s.last_name %></h3></div>
+  <div class="student-name primary-color"><h3><%=s.first_name + " " + s.last_name %></h3></div>
   <%if s.sessions.count > 0 %>
-    <div class="increase-bottom-margin">
+    <div class="increase-bottom-margin secondary-color">
   <table class="table increase-bottom-margin">
     <thead class="thead-dark">
     <tr>

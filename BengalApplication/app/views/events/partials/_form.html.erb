@@ -9,18 +9,21 @@
 
 <div class="container">
   <div class="card mb-3">
-    <div class="card-header event-header"><h1>Event Information</h1></div>
+    <div class="primary-color event-header"><h1>Event Information</h1></div>
     <div class="card-body text-dark">
       <%= form_tag(@action, id: "event-form") do %>
         <div class="row">
-          <div class="col-lg-4">
+          <div class="col-lg-3">
             <%= text_field_tag "name", @edit ? @event.name : nil, placeholder: "Event Name", class: "form-control left-indent-more" %>
           </div>
-          <div class="col-lg-4">
-            <%= text_area_tag "description", @edit ? @event.description : nil, placeholder: "Detailed Description", class: "form-control" %>
+          <div class="col-lg-3">
+            <%= text_area_tag "description", @edit ? @event.description : nil, placeholder: "Detailed Description", class: "form-control control-label" %>
           </div>
-          <div class="col-lg-4">
-            <%= text_field_tag "start_date", @edit ? @event.start_date : nil, placeholder: "Start Date", class: "control-label" %>
+          <div class="col-lg-3">
+            <%= text_field_tag "start_date", @edit ? @event.start_date.strftime("%b %d %Y") : nil, placeholder: "Start Date", class: "form-control control-label" %>
+          </div>
+          <div class="col-lg-3">
+            <%=text_field_tag "visible_constraint", @edit && @event.visible_constraint != nil ? @event.visible_constraint.strftime("%b %d %Y") : nil, placeholder: "Visibility Time Constraint", class: "form-control control-label" %>
           </div>
         </div>
 
@@ -66,7 +69,7 @@
 
         <div class="row">
           <div class="col-lg-3 left-indent-more">
-            <%= submit_tag @edit ? "Update" : "Save and Continue", class: "button solid-element button-small" %>
+            <%= submit_tag @edit ? "Update" : "Save and Continue", class: "button primary-button" %>
           </div>
         </div>
       <% end %>

@@ -52,7 +52,7 @@ class HomeroutesController < ApplicationController
     end
 
     add_home_breadcrumb
-    if check_user
+    if check_user && @current_user_role != "Coordinator" && @current_user_role != "Admin"
       add_breadcrumb @user.first_name + "'s Profile", profile_path(@user)
     end
 

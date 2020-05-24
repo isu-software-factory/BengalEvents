@@ -88,6 +88,6 @@ class SetupsController < ApplicationController
     # set configure to true
     Setup.create(configure: true)
     # create user roles
-    create_roles
+    # create_roles
   end
 end
