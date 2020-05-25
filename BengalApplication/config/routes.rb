@@ -9,7 +9,6 @@ Rails.application.routes.draw do
   resources :admins
   resources :coordinators
   get "events/index/:role/:id" => "events#index", as: "register_for_activity"
-  post "events/:id/:change" => "events#change_visibility", as: "event_visibility"
   get "sponsors/pdf/:id" => "sponsors#pdfshow"
   get "teams/pdf/:id" => "teams#teamschedulepdf"
   get "students/schedule/:id" => "students#schedule"
@@ -65,6 +64,8 @@ resources :events
   get "edit_settings" => "setups#edit_settings", as: "edit_settings"
   post "update_settings" => "setups#update_settings", as: "update_settings"
   get "default_settings" => "setups#reset_default", as: "default_settings"
+  post "events/:id/:change" => "events#change_visibility", as: "event_visibility"
+
 # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
 end

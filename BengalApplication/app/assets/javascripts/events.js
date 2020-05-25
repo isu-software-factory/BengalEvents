@@ -9,9 +9,17 @@ $(document).on('ready page:load turbolinks:load', function () {
     });
 
     // assign all checkbox with function
-    $("input[type='checkbox']").change(function () {
-        register_check_box(this);
-    });
+    if ($("#registration_box").length) {
+        $("input[type='checkbox']").change(function () {
+            register_check_box(this);
+        });
+    }
+
+    if ($("#show").length){
+        $("#show").change(function(){
+            show_visibility_box(this);
+        })
+    }
 
     $(".accordion").hide();
 
@@ -336,3 +344,12 @@ function removePreviousButton(button) {
 $("#reports_start_date").datepicker({
     dateFormat: "yy-mm-dd"
 });
+
+function show_visibility_box(checkbox){
+    if ($(checkbox).prop("checked")){
+        $("#hide").attr("hidden", false);
+    }else{
+        $("#hide").attr("hidden", true);
+    }
+
+}

@@ -19,11 +19,15 @@
           <div class="col-lg-3">
             <%= text_area_tag "description", @edit ? @event.description : nil, placeholder: "Detailed Description", class: "form-control control-label" %>
           </div>
-          <div class="col-lg-3">
+          <div class="col-lg-2">
             <%= text_field_tag "start_date", @edit ? @event.start_date.strftime("%b %d %Y") : nil, placeholder: "Start Date", class: "form-control control-label" %>
           </div>
-          <div class="col-lg-3">
-            <%=text_field_tag "visible_constraint", @edit && @event.visible_constraint != nil ? @event.visible_constraint.strftime("%b %d %Y") : nil, placeholder: "Visibility Time Constraint", class: "form-control control-label" %>
+          <div class="col-lg-2" id="hide" hidden="true">
+            <%=text_field_tag "visible_constraint", @edit && @event.visible_constraint != nil ? @event.visible_constraint.strftime("%b %d %Y") : nil, placeholder: "Visibility Time Constraint", class: "form-control control-label"%>
+          </div>
+          <div class="col-lg-2">
+            <%=check_box_tag "show", true  %>
+            <span class="glyphicon glyphicon-info-sign small-icon" data-toggle="tooltip" data-placement="top" title="Hello"></span>
           </div>
         </div>
 
@@ -68,8 +72,11 @@
         <% end %>
 
         <div class="row">
-          <div class="col-lg-3 left-indent-more">
+          <div class="col-lg-2 left-indent-more">
             <%= submit_tag @edit ? "Update" : "Save and Continue", class: "button primary-button" %>
+          </div>
+          <div class="col-lg-3">
+            <%=link_to "Copy Events And Activities", new_settings_path, class: "button primary-button", title: "Copy an event and activities from a previous event " %>
           </div>
         </div>
       <% end %>

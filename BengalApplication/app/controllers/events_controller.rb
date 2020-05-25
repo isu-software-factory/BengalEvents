@@ -66,6 +66,9 @@ class EventsController < ApplicationController
     @event = Event.find(params[:id])
     authorize @event
     if @event.update(event_params)
+      if params[:show].nil?
+        @event.update(visible_constraint: nil)
+      end
       redirect_to profile_path(current_user), :notice => 'Successfully Updated ' + @event.name
     else
       flash[:errors] = @event.errors.full_messages
@@ -88,6 +91,10 @@ class EventsController < ApplicationController
     @event = Event.find(params[:id])
     @checked == "true" ? @event.update(visible: false) : @event.update(visible: true)
     head :no_content
+  end
+
+  def copy
+    @events = Event.all
   end
 
   private
@@ -177,6 +184,20 @@ class EventsController < ApplicationController
     end
     errors
   end
+
+  # def update_events
+  #   @events.each do |e|
+  #     update_visible_constraint(e)
+  #   end
+  # end
+  #
+  # def update_visible_constraint(event)
+  #   if event.visible_constraint != nil
+  #     if DateTime.now >= event.visible_constraint
+  #       event.update(visible: false)
+  #     end
+  #   end
+  # end
 
 end
 
