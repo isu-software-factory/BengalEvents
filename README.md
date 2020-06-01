@@ -15,6 +15,8 @@ For deploying please see the attached document named "Deployment.docx" in docs f
 
 ## Docker Instructions
 
+## Docker Instructions
+
 - Install Docker 
     - In the terminal, run 'sudo apt-get update'
     - 'sudo apt-get update'
@@ -27,12 +29,19 @@ For deploying please see the attached document named "Deployment.docx" in docs f
 - Verify Docker-Compose Version/Installation 
     - 'docker-compose -v'
 - Create Docker Image
+    - In desired folder, run 'sudo git clone https://github.com/isu-software-factory/BengalEvents.git'
     - In the 'BengalApplication' folder, pull latest update 'git pull origin dev'
     - sudo docker-compose run --rm web rake db:migrate
+    - sudo docker build -t "desiredImageName" .
 - Run Docker Image
     - sudo docker-compose up
     - check localhost:3000, it should be running in the Admin Setup page.
 
+- Push to Docker Hub
+    - sudo docker tag "imageName" isusoftwarefactory/"imageName"
+    - sudo docker push isusoftwarefactory/"imageName"
     
+ 
+ 
  
 
