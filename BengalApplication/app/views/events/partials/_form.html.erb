@@ -76,7 +76,7 @@
             <%= submit_tag @edit ? "Update" : "Save and Continue", class: "button primary-button" %>
           </div>
           <div class="col-lg-3">
-            <%=link_to "Copy Events And Activities", new_settings_path, class: "button primary-button", title: "Copy an event and activities from a previous event " %>
+            <%=link_to "Copy Events And Activities", copy_event_path, class: "button primary-button", title: "Copy an event and activities from a previous event " %>
           </div>
         </div>
       <% end %>

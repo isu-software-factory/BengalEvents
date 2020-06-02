@@ -39,6 +39,7 @@ ActiveRecord::Schema.define(version: 2020_05_18_190204) do
     t.string "equipment"
     t.boolean "ismakeahead"
     t.boolean "iscompetetion"
+    t.integer "identifier"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "event_id"

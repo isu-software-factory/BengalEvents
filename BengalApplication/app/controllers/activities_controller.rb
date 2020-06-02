@@ -1,6 +1,7 @@
 class ActivitiesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_event, only: %i[show]
+  before_action :get_activities, only: [:edit, :new]
   require 'active_support/core_ext/hash'
   def new
     @event = Event.find(params[:event_id])
@@ -17,6 +18,7 @@ class ActivitiesController < ApplicationController
   def create
     @event = Event.find(params[:event_id])
     errors = create_activities(@event)
+
     # any errors with creating activity or sessions
     if errors.empty?
       flash[:notice] = 'Successfully Created Activity'
@@ -208,6 +210,7 @@ def get_param_with_index(name, index)
       return value
     end
   end
+  nil
 end
 
 # get ids from keys with only one underscore
@@ -220,6 +223,17 @@ def get_ids(name)
   end
   ids
 end
+
+# gets or creates a new identifiers for an activity
+def check_identifier(index)
+  identifier = get_param_with_index("repeats_", index.to_s)
+  if identifier.nil?
+    return Activity.last.identifier + 1
+  else
+    return Activity.find_by(name: get_param_with_index("repeat_activity_", index.to_s)).identifier
+  end
+end
+
 # update sessions
 def update_sessions(activity)
   ids = get_keys("end_time")
@@ -235,6 +249,7 @@ def update_sessions(activity)
   end
 end
 
+# deletes a session
 def delete_sessions(activity)
   ids = get_ids("capacity")
   activity.sessions.each do |s|
@@ -245,6 +260,7 @@ def delete_sessions(activity)
   end
 end
 
+# creates activities given by parameters
 def create_activities(event)
   activity_names = get_values("name")
   descriptions = get_values("description")
@@ -256,7 +272,7 @@ def create_activities(event)
   team_sizes = get_values("max_team_tag")
   # create activities
   activity_names.each do |name|
-    local = Activity.new(name: name, description: descriptions[count], ismakeahead: make_ahead[count], iscompetetion: competitions[count], user_id: current_user.id, event_id: event.id, max_team_size: competitions[count] == "true" ? team_sizes[count].to_i : 0)
+    local = Activity.new(name: name, description: descriptions[count], ismakeahead: make_ahead[count], iscompetetion: competitions[count], user_id: current_user.id, event_id: event.id, max_team_size: competitions[count] == "true" ? team_sizes[count].to_i : 0, identifier: check_identifier(count + 1))
     if local.save
       new_activities << local
     else
@@ -310,6 +326,18 @@ def create_session(start_time, room, capacity, activity, end_time)
   errors
 end
 
+def get_activities
+  activities = Activity.all
+  @activities = []
+  @identifiers = []
+  activities.each do |a|
+    unless @identifiers.include?(a.identifier)
+      @activities << a
+      @identifiers << a.identifier
+    end
+  end
+  @activities
+end
 
 def set_event
   @event = Event.find(params[:id])

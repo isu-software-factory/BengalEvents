@@ -168,6 +168,7 @@ Activity.create!([{
                       equipment: "Boxes to use as obstacles.",
                       ismakeahead: false,
                       iscompetetion: false,
+                      identifier: 1,
                       event_id: 1,
                       user_id: 7
                   }, {
@@ -177,9 +178,10 @@ Activity.create!([{
                       event_id: 1,
                       user_id: 7,
                       ismakeahead: false,
-                      iscompetetion: false
+                      iscompetetion: false,
+                      identifier: 2,
 
-                  }, {
+}, {
                       name: "Developing A Game",
                       description: "Develop a game using python",
                       equipment: "None",
@@ -187,8 +189,9 @@ Activity.create!([{
                       user_id: 9,
                       max_team_size: 2,
                       ismakeahead: false,
-                      iscompetetion: true
-                  }])
+                      iscompetetion: true,
+                      identifier: 3,
+}])
 Location.create!([{
                       location_name: "SUB",
                       address: "921 S 8th Ave, Pocatello, ID 83209"

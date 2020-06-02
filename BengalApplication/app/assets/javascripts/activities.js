@@ -26,6 +26,14 @@ $(document).on('ready page:load turbolinks:load', function () {
         setSlider(this);
     });
 
+    $(".repeat").click(function(){
+        setRepeat(this);
+    });
+
+    $(".glyphicon-tasks").click(function(){
+       getDetailedReports(this);
+    });
+
     // check if checkbox is checked
     setSlider($(".competetion").first());
 
@@ -58,19 +66,58 @@ $(document).on('ready page:load turbolinks:load', function () {
 
 
 $(document).ready(function () {
-    if (($("#name_New_1").attr("value") != undefined)) {
+    if (($("#name_New_1").length)) {
         setTimeout(function () {
             setRooms($(".col-lg-4").last().children().last().children().last())
         }, 200);
     }
 
-    if (($("#name_New_1").attr("value") != undefined)) {
+    if (($("#name_New_1").length)) {
         setTimeout(function () {
             setEditRooms()
         }, 300);
     }
     sessionCount = parseInt($("#sessions_count").val());
 });
+
+// hide or show repeat dev
+function setRepeat(checkbox){
+    if ($(checkbox).prop("checked")){
+        $(checkbox).parent().next().attr("hidden", false);
+    }else{
+        $(checkbox).parent().next().attr("hidden", true);
+    }
+}
+
+
+// gets a detailed report for activity
+function getDetailedReports(e){
+    let id = $(e).attr("activity_id");
+    Rails.ajax({
+        url: `/get_detailed_report/${id}`,
+        type: 'GET',
+        dataType: "json",
+        success: function (data){
+            if (data.activities != undefined) {
+                for (i = 0; i < data.activities.activity.length; i++) {
+                    let activity = data.activities.activity[i].name;
+                    let part = data.activities.participants[i];
+                    let type = "";
+                    if (data.activities.activity[i].iscompetetion) {
+                        type = "Competition"
+                    } else {
+                        type = "Non-Competition"
+                    }
+                    $("#body").append(tableRow(activity, type, part, "David"));
+                }
+                $("#activity-notice").children().remove();
+            }else{
+                $("#activity-notice").children().remove();
+                $("#activity-notice").append($("<h2>No Events Occured On This Date</h2>"));
+            }
+        }
+    })
+}
 
 // When editing activity, will set the rooms for the sessions
 function setEditRooms() {
@@ -127,7 +174,7 @@ function loadActivities(date) {
 
 function tableRow(name, type, participants, sponsor){
     let row = $("<tr></tr>");
-    row.addClass("event-collapse");
+    row.addClass("event-collapse solid-element");
     row.append(createTD(name));
     row.append(createTD(type));
     row.append(createTD(participants));

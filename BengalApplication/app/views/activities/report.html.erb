@@ -29,7 +29,7 @@
         <td><%= activity.iscompetetion ? "Competetion" : "Non-Competition" %></td>
         <td><%= activity.total_participants %></td><!--Total participants-->
         <td><%= activity.user.first_name + " " + activity.user.last_name %></td><!--Sponsored by-->
-        <td><span class="glyphicon glyphicon-tasks" title="See All Reports"></span></td>
+        <td><span activity_id="<%=activity.id %>" class="glyphicon glyphicon-tasks" title="See All Reports"></span></td>
       </tr>
     <% end %>
     </tbody>

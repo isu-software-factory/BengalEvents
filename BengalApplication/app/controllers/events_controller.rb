@@ -97,7 +97,55 @@ class EventsController < ApplicationController
     @events = Event.all
   end
 
+  def create_copy
+    @event = get_values("event")
+    @activities = get_values("activity")
+    if @event.length > 1 || @event.length == 0
+      redirect_to copy_event_path, notice: "You can only copy 1 event."
+    else
+      errors = create_event_copy(@event[0], @activities)
+      if errors.length > 0
+        flash[:errors] = errors
+        redirect_back(fallback_location: copy_event_path)
+      else
+        redirect_to profile_path(current_user.id)
+      end
+    end
+  end
+
   private
+
+  def create_event_copy(event, activities)
+    @event = Event.find(event)
+    @new_event = Event.create(name: @event.name, description: @event.description, start_date: @event.start_date, visible: @event.visible, visible_constraint: @event.visible_constraint)
+    errors = create_activities_copy(@new_event, activities)
+    errors
+  end
+
+  def create_activities_copy(event, activities)
+    errors = []
+    activities.each do |a|
+      @a = Activity.find(a)
+      @activity = Activity.new(name: @a.name, description: @a.description, ismakeahead: @a.ismakeahead, iscompetetion: @a.iscompetetion, user_id: current_user.id, event_id: event.id, max_team_size: @a.max_team_size)
+      unless @activity.save
+        errors += @activity.errors.full_messages
+      else
+        errors += create_sessions_copy(@activity, @a)
+      end
+    end
+    errors
+  end
+
+  def create_sessions_copy(activity_copy, activity)
+    errors = []
+    activity.sessions.each do |s|
+      @new_session = Session.new(start_time: s.start_time, capacity: s.capacity, activity_id: activity_copy.id, end_time: s.end_time, room_id: s.room.id)
+      unless @new_session.save
+        errors += @new_session.errors.full_messages
+      end
+    end
+    errors
+  end
 
   def event_params
     params.permit(:name, :start_date, :description, :visible_constraint)
