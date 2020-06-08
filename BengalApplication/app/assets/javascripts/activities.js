@@ -318,7 +318,7 @@ function createRow() {
 // create a button
 function createButton(type, sessionType) {
     let button = document.createElement("button");
-    $(button).attr("class", "button-small glyphicon glyphicon-" + type + " left-indent " + sessionType);
+    $(button).attr("class", "button-small solid-element glyphicon glyphicon-" + type + " left-indent " + sessionType);
     $(button).attr("title", "Add New Session");
     $(button).attr("type", "button");
     if (type == "plus") {

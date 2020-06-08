@@ -4,7 +4,7 @@
     <div class="col border-right">
 
       <h1 class="accordian"><%= @event.name %>
-         <%=link_to " Edit", edit_event_path(@event), class: "btn button-small glyphicon glyphicon-edit" %>
+         <%=link_to " Edit", edit_event_path(@event), class: "solid-element button-small glyphicon glyphicon-edit" %>
         <%= link_to "Delete", event_path(@event.id), class: "btn btn-danger", data: {method: :delete, confirm: "Are you sure?"} %></h1>
 
       <div class="alert alert-success" id="flash" role="alert">
@@ -51,7 +51,7 @@
               <p> Capacity: <%= session.capacity %></p>
               <%= button_to "Register", {controller: "registrations", action: "register",
                                          id: session.id, user_id: current_user.id},
-                            class: "button", id: "Register_button" %>
+                            class: "button solid-element", id: "Register_button" %>
             <% end %>
             <td><%= link_to "Edit", edit_activity_path(activities) %></td>
         <% end %>
@@ -75,7 +75,7 @@
           <p class="card-text">Create a Location for the sponsor to choose from for their event.</p>
           <hr>
           <%# end %>
-          <button class="btn button-small" title="Create A New Event For <%= @event.name %>">
+          <button class="solid-element button-small" title="Create A New Event For <%= @event.name %>">
             <p>
               <span class="fas fa-calendar-plus"></span><%= link_to " Create Event", new_activity_path(event_id: @event.id) %>
             </p>

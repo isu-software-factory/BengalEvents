@@ -5,12 +5,14 @@ $(document).on('ready page:load turbolinks:load', function () {
 
     // new student page
     // assign function to all minus buttons
-    $("button").click(function () {
-        if ($("#student-form").find("button").last().prev()[0] === $(this)[0])
-            $(this).parent().parent().parent().prev().children().last().children().last().append(createButton("plus"));
+    if ($("#student-form").length) {
+        $("button").click(function () {
+            if ($("#student-form").find("button").last().prev()[0] === $(this)[0])
+                $(this).parent().parent().parent().prev().children().last().children().last().append(createButton("plus"));
 
-        $(this).parent().parent().parent().remove();
-    });
+            $(this).parent().parent().parent().remove();
+        });
+    }
 
     // student number
     if ($("#student-form").length)

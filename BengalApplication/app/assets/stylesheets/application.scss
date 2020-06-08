@@ -25,16 +25,6 @@
 
 body {
   font-size: 15px;
-  font-family: FontAwesome;
-}
-
-h1, a {
-  color: rgb(244, 121, 32); /*ISU Orange */
-  margin-bottom: 10px;
-}
-
-a:hover {
-  color: rgb(247, 148, 30);
 }
 
 
@@ -52,8 +42,9 @@ a:hover {
   display: none;
 }
 
+
 .button {
-  background-color: rgb(109, 110, 113); /* ISU medium gray */
+  //background-color: rgb(109, 110, 113); /* ISU medium gray */
   border: 2px solid rgb(109, 110, 113);
   color: white;
   padding: 8px 20px;
@@ -155,6 +146,7 @@ a:hover {
 input[type='checkbox'] {
   width: 20px;
   height: 20px;
+
 }
 
 

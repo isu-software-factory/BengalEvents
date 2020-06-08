@@ -1,9 +1,10 @@
 class SetupsController < ApplicationController
+  before_action :get_fonts, only: ['new_settings', 'edit_settings']
+
   def admin_setup
-    # set configure to true
-    Setup.create(configure: true)
-    # create user roles
-    create_roles
+    unless Setup.exists?(id: 1)
+      set_settings
+    end
     @user = User.new
   end
 
@@ -12,7 +13,7 @@ class SetupsController < ApplicationController
     @user = User.new(get_params)
     if @user.save
       @user.roles << Role.find_by(role_name: "Admin")
-      redirect_to new_settings_path
+      redirect_to edit_settings_path
     else
       flash[:errors] = @user.errors.full_messages
       redirect_back(fallback_location: admin_setup_path)
@@ -24,7 +25,7 @@ class SetupsController < ApplicationController
   end
 
   def save_settings
-    @setting = Setting.new(primary_color: params["primary-colors"], secondary_color: params["secondary-colors"], site_name: params["site-name"])
+    @setting = Setting.new(setting_params)
     if @setting.save
       load_settings
       redirect_to root_path
@@ -43,17 +44,22 @@ class SetupsController < ApplicationController
   def update_settings
     @setting = Setting.first
     if @setting.update(setting_params)
-      
       redirect_to profile_path(current_user)
     else
       redirect_back(fallback_location: edit_settings_path)
     end
   end
 
+  def reset_default
+    @setting = Setting.first
+    @setting.reset_default
+    redirect_to edit_settings_path
+  end
+
   private
 
   def setting_params
-    params.permit(:primary_color, :secondary_color)
+    params.permit(:primary_color, :secondary_color, :font, :additional_color, :site_name, :logo)
   end
 
 
@@ -69,5 +75,19 @@ class SetupsController < ApplicationController
         role.save
       end
     end
+  end
+
+  def get_fonts
+    @fonts = ["Arial", "Sans-Serif", "Times New Roman", "Times", "Courier", "Verdana", "Georgia", "Palatino", "Bookman", "Comic Sans MS", "Arial Black", "Impact" ]
+  end
+
+  def set_settings
+    # create settings
+    Setting.create()
+    Setting.first.logo.attach(io: File.open("app/assets/images/LogoWide-ScienceEngineeringWhite.png"), filename: "LogoWide-ScienceEngineeringWhite.png")
+    # set configure to true
+    Setup.create(configure: true)
+    # create user roles
+    create_roles
   end
 end

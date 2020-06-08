@@ -31,9 +31,9 @@
             </thead>
             <% event.activities.each do |e| %>
               <% if e.iscompetetion && @role == "Team" %>
-                <%= render :partial => "registrations/activities", locals: {e: e, role: @role} %>
+                <%= render :partial => "registrations/partials/activities", locals: {e: e, role: @role} %>
               <% elsif !e.iscompetetion && @role == "User" %>
-                <%= render :partial => "registrations/activities", locals: {e: e, role: @role} %>
+                <%= render :partial => "registrations/partials/activities", locals: {e: e, role: @role} %>
               <% end %>
             <% end %>
           </table>

@@ -3,56 +3,55 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 
-tr.event-collapse:hover td{
-  background-color: rgb(246,146,64);
+
+tr.event-collapse:hover td {
+  //@extend .primary-color !optional;
   cursor: pointer;
   color: white;
 }
-.event-collapse td{
-  background-color: rgb(130,130,130);
+
+.event-collapse td {
   color: white;
   font-size: 1.5em;
 }
-.event-header{
-  background-color: rgb(109, 110, 113); /* ISU medium gray */
+
+.event-header {
+  //background-color: rgb(109, 110, 113); /* ISU medium gray */
   color: white;
   font-size: 1.7em;
 }
 
-.session-header{
-  background-color: rgba(244, 121, 32, 0.8);
+.session-header {
+  //background-color: rgba(244, 121, 32, 0.8);
   color: white;
 }
 
-.remove-button{
+.remove-button {
   color: black;
 
 }
 
-//.name{
-//  color: rgb(246,146,64);
-//}
-
-.events:hover td{
+.events:hover td {
   background-color: rgb(196, 193, 188);
 }
 
-.thead-secondary{
+.thead-secondary {
   background-color: rgb(152, 153, 156);
 }
-.hide{
+
+.hide {
   visibility: hidden;
 }
 
-.show{
+.show {
   visibility: visible;
 }
 
-.left-indent-more{
+.left-indent-more {
   margin-left: 20px;
   margin-bottom: 5px;
 }
 
-.registered{
+.registered {
   color: green;
 }

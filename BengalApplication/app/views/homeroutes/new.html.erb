@@ -104,9 +104,9 @@
                 </div>
                 <div class="col-lg-3">
                   <div class="input-group bottom-indent">
-                    <button class="button-small glyphicon glyphicon-minus" type="button" title="Remove Student"></button>
+                    <button class="button-small solid-element glyphicon glyphicon-minus" type="button" title="Remove Student"></button>
                     <%if (@students.last == student || @students.empty?) %>
-                      <button class="button-small left-indent glyphicon glyphicon-plus" type="button" onclick="addNewStudent()" title="Add New Student"></button>
+                      <button class="button-small solid-element left-indent glyphicon glyphicon-plus" type="button" onclick="addNewStudent()" title="Add New Student"></button>
                     <%end %>
                   </div>
                 </div>
@@ -115,7 +115,7 @@
             <div style="margin-top:10px" class="form-group">
               <!-- Button -->
               <div class="col-sm-12 controls">
-                <%=submit_tag "Submit Changes", class: "button", id: "Submit-Students"%>
+                <%=submit_tag "Submit Changes", class: "button solid-element", id: "Submit-Students"%>
               </div>
             </div>
           <%end %>

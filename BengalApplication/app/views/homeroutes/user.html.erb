@@ -1,10 +1,10 @@
 <div class="container">
   <% if @role == "Teacher" %>
     <%= render :partial => "teachers/show" %>
-    <%= render :partial => "registrations/registrations", locals: {role: @role} %>
+    <%= render :partial => "registrations/partials/registrations", locals: {role: @role} %>
   <% elsif @role == "Student" %>
     <div class="row">
-      <%= render :partial => "registrations/registrations", locals: {role: @role} %>
+      <%= render :partial => "registrations/partials/registrations", locals: {role: @role} %>
       <%= render :partial => "students/show" %>
     </div>
     <%= render :partial => "students/teams" %>

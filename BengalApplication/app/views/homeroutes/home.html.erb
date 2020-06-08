@@ -38,13 +38,13 @@
             <div class="field_container"><%= f.password_field :password, placeholder: "Password", class: "field form-control" %></div>
             <div class="checkbox_container"<%= f.check_box :remember_me, class: "check_box" %> <%= f.label "Remember me" %>
           </div>
-          <div class="button_container"><%= f.submit 'Sign in', class: "button full_button" %></div>
+          <div class="button_container"><%= f.submit 'Sign in', class: "button solid-element full_button" %></div>
           <a> <%= link_to "Forgot your password?", new_password_path(:user) %></a>
         <% end %>
 
         <div class="Register">
-          <div class="button_container"><%= link_to "Register as Teacher", ({controller: "homeroutes", action: "new", name: "Teacher", method: :get}), class: "button full_button" %></div>
-          <div class="button_container"><%= link_to "Register as Sponsor", ({controller: "homeroutes", action: "new", name: "Sponsor", method: :get}), class: "button full_button" %></div>
+          <div class="button_container"><%= link_to "Register as Teacher", ({controller: "homeroutes", action: "new", name: "Teacher", method: :get}), class: "button solid-element full_button" %></div>
+          <div class="button_container"><%= link_to "Register as Sponsor", ({controller: "homeroutes", action: "new", name: "Sponsor", method: :get}), class: "button solid-element full_button" %></div>
         </div>
       </div>
     </div>
