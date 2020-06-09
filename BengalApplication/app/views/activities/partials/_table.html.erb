@@ -1,0 +1,41 @@
+<%unless activities.nil? %>
+
+
+  <% activities.each do |activity| %>
+    <tbody>
+    <tr class="event-collapse solid-element">
+      <td><%= activity.name %></td>
+      <td><%= activity.iscompetetion ? "Competetion" : "Non-Competition" %></td>
+      <td><%= activity.total_participants %></td>
+      <td><%= activity.user.first_name + " " + activity.user.last_name %></td>
+      <!--    <td><span activity_id="<%#= activity.id %>" class="glyphicon glyphicon-tasks" title="See All Reports"></span></td>-->
+      <td><span class="glyphicon glyphicon-menu-down"></span></td>
+    </tr>
+    <tr>
+      <td colspan="4">
+        <div class="accordion">
+          <table class="table">
+            <thead>
+            <tr class="session-header secondary-color">
+              <th>Activity</th>
+              <th>Total Participants</th>
+              <th>Sponsored By</th>
+              <!--            <th>Team Size Restriction</th>-->
+            </tr>
+            </thead>
+            <tbody>
+            <%get_all_repeats(activity.identifier).each do |a| %>
+              <tr>
+                <td><%=a.name %></td>
+                <td><%= activity.iscompetetion ? "Competetion" : "Non-Competition" %></td>
+                <td><%= activity.total_participants %></td>
+                <td><%= activity.user.first_name + " " + activity.user.last_name %></td>
+              </tr>
+            <%end %>
+            </tbody>
+          </table>
+        </div>
+      </td>
+    </tr>
+  <% end %>
+<%end %>

@@ -181,7 +181,7 @@ Activity.create!([{
                       iscompetetion: false,
                       identifier: 2,
 
-}, {
+                  }, {
                       name: "Developing A Game",
                       description: "Develop a game using python",
                       equipment: "None",
@@ -191,7 +191,7 @@ Activity.create!([{
                       ismakeahead: false,
                       iscompetetion: true,
                       identifier: 3,
-}])
+                  }])
 Location.create!([{
                       location_name: "SUB",
                       address: "921 S 8th Ave, Pocatello, ID 83209"
@@ -324,9 +324,15 @@ Waitlist.create!([{
                   }])
 
 Setup.create!([{
-    configure: true
+                   configure: true
                }])
 
 
-
+Setting.create!([{
+                     primary_color: "#6d6e71",
+                     secondary_color: "#f47920",
+                     additional_color: "#f69240",
+                     font: "Arial",
+                     site_name: "Bengal Stem Day"
+                 }])
 p "Done"

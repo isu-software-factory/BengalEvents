@@ -21,7 +21,7 @@ SimpleCov.start
 #
 
 # if the os is windows then use the windows chrome driver else use linux chrome driver
-Selenium::WebDriver::Chrome::Service.driver_path = OS.windows? ? "./spec/Chrome/chromedriver.exe" : "./spec/ChromeLinux/chromedriver"
+# Selenium::WebDriver::Chrome::Service.driver_path = OS.windows? ? "./spec/Chrome/chromedriver.exe" : "./spec/ChromeLinux/chromedriver"
 Capybara.default_driver = :selenium_chrome
 driver = Selenium::WebDriver.for :chrome
 

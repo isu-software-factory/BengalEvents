@@ -73,10 +73,20 @@ RSpec.feature "Homeroutes", type: :feature do
       visit all_users_path
     end
 
-    scenario "Should successfully delete any user" do
+    it "Should successfully delete any user" do
       first(".btn-danger").click
       page.driver.browser.switch_to.alert.accept
       expect(page).to have_content("Successfully Deleted User")
+    end
+  end
+
+  context "coordinator and admin controls" do
+    it "can hide an event for users manually" do
+      pending("...")
+    end
+    
+    it "can show an event for users manually" do
+      pending("...")
     end
   end
 end

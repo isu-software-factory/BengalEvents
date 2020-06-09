@@ -39,7 +39,7 @@ Rails.application.routes.draw do
   get "activities/report" => "activities#report", as: "report"
   post "activities/create/:event_id" => "activities#create"
   post "/activities/:id/update" => "activities#update"
-  get "/load_activities/:date" => "activities#load_activities"
+  get "/load_activities/:date" => "activities#load_activities", as: "load_report"
 
   post "events/:id/update" => "events#update"
   post "events/create" => "events#create"
@@ -69,6 +69,7 @@ resources :events
   post "events/:id/:change" => "events#change_visibility", as: "event_visibility"
   get "events/new/copy" => "events#copy", as: "copy_event"
   post "events/create_copy" => "events#create_copy", as: "create_copy"
+  get "/get_detailed_report/:id" => "activities#detailed_report"
 # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
 end

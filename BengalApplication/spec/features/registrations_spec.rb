@@ -153,4 +153,22 @@ RSpec.feature "Registrations", type: :feature do
     end
   end
 
+  context "Hidden Events" do
+    it "should show event if visibility is true" do
+      pending("...")
+    end
+
+    it "should not show event if visibility is false" do
+      pending("...")
+    end
+
+    it "should show event if visibility time constraint is met" do
+      pending("...")
+    end
+
+    it "should not show event if visibility time constraint isn't met" do
+      pending("...")
+    end
+  end
+
 end

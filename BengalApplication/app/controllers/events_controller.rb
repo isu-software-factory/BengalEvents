@@ -95,6 +95,9 @@ class EventsController < ApplicationController
 
   def copy
     @events = Event.all
+    add_home_breadcrumb
+    add_breadcrumb "New Event", new_event_path
+    add_breadcrumb "Copy Event and Activities", copy_event_path
   end
 
   def create_copy

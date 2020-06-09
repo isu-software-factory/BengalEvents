@@ -49,18 +49,7 @@ $(document).on('ready page:load turbolinks:load', function () {
     $(".accordion").hide();
 
     $(".accordion").parent().parent().prev().click(function () {
-        const accordion = $(this).next().children().first().children().first();
-        down_icon = "glyphicon glyphicon-menu-down";
-        up_icon = "glyphicon glyphicon-menu-up";
-        if (accordion.hasClass("Down")) {
-            accordion.slideUp();
-            accordion.removeClass("Down");
-            $(this).children().last().children().first().removeClass(up_icon).addClass(down_icon);
-        } else {
-            accordion.slideDown();
-            accordion.addClass("Down");
-            $(this).children().last().children().first().removeClass(down_icon).addClass(up_icon);
-        }
+        accordion(this);
     });
 });
 
@@ -80,6 +69,22 @@ $(document).ready(function () {
     sessionCount = parseInt($("#sessions_count").val());
 });
 
+// accordion function
+function accordion(e){
+    const accordion = $(e).next().children().first().children().first();
+    down_icon = "glyphicon glyphicon-menu-down";
+    up_icon = "glyphicon glyphicon-menu-up";
+    if (accordion.hasClass("Down")) {
+        accordion.slideUp();
+        accordion.removeClass("Down");
+        $(e).children().last().children().first().removeClass(up_icon).addClass(down_icon);
+    } else {
+        accordion.slideDown();
+        accordion.addClass("Down");
+        $(e).children().last().children().first().removeClass(down_icon).addClass(up_icon);
+    }
+}
+
 // hide or show repeat dev
 function setRepeat(checkbox){
     if ($(checkbox).prop("checked")){
@@ -91,24 +96,28 @@ function setRepeat(checkbox){
 
 
 // gets a detailed report for activity
-function getDetailedReports(e){
-    let id = $(e).attr("activity_id");
+function getDetailedReports(body, e){
+    let id = e;
     Rails.ajax({
         url: `/get_detailed_report/${id}`,
         type: 'GET',
         dataType: "json",
         success: function (data){
             if (data.activities != undefined) {
+                // create table
+                let table = secondTable($(body));
                 for (i = 0; i < data.activities.activity.length; i++) {
-                    let activity = data.activities.activity[i].name;
+                    let activity = data.activities.activity[i];
                     let part = data.activities.participants[i];
                     let type = "";
+                    let sponsor = data.activities.sponsors[i];
+                    let date = data.activities.dates[i];
                     if (data.activities.activity[i].iscompetetion) {
                         type = "Competition"
                     } else {
                         type = "Non-Competition"
                     }
-                    $("#body").append(tableRow(activity, type, part, "David"));
+                    $(table).append(secondTableRow(activity.name, type, part, sponsor.first_name + " " + sponsor.last_name, date));
                 }
                 $("#activity-notice").children().remove();
             }else{
@@ -153,15 +162,18 @@ function loadActivities(date) {
         success: function (data) {
             if (data.activities != undefined) {
                 for (i = 0; i < data.activities.activity.length; i++) {
-                    let activity = data.activities.activity[i].name;
+                    let activity = data.activities.activity[i];
                     let part = data.activities.participants[i];
+                    let sponsor = data.activities.sponsors[i];
                     let type = "";
                     if (data.activities.activity[i].iscompetetion) {
                         type = "Competition"
                     } else {
                         type = "Non-Competition"
                     }
-                    $("#body").append(tableRow(activity, type, part, "David"));
+                    let body = $("<tbody></tbody>");
+                    $("#report_table").append(body.append(firstTableRow(activity.name, type, part, sponsor.first_name + " " + sponsor.last_name)));
+                    getDetailedReports(body, activity.id);
                 }
                 $("#activity-notice").children().remove();
             }else{
@@ -172,14 +184,59 @@ function loadActivities(date) {
     })
 }
 
-function tableRow(name, type, participants, sponsor){
-    let row = $("<tr></tr>");
-    row.addClass("event-collapse solid-element");
+function tableRow(row, name, type, participants, sponsor, date){
     row.append(createTD(name));
     row.append(createTD(type));
     row.append(createTD(participants));
     row.append(createTD(sponsor));
+    if (date === null) row.append(createTD(date));
     return row;
+}
+
+function firstTableRow(name, type, participants, sponsor){
+    let row = $("<tr></tr>");
+    row.addClass("event-collapse solid-element");
+    row = tableRow(row, name, type, participants, sponsor, "");
+    row.append(createTD("").append($("<span class='glyphicon glyphicon-menu-down'></span>")));
+    return row;
+}
+
+function secondTableRow(name, type, participants, sponsor, date){
+    let row = $("<tr></tr>");
+    row = tableRow(row, name, type, participants, sponsor, date);
+    return row;
+}
+
+// creates a second table and returns the body
+function secondTable(parent){
+    let row = $("<tr></tr>");
+    let td = $("<td colspan='4'></td>");
+    let div = createDiv("accordion");
+    let table = createTable($(div), "session-header secondary-color", ["Name", "Type", "Participants", "Sponsor", "Date"]);
+    td.append(div);
+    row.append(td);
+    parent.append(row);
+    $(div).hide();
+    $(div).parent().parent().prev().click(function () {
+        accordion(this);
+    });
+    return table;
+}
+
+// creates a table and returns the body of the table
+function createTable(parent, headerClasses, headers){
+    let table = $("<table class='table'></table>");
+    let head = $("<thead></thead>");
+    let headRow = $("<tr></tr>").addClass(headerClasses);
+    for(i = 0; i < headers.length; i++){
+        headRow.append($("<th></th>").text(headers[i]));
+    }
+    head.append(headRow);
+    let body = $("<tbody></tbody>");
+    table.append(head);
+    table.append(body);
+    parent.append(table);
+    return body;
 }
 
 function createTD(value){

@@ -90,7 +90,7 @@
 <div>
   <div class="header primary-color" id="header">
     <%cache(Setting.first.logo) do %>
-    <%= link_to image_tag(Setting.first == nil ? "LogoWide-ScienceEngineeringWhite.png" :Setting.first.logo, height: '110', width: '550', :alt => "University Logo", class: "float-left"), root_path %>
+    <%= link_to image_tag(!Setting.first.logo.attached? ? "LogoWide-ScienceEngineeringWhite.png" : Setting.first.logo, height: '110', width: '550', :alt => "University Logo", class: "float-left"), root_path %>
     <%end %>
     <%= render 'user_info' %>
   </div>

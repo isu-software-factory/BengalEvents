@@ -84,10 +84,10 @@ class SetupsController < ApplicationController
   def set_settings
     # create settings
     Setting.create()
-    Setting.first.logo.attach(io: File.open("app/assets/images/LogoWide-ScienceEngineeringWhite.png"), filename: "LogoWide-ScienceEngineeringWhite.png")
+    Setting.first.reset_default_logo
     # set configure to true
     Setup.create(configure: true)
     # create user roles
-    # create_roles
+    create_roles
   end
 end

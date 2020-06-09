@@ -17,7 +17,7 @@ RSpec.feature "Events", type: :feature do
         fill_in "start_date", with: "2020-04-05"
       end
 
-      scenario "should be successful without location address" do
+      it "should be successful without location address" do
         within('form') do
           fill_in "location_1", with: "SUB"
           fill_in "room_number_New_1", with: 232
@@ -27,7 +27,7 @@ RSpec.feature "Events", type: :feature do
         expect(page).to have_content("Activity Information")
       end
 
-      scenario "should be successful with location address" do
+      it "should be successful with location address" do
         within("form") do
           fill_in "location_1", with: "SUB"
           fill_in "address_1", with: "921 S 8th Ave, Pocatello, ID 83209"
@@ -37,7 +37,7 @@ RSpec.feature "Events", type: :feature do
         expect(page).to have_content("Activity Information")
       end
 
-      scenario "should be successful without room name" do
+      it "should be successful without room name" do
         within('form') do
           fill_in "location_1", with: "SUB"
           fill_in "room_number_New_1", with: 232
@@ -46,7 +46,7 @@ RSpec.feature "Events", type: :feature do
         expect(page).to have_content("Activity Information")
       end
 
-      scenario "should be successful with all fields filled in" do
+      it "should be successful with all fields filled in" do
         within("form") do
           fill_in "location_1", with: "SUB"
           fill_in "address_1", with: "921 S 8th Ave, Pocatello, ID 83209"
@@ -57,7 +57,7 @@ RSpec.feature "Events", type: :feature do
         expect(page).to have_content("Activity Information")
       end
 
-      scenario "should successfully create many rooms in one location" do
+      it "should successfully create many rooms in one location" do
         within("form") do
           fill_in "location_1", with: "SUB"
           fill_in "address_1", with: "921 S 8th Ave, Pocatello, ID 83209"
@@ -76,7 +76,7 @@ RSpec.feature "Events", type: :feature do
         expect(Location.last.rooms.count).to eq(3)
       end
 
-      scenario "should successfully create many locations and rooms" do
+      it "should successfully create many locations and rooms" do
         within("form") do
           fill_in "location_1", with: "SUB"
           fill_in "address_1", with: "921 S 8th Ave, Pocatello, ID 83209"
@@ -100,9 +100,40 @@ RSpec.feature "Events", type: :feature do
       end
     end
 
+    context "copying events and activities" do
+      context "should be successful" do
+        it "event is copied" do
+          pending("...")
+        end
+
+        it "one activity is copied" do
+          pending("...")
+        end
+
+        it "multiple activities are copied" do
+          pending("...")
+        end
+
+        it "if multiple activities are selected from different events" do
+          pending('...')
+        end
+      end
+
+      context "should fail" do
+        it "if multiple events are selected" do
+          pending("...")
+        end
+
+        it "if no events are selected" do
+          pending("...")
+        end
+
+      end
+    end
+
     context "should fail" do
 
-      scenario "should fail if event name is missing" do
+      it "should fail if event name is missing" do
         within("form") do
           fill_in "description", with: "Stem Day"
           fill_in "start_date", with: "2020-04-05"
@@ -115,7 +146,7 @@ RSpec.feature "Events", type: :feature do
         expect(page).to have_content("Name can't be blank")
       end
 
-      scenario "should fail if description is missing" do
+      it "should fail if description is missing" do
         within("form") do
           fill_in "name", with: "BengalEventsAgain"
           fill_in "start_date", with: "2020-04-05"
@@ -128,7 +159,7 @@ RSpec.feature "Events", type: :feature do
         expect(page).to have_content("Description can't be blank")
       end
 
-      scenario "should fail if start date is missing" do
+      it "should fail if start date is missing" do
         within("form") do
           fill_in "name", with: "BengalEventsAgain"
           fill_in "description", with: "Stem Day"
@@ -142,7 +173,7 @@ RSpec.feature "Events", type: :feature do
       end
 
 
-      scenario "should fail if locations are not filled" do
+      it "should fail if locations are not filled" do
         within("form") do
           fill_in "name", with: "BengalEventsAgain"
           fill_in "description", with: "Stem Day"
@@ -152,7 +183,7 @@ RSpec.feature "Events", type: :feature do
         expect(page).to have_content("Location name can't be blank")
       end
 
-      scenario "should fail if room # is not filled" do
+      it "should fail if room # is not filled" do
         within("form") do
           fill_in "name", with: "BengalEventsAgain"
           fill_in "start_date", with: "2020-04-05"
@@ -176,7 +207,7 @@ RSpec.feature "Events", type: :feature do
      visit edit_event_path(@event)
    end
 
-   scenario "should be successful when name is changed" do
+   it "should be successful when name is changed" do
      within("form") do
        fill_in "name", with: "BengalEventsAgain"
      end
@@ -185,7 +216,7 @@ RSpec.feature "Events", type: :feature do
      expect(Event.first.name).to eq("BengalEventsAgain")
    end
 
-   scenario "should be successful when description is changed" do
+   it "should be successful when description is changed" do
      within("form") do
        fill_in "description", with: "Stem Day Will Be Updated"
      end
@@ -194,7 +225,7 @@ RSpec.feature "Events", type: :feature do
      expect(Event.first.description).to eq("Stem Day Will Be Updated")
    end
 
-   scenario "should be successful when start date is changed" do
+   it "should be successful when start date is changed" do
      within("form") do
        fill_in "start_date", with: "2020-04-05"
        find(:xpath, ".//input[@value='Bengal Stem Day']").click
@@ -203,7 +234,7 @@ RSpec.feature "Events", type: :feature do
      expect(page).to have_content("Successfully Updated Bengal Stem Day")
    end
 
-   scenario "should fail without name" do
+   it "should fail without name" do
      within('form') do
        fill_in "name", with: ""
      end
@@ -211,7 +242,7 @@ RSpec.feature "Events", type: :feature do
      expect(page).to have_content "Name can't be blank"
    end
 
-   scenario "should fail without description" do
+   it "should fail without description" do
      within('form') do
        fill_in "description", with: ""
      end
@@ -219,7 +250,7 @@ RSpec.feature "Events", type: :feature do
      expect(page).to have_content "Description can't be blank"
    end
 
-   scenario "should fail without start_date" do
+   it "should fail without start_date" do
      within('form') do
        fill_in "start_date", with: ""
        find(:xpath, ".//input[@value='Bengal Stem Day']").click
@@ -238,10 +269,14 @@ RSpec.feature "Events", type: :feature do
      visit profile_path(@coordinator)
    end
 
-   scenario "should be successful" do
+   it "should be successful" do
      find('a', match: :first, text: "Delete").click
      page.driver.browser.switch_to.alert.accept
      expect(page).to have_content("Successfully Deleted Event")
    end
+    
+    it "should delete all activities and sessions" do 
+      pending("...")
+    end
   end
 end

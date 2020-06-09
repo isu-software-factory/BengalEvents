@@ -8,4 +8,8 @@ class Setting < ApplicationRecord
       false
     end
   end
+
+  def reset_default_logo
+    self.logo.attach(io: File.open("app/assets/images/LogoWide-ScienceEngineeringWhite.png"), filename: "LogoWide-ScienceEngineeringWhite.png")
+  end
 end

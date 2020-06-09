@@ -153,16 +153,15 @@ class ActivitiesController < ApplicationController
   # returns the activities for a given date
   def load_activities
     @event = Event.find_by(start_date: DateTime.parse(params[:date]))
+
     if @event
       total_part = []
+      sponsor = []
       @event.activities.each do |a|
-        total = 0
-        a.sessions.each do |s|
-          total += s.users.count
-        end
-        total_part << total
+        total_part << a.total_participants
+        sponsor << a.user
       end
-      render json: {activities: {activity: @event.activities, participants: total_part}}
+      render json: {activities: {activity: @event.activities, participants: total_part, sponsors: sponsor}}
     end
   end
 
@@ -177,7 +176,23 @@ class ActivitiesController < ApplicationController
     rooms = Location.find_by(location_name: params[:location]).rooms
     render json: {results: {rooms: rooms}}
   end
+
+  # returns the information of all the activities with the same identifier
+  def detailed_report
+    activity = Activity.find(params[:id])
+    activities = Activity.where(identifier: activity.identifier)
+    total_part = []
+    sponsor = []
+    date = []
+    activities.each do |a|
+      sponsor << a.user
+      total_part << a.total_participants
+      date << a.event.start_date.strftime("%d/%m/%Y")
+    end
+    render json: {activities: {activity: activities, participants: total_part, sponsors: sponsor, dates: date}}
+  end
 end
+
 
 private
 

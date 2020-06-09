@@ -56,6 +56,14 @@ RSpec.describe Activity, type: :model do
       @activity = Activity.new(name: "Bengal War", description: "5v5", event_id: @event.id, user_id: @user.id).save
       expect(@activity). to eq(true)
     end
+
+    it "validates max team size if activity is a competition" do
+      pending("...")
+    end
+
+    it "validates an identifier" do
+      pending("...")
+    end
   end
 
   context "method tests" do
@@ -65,6 +73,20 @@ RSpec.describe Activity, type: :model do
 
     it "total_participants should return the total number of participants in an activity" do
       expect(@activity.total_participants).to eq(4)
+    end
+
+    context "has_session method" do
+      it "should return true if activity has the given session" do
+        pending("...")
+      end
+
+      it "should return false if activity does not have given session" do
+        pending("...")
+      end
+
+      it "should return false if a non session type is given to method" do
+        pending("...")
+      end
     end
   end
 end

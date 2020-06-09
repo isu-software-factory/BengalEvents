@@ -218,6 +218,8 @@ RSpec.feature "Activities", type: :feature do
     end
   end
 
+
+
   # context "download spreadsheets" do
   #   before(:each) do
   #     DOWNLOAD_PATH = Rails.root.join("tmp/downloads").to_s
