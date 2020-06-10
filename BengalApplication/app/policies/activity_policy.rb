@@ -23,4 +23,8 @@ class ActivityPolicy < ApplicationPolicy
   def destroy?
     user.roles.first.role_name == "Coordinator" || user.roles.first.role_name == "Admin" || record.user == user
   end
+
+  def report?
+    user.roles.first.role_name == "Coordinator" || user.roles.first.role_name == "Admin" || record.user == user
+  end
 end

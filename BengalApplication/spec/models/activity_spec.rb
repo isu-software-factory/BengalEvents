@@ -59,10 +59,12 @@ RSpec.describe Activity, type: :model do
 
     it "validates max team size if activity is a competition" do
       pending("...")
+      fail
     end
 
     it "validates an identifier" do
       pending("...")
+      fail
     end
   end
 
@@ -78,14 +80,17 @@ RSpec.describe Activity, type: :model do
     context "has_session method" do
       it "should return true if activity has the given session" do
         pending("...")
+        fail
       end
 
       it "should return false if activity does not have given session" do
         pending("...")
+        fail
       end
 
       it "should return false if a non session type is given to method" do
         pending("...")
+        fail
       end
     end
   end

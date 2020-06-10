@@ -55,13 +55,13 @@ $(document).on('ready page:load turbolinks:load', function () {
 
 
 $(document).ready(function () {
-    if (($("#name_New_1").length)) {
+    if (($("#name_New_1").length && $("#name_New_1").text() === "")) {
         setTimeout(function () {
             setRooms($(".col-lg-4").last().children().last().children().last())
         }, 200);
     }
 
-    if (($("#name_New_1").length)) {
+    if (($("#name_New_1").length && $("#name_New_1").text() != "")) {
         setTimeout(function () {
             setEditRooms()
         }, 300);

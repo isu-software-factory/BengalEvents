@@ -72,6 +72,7 @@ class ActivitiesController < ApplicationController
   # overtime report of activities
   def report
     @activities = Activity.all
+    authorize @activities
     add_breadcrumb 'Home', profile_path(current_user)
     add_breadcrumb 'Reports', report_path
   end

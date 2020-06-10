@@ -104,28 +104,34 @@ RSpec.feature "Events", type: :feature do
       context "should be successful" do
         it "event is copied" do
           pending("...")
+          fail
         end
 
         it "one activity is copied" do
           pending("...")
+          fail
         end
 
         it "multiple activities are copied" do
           pending("...")
+          fail
         end
 
         it "if multiple activities are selected from different events" do
           pending('...')
+          fail
         end
       end
 
       context "should fail" do
         it "if multiple events are selected" do
           pending("...")
+          fail
         end
 
         it "if no events are selected" do
           pending("...")
+          fail
         end
 
       end
@@ -277,6 +283,7 @@ RSpec.feature "Events", type: :feature do
     
     it "should delete all activities and sessions" do 
       pending("...")
+      fail
     end
   end
 end

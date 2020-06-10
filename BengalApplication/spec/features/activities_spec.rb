@@ -190,7 +190,7 @@ RSpec.feature "Activities", type: :feature do
     it "should be successful when a new session is added" do
       first(".new-session").click
       within("form") do
-        select("102 (Cafe)", from: "room_select_6")
+        select("203 (Ballroom)", from: "room_select_6")
         fill_in "start_time_6", with: "7:30"
         fill_in "end_time_6", with: "8:30"
         fill_in "capacity_6", with: "3"
@@ -218,8 +218,27 @@ RSpec.feature "Activities", type: :feature do
     end
   end
 
+  context "activities over time" do
+    it "coordinator/admin can see activities report" do
+      pending("...")
+      fail
+    end
 
+    it "choose a date to see activities successful" do
+      pending("...")
+      fail
+    end
 
+    it "if there is no event with date then no activities will load" do
+      pending("...")
+      fail
+    end
+
+    it "activity will show all activities with the same identifier" do
+      pending("...")
+      fail
+    end
+  end
   # context "download spreadsheets" do
   #   before(:each) do
   #     DOWNLOAD_PATH = Rails.root.join("tmp/downloads").to_s

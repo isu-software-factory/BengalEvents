@@ -83,10 +83,12 @@ RSpec.feature "Homeroutes", type: :feature do
   context "coordinator and admin controls" do
     it "can hide an event for users manually" do
       pending("...")
+      fail
     end
     
     it "can show an event for users manually" do
       pending("...")
+      fail
     end
   end
 end

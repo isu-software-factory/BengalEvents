@@ -37,10 +37,12 @@ RSpec.describe Event, type: :model do
 
       it "should default visibility to true" do
         pending("...")
+        fail
       end
 
       it "validates time_constraint" do
         pending("...")
+        fail
       end
     end
   end

@@ -139,7 +139,8 @@ RSpec.feature "Registrations", type: :feature do
       login_as(@student)
       visit root_path(role: "User", id: @student.id)
     end
-    scenario "user drops session should successfully register user in wait list" do
+
+    it "user drops session should successfully register user in wait list" do
       expect(Session.find(4).waitlist.users.include?(@student2)).to eq(true)
       tbl = all(".event-collapse").last
       tbl.click
@@ -148,26 +149,31 @@ RSpec.feature "Registrations", type: :feature do
       btn = all(".remove-button").last
       btn.click
       sleep(2)
-      expect(Session.find(4).users.include?(@student2)).to eq(true)
       expect(Session.find(4).waitlist.users.include?(@student2)).to eq(false)
+      expect(Session.find(4).users.include?(@student2)).to eq(true)
+      # expect(Session.find(4).waitlist.users.include?(@student2)).to eq(false)
     end
   end
 
   context "Hidden Events" do
     it "should show event if visibility is true" do
       pending("...")
+      fail
     end
 
     it "should not show event if visibility is false" do
       pending("...")
+      fail
     end
 
     it "should show event if visibility time constraint is met" do
       pending("...")
+      fail
     end
 
     it "should not show event if visibility time constraint isn't met" do
       pending("...")
+      fail
     end
   end
 
