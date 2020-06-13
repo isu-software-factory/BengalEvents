@@ -44,6 +44,7 @@ group :development, :test do
   gem 'capybara-email'
   gem 'rspec-rails'
   #gem 'letter_opener'
+  gem 'sqlite3'
 end
 
 group :development do
@@ -51,12 +52,14 @@ group :development do
   gem 'web-console', '>= 3.3.0'
   gem "better_errors"
   gem "binding_of_caller"
-  gem "sqlite3"
+  # gem "sqlite3"
 end
 
 group :production do
   gem 'pg'
 end
+
+
 
 group :test do
   # Adds support for Capybara system testing and selenium driver

@@ -1,8 +1,16 @@
+require 'rails_helper'
+
 RSpec.feature "Settings", type: :feature do
+
   context "First Time Configuration" do
+    before(:each) do
+      Setting.first.delete
+      Setup.first.delete
+    end
+
     it "should redirect user to admin page for first time" do
-      pending("...")
-      fail
+      visit root_path
+      expect(page).to have_content("Admin Setup")
     end
 
     it "should generate a Settings and Setup record" do
@@ -78,4 +86,5 @@ RSpec.feature "Settings", type: :feature do
       fail
     end
   end
+
 end
