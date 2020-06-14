@@ -13,6 +13,7 @@ class SetupsController < ApplicationController
     @user = User.new(get_params)
     if @user.save
       @user.roles << Role.find_by(role_name: "Admin")
+      sign_in @user
       redirect_to edit_settings_path
     else
       flash[:errors] = @user.errors.full_messages
@@ -60,7 +61,11 @@ class SetupsController < ApplicationController
   private
 
   def setting_params
-    params.permit(:primary_color, :secondary_color, :font, :additional_color, :site_name, :logo)
+    if params[:logo] == ""
+      params.permit(:primary_color, :secondary_color, :font, :additional_color, :site_name)
+    else
+      params.permit(:primary_color, :secondary_color, :font, :additional_color, :site_name, :logo)
+    end
   end
 
 
@@ -89,6 +94,7 @@ class SetupsController < ApplicationController
     # set configure to true
     Setup.create(configure: true)
     # create user roles
-    create_roles
+    # comment out when testing
+    # create_roles
   end
 end

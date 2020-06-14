@@ -129,7 +129,7 @@ class EventsController < ApplicationController
     errors = []
     activities.each do |a|
       @a = Activity.find(a)
-      @activity = Activity.new(name: @a.name, description: @a.description, ismakeahead: @a.ismakeahead, iscompetetion: @a.iscompetetion, user_id: current_user.id, event_id: event.id, max_team_size: @a.max_team_size)
+      @activity = Activity.new(name: @a.name, description: @a.description, ismakeahead: @a.ismakeahead, iscompetetion: @a.iscompetetion, user_id: current_user.id, event_id: event.id, max_team_size: @a.max_team_size, equipment: @a.equipment, identifier: @a.identifier)
       unless @activity.save
         errors += @activity.errors.full_messages
       else

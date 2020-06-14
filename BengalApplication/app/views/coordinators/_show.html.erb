@@ -105,6 +105,11 @@
             <div class="indent-bellow">
             <%= link_to " Reports", report_path, class: "primary-button   button-small glyphicon glyphicon-stats", title: "View Reports" %>
             </div>
+            <%if policy(Setting).edit? %>
+          <div class="indent-bellow">
+              <%= link_to " Settings", edit_settings_path, class: "primary-button button-small glyphicon glyphicon-cog", title: "Edit Site Settings" %>
+            </div>
+              <%end %>
           </div>
         </div>
       </div>
