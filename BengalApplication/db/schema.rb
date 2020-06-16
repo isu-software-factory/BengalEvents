@@ -123,8 +123,8 @@ ActiveRecord::Schema.define(version: 2020_05_18_190204) do
   create_table "settings", force: :cascade do |t|
     t.string "primary_color", default: "#6d6e71"
     t.string "secondary_color", default: "#f47920"
-    t.string "additional_color", default: "#F69240"
-    t.string "font"
+    t.string "additional_color", default: "#f69240"
+    t.string "font", default: "Arial"
     t.string "site_name", default: "Bengal Stem Day"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

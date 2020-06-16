@@ -53,6 +53,7 @@ class SetupsController < ApplicationController
   def reset_default
     @setting = Setting.first
     @setting.reset_default
+    @setting.reset_default_logo
     redirect_to edit_settings_path
   end
 
