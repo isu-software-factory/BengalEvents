@@ -8,12 +8,7 @@
             <% if policy(event).destroy? %>
               <%= link_to " Edit", edit_event_path(event), class: "primary-button  button-small glyphicon glyphicon-edit" %>
               <%= link_to "Delete", event_path(event.id), class: "btn-danger button-small", data: {method: :delete, confirm: "Are you sure?"} %>
-              <%= check_box_tag "check_visible", event.visible, checked=event.visible, title: event.visible ? "Hide Event" : "Show Event",
-              data: {
-                  remote: true,
-                  url: event_visibility_url(event.id, event.visible.to_s),
-                  method: "POST"
-              }%>
+              <%= check_box_tag "check_visible", event.visible, checked=event.visible, event_id: event.id, class: "checkbox_class", title: event.visible ? "Hide Event" : "Show Event" %>
               <span class="glyphicon glyphicon-info-sign small-icon" data-toggle="tooltip" data-placement="top" title="Click text box to make it visible to all users."></span>
           <% end %>
             <span class="badge badge-danger">Starts at <%= event.start_date.strftime("%d/%m/%Y") %></span>

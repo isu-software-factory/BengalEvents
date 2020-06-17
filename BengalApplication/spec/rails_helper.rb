@@ -43,6 +43,9 @@ RSpec.configure do |config|
   config.use_transactional_fixtures = false
 
 
+  config.before(:each) do
+    Capybara.page.current_window.resize_to(1600, 1000)
+  end
 
   config.before(:each) do
     DatabaseCleaner.strategy = :transaction

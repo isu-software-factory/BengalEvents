@@ -258,6 +258,7 @@ def update_sessions(activity)
     # checks if activity has a session with the given index
     if activity.has_session(id.to_i)
       room_num = get_param_with_index("room_select", id).split(" (")[0].to_i
+      asdl
       Session.find(id).update(start_time: get_param_with_index("start_time", id), end_time: get_param_with_index("end_time", id), capacity: get_param_with_index("capacity", id), room_id: Room.find_by(room_number: room_num).id)
     else
       create_session(get_param_with_index("start_time", id), get_param_with_index("room_select", id), get_param_with_index("capacity", id), activity, get_param_with_index("end_time", id))

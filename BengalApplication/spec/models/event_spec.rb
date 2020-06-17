@@ -36,13 +36,16 @@ RSpec.describe Event, type: :model do
       end
 
       it "should default visibility to true" do
-        pending("...")
-        fail
+        @event = Event.new(name: "Stem Day",description: "Students gather around", start_date: @start_date)
+        @event.save
+        expect(@event.visible).to eq(true)
       end
 
-      it "validates time_constraint" do
-        pending("...")
-        fail
+      it "can have time_constraint" do
+        @event = Event.new(name: "Stem Day",description: "Students gather around", start_date: @start_date, visible_constraint: @start_date).save
+        @event2 = Event.new(name: "Stem Day",description: "Students gather around", start_date: @start_date,).save
+        expect(@event).to eq(true)
+        expect(@event2).to eq(true)
       end
     end
   end

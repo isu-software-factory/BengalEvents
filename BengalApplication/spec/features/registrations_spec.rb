@@ -148,7 +148,7 @@ RSpec.feature "Registrations", type: :feature do
       expect(page).to have_content("8")
       btn = all(".remove-button").last
       btn.click
-      sleep(2)
+      sleep(4)
       expect(Session.find(4).waitlist.users.include?(@student2)).to eq(false)
       expect(Session.find(4).users.include?(@student2)).to eq(true)
       # expect(Session.find(4).waitlist.users.include?(@student2)).to eq(false)
@@ -156,24 +156,35 @@ RSpec.feature "Registrations", type: :feature do
   end
 
   context "Hidden Events" do
+    before(:each) do
+      @event = Event.first
+      @teacher = User.first
+      login_as @teacher
+    end
     it "should show event if visibility is true" do
-      pending("...")
-      fail
+      visit register_for_activity_path(role: "User", id: @teacher.id)
+      expect(page).to have_content("Bengal Stem Day")
     end
 
     it "should not show event if visibility is false" do
-      pending("...")
-      fail
+      @event.update(visible: false)
+      visit register_for_activity_path(role: "User", id: @teacher.id)
+      expect(page).not_to have_content("Bengal Stem Day")
     end
 
     it "should show event if visibility time constraint is met" do
-      pending("...")
-      fail
+      date = DateTime.new(2020, 7, 5, 3)
+      @event.update(visible_constraint: date)
+      expect(@event.visible).to eq(true)
+      visit register_for_activity_path(role: "User", id: @teacher.id)
+      expect(page).to have_content("Bengal Stem Day")
     end
 
     it "should not show event if visibility time constraint isn't met" do
-      pending("...")
-      fail
+      date = DateTime.new(2020, 4, 5, 3)
+      @event.update(visible_constraint: date)
+      visit register_for_activity_path(role: "User", id: @teacher.id)
+      expect(page).not_to have_content("Bengal Stem Day")
     end
   end
 

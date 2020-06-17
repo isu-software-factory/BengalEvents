@@ -31,7 +31,7 @@ gem 'jquery-timepicker-rails'
 # gem 'mini_magick', '~> 4.8'
 
 # Use Capistrano for deployment
-
+gem 'pg'
 
  gem 'passenger'
 # Reduces boot times through caching; required in config/boot.rb
@@ -55,7 +55,6 @@ group :development do
 end
 
 group :production do
-  gem 'pg'
 end
 
 

@@ -179,6 +179,7 @@ function loadActivities(date) {
             }else{
                 $("#activity-notice").children().remove();
                 $("#activity-notice").append($("<h2>No Events Occured On This Date</h2>"));
+                $("#report_table").children()[1].remove();
             }
         }
     })

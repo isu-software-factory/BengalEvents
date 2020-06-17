@@ -126,7 +126,7 @@ RSpec.feature "Activities", type: :feature do
       @activity = Activity.first
       # log in
       login_as(@coordinator)
-      visit edit_activity_path(event_id: @event.id, id: @activity.id)
+      visit edit_activity_path(id: @activity.id)
     end
 
     it "should be successful when name is updated" do
@@ -172,11 +172,12 @@ RSpec.feature "Activities", type: :feature do
 
     it "should be successful when session capacity is updated" do
       within("form") do
-        fill_in "capacity_1", with: "5"
+        fill_in "capacity_1", with: 5
       end
       click_button "Confirm"
-      sleep(2)
-      expect(Activity.first.sessions.first.capacity).to eq(5)
+      find(".event-collapse").click
+      expect(page).to have_content("30")
+      # expect(@activity.sessions.first.capacity).to eq(5)
     end
 
     it "should be successful when session room is updated" do
@@ -195,8 +196,7 @@ RSpec.feature "Activities", type: :feature do
         fill_in "end_time_6", with: "8:30"
         fill_in "capacity_6", with: "3"
       end
-      sleep 2
-      click_button "Confirm"
+      find(:xpath, ".//input[@value='Confirm']").click
       expect(page).to have_content("Successfully Updated Activity.")
       expect(Activity.first.sessions.count).to eq(3)
     end
@@ -219,75 +219,32 @@ RSpec.feature "Activities", type: :feature do
   end
 
   context "activities over time" do
-    it "coordinator/admin can see activities report" do
-      pending("...")
-      fail
+    before(:each) do
+      @admin = User.find(9)
+      login_as @admin
+      visit report_path
     end
 
     it "choose a date to see activities successful" do
-      pending("...")
-      fail
+      fill_in "reports_start_date", with: "2020-04-20"
+      click_button "Load"
+      expect(page).to have_content("Robotics")
     end
 
     it "if there is no event with date then no activities will load" do
-      pending("...")
-      fail
+      fill_in "reports_start_date", with: "2020-05-20"
+      click_button "Load"
+      sleep(3)
+      expect(page).not_to have_content("Robotics")
+      expect(page).to have_content("No Events Occured On This Date")
     end
 
     it "activity will show all activities with the same identifier" do
-      pending("...")
-      fail
+      fill_in "reports_start_date", with: "2020-04-20"
+      click_button "Load"
+      first(".event-collapse").click
+      expect(page).to have_content("Robotics")
     end
   end
-  # context "download spreadsheets" do
-  #   before(:each) do
-  #     DOWNLOAD_PATH = Rails.root.join("tmp/downloads").to_s
-  #
-  #
-  #     Capybara.register_driver :selenium do |app|
-  #       options = Selenium::WebDriver::Chrome::Options.new
-  #
-  #       options.add_argument('--headless')
-  #       options.add_argument('--no-sandbox')
-  #       options.add_argument('--disable-gpu')
-  #       options.add_argument('--disable-popup-blocking')
-  #       options.add_argument('--window-size=1366,768')
-  #
-  #       options.add_preference(:download, directory_upgrade: true,
-  #                              prompt_for_download: false,
-  #                              default_directory:
-  #                                  DOWNLOAD_PATH)
-  #
-  #       options.add_preference(:browser, set_download_behavior: {behavior: 'allow'})
-  #
-  #       driver = Capybara::Selenium::Driver.new(app, browser: :chrome, options: options)
-  #
-  #       bridge = driver.browser.send(:bridge)
-  #
-  #       path = '/session/:session_id/chromium/send_command'
-  #       path[':session_id'] = bridge.session_id
-  #
-  #       bridge.http.call(:post, path, cmd: 'Page.setDownloadBehavior',
-  #                        params: {
-  #                            behavior: 'allow',
-  #                            downloadPath: DOWNLOAD_PATH
-  #                        })
-  #
-  #       driver
-  #     end
-  #
-  #     @coordinator = User.find(9)
-  #     login_as(@coordinator)
-  #     visit profile_path(@coordinator)
-  #   end
-  #
-  #   it "should be successful" do
-  #     first(".event-collapse").click
-  #     first(:xpath, ".//a[@title='Download activity spread sheet']").click
-  #     # page.response.headers["Content-Disposition"].should include("filename=\"#{Activity.first.name}\"")
-  #     sleep 10
-  #     full_path = DOWNLOAD_PATH + "/Robotics.xlsx"
-  #     expect(File.exist?(full_path)).to eq(true)
-  #   end
-  # end
+
 end

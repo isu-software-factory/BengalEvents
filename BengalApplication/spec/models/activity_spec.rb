@@ -57,15 +57,14 @@ RSpec.describe Activity, type: :model do
       expect(@activity). to eq(true)
     end
 
-    it "validates max team size if activity is a competition" do
-      pending("...")
-      fail
-    end
+    # it "validates max team size if activity is a competition" do
+    #   @activity = Activity.new(name: "Bengal War", description: "5v5", event_id: @event.id, user_id: @user.id)
+    # end
 
-    it "validates an identifier" do
-      pending("...")
-      fail
-    end
+    # it "validates an identifier" do
+    #   pending("...")
+    #   fail
+    # end
   end
 
   context "method tests" do
@@ -78,19 +77,21 @@ RSpec.describe Activity, type: :model do
     end
 
     context "has_session method" do
+      before(:each) do
+        @activity = Activity.first
+        @session = Session.first.id
+        @session2 = Session.last.id
+      end
       it "should return true if activity has the given session" do
-        pending("...")
-        fail
+        expect(@activity.has_session(@session)).to eq(true)
       end
 
       it "should return false if activity does not have given session" do
-        pending("...")
-        fail
+        expect(@activity.has_session(@session2)).to eq(false)
       end
 
       it "should return false if a non session type is given to method" do
-        pending("...")
-        fail
+        expect(@activity.has_session("session")).to eq(false)
       end
     end
   end

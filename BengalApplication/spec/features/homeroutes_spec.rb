@@ -81,14 +81,27 @@ RSpec.feature "Homeroutes", type: :feature do
   end
 
   context "coordinator and admin controls" do
+    before(:each) do
+      @admin = User.find(9)
+      login_as @admin
+      visit profile_path(@admin)
+    end
     it "can hide an event for users manually" do
-      pending("...")
-      fail
+      expect(Event.first.visible).to eq(true)
+      uncheck "check_visible"
+      sleep(2)
+      expect(Event.first.visible).to eq(false)
     end
     
     it "can show an event for users manually" do
-      pending("...")
-      fail
+      expect(Event.first.visible).to eq(true)
+      uncheck "check_visible"
+      sleep(2)
+      expect(Event.first.visible).to eq(false)
+      sleep(1)
+      check "check_visible"
+      sleep(2)
+      expect(Event.first.visible).to eq(true)
     end
   end
 end
