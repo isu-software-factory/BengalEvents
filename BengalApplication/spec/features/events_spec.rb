@@ -64,11 +64,13 @@ RSpec.feature "Events", type: :feature do
           fill_in "room_number_New_1", with: 232
           fill_in "room_name_1", with: "Caffe"
         end
-        first(:xpath, "//button[@title='Add A New Room']").click
+        find("#location_1").click
+        find(:xpath, "//button[@title='Add A New Room']").click
         within("form") do
           fill_in "room_number_2", with: 322
         end
-        first(:xpath, "//button[@title='Add A New Room']").click
+        find("#location_1").click
+        find(:xpath, "//button[@title='Add A New Room']").click
         within("form") do
           fill_in "room_number_3", with: 212
         end
@@ -83,11 +85,13 @@ RSpec.feature "Events", type: :feature do
           fill_in "room_number_New_1", with: 232
           fill_in "room_name_1", with: "Caffe"
         end
-        first(:xpath, "//button[@title='Add A New Room']").click
+        find("#location_1").click
+        find(:xpath, "//button[@title='Add A New Room']").click
         within("form") do
           fill_in "room_number_2", with: 322
         end
-        first(:xpath, "//button[@title='Add A New Location']").click
+        find("#location_1").click
+        find(:xpath, "//button[@title='Add A New Location']").click
         within("form") do
           fill_in "location_2", with: "College of Tech"
           fill_in "room_number_New_3", with: 121
@@ -118,6 +122,7 @@ RSpec.feature "Events", type: :feature do
 
         it "event is copied" do
           check "event_1"
+          check "activity_1"
           click_button "Submit"
 
 
@@ -127,6 +132,7 @@ RSpec.feature "Events", type: :feature do
           expect(copied_event.name).to eq(event.name)
           expect(copied_event.description).to eq(event.description)
           expect(copied_event.start_date).to eq(event.start_date)
+          sleep(8)
         end
 
         it "one activity is copied" do
@@ -146,6 +152,7 @@ RSpec.feature "Events", type: :feature do
           expect(copied_activity.iscompetetion).to eq(activity.iscompetetion)
           expect(copied_activity.identifier).to eq(activity.identifier)
           expect(copied_activity.max_team_size).to eq(activity.max_team_size)
+          sleep(8)
         end
 
         it "multiple activities are copied" do
