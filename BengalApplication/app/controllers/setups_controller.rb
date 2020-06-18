@@ -20,21 +20,21 @@ class SetupsController < ApplicationController
       redirect_back(fallback_location: admin_setup_path)
     end
   end
-
-  def new_settings
-    @setting = Setting.new
-  end
-
-  def save_settings
-    @setting = Setting.new(setting_params)
-    if @setting.save
-      load_settings
-      redirect_to root_path
-    else
-      flash[:errors] = @setting.errors.full_messages
-      redirect_back(fallback_location: new_settings_path)
-    end
-  end
+  #
+  # def new_settings
+  #   @setting = Setting.new
+  # end
+  #
+  # def save_settings
+  #   @setting = Setting.new(setting_params)
+  #   if @setting.save
+  #     load_settings
+  #     redirect_to root_path
+  #   else
+  #     flash[:errors] = @setting.errors.full_messages
+  #     redirect_back(fallback_location: new_settings_path)
+  #   end
+  # end
 
   def edit_settings
     @setting = Setting.first
@@ -95,6 +95,6 @@ class SetupsController < ApplicationController
     Setup.create(configure: true)
     # create user roles
     # comment out when testing
-    # create_roles
+    create_roles
   end
 end

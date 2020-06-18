@@ -90,13 +90,38 @@ RSpec.feature "Registrations", type: :feature do
       visit root_path(role: "User", id: @teacher.id)
     end
 
-    it "should successfully remove participant from event" do
+    it "should successfully remove participant from session" do
       first(".event-collapse").click()
       expect(first(".registered")).to have_content("Registered")
       # click the unregister button
       find('.remove-button').click()
 
       expect(first(".registered")).not_to have_content("Registered")
+    end
+
+    it "should successfully remove participant from session in profile" do
+      visit profile_path(@teacher)
+      first(:xpath, ".//input[@value='Drop']").click
+      page.driver.browser.switch_to.alert.accept
+      sleep(3)
+      expect(@teacher.sessions.include?(Session.first)).to eq(false)
+    end
+
+    context "for team" do
+      before(:each) do
+        @team = Team.first
+        @user = User.find(2)
+        login_as(@user)
+      end
+
+      it "should successfully remove team from session" do
+        visit root_path(role: "Team", id: @team.id)
+        first(".event-collapse").click
+        expect(first(".registered")).to have_content("Registered")
+        find('.remove-button').click
+
+        expect(first(".registered")).not_to have_content("Registered")
+      end
     end
   end
 
