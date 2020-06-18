@@ -175,9 +175,10 @@ RSpec.feature "Activities", type: :feature do
         fill_in "capacity_1", with: 5
       end
       click_button "Confirm"
-      find(".event-collapse").click
-      expect(page).to have_content("30")
-      # expect(@activity.sessions.first.capacity).to eq(5)
+      first(".event-collapse").click
+      expect(page).to have_content("5")
+      expect(@activity.sessions.first.capacity).to eq(5)
+      sleep(8)
     end
 
     it "should be successful when session room is updated" do
