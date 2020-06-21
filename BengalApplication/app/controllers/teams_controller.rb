@@ -21,8 +21,8 @@ class TeamsController < ApplicationController
   def invite
     @team = Team.find(params[:id])
 
-    add_breadcrumb 'Home', root_path
-    add_breadcrumb current_user.first_name + "'s Profile", profile_path(current_user)
+    add_home_breadcrumb
+    # add_breadcrumb current_user.first_name + "'s Profile", profile_path(current_user)
     add_breadcrumb 'Team', @team
     add_breadcrumb 'Invite Members', ""
   end
@@ -31,8 +31,8 @@ class TeamsController < ApplicationController
     @team = Team.find(params[:id])
     @role = "Team"
 
-    add_breadcrumb 'Home', root_path
-    add_breadcrumb current_user.first_name + "'s Profile", profile_path(current_user)
+    add_home_breadcrumb
+    # add_breadcrumb current_user.first_name + "'s Profile", profile_path(current_user)
     add_breadcrumb 'Team', team_path(@team)
   end
 
@@ -43,8 +43,8 @@ class TeamsController < ApplicationController
   def new
     @team = Team.new
 
-    add_breadcrumb 'Home', root_path
-    add_breadcrumb current_user.first_name + "'s Profile", profile_path(current_user)
+    add_home_breadcrumb
+    # add_breadcrumb current_user.first_name + "'s Profile", profile_path(current_user)
     add_breadcrumb 'Create Team', new_team_path
   end
 

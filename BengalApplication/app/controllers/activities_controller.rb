@@ -3,6 +3,7 @@ class ActivitiesController < ApplicationController
   before_action :set_event, only: %i[show]
   before_action :get_activities, only: [:edit, :new]
   require 'active_support/core_ext/hash'
+
   def new
     @event = Event.find(params[:event_id])
     @activity = Activity.new
@@ -11,7 +12,7 @@ class ActivitiesController < ApplicationController
     # the action passed to the form
     @action = 'create/' + @event.id.to_s
     # breadcrumbs for coordinator/sponsor
-    add_breadcrumb 'Home', profile_path(current_user)
+    add_home_breadcrumb
     add_breadcrumb 'Create Activity', new_activity_path
   end
 
@@ -38,12 +39,13 @@ class ActivitiesController < ApplicationController
     @edit = true
     @action = 'update'
     # breadcrumb for coordinators/sponsor
-    add_breadcrumb 'Home', profile_path(current_user)
+    add_home_breadcrumb
     add_breadcrumb 'Edit ' + @activity.name, activity_path(@activity)
   end
 
   def update
     @activity = Activity.find(params[:id])
+    authorize @activity
     @event = @activity.event
     # delete sessions
     delete_sessions(@activity)
@@ -73,7 +75,7 @@ class ActivitiesController < ApplicationController
   def report
     @activities = Activity.all
     authorize @activities
-    add_breadcrumb 'Home', profile_path(current_user)
+    add_home_breadcrumb
     add_breadcrumb 'Reports', report_path
   end
 
@@ -140,6 +142,8 @@ class ActivitiesController < ApplicationController
     )
   end
 
+
+  # Ajax methods
   # returns the rooms in activity
   def get_session_rooms
     activity = Activity.find(params[:activity])

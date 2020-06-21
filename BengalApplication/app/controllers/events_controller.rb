@@ -7,14 +7,13 @@ class EventsController < ApplicationController
     if params[:role] == "Team"
       @role = "Team"
       @user = Team.find(params[:id])
-      add_breadcrumb current_user.first_name + "'s Profile", profile_path(current_user)
       add_breadcrumb "Team", team_path(@user.id)
       add_breadcrumb "Team Registration", root_path(role: @role, id: @user.id)
     else
       @role = "User"
       @user = User.find(params[:id])
-      if (current_user.roles.first.role_name == "Teacher" && @user.id != current_user.id)
-        add_breadcrumb current_user.first_name + "'s Profile", profile_path(current_user)
+      @user_role = current_user.roles.first.role_name
+      if (@user_role == "Teacher" || @user_role == "Admin" || @user_role == "Coordinator" && @user.id != current_user.id)
         add_breadcrumb "Register For " + @user.first_name, ""
       end
     end
@@ -86,6 +85,7 @@ class EventsController < ApplicationController
     end
   end
 
+  # Ajax methods
   def change_visibility
     @checked = params[:change]
     @event = Event.find(params[:id])

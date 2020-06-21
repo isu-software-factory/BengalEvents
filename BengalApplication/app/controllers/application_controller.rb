@@ -25,7 +25,7 @@ class ApplicationController < ActionController::Base
   end
 
 
-  def authenticate_user!(opts={})
+  def authenticate_user!(opts = {})
     if user_signed_in?
       super
     else
@@ -40,10 +40,17 @@ class ApplicationController < ActionController::Base
 
   def add_home_breadcrumb
     role = current_user.roles.first.role_name
+    id = params[:id] != nil ? params[:id] : nil
     if role != "Student" && role != "Teacher"
       add_breadcrumb "Home", profile_path(current_user)
+      if !id.nil? && id.to_i != current_user.id
+        add_breadcrumb User.find(id).first_name + "' Profile", profile_path(User.find(id))
+      end
     else
       add_breadcrumb "Home", root_path(role: "User", id: current_user.id)
+      if !id.nil? && id.to_i != current_user.id || controller_path != "events"
+        add_breadcrumb current_user.first_name + "' Profile", profile_path(current_user)
+      end
     end
   end
 end
