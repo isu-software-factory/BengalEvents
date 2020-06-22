@@ -1,5 +1,5 @@
 class HomeroutesController < ApplicationController
-  before_action :authenticate_user!, except: [:home]
+  before_action :authenticate_user!, except: [:home, :new, :create]
 
   # redirects user
   def home
@@ -64,7 +64,6 @@ class HomeroutesController < ApplicationController
     @controller = params[:name]
     if @controller == "Student"
       @students = Teacher.find_by(user_id: current_user.id).users
-      authorize @students
       add_home_breadcrumb
       add_breadcrumb "Add New Students", new_user_path("Student")
     else
@@ -74,7 +73,6 @@ class HomeroutesController < ApplicationController
 
   def create
     @user = params[:role]
-    authorize @user
     if @user == "Teacher"
       create_teacher
     elsif @user == "Student"
@@ -93,10 +91,10 @@ class HomeroutesController < ApplicationController
 
   def reset_password
     @user = User.find(params[:id])
-    authorize @user
+    authorize @user, policy_class: SettingPolicy
     random_password = rand(36 ** 8).to_s(36)
     @user.reset_password(random_password, random_password)
-    UserMailer.reset_email(current_user, @user, random_password).deliver_now
+    # UserMailer.reset_email(current_user, @user, random_password).deliver_now
     render json: {data: {success: true}}
   end
 
@@ -148,9 +146,8 @@ class HomeroutesController < ApplicationController
 
   def schedule
     @student = User.find(params[:id])
+    authorize @student
     add_home_breadcrumb
-    # add_breadcrumb "Home", root_path(role: "User", id: current_user.id)
-    # add_breadcrumb current_user.first_name + "'s Profile", profile_path(current_user)
     add_breadcrumb current_user.first_name + "'s Schedule", schedule_path(@student.id)
   end
 

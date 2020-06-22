@@ -2,26 +2,26 @@ class EventPolicy < ApplicationPolicy
 
 
   def new?
-    user.roles.first.role_name == "Coordinator" || user.roles.first.role_name == "Admin"
+    get_role == "Coordinator" || get_role == "Admin"
   end
 
   def edit?
-    user.roles.first.role_name == "Coordinator" || user.roles.first.role_name == "Admin"
+    get_role == "Coordinator" || get_role == "Admin"
   end
 
   def update?
-    user.roles.first.role_name == "Coordinator" || user.roles.first.role_name == "Admin"
+    get_role == "Coordinator" || get_role == "Admin"
   end
 
   def create?
-    user.roles.first.role_name == "Coordinator" || user.roles.first.role_name == "Admin"
+    get_role == "Coordinator" || get_role == "Admin"
   end
 
   def show?
-    user.roles.first.role_name == "Coordinator" || user.roles.first.role_name == "Admin" || user.roles.first.role_name == "Sponsor"
+    get_role == "Coordinator" || get_role == "Admin" || get_role == "Sponsor"
   end
 
   def destroy?
-    user.roles.first.role_name == "Coordinator" || user.roles.first.role_name == "Admin"
+    get_role == "Coordinator" || get_role == "Admin"
   end
 end

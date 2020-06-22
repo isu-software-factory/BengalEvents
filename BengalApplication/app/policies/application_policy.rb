@@ -6,5 +6,9 @@ class ApplicationPolicy
     @record = record
   end
 
+  def get_role
+    user.roles.first.role_name
+  end
+
  
 end
