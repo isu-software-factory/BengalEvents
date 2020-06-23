@@ -17,7 +17,9 @@ tr.event-collapse:hover td {
 
 .event-header {
   //background-color: rgb(109, 110, 113); /* ISU medium gray */
-  color: white;
+  padding: .75rem 1.25rem;
+  margin-bottom: 0;
+  border-bottom: 1px solid rgba(0,0,0,.125);
   font-size: 1.7em;
 }
 

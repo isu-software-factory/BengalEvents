@@ -1,5 +1,6 @@
 class EventPolicy < ApplicationPolicy
 
+
   def new?
     user.roles.first.role_name == "Coordinator" || user.roles.first.role_name == "Admin"
   end

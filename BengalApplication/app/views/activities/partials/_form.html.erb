@@ -10,7 +10,7 @@
 
 <div class="container">
   <div class="card border-dark">
-    <div class="card-header event-header">
+    <div class="primary-color event-header">
       <div class="row">
         <div class="col-lg-6">
           <h1>Activity Information</h1>
@@ -43,6 +43,19 @@
             <div class="form-group">
               <%= check_box_tag "iscompetetion_1", true, @edit ? checked = @activity.iscompetetion : checked = false, class: "competetion" %>
               <%= label_tag "Is competition", nil, class: "control-label" %>
+            </div>
+            <div clas="form-group">
+              <%= check_box_tag "repeats_1", true, @edit ? checked = @activity.identifier : checked = false, class: "repeat" %>
+              <%= label_tag "Repeat", nil, class: "control-label" %>
+              <span class="glyphicon glyphicon-info-sign" data-toggle="tooltip" data-placement="top" title="Check the checkbox if this activity is a repeat of a previous activity."></span>
+            </div>
+            <div hidden="true" class="form-group">
+              <%= label_tag "Choose Repeat Activity", nil, class: "control-label"%>
+              <select class="form-control" id="repeat_activity_1" name="repeat_activity_1">
+                <%@activities.each do |a| %>
+                <option><%=a.name%></option>
+                <%end %>
+              </select>
             </div>
             <div class="form-group">
               <%= label_tag "Choose Location of Activity", nil, class: "control-label" %>
@@ -105,7 +118,7 @@
 
         <div class="row">
           <div class="col-lg-1">
-            <%= submit_tag "Confirm", class: "btn button-small" %>
+            <%= submit_tag "Confirm", class: "solid-element button-small" %>
           </div>
           <div class="col-lg-1">
             <button class="solid-element button-small glyphicon glyphicon-plus new-activity" title="Add New Activity" type="button"></button>

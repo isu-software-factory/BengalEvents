@@ -6,8 +6,6 @@ ruby '~> 2.5.3'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.3'
-# Use sqlite3 as the database for Active Record
-gem 'sqlite3'
 # Use Puma as the app server
 gem 'puma', '3.12.4'
 # Use SCSS for stylesheets
@@ -33,7 +31,7 @@ gem 'jquery-timepicker-rails'
 # gem 'mini_magick', '~> 4.8'
 
 # Use Capistrano for deployment
-
+gem 'pg'
 
  gem 'passenger'
 # Reduces boot times through caching; required in config/boot.rb
@@ -44,8 +42,8 @@ group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'cucumber-rails', require: false
   gem 'capybara-email'
-  gem 'rspec-rails'
   #gem 'letter_opener'
+  gem 'sqlite3'
 end
 
 group :development do
@@ -53,12 +51,13 @@ group :development do
   gem 'web-console', '>= 3.3.0'
   gem "better_errors"
   gem "binding_of_caller"
-
+  # gem "sqlite3"
 end
 
 group :production do
-  gem 'mysql2'
 end
+
+
 
 group :test do
   # Adds support for Capybara system testing and selenium driver
@@ -68,6 +67,7 @@ group :test do
   # Easy installation and use of chromedriver to run system tests with Chrome
   #gem 'chromedriver-helper'
   gem 'webdrivers'
+  gem 'rspec-rails'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

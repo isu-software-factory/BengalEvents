@@ -7,7 +7,7 @@
   <td colspan="2">
     <div class="accordion">
       <table class="table">
-        <thead class="session-header">
+        <thead class="session-header secondary-color">
         <tr>
           <th>Time</th>
           <% if @role == "Team" %>
@@ -33,7 +33,7 @@
                 <%= @user.sessions.include?(s) ? "Registered" : check_box_tag("register", value = s.id, false, title: "Register for activity", role: role, user_id: @user.id) %>
               <% end %>
             </td>
-            <td><%= @user.sessions.include?(s) ? content_tag(:button, "", class: ["button-small", "solid-color", "glyphicon", "glyphicon-remove", "left-indent", "remove-button"], title: "Unregister for activity", user_id: @user.id, session_id: s.id, role: role) : nil %></td>
+            <td><%= @user.sessions.include?(s) ? content_tag(:button, "", class: ["button-small", "primary-button", "glyphicon", "glyphicon-remove", "left-indent", "remove-button"], title: "Unregister for activity", user_id: @user.id, session_id: s.id, role: role) : nil %></td>
           </tr>
         <% end %>
         </tbody>

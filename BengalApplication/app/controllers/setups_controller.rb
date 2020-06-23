@@ -13,27 +13,28 @@ class SetupsController < ApplicationController
     @user = User.new(get_params)
     if @user.save
       @user.roles << Role.find_by(role_name: "Admin")
+      sign_in @user
       redirect_to edit_settings_path
     else
       flash[:errors] = @user.errors.full_messages
       redirect_back(fallback_location: admin_setup_path)
     end
   end
-
-  def new_settings
-    @setting = Setting.new
-  end
-
-  def save_settings
-    @setting = Setting.new(setting_params)
-    if @setting.save
-      load_settings
-      redirect_to root_path
-    else
-      flash[:errors] = @setting.errors.full_messages
-      redirect_back(fallback_location: new_settings_path)
-    end
-  end
+  #
+  # def new_settings
+  #   @setting = Setting.new
+  # end
+  #
+  # def save_settings
+  #   @setting = Setting.new(setting_params)
+  #   if @setting.save
+  #     load_settings
+  #     redirect_to root_path
+  #   else
+  #     flash[:errors] = @setting.errors.full_messages
+  #     redirect_back(fallback_location: new_settings_path)
+  #   end
+  # end
 
   def edit_settings
     @setting = Setting.first
@@ -53,13 +54,18 @@ class SetupsController < ApplicationController
   def reset_default
     @setting = Setting.first
     @setting.reset_default
+    @setting.reset_default_logo
     redirect_to edit_settings_path
   end
 
   private
 
   def setting_params
-    params.permit(:primary_color, :secondary_color, :font, :additional_color, :site_name, :logo)
+    if params[:logo] == ""
+      params.permit(:primary_color, :secondary_color, :font, :additional_color, :site_name)
+    else
+      params.permit(:primary_color, :secondary_color, :font, :additional_color, :site_name, :logo)
+    end
   end
 
 
@@ -84,10 +90,11 @@ class SetupsController < ApplicationController
   def set_settings
     # create settings
     Setting.create()
-    Setting.first.logo.attach(io: File.open("app/assets/images/LogoWide-ScienceEngineeringWhite.png"), filename: "LogoWide-ScienceEngineeringWhite.png")
+    Setting.first.reset_default_logo
     # set configure to true
     Setup.create(configure: true)
     # create user roles
+    # comment out when testing
     create_roles
   end
 end

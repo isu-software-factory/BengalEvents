@@ -4,7 +4,8 @@ class CreateEvent < ActiveRecord::Migration[5.2]
       t.datetime :start_date
       t.string :name
       t.string :description
-      t.boolean :visible
+      t.boolean :visible, default: true
+      t.datetime :visible_constraint
       t.timestamps
     end
   end

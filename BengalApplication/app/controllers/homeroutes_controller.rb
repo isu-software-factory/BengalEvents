@@ -1,4 +1,6 @@
 class HomeroutesController < ApplicationController
+  before_action :authenticate_user!, except: [:home]
+
   # redirects user
   def home
     # user signed in then redirect them to their page
@@ -52,9 +54,9 @@ class HomeroutesController < ApplicationController
     end
 
     add_home_breadcrumb
-    if check_user
-      add_breadcrumb @user.first_name + "'s Profile", profile_path(@user)
-    end
+    # if check_user && @current_user_role != "Coordinator" && @current_user_role != "Admin"
+    #   add_breadcrumb @user.first_name + "'s Profile", profile_path(@user)
+    # end
 
   end
 
@@ -62,8 +64,8 @@ class HomeroutesController < ApplicationController
     @controller = params[:name]
     if @controller == "Student"
       @students = Teacher.find_by(user_id: current_user.id).users
+      authorize @students
       add_home_breadcrumb
-      add_breadcrumb current_user.first_name + "'s Profile", profile_path(current_user)
       add_breadcrumb "Add New Students", new_user_path("Student")
     else
       @user = User.new
@@ -72,6 +74,7 @@ class HomeroutesController < ApplicationController
 
   def create
     @user = params[:role]
+    authorize @user
     if @user == "Teacher"
       create_teacher
     elsif @user == "Student"
@@ -90,9 +93,10 @@ class HomeroutesController < ApplicationController
 
   def reset_password
     @user = User.find(params[:id])
+    authorize @user
     random_password = rand(36 ** 8).to_s(36)
     @user.reset_password(random_password, random_password)
-    #UserMailer.reset_email(current_user, @user, random_password).deliver_now
+    UserMailer.reset_email(current_user, @user, random_password).deliver_now
     render json: {data: {success: true}}
   end
 
@@ -101,16 +105,14 @@ class HomeroutesController < ApplicationController
     @students = Role.find_by(role_name: "Student").users
     @sponsors = Role.find_by(role_name: "Sponsor").users
 
-    add_breadcrumb "Home", root_path(role: "User", id: current_user.id)
-    add_breadcrumb current_user.first_name + "'s Profile", profile_path(current_user)
+    add_home_breadcrumb
     add_breadcrumb "All Users", all_users_path
   end
 
   def class_registrations
     @teacher = Teacher.find_by(user_id: params[:id])
     @students = @teacher.users
-    add_breadcrumb "Home", root_path(role: "User", id: current_user.id)
-    add_breadcrumb current_user.first_name + "'s Profile", profile_path(current_user)
+    add_home_breadcrumb
     add_breadcrumb "Class Registrations", class_registrations_path(current_user.id)
   end
 
@@ -146,8 +148,9 @@ class HomeroutesController < ApplicationController
 
   def schedule
     @student = User.find(params[:id])
-    add_breadcrumb "Home", root_path(role: "User", id: current_user.id)
-    add_breadcrumb current_user.first_name + "'s Profile", profile_path(current_user)
+    add_home_breadcrumb
+    # add_breadcrumb "Home", root_path(role: "User", id: current_user.id)
+    # add_breadcrumb current_user.first_name + "'s Profile", profile_path(current_user)
     add_breadcrumb current_user.first_name + "'s Schedule", schedule_path(@student.id)
   end
 

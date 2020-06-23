@@ -14,32 +14,34 @@
 
 
 
-<div class="container">
+<div class="container" id="registration_box">
   <% @events.each do |event| %>
-    <div class="">
-      <h2 class="accordian"><%= event.name %> <span class="badge badge-danger">
+    <% if show?(event) %>
+      <div class="">
+        <h2 class="accordian"><%= event.name %> <span class="badge badge-danger">
         Starts <%= event.start_date.strftime("%d/%m/%Y") %></span></h2>
-      <div class="row">
-        <div class="col-lg-12">
-          <table class="table">
-            <thead class="thead-dark">
-            <tr>
-              <th class="name">Name</th>
-              <th>Description</th>
-              <th></th>
-            </tr>
-            </thead>
-            <% event.activities.each do |e| %>
-              <% if e.iscompetetion && @role == "Team" %>
-                <%= render :partial => "registrations/partials/activities", locals: {e: e, role: @role} %>
-              <% elsif !e.iscompetetion && @role == "User" %>
-                <%= render :partial => "registrations/partials/activities", locals: {e: e, role: @role} %>
+        <div class="row">
+          <div class="col-lg-12">
+            <table class="table">
+              <thead class="thead-dark">
+              <tr>
+                <th class="name">Name</th>
+                <th>Description</th>
+                <th></th>
+              </tr>
+              </thead>
+              <% event.activities.each do |e| %>
+                <% if e.iscompetetion && @role == "Team" %>
+                  <%= render :partial => "registrations/partials/activities", locals: {e: e, role: @role} %>
+                <% elsif !e.iscompetetion && @role == "User" %>
+                  <%= render :partial => "registrations/partials/activities", locals: {e: e, role: @role} %>
+                <% end %>
               <% end %>
-            <% end %>
-          </table>
+            </table>
+          </div>
         </div>
       </div>
-    </div>
+    <% end %>
   <% end %>
 </div>
 

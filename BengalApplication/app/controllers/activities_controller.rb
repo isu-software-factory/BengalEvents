@@ -1,7 +1,9 @@
 class ActivitiesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_event, only: %i[show]
+  before_action :get_activities, only: [:edit, :new]
   require 'active_support/core_ext/hash'
+
   def new
     @event = Event.find(params[:event_id])
     @activity = Activity.new
@@ -10,13 +12,14 @@ class ActivitiesController < ApplicationController
     # the action passed to the form
     @action = 'create/' + @event.id.to_s
     # breadcrumbs for coordinator/sponsor
-    add_breadcrumb 'Home', profile_path(current_user)
+    add_home_breadcrumb
     add_breadcrumb 'Create Activity', new_activity_path
   end
 
   def create
     @event = Event.find(params[:event_id])
     errors = create_activities(@event)
+
     # any errors with creating activity or sessions
     if errors.empty?
       flash[:notice] = 'Successfully Created Activity'
@@ -36,12 +39,13 @@ class ActivitiesController < ApplicationController
     @edit = true
     @action = 'update'
     # breadcrumb for coordinators/sponsor
-    add_breadcrumb 'Home', profile_path(current_user)
+    add_home_breadcrumb
     add_breadcrumb 'Edit ' + @activity.name, activity_path(@activity)
   end
 
   def update
     @activity = Activity.find(params[:id])
+    authorize @activity
     @event = @activity.event
     # delete sessions
     delete_sessions(@activity)
@@ -70,7 +74,8 @@ class ActivitiesController < ApplicationController
   # overtime report of activities
   def report
     @activities = Activity.all
-    add_breadcrumb 'Home', profile_path(current_user)
+    authorize @activities
+    add_home_breadcrumb
     add_breadcrumb 'Reports', report_path
   end
 
@@ -137,6 +142,8 @@ class ActivitiesController < ApplicationController
     )
   end
 
+
+  # Ajax methods
   # returns the rooms in activity
   def get_session_rooms
     activity = Activity.find(params[:activity])
@@ -151,16 +158,15 @@ class ActivitiesController < ApplicationController
   # returns the activities for a given date
   def load_activities
     @event = Event.find_by(start_date: DateTime.parse(params[:date]))
+
     if @event
       total_part = []
+      sponsor = []
       @event.activities.each do |a|
-        total = 0
-        a.sessions.each do |s|
-          total += s.users.count
-        end
-        total_part << total
+        total_part << a.total_participants
+        sponsor << a.user
       end
-      render json: {activities: {activity: @event.activities, participants: total_part}}
+      render json: {activities: {activity: @event.activities, participants: total_part, sponsors: sponsor}}
     end
   end
 
@@ -175,7 +181,23 @@ class ActivitiesController < ApplicationController
     rooms = Location.find_by(location_name: params[:location]).rooms
     render json: {results: {rooms: rooms}}
   end
+
+  # returns the information of all the activities with the same identifier
+  def detailed_report
+    activity = Activity.find(params[:id])
+    activities = Activity.where(identifier: activity.identifier)
+    total_part = []
+    sponsor = []
+    date = []
+    activities.each do |a|
+      sponsor << a.user
+      total_part << a.total_participants
+      date << a.event.start_date.strftime("%d/%m/%Y")
+    end
+    render json: {activities: {activity: activities, participants: total_part, sponsors: sponsor, dates: date}}
+  end
 end
+
 
 private
 
@@ -208,6 +230,7 @@ def get_param_with_index(name, index)
       return value
     end
   end
+  nil
 end
 
 # get ids from keys with only one underscore
@@ -220,6 +243,17 @@ def get_ids(name)
   end
   ids
 end
+
+# gets or creates a new identifiers for an activity
+def check_identifier(index)
+  identifier = get_param_with_index("repeats_", index.to_s)
+  if identifier.nil?
+    return Activity.last.identifier += 1
+  else
+    return Activity.find_by(name: get_param_with_index("repeat_activity_", index.to_s)).identifier
+  end
+end
+
 # update sessions
 def update_sessions(activity)
   ids = get_keys("end_time")
@@ -228,6 +262,7 @@ def update_sessions(activity)
     # checks if activity has a session with the given index
     if activity.has_session(id.to_i)
       room_num = get_param_with_index("room_select", id).split(" (")[0].to_i
+
       Session.find(id).update(start_time: get_param_with_index("start_time", id), end_time: get_param_with_index("end_time", id), capacity: get_param_with_index("capacity", id), room_id: Room.find_by(room_number: room_num).id)
     else
       create_session(get_param_with_index("start_time", id), get_param_with_index("room_select", id), get_param_with_index("capacity", id), activity, get_param_with_index("end_time", id))
@@ -235,6 +270,7 @@ def update_sessions(activity)
   end
 end
 
+# deletes a session
 def delete_sessions(activity)
   ids = get_ids("capacity")
   activity.sessions.each do |s|
@@ -245,6 +281,7 @@ def delete_sessions(activity)
   end
 end
 
+# creates activities given by parameters
 def create_activities(event)
   activity_names = get_values("name")
   descriptions = get_values("description")
@@ -256,7 +293,7 @@ def create_activities(event)
   team_sizes = get_values("max_team_tag")
   # create activities
   activity_names.each do |name|
-    local = Activity.new(name: name, description: descriptions[count], ismakeahead: make_ahead[count], iscompetetion: competitions[count], user_id: current_user.id, event_id: event.id, max_team_size: competitions[count] == "true" ? team_sizes[count].to_i : 0)
+    local = Activity.new(name: name, description: descriptions[count], ismakeahead: make_ahead[count], iscompetetion: competitions[count], user_id: current_user.id, event_id: event.id, max_team_size: competitions[count] == "true" ? team_sizes[count].to_i : 0, identifier: check_identifier(count + 1))
     if local.save
       new_activities << local
     else
@@ -310,6 +347,18 @@ def create_session(start_time, room, capacity, activity, end_time)
   errors
 end
 
+def get_activities
+  activities = Activity.all
+  @activities = []
+  @identifiers = []
+  activities.each do |a|
+    unless @identifiers.include?(a.identifier)
+      @activities << a
+      @identifiers << a.identifier
+    end
+  end
+  @activities
+end
 
 def set_event
   @event = Event.find(params[:id])

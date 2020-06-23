@@ -4,10 +4,22 @@ $(document).on('ready page:load turbolinks:load', function () {
         dateFormat: "yy-mm-dd"
     });
 
-    // assign all checkbox with function
-    $("input[type='checkbox']").change(function () {
-        register_check_box(this);
+    $("#visible_constraint").datepicker({
+        dateFormat: "yy-mm-dd"
     });
+
+    // assign all checkbox with function
+    if ($("#registration_box").length) {
+        $("input[type='checkbox']").change(function () {
+            register_check_box(this);
+        });
+    }
+
+    if ($("#show").length){
+        $("#show").change(function(){
+            show_visibility_box(this);
+        })
+    }
 
     $(".accordion").hide();
 
@@ -48,7 +60,7 @@ $(document).on('ready page:load turbolinks:load', function () {
                     parent.addClass("registered");
                     parent.text("Registered");
                     checkboxs.remove();
-                    let button = $("<button class='button-small glyphicon glyphicon-remove left-indent remove-button'></button>");
+                    let button = $("<button class='button-small primary-button glyphicon glyphicon-remove left-indent remove-button'></button>");
                     button.attr("user_id", user_id);
                     button.attr("session_id", event_id);
                     button.attr("role", role);
@@ -279,7 +291,7 @@ function createButton(type, location) {
     if (type === "minus") {
         // set attributes
         button.setAttribute("title", "Remove This " + location);
-        button.setAttribute("class", "button-small left-indent glyphicon glyphicon-minus");
+        button.setAttribute("class", "button-small primary-button left-indent glyphicon glyphicon-minus");
         // remove fields and add plus button before this element
         $(button).click(function () {
             // add plus button back to the previous row
@@ -301,7 +313,7 @@ function addSection(button, location){
         $(button).click(function () {
             addNewRoom($(this).parent().parent().parent(), $(this));
         });
-    button.setAttribute("class", "button-small left-indent glyphicon glyphicon-plus");
+    button.setAttribute("class", "button-small primary-button left-indent glyphicon glyphicon-plus");
     button.setAttribute("title", "Add A New " + location);
 }
 
@@ -332,3 +344,12 @@ function removePreviousButton(button) {
 $("#reports_start_date").datepicker({
     dateFormat: "yy-mm-dd"
 });
+
+function show_visibility_box(checkbox){
+    if ($(checkbox).prop("checked")){
+        $("#hide").attr("hidden", false);
+    }else{
+        $("#hide").attr("hidden", true);
+    }
+
+}

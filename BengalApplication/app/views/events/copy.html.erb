@@ -1,0 +1,55 @@
+<% if flash[:errors] %>
+  <% flash[:errors].each do |e| %>
+    <div class="alert alert-danger">
+      <%= e %>
+    </div>
+  <% end %>
+<% end %>
+
+<div class="container">
+  <%=form_tag(create_copy_path) do %>
+  <table class="table">
+    <thead class="thead-dark">
+    <tr>
+      <th scope="col">Event Name</th>
+      <th scope="col"></th>
+      <th></th>
+    </tr>
+    </thead>
+    <% @events.each do |e| %>
+      <tbody>
+      <tr class="event-collapse solid-element">
+        <td><%= e.name %></td>
+        <td><%=check_box_tag "event_" + e.id.to_s, e.id %></td>
+        <td><span class="glyphicon glyphicon-menu-down"></span></td>
+      </tr>
+      <tr>
+        <td colspan="4">
+          <div class="accordion">
+            <table class="table">
+              <thead>
+              <tr class="secondary-color">
+                <th>Activity Name</th>
+                <th></th>
+              </tr>
+              </thead>
+              <tbody>
+              <% e.activities.each do |a| %>
+                <tr>
+                  <td><%=a.name %></td>
+                  <td><%=check_box_tag "activity_" + a.id.to_s, a.id %></td>
+                </tr>
+              <% end %>
+              </tbody>
+            </table>
+          </div>
+        </td>
+      </tr>
+      </tbody>
+    <% end %>
+  </table>
+    <div class="row">
+      <%=submit_tag "Submit" %>
+    </div>
+    <%end %>
+</div>

@@ -90,13 +90,38 @@ RSpec.feature "Registrations", type: :feature do
       visit root_path(role: "User", id: @teacher.id)
     end
 
-    it "should successfully remove participant from event" do
+    it "should successfully remove participant from session" do
       first(".event-collapse").click()
       expect(first(".registered")).to have_content("Registered")
       # click the unregister button
       find('.remove-button').click()
 
       expect(first(".registered")).not_to have_content("Registered")
+    end
+
+    it "should successfully remove participant from session in profile" do
+      visit profile_path(@teacher)
+      first(:xpath, ".//input[@value='Drop']").click
+      page.driver.browser.switch_to.alert.accept
+      sleep(3)
+      expect(@teacher.sessions.include?(Session.first)).to eq(false)
+    end
+
+    context "for team" do
+      before(:each) do
+        @team = Team.first
+        @user = User.find(2)
+        login_as(@user)
+      end
+
+      it "should successfully remove team from session" do
+        visit root_path(role: "Team", id: @team.id)
+        first(".event-collapse").click
+        expect(first(".registered")).to have_content("Registered")
+        find('.remove-button').click
+
+        expect(first(".registered")).not_to have_content("Registered")
+      end
     end
   end
 
@@ -139,7 +164,8 @@ RSpec.feature "Registrations", type: :feature do
       login_as(@student)
       visit root_path(role: "User", id: @student.id)
     end
-    scenario "user drops session should successfully register user in wait list" do
+
+    it "user drops session should successfully register user in wait list" do
       expect(Session.find(4).waitlist.users.include?(@student2)).to eq(true)
       tbl = all(".event-collapse").last
       tbl.click
@@ -147,9 +173,43 @@ RSpec.feature "Registrations", type: :feature do
       expect(page).to have_content("8")
       btn = all(".remove-button").last
       btn.click
-      sleep(2)
-      expect(Session.find(4).users.include?(@student2)).to eq(true)
+      sleep(4)
       expect(Session.find(4).waitlist.users.include?(@student2)).to eq(false)
+      expect(Session.find(4).users.include?(@student2)).to eq(true)
+      # expect(Session.find(4).waitlist.users.include?(@student2)).to eq(false)
+    end
+  end
+
+  context "Hidden Events" do
+    before(:each) do
+      @event = Event.first
+      @teacher = User.first
+      login_as @teacher
+    end
+    it "should show event if visibility is true" do
+      visit register_for_activity_path(role: "User", id: @teacher.id)
+      expect(page).to have_content("Bengal Stem Day")
+    end
+
+    it "should not show event if visibility is false" do
+      @event.update(visible: false)
+      visit register_for_activity_path(role: "User", id: @teacher.id)
+      expect(page).not_to have_content("Bengal Stem Day")
+    end
+
+    it "should show event if visibility time constraint is met" do
+      date = DateTime.new(2020, 7, 5, 3)
+      @event.update(visible_constraint: date)
+      expect(@event.visible).to eq(true)
+      visit register_for_activity_path(role: "User", id: @teacher.id)
+      expect(page).to have_content("Bengal Stem Day")
+    end
+
+    it "should not show event if visibility time constraint isn't met" do
+      date = DateTime.new(2020, 4, 5, 3)
+      @event.update(visible_constraint: date)
+      visit register_for_activity_path(role: "User", id: @teacher.id)
+      expect(page).not_to have_content("Bengal Stem Day")
     end
   end
 

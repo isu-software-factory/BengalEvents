@@ -29,9 +29,9 @@
 
 .team_name{
     position: relative;
-    text-align: left;
-    padding-left: 850px;
-    margin-top: 40px;
+    text-align: center;
+    padding-left: 85px;
+    margin-top: 10px;
 }
 
 .bold{

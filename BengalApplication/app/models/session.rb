@@ -5,8 +5,8 @@ class Session < ApplicationRecord
   has_many :team_registration
   has_many :teams, through: :team_registration, :dependent => :delete_all
   has_many :users, through: :registrations, :dependent => :delete_all
-  validates :start_time, :end_time, presence: true
-  validates_uniqueness_of :start_time, :end_time
+  # validates :start_time, :end_time, presence: true
+  # validates_uniqueness_of :start_time, :end_time
   validates :capacity, presence: true
   has_one :waitlist
 

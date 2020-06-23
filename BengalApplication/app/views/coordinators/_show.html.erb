@@ -8,7 +8,9 @@
             <% if policy(event).destroy? %>
               <%= link_to " Edit", edit_event_path(event), class: "primary-button  button-small glyphicon glyphicon-edit" %>
               <%= link_to "Delete", event_path(event.id), class: "btn-danger button-small", data: {method: :delete, confirm: "Are you sure?"} %>
-            <% end %>
+              <%= check_box_tag "check_visible", event.visible, checked=event.visible, event_id: event.id, class: "checkbox_class", title: event.visible ? "Hide Event" : "Show Event" %>
+              <span class="glyphicon glyphicon-info-sign small-icon" data-toggle="tooltip" data-placement="top" title="Check this box to make this event visible to all users."></span>
+          <% end %>
             <span class="badge badge-danger">Starts at <%= event.start_date.strftime("%d/%m/%Y") %></span>
           </h1>
 
@@ -34,7 +36,6 @@
                   <% if policy(activity).destroy? %>
                     <%= link_to "Edit", edit_activity_path(activity), class: "primary-button button" %>
                     <%= link_to "Delete", activity_path(activity.id), class: "btn btn-danger", title: "Delete Activity", data: {method: :delete, confirm: "Are you sure?"} %>
-
                   <% end %>
                 </td>
                 <td><span class="glyphicon glyphicon-menu-down"></span></td>
@@ -86,20 +87,30 @@
     </div>
 
     <% if policy(Event).new? %>
-      <div class="col-sm-2">
+      <div class="col-sm-2.5">
         <div class="card border-dark mb-3" style="max-width: 18rem;">
           <div class="card-header">Actions</div>
           <div class="card-body text-dark">
-            <%= link_to " Event", new_event_path, class: "primary-button  button-small glyphicon glyphicon-plus", title: "Create a new event" %>
+            <div class="indent-bellow">
+            <%= link_to " Event", new_event_path, class: "primary-button button-small glyphicon glyphicon-plus", title: "Create a new event" %>
+            </div>
+            <div class="indent-bellow">
             <%= link_to " Users", all_users_path, class: "primary-button  button-small glyphicon glyphicon-user", title: "View All Users Profiles" %>
+            </div>
+            <div class="indent-bellow">
             <%= link_to " Reports", report_path, class: "primary-button   button-small glyphicon glyphicon-stats", title: "View Reports" %>
+            </div>
+            <%if policy(Setting).edit? %>
+          <div class="indent-bellow">
+              <%= link_to " Settings", edit_settings_path, class: "primary-button button-small glyphicon glyphicon-cog", title: "Edit Site Settings" %>
+            </div>
+              <%end %>
           </div>
         </div>
       </div>
     <% end %>
   </div>
 </div>
-
 
 
 

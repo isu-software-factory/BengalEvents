@@ -6,6 +6,7 @@ class CreateActivities < ActiveRecord::Migration[5.2]
       t.string :equipment
       t.boolean :ismakeahead
       t.boolean :iscompetetion
+      t.integer :identifier
       t.timestamps
     end
   end

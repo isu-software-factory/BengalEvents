@@ -7,6 +7,7 @@ class Activity < ApplicationRecord
   validates :name, presence: true
   validates :description, presence: true
 
+  # checks the activity for the given session id
   def has_session(session)
     includes = false
     self.sessions.each do |s|

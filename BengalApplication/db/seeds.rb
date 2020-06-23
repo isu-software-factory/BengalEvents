@@ -168,6 +168,7 @@ Activity.create!([{
                       equipment: "Boxes to use as obstacles.",
                       ismakeahead: false,
                       iscompetetion: false,
+                      identifier: 1,
                       event_id: 1,
                       user_id: 7
                   }, {
@@ -177,7 +178,8 @@ Activity.create!([{
                       event_id: 1,
                       user_id: 7,
                       ismakeahead: false,
-                      iscompetetion: false
+                      iscompetetion: false,
+                      identifier: 2,
 
                   }, {
                       name: "Developing A Game",
@@ -187,7 +189,8 @@ Activity.create!([{
                       user_id: 9,
                       max_team_size: 2,
                       ismakeahead: false,
-                      iscompetetion: true
+                      iscompetetion: true,
+                      identifier: 3,
                   }])
 Location.create!([{
                       location_name: "SUB",
@@ -320,8 +323,20 @@ Waitlist.create!([{
                       session_id: 5
                   }])
 
-Setup.create!([{
-    configure: true
-               }])
+if Rails.env == "test"
+  Setup.create!([{
+                     configure: true
+                 }])
+
+
+  Setting.create!([{
+                       primary_color: "#6d6e71",
+                       secondary_color: "#f47920",
+                       additional_color: "#f69240",
+                       font: "Arial",
+                       site_name: "Bengal Stem Day"
+                   }])
+end
+
 
 p "Done"

@@ -1,5 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe Setup, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  context "On create" do
+    it "should default configure to false" do
+      s = Setup.create()
+      expect(s.configure).to eq(false)
+    end
+  end
 end

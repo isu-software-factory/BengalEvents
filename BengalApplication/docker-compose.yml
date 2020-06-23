@@ -1,11 +1,15 @@
 version: '3'
 services:
   db:
-    image: mysql
-    command: --default-authentication-plugin=mysql_native_password
+    image: postgres
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: password
+      POSTGRES_PASSWORD: password
+      POSTGRES_USER: user
+      POSTGRES_DB: db-example
+    volumes:
+      - "./db"
+
   web:
     container_name: railsApp
     build: .
@@ -16,6 +20,3 @@ services:
       - "3000:3000"
     depends_on:
       - db
-
-
-

@@ -3,6 +3,15 @@
 // printing page
 $(document).on('ready page:load turbolinks:load', function () {
 
+    // if home page
+    // if ($("#check_visible").length){
+    //     $("#check_visible").change(function(){
+    //         if ($(this).is(":checked")){
+    //
+    //         }
+    //     })
+    // }
+
     // new student page
     // assign function to all minus buttons
     if ($("#student-form").length) {
@@ -37,12 +46,35 @@ $(document).on('ready page:load turbolinks:load', function () {
 
     });
 
+    if ($(".checkbox_class").length){
+        $(".checkbox_class").change(function(){
+            changeVisibility(this);
+        })
+    }
+
     // if coordinator page
     if ($("#coordinator_page").length)
         accordion_collapse();
 
 });
 
+// change event visibility
+function changeVisibility(e) {
+    let id = $(e).attr("event_id");
+    let state = $(e).attr("value");
+    Rails.ajax({
+        url: `/events/${id}/${state}`,
+        type: 'POST',
+        dataType: "json",
+        success: function () {
+            if (state === "true"){
+                $(e).attr("value", "false")
+            }else{
+                $(e).attr("value", "true")
+            }
+        }
+    })
+}
 
 
 // print the page
