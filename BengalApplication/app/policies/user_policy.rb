@@ -1,5 +1,10 @@
 class UserPolicy < ApplicationPolicy
   def delete?
-    @user.roles.first.role_name == "Admin" || @user.roles.first.role_name == "Coordinator"
+    get_role == "Admin" || get_role == "Coordinator"
   end
+
+  def new?
+    get_role == "Admin" || get_role == "Coordinator" || get_role == "Teacher"
+  end
+
 end

@@ -30,9 +30,8 @@ class TeamsController < ApplicationController
   def show
     @team = Team.find(params[:id])
     @role = "Team"
-
+    authorize @team
     add_home_breadcrumb
-    # add_breadcrumb current_user.first_name + "'s Profile", profile_path(current_user)
     add_breadcrumb 'Team', team_path(@team)
   end
 
@@ -42,9 +41,8 @@ class TeamsController < ApplicationController
 
   def new
     @team = Team.new
-
+    authorize @team
     add_home_breadcrumb
-    # add_breadcrumb current_user.first_name + "'s Profile", profile_path(current_user)
     add_breadcrumb 'Create Team', new_team_path
   end
 
@@ -53,7 +51,7 @@ class TeamsController < ApplicationController
     @emails = team_emails
     @team = Team.new(team_params)
     @student = current_user
-
+    authorize @team
     # add team lead
     @team.lead = @student.id
     if @team.save

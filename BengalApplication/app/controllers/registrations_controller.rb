@@ -116,10 +116,9 @@ class RegistrationsController < ApplicationController
     event = Session.find(params[:session_id].to_i)
     participant = get_participant
     success = false
-    # authorize participant as a registration policy
 
-      # add participant to event
-      success = event.register_participant(participant)
+    # add participant to event
+    success = event.register_participant(participant)
 
 
     if success[0]

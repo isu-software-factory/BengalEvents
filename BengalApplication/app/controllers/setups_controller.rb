@@ -1,5 +1,6 @@
 class SetupsController < ApplicationController
   before_action :get_fonts, only: ['new_settings', 'edit_settings']
+  before_action :authenticate_user!, except: [:admin_setup, :create_admin]
 
   def admin_setup
     unless Setup.exists?(id: 1)
@@ -20,30 +21,17 @@ class SetupsController < ApplicationController
       redirect_back(fallback_location: admin_setup_path)
     end
   end
-  #
-  # def new_settings
-  #   @setting = Setting.new
-  # end
-  #
-  # def save_settings
-  #   @setting = Setting.new(setting_params)
-  #   if @setting.save
-  #     load_settings
-  #     redirect_to root_path
-  #   else
-  #     flash[:errors] = @setting.errors.full_messages
-  #     redirect_back(fallback_location: new_settings_path)
-  #   end
-  # end
 
   def edit_settings
     @setting = Setting.first
+    authorize @setting
     add_home_breadcrumb
     add_breadcrumb "Site Settings", edit_settings_path
   end
 
   def update_settings
     @setting = Setting.first
+    authorize @setting
     if @setting.update(setting_params)
       redirect_to profile_path(current_user)
     else
@@ -53,6 +41,7 @@ class SetupsController < ApplicationController
 
   def reset_default
     @setting = Setting.first
+    authorize @setting
     @setting.reset_default
     @setting.reset_default_logo
     redirect_to edit_settings_path

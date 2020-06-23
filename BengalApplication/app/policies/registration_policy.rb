@@ -2,8 +2,7 @@ class RegistrationPolicy < ApplicationPolicy
 
   def register?
     # only teachers, students, and teams can register
-    role = user.roles.first.role_name
-    if role == "Student"
+    if get_role == "Student"
       record.member_type == "Student" || record.member_type == "Team"
     else
       record.member_type == "Teacher"
@@ -11,13 +10,12 @@ class RegistrationPolicy < ApplicationPolicy
   end
 
   def registers?
-    role = user.roles.first.role_name
-    user.id == record.id || role == "Teacher" || role == "Admin" || role == "Coordinator"
+    user.id == record.id || get_role == "Teacher" || get_role == "Admin" || get_role == "Coordinator"
   end
 
   def events?
     # only teachers, students, and teams can see registration for activities
-    if user.meta_type == "Student"
+    if get_role == "Student"
       record.member_type == "Student" || record.member_type == "Team"
     else
       record.member_type == "Teacher"
@@ -26,7 +24,7 @@ class RegistrationPolicy < ApplicationPolicy
 
   def index?
     # only teachers, students, and teams can see registration for events
-    if user.meta_type == "Student"
+    if get_role == "Student"
       record.member_type == "Student" || record.member_type == "Team"
     else
       record.member_type == "Teacher"
@@ -35,7 +33,7 @@ class RegistrationPolicy < ApplicationPolicy
 
   def drop?
     # only teachers, students, and team leads can drop event details
-    if user.meta_type == "Student"
+    if get_role == "Student"
       record.member_type == "Student" || record.member_type == "Team" && user.meta == record.member.get_lead
     else
       record.member_type == "Teacher"

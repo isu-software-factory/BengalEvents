@@ -248,7 +248,10 @@ end
 def check_identifier(index)
   identifier = get_param_with_index("repeats_", index.to_s)
   if identifier.nil?
-    return Activity.last.identifier += 1
+    if Activity.last.nil?
+      return 1
+    end
+    return Activity.last.identifier + 1
   else
     return Activity.find_by(name: get_param_with_index("repeat_activity_", index.to_s)).identifier
   end
