@@ -1,0 +1,53 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h1>All Locations
+        <%= link_to " Location", manage_locations_path, class: "button-small primary-button  glyphicon glyphicon-plus", title: "Create a new activity for event." %>
+      </h1>
+      <% @locations.each do |location| %>
+        <table class="table">
+          <thead class="thead-dark">
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Address</th>
+            <th scope="col">Manage</th>
+            <th scope="col"></th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr class="event-collapse solid-element">
+            <td><%=location.location_name %></td>
+            <td><%=location.address.empty? ? "N/A" : location.address %></td>
+            <td><%=link_to "Delete", location_path(location.id), class: "btn btn-danger", title: "Delete Location", data: {method: :delete, confirm: "Are you sure?"} %></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td colspan="3">
+              <div class="accordion">
+                <table class="table">
+                  <thead>
+                  <tr class="session-header secondary-color">
+                    <th>Room Number</th>
+                    <th>Room Name</th>
+                    <th>Manage</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <%location.rooms.each do |room| %>
+                    <tr>
+                      <td><%=room.room_number %></td>
+                      <td><%=room.room_name.empty? ? "N/A" : room.room_name %></td>
+                      <td><%=link_to "Delete", delete_room_path(room.id), class: "btn btn-danger", title: "Delete Room", data: {method: :delete, confirm: "Are you sure?"} %></td>
+                    </tr>
+                  <%end %>
+                  </tbody>
+                </table>
+              </div>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      <% end %>
+    </div>
+  </div>
+</div>

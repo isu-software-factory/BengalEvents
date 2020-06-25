@@ -70,6 +70,9 @@ resources :events
   get "events/new/copy" => "events#copy", as: "copy_event"
   post "events/create_copy" => "events#create_copy", as: "create_copy"
   get "/get_detailed_report/:id" => "activities#detailed_report"
+  get "locations/manage" => "locations#manage", as: "manage_locations"
+  resources :locations
+  delete "delete_room/:id" => "locations#destroy_room", as: "delete_room"
 # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
 end
