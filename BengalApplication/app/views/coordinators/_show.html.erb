@@ -63,7 +63,7 @@
                             <% @num += 1 %></td>
                           <td><%= session.start_time.strftime("%l:%M %p") %>
                             -  <%= session.end_time.strftime("%l:%M %p") %></td>
-                          <td><%= session.room.location.location_name + ": " + session.room.room_number + " " + session.room.room_name %></td>
+                          <td><%=session.room.nil? ? "No Room Assigned" : session.room.location.location_name + ": " + session.room.room_number + " " + session.room.room_name %></td>
                           <td><%= session.capacity %></td>
                           <td><%= session.capacity_remaining %></td>
                           <% if activity.iscompetetion %>
@@ -105,6 +105,9 @@
               <%= link_to " Settings", edit_settings_path, class: "primary-button button-small glyphicon glyphicon-cog", title: "Edit Site Settings" %>
             </div>
               <%end %>
+            <div class="indent-bellow">
+              <%= link_to " Manage Locations", manage_locations_path, class: "primary-button button-small glyphicon glyphicon-stats", title: "Manage all locations" %>
+            </div>
           </div>
         </div>
       </div>

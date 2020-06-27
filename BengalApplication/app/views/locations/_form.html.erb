@@ -1,0 +1,21 @@
+<div id='form' class="card border-dark mb-3" style="max-width: 18rem;">
+  <div class="card-header">Location Info</div>
+  <div class="card-body text-dark">
+    <div class="container">
+      <%= form_tag(@action, remote: @remote) do %>
+        <%=hidden_field_tag "location_id", location.nil? ? nil : location.id %>
+        <div class="row">
+          <div class="col-sm-2">
+            <%= text_field_tag "location", location.nil? ? nil : location.location_name, placeholder: "Location Name", class: "form-control" %>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-2">
+            <%= text_field_tag "address", location.nil? ? nil : location.address, placeholder: "Address (optional)", class: "form-control" %>
+          </div>
+        </div>
+        <%= submit_tag "Submit", class: "button primary-button " %>
+      <% end %>
+    </div>
+  </div>
+</div>

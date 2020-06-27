@@ -72,7 +72,7 @@
     <%= javascript_include_tag 'application', :registrations, 'data-turbolinks-track': 'reload' %>
   <% elsif controller.controller_name == "homeroutes" %>
     <%= javascript_include_tag 'application', :homeroutes, 'data-turbolinks-track': 'reload' %>
-  <% elsif controller.controller_name == "events" %>
+  <% elsif controller.controller_name == "events" || controller.controller_name == "locations"%>
     <%= javascript_include_tag 'application', :events, 'data-turbolinks-track': 'reload' %>
   <% elsif controller.controller_name == "teams" %>
     <%= javascript_include_tag 'application', :teams, 'data-turbolinks-track': 'reload' %>

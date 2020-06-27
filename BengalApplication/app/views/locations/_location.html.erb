@@ -1,39 +1,42 @@
-
-<% if current_user.meta.is_a? Coordinator %>
-  <% if flash[:errors] %>
-    <% flash[:errors].each do |e| %>
-      <p><%= e %></p>
-    <% end %>
-  <% end %>
-
-  <% location.time_slots.each do |t| %>
-    <div class="accordion" id="accordionExample">
-      <div class="card">
-        <div class="card-header" id="headingOne">
-          <h5 class="mb-0">
-            <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#<%= t.id %>" aria-expanded="true" aria-controls="collapseOne">
-              <%= t.location.name %>
-            </button>
-            <button class="btn btn-link float-right" type="button" data-toggle="collapse" data-target="#<%= t.id %>" aria-expanded="true" aria-controls="collapseOne">
-              <span class="glyphicon glyphicon-menu-down pull-right"></span>
-            </button>
-          </h5>
-        </div>
-        <div id="<%= t.id %>" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
-          <div class="card-body">
-            <p>Start Time: <%= t.start_time.strftime("%H:%M %p") %> </p>
-            <p> End Time: <%= t.end_time.strftime("%H:%M %p") %> </p>
-            <% if policy(location).edit? %>
-              <%#= link_to "Edit", edit_occasion_location_path(@occasion, location) %>
-            <% end %>
-            <% if policy(location).destroy? %>
-              <%= link_to "Delete", occasion_location_path(@occasion, location), class: "btn btn-danger", method: :delete, data: {confirm: "Are you sure?"} %>
-            <% end %>
-          </div>
-        </div>
+<table id="location_table" class="table">
+  <thead class="thead-dark">
+  <tr>
+    <th scope="col">Name</th>
+    <th scope="col">Address</th>
+    <th scope="col">Manage</th>
+    <th scope="col"></th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr class="event-collapse solid-element">
+    <td><%=location.location_name %></td>
+    <td><%=location.address.empty? ? "N/A" : location.address %></td>
+    <td><%=link_to "Delete", delete_location_path(location.id), class: "btn btn-danger", title: "Delete Location", data: {method: :delete, confirm: "Are you sure?"} %></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td colspan="3">
+      <div class="accordion">
+        <table class="table">
+          <thead>
+          <tr class="session-header secondary-color">
+            <th>Room Number</th>
+            <th>Room Name</th>
+            <th>Manage</th>
+          </tr>
+          </thead>
+          <tbody>
+          <%location.rooms.each do |room| %>
+            <tr>
+              <td><%=room.room_number %></td>
+              <td><%=room.room_name.empty? ? "N/A" : room.room_name %></td>
+              <td><%=link_to "Delete", delete_room_path(room.id), class: "btn btn-danger", title: "Delete Room", data: {method: :delete, confirm: "Are you sure?"} %></td>
+            </tr>
+          <%end %>
+          </tbody>
+        </table>
       </div>
-    </div>
-  <% end %>
-<% end %>
-
-
+    </td>
+  </tr>
+  </tbody>
+</table>
