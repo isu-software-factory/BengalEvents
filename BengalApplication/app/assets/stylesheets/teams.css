@@ -86,3 +86,8 @@
     border-color: black;
     border-top-width: 5px;
 }
+
+.rounded{
+    border: 1px solid;
+    border-color: #0c0c0c;
+}

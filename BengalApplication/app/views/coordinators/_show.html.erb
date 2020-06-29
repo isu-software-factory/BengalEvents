@@ -11,7 +11,7 @@
               <%= check_box_tag "check_visible", event.visible, checked=event.visible, event_id: event.id, class: "checkbox_class", title: event.visible ? "Hide Event" : "Show Event" %>
               <span class="glyphicon glyphicon-info-sign small-icon" data-toggle="tooltip" data-placement="top" title="Check this box to make this event visible to all users."></span>
           <% end %>
-            <span class="badge badge-danger">Starts at <%= event.start_date.strftime("%d/%m/%Y") %></span>
+            <span class="badge badge-danger">Starts at <%= event.start_date.strftime("%m/%d/%Y") %></span>
           </h1>
 
           <hr>
@@ -106,7 +106,7 @@
             </div>
               <%end %>
             <div class="indent-bellow">
-              <%= link_to " Manage Locations", manage_locations_path, class: "primary-button button-small glyphicon glyphicon-stats", title: "Manage all locations" %>
+              <%= link_to " Locations", manage_locations_path, class: "primary-button button-small glyphicon glyphicon-road", title: "Manage all locations" %>
             </div>
           </div>
         </div>
@@ -114,8 +114,5 @@
     <% end %>
   </div>
 </div>
-
-
-
 
 
