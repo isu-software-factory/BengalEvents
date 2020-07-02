@@ -3,7 +3,7 @@
   <div class="card-body text-dark">
     <div class="container">
       <%= form_tag(@action, remote: @remote) do %>
-        <%=hidden_field_tag "location_id", location.nil? ? nil : location.id %>
+        <%= hidden_field_tag "location_id", location.nil? ? nil : location.id %>
         <div class="row">
           <div class="col-sm-2" style="width: 24rem;">
             <%= text_field_tag "location", location.nil? ? nil : location.location_name, placeholder: "Location Name", class: "form-control" %>
@@ -14,16 +14,18 @@
             <%= text_field_tag "address", location.nil? ? nil : location.address, placeholder: "Address (optional)", class: "form-control" %>
           </div>
         </div>
-        <div class="row">
-          <div class="col-sm-2" style="width: 20rem;">
-            <%= text_field_tag "room_number", location.nil? ? nil : location.rooms, placeholder: "Room Number", class: "form-control" %>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-sm-2" style="width: 20rem;">
-            <%= text_field_tag "room_name", location.nil? ? nil : location.rooms, placeholder: "Room Name", class: "form-control" %>
-          </div>
-        </div>
+        <% unless location.nil? %>
+          <% location.rooms.each do |r| %>
+            <div class="row">
+              <div class="col-sm-1" style="width: 20rem;">
+                <%= text_field_tag "room_number_" + r.id.to_s, r.room_number, placeholder: "Room Number", class: "form-control" %>
+              </div>
+              <div class="col-sm-1" style="width: 20rem">
+                <%= text_field_tag "room_name_" + r.id.to_s, r.room_name, placeholder: "Room Name", class: "form-control" %>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
         <%= submit_tag "Submit", class: "button primary-button " %>
       <% end %>
     </div>

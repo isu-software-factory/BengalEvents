@@ -35,15 +35,13 @@ class LocationsController < ApplicationController
 
   def create
     @location = Location.new(location_name: params['location'], address: params['address'])
-    respond_to do |format|
       if @location.save
-        format.js
-        format.html { redirect_to manage_locations_path, notice: "Successfully Created New Location." }
+        redirect_to manage_locations_path, notice: "Successfully Created New Location."
       else
         flash[:error] = @location.errors.full_message
         redirect_to manage_location_path
       end
-    end
+
   end
 
   def edit
@@ -54,16 +52,67 @@ class LocationsController < ApplicationController
 
   def update
     @location = Location.find(params[:location_id])
+    errors = []
     respond_to do |format|
       if @location.update(location_name: params['location'], address: params['address'])
-        format.html { redirect_to manage_locations_path }
+        if update_rooms(@location, errors)
+          format.html { redirect_to manage_locations_path }
+        else
+          format.html {
+            flash[:error] = errors
+            redirect_to manage_location_path
+          }
+        end
       else
         format.html {
           flash[:error] = @location.errors.full_message
           redirect_to manage_location_path
         }
       end
+    end
+  end
+
+  def new_room
+    @location = Location.find(params[:id])
+    @action = "locations/create/room"
+  end
+
+  def create_room
+    @location = Location.find(params[:location_id])
+    room = Room.new(room_number: params[:room_number], room_name: params[:room_name], location_id: @location.id)
+    if room.save
+      redirect_to manage_locations_path
+    else
+      flash[:error] = room.errors.full_message
+      redirect_to manage_locations_path
+    end
+  end
+
+
+
+  private
+
+  def get_id(name)
+    ids = []
+    params.each do |key, value|
+      if key.start_with?(name)
+        ids << key.split("_")[2].to_i
       end
     end
-
+    ids
   end
+
+  def update_rooms(location, errors)
+    ids = get_id("room_name")
+    no_error = true
+    ids.each do |i|
+      room = location.rooms.find_by(id: i)
+      unless room.update(room_name: params["room_name_" + i.to_s], room_number: params["room_number_" + i.to_s])
+        errors += room.errors.full_messages
+        no_error = false
+      end
+    end
+    no_error
+  end
+
+end

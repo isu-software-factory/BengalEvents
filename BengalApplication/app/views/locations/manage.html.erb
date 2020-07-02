@@ -2,7 +2,7 @@
   <div class="row">
     <div id="locations_container" class="col border-right">
       <h1>All Locations
-        <%= link_to " Location", new_location_path, class: "button-small primary-button  glyphicon glyphicon-plus", title: "Create a new activity for event.", remote: true%>
+        <%= link_to " Location", new_location_path, class: "button-small primary-button  glyphicon glyphicon-plus", title: "Create a new activity for event.", remote: true %>
       </h1>
       <% @locations.each do |location| %>
         <table class="table">
@@ -16,10 +16,12 @@
           </thead>
           <tbody>
           <tr class="event-collapse solid-element">
-            <td><%=location.location_name %></td>
-            <td><%=location.address.empty? ? "N/A" : location.address %></td>
-            <td><%=link_to "Delete", delete_location_path(location.id), class: "btn btn-danger", title: "Delete Location", data: {method: :delete, confirm: "Are you sure?"} %>
-            <%=link_to "Edit", edit_location_path(location.id), class: "button-small primary-button", title: "Edit Location", remote: true %></td>
+            <td><%= location.location_name %></td>
+            <td><%= location.address.empty? ? "N/A" : location.address %></td>
+            <td><%= link_to "Delete", delete_location_path(location.id), class: "btn btn-danger", title: "Delete Location", data: {method: :delete, confirm: "Are you sure?"} %>
+              <%= link_to "Edit", edit_location_path(location.id), class: "button-small primary-button", title: "Edit Location", remote: true %>
+              <%= link_to "Room", new_room_path(location.id), class: "button-small primary-button glyphicon glyphicon-plus", title: "New Room", remote: true %>
+            </td>
             <td></td>
           </tr>
           <tr>
@@ -34,13 +36,13 @@
                   </tr>
                   </thead>
                   <tbody>
-                  <%location.rooms.each do |room| %>
+                  <% location.rooms.each do |room| %>
                     <tr>
-                      <td><%=room.room_number %></td>
-                      <td><%=room.room_name.empty? ? "N/A" : room.room_name %></td>
-                      <td><%=link_to "Delete", delete_room_path(room.id), class: "btn btn-danger", title: "Delete Room", data: {method: :delete, confirm: "Are you sure?"} %></td>
+                      <td><%= room.room_number %></td>
+                      <td><%= room.room_name.empty? ? "N/A" : room.room_name %></td>
+                      <td><%= link_to "Delete", delete_room_path(room.id), class: "btn btn-danger", title: "Delete Room", data: {method: :delete, confirm: "Are you sure?"} %></td>
                     </tr>
-                  <%end %>
+                  <% end %>
                   </tbody>
                 </table>
               </div>

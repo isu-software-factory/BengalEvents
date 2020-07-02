@@ -77,6 +77,8 @@ resources :events
   post "locations/update" => "locations#update"
   post "locations/create" => "locations#create"
   delete "delete_room/:id" => "locations#destroy_room", as: "delete_room"
+  get "rooms/new/:id" => "locations#new_room", as: "new_room"
+  post "locations/create/room" => "locations#create_room"
 # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
 end

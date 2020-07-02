@@ -1,0 +1,22 @@
+<div id='form' class="card border-dark mb-3" style="width: 25rem;">
+  <div class="card-header">Room Info</div>
+  <div class="card-body text-dark">
+    <div class="container">
+      <%= form_tag(@action, remote: false) do %>
+        <%= hidden_field_tag "location_id", location.nil? ? nil : location.id %>
+        <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+        <div class="row">
+          <div class="col-sm-2" style="width: 24rem;">
+            <%= text_field_tag "room_number", nil, placeholder: "Room Number", class: "form-control" %>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-2" style="width: 24rem;">
+            <%= text_field_tag "room_name", nil, placeholder: "Room Name (optional)", class: "form-control" %>
+          </div>
+        </div>
+        <%= submit_tag "Submit", class: "button primary-button " %>
+      <% end %>
+    </div>
+  </div>
+</div>
