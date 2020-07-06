@@ -100,7 +100,7 @@ ActiveRecord::Schema.define(version: 2020_05_18_190204) do
   end
 
   create_table "rooms", force: :cascade do |t|
-    t.string "room_number"
+    t.integer "room_number"
     t.string "room_name"
     t.integer "location_id"
     t.datetime "created_at", null: false

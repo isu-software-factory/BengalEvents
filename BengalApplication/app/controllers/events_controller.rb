@@ -34,8 +34,7 @@ class EventsController < ApplicationController
     authorize @event
     # create locations and rooms
     errors = create_locations
-
-    if errors.length <= 0 && @event.save
+    if errors.length == 0 && @event.save
       redirect_to new_activity_path(event_id: @event.id)
     else
       flash[:errors] = @event.errors.full_messages + errors
@@ -185,24 +184,28 @@ class EventsController < ApplicationController
     errors = []
     count = 0
 
-    # create locations
-    locations.each do |location|
-      local = Location.new(location_name: location, address: addresses[count])
-      if local.save
-        new_locations << local
-      else
-        errors += local.errors.full_messages
+    unless (params[:location_visible].nil?)
+      # create locations
+      locations.each do |location|
+        local = Location.new(location_name: location, address: addresses[count])
+        if local.save
+          new_locations << local
+        else
+          errors += local.errors.full_messages
+        end
+        count += 1
       end
-      count += 1
-    end
 
-    # check locations aren't empty
-    if new_locations.length == 0
-      errors
-    else
-      errors += add_rooms(new_locations)
-      errors
+
+      # check locations aren't empty
+      if new_locations.length == 0
+        errors
+      else
+        errors += add_rooms(new_locations)
+        errors
+      end
     end
+    errors
   end
 
   # create and add rooms to locations

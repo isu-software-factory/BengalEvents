@@ -21,6 +21,12 @@ $(document).on('ready page:load turbolinks:load', function () {
         })
     }
 
+    if ($("#location_visible").length){
+        $("#location_visible").change(function() {
+            change_location_visibility(this);
+        })
+    }
+
     $(".accordion").hide();
 
     $(".accordion").parent().parent().prev().click(function () {
@@ -136,6 +142,16 @@ $(document).on('ready page:load turbolinks:load', function () {
         }
     })
 });
+
+
+function change_location_visibility(checkbox){
+    if ($(checkbox).prop("checked")){
+        $("#locations_container").attr("hidden", false)
+    }else{
+        $("#locations_container").attr("hidden", true);
+    }
+}
+
 
 // location number
 let locationCount = 1;

@@ -13,7 +13,8 @@ class LocationsController < ApplicationController
     if @location.destroy
       redirect_to manage_locations_path, notice: 'Successfully Deleted Location.'
     else
-      flash[:error] = 'We were unable to destroy the location.'
+      flash[:errors] = 'We were unable to destroy the location.'
+      redirect_back(fallback_location: manage_locations_path)
     end
   end
 
@@ -23,7 +24,8 @@ class LocationsController < ApplicationController
     if @room.destroy
       redirect_to manage_locations_path, notice: "Successfully Deleted Room."
     else
-      flash[:error] = "We were unable to destroy the room."
+      flash[:errors] = "We were unable to destroy the room."
+      redirect_back(fallback_location: manage_locations_path)
     end
   end
 
@@ -35,12 +37,12 @@ class LocationsController < ApplicationController
 
   def create
     @location = Location.new(location_name: params['location'], address: params['address'])
-      if @location.save
-        redirect_to manage_locations_path, notice: "Successfully Created New Location."
-      else
-        flash[:error] = @location.errors.full_message
-        redirect_to manage_location_path
-      end
+    if @location.save
+      redirect_to manage_locations_path, notice: "Successfully Created New Location."
+    else
+      flash[:errors] = @location.errors.full_messages
+      redirect_back(fallback_location: manage_locations_path)
+    end
 
   end
 
@@ -52,23 +54,17 @@ class LocationsController < ApplicationController
 
   def update
     @location = Location.find(params[:location_id])
-    errors = []
-    respond_to do |format|
-      if @location.update(location_name: params['location'], address: params['address'])
-        if update_rooms(@location, errors)
-          format.html { redirect_to manage_locations_path }
-        else
-          format.html {
-            flash[:error] = errors
-            redirect_to manage_location_path
-          }
-        end
+    if @location.update(location_name: params['location'], address: params['address'])
+      results = update_rooms(@location)
+      if results[0]
+        redirect_to manage_locations_path
       else
-        format.html {
-          flash[:error] = @location.errors.full_message
-          redirect_to manage_location_path
-        }
+        flash[:errors] = results[1]
+        redirect_back(fallback_location: manage_locations_path)
       end
+    else
+      flash[:errors] = @location.errors.full_messages
+      redirect_back(fallback_location: manage_locations_path)
     end
   end
 
@@ -83,11 +79,10 @@ class LocationsController < ApplicationController
     if room.save
       redirect_to manage_locations_path
     else
-      flash[:error] = room.errors.full_message
-      redirect_to manage_locations_path
+      flash[:errors] = room.errors.full_messages
+      redirect_back(fallback_location: manage_locations_path)
     end
   end
-
 
 
   private
@@ -102,8 +97,10 @@ class LocationsController < ApplicationController
     ids
   end
 
-  def update_rooms(location, errors)
+  def update_rooms(location)
     ids = get_id("room_name")
+    results = []
+    errors = []
     no_error = true
     ids.each do |i|
       room = location.rooms.find_by(id: i)
@@ -112,7 +109,9 @@ class LocationsController < ApplicationController
         no_error = false
       end
     end
-    no_error
+    results << no_error
+    results << errors
+    results
   end
 
 end

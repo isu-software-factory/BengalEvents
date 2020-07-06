@@ -1,3 +1,11 @@
+<% if flash[:errors] %>
+  <% flash[:errors].each do |e| %>
+    <div class="alert alert-danger">
+      <%= e %>
+    </div>
+  <% end %>
+<% end %>
+
 <div class="container">
   <div class="row">
     <div id="locations_container" class="col border-right">
@@ -17,7 +25,7 @@
           <tbody>
           <tr class="event-collapse solid-element">
             <td><%= location.location_name %></td>
-            <td><%= location.address.empty? ? "N/A" : location.address %></td>
+            <td><%= location.address.nil? ? "N/A" : location.address %></td>
             <td><%= link_to "Delete", delete_location_path(location.id), class: "btn btn-danger", title: "Delete Location", data: {method: :delete, confirm: "Are you sure?"} %>
               <%= link_to "Edit", edit_location_path(location.id), class: "button-small primary-button", title: "Edit Location", remote: true %>
               <%= link_to "Room", new_room_path(location.id), class: "button-small primary-button glyphicon glyphicon-plus", title: "New Room", remote: true %>
@@ -39,7 +47,7 @@
                   <% location.rooms.each do |room| %>
                     <tr>
                       <td><%= room.room_number %></td>
-                      <td><%= room.room_name.empty? ? "N/A" : room.room_name %></td>
+                      <td><%= room.room_name.nil? ? "N/A" : room.room_name %></td>
                       <td><%= link_to "Delete", delete_room_path(room.id), class: "btn btn-danger", title: "Delete Room", data: {method: :delete, confirm: "Are you sure?"} %></td>
                     </tr>
                   <% end %>
