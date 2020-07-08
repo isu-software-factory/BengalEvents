@@ -30,7 +30,6 @@ RSpec.feature "Teachers", type: :feature do
     click_button 'Create Account'
     expect(page).to have_content("Enter Student Name and (Email or Username)")
   end
-end
 
 
   context "Controlling Student" do
@@ -45,10 +44,27 @@ end
       button.click
       option=find("a", text: "Request New Password")
       option.click
+      sleep(1)
       expect(page).to have_content("Successfully Reset Password")
     end
 
+    it "teacher should recieve the new email password for student" do
+      # button = all(".dropdown-toggle").last
+      # button.click
+      # option = find("a", text: "Request New Password")
+      # option.click
+      # sleep(5)
+      clear_emails
+      UserMailer.reset_password(@teacher, User.find(2), "asl20sl2").deliver_now
+      sleep(1)
+      open_email('bil@gmail.com')
+      expect(current_email).not_to eq(nil)
+      expect(current_email).to have_content("new password is:")
+      clear_emails
+    end
+
     it "teacher can register the student for an activity" do
+      clear_emails
       button=all(".dropdown-toggle").last
       button.click
       option=find("a", text: "Register For Student")
@@ -59,4 +75,4 @@ end
     end
   end
 
-
+end

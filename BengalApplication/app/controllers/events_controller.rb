@@ -103,7 +103,7 @@ class EventsController < ApplicationController
     @event = get_values("event")
     @activities = get_values("activity")
     if @event.length > 1 || @event.length == 0
-      redirect_to copy_event_path, notice: "You can only copy 1 event."
+      redirect_to copy_event_path, alert: "You can only copy 1 event."
     else
       errors = create_event_copy(@event[0], @activities)
       if errors.length > 0
@@ -183,8 +183,7 @@ class EventsController < ApplicationController
     new_locations = []
     errors = []
     count = 0
-
-    unless (params[:location_visible].nil?)
+    unless (params[:visible_location].nil?)
       # create locations
       locations.each do |location|
         local = Location.new(location_name: location, address: addresses[count])

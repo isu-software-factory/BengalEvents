@@ -21,8 +21,8 @@ $(document).on('ready page:load turbolinks:load', function () {
         })
     }
 
-    if ($("#location_visible").length){
-        $("#location_visible").change(function() {
+    if ($("#visible_location").length){
+        $("#visible_location").change(function() {
             change_location_visibility(this);
         })
     }

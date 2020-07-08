@@ -94,7 +94,7 @@ class HomeroutesController < ApplicationController
     authorize @user, policy_class: SettingPolicy
     random_password = rand(36 ** 8).to_s(36)
     @user.reset_password(random_password, random_password)
-    # UserMailer.reset_email(current_user, @user, random_password).deliver_now
+    UserMailer.reset_password(current_user, @user, random_password).deliver_now
     render json: {data: {success: true}}
   end
 

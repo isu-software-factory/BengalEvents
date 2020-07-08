@@ -38,21 +38,20 @@ Rails.application.configure do
   # ActionMailer::Base.deliveries array.
 
   # Print deprecation notices to the stderr.
-  config.active_job.queue_adapter = :inline
-  config.active_support.deprecation = :stderr
-  config.action_mailer.perform_deliveries = true
-  config.action_mailer.raise_delivery_errors = true
-  config.action_mailer.default_options = {from: 'isuevent@isu.edu'}
-  config.action_mailer.default_url_options = {:host => "localhost:3000", port: 3001}
+  # config.action_mailer.perform_caching = false
+  # config.action_mailer.perform_deliveries = true
+  # config.action_mailer.raise_delivery_errors = true
+  # config.action_mailer.default_options = {from: 'isuevent@isu.edu'}
+  config.action_mailer.default_url_options = {:host => "localhost", port: 3001}
   config.action_mailer.delivery_method = :test
-  config.action_mailer.smtp_settings = {
-      address:              'smtp.gmail.com',
-      port:                 587,
-      domain:               'example.com',
-      user_name:            'isuevent@isu.edu',
-      password:             'b166t173',
-      authentication:       'plain',
-      enable_starttls_auto: true  }
+  # config.action_mailer.smtp_settings = {
+  #     address:              'smtp.gmail.com',
+  #     port:                 587,
+  #     domain:               'example.com',
+  #     user_name:            'isuevent@isu.edu',
+  #     password:             'b166t173',
+  #     authentication:       'plain',
+  #     enable_starttls_auto: true  }
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true

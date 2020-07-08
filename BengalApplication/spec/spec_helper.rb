@@ -26,9 +26,11 @@ SimpleCov.start
 # Selenium::WebDriver::Chrome::Service.driver_path = OS.windows? ? "./spec/Chrome/chromedriver.exe" : "./spec/ChromeLinux/chromedriver"
 Capybara.default_driver = :selenium_chrome
 # driver = Selenium::WebDriver.for :chrome
+#
 
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|
+
 
 
   # rspec-expectations config goes here. You can use an alternate

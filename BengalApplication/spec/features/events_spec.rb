@@ -15,9 +15,11 @@ RSpec.feature "Events", type: :feature do
         fill_in "name", with: "BengalEventsAgain"
         fill_in "description", with: "Stem Day"
         fill_in "start_date", with: "2020-04-05"
+        find("#name").click
       end
 
       it "should be successful without location address" do
+        check "visible_location"
         within('form') do
           fill_in "location_1", with: "SUB"
           fill_in "room_number_New_1", with: 232
@@ -28,6 +30,7 @@ RSpec.feature "Events", type: :feature do
       end
 
       it "should be successful with location address" do
+        check "visible_location"
         within("form") do
           fill_in "location_1", with: "SUB"
           fill_in "address_1", with: "921 S 8th Ave, Pocatello, ID 83209"
@@ -38,6 +41,7 @@ RSpec.feature "Events", type: :feature do
       end
 
       it "should be successful without room name" do
+        check "visible_location"
         within('form') do
           fill_in "location_1", with: "SUB"
           fill_in "room_number_New_1", with: 232
@@ -47,6 +51,7 @@ RSpec.feature "Events", type: :feature do
       end
 
       it "should be successful with all fields filled in" do
+        check "visible_location"
         within("form") do
           fill_in "location_1", with: "SUB"
           fill_in "address_1", with: "921 S 8th Ave, Pocatello, ID 83209"
@@ -58,6 +63,7 @@ RSpec.feature "Events", type: :feature do
       end
 
       it "should successfully create many rooms in one location" do
+        check "visible_location"
         within("form") do
           fill_in "location_1", with: "SUB"
           fill_in "address_1", with: "921 S 8th Ave, Pocatello, ID 83209"
@@ -75,10 +81,14 @@ RSpec.feature "Events", type: :feature do
           fill_in "room_number_3", with: 212
         end
         click_button 'Save and Continue'
+        sleep(10)
+        expect(page).to have_content("Activity Information")
         expect(Location.last.rooms.count).to eq(3)
       end
 
       it "should successfully create many locations and rooms" do
+        expect(Location.all.count).to eq(1)
+        check "visible_location"
         within("form") do
           fill_in "location_1", with: "SUB"
           fill_in "address_1", with: "921 S 8th Ave, Pocatello, ID 83209"
@@ -97,10 +107,18 @@ RSpec.feature "Events", type: :feature do
           fill_in "room_number_New_3", with: 121
         end
         click_button 'Save and Continue'
+        sleep(10)
+        expect(page).to have_content("Activity Information")
         expect(Location.all.count).to eq(3)
         expect(Location.last.rooms.count).to eq(1)
         expect(Location.find(2).rooms.count).to eq(2)
         expect(Room.all.count).to eq(6)
+      end
+
+      it "should create an event without a location" do
+        click_button "Save and Continue"
+        sleep(2)
+        expect(Event.all.count).to eq(2)
       end
     end
 
@@ -245,7 +263,8 @@ RSpec.feature "Events", type: :feature do
           check "event_1"
           sleep(3)
           check "event_2"
-          click_button("Submit")
+          click_button "Submit"
+          sleep(2)
           expect(page).to have_content("You can only copy 1 event.")
         end
 
@@ -254,6 +273,7 @@ RSpec.feature "Events", type: :feature do
           events[0].click
           check "activity_1"
           click_button "Submit"
+          sleep(2)
           expect(page).to have_content("You can only copy 1 event.")
         end
 
@@ -263,6 +283,7 @@ RSpec.feature "Events", type: :feature do
     context "should fail" do
 
       it "should fail if event name is missing" do
+        check "visible_location"
         within("form") do
           fill_in "description", with: "Stem Day"
           fill_in "start_date", with: "2020-04-05"
@@ -276,6 +297,7 @@ RSpec.feature "Events", type: :feature do
       end
 
       it "should fail if description is missing" do
+        check "visible_location"
         within("form") do
           fill_in "name", with: "BengalEventsAgain"
           fill_in "start_date", with: "2020-04-05"
@@ -289,6 +311,7 @@ RSpec.feature "Events", type: :feature do
       end
 
       it "should fail if start date is missing" do
+        check "visible_location"
         within("form") do
           fill_in "name", with: "BengalEventsAgain"
           fill_in "description", with: "Stem Day"
@@ -303,6 +326,7 @@ RSpec.feature "Events", type: :feature do
 
 
       it "should fail if locations are not filled" do
+        check "visible_location"
         within("form") do
           fill_in "name", with: "BengalEventsAgain"
           fill_in "description", with: "Stem Day"
@@ -313,6 +337,7 @@ RSpec.feature "Events", type: :feature do
       end
 
       it "should fail if room # is not filled" do
+        check "visible_location"
         within("form") do
           fill_in "name", with: "BengalEventsAgain"
           fill_in "start_date", with: "2020-04-05"
@@ -323,7 +348,6 @@ RSpec.feature "Events", type: :feature do
         click_button "Save and Continue"
         expect(page).to have_content("Room number can't be blank")
       end
-
     end
   end
 

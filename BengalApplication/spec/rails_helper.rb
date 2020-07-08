@@ -10,7 +10,7 @@ abort("The Rails environment is running in production mode!") if Rails.env.produ
 require 'rspec/rails'
 require 'capybara/rails'
 require 'capybara/email'
-include Capybara::Email::DSL
+
 
 
 
