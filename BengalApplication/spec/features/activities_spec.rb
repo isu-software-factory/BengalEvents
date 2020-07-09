@@ -84,9 +84,9 @@ RSpec.feature "Activities", type: :feature do
       check "same_room"
       click_button "Confirm"
       expect(Activity.find(4).sessions.count).to eq(3)
-      expect(Activity.find(4).sessions.first.room.room_number).to eq("203")
-      expect(Activity.find(4).sessions[1].room.room_number).to eq("203")
-      expect(Activity.find(4).sessions[2].room.room_number).to eq("203")
+      expect(Activity.find(4).sessions.first.room.room_number).to eq(203)
+      expect(Activity.find(4).sessions[1].room.room_number).to eq(203)
+      expect(Activity.find(4).sessions[2].room.room_number).to eq(203)
       expect(page).to have_content("Successfully Created Activity")
     end
 
@@ -186,7 +186,7 @@ RSpec.feature "Activities", type: :feature do
         select("203 (Ballroom)", from: "room_select_1")
       end
       click_button "Confirm"
-      expect(Activity.first.sessions.first.room.room_number).to eq("203")
+      expect(Activity.first.sessions.first.room.room_number).to eq(203)
     end
 
     it "should be successful when a new session is added" do

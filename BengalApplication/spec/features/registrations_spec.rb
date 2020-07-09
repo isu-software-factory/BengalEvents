@@ -198,10 +198,11 @@ RSpec.feature "Registrations", type: :feature do
     end
 
     it "should show event if visibility time constraint is met" do
-      date = DateTime.new(2020, 7, 5, 3)
+      date = DateTime.now + 60
       @event.update(visible_constraint: date)
       expect(@event.visible).to eq(true)
       visit register_for_activity_path(role: "User", id: @teacher.id)
+      sleep(1)
       expect(page).to have_content("Bengal Stem Day")
     end
 

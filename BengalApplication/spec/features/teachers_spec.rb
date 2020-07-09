@@ -49,16 +49,13 @@ RSpec.feature "Teachers", type: :feature do
     end
 
     it "teacher should recieve the new email password for student" do
-      # button = all(".dropdown-toggle").last
-      # button.click
-      # option = find("a", text: "Request New Password")
-      # option.click
-      # sleep(5)
+      button = all(".dropdown-toggle").last
+      button.click
+      option = find("a", text: "Request New Password")
+      option.click
       clear_emails
-      UserMailer.reset_password(@teacher, User.find(2), "asl20sl2").deliver_now
       sleep(1)
-      open_email('bil@gmail.com')
-      expect(current_email).not_to eq(nil)
+      open_email(@teacher.email)
       expect(current_email).to have_content("new password is:")
       clear_emails
     end
