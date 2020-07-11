@@ -339,7 +339,7 @@ class HomeroutesController < ApplicationController
     if @student.save
       @student.roles << Role.find_by(role_name: "Student")
       id = @student.id
-      #UserMailer.login_email(@student, @student.user, random_password).deliver_now
+      !@student.email.nil? ? UserMailer.login_email(@student, random_password).deliver_now : nil
       errors = [true, @student.errors.full_messages]
       return errors
     else

@@ -176,7 +176,58 @@ RSpec.feature "Registrations", type: :feature do
       sleep(4)
       expect(Session.find(4).waitlist.users.include?(@student2)).to eq(false)
       expect(Session.find(4).users.include?(@student2)).to eq(true)
-      # expect(Session.find(4).waitlist.users.include?(@student2)).to eq(false)
+    end
+
+    context "emails" do
+
+      it "should sent an email to the student if the student is in waitlist and a participant drops from that activity" do
+        @student = User.find(2)
+        @student2 = User.find(3)
+        @student3 = User.find(4)
+        @session = Session.find(4)
+        @session.register_participant(@student3)
+
+        login_as(@student)
+
+        @session.waitlist.users << @student2
+        visit root_path(role: "User", id: @student2.id)
+        tbl = all(".event-collapse").last
+        tbl.click
+        expect(page).to have_content("0")
+        expect(page).to have_content("8")
+        btn = all(".remove-button").last
+        btn.click
+        sleep(1)
+        open_email(@student2.email)
+        expect(current_email).to have_content("You have been automatically registered for " + @session.activity.name)
+        clear_emails
+      end
+
+      it "should send an email if the participant is a team" do
+        @student = User.find(3)
+        @student2 = User.find(4)
+        @team = Team.find(2)
+        @team2 = Team.find(3)
+        @session = Session.find(5)
+        @team.users.delete(User.find(2))
+        expect(@session.activity.iscompetetion).to eq(true)
+        @session.register_participant(@team)
+        @session.waitlist.teams << @team2
+        expect(@session.capacity_remaining).to eq(0)
+        login_as(@student)
+
+        visit team_path(@team)
+        click_link "Register For Activities"
+        tbl = all(".event-collapse").last
+        tbl.click
+        btn = all(".remove-button").last
+        btn.click
+        sleep(1)
+        open_email(@student2.email)
+        expect(current_email).to have_content("You're team has been automatically registered for " + @session.activity.name)
+        clear_emails
+      end
+
     end
   end
 
@@ -213,5 +264,7 @@ RSpec.feature "Registrations", type: :feature do
       expect(page).not_to have_content("Bengal Stem Day")
     end
   end
+
+
 
 end

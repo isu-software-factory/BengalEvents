@@ -27,8 +27,8 @@
             <% end %>
             <td class="capacity_remaining"><%= s.capacity_remaining %></td>
             <td class="registered">
-              <% if s.capacity_remaining == 0 && !(s.users.include?(@user)) %>
-                <%= s.waitlist.users.include?(@user) ? "On Wait List" : link_to("Add To Waitlist", waitlist_path(@user.id, s.id)) %>
+              <% if s.capacity_remaining == 0 && !(s.users.include?(@user) || s.teams.include?(@user)) %>
+                <%= s.waitlist.users.include?(@user) || s.teams.include?(@user)? "On Wait List" : link_to("Add To Waitlist", waitlist_path(@user.id, s.id)) %>
               <% else %>
                 <%= @user.sessions.include?(s) ? "Registered" : check_box_tag("register", value = s.id, false, title: "Register for activity", role: role, user_id: @user.id) %>
               <% end %>

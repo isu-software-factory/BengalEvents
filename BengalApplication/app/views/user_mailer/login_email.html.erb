@@ -1,5 +1,5 @@
 <h1>
-  <%=@account.name %>, you have been successfully  signed up to BengalEvents!
+  <%=@user.first_name + " " + @user.last_name%>, you have been successfully  signed up to BengalEvents!
   Follow the following instructions to login to your account. </h1>
 <p>Click on this link  <%= link_to "BengalEvents", user_session_url %>. </p>
 <p>Next enter your email address : <%=@user.email %>.</p>

@@ -157,8 +157,10 @@ ActiveRecord::Schema.define(version: 2020_05_18_190204) do
   create_table "teams", force: :cascade do |t|
     t.string "lead"
     t.string "team_name"
+    t.integer "waitlist_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["waitlist_id"], name: "index_teams_on_waitlist_id"
   end
 
   create_table "users", force: :cascade do |t|

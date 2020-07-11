@@ -81,11 +81,18 @@ class ActivitiesController < ApplicationController
 
   # add user to the waitlist of session
   def waitlist
-    @user = User.find(params[:id])
     @session = Session.find(params[:session_id])
-    # add user to waitlist
-    @session.waitlist.users << @user
-    redirect_back(fallback_location: root_path(role: "User", id: @user.id))
+    if @session.activity.iscompetetion
+      @user = Team.find(params[:id])
+      @session.waitlist.teams << @user
+      # add user to waitlist
+      redirect_back(fallback_location: root_path(role: "Team", id: @user.id))
+    else
+      @user = User.find(params[:id])
+      @session.waitlist.users << @user
+      # add user to waitlist
+      redirect_back(fallback_location: root_path(role: "User", id: @user.id))
+    end
   end
 
   # session participant spreadsheet

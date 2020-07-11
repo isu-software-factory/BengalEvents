@@ -53,7 +53,6 @@ class Session < ApplicationRecord
   def register_team(team)
     success = [false]
     if self.teams.include?(team)
-      self.teams << team
       success = [false, "Your team is already registered for this event"]
     elsif (self.activity.max_team_size < team.users.count || self.activity.max_team_size < team.users.count)
       success = [false, "Your team does not meet the team size restriction"]
@@ -86,14 +85,30 @@ class Session < ApplicationRecord
   def wait_list_check
     # checks to see if the session has a spot open and if there is, register the first person on the waitlist
     if self.capacity_remaining > 0
-      if self.waitlist.users.count > 0
+      unless self.activity.iscompetetion
+        if self.waitlist.users.count > 0
+          # get first person on wait_list
+          @participant = self.waitlist.users[0]
+          # register participant and send email
+          self.register_participant(@participant)
+
+          # remove participant from waitlist
+          self.waitlist.users.delete(@participant)
+
+          # send email
+          !@participant.email.nil? ? UserMailer.notice(@participant, self.activity).deliver_now : nil
+        end
+      else
         # get first person on wait_list
-        @participant = self.waitlist.users[0]
+        @participant = self.waitlist.teams[0]
         # register participant and send email
         self.register_participant(@participant)
 
         # remove participant from waitlist
-        self.waitlist.users.delete(@participant)
+        self.waitlist.teams.delete(@participant)
+
+        # send email
+        !@participant.get_lead.email? ?  UserMailer.notice(@participant, self.activity).deliver_now : nil
       end
     end
   end
