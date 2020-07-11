@@ -76,6 +76,7 @@ class HomeroutesController < ApplicationController
     if @user == "Teacher"
       create_teacher
     elsif @user == "Student"
+      authorize current_user
       create_student
     else
       create_sponsor

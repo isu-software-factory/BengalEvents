@@ -64,6 +64,15 @@ RSpec.feature "Locations", type: :feature do
       click_button "Submit"
       expect(page).to have_content("Room number can't be blank")
     end
+
+    it "should fail if location name is left blank" do
+      click_link "Edit"
+      within("form") do
+        fill_in "location", with: ""
+      end
+      click_button "Submit"
+      expect(page).to have_content("Location name can't be blank")
+    end
   end
 
   context "Create New Room" do
@@ -92,6 +101,36 @@ RSpec.feature "Locations", type: :feature do
       end
       click_button "Submit"
       expect(page).to have_content("Room number can't be blank")
+    end
+  end
+
+  context "destroy" do
+    before(:each) do
+      @user = User.find(9)
+      login_as(@user)
+      visit manage_locations_path
+    end
+
+    it "should successfully destroy a location along with rooms" do
+      expect(Location.all.count).to eq(1)
+      expect(Room.all.count).to eq(3)
+      click_link "Delete"
+      page.driver.browser.switch_to.alert.accept
+      sleep(1)
+      expect(page).to have_content("Successfully Deleted Location.")
+      expect(Location.all.count).to eq(0)
+      expect(Room.all.count).to eq(0)
+    end
+
+    it "should successfully destroy a room" do
+      expect(Room.all.count).to eq(3)
+      find(".event-collapse").click
+      buttons = page.all(:xpath, '//a[@title="Delete Room"]')
+      buttons[1].click
+      page.driver.browser.switch_to.alert.accept
+      sleep(1)
+      expect(page).to have_content("Successfully Deleted Room.")
+      expect(Room.all.count).to eq(2)
     end
   end
 

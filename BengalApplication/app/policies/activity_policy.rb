@@ -16,10 +16,6 @@ class ActivityPolicy < ApplicationPolicy
     get_role == "Coordinator" || get_role == "Admin" || get_role == "Sponsor"
   end
 
-  def show?
-    get_role == "Coordinator" || get_role == "Admin" || get_role == "Sponsor"
-  end
-
   def destroy?
     get_role == "Coordinator" || get_role == "Admin" || record.user == user
   end

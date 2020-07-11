@@ -108,7 +108,7 @@ class Session < ApplicationRecord
         self.waitlist.teams.delete(@participant)
 
         # send email
-        !@participant.get_lead.email? ?  UserMailer.notice(@participant, self.activity).deliver_now : nil
+        !@participant.get_lead.email.nil? ?  UserMailer.notice(@participant, self.activity).deliver_now : nil
       end
     end
   end

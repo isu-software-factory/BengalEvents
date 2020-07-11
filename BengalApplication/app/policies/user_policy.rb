@@ -3,7 +3,7 @@ class UserPolicy < ApplicationPolicy
     get_role == "Admin" || get_role == "Coordinator"
   end
 
-  def new?
+  def create?
     get_role == "Admin" || get_role == "Coordinator" || get_role == "Teacher"
   end
 

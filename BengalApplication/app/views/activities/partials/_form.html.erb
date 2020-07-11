@@ -96,7 +96,7 @@
                   <%= text_field_tag @sessions.empty? ? "end_time_" + @index.to_s : "end_time_" + s.id.to_s, @edit ? value = s.end_time.strftime("%l:%M %p") : value = nil, class: "control-label form-control end_time" %>
                 </div>
                 <div class="col-lg-3">
-                  <%=select_tag @sessions.empty? ? "room_select_" + @index.to_s : "room_select_" + s.id.to_s, nil, class: "form-control roomselect", title: "Choose Room that Session will be hosted at" %>
+                  <%=select_tag (@sessions.empty? ? "room_select_" + @index.to_s : "room_select_" + s.id.to_s), nil, class: "form-control roomselect", title: "Choose Room that Session will be hosted at" %>
                 </div>
                 <div class="col-lg-2">
                   <%= text_field_tag @sessions.empty? ? "capacity_" + @index.to_s : "capacity_" + s.id.to_s, @edit ? value = s.capacity : value = nil, class: "control-label form-control" %>

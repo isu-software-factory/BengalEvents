@@ -158,15 +158,17 @@ RSpec.feature "Registrations", type: :feature do
     before(:each) do
       @student = User.find(3)
       @student2 = User.find(4)
+      @student3 = User.find(5)
       @session = Session.find(4)
       @session.register_participant(@student)
       @session.waitlist.users << @student2
-      login_as(@student)
-      visit root_path(role: "User", id: @student.id)
+
     end
 
     it "user drops session should successfully register user in wait list" do
-      expect(Session.find(4).waitlist.users.include?(@student2)).to eq(true)
+      login_as(@student)
+      visit root_path(role: "User", id: @student.id)
+      expect(@session.waitlist.users.include?(@student2)).to eq(true)
       tbl = all(".event-collapse").last
       tbl.click
       expect(page).to have_content("0")
@@ -176,6 +178,40 @@ RSpec.feature "Registrations", type: :feature do
       sleep(4)
       expect(Session.find(4).waitlist.users.include?(@student2)).to eq(false)
       expect(Session.find(4).users.include?(@student2)).to eq(true)
+    end
+
+    it "user clicks on waitlist and they will be added to the session waitlist" do
+      login_as(@student3)
+      visit root_path(role: "User", id: @student3.id)
+      expect(@session.waitlist.users.include?(@student3)).to eq(false)
+      expect(@session.waitlist.users.include?(@student2)).to eq(true)
+      tbl = all(".event-collapse").last
+      tbl.click
+      click_link "Add To Waitlist"
+      sleep(1)
+      expect(Session.find(4).waitlist.users.include?(@student3)).to eq(true)
+      expect(page).to have_content("You have been successfully added to the waitlist")
+    end
+
+    it "team clicks on waitlist and they will be added to the session waitlist" do
+      @team = Team.find(2)
+      @team2 = Team.find(3)
+      @session = Session.find(5)
+      @team.users.delete(User.find(2))
+      expect(@session.activity.iscompetetion).to eq(true)
+      @session.register_participant(@team)
+      @session.waitlist.teams << @team2
+      expect(@session.capacity_remaining).to eq(0)
+      login_as(@student2)
+      visit team_path(@team2)
+      # on registration page
+      click_link "Register For Activities"
+      tbl = all(".event-collapse").last
+      tbl.click
+      click_link "Add To Waitlist"
+      sleep(1)
+      expect(Session.find(5).waitlist.teams.include?(@team2)).to eq(true)
+      expect(page).to have_content("You're team has been successfully added to the waitlist")
     end
 
     context "emails" do
@@ -227,7 +263,6 @@ RSpec.feature "Registrations", type: :feature do
         expect(current_email).to have_content("You're team has been automatically registered for " + @session.activity.name)
         clear_emails
       end
-
     end
   end
 

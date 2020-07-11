@@ -18,6 +18,8 @@ class ActivitiesController < ApplicationController
 
   def create
     @event = Event.find(params[:event_id])
+    @activity = Activity.new
+    authorize @activity
     errors = create_activities(@event)
 
     # any errors with creating activity or sessions
@@ -86,11 +88,13 @@ class ActivitiesController < ApplicationController
       @user = Team.find(params[:id])
       @session.waitlist.teams << @user
       # add user to waitlist
+      flash[:notice] = "You're team has been successfully added to the waitlist"
       redirect_back(fallback_location: root_path(role: "Team", id: @user.id))
     else
       @user = User.find(params[:id])
       @session.waitlist.users << @user
       # add user to waitlist
+      flash[:notice] = "You have been successfully added to the waitlist"
       redirect_back(fallback_location: root_path(role: "User", id: @user.id))
     end
   end
@@ -232,12 +236,16 @@ end
 
 # return the value with the given name and index
 def get_param_with_index(name, index)
-  params.each do |key, value|
-    if key.start_with?(name) && key.ends_with?(index.to_s)
-      return value
+  if index == "" || name == "" || index.nil? || name.nil?
+    return "empty index or name"
+  else
+    params.each do |key, value|
+      if key.start_with?(name) && key.ends_with?(index.to_s)
+        return value
+      end
     end
+    nil
   end
-  nil
 end
 
 # get ids from keys with only one underscore
@@ -271,9 +279,13 @@ def update_sessions(activity)
     id = id.split("end_time_")[1].to_i
     # checks if activity has a session with the given index
     if activity.has_session(id.to_i)
-      room_num = get_param_with_index("room_select", id).split(" (")[0].to_i
-
-      Session.find(id).update(start_time: get_param_with_index("start_time", id), end_time: get_param_with_index("end_time", id), capacity: get_param_with_index("capacity", id), room_id: Room.find_by(room_number: room_num).id)
+      room_num = get_param_with_index("room_select_", id)
+      if !room_num.nil?
+        room_num = room_num.split(" (")[0].to_i
+        Session.find(id).update(start_time: get_param_with_index("start_time", id), end_time: get_param_with_index("end_time", id), capacity: get_param_with_index("capacity", id), room_id: Room.find_by(room_number: room_num).id)
+      else
+        raise "Room Num is Nil! \n id: " + id.to_s + "\n" + "params: " + params.to_s + "\n"
+      end
     else
       create_session(get_param_with_index("start_time", id), get_param_with_index("room_select", id), get_param_with_index("capacity", id), activity, get_param_with_index("end_time", id))
     end

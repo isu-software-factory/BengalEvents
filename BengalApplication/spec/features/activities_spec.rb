@@ -117,6 +117,23 @@ RSpec.feature "Activities", type: :feature do
       expect(page).to have_content("Successfully Created Activity")
     end
 
+    it "should fail if activity name is left empty" do
+      # fill form
+      within('form') do
+        fill_in "name_New_1", with: ""
+      end
+      click_button "Confirm"
+      expect(page).to have_content("Name can't be blank")
+    end
+
+    it "should fail if description is left empty" do
+      # fill form
+      within('form') do
+        fill_in "description_1", with: ""
+      end
+      click_button "Confirm"
+      expect(page).to have_content("Description can't be blank")
+    end
   end
 
   context "update an activity" do
@@ -150,6 +167,7 @@ RSpec.feature "Activities", type: :feature do
     end
 
     it "should be successful when iscompetetion is updated" do
+      sleep(3)
       within('form') do
         check "iscompetetion_1"
       end
@@ -171,14 +189,13 @@ RSpec.feature "Activities", type: :feature do
     end
 
     it "should be successful when session capacity is updated" do
+      sleep(3)
       within("form") do
-        fill_in "capacity_1", with: 5
+        fill_in "capacity_1", with: "5"
       end
       click_button "Confirm"
-      first(".event-collapse").click
-      expect(page).to have_content("5")
-      expect(@activity.sessions.first.capacity).to eq(5)
-      sleep(8)
+      sleep(1)
+      expect(Activity.first.sessions.first.capacity).to eq(5)
     end
 
     it "should be successful when session room is updated" do
@@ -200,6 +217,24 @@ RSpec.feature "Activities", type: :feature do
       find(:xpath, ".//input[@value='Confirm']").click
       expect(page).to have_content("Successfully Updated Activity.")
       expect(Activity.first.sessions.count).to eq(3)
+    end
+
+    it "should fail if activity name is left empty" do
+      # fill form
+      within('form') do
+        fill_in "name_New_1", with: ""
+      end
+      click_button "Confirm"
+      expect(page).to have_content("Name can't be blank")
+    end
+
+    it "should fail if description is left empty" do
+      # fill form
+      within('form') do
+        fill_in "description_1", with: ""
+      end
+      click_button "Confirm"
+      expect(page).to have_content("Description can't be blank")
     end
 
   end
