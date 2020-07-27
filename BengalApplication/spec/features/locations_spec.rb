@@ -1,4 +1,4 @@
-
+require 'gas_load_tester'
 
 RSpec.feature "Locations", type: :feature do
 
@@ -126,12 +126,12 @@ RSpec.feature "Locations", type: :feature do
       expect(Room.all.count).to eq(3)
       find(".event-collapse").click
       buttons = page.all(:xpath, '//a[@title="Delete Room"]')
-      buttons[1].click
+      buttons[0].click
       page.driver.browser.switch_to.alert.accept
       sleep(1)
       expect(page).to have_content("Successfully Deleted Room.")
       expect(Room.all.count).to eq(2)
     end
   end
-
 end
+

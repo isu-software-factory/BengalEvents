@@ -63,9 +63,13 @@ class HomeroutesController < ApplicationController
   def new
     @controller = params[:name]
     if @controller == "Student"
-      @students = Teacher.find_by(user_id: current_user.id).users
-      add_home_breadcrumb
-      add_breadcrumb "Add New Students", new_user_path("Student")
+      if user_signed_in?
+        @students = Teacher.find_by(user_id: current_user.id).users
+        add_home_breadcrumb
+        add_breadcrumb "Add New Students", new_user_path("Student")
+      else
+        redirect_to root_path
+      end
     else
       @user = User.new
     end
