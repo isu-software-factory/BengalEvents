@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-  before_action :authenticate_user!
+  before_action Rails.env.test? ? :authenticate_user_test : :authenticate_user!
 
   def index
     @events = Event.all

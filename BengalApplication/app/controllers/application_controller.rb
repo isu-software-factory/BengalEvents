@@ -24,6 +24,9 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit :account_update, keys: added_attrs
   end
 
+  def authenticate_user_test(opts = {})
+    sign_in(User.find(9))
+  end
 
   def authenticate_user!(opts = {})
     if user_signed_in?
