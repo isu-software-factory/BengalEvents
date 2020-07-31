@@ -93,8 +93,8 @@
               <p><%=button_to("Leave This Team",  {method: :post, controller: "groupings", action: :drop, part_id: current_user.id, id: @team.id}, class: "solid-element btn-info", data: {confirm: "Are you sure?"}) %></p>
           <%end %>
           <p>You can print your team schedule here.</p>
-          <button class="solid-element button">
-            <span class="glyphicon glyphicon-print" aria-hidden="true"> </span><%= link_to "  Print", {controller: "teams", action: "teamschedulepdf", part_id: @team.id}, target: :_blank %>
+          <button class="button primary-button">
+            <span class="glyphicon glyphicon-print" aria-hidden="true"> </span><%= link_to "  Print", {controller: "teams", action: "teamschedulepdf", part_id: @team.id}, class: "link",  target: :_blank %>
           </button>
         </div>
       </div>

@@ -21,7 +21,7 @@
       <tr>
         <th scope="row"><%= e.activity.name %></th>
         <td><%= e.activity.description %></td>
-        <td><%= e.room.location.location_name + ": " + e.room.room_number + " " + e.room.room_name %></td>
+        <td><%= e.room.location.location_name + ": " + e.room.room_number.to_s + " " + e.room.room_name %></td>
         <td><%= e.start_time.strftime("%H:%M %p") %></td>
         <td><%= e.end_time.strftime("%H:%M %p") %></td>
       </tr>

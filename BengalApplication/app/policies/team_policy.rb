@@ -12,7 +12,7 @@ class TeamPolicy < ApplicationPolicy
 
   def show?
     # only students can see their team
-    get_role == "Student" && record.users.include?(user)
+    get_role == "Student" && record.users.include?(user) || get_role == "Admin" || get_role == "Coordinator"
   end
 
   def drop?
@@ -27,6 +27,6 @@ class TeamPolicy < ApplicationPolicy
 
   def change?
     # only team lead can change team details
-    get_role == "Student" && record.get_lead == @user
+    get_role == "Student" && record.get_lead == @user || get_role == "Admin" || get_role == "Coordinator"
   end
 end
