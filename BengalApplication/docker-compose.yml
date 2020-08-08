@@ -17,6 +17,6 @@ services:
     volumes:
       - ".:/application"
     ports:
-      - "22:22"
+      - "3000:22"
     depends_on:
       - db
