@@ -13,8 +13,8 @@ class ApplicationController < ActionController::Base
 
   # first time setup
   def configure_setup
-    if Setup.first.nil?
-      redirect_to admin_setup_path
+    if Setup.first.nil? || User.first.nil?
+        redirect_to admin_setup_path
     end
   end
 
