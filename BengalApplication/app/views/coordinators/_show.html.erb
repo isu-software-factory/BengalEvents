@@ -8,15 +8,15 @@
             <% if policy(event).destroy? %>
               <%= link_to " Edit", edit_event_path(event), class: "primary-button  button-small glyphicon glyphicon-edit" %>
               <%= link_to "Delete", event_path(event.id), class: "btn-danger button-small", data: {method: :delete, confirm: "Are you sure?"} %>
-              <%= check_box_tag "check_visible", event.visible, checked=event.visible, event_id: event.id, class: "checkbox_class", title: event.visible ? "Hide Event" : "Show Event" %>
+              <%= check_box_tag "check_visible", event.visible, checked = event.visible, event_id: event.id, class: "checkbox_class", title: event.visible ? "Hide Event" : "Show Event" %>
               <span class="glyphicon glyphicon-info-sign small-icon" data-toggle="tooltip" data-placement="top" title="Check this box to make this event visible to all users."></span>
-          <% end %>
+            <% end %>
             <span class="badge badge-danger">Starts at <%= event.start_date.strftime("%m/%d/%Y") %></span>
           </h1>
 
           <hr>
           <h2>Activities</h2>
-          <table class="table" >
+          <table class="table">
             <thead class="thead-dark">
             <tr>
               <th scope="col">Name</th>
@@ -63,7 +63,7 @@
                             <% @num += 1 %></td>
                           <td><%= session.start_time.strftime("%l:%M %p") %>
                             -  <%= session.end_time.strftime("%l:%M %p") %></td>
-                          <td><%=session.room.nil? ? "No Room Assigned" : session.room.location.location_name + ": " + session.room.room_number.to_s + " " + session.room.room_name %></td>
+                          <td><%= session.room.nil? ? "No Room Assigned" : session.room.location.location_name + ": " + session.room.room_number.to_s + " " + session.room.room_name %></td>
                           <td><%= session.capacity %></td>
                           <td><%= session.capacity_remaining %></td>
                           <% if activity.iscompetetion %>
@@ -91,28 +91,41 @@
         <div class="card border-dark mb-3" style="max-width: 18rem;">
           <div class="card-header">Actions</div>
           <div class="card-body text-dark">
-            <div class="indent-bellow">
-            <%= link_to " Event", new_event_path, class: "primary-button button-small glyphicon glyphicon-plus", title: "Create a new event" %>
-            </div>
-            <div class="indent-bellow">
-            <%= link_to " Users", all_users_path, class: "primary-button  button-small glyphicon glyphicon-user", title: "View All Users Profiles" %>
-            </div>
-            <div class="indent-bellow">
-            <%= link_to " Reports", report_path, class: "primary-button   button-small glyphicon glyphicon-stats", title: "View Reports" %>
-            </div>
-            <%if policy(Setting).edit? %>
+            <% if policy(User).create_su? %>
+              <div class="indent-bellow">
+                <div class="dropdown">
+                  <a class="button-small primary-button dropdown-toggle" href="#" role="button" id="dropdownMenuLink1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <span class="glyphicon glyphicon-plus"> User</span>
+                  </a>
+                  <div class="dropdown-menu menu-container dropdown-menu-left">
+                    <%= link_to "Admin", new_user_path("Admin"), title: "Create New Admin", class: "dropdown-item" %>
+                    <%= link_to "Coordinator", new_user_path("Coordinator"), title: "Create New Coordinator", class: "dropdown-item" %>
+                  </div>
+                </div>
+              </div>
+            <% end %>
           <div class="indent-bellow">
+            <%= link_to " Event", new_event_path, class: "primary-button button-small glyphicon glyphicon-plus", title: "Create a new event" %>
+          </div>
+          <div class="indent-bellow">
+            <%= link_to " Users", all_users_path, class: "primary-button  button-small glyphicon glyphicon-user", title: "View All Users Profiles" %>
+          </div>
+          <div class="indent-bellow">
+            <%= link_to " Reports", report_path, class: "primary-button   button-small glyphicon glyphicon-stats", title: "View Reports" %>
+          </div>
+          <% if policy(Setting).edit? %>
+            <div class="indent-bellow">
               <%= link_to " Settings", edit_settings_path, class: "primary-button button-small glyphicon glyphicon-cog", title: "Edit Site Settings" %>
             </div>
-              <%end %>
-            <div class="indent-bellow">
-              <%= link_to " Locations", manage_locations_path, class: "primary-button button-small glyphicon glyphicon-road", title: "Manage all locations" %>
-            </div>
+          <% end %>
+          <div class="indent-bellow">
+            <%= link_to " Locations", manage_locations_path, class: "primary-button button-small glyphicon glyphicon-road", title: "Manage all locations" %>
           </div>
         </div>
       </div>
+      </div>
     <% end %>
-  </div>
+    </div>
 </div>
 
 

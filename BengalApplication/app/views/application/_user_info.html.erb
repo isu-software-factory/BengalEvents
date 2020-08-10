@@ -9,8 +9,7 @@
   <% unless (controller.action_name == "pdfshow") || (controller.action_name == "teamschedulepdf" || controller.action_name == "print_schedule") || (controller.action_name == "print_class_registrations") %>
     <div class="dropdown menu">
       <a class="button-small-view primary-button dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        <span class="glyphicon glyphicon-cog"></span>
-        <%= current_user.first_name %></a>
+        <span class="glyphicon glyphicon-cog"> <%= current_user.first_name %></span></a>
       <div class="dropdown-menu menu-container dropdown-menu-right">
         <%= link_to "Account Settings", edit_user_registration_path(current_user), class: "dropdown-item" %>
         <%= link_to "Log Out", destroy_user_session_path, method: :delete, class: "dropdown-item" %>

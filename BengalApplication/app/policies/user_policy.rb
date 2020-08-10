@@ -7,4 +7,8 @@ class UserPolicy < ApplicationPolicy
     get_role == "Admin" || get_role == "Coordinator" || get_role == "Teacher"
   end
 
+  def create_su?
+    get_role == "Admin"
+  end
+
 end

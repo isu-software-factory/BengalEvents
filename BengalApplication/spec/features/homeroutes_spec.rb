@@ -104,4 +104,181 @@ RSpec.feature "Homeroutes", type: :feature do
       expect(Event.first.visible).to eq(true)
     end
   end
+
+  context "new admin" do
+    before(:each) do
+      @admin = User.find(9)
+      login_as @admin
+      visit profile_path(@admin)
+
+      button=all(".dropdown-toggle").last
+      button.click
+      option=find("a", text: "Admin")
+      option.click
+      sleep(1)
+    end
+    it "create a new admin successfully" do
+      within('form') do
+        fill_in "first_name", with: 'Daniel'
+        fill_in "last_name", with: "Cano"
+        fill_in "email", with: "danielAdmin@gmail.com"
+        fill_in "user_name", with: "AdminnD234"
+        fill_in "password", with: "password"
+        fill_in "password_confirmation", with: "password"
+      end
+      click_button 'Create Account'
+      expect(page).to have_content("Successfully Created Admin")
+    end
+
+    it "should fail if name is missing" do
+      within('form') do
+        fill_in "last_name", with: "Cano"
+        fill_in "email", with: "danielAdmin@gmail.com"
+        fill_in "user_name", with: "AdD234"
+        fill_in "password", with: "password"
+        fill_in "password_confirmation", with: "password"
+      end
+      click_button "Create Account"
+      expect(page).to have_content("First name can't be blank")
+    end
+
+    it "should fail if last name is missing" do
+      within('form') do
+        fill_in "first_name", with: "Daniel"
+        fill_in "email", with: "danielAdmin@gmail.com"
+        fill_in "user_name", with: "AdD234"
+        fill_in "password", with: "password"
+        fill_in "password_confirmation", with: "password"
+      end
+      click_button "Create Account"
+      expect(page).to have_content("Last name can't be blank")
+    end
+
+    it "should fail if username is missing" do
+      within('form') do
+        fill_in "first_name", with: "Daniel"
+        fill_in "last_name", with: "Cano"
+        fill_in "email", with: "danielAdmin@gmail.com"
+        fill_in "password", with: "password"
+        fill_in "password_confirmation", with: "password"
+      end
+      click_button "Create Account"
+      expect(page).to have_content("User name can't be blank")
+    end
+
+    it "should fail if name is missing" do
+      within('form') do
+        fill_in "last_name", with: "Cano"
+        fill_in "email", with: "danielAdmin@gmail.com"
+        fill_in "user_name", with: "AdD234"
+        fill_in "password", with: "password"
+        fill_in "password_confirmation", with: "password"
+      end
+      click_button "Create Account"
+      expect(page).to have_content("First name can't be blank")
+    end
+
+
+
+    it "should fail if password is missing" do
+      within('form') do
+        fill_in "first_name", with: 'Daniel'
+        fill_in "last_name", with: "Cano"
+        fill_in "email", with: "danielAdmin@gmail.com"
+        fill_in "user_name", with: "AdD234"
+        fill_in "password_confirmation", with: "password"
+      end
+      click_button 'Create Account'
+      expect(page).to have_content("Password can't be blank")
+    end
+  end
+
+  context "create new coordinator" do
+    before(:each) do
+      @admin = User.find(9)
+      login_as @admin
+      visit profile_path(@admin)
+
+      button=all(".dropdown-toggle").last
+      button.click
+      option=find("a", text: "Coordinator")
+      option.click
+      sleep(1)
+    end
+
+    it "create a new coordinator succesfully" do
+      within('form') do
+        fill_in "first_name", with: 'Daniel'
+        fill_in "last_name", with: "Cano"
+        fill_in "email", with: "danielAdmin@gmail.com"
+        fill_in "user_name", with: "AdminnD234"
+        fill_in "password", with: "password"
+        fill_in "password_confirmation", with: "password"
+      end
+      click_button 'Create Account'
+      expect(page).to have_content("Successfully Created Coordinator")
+    end
+
+    it "should fail if name is missing" do
+      within('form') do
+        fill_in "last_name", with: "Cano"
+        fill_in "email", with: "danielCor@gmail.com"
+        fill_in "user_name", with: "CD234"
+        fill_in "password", with: "password"
+        fill_in "password_confirmation", with: "password"
+      end
+      click_button "Create Account"
+      expect(page).to have_content("First name can't be blank")
+    end
+
+    it "should fail if last name is missing" do
+      within('form') do
+        fill_in "first_name", with: "Daniel"
+        fill_in "email", with: "danielCor@gmail.com"
+        fill_in "user_name", with: "CD234"
+        fill_in "password", with: "password"
+        fill_in "password_confirmation", with: "password"
+      end
+      click_button "Create Account"
+      expect(page).to have_content("Last name can't be blank")
+    end
+
+    it "should fail if username is missing" do
+      within('form') do
+        fill_in "first_name", with: "Daniel"
+        fill_in "last_name", with: "Cano"
+        fill_in "email", with: "danielCor@gmail.com"
+        fill_in "password", with: "password"
+        fill_in "password_confirmation", with: "password"
+      end
+      click_button "Create Account"
+      expect(page).to have_content("User name can't be blank")
+    end
+
+    it "should fail if name is missing" do
+      within('form') do
+        fill_in "last_name", with: "Cano"
+        fill_in "email", with: "danielCor@gmail.com"
+        fill_in "user_name", with: "CD234"
+        fill_in "password", with: "password"
+        fill_in "password_confirmation", with: "password"
+      end
+      click_button "Create Account"
+      expect(page).to have_content("First name can't be blank")
+    end
+
+
+
+    it "should fail if password is missing" do
+      within('form') do
+        fill_in "first_name", with: 'Daniel'
+        fill_in "last_name", with: "Cano"
+        fill_in "email", with: "danielCor@gmail.com"
+        fill_in "user_name", with: "CD234"
+        fill_in "password_confirmation", with: "password"
+      end
+      click_button 'Create Account'
+      expect(page).to have_content("Password can't be blank")
+    end
+  end
 end

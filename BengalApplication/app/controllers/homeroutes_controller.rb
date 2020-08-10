@@ -73,6 +73,11 @@ class HomeroutesController < ApplicationController
     else
       @user = User.new
     end
+
+    if signed_in? && policy(User).create_su?
+      add_home_breadcrumb
+      add_breadcrumb "New " + @controller, new_user_path(@controller)
+    end
   end
 
   def create
@@ -82,6 +87,12 @@ class HomeroutesController < ApplicationController
     elsif @user == "Student"
       authorize current_user
       create_student
+    elsif @user == "Admin"
+      authorize current_user
+      create_admin
+    elsif @user == "Coordinator"
+      authorize current_user
+      create_coordinator
     else
       create_sponsor
     end
@@ -357,7 +368,7 @@ class HomeroutesController < ApplicationController
     # create sponsor and role
     @user = User.new(user_params)
     @user.roles << Role.find_by(role_name: "Sponsor")
-    result = save_sponsor(@user)
+    result = save_user(@user)
 
     if result[0]
       # sign in sponsor and redirect to students new page
@@ -369,7 +380,7 @@ class HomeroutesController < ApplicationController
     end
   end
 
-  def save_sponsor(user)
+  def save_user(user)
     results = [true,]
     errors = []
     @user = user.save
@@ -385,6 +396,28 @@ class HomeroutesController < ApplicationController
   def create_user_name(f_name, l_name)
     user_name = l_name + f_name + rand(36 ** 2).to_s(36)
     user_name
+  end
+
+  def create_admin
+    create_user("Admin")
+  end
+
+  def create_coordinator
+    create_user("Coordinator")
+  end
+
+  def create_user(role)
+    @user = User.new(user_params)
+    @user.roles << Role.find_by(role_name: role)
+    result = save_user(@user)
+
+    if result[0]
+      flash[:notice] = "Successfully Created " + role
+      redirect_to profile_path(current_user)
+    else
+      flash[:errors] = result[1]
+      redirect_back(fallback_location: new_user_path(role))
+    end
   end
 
   def user_params
