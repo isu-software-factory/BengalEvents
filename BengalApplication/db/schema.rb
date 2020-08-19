@@ -43,10 +43,8 @@ ActiveRecord::Schema.define(version: 2020_05_18_190204) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "event_id"
-    t.integer "user_id"
     t.integer "max_team_size"
     t.index ["event_id"], name: "index_activities_on_event_id"
-    t.index ["user_id"], name: "index_activities_on_user_id"
   end
 
   create_table "assignments", force: :cascade do |t|

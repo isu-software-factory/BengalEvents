@@ -24,10 +24,13 @@ test: &test
 production:
   adapter: postgresql
   encoding: unicode
-  database: db/production.postgresql
+  database: production
+  host: db
   pool: 5
   username: user
-  passowrd:
+  password: password
   timeout: 5000
+
+
 cucumber:
   <<: *test

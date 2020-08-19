@@ -6,7 +6,6 @@ services:
     environment:
       POSTGRES_PASSWORD: password
       POSTGRES_USER: user
-      POSTGRES_DB: db-example
     volumes:
       - "./db"
 
@@ -16,6 +15,8 @@ services:
     command: bundle exec rails s -p 3000 -b '0.0.0.0'
     volumes:
       - ".:/application"
+    environment:
+      RAILS_ENV: production
     ports:
       - "80:3000"
     depends_on:
