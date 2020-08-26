@@ -18,6 +18,7 @@ Rails.application.config.assets.precompile += %w( activities.js )
 Rails.application.config.assets.precompile += %w( coordinators.js )
 Rails.application.config.assets.precompile += %w( setups.js)
 
+
 # Allow overriding of the sprockets cache path
 Rails.application.config.assets.configure do |env|
   env.cache = Sprockets::Cache::FileStore.new(

@@ -1,8 +1,7 @@
 FROM ruby:2.5
-RUN apt-get update -qq && apt-get install -y nodejs
+RUN apt-get update -qq && apt-get install -y nodejs postgresql-client vim nano
 RUN mkdir /application
 WORKDIR /application
-
 
 ENV RAILS_ENV production
 ENV RAILS_SERVE_STATIC_FILES true
@@ -14,7 +13,10 @@ COPY Gemfile.lock /application/Gemfile.lock
 RUN gem install bundler
 RUN bundle install
 COPY . /application
+RUN bundle exec rake assets:precompile
+# run for secret_key_base
+# docker-compose run --rm -e EDITOR=vim web bin/rails credentials:edit
+# expose 20
+EXPOSE 20
 
-EXPOSE 22
-
-CMD ["rails", "server", "-b", "0.0.0.0"]
+CMD ["rails","bin/bundle", "exec", "server", "-b", "0.0.0.0"]
